@@ -158,6 +158,14 @@ ENV/
 env.bak/
 venv.bak/
 
+# Node.js dependencies and build output
+node_modules/
+frontend/node_modules/
+frontend/dist/
+dist/
+coverage/
+.vite/
+
 # Spyder project settings
 .spyderproject
 .spyproject
