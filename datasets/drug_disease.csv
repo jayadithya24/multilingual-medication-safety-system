@@ -1,0 +1,31 @@
+drug_id,drug_name,disease_id,disease
+metformin,Metformin,type-2-diabetes,Type 2 Diabetes
+glipizide,Glipizide,type-2-diabetes,Type 2 Diabetes
+glimepiride,Glimepiride,type-2-diabetes,Type 2 Diabetes
+sitagliptin,Sitagliptin,type-2-diabetes,Type 2 Diabetes
+empagliflozin,Empagliflozin,type-2-diabetes,Type 2 Diabetes
+pioglitazone,Pioglitazone,type-2-diabetes,Type 2 Diabetes
+insulin-glargine,Insulin Glargine,type-2-diabetes,Type 2 Diabetes
+dapagliflozin,Dapagliflozin,type-2-diabetes,Type 2 Diabetes
+vildagliptin,Vildagliptin,type-2-diabetes,Type 2 Diabetes
+acarbose,Acarbose,type-2-diabetes,Type 2 Diabetes
+amlodipine,Amlodipine,hypertension,Hypertension
+losartan,Losartan,hypertension,Hypertension
+enalapril,Enalapril,hypertension,Hypertension
+telmisartan,Telmisartan,hypertension,Hypertension
+hydrochlorothiazide,Hydrochlorothiazide,hypertension,Hypertension
+atenolol,Atenolol,hypertension,Hypertension
+ramipril,Ramipril,hypertension,Hypertension
+chlorthalidone,Chlorthalidone,hypertension,Hypertension
+carvedilol,Carvedilol,hypertension,Hypertension
+clonidine,Clonidine,hypertension,Hypertension
+ibuprofen,Ibuprofen,arthritis,Arthritis
+diclofenac,Diclofenac,arthritis,Arthritis
+naproxen,Naproxen,arthritis,Arthritis
+methotrexate,Methotrexate,arthritis,Arthritis
+hydroxychloroquine,Hydroxychloroquine,arthritis,Arthritis
+celecoxib,Celecoxib,arthritis,Arthritis
+sulfasalazine,Sulfasalazine,arthritis,Arthritis
+prednisolone,Prednisolone,arthritis,Arthritis
+leflunomide,Leflunomide,arthritis,Arthritis
+colchicine,Colchicine,arthritis,Arthritis
