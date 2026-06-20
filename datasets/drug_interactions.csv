@@ -1,0 +1,158 @@
+drug1_id,drug1,drug2_id,drug2,drug2_in_scope,severity
+metformin,Metformin,topiramate,Topiramate,no,Moderate
+metformin,Metformin,acetazolamide,Acetazolamide,no,Moderate
+metformin,Metformin,alcohol,Alcohol,no,Moderate
+metformin,Metformin,iodinated-contrast-agents,Iodinated contrast agents,no,Mild
+metformin,Metformin,cimetidine,Cimetidine,no,Moderate
+glipizide,Glipizide,fluconazole,Fluconazole,no,Moderate
+glipizide,Glipizide,miconazole,Miconazole,no,Moderate
+glipizide,Glipizide,nsaids,NSAIDs,no,Mild
+glipizide,Glipizide,warfarin,Warfarin,no,Mild
+glipizide,Glipizide,salicylates,Salicylates,no,Mild
+glipizide,Glipizide,beta-blockers,Beta-blockers,no,Mild
+glipizide,Glipizide,rifampin,Rifampin,no,Moderate
+glimepiride,Glimepiride,fluconazole,Fluconazole,no,Severe
+glimepiride,Glimepiride,gemfibrozil,Gemfibrozil,no,Severe
+glimepiride,Glimepiride,ace-inhibitors,ACE inhibitors,no,Mild
+glimepiride,Glimepiride,salicylates,Salicylates,no,Mild
+glimepiride,Glimepiride,corticosteroids,Corticosteroids,no,Mild
+glimepiride,Glimepiride,thiazides,Thiazides,no,Mild
+sitagliptin,Sitagliptin,digoxin,Digoxin,no,Moderate
+sitagliptin,Sitagliptin,insulin,Insulin,no,Moderate
+sitagliptin,Sitagliptin,sulfonylureas,Sulfonylureas,no,Moderate
+empagliflozin,Empagliflozin,insulin,Insulin,no,Moderate
+empagliflozin,Empagliflozin,insulin-secretagogues,Insulin Secretagogues,no,Moderate
+empagliflozin,Empagliflozin,diuretics,Diuretics,no,Moderate
+empagliflozin,Empagliflozin,rifampin,Rifampin,no,Moderate
+pioglitazone,Pioglitazone,gemfibrozil,Gemfibrozil,no,Severe
+pioglitazone,Pioglitazone,rifampin,Rifampin,no,Moderate
+pioglitazone,Pioglitazone,insulin,Insulin,no,Moderate
+insulin-glargine,Insulin Glargine,beta-blockers,Beta-blockers,no,Moderate
+insulin-glargine,Insulin Glargine,ace-inhibitors,ACE inhibitors,no,Moderate
+insulin-glargine,Insulin Glargine,salicylates,Salicylates,no,Moderate
+insulin-glargine,Insulin Glargine,mao-inhibitors,MAO inhibitors,no,Moderate
+insulin-glargine,Insulin Glargine,corticosteroids,Corticosteroids,no,Mild
+insulin-glargine,Insulin Glargine,thiazides,Thiazides,no,Mild
+insulin-glargine,Insulin Glargine,atypical-antipsychotics,Atypical Antipsychotics,no,Mild
+dapagliflozin,Dapagliflozin,insulin,Insulin,no,Moderate
+dapagliflozin,Dapagliflozin,sulfonylureas,Sulfonylureas,no,Moderate
+dapagliflozin,Dapagliflozin,diuretics,Diuretics,no,Moderate
+dapagliflozin,Dapagliflozin,mefenamic-acid,Mefenamic Acid,no,Moderate
+vildagliptin,Vildagliptin,insulin,Insulin,no,Moderate
+vildagliptin,Vildagliptin,sulfonylureas,Sulfonylureas,no,Moderate
+vildagliptin,Vildagliptin,ace-inhibitors,ACE inhibitors,no,Moderate
+acarbose,Acarbose,amylase,Amylase,no,Severe
+acarbose,Acarbose,pancreatin,Pancreatin,no,Severe
+acarbose,Acarbose,activated-charcoal,Activated charcoal,no,Moderate
+acarbose,Acarbose,digoxin,Digoxin,no,Moderate
+amlodipine,Amlodipine,ketoconazole,Ketoconazole,no,Moderate
+amlodipine,Amlodipine,ritonavir,Ritonavir,no,Moderate
+amlodipine,Amlodipine,clarithromycin,Clarithromycin,no,Moderate
+amlodipine,Amlodipine,rifampin,Rifampin,no,Moderate
+amlodipine,Amlodipine,simvastatin,Simvastatin,no,Mild
+amlodipine,Amlodipine,cyclosporine,Cyclosporine,no,Moderate
+amlodipine,Amlodipine,tacrolimus,Tacrolimus,no,Moderate
+losartan,Losartan,aliskiren,Aliskiren,no,Severe
+losartan,Losartan,potassium-supplements,Potassium supplements,no,Moderate
+losartan,Losartan,potassium-sparing-diuretics,Potassium-Sparing Diuretics,no,Moderate
+losartan,Losartan,nsaids,NSAIDs,no,Moderate
+losartan,Losartan,lithium,Lithium,no,Moderate
+enalapril,Enalapril,aliskiren,Aliskiren,no,Severe
+enalapril,Enalapril,potassium-sparing-diuretics,Potassium-sparing diuretics,no,Severe
+enalapril,Enalapril,supplements,Supplements,no,Severe
+enalapril,Enalapril,nsaids,NSAIDs,no,Moderate
+enalapril,Enalapril,lithium,Lithium,no,Moderate
+telmisartan,Telmisartan,digoxin,Digoxin,no,Moderate
+telmisartan,Telmisartan,lithium,Lithium,no,Moderate
+telmisartan,Telmisartan,ramipril,Ramipril,yes,Mild
+telmisartan,Telmisartan,nsaids,NSAIDs,no,Moderate
+hydrochlorothiazide,Hydrochlorothiazide,lithium,Lithium,no,Moderate
+hydrochlorothiazide,Hydrochlorothiazide,nsaids,NSAIDs,no,Moderate
+hydrochlorothiazide,Hydrochlorothiazide,antidiabetic-agents,Antidiabetic agents,no,Moderate
+hydrochlorothiazide,Hydrochlorothiazide,corticosteroids,Corticosteroids,no,Moderate
+hydrochlorothiazide,Hydrochlorothiazide,digoxin,Digoxin,no,Moderate
+atenolol,Atenolol,verapamil,Verapamil,no,Mild
+atenolol,Atenolol,diltiazem,Diltiazem,no,Mild
+atenolol,Atenolol,clonidine,Clonidine,yes,Mild
+atenolol,Atenolol,insulin,Insulin,no,Mild
+atenolol,Atenolol,oral-antidiabetics,Oral Antidiabetics,no,Mild
+atenolol,Atenolol,nsaids,NSAIDs,no,Moderate
+ramipril,Ramipril,aliskiren,Aliskiren,no,Severe
+ramipril,Ramipril,potassium-sparing-diuretics,Potassium-sparing diuretics,no,Severe
+ramipril,Ramipril,nsaids,NSAIDs,no,Moderate
+ramipril,Ramipril,lithium,Lithium,no,Mild
+chlorthalidone,Chlorthalidone,lithium,Lithium,no,Moderate
+chlorthalidone,Chlorthalidone,digoxin,Digoxin,no,Moderate
+chlorthalidone,Chlorthalidone,nsaids,NSAIDs,no,Moderate
+chlorthalidone,Chlorthalidone,corticosteroids,Corticosteroids,no,Moderate
+chlorthalidone,Chlorthalidone,amphotericin-b,amphotericin B,no,Moderate
+carvedilol,Carvedilol,verapamil,Verapamil,no,Severe
+carvedilol,Carvedilol,diltiazem,Diltiazem,no,Severe
+carvedilol,Carvedilol,digoxin,Digoxin,no,Moderate
+carvedilol,Carvedilol,insulin,Insulin,no,Mild
+carvedilol,Carvedilol,oral-antidiabetics,Oral Antidiabetics,no,Mild
+carvedilol,Carvedilol,fluoxetine,Fluoxetine,no,Moderate
+carvedilol,Carvedilol,paroxetine,Paroxetine,no,Moderate
+clonidine,Clonidine,beta-blockers,Beta-blockers,no,Mild
+clonidine,Clonidine,tricyclic-antidepressants,Tricyclic Antidepressants,no,Moderate
+clonidine,Clonidine,cns-depressants,CNS depressants,no,Moderate
+clonidine,Clonidine,alcohol,Alcohol,no,Moderate
+ibuprofen,Ibuprofen,aspirin,Aspirin,no,Moderate
+ibuprofen,Ibuprofen,warfarin,Warfarin,no,Moderate
+ibuprofen,Ibuprofen,ace-inhibitors,ACE inhibitors,no,Moderate
+ibuprofen,Ibuprofen,arbs,ARBs,no,Moderate
+ibuprofen,Ibuprofen,lithium,Lithium,no,Moderate
+ibuprofen,Ibuprofen,methotrexate,Methotrexate,yes,Moderate
+diclofenac,Diclofenac,warfarin,Warfarin,no,Moderate
+diclofenac,Diclofenac,anticoagulants,Anticoagulants,no,Moderate
+diclofenac,Diclofenac,methotrexate,Methotrexate,yes,Severe
+diclofenac,Diclofenac,cyclosporine,Cyclosporine,no,Moderate
+diclofenac,Diclofenac,digoxin,Digoxin,no,Moderate
+diclofenac,Diclofenac,ace-inhibitors,ACE inhibitors,no,Moderate
+diclofenac,Diclofenac,arbs,ARBs,no,Moderate
+naproxen,Naproxen,warfarin,Warfarin,no,Moderate
+naproxen,Naproxen,ace-inhibitors,ACE inhibitors,no,Moderate
+naproxen,Naproxen,arbs,ARBs,no,Moderate
+naproxen,Naproxen,methotrexate,Methotrexate,yes,Moderate
+naproxen,Naproxen,probenecid,Probenecid,no,Moderate
+naproxen,Naproxen,lithium,Lithium,no,Mild
+methotrexate,Methotrexate,ibuprofen,Ibuprofen,yes,Severe
+methotrexate,Methotrexate,diclofenac,Diclofenac,yes,Severe
+methotrexate,Methotrexate,trimethoprim,Trimethoprim,no,Moderate
+methotrexate,Methotrexate,sulfamethoxazole,Sulfamethoxazole,no,Moderate
+methotrexate,Methotrexate,penicillins,Penicillins,no,Moderate
+methotrexate,Methotrexate,proton-pump-inhibitors,Proton pump inhibitors,no,Moderate
+methotrexate,Methotrexate,alcohol,Alcohol,no,Moderate
+hydroxychloroquine,Hydroxychloroquine,azithromycin,Azithromycin,no,Severe
+hydroxychloroquine,Hydroxychloroquine,fluoroquinolones,Fluoroquinolones,no,Severe
+hydroxychloroquine,Hydroxychloroquine,antiarrhythmics,Antiarrhythmics,no,Severe
+hydroxychloroquine,Hydroxychloroquine,digoxin,Digoxin,no,Moderate
+hydroxychloroquine,Hydroxychloroquine,antidiabetics,Antidiabetics,no,Mild
+hydroxychloroquine,Hydroxychloroquine,cyclosporine,Cyclosporine,no,Moderate
+celecoxib,Celecoxib,warfarin,Warfarin,no,Moderate
+celecoxib,Celecoxib,ace-inhibitors,ACE inhibitors,no,Moderate
+celecoxib,Celecoxib,arbs,ARBs,no,Moderate
+celecoxib,Celecoxib,lithium,Lithium,no,Moderate
+celecoxib,Celecoxib,cyp2c9-inhibitor,CYP2C9 inhibitor,no,Mild
+celecoxib,Celecoxib,methotrexate,Methotrexate,yes,Moderate
+sulfasalazine,Sulfasalazine,methotrexate,Methotrexate,yes,Moderate
+sulfasalazine,Sulfasalazine,digoxin,Digoxin,no,Moderate
+sulfasalazine,Sulfasalazine,folic-acid,Folic acid,no,Mild
+sulfasalazine,Sulfasalazine,warfarin,Warfarin,no,Moderate
+prednisolone,Prednisolone,nsaids,NSAIDs,no,Moderate
+prednisolone,Prednisolone,antidiabetic-agents,Antidiabetic agents,no,Mild
+prednisolone,Prednisolone,live-vaccines,Live vaccines,no,Severe
+prednisolone,Prednisolone,rifampin,Rifampin,no,Moderate
+prednisolone,Prednisolone,warfarin,Warfarin,no,Moderate
+leflunomide,Leflunomide,methotrexate,Methotrexate,yes,Moderate
+leflunomide,Leflunomide,warfarin,Warfarin,no,Moderate
+leflunomide,Leflunomide,active-metabolite-overlap,Active Metabolite Overlap,no,Severe
+leflunomide,Leflunomide,cholestyramine,Cholestyramine,no,Mild
+leflunomide,Leflunomide,activated-charcoal,Activated Charcoal,no,Mild
+colchicine,Colchicine,clarithromycin,Clarithromycin,no,Severe
+colchicine,Colchicine,ritonavir,Ritonavir,no,Severe
+colchicine,Colchicine,ketoconazole,Ketoconazole,no,Severe
+colchicine,Colchicine,cyclosporine,Cyclosporine,no,Moderate
+colchicine,Colchicine,ranolazine,Ranolazine,no,Moderate
+colchicine,Colchicine,statins,Statins,no,Moderate
+colchicine,Colchicine,digoxin,Digoxin,no,Moderate

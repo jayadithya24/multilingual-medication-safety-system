@@ -1,0 +1,322 @@
+drug_id,drug_name,side_effect
+metformin,Metformin,Diarrhea
+metformin,Metformin,nausea
+metformin,Metformin,vomiting
+metformin,Metformin,flatulence
+metformin,Metformin,abdominal discomfort
+metformin,Metformin,indigestion
+metformin,Metformin,headache
+metformin,Metformin,decreased vitamin B12 absorption (long-term use)
+metformin,Metformin,metallic taste
+metformin,Metformin,lactic acidosis
+glipizide,Glipizide,Hypoglycemia (most common)
+glipizide,Glipizide,nausea
+glipizide,Glipizide,diarrhea
+glipizide,Glipizide,constipation
+glipizide,Glipizide,dizziness
+glipizide,Glipizide,headache
+glipizide,Glipizide,skin rash
+glipizide,Glipizide,photosensitivity
+glipizide,Glipizide,weight gain
+glipizide,Glipizide,blood dyscrasias
+glipizide,Glipizide,hepatotoxicity
+glipizide,Glipizide,hyponatremia (SIADH)
+glimepiride,Glimepiride,Hypoglycemia
+glimepiride,Glimepiride,dizziness
+glimepiride,Glimepiride,headache
+glimepiride,Glimepiride,nausea
+glimepiride,Glimepiride,asthenia
+glimepiride,Glimepiride,weight gain
+glimepiride,Glimepiride,"skin reactions (pruritus, erythema, urticaria)"
+glimepiride,Glimepiride,leukopenia
+glimepiride,Glimepiride,agranulocytosis
+glimepiride,Glimepiride,thrombocytopenia
+glimepiride,Glimepiride,hemolytic anemia
+sitagliptin,Sitagliptin,Nasopharyngitis
+sitagliptin,Sitagliptin,upper respiratory tract infection
+sitagliptin,Sitagliptin,headache
+sitagliptin,Sitagliptin,urinary tract infection
+sitagliptin,Sitagliptin,acute pancreatitis
+sitagliptin,Sitagliptin,severe joint pain (arthralgia)
+sitagliptin,Sitagliptin,bullous pemphigoid
+sitagliptin,Sitagliptin,"hypersensitivity reactions (anaphylaxis, angioedema)"
+empagliflozin,Empagliflozin,Urinary tract infections
+empagliflozin,Empagliflozin,genital mycotic infections (candidiasis)
+empagliflozin,Empagliflozin,increased urination
+empagliflozin,Empagliflozin,nasopharyngitis
+empagliflozin,Empagliflozin,dyslipidemia
+empagliflozin,Empagliflozin,nausea
+empagliflozin,Empagliflozin,diabetic ketoacidosis (even with near-normal glucose)
+empagliflozin,Empagliflozin,Fournier's gangrene
+empagliflozin,Empagliflozin,lower limb amputation risk
+pioglitazone,Pioglitazone,Weight gain
+pioglitazone,Pioglitazone,edema
+pioglitazone,Pioglitazone,upper respiratory infection
+pioglitazone,Pioglitazone,headache
+pioglitazone,Pioglitazone,sinusitis
+pioglitazone,Pioglitazone,fluid retention/heart failure exacerbation
+pioglitazone,Pioglitazone,bone fractures (especially in women)
+pioglitazone,Pioglitazone,macular edema
+pioglitazone,Pioglitazone,bladder cancer risk with prolonged use
+insulin-glargine,Insulin Glargine,Hypoglycemia (most common and serious)
+insulin-glargine,Insulin Glargine,"injection site reactions (pain, redness, swelling, lipodystrophy)"
+insulin-glargine,Insulin Glargine,weight gain
+insulin-glargine,Insulin Glargine,edema
+insulin-glargine,Insulin Glargine,peripheral edema
+insulin-glargine,Insulin Glargine,hypokalemia
+insulin-glargine,Insulin Glargine,allergic reactions
+dapagliflozin,Dapagliflozin,Female genital mycotic infections
+dapagliflozin,Dapagliflozin,urinary tract infections
+dapagliflozin,Dapagliflozin,nasopharyngitis
+dapagliflozin,Dapagliflozin,back pain
+dapagliflozin,Dapagliflozin,increased urination
+dapagliflozin,Dapagliflozin,nausea
+dapagliflozin,Dapagliflozin,dyslipidemia
+dapagliflozin,Dapagliflozin,diabetic ketoacidosis (DKA)
+dapagliflozin,Dapagliflozin,Fournier's gangrene
+dapagliflozin,Dapagliflozin,urosepsis
+vildagliptin,Vildagliptin,Nasopharyngitis
+vildagliptin,Vildagliptin,headache
+vildagliptin,Vildagliptin,dizziness
+vildagliptin,Vildagliptin,peripheral edema
+vildagliptin,Vildagliptin,nausea
+vildagliptin,Vildagliptin,Hepatic enzyme elevations (liver function monitoring required)
+vildagliptin,Vildagliptin,acute pancreatitis
+vildagliptin,Vildagliptin,severe cutaneous adverse reactions
+vildagliptin,Vildagliptin,upper respiratory infections
+acarbose,Acarbose,Flatulence (very common)
+acarbose,Acarbose,abdominal pain
+acarbose,Acarbose,diarrhea
+acarbose,Acarbose,bloating — these are dose-related and often decrease over time
+acarbose,Acarbose,elevated liver enzymes
+acarbose,Acarbose,hepatotoxicity with high doses
+acarbose,Acarbose,ileus
+amlodipine,Amlodipine,Peripheral edema (most common)
+amlodipine,Amlodipine,flushing
+amlodipine,Amlodipine,headache
+amlodipine,Amlodipine,dizziness
+amlodipine,Amlodipine,palpitations
+amlodipine,Amlodipine,fatigue
+amlodipine,Amlodipine,somnolence
+amlodipine,Amlodipine,nausea
+amlodipine,Amlodipine,gingival hyperplasia
+amlodipine,Amlodipine,hepatotoxicity
+amlodipine,Amlodipine,severe hypotension
+losartan,Losartan,Dizziness
+losartan,Losartan,upper respiratory infection
+losartan,Losartan,nasal congestion
+losartan,Losartan,back pain
+losartan,Losartan,fatigue
+losartan,Losartan,hyperkalemia
+losartan,Losartan,elevated serum creatinine
+losartan,Losartan,angioedema (rare vs. ACE inhibitors)
+losartan,Losartan,hypotension
+losartan,Losartan,renal impairment
+enalapril,Enalapril,"Dry persistent cough (very common, 10–20%)"
+enalapril,Enalapril,dizziness
+enalapril,Enalapril,headache
+enalapril,Enalapril,fatigue
+enalapril,Enalapril,hyperkalemia
+enalapril,Enalapril,elevated creatinine
+enalapril,Enalapril,angioedema (can be life-threatening)
+enalapril,Enalapril,neutropenia/agranulocytosis (in renal impairment)
+telmisartan,Telmisartan,Upper respiratory infection
+telmisartan,Telmisartan,back pain
+telmisartan,Telmisartan,sinusitis
+telmisartan,Telmisartan,diarrhea
+telmisartan,Telmisartan,dizziness
+telmisartan,Telmisartan,hyperkalemia
+telmisartan,Telmisartan,UTI
+telmisartan,Telmisartan,angioedema
+telmisartan,Telmisartan,hypotension
+telmisartan,Telmisartan,elevated liver enzymes
+hydrochlorothiazide,Hydrochlorothiazide,Hypokalemia
+hydrochlorothiazide,Hydrochlorothiazide,hyponatremia
+hydrochlorothiazide,Hydrochlorothiazide,hypomagnesemia
+hydrochlorothiazide,Hydrochlorothiazide,hyperuricemia
+hydrochlorothiazide,Hydrochlorothiazide,hyperglycemia
+hydrochlorothiazide,Hydrochlorothiazide,hyperlipidemia
+hydrochlorothiazide,Hydrochlorothiazide,photosensitivity
+hydrochlorothiazide,Hydrochlorothiazide,dizziness
+hydrochlorothiazide,Hydrochlorothiazide,headache
+hydrochlorothiazide,Hydrochlorothiazide,orthostatic hypotension
+hydrochlorothiazide,Hydrochlorothiazide,impotence
+hydrochlorothiazide,Hydrochlorothiazide,pancreatitis
+hydrochlorothiazide,Hydrochlorothiazide,agranulocytosis
+hydrochlorothiazide,Hydrochlorothiazide,severe cutaneous reactions
+atenolol,Atenolol,Bradycardia
+atenolol,Atenolol,fatigue
+atenolol,Atenolol,dizziness
+atenolol,Atenolol,depression
+atenolol,Atenolol,cold extremities
+atenolol,Atenolol,sleep disturbances
+atenolol,Atenolol,impotence
+atenolol,Atenolol,dyspnea
+atenolol,Atenolol,In susceptible patients: bronchospasm
+atenolol,Atenolol,May mask tachycardia of hypoglycemia
+ramipril,Ramipril,Dry cough (10–15%)
+ramipril,Ramipril,dizziness
+ramipril,Ramipril,headache
+ramipril,Ramipril,fatigue
+ramipril,Ramipril,hyperkalemia
+ramipril,Ramipril,elevated serum creatinine
+ramipril,Ramipril,angioedema
+ramipril,Ramipril,hypotension
+ramipril,Ramipril,neutropenia
+ramipril,Ramipril,renal failure
+chlorthalidone,Chlorthalidone,Hypokalemia
+chlorthalidone,Chlorthalidone,hyponatremia
+chlorthalidone,Chlorthalidone,hyperuricemia
+chlorthalidone,Chlorthalidone,hyperglycemia
+chlorthalidone,Chlorthalidone,elevated triglycerides
+chlorthalidone,Chlorthalidone,photosensitivity
+chlorthalidone,Chlorthalidone,orthostatic hypotension
+chlorthalidone,Chlorthalidone,muscle cramps
+chlorthalidone,Chlorthalidone,impotence
+chlorthalidone,Chlorthalidone,pancreatitis
+chlorthalidone,Chlorthalidone,aplastic anemia
+chlorthalidone,Chlorthalidone,severe skin reactions
+carvedilol,Carvedilol,Dizziness
+carvedilol,Carvedilol,fatigue
+carvedilol,Carvedilol,hypotension
+carvedilol,Carvedilol,weight gain
+carvedilol,Carvedilol,bradycardia
+carvedilol,Carvedilol,diarrhea
+carvedilol,Carvedilol,edema
+carvedilol,Carvedilol,hyperglycemia (in diabetes)
+carvedilol,Carvedilol,blurred vision
+carvedilol,Carvedilol,severe hepatocellular injury
+carvedilol,Carvedilol,thrombocytopenia
+clonidine,Clonidine,Dry mouth (most common)
+clonidine,Clonidine,drowsiness
+clonidine,Clonidine,dizziness
+clonidine,Clonidine,constipation
+clonidine,Clonidine,sedation
+clonidine,Clonidine,headache
+clonidine,Clonidine,fatigue
+clonidine,Clonidine,rebound hypertension on abrupt discontinuation
+clonidine,Clonidine,AV block
+clonidine,Clonidine,liver function abnormalities
+clonidine,Clonidine,depression
+ibuprofen,Ibuprofen,Gastrointestinal: nausea
+ibuprofen,Ibuprofen,dyspepsia
+ibuprofen,Ibuprofen,abdominal pain
+ibuprofen,Ibuprofen,GI bleeding
+ibuprofen,Ibuprofen,peptic ulceration
+ibuprofen,Ibuprofen,Cardiovascular: increased risk of MI and stroke
+ibuprofen,Ibuprofen,Renal: fluid retention
+ibuprofen,Ibuprofen,edema
+ibuprofen,Ibuprofen,acute renal failure
+ibuprofen,Ibuprofen,Headache
+ibuprofen,Ibuprofen,dizziness
+ibuprofen,Ibuprofen,rash
+ibuprofen,Ibuprofen,hepatotoxicity
+ibuprofen,Ibuprofen,aseptic meningitis
+ibuprofen,Ibuprofen,"serious skin reactions (SJS, TEN)"
+diclofenac,Diclofenac,GI: nausea
+diclofenac,Diclofenac,abdominal pain
+diclofenac,Diclofenac,dyspepsia
+diclofenac,Diclofenac,diarrhea
+diclofenac,Diclofenac,GI bleeding
+diclofenac,Diclofenac,Hepatotoxicity: elevations in liver enzymes (common)
+diclofenac,Diclofenac,clinically important liver injury
+diclofenac,Diclofenac,Cardiovascular: increased MI/stroke risk
+diclofenac,Diclofenac,Renal: fluid retention
+diclofenac,Diclofenac,renal impairment
+diclofenac,Diclofenac,"serious skin reactions (SJS, TEN, DRESS)"
+naproxen,Naproxen,GI: nausea
+naproxen,Naproxen,dyspepsia
+naproxen,Naproxen,abdominal pain
+naproxen,Naproxen,heartburn
+naproxen,Naproxen,GI bleeding
+naproxen,Naproxen,Fluid retention
+naproxen,Naproxen,edema
+naproxen,Naproxen,hypertension
+naproxen,Naproxen,Headache
+naproxen,Naproxen,dizziness
+naproxen,Naproxen,Tinnitus (high doses)
+naproxen,Naproxen,hepatic abnormalities
+naproxen,Naproxen,renal papillary necrosis
+naproxen,Naproxen,serious skin reactions
+methotrexate,Methotrexate,Nausea
+methotrexate,Methotrexate,vomiting
+methotrexate,Methotrexate,stomatitis
+methotrexate,Methotrexate,"fatigue (common, reduced by folic acid supplementation)"
+methotrexate,Methotrexate,Hepatotoxicity: liver fibrosis/cirrhosis with cumulative doses
+methotrexate,Methotrexate,Pulmonary toxicity (methotrexate pneumonitis)
+methotrexate,Methotrexate,Bone marrow suppression: pancytopenia
+methotrexate,Methotrexate,leukopenia
+methotrexate,Methotrexate,Teratogenicity
+hydroxychloroquine,Hydroxychloroquine,Nausea
+hydroxychloroquine,Hydroxychloroquine,vomiting
+hydroxychloroquine,Hydroxychloroquine,diarrhea
+hydroxychloroquine,Hydroxychloroquine,abdominal cramps
+hydroxychloroquine,Hydroxychloroquine,headache
+hydroxychloroquine,Hydroxychloroquine,dizziness
+hydroxychloroquine,Hydroxychloroquine,skin rash
+hydroxychloroquine,Hydroxychloroquine,"Ophthalmologic: retinal toxicity/maculopathy (irreversible with long-term use, dose-dependent)"
+hydroxychloroquine,Hydroxychloroquine,cardiomyopathy
+hydroxychloroquine,Hydroxychloroquine,QT prolongation
+hydroxychloroquine,Hydroxychloroquine,peripheral neuropathy
+hydroxychloroquine,Hydroxychloroquine,drug-induced lupus
+celecoxib,Celecoxib,Abdominal pain
+celecoxib,Celecoxib,dyspepsia
+celecoxib,Celecoxib,diarrhea
+celecoxib,Celecoxib,nausea
+celecoxib,Celecoxib,headache
+celecoxib,Celecoxib,dizziness
+celecoxib,Celecoxib,fluid retention
+celecoxib,Celecoxib,hypertension
+celecoxib,Celecoxib,peripheral edema
+celecoxib,Celecoxib,upper respiratory infection
+celecoxib,Celecoxib,"serious cardiovascular events (MI, stroke)"
+celecoxib,Celecoxib,serious GI events
+celecoxib,Celecoxib,serious skin reactions
+celecoxib,Celecoxib,hepatotoxicity
+sulfasalazine,Sulfasalazine,Nausea
+sulfasalazine,Sulfasalazine,vomiting
+sulfasalazine,Sulfasalazine,anorexia
+sulfasalazine,Sulfasalazine,headache
+sulfasalazine,Sulfasalazine,dizziness
+sulfasalazine,Sulfasalazine,skin rash
+sulfasalazine,Sulfasalazine,oligospermia (reversible)
+sulfasalazine,Sulfasalazine,Orange-yellow discoloration of urine/skin
+sulfasalazine,Sulfasalazine,agranulocytosis
+sulfasalazine,Sulfasalazine,aplastic anemia
+sulfasalazine,Sulfasalazine,hepatotoxicity
+sulfasalazine,Sulfasalazine,SJS/TEN
+sulfasalazine,Sulfasalazine,severe hypersensitivity reactions
+prednisolone,Prednisolone,Short-term: insomnia
+prednisolone,Prednisolone,mood changes
+prednisolone,Prednisolone,increased appetite
+prednisolone,Prednisolone,hyperglycemia
+prednisolone,Prednisolone,hypertension
+prednisolone,Prednisolone,Long-term: Cushing's syndrome
+prednisolone,Prednisolone,osteoporosis
+prednisolone,Prednisolone,adrenal suppression
+prednisolone,Prednisolone,infections
+prednisolone,Prednisolone,cataracts
+prednisolone,Prednisolone,glaucoma
+prednisolone,Prednisolone,peptic ulceration
+prednisolone,Prednisolone,muscle weakness
+prednisolone,Prednisolone,growth suppression (pediatric)
+leflunomide,Leflunomide,Diarrhea (most common)
+leflunomide,Leflunomide,nausea
+leflunomide,Leflunomide,alopecia (reversible)
+leflunomide,Leflunomide,rash
+leflunomide,Leflunomide,elevated ALT/AST
+leflunomide,Leflunomide,headache
+leflunomide,Leflunomide,hypertension
+leflunomide,Leflunomide,hepatotoxicity (including fatal liver failure)
+leflunomide,Leflunomide,teratogenicity
+leflunomide,Leflunomide,bone marrow suppression
+leflunomide,Leflunomide,peripheral neuropathy
+leflunomide,Leflunomide,serious infections
+colchicine,Colchicine,"Diarrhea (most common, dose-limiting)"
+colchicine,Colchicine,nausea
+colchicine,Colchicine,vomiting
+colchicine,Colchicine,abdominal pain
+colchicine,Colchicine,Neuromuscular toxicity: myopathy
+colchicine,Colchicine,rhabdomyolysis (especially with statins/CsA)
+colchicine,Colchicine,Bone marrow suppression: pancytopenia with overdose or in renal impairment
+colchicine,Colchicine,Alopecia with long-term use
