@@ -1,15 +1,22 @@
 import api from "./api";
 
-export const uploadMedicineImage = async (imageFile) => {
+/**
+ * Upload medicine image to FastAPI OCR endpoint
+ * @param {File} imageFile
+ * @returns OCR response
+ */
+export const scanMedicine = async (imageFile) => {
+  const formData = new FormData();
 
-    const formData = new FormData();
+  formData.append("file", imageFile);
 
-    formData.append("file", imageFile);
+  const response = await api.post("/upload-image", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 
-    const response = await api.post(
-        "/upload-image",
-        formData
-    );
-
-    return response.data;
+  return response.data;
 };
+
+export const uploadMedicineImage = scanMedicine;

@@ -1,114 +1,118 @@
 import { useState } from "react";
-import { uploadMedicineImage } from "../../services/ocrService";
+import { scanMedicine } from "../../services/ocrService";
 import Loading from "../../components/Loading/Loading";
 import "./ImageScanner.css";
 
 function ImageScanner() {
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [preview, setPreview] = useState(null);
-    const [result, setResult] = useState(null);
-    const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState("");
 
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
+  const handleImageChange = (event) => {
+    const selectedFile = event.target.files[0];
 
-        if (!file) return;
+    if (!selectedFile) return;
 
-        setSelectedImage(file);
-        setPreview(URL.createObjectURL(file));
-        setResult(null);
-    };
+    setImage(selectedFile);
+    setPreview(URL.createObjectURL(selectedFile));
+    setResult(null);
+    setError("");
+  };
 
-    const handleScan = async () => {
+  const handleScan = async () => {
+    if (!image) {
+      setError("Please select a medicine image.");
+      return;
+    }
 
-        if (!selectedImage) {
-            alert("Please select an image.");
-            return;
-        }
+    try {
+      setLoading(true);
+      setError("");
 
-        try {
+      const response = await scanMedicine(image);
 
-            setLoading(true);
+      setResult(response);
+    } catch (err) {
+      console.error(err);
+      setError("Unable to scan the medicine image.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-            const response = await uploadMedicineImage(selectedImage);
+  return (
+    <div className="scanner-page">
+      <div className="scanner-card">
 
-            setResult(response);
+        <h1>OCR Medicine Scanner</h1>
 
-        } catch (error) {
+        <p>
+          Upload a medicine strip or tablet image to identify the medicine.
+        </p>
 
-            console.error(error);
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+        />
 
-            alert("Failed to scan image.");
+        {preview && (
+          <div className="preview-section">
+            <img
+              src={preview}
+              alt="Medicine Preview"
+              className="preview-image"
+            />
+          </div>
+        )}
 
-        } finally {
+        <button
+          className="scan-btn"
+          onClick={handleScan}
+        >
+          Scan Medicine
+        </button>
 
-            setLoading(false);
+        {loading && <Loading />}
 
-        }
+        {error && (
+          <div className="error-box">
+            {error}
+          </div>
+        )}
 
-    };
+        {result && (
+          <div className="result-box">
 
-    return (
-
-        <div className="scanner-page">
-
-            <h1>OCR Medicine Scanner</h1>
+            <h2>Scan Result</h2>
 
             <p>
-                Upload a medicine strip or tablet image to detect the medicine.
+              <strong>File :</strong> {result.filename}
             </p>
 
-            <div className="scanner-card">
+            <p>
+              <strong>Medicine :</strong>{" "}
+              {result.ocr_result.medicine ?? "Not Detected"}
+            </p>
 
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                />
+            <h3>Detected Text</h3>
 
-                {preview && (
-                    <img
-                        src={preview}
-                        alt="Preview"
-                        className="preview-image"
-                    />
-                )}
+            <ul>
+              {(result.ocr_result.all_text ||
+                result.ocr_result.detected_text ||
+                []).map((text, index) => (
+                <li key={index}>{text}</li>
+              ))}
+            </ul>
 
-                <button onClick={handleScan}>
-                    Scan Medicine
-                </button>
+          </div>
+        )}
 
-                {loading && <Loading />}
-
-                {result && (
-
-                    <div className="result-card">
-
-                        <h2>Medicine Detected</h2>
-
-                        <p>
-
-                            <strong>Name :</strong>{" "}
-                            {result.ocr_result.medicine}
-
-                        </p>
-
-                        <p>
-
-                            <strong>Confidence :</strong>{" "}
-                            {(result.ocr_result.confidence * 100).toFixed(0)}%
-
-                        </p>
-
-                    </div>
-
-                )}
-
-            </div>
-
-        </div>
-
-    );
+      </div>
+    </div>
+  );
 }
 
 export default ImageScanner;
