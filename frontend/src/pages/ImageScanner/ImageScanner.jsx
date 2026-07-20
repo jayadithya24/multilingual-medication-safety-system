@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { scanMedicine } from "../../services/ocrService";
 import Loading from "../../components/Loading/Loading";
+import MedicineCard from "../../components/MedicineCard/MedicineCard";
 import "./ImageScanner.css";
 
 function ImageScanner() {
@@ -9,6 +10,10 @@ function ImageScanner() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
+
+  const medicineDetails = result?.ocr_result?.medicine_details ?? null;
+  const scanStatus = result?.ocr_result?.status;
+  const notFoundMessage = result?.ocr_result?.message;
 
   const handleImageChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -94,18 +99,22 @@ function ImageScanner() {
 
             <p>
               <strong>Medicine :</strong>{" "}
-              {result.ocr_result.medicine ?? "Not Detected"}
+              {scanStatus === "success"
+                ? result.ocr_result.detected_medicine
+                : "Not Detected"}
             </p>
 
-            <h3>Detected Text</h3>
+            {scanStatus === "success" && medicineDetails && (
+              <MedicineCard medicine={medicineDetails} />
+            )}
 
-            <ul>
-              {(result.ocr_result.all_text ||
-                result.ocr_result.detected_text ||
-                []).map((text, index) => (
-                <li key={index}>{text}</li>
-              ))}
-            </ul>
+            {scanStatus !== "success" && (
+              <MedicineCard medicine={null} />
+            )}
+
+            {scanStatus === "not_found" && notFoundMessage && (
+              <p className="scan-not-found-message">{notFoundMessage}</p>
+            )}
 
           </div>
         )}

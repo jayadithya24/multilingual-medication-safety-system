@@ -39,6 +39,16 @@ function Navbar() {
                              OCR Scanner
                         </NavLink>
                     </li>
+                    <li>
+                        <NavLink to="/drug-interaction">
+                             Drug Interaction
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/voice-search">
+                             Voice Search
+                        </NavLink>
+                    </li>
                 </ul>
 
             </nav>
