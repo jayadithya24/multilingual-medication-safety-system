@@ -28,17 +28,33 @@ and interactions as a connected graph — not flat tables.
 
 ## PROJECT SCOPE (DO NOT EXPAND BEYOND THIS)
 
-**Diseases covered:**
+**Diseases covered — EXACTLY THESE THREE, NO MORE:**
 - Type 2 Diabetes
-- Hypertension
-- Arthritis
+- Hypertension (High Blood Pressure)
+- Arthritis (Osteoarthritis + Rheumatoid Arthritis + Gout)
+
+**WHY these 3 — say this to your panel:**
+These 3 are the most prevalent NCDs in India AND they frequently co-occur in
+the same elderly patient. A 68-year-old in coastal Karnataka commonly has all 3
+simultaneously — taking Metformin (Diabetes) + Amlodipine (HTN) + Ibuprofen
+(Arthritis). That combination creates real, dangerous polypharmacy risk:
+  Metformin + Ibuprofen  = SEVERE   (lactic acidosis risk)
+  Amlodipine + Ibuprofen = MODERATE (BP medication undermined by NSAID)
+  Metformin + Amlodipine = MILD     (no significant interaction)
+This co-occurrence scenario is your primary demo. No existing multilingual
+tool handles this combination in Kannada or Tulu.
 
 **Languages:**
 - English
 - Kannada (standard literary Kannada)
 - Tulu (genuine Tulu vocabulary written in Kannada script — NOT translated Kannada)
 
-**Drugs:** 30 total (10 per disease). See datasets/english_master_dataset.csv for full list.
+**Drugs:** 30 total (10 per disease). See datasets/english_master_dataset.csv.
+
+**DO NOT add diseases beyond these 3.**
+**DO NOT add drugs outside these 3 disease areas.**
+**DO NOT add a 4th language.**
+Scalability answer: The pipeline supports adding new diseases — we chose depth over breadth.
 
 **User roles (3 roles — Researcher merged into Doctor):**
 - Patient → upload prescription, voice/text search, view basic drug info, view safety alerts
@@ -592,5 +608,4 @@ ENVIRONMENT=development
 - **Disclaimer on every interaction result** — system supports, not replaces, doctors
 
 ---
-
 
