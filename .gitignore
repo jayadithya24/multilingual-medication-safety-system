@@ -225,3 +225,18 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# Python / Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+ENV/
+.env
+
+# VS Code IDE Settings
+.vscode/
+
+# OS Specific Files
+.DS_Store
+Thumbs.db
