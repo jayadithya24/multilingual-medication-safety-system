@@ -3,7 +3,7 @@ import easyocr
 from app.utils.text_cleaner import clean_detected_text
 from app.services.medicine_service import search_medicine
 
-reader = easyocr.Reader(["en"])
+reader = easyocr.Reader(["en", "kn", "te"])
 
 
 def extract_text(file_path):
