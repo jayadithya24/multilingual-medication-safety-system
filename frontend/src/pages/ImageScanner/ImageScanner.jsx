@@ -41,7 +41,7 @@ function ImageScanner() {
       setResult(response);
     } catch (err) {
       console.error(err);
-      setError("Unable to scan the medicine image.");
+      setError(err.message || "Unable to scan the medicine image.");
     } finally {
       setLoading(false);
     }
@@ -76,8 +76,9 @@ function ImageScanner() {
         <button
           className="scan-btn"
           onClick={handleScan}
+          disabled={loading}
         >
-          Scan Medicine
+          {loading ? "Scanning..." : "Scan Medicine"}
         </button>
 
         {loading && <Loading />}

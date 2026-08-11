@@ -1,3 +1,4 @@
+import React from "react";
 import "./Workflow.css";
 
 function Workflow() {
@@ -27,29 +28,14 @@ function Workflow() {
                 {
 
                     steps.map((step,index)=>(
-
-                        <>
-
-                            <div className="workflow-card" key={index}>
-
+                        <React.Fragment key={index}>
+                            <div className="workflow-card">
                                 {step}
-
                             </div>
-
-                            {
-
-                                index!==steps.length-1 &&
-
-                                <span className="arrow">
-
-                                    ➜
-
-                                </span>
-
-                            }
-
-                        </>
-
+                            {index!==steps.length-1 && (
+                                <span className="arrow">➜</span>
+                            )}
+                        </React.Fragment>
                     ))
 
                 }

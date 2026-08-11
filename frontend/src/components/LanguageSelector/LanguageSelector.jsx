@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 /**
  * Language Selector Component
@@ -63,7 +63,7 @@ function LanguageSelector({ selectedLanguage, onLanguageChange }) {
         </ul>
       )}
 
-      <style>
+      <style>{`
         .language-selector {
           position: relative;
           display: inline-block;
@@ -132,7 +132,7 @@ function LanguageSelector({ selectedLanguage, onLanguageChange }) {
           font-size: 12px;
           color: #666;
         }
-      </style>
+      `}</style>
     </div>
   );
 }
