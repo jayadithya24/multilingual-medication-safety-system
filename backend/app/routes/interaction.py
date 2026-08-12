@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Query
 
-from app.services.interaction_service import get_interaction
+from backend.app.services.interaction_service import get_interaction
 
 
 router = APIRouter()

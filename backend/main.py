@@ -5,8 +5,7 @@ from backend.app.routes.upload import router as upload_router
 from backend.app.routes.mongo_loader_route import router as mongo_loader_router
 from backend.app.routes.auth import router as auth_router
 from backend.app.routes.neo4j import router as neo4j_router
-from backend.app.routes.interactions import router as interactions_router
-from backend.app.routes.patient import router as patient_router
+from backend.app.routes.interaction import router as interaction_router
 from backend.app.routes.medicine import router as medicine_router
 from backend.app.routes.voice import router as voice_router
 
@@ -27,8 +26,7 @@ app.include_router(upload_router)
 app.include_router(auth_router)
 app.include_router(mongo_loader_router)
 app.include_router(neo4j_router)
-app.include_router(interactions_router)
-app.include_router(patient_router)
+app.include_router(interaction_router)
 app.include_router(medicine_router)
 app.include_router(voice_router)
 

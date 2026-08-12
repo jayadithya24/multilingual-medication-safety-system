@@ -1,7 +1,7 @@
 from functools import lru_cache
 
-from app.services.medicine_service import search_medicine
-from app.utils.text_cleaner import clean_detected_text
+from backend.app.services.medicine_service import search_medicine
+from backend.app.utils.text_cleaner import clean_detected_text
 
 
 @lru_cache(maxsize=1)

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from app.services.medicine_service import list_medicine_names, search_medicine
+from backend.app.services.medicine_service import list_medicine_names, search_medicine
 
 router = APIRouter()
 
