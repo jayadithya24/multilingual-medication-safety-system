@@ -1,8 +1,12 @@
 
-pymongo
-motor
-pandas
-pytest
-mongomock
 fastapi
 uvicorn
+pandas
+pymongo
+python-multipart
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt
+neo4j
+pytest
+mongomock
