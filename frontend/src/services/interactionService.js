@@ -10,3 +10,8 @@ export const checkDrugInteraction = async (drug1, drug2) => {
 
   return response.data;
 };
+
+export const checkMultiDrugInteraction = async (drugs) => {
+  const response = await api.post("/interaction/multi", { drugs });
+  return response.data;
+};
