@@ -8,6 +8,7 @@ from backend.app.routes.neo4j import router as neo4j_router
 from backend.app.routes.interaction import router as interaction_router
 from backend.app.routes.medicine import router as medicine_router
 from backend.app.routes.voice import router as voice_router
+from backend.app.routes.tts import router as tts_router
 
 app = FastAPI(
     title="Medication Safety System",
@@ -29,6 +30,8 @@ app.include_router(neo4j_router)
 app.include_router(interaction_router)
 app.include_router(medicine_router)
 app.include_router(voice_router)
+app.include_router(tts_router)
+
 
 
 @app.get("/")
