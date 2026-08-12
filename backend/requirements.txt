@@ -2,3 +2,7 @@
 pymongo
 motor
 pandas
+pytest
+mongomock
+fastapi
+uvicorn
