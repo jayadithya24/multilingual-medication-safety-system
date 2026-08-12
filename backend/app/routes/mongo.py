@@ -2,12 +2,12 @@ from fastapi import APIRouter, Depends
 from datetime import timedelta
 from fastapi import HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from app.auth import (
+from backend.app.auth import (
     get_current_active_user,
     create_access_token,
     ACCESS_TOKEN_EXPIRE_MINUTES,
 )
-from app.services.mongo_service import insert_to_mongo
+from backend.app.services.mongo_service import insert_to_mongo
 from pydantic import BaseModel
 from typing import List, Dict, Any
 
