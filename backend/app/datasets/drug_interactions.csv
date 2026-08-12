@@ -1,0 +1,4 @@
+drug_1,drug_2,severity,description,recommendation
+aspirin,warfarin,High,Concurrent use increases the risk of serious bleeding.,Avoid combination when possible and monitor INR closely.
+ibuprofen,lisinopril,Moderate,NSAIDs may reduce the antihypertensive effect of lisinopril and affect kidney function.,Use the lowest effective dose and monitor blood pressure and renal function.
+metformin,contrast media,High,Iodinated contrast may increase the risk of lactic acidosis in susceptible patients taking metformin.,Hold metformin as clinically indicated and follow renal function guidance before and after contrast exposure.

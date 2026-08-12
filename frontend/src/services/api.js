@@ -1,4 +1,11 @@
-﻿const BASE_URL = "http://127.0.0.1:8000";
+import axios from "axios";
+
+const BASE_URL = "http://127.0.0.1:8000";
+
+export const api = axios.create({
+  baseURL: BASE_URL,
+  timeout: 30000,
+});
 
 export async function getHealth() {
   const response = await fetch(`${BASE_URL}/health`);
@@ -28,3 +35,5 @@ export async function searchDrug(term) {
   }
   return response.json();
 }
+
+export default api;
