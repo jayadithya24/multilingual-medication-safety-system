@@ -1,5 +1,15 @@
+import sys
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from backend.env_loader import load_project_env
+
+load_project_env()
 
 from backend.app.routes.upload import router as upload_router
 from backend.app.routes.mongo_loader_route import router as mongo_loader_router
@@ -17,12 +27,12 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://127.0.0.1:5173", "http://localhost:5173", "*"],
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_origin_regex=r"https?://(localhost|127\.0\.0\.1)(:\d+)?",
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 app.include_router(upload_router)
 app.include_router(auth_router)
 app.include_router(mongo_loader_router)

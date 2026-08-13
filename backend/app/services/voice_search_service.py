@@ -54,7 +54,7 @@ def transcribe_audio(file_path):
     return ""
 
 
-def search_medicine_from_transcript(transcript_text):
+def search_medicine_from_transcript(transcript_text, lang: str = "en"):
     """Clean transcript text and search the medicine dataset using the shared medicine service."""
 
     if not transcript_text:
@@ -76,7 +76,7 @@ def search_medicine_from_transcript(transcript_text):
             continue
 
         seen_candidates.add(normalized_candidate)
-        medicine = search_medicine(normalized_candidate)
+        medicine = search_medicine(normalized_candidate, lang=lang)
         if medicine:
             return medicine, cleaned_words
 

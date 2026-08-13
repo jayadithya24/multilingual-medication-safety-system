@@ -4,6 +4,7 @@ import { sendVoiceSearchAudio } from "../../services/voiceService";
 import "./VoiceSearch.css";
 
 function VoiceSearch() {
+  const [lang, setLang] = useState("en");
   const [isRecording, setIsRecording] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState("");
@@ -121,7 +122,7 @@ function VoiceSearch() {
       setError("");
       setResult(null);
 
-      const response = await sendVoiceSearchAudio(audioFile);
+      const response = await sendVoiceSearchAudio(audioFile, lang);
       setResult(response);
     } catch (searchError) {
       console.error(searchError);
@@ -146,6 +147,15 @@ function VoiceSearch() {
             Record the name of a medicine, or upload an audio file and let the backend recognize it.
           </p>
         </div>
+
+        <label className="voice-language-selector">
+          <span>Language</span>
+          <select value={lang} onChange={(event) => setLang(event.target.value)}>
+            <option value="en">English</option>
+            <option value="kn">Kannada</option>
+            <option value="tulu">Tulu</option>
+          </select>
+        </label>
 
         <div className="voice-panel">
           <div className="voice-controls">

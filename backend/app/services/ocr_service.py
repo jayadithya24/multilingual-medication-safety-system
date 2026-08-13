@@ -14,7 +14,7 @@ def _get_reader():
         return None
 
 
-def extract_text(file_path):
+def extract_text(file_path, lang: str = "en"):
     """Run OCR, clean detected text, and return all matching medicine records."""
     if not file_path or not os.path.exists(file_path):
         return {
@@ -36,7 +36,7 @@ def extract_text(file_path):
     filename = os.path.basename(file_path).lower()
 
     # Extract all matching medicines from detected text or filename
-    all_medicines = list_medicine_names()
+    all_medicines = list_medicine_names(lang=lang)
     found_medicines = []
     found_details = []
 
@@ -45,7 +45,7 @@ def extract_text(file_path):
 
     for med in all_medicines:
         if med.lower() in full_text:
-            med_info = search_medicine(med)
+            med_info = search_medicine(med, lang=lang)
             if med_info and med not in found_medicines:
                 found_medicines.append(med)
                 found_details.append(med_info)
@@ -55,13 +55,13 @@ def extract_text(file_path):
         # Default demo prescription co-occurrence: Metformin, Amlodipine, Ibuprofen
         demo_list = ["Metformin", "Amlodipine", "Ibuprofen"]
         for med in demo_list:
-            med_info = search_medicine(med)
+            med_info = search_medicine(med, lang=lang)
             if med_info:
                 found_medicines.append(med)
                 found_details.append(med_info)
 
     first_med = found_medicines[0] if found_medicines else "Metformin"
-    first_details = found_details[0] if found_details else search_medicine(first_med)
+    first_details = found_details[0] if found_details else search_medicine(first_med, lang=lang)
 
     return {
         "status": "success",
@@ -70,10 +70,11 @@ def extract_text(file_path):
         "all_detected_medicines": found_medicines,
         "all_detected_details": found_details,
         "raw_text": " ".join(detected_text) if detected_text else "Prescription Image Processed",
+        "lang": lang,
     }
 
 
-def extract_text_from_image(file=None, file_path=None):
+def extract_text_from_image(file=None, file_path=None, lang: str = "en"):
     """Compatibility wrapper for older call sites expecting a file upload object."""
     if file is not None:
         if hasattr(file, "file"):
@@ -85,5 +86,5 @@ def extract_text_from_image(file=None, file_path=None):
             "status": "not_found",
             "message": "OCR input file not found.",
         }
-    return extract_text(file_path)
+    return extract_text(file_path, lang=lang)
 

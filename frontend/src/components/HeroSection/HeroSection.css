@@ -68,6 +68,8 @@
 
     gap:20px;
 
+    flex-wrap:wrap;
+
 }
 
 .btn-primary{
@@ -99,6 +101,24 @@
     border-radius:10px;
 
     font-weight:bold;
+
+}
+
+.btn-tertiary{
+
+    text-decoration:none;
+
+    border:2px solid #0F766E;
+
+    color:#0F766E;
+
+    padding:15px 30px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    background:rgba(255,255,255,.6);
 
 }
 

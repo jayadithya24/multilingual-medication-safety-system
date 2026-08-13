@@ -70,7 +70,7 @@ def _load_interaction_table():
     return dataframe
 
 
-def get_interaction(drug1, drug2):
+def get_interaction(drug1, drug2, lang: str = "en"):
     """Return the first matching interaction for the two drugs regardless of order."""
     if not drug1 or not drug2:
         return None
@@ -114,10 +114,11 @@ def get_interaction(drug1, drug2):
         "severity": str(first_match["severity"]),
         "description": str(first_match["description"]),
         "recommendation": str(first_match["recommendation"]),
+        "lang": lang,
     }
 
 
-def get_multi_drug_interactions(drugs):
+def get_multi_drug_interactions(drugs, lang: str = "en"):
     """Evaluate pairwise interactions across a list of 2 or more drugs."""
     if not drugs or len(drugs) < 2:
         return {
@@ -132,7 +133,7 @@ def get_multi_drug_interactions(drugs):
     severities_found = []
 
     for d1, d2 in itertools.combinations(clean_drugs, 2):
-        match = get_interaction(d1, d2)
+        match = get_interaction(d1, d2, lang=lang)
         if match:
             interactions.append(match)
             severities_found.append(match["severity"].capitalize())
@@ -149,4 +150,5 @@ def get_multi_drug_interactions(drugs):
         "total_interactions_found": len(interactions),
         "max_severity": max_sev,
         "interactions": interactions,
-    }
+        "lang": lang,
+    }

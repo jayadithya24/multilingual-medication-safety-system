@@ -25,28 +25,19 @@ function Navbar() {
 
                     <li>
                         <NavLink to="/research">
-                            Research Dashboard
+                            Doctor Portal
                         </NavLink>
                     </li>
 
                     <li>
                         <NavLink to="/public">
-                            Public Dashboard
+                            Patient Portal
                         </NavLink>
                     </li>
+
                     <li>
-                        <NavLink to="/scanner">
-                             OCR Scanner
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/drug-interaction">
-                             Drug Interaction
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/voice-search">
-                             Voice Search
+                        <NavLink to="/admin">
+                            Admin Portal
                         </NavLink>
                     </li>
                 </ul>

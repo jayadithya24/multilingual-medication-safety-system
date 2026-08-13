@@ -5,7 +5,7 @@ import api from "./api";
  * @param {File} imageFile
  * @returns OCR response
  */
-export const scanMedicine = async (imageFile) => {
+export const scanMedicine = async (imageFile, lang = "en") => {
   const formData = new FormData();
 
   formData.append("file", imageFile);
@@ -14,6 +14,7 @@ export const scanMedicine = async (imageFile) => {
       headers: {
         "Content-Type": "multipart/form-data",
       },
+      params: { lang },
       // OCR can be slow on large images; increase timeout for this request
       timeout: 120000,
     });

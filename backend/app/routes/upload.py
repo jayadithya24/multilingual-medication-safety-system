@@ -1,7 +1,7 @@
 import os
 import tempfile
 
-from fastapi import APIRouter, UploadFile, File, HTTPException
+from fastapi import APIRouter, UploadFile, File, HTTPException, Query
 
 from backend.app.services.ocr_service import extract_text
 
@@ -9,7 +9,7 @@ router = APIRouter()
 
 
 @router.post("/upload-image")
-async def upload_image(file: UploadFile = File(...)):
+async def upload_image(file: UploadFile = File(...), lang: str = Query("en")):
     if not file.filename:
         raise HTTPException(status_code=400, detail="File name is required")
 
@@ -20,7 +20,7 @@ async def upload_image(file: UploadFile = File(...)):
         tmp_path = tmp.name
 
     try:
-        result = extract_text(tmp_path)
+        result = extract_text(tmp_path, lang=lang)
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"OCR failed: {str(exc)}") from exc
     finally:
@@ -30,4 +30,5 @@ async def upload_image(file: UploadFile = File(...)):
     return {
         "filename": file.filename,
         "ocr_result": result,
+        "lang": lang,
     }

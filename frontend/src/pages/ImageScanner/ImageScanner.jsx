@@ -5,6 +5,7 @@ import MedicineCard from "../../components/MedicineCard/MedicineCard";
 import "./ImageScanner.css";
 
 function ImageScanner() {
+  const [lang, setLang] = useState("en");
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -36,7 +37,7 @@ function ImageScanner() {
       setLoading(true);
       setError("");
 
-      const response = await scanMedicine(image);
+      const response = await scanMedicine(image, lang);
 
       setResult(response);
     } catch (err) {
@@ -56,6 +57,15 @@ function ImageScanner() {
         <p>
           Upload a medicine strip or tablet image to identify the medicine.
         </p>
+
+        <label className="scanner-language-selector">
+          <span>Language</span>
+          <select value={lang} onChange={(event) => setLang(event.target.value)}>
+            <option value="en">English</option>
+            <option value="kn">Kannada</option>
+            <option value="tulu">Tulu</option>
+          </select>
+        </label>
 
         <input
           type="file"

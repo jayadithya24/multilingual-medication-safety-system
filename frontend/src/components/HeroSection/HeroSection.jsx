@@ -28,11 +28,15 @@ function HeroSection() {
         <div className="hero-buttons">
 
           <Link to="/research" className="btn-primary">
-            Research Dashboard
+            Doctor Portal
           </Link>
 
           <Link to="/public" className="btn-secondary">
-            Public Dashboard
+            Patient Portal
+          </Link>
+
+          <Link to="/admin" className="btn-tertiary">
+            Admin Portal
           </Link>
 
         </div>

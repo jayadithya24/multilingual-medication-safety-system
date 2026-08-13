@@ -55,27 +55,55 @@ def search_medicine(medicine_name: str, lang: str = "en"):
         if not normalized_name:
             return None
 
-        # Search exact match first, then partial match
-        exact_matches = dataframe[
-            dataframe["drug_name"].str.lower().str.strip() == normalized_name
+        search_columns = [
+            column
+            for column in ["drug_name", "generic_name", "active_ingredient"]
+            if column in dataframe.columns
         ]
+        if not search_columns:
+            return None
+
+        normalized_columns = {
+            column: dataframe[column].astype(str).str.lower().str.strip()
+            for column in search_columns
+        }
+
+        # Search exact match first, then partial match
+        exact_mask = None
+        for series in normalized_columns.values():
+            column_mask = series == normalized_name
+            exact_mask = column_mask if exact_mask is None else (exact_mask | column_mask)
+
+        exact_matches = dataframe[exact_mask] if exact_mask is not None else dataframe.iloc[0:0]
         if not exact_matches.empty:
             match_dict = exact_matches.iloc[0].to_dict()
             match_dict["lang"] = lang
             return match_dict
 
-        matches = dataframe[
-            dataframe["drug_name"].str.lower().str.contains(normalized_name, na=False, regex=False)
-        ]
+        partial_mask = None
+        for series in normalized_columns.values():
+            column_mask = series.str.contains(normalized_name, na=False, regex=False)
+            partial_mask = column_mask if partial_mask is None else (partial_mask | column_mask)
+
+        matches = dataframe[partial_mask] if partial_mask is not None else dataframe.iloc[0:0]
 
         if matches.empty:
             # Fallback to English if not found in requested language
             if lang != "en":
                 en_df = _load_dataset("en")
                 if en_df is not None:
-                    matches = en_df[
-                        en_df["drug_name"].str.lower().str.contains(normalized_name, na=False, regex=False)
+                    available_columns = [
+                        column
+                        for column in ["drug_name", "generic_name", "active_ingredient"]
+                        if column in en_df.columns
                     ]
+                    if available_columns:
+                        fallback_mask = None
+                        for column in available_columns:
+                            series = en_df[column].astype(str).str.lower().str.strip()
+                            column_mask = series.str.contains(normalized_name, na=False, regex=False)
+                            fallback_mask = column_mask if fallback_mask is None else (fallback_mask | column_mask)
+                        matches = en_df[fallback_mask] if fallback_mask is not None else en_df.iloc[0:0]
 
         if matches.empty:
             return None
@@ -92,7 +120,9 @@ def search_medicine(medicine_name: str, lang: str = "en"):
 def list_medicine_names(lang: str = "en"):
     """Return a sorted list of unique medicine names for dropdown usage."""
     try:
-        dataframe = _load_dataset(lang) or _load_dataset("en")
+        dataframe = _load_dataset(lang)
+        if dataframe is None:
+            dataframe = _load_dataset("en")
         if dataframe is None or "drug_name" not in dataframe.columns:
             return []
 
@@ -107,4 +137,4 @@ def list_medicine_names(lang: str = "en"):
         return sorted(set(medicines), key=str.lower)
 
     except Exception:
-        return []
+        return []

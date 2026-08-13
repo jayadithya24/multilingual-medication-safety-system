@@ -2,9 +2,12 @@ import { useEffect, useMemo, useState } from "react";
 import Loading from "../../components/Loading/Loading";
 import { checkDrugInteraction } from "../../services/interactionService";
 import { fetchMedicines } from "../../services/medicineService";
+import { loginWithPassword, logout } from "../../services/authService";
+import { getStoredToken } from "../../services/api";
 import "./DrugInteraction.css";
 
 function DrugInteraction() {
+  const [lang] = useState("en");
   const [drug1, setDrug1] = useState("");
   const [drug2, setDrug2] = useState("");
   const [medicineNames, setMedicineNames] = useState([]);
@@ -12,6 +15,11 @@ function DrugInteraction() {
   const [checking, setChecking] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
+  const [username, setUsername] = useState("doctor");
+  const [password, setPassword] = useState("secret");
+  const [authError, setAuthError] = useState("");
+  const [authLoading, setAuthLoading] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(Boolean(getStoredToken()));
 
   useEffect(() => {
     let isMounted = true;
@@ -43,6 +51,10 @@ function DrugInteraction() {
     };
   }, []);
 
+  useEffect(() => {
+    setIsAuthenticated(Boolean(getStoredToken()));
+  }, []);
+
   const severityClass = useMemo(() => {
     const severity = result?.interaction?.severity?.toLowerCase();
 
@@ -53,6 +65,11 @@ function DrugInteraction() {
   }, [result]);
 
   const handleCheckInteraction = async () => {
+    if (!isAuthenticated) {
+      setError("Please sign in as a doctor before checking interactions.");
+      return;
+    }
+
     if (!drug1.trim() || !drug2.trim()) {
       setError("Please select or enter two medicines.");
       return;
@@ -63,14 +80,35 @@ function DrugInteraction() {
       setError("");
       setResult(null);
 
-      const response = await checkDrugInteraction(drug1.trim(), drug2.trim());
+      const response = await checkDrugInteraction(drug1.trim(), drug2.trim(), lang);
       setResult(response);
     } catch (checkError) {
       console.error(checkError);
-      setError("Unable to check drug interaction right now.");
+      const detail = checkError?.response?.data?.detail;
+      setError(detail || "Unable to check drug interaction right now.");
     } finally {
       setChecking(false);
     }
+  };
+
+  const handleLogin = async () => {
+    try {
+      setAuthLoading(true);
+      setAuthError("");
+      await loginWithPassword(username.trim(), password);
+      setIsAuthenticated(true);
+    } catch (loginError) {
+      console.error(loginError);
+      setAuthError(loginError?.response?.data?.detail || "Doctor login failed.");
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  const handleLogout = () => {
+    logout();
+    setIsAuthenticated(false);
+    setResult(null);
   };
 
   const interaction = result?.interaction ?? null;
@@ -88,6 +126,49 @@ function DrugInteraction() {
         </div>
 
         <div className="interaction-panel">
+          {!isAuthenticated ? (
+            <div className="interaction-auth">
+              <h2>Doctor Sign In</h2>
+              <p>Sign in to enable interaction checking.</p>
+
+              <label className="interaction-field">
+                <span>Username</span>
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(event) => setUsername(event.target.value)}
+                  placeholder="doctor"
+                />
+              </label>
+
+              <label className="interaction-field">
+                <span>Password</span>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  placeholder="secret"
+                />
+              </label>
+
+              <button className="interaction-button" onClick={handleLogin} disabled={authLoading}>
+                {authLoading ? "Signing in..." : "Sign in"}
+              </button>
+
+              {authError && <div className="interaction-error">{authError}</div>}
+            </div>
+          ) : (
+            <div className="interaction-auth interaction-auth--signed-in">
+              <div>
+                <h2>Signed in as doctor</h2>
+                <p>You can now check drug interactions.</p>
+              </div>
+              <button className="interaction-button interaction-button--secondary" onClick={handleLogout}>
+                Sign out
+              </button>
+            </div>
+          )}
+
           <div className="interaction-form">
             <label className="interaction-field">
               <span>Medicine 1</span>
@@ -114,7 +195,7 @@ function DrugInteraction() {
             <button
               className="interaction-button"
               onClick={handleCheckInteraction}
-              disabled={checking || loadingMedicines}
+              disabled={checking || loadingMedicines || !isAuthenticated}
             >
               {checking ? "Checking..." : "Check Interaction"}
             </button>

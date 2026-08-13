@@ -1,6 +1,8 @@
 from typing import List
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel
+
+from backend.app.auth import User, get_current_active_user
 
 from backend.app.services.interaction_service import get_interaction, get_multi_drug_interactions
 
@@ -16,8 +18,13 @@ class MultiDrugRequest(BaseModel):
 async def check_interaction(
     drug1: str = Query(..., min_length=1),
     drug2: str = Query(..., min_length=1),
+    lang: str = Query("en"),
+    current_user: User = Depends(get_current_active_user),
 ):
-    interaction = get_interaction(drug1, drug2)
+    if current_user.role != "doctor":
+        raise HTTPException(status_code=403, detail="Only doctors can check drug interactions")
+
+    interaction = get_interaction(drug1, drug2, lang=lang)
 
     if interaction:
         return {
@@ -32,6 +39,13 @@ async def check_interaction(
 
 
 @router.post("/interaction/multi")
-async def check_multi_interaction(body: MultiDrugRequest):
-    result = get_multi_drug_interactions(body.drugs)
-    return result
+async def check_multi_interaction(
+    body: MultiDrugRequest,
+    lang: str = Query("en"),
+    current_user: User = Depends(get_current_active_user),
+):
+    if current_user.role != "doctor":
+        raise HTTPException(status_code=403, detail="Only doctors can check drug interactions")
+
+    result = get_multi_drug_interactions(body.drugs, lang=lang)
+    return result

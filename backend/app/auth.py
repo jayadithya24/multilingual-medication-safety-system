@@ -21,6 +21,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 class Token(BaseModel):
     access_token: str
     token_type: str
+    role: Optional[str] = None
 
 class TokenData(BaseModel):
     username: Optional[str] = None
@@ -29,6 +30,7 @@ class User(BaseModel):
     username: str
     email: Optional[str] = None
     full_name: Optional[str] = None
+    role: Optional[str] = "patient"
     disabled: Optional[bool] = None
 
 class UserInDB(User):
@@ -41,6 +43,21 @@ fake_users_db = {
         "username": "admin",
         "full_name": "Admin User",
         "email": "admin@example.com",
+        "role": "doctor",
+        "hashed_password": "$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW",  # secret
+    },
+    "doctor": {
+        "username": "doctor",
+        "full_name": "Doctor User",
+        "email": "doctor@example.com",
+        "role": "doctor",
+        "hashed_password": "$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW",  # secret
+    },
+    "patient": {
+        "username": "patient",
+        "full_name": "Patient User",
+        "email": "patient@example.com",
+        "role": "patient",
         "hashed_password": "$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW",  # secret
     }
 }
