@@ -33,7 +33,6 @@ export async function registerPatient(name, email, password, confirmPassword) {
     confirm_password: confirmPassword,
   });
 
-  persistAuth(response.data);
   return response.data;
 }
 

@@ -44,21 +44,21 @@ fake_users_db = {
         "full_name": "Admin User",
         "email": "admin@example.com",
         "role": "doctor",
-        "hashed_password": "$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW",  # secret
+        "hashed_password": "$2b$12$zA6ilqwM1GzNkijm9iVnVeklyeG9sp1EGuuoSwhlMcN9jxJujKhOu",  # secret
     },
     "doctor": {
         "username": "doctor",
         "full_name": "Doctor User",
-        "email": "doctor@example.com",
+        "email": "doctor@gmail.com",
         "role": "doctor",
-        "hashed_password": "$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW",  # secret
+        "hashed_password": "$2b$12$TdGJQoxKf1wBsv.Ksm2Nneqn0z5TUNQPMl4j2/nJ.yGhOhn8P36le",  # secret
     },
     "patient": {
         "username": "patient",
         "full_name": "Patient User",
         "email": "patient@example.com",
         "role": "patient",
-        "hashed_password": "$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW",  # secret
+        "hashed_password": "$2b$12$Fw7DAAMZ3.GJExtd/yw6CehbXW/K1Yc04ZYCTEPBcNVgB0SL/yqMy",  # secret
     }
 }
 

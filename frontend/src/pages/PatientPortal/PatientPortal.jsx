@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginWithPassword, registerPatient } from "../../services/authService";
+import { clearStoredToken } from "../../services/api";
 import { fetchMedicines } from "../../services/medicineService";
 import "./PatientPortal.css";
 
@@ -16,33 +17,89 @@ function PatientPortal() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async () => {
-    try {
-      setLoading(true);
-      setError("");
-      await loginWithPassword(loginIdentity.trim(), loginPassword);
-      navigate("/patient-dashboard", { replace: true });
-    } catch (loginError) {
-      console.error(loginError);
-      setError(loginError?.response?.data?.detail || "Patient login failed.");
-    } finally {
-      setLoading(false);
+ const handleLogin = async () => {
+  try {
+    setLoading(true);
+    setError("");
+
+    await loginWithPassword(
+      loginIdentity.trim(),
+      loginPassword
+    );
+
+    // Login successful → go to patient dashboard
+    navigate("/patient-dashboard", { replace: true });
+
+  } catch (loginError) {
+    console.error("Login error:", loginError);
+
+    const detail = loginError?.response?.data?.detail;
+
+    if (Array.isArray(detail)) {
+      setError(
+        detail
+          .map((item) => item.msg)
+          .filter(Boolean)
+          .join(", ")
+      );
+    } else {
+      setError(detail || "Patient login failed.");
     }
-  };
+
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleRegister = async () => {
-    try {
-      setLoading(true);
-      setError("");
-      await registerPatient(registerName.trim(), registerEmail.trim(), registerPassword, confirmPassword);
-      navigate("/patient-dashboard", { replace: true });
-    } catch (registerError) {
-      console.error(registerError);
-      setError(registerError?.response?.data?.detail || "Patient registration failed.");
-    } finally {
-      setLoading(false);
+  try {
+    setLoading(true);
+    setError("");
+
+    await registerPatient(
+      registerName.trim(),
+      registerEmail.trim(),
+      registerPassword,
+      confirmPassword
+    );
+
+    // Registration should NOT automatically log the patient in
+    clearStoredToken();
+
+    // Switch back to Login tab
+    setTab("login");
+
+    // Put the registered email into the login field
+    setLoginIdentity(registerEmail.trim());
+
+    // Clear registration fields
+    setRegisterName("");
+    setRegisterEmail("");
+    setRegisterPassword("");
+    setConfirmPassword("");
+
+    setError("");
+
+  } catch (registerError) {
+    console.error("Registration error:", registerError);
+
+    const detail = registerError?.response?.data?.detail;
+
+    if (Array.isArray(detail)) {
+      setError(
+        detail
+          .map((item) => item.msg)
+          .filter(Boolean)
+          .join(", ")
+      );
+    } else {
+      setError(detail || "Patient registration failed.");
     }
-  };
+
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="portal-auth-page">

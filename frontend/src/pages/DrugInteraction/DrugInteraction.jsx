@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import Loading from "../../components/Loading/Loading";
 import { checkDrugInteraction } from "../../services/interactionService";
 import { fetchMedicines } from "../../services/medicineService";
-import { loginWithPassword, logout } from "../../services/authService";
+import { loginWithPassword } from "../../services/authService";
 import { getStoredToken } from "../../services/api";
 import "./DrugInteraction.css";
 
@@ -105,11 +105,7 @@ function DrugInteraction() {
     }
   };
 
-  const handleLogout = () => {
-    logout();
-    setIsAuthenticated(false);
-    setResult(null);
-  };
+  
 
   const interaction = result?.interaction ?? null;
   const isNotFound = result?.status === "not_found";
@@ -159,14 +155,11 @@ function DrugInteraction() {
             </div>
           ) : (
             <div className="interaction-auth interaction-auth--signed-in">
-              <div>
-                <h2>Signed in as doctor</h2>
-                <p>You can now check drug interactions.</p>
-              </div>
-              <button className="interaction-button interaction-button--secondary" onClick={handleLogout}>
-                Sign out
-              </button>
-            </div>
+  <div>
+    <h2>Signed in as doctor</h2>
+    <p>You can now check drug interactions.</p>
+  </div>
+</div>
           )}
 
           <div className="interaction-form">
