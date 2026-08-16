@@ -1,6 +1,7 @@
 from datetime import timedelta
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
+from backend.app.database import users_collection
 from backend.app.auth import (
     authenticate_user,
     create_access_token,
@@ -41,28 +42,72 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
 
 @router.post("/register", response_model=Token)
 async def register_patient(payload: RegisterRequest):
+
     if payload.password != payload.confirm_password:
-        raise HTTPException(status_code=400, detail="Passwords do not match")
+        raise HTTPException(
+            status_code=400,
+            detail="Passwords do not match"
+        )
 
     username = payload.email.strip().lower()
-    if username in fake_users_db:
-        raise HTTPException(status_code=400, detail="User already exists")
 
-    fake_users_db[username] = {
+    # Check MongoDB for existing patient
+    existing_user = users_collection.find_one({
+        "username": username
+    })
+
+    if existing_user:
+        raise HTTPException(
+            status_code=400,
+            detail="User already exists"
+        )
+
+    # Generate patient ID
+    patient_count = users_collection.count_documents({
+        "role": "patient"
+    })
+
+    patient_id = f"P{patient_count + 1:03d}"
+
+    # Create patient document
+    patient_document = {
         "username": username,
         "full_name": payload.name.strip(),
         "email": username,
         "role": "patient",
-        "hashed_password": get_password_hash(payload.password),
+
+        "hashed_password": get_password_hash(
+            payload.password
+        ),
+
+        # Patient profile information
+        "patient_id": patient_id,
+        "age": None,
+        "gender": None,
+        "medical_condition": None,
     }
 
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(
-        data={"sub": username, "role": "patient"}, expires_delta=access_token_expires
+    # Save patient to MongoDB
+    users_collection.insert_one(patient_document)
+
+    # Create login token
+    access_token_expires = timedelta(
+        minutes=ACCESS_TOKEN_EXPIRE_MINUTES
     )
-    return {"access_token": access_token, "token_type": "bearer", "role": "patient"}
 
+    access_token = create_access_token(
+        data={
+            "sub": username,
+            "role": "patient"
+        },
+        expires_delta=access_token_expires
+    )
 
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "role": "patient"
+    }
 @router.get("/me", response_model=User)
 async def read_users_me(current_user: User = Depends(get_current_active_user)):
     return current_user

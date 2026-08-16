@@ -1,0 +1,493 @@
+.prescription-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+}
+
+.prescription-page__hero {
+    margin-bottom: 32px;
+}
+
+.prescription-page__kicker {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #2563eb;
+    margin-bottom: 10px;
+}
+
+.prescription-page__hero h1 {
+    margin: 0;
+    font-size: 38px;
+    color: #111827;
+}
+
+.prescription-page__hero p {
+    max-width: 700px;
+    margin-top: 10px;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+.prescription-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.prescription-card__header {
+    padding-bottom: 24px;
+    margin-bottom: 26px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.prescription-card__header span,
+.prescription-times__header span {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #64748b;
+}
+
+.prescription-card__header h2 {
+    margin: 7px 0;
+    color: #111827;
+}
+
+.prescription-card__header p {
+    margin: 0;
+    color: #6b7280;
+}
+
+.prescription-field {
+    display: block;
+    margin-bottom: 22px;
+}
+
+.prescription-field > span {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.prescription-field input,
+.prescription-field textarea,
+.prescription-field select {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 15px;
+    background: #ffffff;
+    color: #111827;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.prescription-field textarea {
+    resize: vertical;
+}
+
+.prescription-field input:focus,
+.prescription-field textarea:focus,
+.prescription-field select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.prescription-times {
+    margin-top: 30px;
+    padding: 22px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #f8fafc;
+}
+
+.prescription-times__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.prescription-times__header h3 {
+    margin: 6px 0 0;
+    font-size: 18px;
+    color: #111827;
+}
+
+.prescription-add-time {
+    border: none;
+    background: #eff6ff;
+    color: #2563eb;
+    padding: 9px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.prescription-times__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.prescription-time {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.prescription-time span {
+    min-width: 55px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.prescription-time input {
+    flex: 1;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 9px;
+}
+
+.prescription-remove-time {
+    border: none;
+    background: transparent;
+    color: #dc2626;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.prescription-reminder {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 24px;
+    padding: 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.prescription-reminder strong {
+    color: #111827;
+}
+
+.prescription-reminder p {
+    margin: 5px 0 0;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.prescription-switch input {
+    display: none;
+}
+
+.prescription-switch span {
+    display: block;
+    width: 48px;
+    height: 26px;
+    border-radius: 20px;
+    background: #cbd5e1;
+    cursor: pointer;
+    position: relative;
+}
+
+.prescription-switch span::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 3px;
+    left: 3px;
+    border-radius: 50%;
+    background: #ffffff;
+    transition: transform 0.2s;
+}
+
+.prescription-switch input:checked + span {
+    background: #2563eb;
+}
+
+.prescription-switch input:checked + span::after {
+    transform: translateX(22px);
+}
+
+.prescription-notice {
+    margin-top: 24px;
+    padding: 16px;
+    border-radius: 10px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+}
+
+.prescription-notice strong {
+    color: #92400e;
+}
+
+.prescription-notice p {
+    margin: 6px 0 0;
+    color: #92400e;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.prescription-error,
+.prescription-success {
+    margin-top: 18px;
+    padding: 13px 15px;
+    border-radius: 9px;
+}
+
+.prescription-error {
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+.prescription-success {
+    background: #f0fdf4;
+    color: #15803d;
+}
+
+.prescription-submit {
+    width: 100%;
+    margin-top: 24px;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.prescription-submit:hover {
+    background: #1d4ed8;
+}
+
+.prescription-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+    .prescription-page {
+        padding: 24px 16px 60px;
+    }
+
+    .prescription-card {
+        padding: 22px;
+    }
+
+    .prescription-page__hero h1 {
+        font-size: 30px;
+    }
+
+    .prescription-times__header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .prescription-times__list {
+        grid-template-columns: 1fr;
+    }
+
+    .prescription-time {
+        flex-wrap: wrap;
+    }
+}
+
+.prescription-ocr {
+    margin-top: 10px;
+}
+
+.prescription-preview {
+    margin: 18px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.prescription-preview img {
+    max-width: 100%;
+    max-height: 350px;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.prescription-ocr-message {
+    margin-top: 16px;
+    padding: 13px 15px;
+    border-radius: 9px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* =========================================
+   PRESCRIPTION IMAGE OPTIONS
+========================================= */
+
+.prescription-image-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.prescription-image-option {
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px;
+    border: 1px solid #dbe3ef;
+    border-radius: 12px;
+    background: #ffffff;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.prescription-image-option:hover {
+    border-color: #2563eb;
+    background: #f8fbff;
+}
+
+.prescription-image-option__icon {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #eff6ff;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.prescription-image-option strong {
+    display: block;
+    color: #111827;
+    margin-bottom: 5px;
+}
+
+.prescription-image-option span {
+    display: block;
+    color: #64748b;
+    font-size: 13px;
+}
+
+
+/* =========================================
+   CAMERA
+========================================= */
+
+.prescription-camera {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #dbe3ef;
+    border-radius: 14px;
+    background: #f8fafc;
+}
+
+.prescription-camera__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.prescription-camera__header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #111827;
+}
+
+.prescription-camera__close {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: #fee2e2;
+    color: #b91c1c;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.prescription-camera__video {
+    width: 100%;
+    max-height: 500px;
+    display: block;
+    object-fit: cover;
+    border-radius: 12px;
+    background: #000;
+}
+
+.prescription-camera__controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.prescription-camera__capture {
+    border: none;
+    border-radius: 9px;
+    padding: 12px 24px;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.prescription-camera__capture:hover {
+    background: #1d4ed8;
+}
+
+.prescription-camera__cancel {
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    padding: 12px 24px;
+    background: #fff;
+    color: #374151;
+    cursor: pointer;
+}
+
+.prescription-camera__cancel:hover {
+    background: #f3f4f6;
+}
+
+
+@media (max-width: 700px) {
+
+    .prescription-image-options {
+        grid-template-columns: 1fr;
+    }
+
+    .prescription-camera__controls {
+        flex-direction: column;
+    }
+
+    .prescription-camera__capture,
+    .prescription-camera__cancel {
+        width: 100%;
+    }
+
+}

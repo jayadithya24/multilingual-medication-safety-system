@@ -1,0 +1,127 @@
+.knowledge-graph {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 24px;
+    box-sizing: border-box;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.knowledge-graph__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.knowledge-graph__label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #0f766e;
+}
+
+.knowledge-graph__header h2 {
+    margin: 6px 0 6px;
+    font-size: 24px;
+    color: #0f172a;
+}
+
+.knowledge-graph__header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.knowledge-graph__stats {
+    display: flex;
+    gap: 12px;
+}
+
+.knowledge-graph__stats div {
+    min-width: 80px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+.knowledge-graph__stats strong {
+    display: block;
+    font-size: 20px;
+    color: #0f172a;
+}
+
+.knowledge-graph__stats span {
+    display: block;
+    margin-top: 3px;
+    font-size: 11px;
+    color: #64748b;
+}
+
+.knowledge-graph__legend {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: #475569;
+}
+
+.knowledge-graph__legend span {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.legend-dot--drug {
+    background: #3b82f6;
+}
+
+.legend-dot--disease {
+    background: #10b981;
+}
+
+.legend-dot--side-effect {
+    background: #f59e0b;
+}
+
+.knowledge-graph__canvas {
+    width: 100%;
+    height: 650px;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+}
+
+.knowledge-graph__canvas canvas {
+    display: block;
+}
+
+.knowledge-graph__loading,
+.knowledge-graph__error,
+.knowledge-graph__empty {
+    padding: 40px;
+    border-radius: 16px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    color: #64748b;
+}
+
+.knowledge-graph__error {
+    color: #b91c1c;
+    background: #fef2f2;
+    border-color: #fecaca;
+}

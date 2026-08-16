@@ -6,6 +6,12 @@ export const fetchMedicines = async (lang = "en") => {
 };
 
 export const searchMedicine = async (name, lang = "en") => {
-  const response = await api.get(`/medicine/${encodeURIComponent(name)}`, { params: { lang } });
-  return response.data;
-};
+    const response = await api.get("/neo4j/search", {
+        params: {
+            term: name,
+            limit: 10,
+        },
+    });
+
+    return response.data;
+};

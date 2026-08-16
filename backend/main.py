@@ -19,6 +19,9 @@ from backend.app.routes.interaction import router as interaction_router
 from backend.app.routes.medicine import router as medicine_router
 from backend.app.routes.voice import router as voice_router
 from backend.app.routes.tts import router as tts_router
+from backend.app.routes.patient_schedule import router as patient_schedule_router
+from backend.app.routes.patient_drugs import router as patient_drugs_router
+from backend.app.routes.patient import router as patient_router
 
 app = FastAPI(
     title="Medication Safety System",
@@ -43,7 +46,9 @@ app.include_router(interaction_router)
 app.include_router(medicine_router)
 app.include_router(voice_router)
 app.include_router(tts_router)
-
+app.include_router(patient_schedule_router)
+app.include_router(patient_drugs_router)
+app.include_router(patient_router)
 
 
 @app.get("/")

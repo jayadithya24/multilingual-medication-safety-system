@@ -5,6 +5,8 @@ import { fetchMedicines } from "../../services/medicineService";
 import { loginWithPassword } from "../../services/authService";
 import { getStoredToken } from "../../services/api";
 import "./DrugInteraction.css";
+import InteractionGraph from "../../components/KnowledgeGraph/InteractionGraph";
+
 
 function DrugInteraction() {
   const [lang] = useState("en");
@@ -240,6 +242,14 @@ function DrugInteraction() {
               ) : null}
             </div>
           )}
+          {/* Interaction Knowledge Graph */}
+
+{result && drug1 && drug2 && (
+    <InteractionGraph
+        drug1={drug1.trim()}
+        drug2={drug2.trim()}
+    />
+)}
         </div>
       </section>
     </div>

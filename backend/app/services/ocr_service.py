@@ -88,3 +88,130 @@ def extract_text_from_image(file=None, file_path=None, lang: str = "en"):
         }
     return extract_text(file_path, lang=lang)
 
+def extract_prescription_details(file_path, lang: str = "en"):
+    """
+    OCR specifically for prescription images.
+
+    Extracts whatever prescription information can be detected.
+    Fields that cannot be detected are returned as None so the
+    patient can enter them manually.
+    """
+
+    if not file_path or not os.path.exists(file_path):
+        return {
+            "status": "not_found",
+            "message": "Prescription image not found.",
+        }
+
+    detected_text = []
+
+    reader = _get_reader()
+
+    if reader is not None:
+        try:
+            result = reader.readtext(file_path)
+
+            for item in result:
+                if len(item) >= 2:
+                    detected_text.append(item[1])
+
+        except Exception as err:
+            print(f"EasyOCR warning: {err}")
+
+    raw_text = " ".join(detected_text).strip()
+
+    if not raw_text:
+        return {
+            "status": "partial",
+            "message": "No prescription text could be detected. Please enter the details manually.",
+            "medicine": None,
+            "dosage": None,
+            "instructions": None,
+            "raw_text": "",
+            "lang": lang,
+        }
+
+    text_lower = raw_text.lower()
+
+    # ---------------------------------------------------------
+    # 1. Detect medicine name using your existing medicine DB
+    # ---------------------------------------------------------
+
+    medicine = None
+
+    all_medicines = list_medicine_names(lang=lang)
+
+    for med in all_medicines:
+        if med.lower() in text_lower:
+            medicine = med
+            break
+
+    # ---------------------------------------------------------
+    # 2. Try to detect dosage
+    # ---------------------------------------------------------
+
+    import re
+
+    dosage = None
+
+    dosage_patterns = [
+        r"\b\d+(?:\.\d+)?\s*(?:mg|mcg|g|ml|%|iu)\b",
+        r"\b\d+(?:\.\d+)?\s*(?:milligram|milligrams|gram|grams|ml)\b",
+    ]
+
+    for pattern in dosage_patterns:
+        match = re.search(pattern, raw_text, re.IGNORECASE)
+
+        if match:
+            dosage = match.group(0)
+            break
+
+    # ---------------------------------------------------------
+    # 3. Try to detect instructions
+    # ---------------------------------------------------------
+
+    instructions = None
+
+    instruction_keywords = [
+        "after breakfast",
+        "before breakfast",
+        "after lunch",
+        "before lunch",
+        "after dinner",
+        "before dinner",
+        "after food",
+        "before food",
+        "with food",
+        "without food",
+        "at night",
+        "in the morning",
+        "morning",
+        "afternoon",
+        "evening",
+        "night",
+    ]
+
+    for keyword in instruction_keywords:
+        if keyword in text_lower:
+            instructions = keyword.title()
+            break
+
+    # ---------------------------------------------------------
+    # Return result
+    # ---------------------------------------------------------
+
+    status = "success" if medicine else "partial"
+
+    return {
+        "status": status,
+        "medicine": medicine,
+        "dosage": dosage,
+        "instructions": instructions,
+        "raw_text": raw_text,
+        "lang": lang,
+        "message": (
+            "Prescription details detected."
+            if medicine
+            else "Some prescription details could not be detected. Please enter them manually."
+        ),
+    }

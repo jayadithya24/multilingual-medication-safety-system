@@ -1,70 +1,368 @@
-.dashboard-shell {
-  min-height: 100vh;
-  padding: 40px 20px 64px;
-  background:
-    radial-gradient(circle at top left, rgba(14, 165, 233, 0.16), transparent 30%),
-    linear-gradient(180deg, #f7fbff 0%, #eef4ff 100%);
-  color: #0f172a;
+.doctor-dashboard {
+    min-height: calc(100vh - 82px);
+    padding: 32px;
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(37, 99, 235, 0.08),
+            transparent 30%
+        ),
+        #f8fafc;
+    color: #0f172a;
 }
 
-.dashboard-hero {
-  width: min(980px, 100%);
-  margin: 0 auto 22px;
-  text-align: center;
+
+/* =========================
+   WELCOME
+========================= */
+
+.doctor-dashboard__welcome {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 32px;
 }
 
-.dashboard-kicker {
-  margin: 0 0 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 0.78rem;
-  font-weight: 800;
-  color: #0f766e;
+.doctor-dashboard__kicker {
+    margin: 0 0 8px;
+    color: #0f766e;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 }
 
-.dashboard-hero h1 {
-  margin: 0;
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  line-height: 1.08;
+.doctor-dashboard__welcome h1 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
 }
 
-.dashboard-hero p {
-  max-width: 720px;
-  margin: 14px auto 0;
-  color: #475569;
-  line-height: 1.7;
+.doctor-dashboard__subtitle {
+    max-width: 680px;
+    margin: 12px 0 0;
+    color: #64748b;
+    line-height: 1.7;
+    font-size: 0.98rem;
 }
 
-.dashboard-grid {
-  width: min(980px, 100%);
-  margin: 0 auto;
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+.doctor-dashboard__status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border: 1px solid #bbf7d0;
+    border-radius: 999px;
+    background: #f0fdf4;
+    color: #166534;
+    font-size: 0.78rem;
+    font-weight: 800;
+    white-space: nowrap;
 }
 
-.dashboard-card {
-  display: block;
-  text-decoration: none;
-  text-align: left;
-  border: 1px solid rgba(37, 99, 235, 0.12);
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
-  padding: 24px;
-  color: #0f172a;
+.doctor-dashboard__status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
 }
 
-.dashboard-card h2 {
-  margin: 0 0 10px;
+
+/* =========================
+   SECTION
+========================= */
+
+.doctor-dashboard__section {
+    margin-bottom: 28px;
 }
 
-.dashboard-card p {
-  margin: 0;
-  color: #475569;
-  line-height: 1.6;
+.doctor-dashboard__section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
 }
 
-.dashboard-card--button {
-  cursor: pointer;
+.doctor-dashboard__section-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.doctor-dashboard__section-header p {
+    margin: 5px 0 0;
+    color: #64748b;
+    font-size: 0.86rem;
+}
+
+
+/* =========================
+   CLINICAL TOOLS
+========================= */
+
+.doctor-dashboard__tools {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.doctor-tool {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    min-height: 150px;
+    padding: 22px;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    background: #ffffff;
+    color: #0f172a;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.doctor-tool:hover {
+    transform: translateY(-2px);
+    border-color: #cbd5e1;
+    box-shadow: 0 18px 38px rgba(15, 23, 42, 0.08);
+}
+
+.doctor-tool--primary {
+    border-color: rgba(13, 148, 136, 0.25);
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #f0fdfa 100%
+        );
+}
+
+.doctor-tool__icon {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    background: #f1f5f9;
+    font-size: 1.2rem;
+}
+
+.doctor-tool--primary .doctor-tool__icon {
+    background: #ccfbf1;
+}
+
+.doctor-tool__content {
+    min-width: 0;
+    padding-right: 70px;
+}
+
+.doctor-tool__label {
+    display: block;
+    margin-bottom: 5px;
+    color: #0f766e;
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+}
+
+.doctor-tool h3 {
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+.doctor-tool p {
+    margin: 8px 0 0;
+    color: #64748b;
+    font-size: 0.84rem;
+    line-height: 1.55;
+}
+
+.doctor-tool__arrow {
+    position: absolute;
+    top: 24px;
+    right: 22px;
+    color: #0f766e;
+    font-size: 1.3rem;
+    font-weight: 900;
+}
+
+.doctor-tool__coming {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    padding: 5px 8px;
+    border-radius: 7px;
+    background: #f1f5f9;
+    color: #64748b;
+    font-size: 0.62rem;
+    font-weight: 800;
+}
+
+
+/* =========================
+   DATA SCOPE
+========================= */
+
+.doctor-dashboard__scope {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding: 20px 22px;
+    border: 1px solid #dbeafe;
+    border-radius: 18px;
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #f8fafc
+        );
+}
+
+.doctor-dashboard__scope-icon {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: #dbeafe;
+    color: #2563eb;
+    font-weight: 900;
+}
+
+.doctor-dashboard__scope-label {
+    display: block;
+    margin-bottom: 4px;
+    color: #2563eb;
+    font-size: 0.64rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+}
+
+.doctor-dashboard__scope h3 {
+    margin: 0;
+    font-size: 0.98rem;
+}
+
+.doctor-dashboard__scope p {
+    margin: 4px 0 0;
+    color: #64748b;
+    font-size: 0.82rem;
+}
+
+
+/* =========================
+   RECENT ANALYSES
+========================= */
+
+.doctor-dashboard__view-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 800;
+}
+
+.doctor-dashboard__view-link:hover {
+    text-decoration: underline;
+}
+
+.doctor-dashboard__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    padding: 30px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 18px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.doctor-dashboard__empty-icon {
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 12px;
+    border-radius: 14px;
+    background: #f1f5f9;
+    font-size: 1.25rem;
+}
+
+.doctor-dashboard__empty h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.doctor-dashboard__empty p {
+    max-width: 420px;
+    margin: 8px 0 16px;
+    color: #64748b;
+    font-size: 0.84rem;
+    line-height: 1.55;
+}
+
+.doctor-dashboard__empty-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 16px;
+    border-radius: 9px;
+    background: #2563eb;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+    .doctor-dashboard {
+        padding: 24px;
+    }
+
+    .doctor-dashboard__tools {
+        grid-template-columns: 1fr;
+    }
+
+    .doctor-dashboard__welcome {
+        flex-direction: column;
+    }
+
+    .doctor-dashboard__status {
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 600px) {
+    .doctor-dashboard {
+        padding: 20px 16px;
+    }
+
+    .doctor-dashboard__section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .doctor-tool {
+        padding: 18px;
+    }
+
+    .doctor-tool__content {
+        padding-right: 45px;
+    }
 }
