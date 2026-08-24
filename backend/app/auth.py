@@ -82,7 +82,7 @@ fake_users_db = {
         "full_name": "Doctor User",
         "email": "doctor@gmail.com",
         "role": "doctor",
-        "hashed_password": "$2b$12$TdGJQoxKf1wBsv.Ksm2Nneqn0z5TUNQPMl4j2/nJ.yGhOhn8P36le",
+        "hashed_password": "$2b$12$GQS.25nau21FJXuguXePVeRf0B.Sgf7lyHKTGe5eoDcjoc7njV1NS",
     },
 
     "patient": {
