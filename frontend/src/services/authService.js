@@ -1,8 +1,10 @@
 import api, { clearStoredToken, setStoredRole, setStoredToken } from "./api";
 
 function persistAuth(responseData) {
-  if (responseData?.access_token) {
-    setStoredToken(responseData.access_token);
+  const accessToken = responseData?.access_token || responseData?.token;
+
+  if (accessToken) {
+    setStoredToken(accessToken);
   }
 
   if (responseData?.role) {

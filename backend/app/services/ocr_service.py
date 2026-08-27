@@ -1,8 +1,16 @@
 import os
+import logging
+import time
 from functools import lru_cache
 
+import cv2
+
 from backend.app.services.medicine_service import list_medicine_names, search_medicine
-from backend.app.utils.text_cleaner import clean_detected_text
+
+
+logger = logging.getLogger(__name__)
+
+MAX_OCR_DIMENSION = 1600
 
 
 @lru_cache(maxsize=1)
@@ -10,8 +18,66 @@ def _get_reader():
     try:
         import easyocr
         return easyocr.Reader(["en"], gpu=False)
-    except Exception:
+    except Exception as err:
+        logger.exception("EasyOCR initialization failed: %s", err)
         return None
+
+
+def warm_up_reader():
+    """Load the cached OCR reader during application startup."""
+    started_at = time.perf_counter()
+    reader = _get_reader()
+    if reader is None:
+        logger.error("EasyOCR reader is unavailable after %.2f seconds", time.perf_counter() - started_at)
+    else:
+        logger.info("EasyOCR reader ready in %.2f seconds", time.perf_counter() - started_at)
+    return reader is not None
+
+
+def _read_detected_text(reader, file_path):
+    """Preprocess an image once and run one bounded EasyOCR pass."""
+    started_at = time.perf_counter()
+    image = cv2.imread(file_path, cv2.IMREAD_COLOR)
+    if image is None:
+        logger.error("OCR could not decode image: %s", file_path)
+        return []
+
+    original_height, original_width = image.shape[:2]
+    logger.info("OCR image dimensions: %sx%s", original_width, original_height)
+
+    largest_dimension = max(original_width, original_height)
+    if largest_dimension > MAX_OCR_DIMENSION:
+        scale = MAX_OCR_DIMENSION / largest_dimension
+        image = cv2.resize(
+            image,
+            (int(original_width * scale), int(original_height * scale)),
+            interpolation=cv2.INTER_AREA,
+        )
+
+    grayscale = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    processed_image = cv2.createCLAHE(
+        clipLimit=2.0,
+        tileGridSize=(8, 8),
+    ).apply(grayscale)
+
+    try:
+        result = reader.readtext(
+            processed_image,
+            canvas_size=MAX_OCR_DIMENSION,
+            mag_ratio=1.0,
+            batch_size=1,
+        )
+    except Exception as err:
+        logger.exception("EasyOCR read failed for %s: %s", file_path, err)
+        return []
+
+    detected_text = [item[1] for item in result if len(item) >= 2 and item[1]]
+    logger.info(
+        "OCR completed in %.2f seconds; detected %d text regions",
+        time.perf_counter() - started_at,
+        len(detected_text),
+    )
+    return detected_text
 
 
 def extract_text(file_path, lang: str = "en"):
@@ -26,12 +92,7 @@ def extract_text(file_path, lang: str = "en"):
     reader = _get_reader()
 
     if reader is not None:
-        try:
-            result = reader.readtext(file_path)
-            for item in result:
-                detected_text.append(item[1])
-        except Exception as err:
-            print(f"EasyOCR warning: {err}")
+        detected_text = _read_detected_text(reader, file_path)
 
     filename = os.path.basename(file_path).lower()
 
@@ -50,26 +111,16 @@ def extract_text(file_path, lang: str = "en"):
                 found_medicines.append(med)
                 found_details.append(med_info)
 
-    # Demo fallback if no specific medicine name matched in image text
-    if not found_medicines:
-        # Default demo prescription co-occurrence: Metformin, Amlodipine, Ibuprofen
-        demo_list = ["Metformin", "Amlodipine", "Ibuprofen"]
-        for med in demo_list:
-            med_info = search_medicine(med, lang=lang)
-            if med_info:
-                found_medicines.append(med)
-                found_details.append(med_info)
-
-    first_med = found_medicines[0] if found_medicines else "Metformin"
-    first_details = found_details[0] if found_details else search_medicine(first_med, lang=lang)
+    first_med = found_medicines[0] if found_medicines else None
+    first_details = found_details[0] if found_details else None
 
     return {
-        "status": "success",
+        "status": "success" if detected_text else "partial",
         "detected_medicine": first_med,
         "medicine_details": first_details,
         "all_detected_medicines": found_medicines,
         "all_detected_details": found_details,
-        "raw_text": " ".join(detected_text) if detected_text else "Prescription Image Processed",
+        "raw_text": " ".join(detected_text),
         "lang": lang,
     }
 
@@ -103,20 +154,21 @@ def extract_prescription_details(file_path, lang: str = "en"):
             "message": "Prescription image not found.",
         }
 
+    started_at = time.perf_counter()
+    logger.info("OCR started: %s", file_path)
     detected_text = []
 
-    reader = _get_reader()
-
-    if reader is not None:
-        try:
-            result = reader.readtext(file_path)
-
-            for item in result:
-                if len(item) >= 2:
-                    detected_text.append(item[1])
-
-        except Exception as err:
-            print(f"EasyOCR warning: {err}")
+    try:
+        reader = _get_reader()
+        if reader is not None:
+            detected_text = _read_detected_text(reader, file_path)
+    except Exception as err:
+        logger.exception("Prescription OCR failed safely for %s: %s", file_path, err)
+    finally:
+        logger.info(
+            "Prescription OCR request completed in %.2f seconds",
+            time.perf_counter() - started_at,
+        )
 
     raw_text = " ".join(detected_text).strip()
 
@@ -128,6 +180,10 @@ def extract_prescription_details(file_path, lang: str = "en"):
             "dosage": None,
             "instructions": None,
             "raw_text": "",
+            "detected_medicine": None,
+            "all_detected_medicines": [],
+            "medicine_details": None,
+            "all_detected_details": [],
             "lang": lang,
         }
 
@@ -137,14 +193,18 @@ def extract_prescription_details(file_path, lang: str = "en"):
     # 1. Detect medicine name using your existing medicine DB
     # ---------------------------------------------------------
 
-    medicine = None
-
     all_medicines = list_medicine_names(lang=lang)
+    found_medicines = []
+    found_details = []
 
     for med in all_medicines:
         if med.lower() in text_lower:
-            medicine = med
-            break
+            med_info = search_medicine(med, lang=lang)
+            if med_info:
+                found_medicines.append(med)
+                found_details.append(med_info)
+
+    medicine = found_medicines[0] if found_medicines else None
 
     # ---------------------------------------------------------
     # 2. Try to detect dosage
@@ -205,6 +265,10 @@ def extract_prescription_details(file_path, lang: str = "en"):
     return {
         "status": status,
         "medicine": medicine,
+        "detected_medicine": medicine,
+        "all_detected_medicines": found_medicines,
+        "medicine_details": found_details[0] if found_details else None,
+        "all_detected_details": found_details,
         "dosage": dosage,
         "instructions": instructions,
         "raw_text": raw_text,

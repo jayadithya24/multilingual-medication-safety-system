@@ -25,6 +25,7 @@ const languageOptions = [
 function PublicDashboard() {
     const [activeTab, setActiveTab] = useState("text");
     const [lang, setLang] = useState("en");
+    const [voiceLang] = useState("auto");
 
     // Medicine search
     const [medicineNames, setMedicineNames] = useState([]);
@@ -382,31 +383,48 @@ const capturePhoto = () => {
                 })
                 : new MediaRecorder(stream);
 
+            console.debug("Recording started", {
+                mimeType: mediaRecorder.mimeType || "browser default",
+            });
+
             chunksRef.current = [];
 
             mediaRecorder.ondataavailable = (event) => {
                 if (event.data.size > 0) {
                     chunksRef.current.push(event.data);
+                    console.debug("Audio chunk received", event.data.size);
                 }
             };
 
             mediaRecorder.onstop = () => {
+                const mimeType = mediaRecorder.mimeType || preferredMimeType || "audio/webm";
                 const recordingBlob = new Blob(
                     chunksRef.current,
                     {
-                        type:
-                            mediaRecorder.mimeType ||
-                            "audio/webm",
+                        type: mimeType,
                     }
                 );
 
+                console.debug("Recording stopped", {
+                    chunks: chunksRef.current.length,
+                    blobSize: recordingBlob.size,
+                    blobType: recordingBlob.type,
+                });
+
+                if (recordingBlob.size === 0) {
+                    setAudioFile(null);
+                    setVoiceError("No audio was recorded. Please try again.");
+                    mediaStreamRef.current?.getTracks().forEach((track) => track.stop());
+                    mediaStreamRef.current = null;
+                    return;
+                }
+
+                const extension = mimeType.includes("mp4") ? "mp4" : "webm";
                 const recordingFile = new File(
                     [recordingBlob],
-                    "voice-search.webm",
+                    `voice-search.${extension}`,
                     {
-                        type:
-                            recordingBlob.type ||
-                            "audio/webm",
+                        type: recordingBlob.type,
                     }
                 );
 
@@ -427,14 +445,16 @@ const capturePhoto = () => {
                 chunksRef.current = [];
             };
 
-            mediaRecorder.start();
+            mediaRecorder.start(250);
 
             mediaRecorderRef.current = mediaRecorder;
             setIsRecording(true);
         } catch (error) {
             console.error(error);
             setVoiceError(
-                "Unable to access the microphone."
+                error?.name === "NotAllowedError"
+                    ? "Microphone permission is required."
+                    : "Unable to access the microphone."
             );
         }
     };
@@ -447,6 +467,8 @@ const capturePhoto = () => {
             return;
         }
 
+        console.debug("Stopping recording");
+        mediaRecorderRef.current.requestData?.();
         mediaRecorderRef.current.stop();
         setIsRecording(false);
     };
@@ -466,14 +488,23 @@ const capturePhoto = () => {
             const response =
                 await sendVoiceSearchAudio(
                     audioFile,
-                    lang
+                    voiceLang
                 );
 
             setVoiceResult(response);
+
+            if (response.response_text && "speechSynthesis" in window) {
+                window.speechSynthesis.cancel();
+                const spokenResponse = new SpeechSynthesisUtterance(response.response_text);
+                spokenResponse.lang = response.response_language === "en" ? "en-IN" : "kn-IN";
+                window.speechSynthesis.speak(spokenResponse);
+            }
         } catch (error) {
             console.error(error);
 
             setVoiceError(
+                error?.response?.data?.detail ||
+                error?.message ||
                 "Unable to process the voice search request."
             );
         } finally {
@@ -1078,6 +1109,28 @@ const capturePhoto = () => {
 
                             {voiceResult && (
                                 <div className="patient-result">
+
+                                    {voiceResult.response_text && (
+                                        <p className="patient-voice-response">
+                                            {voiceResult.response_text}
+                                        </p>
+                                    )}
+
+                                    {voiceResult.detected_medicine && (
+                                        <p className="patient-voice-detected-medicine">
+                                            Detected medicine: {voiceResult.detected_medicine}
+                                        </p>
+                                    )}
+
+                                    {voiceResult.matching_medicines?.length > 0 && (
+                                        <ul className="patient-voice-medicines">
+                                            {voiceResult.matching_medicines.map((medicine) => (
+                                                <li key={medicine.drug_name}>
+                                                    {medicine.drug_name}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
 
                                     {voiceMedicine ? (
                                         <MedicineCard

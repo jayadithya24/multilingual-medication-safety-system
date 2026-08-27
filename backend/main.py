@@ -22,6 +22,7 @@ from backend.app.routes.tts import router as tts_router
 from backend.app.routes.patient_schedule import router as patient_schedule_router
 from backend.app.routes.patient_drugs import router as patient_drugs_router
 from backend.app.routes.patient import router as patient_router
+from backend.app.services.ocr_service import warm_up_reader
 
 app = FastAPI(
     title="Medication Safety System",
@@ -33,6 +34,10 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "http://localhost:5174",
+        "http://127.0.0.1:5174",
+        "http://localhost:5175",
+        "http://127.0.0.1:5175",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -49,6 +54,11 @@ app.include_router(tts_router)
 app.include_router(patient_schedule_router)
 app.include_router(patient_drugs_router)
 app.include_router(patient_router)
+
+
+@app.on_event("startup")
+def warm_up_ocr():
+    warm_up_reader()
 
 
 @app.get("/")

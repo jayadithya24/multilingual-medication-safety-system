@@ -1,16 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import MedicineCard from "../../components/MedicineCard/MedicineCard";
 import { sendVoiceSearchAudio } from "../../services/voiceService";
+import { scanMedicine } from "../../services/ocrService";
 import "./VoiceSearch.css";
 
 function VoiceSearch() {
-  const [lang, setLang] = useState("en");
+  const [lang, setLang] = useState("auto");
   const [isRecording, setIsRecording] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState("");
   const [result, setResult] = useState(null);
   const [audioFile, setAudioFile] = useState(null);
   const [audioPreview, setAudioPreview] = useState("");
+  const [medicineImage, setMedicineImage] = useState(null);
+  const [medicinePreview, setMedicinePreview] = useState("");
+  const [ocrMedicine, setOcrMedicine] = useState("");
 
   const mediaRecorderRef = useRef(null);
   const mediaStreamRef = useRef(null);
@@ -21,6 +25,10 @@ function VoiceSearch() {
     return () => {
       if (audioPreview) {
         URL.revokeObjectURL(audioPreview);
+      }
+
+      if (medicinePreview) {
+        URL.revokeObjectURL(medicinePreview);
       }
 
       if (mediaStreamRef.current) {
@@ -50,6 +58,20 @@ function VoiceSearch() {
     resetResultState();
   };
 
+  const handleMedicineImageChange = (event) => {
+    const selectedFile = event.target.files?.[0];
+    if (!selectedFile) return;
+
+    if (medicinePreview) {
+      URL.revokeObjectURL(medicinePreview);
+    }
+
+    setMedicineImage(selectedFile);
+    setMedicinePreview(URL.createObjectURL(selectedFile));
+    setOcrMedicine("");
+    resetResultState();
+  };
+
   const startRecording = async () => {
     try {
       resetResultState();
@@ -65,21 +87,42 @@ function VoiceSearch() {
         ? new MediaRecorder(stream, { mimeType: preferredMimeType })
         : new MediaRecorder(stream);
 
+      console.debug("Recording started", {
+        mimeType: mediaRecorder.mimeType || "browser default",
+      });
+
       chunksRef.current = [];
 
       mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
           chunksRef.current.push(event.data);
+          console.debug("Audio chunk received", event.data.size);
         }
       };
 
       mediaRecorder.onstop = () => {
+        const mimeType = mediaRecorder.mimeType || preferredMimeType || "audio/webm";
         const recordingBlob = new Blob(chunksRef.current, {
-          type: mediaRecorder.mimeType || "audio/webm",
+          type: mimeType,
         });
 
-        const recordingFile = new File([recordingBlob], "voice-search.webm", {
-          type: recordingBlob.type || "audio/webm",
+        console.debug("Recording stopped", {
+          chunks: chunksRef.current.length,
+          blobSize: recordingBlob.size,
+          blobType: recordingBlob.type,
+        });
+
+        if (recordingBlob.size === 0) {
+          setAudioFile(null);
+          setError("No audio was recorded. Please try again.");
+          mediaStreamRef.current?.getTracks().forEach((track) => track.stop());
+          mediaStreamRef.current = null;
+          return;
+        }
+
+        const extension = mimeType.includes("mp4") ? "mp4" : "webm";
+        const recordingFile = new File([recordingBlob], `voice-search.${extension}`, {
+          type: recordingBlob.type,
         });
 
         if (audioPreview) {
@@ -93,12 +136,16 @@ function VoiceSearch() {
         chunksRef.current = [];
       };
 
-      mediaRecorder.start();
+      mediaRecorder.start(250);
       mediaRecorderRef.current = mediaRecorder;
       setIsRecording(true);
     } catch (recordingError) {
       console.error(recordingError);
-      setError("Unable to access the microphone.");
+      setError(
+        recordingError?.name === "NotAllowedError"
+          ? "Microphone permission is required."
+          : "Unable to access the microphone."
+      );
     }
   };
 
@@ -107,6 +154,8 @@ function VoiceSearch() {
       return;
     }
 
+    console.debug("Stopping recording");
+    mediaRecorderRef.current.requestData?.();
     mediaRecorderRef.current.stop();
     setIsRecording(false);
   };
@@ -122,17 +171,41 @@ function VoiceSearch() {
       setError("");
       setResult(null);
 
-      const response = await sendVoiceSearchAudio(audioFile, lang);
+      let identifiedMedicine = ocrMedicine;
+      if (medicineImage && !identifiedMedicine) {
+        const ocrResponse = await scanMedicine(medicineImage, lang === "auto" ? "en" : lang);
+        identifiedMedicine = ocrResponse?.ocr_result?.detected_medicine || "";
+        setOcrMedicine(identifiedMedicine);
+        if (!identifiedMedicine) {
+          throw new Error(
+            "This medicine is not available in the system. Please consult a doctor."
+          );
+        }
+      }
+
+      const response = await sendVoiceSearchAudio(audioFile, lang, identifiedMedicine);
       setResult(response);
+
+      if (response.response_text && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+        const spokenResponse = new SpeechSynthesisUtterance(response.response_text);
+        spokenResponse.lang = response.response_language === "en" ? "en-IN" : "kn-IN";
+        window.speechSynthesis.speak(spokenResponse);
+      }
     } catch (searchError) {
       console.error(searchError);
-      setError("Unable to process the voice search request.");
+      setError(
+        searchError?.response?.data?.detail ||
+        searchError?.message ||
+        "Unable to process the voice search request."
+      );
     } finally {
       setProcessing(false);
     }
   };
 
   const medicineDetails = result?.medicine_details ?? null;
+  const matchingMedicines = result?.matching_medicines ?? [];
   const detectedText = result?.detected_text ?? "";
   const detectedMedicine = result?.detected_medicine ?? medicineDetails?.drug_name ?? "";
   const isNotFound = result?.status === "not_found";
@@ -151,6 +224,7 @@ function VoiceSearch() {
         <label className="voice-language-selector">
           <span>Language</span>
           <select value={lang} onChange={(event) => setLang(event.target.value)}>
+            <option value="auto">Automatic</option>
             <option value="en">English</option>
             <option value="kn">Kannada</option>
             <option value="tulu">Tulu</option>
@@ -192,6 +266,23 @@ function VoiceSearch() {
             />
           </div>
 
+          <label className="voice-medicine-image">
+            <span>Show or upload medicine image</span>
+            <input
+              type="file"
+              accept="image/*"
+              capture="environment"
+              onChange={handleMedicineImageChange}
+            />
+          </label>
+
+          {medicinePreview && (
+            <div className="voice-medicine-preview">
+              <img src={medicinePreview} alt="Medicine" />
+              {ocrMedicine && <p>Medicine identified: {ocrMedicine}</p>}
+            </div>
+          )}
+
           {audioPreview && (
             <div className="voice-audio-preview">
               <audio controls src={audioPreview} />
@@ -220,6 +311,18 @@ function VoiceSearch() {
               <div className="voice-summary">
                 <p className="voice-summary__label">Recognized Text</p>
                 <h2>{detectedText || "N/A"}</h2>
+                {result.response_text && (
+                  <p className="voice-summary__response">
+                    {result.response_text}
+                  </p>
+                )}
+                {matchingMedicines.length > 0 && (
+                  <ul className="voice-matching-medicines">
+                    {matchingMedicines.map((medicine) => (
+                      <li key={medicine.drug_name}>{medicine.drug_name}</li>
+                    ))}
+                  </ul>
+                )}
                 <p className="voice-summary__medicine">
                   {isNotFound
                     ? "Medicine not found."

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import api from "../../services/api";
+import { getStoredToken } from "../../services/api";
 import "./Prescription.css";
 
 function Prescription() {
@@ -406,6 +407,10 @@ useEffect(() => {
 
         try {
             setSaving(true);
+
+            if (!getStoredToken()) {
+                throw new Error("Please log in again before adding a medication to your schedule.");
+            }
 
             const response =
                 await api.post(

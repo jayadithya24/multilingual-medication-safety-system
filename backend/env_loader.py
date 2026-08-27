@@ -3,7 +3,7 @@ import os
 
 
 def load_project_env() -> None:
-    env_path = Path(__file__).resolve().parents[1] / ".env"
+    env_path = Path(__file__).resolve().parent / ".env"
     if not env_path.exists():
         return
 

@@ -12,6 +12,7 @@ mongomock
 easyocr
 SpeechRecognition
 openai-whisper
+imageio-ffmpeg
 numpy
 opencv-python-headless
 pillow
