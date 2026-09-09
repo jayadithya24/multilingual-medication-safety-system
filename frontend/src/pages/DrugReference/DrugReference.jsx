@@ -1,9 +1,11 @@
 import { useState } from "react";
+import LanguageSelector from "../../components/LanguageSelector/LanguageSelector";
 import { searchMedicine } from "../../services/medicineService";
 import "./DrugReference.css";
 
 function DrugReference() {
     const [searchTerm, setSearchTerm] = useState("");
+    const [lang, setLang] = useState("en");
     const [results, setResults] = useState([]);
     const [selectedDrug, setSelectedDrug] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -22,7 +24,7 @@ function DrugReference() {
             setError("");
             setSelectedDrug(null);
 
-            const response = await searchMedicine(searchTerm.trim());
+            const response = await searchMedicine(searchTerm.trim(), lang);
 
             // Your backend returns { results: [...] }
             setResults(response.results || []);
@@ -61,6 +63,12 @@ function DrugReference() {
 
             {/* Search */}
             <section className="drug-reference-search">
+                <div style={{ marginBottom: "16px" }}>
+    <LanguageSelector
+        selectedLanguage={lang}
+        onLanguageChange={setLang}
+    />
+</div>
 
                 <form onSubmit={handleSearch}>
 
@@ -217,8 +225,13 @@ function DrugReference() {
                         <h3>Description</h3>
 
                         <p>
-                            {selectedDrug.description_en ||
-                                "No description available."}
+                           {(
+    lang === "kn"
+        ? selectedDrug.description_kn
+        : lang === "tulu"
+            ? selectedDrug.description_tulu
+            : selectedDrug.description_en
+) || selectedDrug.description || "No description available."}
                         </p>
                     </div>
 
@@ -231,8 +244,13 @@ function DrugReference() {
                         </h3>
 
                         <p>
-                            {selectedDrug.warnings_en ||
-                                "No warnings available."}
+                           {(
+    lang === "kn"
+        ? selectedDrug.warnings_kn
+        : lang === "tulu"
+            ? selectedDrug.warnings_tulu
+            : selectedDrug.warnings_en
+) || selectedDrug.warnings || "No warnings available."}
                         </p>
 
                     </div>
@@ -246,8 +264,13 @@ function DrugReference() {
                         </h3>
 
                         <p>
-                            {selectedDrug.contraindications_en ||
-                                "No contraindications available."}
+                            {(
+    lang === "kn"
+        ? selectedDrug.contraindications_kn
+        : lang === "tulu"
+            ? selectedDrug.contraindications_tulu
+            : selectedDrug.contraindications_en
+) || selectedDrug.contraindications || "No contraindications available."}
                         </p>
 
                     </div>

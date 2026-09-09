@@ -22,11 +22,13 @@ router = APIRouter(
 @router.get("/search")
 async def drug_search(
     term: str = Query(..., min_length=1),
-    limit: int = Query(10, ge=1, le=50)
+    limit: int = Query(10, ge=1, le=50),
+    lang: str = Query("en")
 ):
     results = search_drug_by_text(
         term,
-        limit=limit
+        limit=limit,
+        lang=lang
     )
 
     return {

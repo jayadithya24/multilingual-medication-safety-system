@@ -204,7 +204,14 @@ function ImageScanner() {
             )}
 
             {scanStatus !== "success" && (
-              <MedicineCard medicine={null} />
+                <>
+                  <MedicineCard medicine={null} />
+                  {result.ocr_result.raw_text && (
+                    <p className="scan-not-found-message">
+                      Detected text: {result.ocr_result.raw_text}
+                    </p>
+                  )}
+                </>
             )}
 
             {scanStatus === "not_found" &&

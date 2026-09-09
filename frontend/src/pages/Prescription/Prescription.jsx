@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import api from "../../services/api";
 import { getStoredToken } from "../../services/api";
+import { registerMedicationNotifications } from "../../services/fcmService";
 import "./Prescription.css";
 
 function Prescription() {
@@ -207,7 +208,10 @@ useEffect(() => {
 
             const response = await api.post(
                 "/prescription-ocr",
-                formData
+                formData,
+                {
+                    timeout: 300000,
+                }
             );
 
             console.log(
@@ -253,8 +257,7 @@ useEffect(() => {
                 );
             } else {
                 setOcrMessage(
-                    ocrResult.message ||
-                    "Some details could not be detected. Please enter the missing information manually."
+                    `${ocrResult.message || "Some details could not be detected. Please enter the missing information manually."}${ocrResult.raw_text ? ` Detected text: ${ocrResult.raw_text}` : ""}`
                 );
             }
 
@@ -434,6 +437,8 @@ useEffect(() => {
                             reminderEnabled,
                     }
                 );
+
+            await registerMedicationNotifications();
 
             console.log(
                 "Medication schedule created:",

@@ -13,25 +13,155 @@ def _get_driver():
     return GraphDatabase.driver(uri, auth=(user, password))
 
 
-def _serialize_drug(record: Any) -> Dict[str, Any]:
+def _serialize_drug(
+    record: Any,
+    lang: str = "en"
+) -> Dict[str, Any]:
     drug = record["drug"]
+
     interactions = record.get("interactions", [])
+    diseases = record.get("diseases", [])
+    side_effects = record.get("side_effects", [])
+        # Normalize language
+    lang = (lang or "en").strip().lower()
+
+    if lang in ("tlu", "te"):
+        lang = "tulu"
+
+    # Select language-specific medicine information
+    if lang == "kn":
+
+        description = (
+            drug.get("description_kn")
+            or drug.get("description_en")
+            or drug.get("description")
+        )
+
+        warnings = (
+            drug.get("warnings_kn")
+            or drug.get("warnings_en")
+            or drug.get("warnings")
+        )
+
+        contraindications = (
+            drug.get("contraindications_kn")
+            or drug.get("contraindications_en")
+            or drug.get("contraindications")
+        )
+
+    elif lang == "tulu":
+
+        description = (
+            drug.get("description_tulu")
+            or drug.get("description_tlu")
+            or drug.get("description_en")
+            or drug.get("description")
+        )
+
+        warnings = (
+            drug.get("warnings_tulu")
+            or drug.get("warnings_tlu")
+            or drug.get("warnings_en")
+            or drug.get("warnings")
+        )
+
+        contraindications = (
+            drug.get("contraindications_tulu")
+            or drug.get("contraindications_tlu")
+            or drug.get("contraindications_en")
+            or drug.get("contraindications")
+        )
+
+    else:
+
+        description = (
+            drug.get("description_en")
+            or drug.get("description")
+        )
+
+        warnings = (
+            drug.get("warnings_en")
+            or drug.get("warnings")
+        )
+
+        contraindications = (
+            drug.get("contraindications_en")
+            or drug.get("contraindications")
+        )
+
+    # Convert Neo4j values safely
+    if diseases is None:
+        diseases = []
+
+    if side_effects is None:
+        side_effects = []
 
     return {
         "drug_id": drug.get("drug_id") or drug.get("id") or drug.get("name"),
         "drug_name": drug.get("drug_name") or drug.get("name"),
         "generic_name": drug.get("generic_name"),
         "drug_class": drug.get("drug_class"),
-        "active_ingredient": drug.get("active_ingredient"),
-        "description_en": drug.get("description_en") or drug.get("description"),
+
+        "active_ingredient": (
+            drug.get("active_ingredient")
+            or drug.get("activeIngredient")
+        ),
+
+        # Normalized fields expected by MedicineCard.jsx
+        "description": description,
+
+"side_effects": (
+    drug.get("side_effects")
+    or drug.get("side_effects_en")
+    or ", ".join(
+        str(x) for x in side_effects
+        if x
+    ) or None
+),
+
+"contraindications": contraindications,
+
+"warnings": warnings,
+
+        "disease": (
+            drug.get("disease")
+            or ", ".join(
+                str(x) for x in diseases
+                if x
+            ) or None
+        ),
+
+        "major_interactions": (
+            drug.get("major_interactions")
+            or ", ".join(
+                f"{i.get('drug_name')}: {i.get('description')}"
+                for i in interactions
+                if i.get("drug_name")
+            ) or None
+        ),
+
+        # Keep multilingual fields too
+        "description_en": (
+            drug.get("description_en")
+            or drug.get("description")
+        ),
         "description_kn": drug.get("description_kn"),
         "description_tulu": drug.get("description_tulu"),
-        "warnings_en": drug.get("warnings_en") or drug.get("warnings"),
+
+        "warnings_en": (
+            drug.get("warnings_en")
+            or drug.get("warnings")
+        ),
         "warnings_kn": drug.get("warnings_kn"),
         "warnings_tulu": drug.get("warnings_tulu"),
-        "contraindications_en": drug.get("contraindications_en") or drug.get("contraindications"),
+
+        "contraindications_en": (
+            drug.get("contraindications_en")
+            or drug.get("contraindications")
+        ),
         "contraindications_kn": drug.get("contraindications_kn"),
         "contraindications_tulu": drug.get("contraindications_tulu"),
+
         "interactions": [
             {
                 "drug_id": i.get("drug_id"),
@@ -40,12 +170,15 @@ def _serialize_drug(record: Any) -> Dict[str, Any]:
                 "description": i.get("description"),
             }
             for i in interactions
-            if i.get("drug_name")
+            if i and i.get("drug_name")
         ],
     }
-
-def _fallback_search(query: str, limit: int) -> List[Dict[str, Any]]:
-    dataframe = _load_dataset("en")
+def _fallback_search(
+    query: str,
+    limit: int,
+    lang: str = "en"
+) -> List[Dict[str, Any]]:
+    dataframe = _load_dataset(lang)
     if dataframe is None:
         return []
 
@@ -75,15 +208,35 @@ def _fallback_search(query: str, limit: int) -> List[Dict[str, Any]]:
 
     if matches.empty:
         fallback = search_medicine(query, lang="en")
-        return [_serialize_drug({"drug": fallback, "interactions": []})] if fallback else []
+        return [
+    _serialize_drug(
+        {
+            "drug": fallback,
+            "interactions": []
+        },
+        lang=lang
+    )
+] if fallback else []
 
     results: List[Dict[str, Any]] = []
     for _, row in matches.head(limit).iterrows():
-        results.append(_serialize_drug({"drug": row.to_dict(), "interactions": []}))
+        results.append(
+    _serialize_drug(
+        {
+            "drug": row.to_dict(),
+            "interactions": []
+        },
+        lang=lang
+    )
+)
     return results
 
 
-def search_drug_by_text(query: str, limit: int = 15) -> List[Dict[str, Any]]:
+def search_drug_by_text(
+    query: str,
+    limit: int = 15,
+    lang: str = "en"
+) -> List[Dict[str, Any]]:
     if not query:
         return []
 
@@ -91,16 +244,24 @@ def search_drug_by_text(query: str, limit: int = 15) -> List[Dict[str, Any]]:
         driver = _get_driver()
         with driver.session() as session:
             cypher = """
-            MATCH (d:Drug)
-WHERE toLower(d.name) CONTAINS toLower($query)
-   OR toLower(coalesce(d.generic_name, "")) CONTAINS toLower($query)
-   OR toLower(coalesce(d.active_ingredient, "")) CONTAINS toLower($query)
+MATCH (d:Drug)
+WHERE toLower(d.name) CONTAINS toLower($search_term)
+   OR toLower(coalesce(d.generic_name, "")) CONTAINS toLower($search_term)
+
+OPTIONAL MATCH (d)-[:TREATS]->(disease:Disease)
+
+OPTIONAL MATCH (d)-[:CAUSES]->(side:SideEffect)
 
 OPTIONAL MATCH (d)-[r:INTERACTS_WITH]->(o:Drug)
 
 RETURN
     d AS drug,
-    collect({
+
+    collect(DISTINCT disease.name) AS diseases,
+
+    collect(DISTINCT side.name) AS side_effects,
+
+    collect(DISTINCT {
         drug_id: o.name,
         drug_name: o.name,
         severity: r.severity,
@@ -108,16 +269,33 @@ RETURN
     }) AS interactions
 
 LIMIT $limit
-            """
-            records = session.run(cypher, query=query, limit=limit)
-            results = [_serialize_drug(record) for record in records]
-            if results:
-                return results
+"""
+            records = session.run(cypher, search_term=query, limit=limit)
+            if records:
+                # Neo4j confirms that the medicine exists.
+                # Return the complete medicine information
+                # from the main dataset, which is also used by OCR.
+                dataset_results = _fallback_search(
+    query,
+    limit,
+    lang=lang
+)
+
+                if dataset_results:
+                    return dataset_results
+
+                # If the medicine is not available in the dataset,
+                # use the Neo4j result as a fallback.
+                results = [_serialize_drug(record, lang=lang) for record in records]
+
     except Exception as err:
         print(f"Neo4j unavailable, falling back to CSV: {err}")
 
-    return _fallback_search(query, limit)
-
+    return _fallback_search(
+    query,
+    limit,
+    lang=lang
+)
 
 def get_drug_by_id(drug_id: str) -> Dict[str, Any]:
     try:

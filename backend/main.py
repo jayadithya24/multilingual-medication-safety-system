@@ -1,4 +1,6 @@
+import asyncio
 import sys
+import os
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -22,7 +24,10 @@ from backend.app.routes.tts import router as tts_router
 from backend.app.routes.patient_schedule import router as patient_schedule_router
 from backend.app.routes.patient_drugs import router as patient_drugs_router
 from backend.app.routes.patient import router as patient_router
+from backend.app.routes.access_requests import router as access_requests_router
 from backend.app.services.ocr_service import warm_up_reader
+from backend.app.routes.fcm import router as fcm_router
+from backend.app.services.fcm_service import reminder_loop
 
 app = FastAPI(
     title="Medication Safety System",
@@ -54,11 +59,32 @@ app.include_router(tts_router)
 app.include_router(patient_schedule_router)
 app.include_router(patient_drugs_router)
 app.include_router(patient_router)
+app.include_router(access_requests_router)
+app.include_router(fcm_router)
+
+reminder_stop_event = asyncio.Event()
+reminder_task = None
 
 
 @app.on_event("startup")
 def warm_up_ocr():
-    warm_up_reader()
+    # PaddleOCR loads native model libraries; defer that work for Uvicorn reload.
+    if os.getenv("WARM_UP_OCR", "false").lower() == "true":
+        warm_up_reader()
+
+
+@app.on_event("startup")
+async def start_medication_reminder_worker():
+    global reminder_task
+    reminder_stop_event.clear()
+    reminder_task = asyncio.create_task(reminder_loop(reminder_stop_event))
+
+
+@app.on_event("shutdown")
+async def stop_medication_reminder_worker():
+    reminder_stop_event.set()
+    if reminder_task:
+        await reminder_task
 
 
 @app.get("/")

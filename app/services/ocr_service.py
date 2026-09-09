@@ -6,10 +6,20 @@ import pandas as pd
 import numpy as np
 from PIL import Image
 from pathlib import Path
-from paddleocr import PaddleOCR
+from functools import lru_cache
 
-# Initialize PaddleOCR engine once globally
-ocr = PaddleOCR(use_angle_cls=True, lang='en')
+
+@lru_cache(maxsize=1)
+def _get_ocr():
+    from paddleocr import PaddleOCR
+
+    return PaddleOCR(
+        lang="en",
+        use_doc_orientation_classify=False,
+        use_doc_unwarping=False,
+        use_textline_orientation=False,
+        enable_mkldnn=False,
+    )
 
 DATASETS_DIR = Path(__file__).resolve().parent.parent.parent / "datasets"
 
@@ -51,14 +61,20 @@ def extract_text_from_prescription(image_bytes: bytes) -> list[dict]:
     np_img = np.array(image)
     cv_img = cv2.cvtColor(np_img, cv2.COLOR_RGB2BGR)
 
-    results = ocr.ocr(cv_img, cls=True)
+    results = _get_ocr().predict(input=cv_img)
     extracted_lines = []
 
-    if results and results[0]:
-        for line in results[0]:
-            text, confidence = line[1]
-            if confidence > 0.4:
-                extracted_lines.append(text.strip())
+    for result in results or []:
+        if isinstance(result, dict):
+            texts = result.get("rec_texts", [])
+            scores = result.get("rec_scores", [])
+        else:
+            texts = getattr(result, "rec_texts", [])
+            scores = getattr(result, "rec_scores", [])
+        for index, text in enumerate(texts or []):
+            confidence = float(scores[index]) if index < len(scores or []) else 0.0
+            if text and confidence > 0.4:
+                extracted_lines.append(str(text).strip())
 
     full_text = " ".join(extracted_lines)
     known_meds = get_known_medicines()

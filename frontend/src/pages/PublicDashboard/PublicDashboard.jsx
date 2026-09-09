@@ -6,6 +6,8 @@ import MedicineCard from "../../components/MedicineCard/MedicineCard";
 import { searchMedicine, fetchMedicines } from "../../services/medicineService";
 import { scanMedicine } from "../../services/ocrService";
 import { sendVoiceSearchAudio } from "../../services/voiceService";
+import api from "../../services/api";
+import { registerMedicationNotifications, sendTestNotification } from "../../services/fcmService";
 
 
 import {
@@ -22,10 +24,27 @@ const languageOptions = [
     { value: "tulu", label: "Tulu" },
 ];
 
+function getNextDose(schedules) {
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    const doses = schedules.flatMap((schedule) =>
+        (schedule.scheduled_times || []).map((time) => {
+            const [hours, minutes] = time.split(":").map(Number);
+            const minutesToday = hours * 60 + minutes;
+            return {
+                label: `${schedule.medicine_name} ${schedule.dosage}`,
+                time,
+                offset: minutesToday >= currentMinutes ? minutesToday : minutesToday + 1440,
+            };
+        }),
+    );
+    return doses.sort((first, second) => first.offset - second.offset)[0] || null;
+}
+
 function PublicDashboard() {
     const [activeTab, setActiveTab] = useState("text");
     const [lang, setLang] = useState("en");
-    const [voiceLang] = useState("auto");
+    const voiceLang = lang;
 
     // Medicine search
     const [medicineNames, setMedicineNames] = useState([]);
@@ -61,6 +80,10 @@ const cameraStreamRef = useRef(null);
     const [scheduleError, setScheduleError] = useState("");
     const [historyError, setHistoryError] = useState("");
     const [takingMedicineId, setTakingMedicineId] = useState(null);
+    const [accessRequests, setAccessRequests] = useState([]);
+    const [accessRequestError, setAccessRequestError] = useState("");
+    const [notificationStatus, setNotificationStatus] = useState("");
+    const [testNotificationLoading, setTestNotificationLoading] = useState(false);
 
     const mediaRecorderRef = useRef(null);
     const mediaStreamRef = useRef(null);
@@ -94,12 +117,34 @@ const cameraStreamRef = useRef(null);
         };
     }, [lang]);
 
-    // Load patient schedule/history when My Medicines tab opens
     useEffect(() => {
-        if (activeTab === "medicines") {
-            loadPatientMedication();
+        registerMedicationNotifications()
+            .then((result) => {
+                console.info("[FCM] Registration result:", result);
+                if (result.registered) {
+                    setNotificationStatus("Medication reminders enabled");
+                } else {
+                    setNotificationStatus(`Medication reminders unavailable: ${result.reason}`);
+                }
+            })
+            .catch((error) => {
+                console.error("[FCM] Registration failed:", error);
+                setNotificationStatus(`Medication reminders failed: ${error.message}`);
+            });
+    }, []);
+
+    const handleTestNotification = async () => {
+        try {
+            setTestNotificationLoading(true);
+            const result = await sendTestNotification();
+            setNotificationStatus(result.message || "Test notification sent.");
+        } catch (error) {
+            console.error("[FCM] Test notification failed:", error);
+            setNotificationStatus(error?.response?.data?.detail || "Test notification failed.");
+        } finally {
+            setTestNotificationLoading(false);
         }
-    }, [activeTab]);
+    };
 
     // Cleanup
     useEffect(() => {
@@ -486,12 +531,16 @@ const capturePhoto = () => {
             resetVoiceState();
 
             const response =
-                await sendVoiceSearchAudio(
-                    audioFile,
-                    voiceLang
-                );
+    await sendVoiceSearchAudio(
+        audioFile,
+        voiceLang
+    );
 
-            setVoiceResult(response);
+console.log("========== VOICE SEARCH RESPONSE ==========");
+console.log(response);
+console.log("============================================");
+
+setVoiceResult(response);
 
             if (response.response_text && "speechSynthesis" in window) {
                 window.speechSynthesis.cancel();
@@ -564,6 +613,33 @@ const capturePhoto = () => {
         }
     };
 
+    const loadAccessRequests = async () => {
+        try {
+            const response = await api.get("/patient/access-requests");
+            setAccessRequests(response.data.requests || []);
+            setAccessRequestError("");
+        } catch (error) {
+            setAccessRequestError(error?.response?.data?.detail || "Unable to load access requests.");
+        }
+    };
+
+    const respondToAccessRequest = async (requestId, decision) => {
+        try {
+            await api.put(`/patient/access-request/${encodeURIComponent(requestId)}/${decision}`);
+            await loadAccessRequests();
+        } catch (error) {
+            setAccessRequestError(error?.response?.data?.detail || "Unable to update access request.");
+        }
+    };
+
+    // Load patient schedule/history when My Medicines tab opens
+    useEffect(() => {
+        if (activeTab === "medicines") {
+            loadPatientMedication();
+            loadAccessRequests();
+        }
+    }, [activeTab]);
+
     const handleMarkAsTaken = async (scheduleId) => {
         try {
             setTakingMedicineId(scheduleId);
@@ -588,13 +664,16 @@ const capturePhoto = () => {
     // RESULTS
     // -----------------------------
 
-    const textMedicine = textResult?.medicine ?? null;
+    const textMedicine = textResult?.results?.[0] ?? null;
 
-    const ocrMedicine =
-        ocrResult?.ocr_result?.medicine_details ?? null;
+const ocrMedicine =
+    ocrResult?.ocr_result?.medicine_details ?? null;
+const ocrRawText =
+    ocrResult?.ocr_result?.raw_text?.trim() ?? "";
 
-    const voiceMedicine =
-        voiceResult?.medicine_details ?? null;
+const voiceMedicine =
+    voiceResult?.medicine_details ?? null;
+    const nextDose = getNextDose(schedules);
 
     return (
         <div className="patient-portal">
@@ -996,9 +1075,15 @@ const capturePhoto = () => {
                     />
                 ) : (
                     <div className="patient-empty">
-                        No medicine detected.
-                        Please enter the prescription
-                        details manually.
+                        {ocrRawText
+                            ? "Text was detected, but this medicine is not in the supported 30-medicine dataset."
+                            : "No medicine text could be detected."}
+                        {ocrRawText && (
+                            <p>
+                                Detected text: {ocrRawText.slice(0, 500)}
+                            </p>
+                        )}
+                        <p>Please verify the medicine name manually.</p>
                     </div>
                 )}
 
@@ -1187,6 +1272,30 @@ const capturePhoto = () => {
 
                             </div>
 
+                            <div className="patient-medication-block">
+                                <div className="patient-medication-title">
+                                    <h3>Medication Access Requests</h3>
+                                </div>
+                                {accessRequestError && <div className="patient-error">{accessRequestError}</div>}
+                                {accessRequests.length === 0 && !accessRequestError && (
+                                    <div className="patient-empty">No medication access requests.</div>
+                                )}
+                                {accessRequests.map((request) => (
+                                    <div className="patient-history-card" key={request.requestId}>
+                                        <div>
+                                            <h3>Dr. {request.doctorName} wants access to your medication details.</h3>
+                                            <p>Status: {request.status}</p>
+                                        </div>
+                                        {request.status === "PENDING" && (
+                                            <div>
+                                                <button type="button" onClick={() => respondToAccessRequest(request.requestId, "accept")}>Accept</button>
+                                                <button type="button" onClick={() => respondToAccessRequest(request.requestId, "reject")}>Reject</button>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+
                             {/* SCHEDULE */}
                             <div className="patient-medication-block">
 
@@ -1202,6 +1311,20 @@ const capturePhoto = () => {
                                         scheduled
                                     </span>
                                 </div>
+                                {notificationStatus && <div className="patient-empty">{notificationStatus}</div>}
+                                <button
+                                    type="button"
+                                    className="patient-refresh-button"
+                                    onClick={handleTestNotification}
+                                    disabled={testNotificationLoading}
+                                >
+                                    {testNotificationLoading ? "Sending..." : "Send Test Notification"}
+                                </button>
+                                {nextDose && (
+                                    <div className="patient-empty">
+                                        Next scheduled dose: {nextDose.label} at {nextDose.time}
+                                    </div>
+                                )}
 
                                 {scheduleLoading && (
                                     <Loading />
@@ -1277,9 +1400,7 @@ const capturePhoto = () => {
                                                             Time
                                                         </span>
                                                         <strong>
-                                                            {
-                                                                schedule.scheduled_time
-                                                            }
+                                                            {(schedule.scheduled_times || []).join(", ") || "As needed"}
                                                         </strong>
                                                     </div>
 

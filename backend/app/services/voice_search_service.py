@@ -84,21 +84,71 @@ def _transcribe_with_whisper(file_path, lang="en"):
         return None
 
     whisper_language = {"en": "en", "kn": "kn"}.get(lang)
-    options = {"fp16": False}
+
+    options = {
+        "fp16": False,
+        "temperature": 0,
+    }
+
     if whisper_language:
         options["language"] = whisper_language
 
+    # Give Whisper the medicine vocabulary used by our system.
+    try:
+        medicine_names = list_medicine_names(lang=lang)
+        medicine_prompt = ", ".join(
+            str(name).strip()
+            for name in medicine_names
+            if str(name).strip()
+        )
+
+        if medicine_prompt:
+            options["initial_prompt"] = (
+                "Medicine names: " + medicine_prompt
+            )
+    except Exception as err:
+        logger.warning(
+            "Could not create medicine vocabulary prompt: %s",
+            err,
+        )
+
     try:
         with wave.open(file_path, "rb") as audio_file:
-            audio_bytes = audio_file.readframes(audio_file.getnframes())
-            audio = np.frombuffer(audio_bytes, dtype=np.int16).astype(np.float32) / 32768.0
-            if audio_file.getnchannels() > 1:
-                audio = audio.reshape(-1, audio_file.getnchannels()).mean(axis=1)
+            audio_bytes = audio_file.readframes(
+                audio_file.getnframes()
+            )
 
-        transcription = model.transcribe(audio, **options)
-        return transcription.get("text", "").strip()
+            audio = (
+                np.frombuffer(
+                    audio_bytes,
+                    dtype=np.int16,
+                )
+                .astype(np.float32)
+                / 32768.0
+            )
+
+            if audio_file.getnchannels() > 1:
+                audio = audio.reshape(
+                    -1,
+                    audio_file.getnchannels(),
+                ).mean(axis=1)
+
+        transcription = model.transcribe(
+            audio,
+            **options,
+        )
+
+        return transcription.get(
+            "text",
+            "",
+        ).strip()
+
     except Exception as err:
-        logger.exception("Whisper transcription failed for %s: %s", file_path, err)
+        logger.exception(
+            "Whisper transcription failed for %s: %s",
+            file_path,
+            err,
+        )
         return None
 
 
@@ -163,40 +213,97 @@ def transcribe_audio(file_path, lang="en"):
 
 
 def detect_transcript_language(transcript_text, requested_lang="en"):
-    """Detect language from script and existing Kannada/Tulu dataset vocabulary."""
-    requested_lang = requested_lang or "auto"
-    if re.search(r"[\u0C80-\u0CFF]", transcript_text or ""):
-        if requested_lang in {"kn", "tulu"}:
-            return requested_lang
+    """Detect transcript language while respecting the user's selected language."""
 
-        def dataset_words(lang):
-            dataframe = _load_dataset(lang)
-            if dataframe is None:
-                return set()
-            values = dataframe.astype(str).to_string(index=False)
-            return {
-                unicodedata.normalize("NFKC", word).replace("\u200c", "")
-                for word in re.findall(r"[\u0C80-\u0CFF]+", values)
-            }
+    requested_lang = (requested_lang or "auto").strip().lower()
 
-        transcript_words = {
-            unicodedata.normalize("NFKC", word).replace("\u200c", "")
-            for word in re.findall(r"[\u0C80-\u0CFF]+", transcript_text)
-        }
-        kannada_words = dataset_words("kn")
-        tulu_words = dataset_words("tulu")
-        if transcript_words & (tulu_words - kannada_words):
-            return "tulu"
+    # Normalize language codes
+    if requested_lang == "tlu":
+        requested_lang = "tulu"
+
+    # If the user explicitly selected Kannada,
+    # trust that selection instead of assuming English
+    # just because Whisper returned Latin characters.
+    if requested_lang == "kn":
         return "kn"
 
-    if re.search(r"[A-Za-z]", transcript_text or ""):
-        tulu_cues = {"yenk", "yank", "enk", "matre", "ovu", "ovund", "panle", "matt", "malt"}
-        transcript_words = set(re.findall(r"[a-z]+", transcript_text.lower()))
-        if len(transcript_words & tulu_cues) >= 2:
-            return "tulu"
-        return "en"
+    # If the user explicitly selected Tulu,
+    # trust that selection as well.
+    if requested_lang == "tulu":
+        return "tulu"
 
-    return requested_lang or "en"
+    # Only perform automatic detection when the user selected "auto".
+    if requested_lang == "auto":
+
+        # Kannada/Tulu Unicode script
+        if re.search(r"[\u0C80-\u0CFF]", transcript_text or ""):
+
+            def dataset_words(lang):
+                dataframe = _load_dataset(lang)
+
+                if dataframe is None:
+                    return set()
+
+                values = dataframe.astype(str).to_string(index=False)
+
+                return {
+                    unicodedata.normalize(
+                        "NFKC",
+                        word
+                    ).replace("\u200c", "")
+                    for word in re.findall(
+                        r"[\u0C80-\u0CFF]+",
+                        values
+                    )
+                }
+
+            transcript_words = {
+                unicodedata.normalize(
+                    "NFKC",
+                    word
+                ).replace("\u200c", "")
+                for word in re.findall(
+                    r"[\u0C80-\u0CFF]+",
+                    transcript_text
+                )
+            }
+
+            kannada_words = dataset_words("kn")
+            tulu_words = dataset_words("tulu")
+
+            if transcript_words & (tulu_words - kannada_words):
+                return "tulu"
+
+            return "kn"
+
+        # Latin-script Tulu detection
+        if re.search(r"[A-Za-z]", transcript_text or ""):
+
+            tulu_cues = {
+                "yenk",
+                "yank",
+                "enk",
+                "matre",
+                "ovu",
+                "ovund",
+                "panle",
+                "matt",
+                "malt"
+            }
+
+            transcript_words = set(
+                re.findall(
+                    r"[a-z]+",
+                    transcript_text.lower()
+                )
+            )
+
+            if len(transcript_words & tulu_cues) >= 2:
+                return "tulu"
+
+            return "en"
+
+    return "en"
 
 
 def find_disease_medicines(transcript_text, lang="en"):
@@ -234,36 +341,109 @@ def _normalize_spoken_name(value):
 
 
 def _fuzzy_medicine_match(transcript_text, lang="en"):
-    """Match only against known dataset names, tolerating speech spelling errors."""
-    known_medicines = list_medicine_names(lang=lang)
-    normalized_text = str(transcript_text).lower()
-    spoken_candidates = [
-        word for word in re.findall(r"[a-z0-9]+", normalized_text)
-        if len(word) >= 5 and word not in VOICE_STOP_WORDS
-    ]
-    spoken_candidates.extend(
-        candidate for candidate in _transcript_candidates(transcript_text, lang=lang)
-        if " " in candidate
-    )
-    best_scores = {}
+    """
+    Match a spoken/transcribed medicine name against the
+    medicines that actually exist in our dataset.
 
-    for candidate in spoken_candidates:
-        normalized_candidate = _normalize_spoken_name(candidate)
-        if len(normalized_candidate) < 5:
+    This tolerates common Whisper speech-to-text mistakes
+    such as:
+        ibuprofen -> aibo profin
+        paracetamol -> paracitamol
+        cetirizine -> cetrizine
+    """
+
+    known_medicines = list_medicine_names(lang=lang)
+
+    if not known_medicines:
+        return None
+
+    normalized_text = str(
+        transcript_text or ""
+    ).lower().strip()
+
+    if not normalized_text:
+        return None
+
+    # Create possible spoken candidates.
+    spoken_candidates = [
+        word
+        for word in re.findall(
+            r"[a-z0-9]+",
+            normalized_text,
+        )
+        if len(word) >= 4
+        and word not in VOICE_STOP_WORDS
+    ]
+
+    # Also test the complete transcription.
+    spoken_candidates.append(normalized_text)
+
+    # Test combinations of neighboring words.
+    words = re.findall(
+        r"[a-z0-9]+",
+        normalized_text,
+    )
+
+    for i in range(len(words)):
+        for j in range(i + 1, min(i + 4, len(words) + 1)):
+            phrase = " ".join(words[i:j])
+
+            if len(phrase) >= 4:
+                spoken_candidates.append(phrase)
+
+    # Remove duplicates while preserving order.
+    spoken_candidates = list(
+        dict.fromkeys(spoken_candidates)
+    )
+
+    best_match = None
+    best_score = 0.0
+
+    for medicine in known_medicines:
+
+        normalized_medicine = _normalize_spoken_name(
+            medicine
+        )
+
+        if len(normalized_medicine) < 4:
             continue
 
-        for medicine in known_medicines:
-            normalized_medicine = _normalize_spoken_name(medicine)
-            score = SequenceMatcher(None, normalized_candidate, normalized_medicine).ratio()
-            best_scores[medicine] = max(score, best_scores.get(medicine, 0.0))
+        for candidate in spoken_candidates:
 
-    ranked_matches = [(score, medicine) for medicine, score in best_scores.items()]
-    ranked_matches.sort(reverse=True)
-    if ranked_matches:
-        best_score, best_match = ranked_matches[0]
-        second_score = ranked_matches[1][0] if len(ranked_matches) > 1 else 0.0
-        if best_score >= 0.75 and best_score - second_score >= 0.08:
-            return search_medicine(best_match, lang=lang)
+            normalized_candidate = _normalize_spoken_name(
+                candidate
+            )
+
+            if len(normalized_candidate) < 4:
+                continue
+
+            score = SequenceMatcher(
+                None,
+                normalized_candidate,
+                normalized_medicine,
+            ).ratio()
+
+            if score > best_score:
+                best_score = score
+                best_match = medicine
+
+    logger.info(
+        "Voice fuzzy matching: transcript=%r best_match=%r score=%.3f",
+        transcript_text,
+        best_match,
+        best_score,
+    )
+
+    # More tolerant threshold for speech-recognition errors.
+    if best_match and best_score >= 0.65:
+        medicine = search_medicine(
+            best_match,
+            lang=lang,
+        )
+
+        if medicine:
+            return medicine
+
     return None
 
 

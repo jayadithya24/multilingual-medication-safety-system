@@ -4,10 +4,12 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from backend.app.auth import get_current_active_user
 from backend.app.database import (
+    access_requests_collection,
     users_collection,
     patient_schedules_collection,
     medication_history_collection,
 )
+from backend.app.routes.access_requests import has_accepted_access
 
 
 router = APIRouter(
@@ -30,22 +32,28 @@ async def get_patients(
 ):
     require_doctor(current_user)
 
-    # Get ALL registered patients from MongoDB
+    # Patient identity and consent state are the only data shown before approval.
     patients = list(
         users_collection.find(
             {"role": "patient"},
             {
                 "_id": 0,
-                "username": 1,
                 "full_name": 1,
-                "email": 1,
                 "patient_id": 1,
-                "age": 1,
-                "gender": 1,
-                "medical_condition": 1,
             }
         )
     )
+
+    for patient in patients:
+        request = access_requests_collection.find_one(
+            {
+                "doctorId": current_user.username,
+                "patientId": patient["patient_id"],
+            },
+            sort=[("createdAt", -1)],
+        )
+        patient["status"] = request["status"] if request else "NONE"
+        patient["requestId"] = request.get("requestId") if request else None
 
     return {
         "status": "success",
@@ -58,6 +66,12 @@ async def get_patient_drugs(
     current_user=Depends(get_current_active_user)
 ):
     require_doctor(current_user)
+
+    patient = users_collection.find_one({"username": patient_username, "role": "patient"})
+    if not patient:
+        raise HTTPException(status_code=404, detail="Patient not found.")
+    if not has_accepted_access(current_user.username, patient.get("patient_id")):
+        raise HTTPException(status_code=403, detail="Patient medication access has not been accepted.")
 
     schedules = list(
         patient_schedules_collection.find(
@@ -87,9 +101,18 @@ async def get_doctor_medication_history(
 ):
     require_doctor(current_user)
 
+    accepted_patient_ids = [request["patientId"] for request in access_requests_collection.find(
+        {"doctorId": current_user.username, "status": "ACCEPTED"},
+        {"patientId": 1, "_id": 0},
+    )]
+    accepted_patients = [patient["username"] for patient in users_collection.find(
+        {"patient_id": {"$in": accepted_patient_ids}, "role": "patient"},
+        {"username": 1, "_id": 0},
+    )]
+
     history = list(
         medication_history_collection.find(
-            {}
+            {"patient_username": {"$in": accepted_patients}}
         ).sort("taken_at", -1)
     )
 

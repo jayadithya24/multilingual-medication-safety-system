@@ -5,7 +5,11 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 
 from backend.app.auth import get_current_active_user, User
-from backend.app.database import patient_schedules_collection
+from backend.app.database import (
+    medication_history_collection,
+    patient_schedules_collection,
+    users_collection,
+)
 
 
 router = APIRouter(
@@ -83,6 +87,11 @@ async def create_medication_schedule(
 
         "patient_username": current_user.username,
 
+        "patient_id": (users_collection.find_one(
+            {"username": current_user.username, "role": "patient"},
+            {"patient_id": 1, "_id": 0},
+        ) or {}).get("patient_id"),
+
         "medicine_name": payload.medicine_name.strip(),
 
         "dosage": payload.dosage.strip(),
@@ -94,6 +103,12 @@ async def create_medication_schedule(
         "scheduled_times": payload.scheduled_times,
 
         "reminder_enabled": payload.reminder_enabled,
+
+        "is_active": True,
+
+        "last_taken_at": None,
+
+        "last_reminder_key": None,
 
         "status": "active",
 
@@ -193,4 +208,44 @@ async def delete_medication_schedule(
     return {
         "status": "success",
         "message": "Medication removed from schedule."
+    }
+
+
+@router.post("/{schedule_id}/taken")
+async def mark_medication_taken(
+    schedule_id: str,
+    current_user: User = Depends(get_current_active_user),
+):
+    if current_user.role != "patient":
+        raise HTTPException(status_code=403, detail="Only patients can update medication schedules.")
+
+    schedule = patient_schedules_collection.find_one({
+        "schedule_id": schedule_id,
+        "patient_username": current_user.username,
+        "status": "active",
+    })
+    if not schedule:
+        raise HTTPException(status_code=404, detail="Medication schedule not found.")
+
+    taken_at = datetime.now(timezone.utc)
+    history_id = f"HIS-{uuid4().hex[:8].upper()}"
+    medication_history_collection.insert_one({
+        "history_id": history_id,
+        "schedule_id": schedule_id,
+        "patient_username": current_user.username,
+        "patient_id": schedule.get("patient_id"),
+        "medicine_name": schedule["medicine_name"],
+        "dosage": schedule["dosage"],
+        "scheduled_time": ", ".join(schedule.get("scheduled_times", [])),
+        "taken_at": taken_at,
+    })
+    patient_schedules_collection.update_one(
+        {"schedule_id": schedule_id, "patient_username": current_user.username},
+        {"$set": {"last_taken_at": taken_at}},
+    )
+    return {
+        "status": "success",
+        "message": "Medication marked as taken.",
+        "history_id": history_id,
+        "taken_at": taken_at,
     }

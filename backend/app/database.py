@@ -19,6 +19,8 @@ users_collection = db["users"]
 
 patient_schedules_collection = db["patient_schedules"]
 medication_history_collection = db["medication_history"]
+access_requests_collection = db["access_requests"]
+fcm_tokens_collection = db["fcm_tokens"]
 
 # Useful indexes
 patient_schedules_collection.create_index(
@@ -27,4 +29,13 @@ patient_schedules_collection.create_index(
 
 medication_history_collection.create_index(
     [("patient_username", 1), ("date", -1)]
+)
+
+access_requests_collection.create_index(
+    [("doctorId", 1), ("patientId", 1), ("status", 1)]
+)
+
+fcm_tokens_collection.create_index(
+    [("patient_username", 1), ("token", 1)],
+    unique=True,
 )

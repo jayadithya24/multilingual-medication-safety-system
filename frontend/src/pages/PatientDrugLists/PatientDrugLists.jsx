@@ -6,6 +6,7 @@ function PatientDrugLists() {
     const [patients, setPatients] = useState([]);
     const [selectedPatient, setSelectedPatient] = useState("");
     const [medications, setMedications] = useState([]);
+    const [requestingPatient, setRequestingPatient] = useState("");
 
     const [loading, setLoading] = useState(true);
     const [loadingMedications, setLoadingMedications] = useState(false);
@@ -44,54 +45,32 @@ function PatientDrugLists() {
     }, []);
 
     // --------------------------------------------------
-    // When doctor selects a patient
+    // Selecting a patient only shows consent state. Medication access is explicit.
     // --------------------------------------------------
 
-    const handlePatientChange = async (event) => {
-        const username = event.target.value;
-
-        setSelectedPatient(username);
-        setMedications([]);
-        setError("");
-
-        if (!username) {
-            return;
+    const requestAccess = async (patientId) => {
+        try {
+            setRequestingPatient(patientId);
+            await api.post("/doctor/access-request", { patient_id: patientId });
+            const response = await api.get("/doctor/patients");
+            setPatients(response.data.patients || []);
+        } catch (err) {
+            setError(err?.response?.data?.detail || "Unable to request access.");
+        } finally {
+            setRequestingPatient("");
         }
+    };
 
+    const viewPatientDetails = async (patientId) => {
         try {
             setLoadingMedications(true);
-
-            const response = await api.get(
-                `/doctor/patients/${encodeURIComponent(username)}/drugs`
-            );
-
-            console.log(
-                "Selected patient medications:",
-                response.data
-            );
-
-            setMedications(
-                response.data.medications || []
-            );
-
+            setSelectedPatient(patientId);
+            const response = await api.get(`/doctor/patients/${encodeURIComponent(patientId)}/medications`);
+            setMedications(response.data.medications || []);
+            setError("");
         } catch (err) {
-            console.error(
-                "Error loading patient medications:",
-                err
-            );
-
-            // If patient has no medication records,
-            // don't treat it as a serious page error.
-            if (err?.response?.status === 404) {
-                setMedications([]);
-            } else {
-                const detail = err?.response?.data?.detail;
-
-                setError(
-                    detail || "Unable to load patient medications."
-                );
-            }
-
+            setMedications([]);
+            setError(err?.response?.data?.detail || "Unable to load patient medications.");
         } finally {
             setLoadingMedications(false);
         }
@@ -103,7 +82,7 @@ function PatientDrugLists() {
 
     const selectedPatientData = patients.find(
         (patient) =>
-            patient.username === selectedPatient
+            patient.patient_id === selectedPatient
     );
 
     return (
@@ -129,40 +108,29 @@ function PatientDrugLists() {
             </section>
 
 
-            {/* Patient Selector */}
-
-            <section className="patient-drug-lists__selector">
-
-                <label htmlFor="patient-select">
-                    Select Patient
-                </label>
-
-                <select
-                    id="patient-select"
-                    value={selectedPatient}
-                    onChange={handlePatientChange}
-                    disabled={loading}
-                >
-
-                    <option value="">
-                        {loading
-                            ? "Loading patients..."
-                            : "Select a patient"}
-                    </option>
-
-                    {patients.map((patient) => (
-
-                        <option
-                            key={patient.username}
-                            value={patient.username}
-                        >
-                            {patient.full_name}
-                        </option>
-
-                    ))}
-
-                </select>
-
+            <section className="patient-drug-lists__results">
+                <div className="patient-drug-lists__results-header">
+                    <div><p>ACCESS REQUESTS</p><h2>Patients</h2></div>
+                    <span>{patients.length} patients</span>
+                </div>
+                {loading ? <div className="patient-drug-lists__loading">Loading patients...</div> : (
+                    <div className="patient-drug-lists__grid">
+                        {patients.map((patient) => (
+                            <article className="patient-drug-card" key={patient.patient_id}>
+                                <div className="patient-drug-card__content">
+                                    <h3>{patient.full_name}</h3>
+                                    <p className="patient-drug-card__generic">Patient ID: {patient.patient_id}</p>
+                                </div>
+                                <div className="patient-drug-card__schedule">
+                                    {patient.status === "NONE" && <button type="button" onClick={() => requestAccess(patient.patient_id)} disabled={requestingPatient === patient.patient_id}>{requestingPatient === patient.patient_id ? "Requesting..." : "Request Access"}</button>}
+                                    {patient.status === "PENDING" && <strong>Pending</strong>}
+                                    {patient.status === "REJECTED" && <strong>Rejected</strong>}
+                                    {patient.status === "ACCEPTED" && <button type="button" onClick={() => viewPatientDetails(patient.patient_id)}>View Patient Details</button>}
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                )}
             </section>
 
 
@@ -196,48 +164,10 @@ function PatientDrugLists() {
                             {selectedPatientData.patient_id}
                         </p>
 
-                        <p>
-                            Email:{" "}
-                            {selectedPatientData.email}
-                        </p>
-
                     </div>
 
 
                     <div className="patient-drug-lists__patient-meta">
-
-                        <div>
-                            <span>
-                                Age
-                            </span>
-
-                            <strong>
-                                {selectedPatientData.age ?? "Not provided"}
-                            </strong>
-                        </div>
-
-
-                        <div>
-                            <span>
-                                Gender
-                            </span>
-
-                            <strong>
-                                {selectedPatientData.gender ?? "Not provided"}
-                            </strong>
-                        </div>
-
-
-                        <div>
-                            <span>
-                                Condition
-                            </span>
-
-                            <strong>
-                                {selectedPatientData.medical_condition ??
-                                    "Not provided"}
-                            </strong>
-                        </div>
 
                     </div>
 

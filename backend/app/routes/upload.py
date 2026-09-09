@@ -1,5 +1,6 @@
 import os
 import tempfile
+import asyncio
 
 
 from fastapi import APIRouter, UploadFile, File, HTTPException, Query
@@ -24,7 +25,7 @@ async def upload_image(file: UploadFile = File(...), lang: str = Query("en")):
         tmp_path = tmp.name
 
     try:
-        result = extract_text(tmp_path, lang=lang)
+        result = await asyncio.to_thread(extract_text, tmp_path, lang)
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"OCR failed: {str(exc)}") from exc
     finally:
@@ -60,9 +61,10 @@ async def prescription_ocr(
         tmp_path = tmp.name
 
     try:
-        result = extract_prescription_details(
+        result = await asyncio.to_thread(
+            extract_prescription_details,
             tmp_path,
-            lang=lang
+            lang,
         )
 
     except Exception as exc:

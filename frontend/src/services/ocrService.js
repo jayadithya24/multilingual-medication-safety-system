@@ -1,5 +1,24 @@
 import api from "./api";
 
+async function prepareOcrImage(imageFile) {
+  if (!imageFile?.type?.startsWith("image/") || imageFile.size <= 2_000_000) {
+    return imageFile;
+  }
+
+  const bitmap = await createImageBitmap(imageFile);
+  const scale = Math.min(1, 1600 / Math.max(bitmap.width, bitmap.height));
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+  canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+  canvas.getContext("2d").drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+  bitmap.close();
+
+  const blob = await new Promise((resolve) =>
+    canvas.toBlob(resolve, "image/jpeg", 0.82)
+  );
+  return new File([blob], "ocr-image.jpg", { type: "image/jpeg" });
+}
+
 /**
  * Upload medicine image to FastAPI OCR endpoint
  * @param {File} imageFile
@@ -8,7 +27,7 @@ import api from "./api";
 export const scanMedicine = async (imageFile, lang = "en") => {
   const formData = new FormData();
 
-  formData.append("file", imageFile);
+  formData.append("file", await prepareOcrImage(imageFile));
   try {
     const response = await api.post("/upload-image", formData, {
       headers: {
@@ -16,7 +35,7 @@ export const scanMedicine = async (imageFile, lang = "en") => {
       },
       params: { lang },
       // OCR can be slow on large images; increase timeout for this request
-      timeout: 120000,
+      timeout: 300000,
     });
 
     return response.data;
