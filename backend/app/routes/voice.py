@@ -20,44 +20,63 @@ logger = logging.getLogger(__name__)
 VOICE_TRANSCRIPTION_TIMEOUT_SECONDS = 45
 
 
-def _medicine_not_found_message(lang):
-    messages = {
-        "kn": "ಈ ಮಾತ್ರೆ ಈ ವ್ಯವಸ್ಥೆಯಲ್ಲಿ ಇಲ್ಲ. ದಯವಿಟ್ಟು ವೈದ್ಯರನ್ನು ಸಂಪರ್ಕಿಸಿ.",
-        "tulu": "ಈ ಮದ್ದು ಈ ವ್ಯವಸ್ಥೆಡ್ ಇಲ್ಲ. ದಯವಿಟ್ಟು ಡಾಕ್ಟರ್ನ್ ಸಂಪರ್ಕ ಮಲ್ಪು.",
-    }
-    return messages.get(
-        lang,
-        "This medicine is not available in this system. Please consult a doctor.",
-    )
-
-
 def _remove_file(file_path):
     if os.path.exists(file_path):
         os.remove(file_path)
 
 
+QUESTION_CUES = {
+    "side_effects": (
+        "side effect", "side effects", "adverse", "ಬದಿ ಪರಿಣಾಮ", "ಅಡ್ಡ ಪರಿಣಾಮ",
+        "ದುಷ್ಪರಿಣಾಮ", "ಸೈಡ್ ಎಫೆಕ್ಟ್",
+    ),
+    "warnings": (
+        "warning", "warnings", "danger", "caution", "ಎಚ್ಚರಿಕೆ", "ಅಪಾಯ",
+        "ಜಾಗ್ರತೆ",
+    ),
+    "contraindications": (
+        "can i take", "safe to take", "should i take", "contraindication",
+        "allergy", "ತೆಗೆದುಕೊಳ್ಳಬಹುದೇ", "ತಿನ್ನಬಹುದೇ", "ಅಲರ್ಜಿ",
+    ),
+    "description": (
+        "what is", "used for", "use", "tell me", "about", "ಏನು", "ಬಳಕೆ",
+        "ಬಗ್ಗೆ", "ಮದ್ದು",
+    ),
+}
+
+
+def _is_medication_question(transcript):
+    normalized_text = str(transcript or "").casefold()
+    return "?" in normalized_text or any(
+        cue in normalized_text
+        for cues in QUESTION_CUES.values()
+        for cue in cues
+    )
+
+
 def _question_response(medicine, transcript, lang):
-    disease = str(medicine.get("disease") or "").strip()
-    question = transcript.lower()
-    asks_about_use = any(phrase in question for phrase in ["for", "used", "use", "sugar", "bp", "pressure", "diabetes", "ಮಧುಮೇಹ", "ಒತ್ತಡ"])
+    normalized_text = str(transcript or "").casefold()
+    selected_field = "description"
+    for field in ("side_effects", "warnings", "contraindications", "description"):
+        if any(cue in normalized_text for cue in QUESTION_CUES[field]):
+            selected_field = field
+            break
 
-    if not asks_about_use:
-        return medicine.get("description") or disease
+    response_text = medicine.get(selected_field)
+    if response_text:
+        return response_text, selected_field
 
-    asks_sugar = any(phrase in question for phrase in ["sugar", "diabetes", "ಮಧುಮೇಹ"])
-    asks_pressure = any(phrase in question for phrase in ["bp", "blood pressure", "pressure", "ಒತ್ತಡ"])
-    disease_is_sugar = any(phrase in disease.lower() for phrase in ["diabetes", "ಮಧುಮೇಹ"])
-    disease_is_pressure = any(phrase in disease.lower() for phrase in ["pressure", "hypertension", "ಒತ್ತಡ"])
-    is_correct_use = (asks_sugar and disease_is_sugar) or (asks_pressure and disease_is_pressure)
+    return medicine.get("description") or medicine.get("disease"), "description"
 
-    if lang == "kn":
-        answer = "ಹೌದು" if is_correct_use else "ಇಲ್ಲ"
-        return f"{answer}, {medicine.get('drug_name')} {disease} ಗೆ ಬಳಸುವ ಔಷಧಿ."
-    if lang == "tulu":
-        answer = "ಅಂದ್" if is_correct_use else "ಅತ್ತ್"
-        return f"{answer}, {medicine.get('drug_name')} {disease}ಗ್ ಬಳಕೆ ಆಪುಂಡು."
-    answer = "Yes" if is_correct_use else "No"
-    return f"{answer}, {medicine.get('drug_name')} is used for {disease}."
+
+def _clarification_response(lang):
+    return {
+        "status": "clarification_required",
+        "message": "Please provide or select a medicine name, or use the prescription/OCR feature first.",
+        "response_text": None,
+        "response_language": lang,
+        "clarification_required": True,
+    }
 
 
 @router.post("/voice-search")
@@ -106,11 +125,16 @@ async def voice_search(
         logger.info("Voice processing completed")
 
         detected_language = detect_transcript_language(transcript_text, requested_lang=lang)
+        is_question = _is_medication_question(transcript_text)
 
         if medicine_name:
             medicine = search_medicine(medicine_name, lang=detected_language)
             if medicine:
-                response_text = _question_response(medicine, transcript_text, detected_language)
+                response_text, response_field = _question_response(
+                    medicine,
+                    transcript_text,
+                    detected_language,
+                )
                 return {
                     "status": "success",
                     "detected_text": transcript_text,
@@ -118,6 +142,7 @@ async def voice_search(
                     "medicine_details": medicine,
                     "response_text": response_text,
                     "response_language": detected_language,
+                    "response_field": response_field,
                     "lang": detected_language,
                     "detected_language": detected_language,
                     "question_about_image_medicine": True,
@@ -128,7 +153,7 @@ async def voice_search(
             lang=detected_language,
         )
 
-        if not medicine:
+        if not medicine and not is_question:
             category_medicines = [
                 medicine for medicine in find_disease_medicines(
                     transcript_text,
@@ -153,7 +178,11 @@ async def voice_search(
 
         if medicine:
             detected_medicine = medicine.get("drug_name") or " ".join(cleaned_words).strip() or transcript_text
-            response_text = _question_response(medicine, transcript_text, detected_language)
+            response_text, response_field = _question_response(
+                medicine,
+                transcript_text,
+                detected_language,
+            )
 
             return {
                 "status": "success",
@@ -164,17 +193,19 @@ async def voice_search(
                 "detected_language": detected_language,
                 "response_text": response_text,
                 "response_language": detected_language,
+                "response_field": response_field,
             }
 
-        not_found_message = _medicine_not_found_message(detected_language)
+        clarification = _clarification_response(detected_language)
         return {
-            "status": "not_found",
+            "status": clarification["status"],
             "detected_text": transcript_text,
-            "message": not_found_message,
+            "message": clarification["message"],
             "lang": detected_language,
             "detected_language": detected_language,
-            "response_text": not_found_message,
+            "response_text": clarification["response_text"],
             "response_language": detected_language,
+            "clarification_required": clarification["clarification_required"],
         }
 
     except HTTPException:

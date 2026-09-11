@@ -173,7 +173,7 @@ function VoiceSearch() {
 
       let identifiedMedicine = ocrMedicine;
       if (medicineImage && !identifiedMedicine) {
-        const ocrResponse = await scanMedicine(medicineImage, lang === "auto" ? "en" : lang);
+        const ocrResponse = await scanMedicine(medicineImage, lang);
         identifiedMedicine = ocrResponse?.ocr_result?.detected_medicine || "";
         setOcrMedicine(identifiedMedicine);
         if (!identifiedMedicine) {
@@ -189,7 +189,11 @@ function VoiceSearch() {
       if (response.response_text && "speechSynthesis" in window) {
         window.speechSynthesis.cancel();
         const spokenResponse = new SpeechSynthesisUtterance(response.response_text);
-        spokenResponse.lang = response.response_language === "en" ? "en-IN" : "kn-IN";
+        spokenResponse.lang = response.response_language === "tulu"
+          ? "tcy-IN"
+          : response.response_language === "kn"
+            ? "kn-IN"
+            : "en-IN";
         window.speechSynthesis.speak(spokenResponse);
       }
     } catch (searchError) {
@@ -208,7 +212,7 @@ function VoiceSearch() {
   const matchingMedicines = result?.matching_medicines ?? [];
   const detectedText = result?.detected_text ?? "";
   const detectedMedicine = result?.detected_medicine ?? medicineDetails?.drug_name ?? "";
-  const isNotFound = result?.status === "not_found";
+  const isNotFound = result?.status === "not_found" || result?.clarification_required;
 
   return (
     <div className="voice-search-page">

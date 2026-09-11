@@ -70,11 +70,11 @@ export async function getHealth() {
   return response.json();
 }
 
-export async function uploadPrescription(file) {
+export async function uploadPrescription(file, lang = "en") {
   const formData = new FormData();
   formData.append("file", file);
 
-  const response = await fetch(`${BASE_URL}/upload-image`, {
+  const response = await fetch(`${BASE_URL}/upload-image?lang=${encodeURIComponent(lang)}`, {
     method: "POST",
     body: formData,
   });

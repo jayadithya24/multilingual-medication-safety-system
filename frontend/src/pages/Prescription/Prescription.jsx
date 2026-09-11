@@ -18,6 +18,7 @@ function Prescription() {
     const [preview, setPreview] = useState(null);
     const [ocrLoading, setOcrLoading] = useState(false);
     const [ocrMessage, setOcrMessage] = useState("");
+    const [language, setLanguage] = useState("en");
     // Camera
 const [cameraOpen, setCameraOpen] = useState(false);
 const [cameraError, setCameraError] = useState("");
@@ -212,6 +213,7 @@ useEffect(() => {
                 {
                     timeout: 300000,
                 }
+                { params: { lang: language } }
             );
 
             console.log(
@@ -495,6 +497,18 @@ useEffect(() => {
 
                 <h1>
                     Add Medication
+
+                    <label>
+                        Language
+                        <select
+                            value={language}
+                            onChange={(event) => setLanguage(event.target.value)}
+                        >
+                            <option value="en">English</option>
+                            <option value="kn">Kannada</option>
+                            <option value="tulu">Tulu</option>
+                        </select>
+                    </label>
                 </h1>
 
                 <p>

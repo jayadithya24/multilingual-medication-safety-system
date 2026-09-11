@@ -48,8 +48,8 @@ BRAND_ALIASES = {
 }
 
 
-@lru_cache(maxsize=1)
-def _get_reader():
+@lru_cache(maxsize=3)
+def _get_reader(lang="en"):
     try:
         import site
         import sys
@@ -84,7 +84,7 @@ def _get_reader():
 def warm_up_reader():
     """Load the cached OCR reader during application startup."""
     started_at = time.perf_counter()
-    reader = _get_reader()
+    reader = _get_reader("en")
     if reader is None:
         logger.error("PaddleOCR reader is unavailable after %.2f seconds", time.perf_counter() - started_at)
     else:
@@ -230,7 +230,8 @@ def extract_text(file_path, lang: str = "en"):
         }
 
     detected_text = []
-    reader = _get_reader()
+    requested_lang = (lang or "en").strip().lower()
+    reader = _get_reader(requested_lang)
 
     if reader is not None:
         detected_text = _read_detected_text(reader, file_path)
@@ -238,7 +239,7 @@ def extract_text(file_path, lang: str = "en"):
     filename = os.path.basename(file_path).lower()
 
     # Extract all matching medicines from detected text or filename
-    all_medicines = list_medicine_names(lang=lang)
+    all_medicines = list_medicine_names(lang=requested_lang)
     found_medicines = []
     found_details = []
 
@@ -251,6 +252,12 @@ def extract_text(file_path, lang: str = "en"):
         if med_info:
             found_medicines.append(medicine_match)
             found_details.append(med_info)
+    for med in all_medicines:
+        if med.lower() in full_text:
+            med_info = search_medicine(med, lang=requested_lang)
+            if med_info and med not in found_medicines:
+                found_medicines.append(med)
+                found_details.append(med_info)
 
     first_med = found_medicines[0] if found_medicines else None
     first_details = found_details[0] if found_details else None
@@ -262,7 +269,7 @@ def extract_text(file_path, lang: str = "en"):
         "all_detected_medicines": found_medicines,
         "all_detected_details": found_details,
         "raw_text": " ".join(detected_text),
-        "lang": lang,
+        "lang": requested_lang,
     }
 
 
@@ -298,9 +305,10 @@ def extract_prescription_details(file_path, lang: str = "en"):
     started_at = time.perf_counter()
     logger.info("OCR started: %s", file_path)
     detected_text = []
+    requested_lang = (lang or "en").strip().lower()
 
     try:
-        reader = _get_reader()
+        reader = _get_reader(requested_lang)
         if reader is not None:
             detected_text = _read_detected_text(reader, file_path)
     except Exception as err:
@@ -325,7 +333,7 @@ def extract_prescription_details(file_path, lang: str = "en"):
             "all_detected_medicines": [],
             "medicine_details": None,
             "all_detected_details": [],
-            "lang": lang,
+            "lang": requested_lang,
         }
 
     text_lower = raw_text.lower()
@@ -334,7 +342,7 @@ def extract_prescription_details(file_path, lang: str = "en"):
     # 1. Detect medicine name using your existing medicine DB
     # ---------------------------------------------------------
 
-    all_medicines = list_medicine_names(lang=lang)
+    all_medicines = list_medicine_names(lang=requested_lang)
     found_medicines = []
     found_details = []
 
@@ -344,6 +352,12 @@ def extract_prescription_details(file_path, lang: str = "en"):
         if med_info:
             found_medicines.append(medicine_match)
             found_details.append(med_info)
+    for med in all_medicines:
+        if med.lower() in text_lower:
+            med_info = search_medicine(med, lang=requested_lang)
+            if med_info:
+                found_medicines.append(med)
+                found_details.append(med_info)
 
     medicine = found_medicines[0] if found_medicines else None
 
@@ -413,7 +427,7 @@ def extract_prescription_details(file_path, lang: str = "en"):
         "dosage": dosage,
         "instructions": instructions,
         "raw_text": raw_text,
-        "lang": lang,
+        "lang": requested_lang,
         "message": (
             "Prescription details detected."
             if medicine

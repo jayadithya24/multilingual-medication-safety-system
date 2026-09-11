@@ -545,7 +545,11 @@ setVoiceResult(response);
             if (response.response_text && "speechSynthesis" in window) {
                 window.speechSynthesis.cancel();
                 const spokenResponse = new SpeechSynthesisUtterance(response.response_text);
-                spokenResponse.lang = response.response_language === "en" ? "en-IN" : "kn-IN";
+                spokenResponse.lang = response.response_language === "tulu"
+                    ? "tcy-IN"
+                    : response.response_language === "kn"
+                        ? "kn-IN"
+                        : "en-IN";
                 window.speechSynthesis.speak(spokenResponse);
             }
         } catch (error) {
