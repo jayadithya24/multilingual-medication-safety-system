@@ -1,0 +1,122 @@
+{
+  "task": "synthetic_patient_worst_recorded_interaction_severity",
+  "seed": 42,
+  "source_sha256": {
+    "english_master_dataset.csv": "7ae1907d9ff2a974146bba517a500684b1895b7ecc52996cdd03c3d662393099",
+    "kannada_master_dataset.csv": "7d6eb403a714fc543228d74ad0c5f4d7161f6d53e9d8eb9511dae4b6650684e9",
+    "tulu_master_dataset.csv": "69fadf33938299c02931201ec5ffe54ec2efce99f22070ba860eb036437e1d9b",
+    "synthetic_patients.csv": "ed97776ca2df72db258ee77a6c29a1861deaef1547b3ca68b7faef4ad5b0a2f6",
+    "synthetic_patient_drugs.csv": "98b7583370bd6f5ced575bdbc4cf731f5947d42675718498392d388cf6224f7a",
+    "synthetic_patient_interactions.csv": "b4f4b74a68318c4931d12d7e6e94fd0612546838d052262de9122c07139c92e6",
+    "drug_interactions.csv": "f48a31d60db7a354df0208c71211009cd66af8e5696ee30ae0f1069e9ba58fde"
+  },
+  "splits": {
+    "train": {
+      "patients": 34959,
+      "labels": {
+        "None": 33643,
+        "Severe": 1135,
+        "Mild": 181
+      }
+    },
+    "validation": {
+      "patients": 4370,
+      "labels": {
+        "None": 4205,
+        "Severe": 142,
+        "Mild": 23
+      }
+    },
+    "test": {
+      "patients": 4371,
+      "labels": {
+        "None": 4206,
+        "Severe": 142,
+        "Mild": 23
+      }
+    }
+  },
+  "features": [
+    "age",
+    "gender",
+    "kidney_function",
+    "liver_function",
+    "bmi_category",
+    "condition__arthritis",
+    "condition__hypertension",
+    "condition__type_2_diabetes",
+    "drug__acarbose",
+    "drug__amlodipine",
+    "drug__atenolol",
+    "drug__carvedilol",
+    "drug__celecoxib",
+    "drug__chlorthalidone",
+    "drug__clonidine",
+    "drug__colchicine",
+    "drug__dapagliflozin",
+    "drug__diclofenac",
+    "drug__empagliflozin",
+    "drug__enalapril",
+    "drug__glimepiride",
+    "drug__glipizide",
+    "drug__hydrochlorothiazide",
+    "drug__hydroxychloroquine",
+    "drug__ibuprofen",
+    "drug__insulin-glargine",
+    "drug__leflunomide",
+    "drug__losartan",
+    "drug__metformin",
+    "drug__methotrexate",
+    "drug__naproxen",
+    "drug__pioglitazone",
+    "drug__prednisolone",
+    "drug__ramipril",
+    "drug__sitagliptin",
+    "drug__sulfasalazine",
+    "drug__telmisartan",
+    "drug__vildagliptin"
+  ],
+  "target": "target_severity",
+  "train_class_weights": {
+    "None": 0.3463722022411794,
+    "Severe": 10.266960352422908,
+    "Mild": 64.38121546961327
+  },
+  "absent_target_classes": [
+    "Moderate"
+  ],
+  "source_rule_conflicts": [
+    {
+      "drug_ids": [
+        "ibuprofen",
+        "methotrexate"
+      ],
+      "ratings": [
+        "Moderate",
+        "Severe"
+      ]
+    }
+  ],
+  "drug_count": 30,
+  "patient_count": 43700,
+  "prescription_count": 99877,
+  "interaction_count": 2041,
+  "limitations": [
+    "Synthetic rule-derived labels, not measured clinical outcomes.",
+    "None means no recorded interaction in the supplied rules, not proven safety.",
+    "Same medicine combinations may occur in different patient splits; this does not test unseen-pair generalization.",
+    "Do not train on IDs, split, interaction severity, highest_severity, or master warning/interaction text.",
+    "Class weights computed on training only; absent classes cannot be learned.",
+    "Conflicting source ratings use the original generator's maximum-severity policy and need domain review."
+  ],
+  "output_sha256": {
+    "drug_catalog.csv": "4db97998387dac7bc49543ae02b9149c5b29a70b2ea2933cbde08e3863a72238",
+    "master_localized.csv": "4dde6182c34fdfce261b2d30efc31c13dd06113b0557c5e4a67321e086501f42",
+    "patient_drugs.csv": "06bb5ddd2e0ff639d9469188128da6bbf8427fa4b05e70465af70b3c9738166c",
+    "patient_interactions.csv": "2efc05a5841383c7559cdcd8aaf165d2f4875b4ebaf3f59a02873cd791d64b95",
+    "patient_splits.csv": "3a7124e0fd0541d9afc5592b21f91e33608c1e93cd043709e7ffe7b06fa373ac",
+    "test.csv": "45c588420366129a76edab7c3e0fee313175012ba027a3174e03c55147e28f35",
+    "train.csv": "6669511c02e045a94199a604c66e72375ce9d2cb0cefec61176e737e2b90ba78",
+    "validation.csv": "58cfb6ee049538b852d55ad8dfed2a3b1e6787997bce8a895ebdf7d52dca2f88"
+  }
+}

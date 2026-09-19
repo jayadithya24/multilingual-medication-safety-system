@@ -5,10 +5,11 @@ import logging
 import re
 import subprocess
 import tempfile
-import unicodedata
 import wave
+from concurrent.futures import ThreadPoolExecutor
 
 import numpy as np
+from backend.app.services.voice_language import infer_language
 
 from backend.app.services.medicine_service import _load_dataset, list_medicine_names, search_medicine
 
@@ -35,16 +36,22 @@ def _ensure_ffmpeg_on_path():
 def _convert_audio_for_transcription(file_path):
     """Convert browser audio to a format both existing transcribers can read."""
     try:
+        with wave.open(file_path, "rb") as audio:
+            if (audio.getframerate(), audio.getnchannels(), audio.getsampwidth()) == (16000, 1, 2):
+                return file_path
+    except (wave.Error, EOFError):
+        pass
+
+    try:
         ffmpeg_path = _ensure_ffmpeg_on_path()
     except Exception as err:
         logger.exception("FFmpeg is unavailable for audio processing: %s", err)
         return None
 
-    if file_path.lower().endswith(".wav"):
-        return file_path
-
+    converted_path = None
     try:
-        converted_path = tempfile.mktemp(suffix=".wav")
+        descriptor, converted_path = tempfile.mkstemp(suffix=".wav")
+        os.close(descriptor)
         subprocess.run(
             [
                 ffmpeg_path,
@@ -55,14 +62,19 @@ def _convert_audio_for_transcription(file_path):
                 "1",
                 "-ar",
                 "16000",
+                "-c:a",
+                "pcm_s16le",
                 converted_path,
             ],
             check=True,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
+            timeout=15,
         )
         return converted_path
     except Exception as err:
+        if converted_path and os.path.exists(converted_path):
+            os.remove(converted_path)
         logger.exception("Audio conversion failed for %s: %s", file_path, err)
         return None
 
@@ -72,7 +84,7 @@ def _get_whisper_model():
     try:
         import whisper
 
-        return whisper.load_model("base")
+        return whisper.load_model(os.getenv("WHISPER_MODEL", "base"))
     except Exception as err:
         logger.exception("Whisper initialization failed: %s", err)
         return None
@@ -157,6 +169,7 @@ def _transcribe_with_speech_recognition(file_path, lang="en"):
         return None
 
     recognizer = sr.Recognizer()
+    recognizer.operation_timeout = 5
 
     with sr.AudioFile(file_path) as source:
         audio_data = recognizer.record(source)
@@ -164,144 +177,78 @@ def _transcribe_with_speech_recognition(file_path, lang="en"):
     try:
         google_languages = {
             "en": ["en-IN"],
-            "kn": ["kn-IN"],
-            "tulu": ["tcy-IN", "kn-IN"],
+            "kn": ["kn-IN", "en-IN"],
+            "tulu": ["tcy-IN", "kn-IN", "en-IN"],
             "auto": ["tcy-IN", "kn-IN", "en-IN"],
         }.get(lang, ["en-IN"])
+        first_transcript = None
+        candidates = []
+        def recognize_candidate(locale):
+            try:
+                worker = sr.Recognizer()
+                worker.operation_timeout = 5
+                return worker.recognize_google(audio_data, language=locale).strip()
+            except Exception as err:
+                logger.warning("SpeechRecognition failed for %s: %s", locale, err)
+                return ""
+
+        # Auto mode needs all candidates to detect conflicting language evidence.
+        # Run independent network requests together rather than serially.
+        auto_transcripts = None
+        if lang == "auto":
+            with ThreadPoolExecutor(max_workers=3) as pool:
+                auto_transcripts = dict(zip(google_languages, pool.map(recognize_candidate, google_languages)))
         for google_language in google_languages:
             try:
-                transcript = recognizer.recognize_google(audio_data, language=google_language).strip()
+                transcript = auto_transcripts[google_language] if auto_transcripts is not None else recognizer.recognize_google(audio_data, language=google_language).strip()
                 if transcript:
-                    return transcript
+                    if first_transcript is None:
+                        first_transcript = transcript
+                    detected = infer_language(transcript, lang)
+                    medicine, _ = search_medicine_from_transcript(transcript, lang=detected or "en")
+                    if lang == "auto":
+                        candidates.append((transcript, detected, bool(medicine)))
+                        continue
+                    if medicine or len(google_languages) == 1:
+                        return transcript
             except Exception as err:
                 logger.warning("SpeechRecognition failed for %s: %s", google_language, err)
-        return None
+        if candidates:
+            # Retain language-bearing phrases instead of stopping at the first
+            # recognizer that happens to recognize a medicine name.
+            languages = {detected for _, detected, _ in candidates if detected}
+            if len(languages) > 1:
+                # Conflicting evidence must reach the clarification path.
+                return " / ".join(text for text, _, _ in candidates)
+            return max(candidates, key=lambda item: (bool(item[1]), item[2]))[0]
+        return first_transcript
     except Exception as err:
         logger.warning("SpeechRecognition transcription failed: %s", err)
         return None
 
 
 def transcribe_audio(file_path, lang="en"):
-    """Transcribe an audio file using Whisper first, then SpeechRecognition as fallback."""
+    """Transcribe audio with the fastest suitable backend for the selected language."""
     transcription_path = _convert_audio_for_transcription(file_path)
     if not transcription_path:
         return ""
 
     try:
-        text = _transcribe_with_whisper(transcription_path, lang=lang)
-    except Exception as err:
-        logger.exception("Voice transcription failed safely: %s", err)
-        text = None
-    if text:
-        return text
-
-    try:
-        text = _transcribe_with_speech_recognition(transcription_path, lang=lang)
-    except Exception as err:
-        logger.exception("Speech fallback failed safely: %s", err)
-        text = None
-    if text:
+        for transcriber in (_transcribe_with_speech_recognition, _transcribe_with_whisper):
+            try:
+                text = transcriber(transcription_path, lang=lang)
+                if text and text.strip():
+                    return text.strip()
+            except Exception as err:
+                logger.exception("Voice transcription failed safely: %s", err)
+        return ""
+    finally:
         if transcription_path != file_path:
             os.remove(transcription_path)
-        return text
-
-    if transcription_path != file_path:
-        os.remove(transcription_path)
-    return ""
 
 
-def detect_transcript_language(transcript_text, requested_lang="en"):
-    """Detect transcript language while respecting the user's selected language."""
-
-    requested_lang = (requested_lang or "auto").strip().lower()
-
-    # Normalize language codes
-    if requested_lang == "tlu":
-        requested_lang = "tulu"
-
-    # If the user explicitly selected Kannada,
-    # trust that selection instead of assuming English
-    # just because Whisper returned Latin characters.
-    if requested_lang == "kn":
-        return "kn"
-
-    # If the user explicitly selected Tulu,
-    # trust that selection as well.
-    if requested_lang == "tulu":
-        return "tulu"
-
-    # Only perform automatic detection when the user selected "auto".
-    if requested_lang == "auto":
-
-        # Kannada/Tulu Unicode script
-        if re.search(r"[\u0C80-\u0CFF]", transcript_text or ""):
-
-            def dataset_words(lang):
-                dataframe = _load_dataset(lang)
-
-                if dataframe is None:
-                    return set()
-
-                values = dataframe.astype(str).to_string(index=False)
-
-                return {
-                    unicodedata.normalize(
-                        "NFKC",
-                        word
-                    ).replace("\u200c", "")
-                    for word in re.findall(
-                        r"[\u0C80-\u0CFF]+",
-                        values
-                    )
-                }
-
-            transcript_words = {
-                unicodedata.normalize(
-                    "NFKC",
-                    word
-                ).replace("\u200c", "")
-                for word in re.findall(
-                    r"[\u0C80-\u0CFF]+",
-                    transcript_text
-                )
-            }
-
-            kannada_words = dataset_words("kn")
-            tulu_words = dataset_words("tulu")
-
-            if transcript_words & (tulu_words - kannada_words):
-                return "tulu"
-
-            return "kn"
-
-        # Latin-script Tulu detection
-        if re.search(r"[A-Za-z]", transcript_text or ""):
-
-            tulu_cues = {
-                "yenk",
-                "yank",
-                "enk",
-                "matre",
-                "ovu",
-                "ovund",
-                "panle",
-                "matt",
-                "malt"
-            }
-
-            transcript_words = set(
-                re.findall(
-                    r"[a-z]+",
-                    transcript_text.lower()
-                )
-            )
-
-            if len(transcript_words & tulu_cues) >= 2:
-                return "tulu"
-
-            return "en"
-
-    return "en"
+def detect_transcript_language(transcript_text, requested_lang=None):
+    return infer_language(transcript_text, requested_lang)
 
 
 def find_disease_medicines(transcript_text, lang="en"):
@@ -322,7 +269,7 @@ def find_disease_medicines(transcript_text, lang="en"):
 
 def _transcript_candidates(transcript_text, lang="en"):
     normalized_text = str(transcript_text).strip().lower()
-    words = [word for word in re.findall(r"[^\W\d_]+", normalized_text, flags=re.UNICODE) if word]
+    words = re.findall(r"[a-z]+|[\u0c80-\u0cff\u200c\u200d]+", normalized_text)
     known_medicine_matches = [
         medicine.lower()
         for medicine in list_medicine_names(lang=lang)

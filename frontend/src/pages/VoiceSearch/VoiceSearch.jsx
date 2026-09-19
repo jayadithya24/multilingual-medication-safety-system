@@ -1,8 +1,55 @@
 import { useEffect, useRef, useState } from "react";
-import MedicineCard from "../../components/MedicineCard/MedicineCard";
+import VoicePlayback from "../../components/VoicePlayback";
 import { sendVoiceSearchAudio } from "../../services/voiceService";
 import { scanMedicine } from "../../services/ocrService";
 import "./VoiceSearch.css";
+
+const LANGUAGE_COPY = {
+  en: {
+    name: "English",
+    medicine: "Medicine",
+    usedFor: "Used for",
+    simpleDescription: "What it does",
+    warning: "Important warning",
+    consult: "Ask a doctor or pharmacist before changing how you take it.",
+  },
+  kn: {
+    name: "ಕನ್ನಡ",
+    medicine: "ಔಷಧಿ",
+    usedFor: "ಬಳಕೆ",
+    simpleDescription: "ಇದು ಏನು ಮಾಡುತ್ತದೆ",
+    warning: "ಮುಖ್ಯ ಎಚ್ಚರಿಕೆ",
+    consult: "ಔಷಧಿಯನ್ನು ಬದಲಾಯಿಸುವ ಮೊದಲು ವೈದ್ಯರನ್ನು ಅಥವಾ ಔಷಧಿಕಾರರನ್ನು ಕೇಳಿ.",
+  },
+  tulu: {
+    name: "ತುಳು",
+    medicine: "ಮರ್ದ್",
+    usedFor: "ಬಳಕೆ",
+    simpleDescription: "ಉಂದು ದಾದ ಮಲ್ಪುಂಡ್",
+    warning: "ಮುಖ್ಯ ಜಾಗ್ರತೆ",
+    consult: "ಮರ್ದ್ ಬದಲ್ ಮಲ್ಪುನೆಡ್ದ್ ದುಂಬು ಡಾಕ್ಟ್ರೆಡ ಅತ್ತ್ಂಡ ಫಾರ್ಮಸಿಸ್ಟ್‌ಡ ಕೇನ್ಲೆ",
+  },
+};
+
+function firstSentence(value) {
+  const text = String(value || "").trim();
+  if (!text) return "";
+  const sentence = text.match(/^.*?[.!?।॥]/)?.[0];
+  return sentence || text;
+}
+
+function getSimpleInfo(medicine, language) {
+  if (!medicine) return null;
+
+  const copy = LANGUAGE_COPY[language] || LANGUAGE_COPY.en;
+  return {
+    copy,
+    name: medicine.drug_name,
+    disease: medicine.disease,
+    description: firstSentence(medicine.description),
+    warning: firstSentence(medicine.warnings),
+  };
+}
 
 function VoiceSearch() {
   const [lang, setLang] = useState("auto");
@@ -20,22 +67,32 @@ function VoiceSearch() {
   const mediaStreamRef = useRef(null);
   const chunksRef = useRef([]);
   const fileInputRef = useRef(null);
+  const recordingTimerRef = useRef(null);
+  const silenceCleanupRef = useRef(() => {});
 
   useEffect(() => {
     return () => {
-      if (audioPreview) {
-        URL.revokeObjectURL(audioPreview);
+      clearTimeout(recordingTimerRef.current);
+      silenceCleanupRef.current();
+      const recorder = mediaRecorderRef.current;
+      if (recorder) {
+        recorder.onstop = null;
+        recorder.ondataavailable = null;
+        if (recorder.state !== "inactive") recorder.stop();
       }
-
-      if (medicinePreview) {
-        URL.revokeObjectURL(medicinePreview);
-      }
-
       if (mediaStreamRef.current) {
         mediaStreamRef.current.getTracks().forEach((track) => track.stop());
       }
     };
+  }, []);
+
+  useEffect(() => {
+    return () => { if (audioPreview) URL.revokeObjectURL(audioPreview); };
   }, [audioPreview]);
+
+  useEffect(() => {
+    return () => { if (medicinePreview) URL.revokeObjectURL(medicinePreview); };
+  }, [medicinePreview]);
 
   const resetResultState = () => {
     setResult(null);
@@ -101,6 +158,9 @@ function VoiceSearch() {
       };
 
       mediaRecorder.onstop = () => {
+        clearTimeout(recordingTimerRef.current);
+        silenceCleanupRef.current();
+        setIsRecording(false);
         const mimeType = mediaRecorder.mimeType || preferredMimeType || "audio/webm";
         const recordingBlob = new Blob(chunksRef.current, {
           type: mimeType,
@@ -134,12 +194,50 @@ function VoiceSearch() {
         mediaStreamRef.current?.getTracks().forEach((track) => track.stop());
         mediaStreamRef.current = null;
         chunksRef.current = [];
+        void handleVoiceSearch(recordingFile);
       };
 
       mediaRecorder.start(250);
       mediaRecorderRef.current = mediaRecorder;
       setIsRecording(true);
+      // Wait for sustained sound before interpreting a quiet pause as finished.
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (AudioContextClass) {
+        try {
+          const context = new AudioContextClass();
+          const source = context.createMediaStreamSource(stream);
+          const analyser = context.createAnalyser();
+          analyser.fftSize = 2048;
+          source.connect(analyser);
+          const samples = new Float32Array(analyser.fftSize);
+          let speechFrames = 0;
+          let lastSound = 0;
+          const timer = setInterval(() => {
+            analyser.getFloatTimeDomainData(samples);
+            const rms = Math.sqrt(samples.reduce((sum, value) => sum + value * value, 0) / samples.length);
+            if (rms > 0.02) {
+              speechFrames += 1;
+              lastSound = performance.now();
+            } else if (speechFrames >= 4 && performance.now() - lastSound >= 2500 && mediaRecorder.state === "recording") {
+              mediaRecorder.stop();
+            }
+          }, 100);
+          silenceCleanupRef.current = () => {
+            clearInterval(timer);
+            source.disconnect();
+            if (context.state !== "closed") void context.close();
+          };
+          void context.resume().catch(() => {});
+        } catch (audioError) {
+          console.warn("Silence detection unavailable; use Stop.", audioError);
+        }
+      }
+      recordingTimerRef.current = setTimeout(() => {
+        if (mediaRecorder.state === "recording") mediaRecorder.stop();
+      }, 30000);
     } catch (recordingError) {
+      mediaStreamRef.current?.getTracks().forEach((track) => track.stop());
+      mediaStreamRef.current = null;
       console.error(recordingError);
       setError(
         recordingError?.name === "NotAllowedError"
@@ -155,13 +253,14 @@ function VoiceSearch() {
     }
 
     console.debug("Stopping recording");
+    clearTimeout(recordingTimerRef.current);
     mediaRecorderRef.current.requestData?.();
     mediaRecorderRef.current.stop();
     setIsRecording(false);
   };
 
-  const handleVoiceSearch = async () => {
-    if (!audioFile) {
+  const handleVoiceSearch = async (selectedAudio = audioFile) => {
+    if (!selectedAudio) {
       setError("Please record or upload an audio file first.");
       return;
     }
@@ -173,7 +272,7 @@ function VoiceSearch() {
 
       let identifiedMedicine = ocrMedicine;
       if (medicineImage && !identifiedMedicine) {
-        const ocrResponse = await scanMedicine(medicineImage, lang);
+        const ocrResponse = await scanMedicine(medicineImage, lang === "auto" ? "en" : lang);
         identifiedMedicine = ocrResponse?.ocr_result?.detected_medicine || "";
         setOcrMedicine(identifiedMedicine);
         if (!identifiedMedicine) {
@@ -183,19 +282,9 @@ function VoiceSearch() {
         }
       }
 
-      const response = await sendVoiceSearchAudio(audioFile, lang, identifiedMedicine);
+      const response = await sendVoiceSearchAudio(selectedAudio, lang, identifiedMedicine);
       setResult(response);
 
-      if (response.response_text && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-        const spokenResponse = new SpeechSynthesisUtterance(response.response_text);
-        spokenResponse.lang = response.response_language === "tulu"
-          ? "tcy-IN"
-          : response.response_language === "kn"
-            ? "kn-IN"
-            : "en-IN";
-        window.speechSynthesis.speak(spokenResponse);
-      }
     } catch (searchError) {
       console.error(searchError);
       setError(
@@ -212,7 +301,14 @@ function VoiceSearch() {
   const matchingMedicines = result?.matching_medicines ?? [];
   const detectedText = result?.detected_text ?? "";
   const detectedMedicine = result?.detected_medicine ?? medicineDetails?.drug_name ?? "";
-  const isNotFound = result?.status === "not_found" || result?.clarification_required;
+  const isNotFound = result?.status === "not_found";
+  const simpleInfo = getSimpleInfo(
+    medicineDetails,
+    result?.response_language || (lang === "auto" ? "en" : lang)
+  );
+  const spokenResponse = simpleInfo
+    ? `${simpleInfo.copy.medicine}: ${simpleInfo.name}. ${simpleInfo.copy.usedFor}: ${simpleInfo.disease}. ${simpleInfo.copy.warning}: ${simpleInfo.warning}. ${simpleInfo.copy.consult}`
+    : result?.response_text;
 
   return (
     <div className="voice-search-page">
@@ -221,7 +317,7 @@ function VoiceSearch() {
           <p className="voice-kicker">Voice Search</p>
           <h1>Speak or upload an audio clip to find a medicine</h1>
           <p>
-            Record the name of a medicine, or upload an audio file and let the backend recognize it.
+            Record your medicine name or question. After you speak, pause for about 3 seconds to search automatically. Maximum recording: 30 seconds. You can also press Stop.
           </p>
         </div>
 
@@ -234,6 +330,10 @@ function VoiceSearch() {
             <option value="tulu">Tulu</option>
           </select>
         </label>
+
+        {lang === "auto" && (
+          <p>Speak a short sentence with the medicine name so we can identify your language. A medicine name alone may not be enough.</p>
+        )}
 
         <div className="voice-panel">
           <div className="voice-controls">
@@ -256,7 +356,7 @@ function VoiceSearch() {
             <button
               className="voice-button voice-button--ghost"
               onClick={() => fileInputRef.current?.click()}
-              disabled={processing}
+              disabled={processing || isRecording}
             >
               Upload Audio
             </button>
@@ -295,7 +395,7 @@ function VoiceSearch() {
 
           <button
             className="voice-submit"
-            onClick={handleVoiceSearch}
+            onClick={() => handleVoiceSearch()}
             disabled={processing || isRecording}
           >
             {processing ? "Processing..." : "Search Medicine"}
@@ -312,10 +412,12 @@ function VoiceSearch() {
 
           {result && (
             <div className="voice-result">
+              {result.status === "language_uncertain" && <p role="status">{result.message}</p>}
+              <VoicePlayback text={spokenResponse} language={result.response_language || (lang === "auto" ? "en" : lang)} />
               <div className="voice-summary">
                 <p className="voice-summary__label">Recognized Text</p>
                 <h2>{detectedText || "N/A"}</h2>
-                {result.response_text && (
+                {result.response_text && !medicineDetails && (
                   <p className="voice-summary__response">
                     {result.response_text}
                   </p>
@@ -328,17 +430,35 @@ function VoiceSearch() {
                   </ul>
                 )}
                 <p className="voice-summary__medicine">
-                  {isNotFound
+                  {result.status === "language_uncertain"
+                    ? "Please confirm your language above."
+                    : isNotFound
                     ? "Medicine not found."
                     : `Detected Medicine: ${detectedMedicine || "N/A"}`}
                 </p>
               </div>
 
-              {medicineDetails ? (
-                <MedicineCard medicine={medicineDetails} />
-              ) : (
-                <MedicineCard medicine={null} />
-              )}
+              {simpleInfo ? (
+                <article className="voice-simple-info" aria-label={`${simpleInfo.copy.name} medicine information`}>
+                  <p className="voice-simple-info__language">{simpleInfo.copy.name}</p>
+                  <h2>{simpleInfo.name}</h2>
+                  <dl>
+                    <div>
+                      <dt>{simpleInfo.copy.usedFor}</dt>
+                      <dd>{simpleInfo.disease}</dd>
+                    </div>
+                    <div>
+                      <dt>{simpleInfo.copy.simpleDescription}</dt>
+                      <dd>{simpleInfo.description || "N/A"}</dd>
+                    </div>
+                    <div>
+                      <dt>{simpleInfo.copy.warning}</dt>
+                      <dd>{simpleInfo.warning || "N/A"}</dd>
+                    </div>
+                  </dl>
+                  <p className="voice-simple-info__consult">{simpleInfo.copy.consult}</p>
+                </article>
+              ) : null}
 
               {isNotFound && (
                 <p className="voice-result__message">{result.message}</p>

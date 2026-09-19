@@ -55,8 +55,9 @@ Output:
 import os
 import pandas as pd
 
-OUTPUT_DIR = "."
+OUTPUT_DIR = os.path.dirname(__file__)
 OUTPUT_FILENAME = "tulu_master_dataset.csv"
+ENGLISH_INPUT = "english_master_dataset.csv"
 
 records = [
 
@@ -74,7 +75,7 @@ records = [
             "ಮೆಟ್‌ಫಾರ್ಮಿನ್ ಟೈಪ್ 2 ಮಧುಮೇಹಗ್ ಮೊಕ್ಲೆನ ಆಯ್ಕೆದ ಮದ್ದು ಆದ್ ಉಂಡು. "
             "ಇದು ಕರಲ್‌ಡ್ ಗ್ಲೂಕೋಸ್ ಉತ್ಪತ್ತಿ ಕಡಮೆ ಮಲ್ತ್‌ದ್, ಮೈದ ಕೋಶೊಲು "
             "ಇನ್ಸುಲಿನ್‌ಗ್ ಲಾಯಕ್ಕ್ ಸ್ಪಂದನೆ ಮಲ್ಪೆರೆ ಸಹಾಯ ಮಲ್ಪುಂಡು. "
-            "ಒರೊಬ್ಬೆ ತೊಟ್ಟುಕೊಂಡಪ್ಪೊಲ್ ರಕ್ತದ ಸಕ್ಕರೆ ತುಂಬ ಕಡಮೆ ಆಪ ಅಪಾಯ ಕಡಮೆ ಉಂಡು."
+            "ಒರೊಬ್ಬೆ ತೊಟ್ಟುಕೊಂಡಪ್ಪೊಲ್ ನೆತ್ತೆರ್ದ ಸಕ್ಕರೆ ಅಂಶ ತುಂಬ ಕಡಮೆ ಆಪ ಅಪಾಯ ಕಡಮೆ ಉಂಡು."
         ),
         "side_effects": (
             "ಬೊಜ್ಜು ಸೂಲ್, ತಿಕ್ಕಾಯಿ, ಬೊಕ್ಕ, ಅಜೀರ್ಣ, ತಲೆ ನೋವು, "
@@ -103,11 +104,11 @@ records = [
         "active_ingredient": "ಗ್ಲಿಪಿಝೈಡ್",
         "description": (
             "ಗ್ಲಿಪಿಝೈಡ್ ಮೇದೋಜೀರಕ ಗ್ರಂಥಿಡ್ ಇನ್ಸುಲಿನ್ ಬಿಡ್ಪಾವಣೆ ಜಾಸ್ತಿ ಮಲ್ತ್‌ದ್ "
-            "ರಕ್ತದ ಸಕ್ಕರೆ ಕಡಮೆ ಮಲ್ಪುಂಡು. "
+            "ನೆತ್ತೆರ್ದ ಸಕ್ಕರೆ ಅಂಶನ್ ಕಡಮೆ ಮಲ್ಪುಂಡು. "
             "ತಿನ್ಪಿನ ಕ್ರಮ ಆದ್ ವ್ಯಾಯಾಮದ ಜತೆ ಟೈಪ್ 2 ಮಧುಮೇಹಗ್ ತೊಟ್ಟುಕೊಂಡಿಪ್ಪೆರ್."
         ),
         "side_effects": (
-            "ರಕ್ತದ ಸಕ್ಕರೆ ತುಂಬ ಕಡಮೆ ಆಪುನು (ಹೈಪೊಗ್ಲೈಸೀಮಿಯಾ — ಅತಿ ಸಾಮಾನ್ಯ), "
+            "ನೆತ್ತೆರ್ದ ಸಕ್ಕರೆ ಅಂಶ ತುಂಬ ಕಡಮೆ ಆಪುನು (ಹೈಪೊಗ್ಲೈಸೀಮಿಯಾ — ಅತಿ ಸಾಮಾನ್ಯ), "
             "ತಿಕ್ಕಾಯಿ, ಬೊಜ್ಜು ಸೂಲ್, ತಲೆ ತಿರ್ಗ್‌ನ, "
             "ತಲೆ ನೋವು, ಮೈ ಮೇಲ್ ದದ್ದು, ತೂಕ ಜಾಸ್ತಿ. "
             "ಅಪರೂಪ: ರಕ್ತದ ತೊಂದರೆ, ಕರಲ್ ಸಮಸ್ಯೆ."
@@ -137,7 +138,7 @@ records = [
             "ಟೈಪ್ 2 ಮಧುಮೇಹಗ್ ತೊಟ್ಟುಕೊಂಡಿಪ್ಪೆರ್."
         ),
         "side_effects": (
-            "ರಕ್ತದ ಸಕ್ಕರೆ ಕಡಮೆ, ತಲೆ ತಿರ್ಗ್‌ನ, ತಲೆ ನೋವು, ತಿಕ್ಕಾಯಿ, "
+            "ನೆತ್ತೆರ್ದ ಸಕ್ಕರೆ ಅಂಶ ಕಡಮೆ, ತಲೆ ತಿರ್ಗ್‌ನ, ತಲೆ ನೋವು, ತಿಕ್ಕಾಯಿ, "
             "ಸಾಂಕ, ತೂಕ ಜಾಸ್ತಿ, ಮೈ ಮೇಲ್ ಪ್ರತಿಕ್ರಿಯೆ. "
             "ಅಪರೂಪ: ರಕ್ತದ ಕಣ ಕಡಮೆ, ಕರಲ್ ತೊಂದರೆ."
         ),
@@ -146,7 +147,7 @@ records = [
             "ಸಲ್ಫಾ ಮದ್ದ್‌ಗ್ ಅಲರ್ಜಿ, ತೀವ್ರ ಮೂತ್ರ ಕ್ಯಾನೆ ಅತ್ತಂಡ ಕರಲ್ ತೊಂದರೆ."
         ),
         "warnings": (
-            "ರಕ್ತದ ಸಕ್ಕರೆ ತುಂಬ ಕಡಮೆ ಆಪ ಅಪಾಯ — ಮುದಿಯೆರ್‌ಡ್ ಆದ್ "
+            "ನೆತ್ತೆರ್ದ ಸಕ್ಕರೆ ಅಂಶ ತುಂಬ ಕಡಮೆ ಆಪ ಅಪಾಯ — ಮುದಿಯೆರ್‌ಡ್ ಆದ್ "
             "ಮೂತ್ರ ಕ್ಯಾನೆ ತೊಂದರೆ ಉಪ್ಪುನವೆರ್‌ಡ್ ಜಾಸ್ತಿ. "
             "G6PD ಕೊರತೆ ಉಪ್ಪುನವೆರ್‌ಡ್ ರಕ್ತಹೀನತೆ ಆಪ ಸಾಧ್ಯತೆ ಉಂಡು."
         ),
@@ -161,7 +162,7 @@ records = [
         "active_ingredient": "ಸಿಟಾಗ್ಲಿಪ್ಟಿನ್ ಫಾಸ್ಫೇಟ್",
         "description": (
             "ಸಿಟಾಗ್ಲಿಪ್ಟಿನ್ DPP-4 ಕಿಣ್ವ ತಡೆದ್ ಇನ್ಸುಲಿನ್ ಬಿಡ್ಪಾವಣೆ ಜಾಸ್ತಿ ಮಲ್ತ್‌ದ್ "
-            "ಗ್ಲೂಕಗಾನ್ ಕಡಮೆ ಮಲ್ಪುಂಡು. ರಕ್ತದ ಸಕ್ಕರೆ ಮಟ್ಟಗ್ ತಕ್ಕಂತೆ ಕೆಲಸ ಮಲ್ಪುಂಡು — "
+            "ಗ್ಲೂಕಗಾನ್ ಕಡಮೆ ಮಲ್ಪುಂಡು. ನೆತ್ತೆರ್ದ ಸಕ್ಕರೆ ಅಂಶಗ್ ತಕ್ಕಂತೆ ಕೆಲಸ ಮಲ್ಪುಂಡು — "
             "ಸಕ್ಕರೆ ತುಂಬ ಕಡಮೆ ಆಪ ಅಪಾಯ ಕಡಮೆ."
         ),
         "side_effects": (
@@ -217,7 +218,7 @@ records = [
         "active_ingredient": "ಪಿಯೋಗ್ಲಿಟಾಝೋನ್ ಹೈಡ್ರೋಕ್ಲೋರೈಡ್",
         "description": (
             "ಪಿಯೋಗ್ಲಿಟಾಝೋನ್ ಕೋಶೊಲೆಗ್ ಇನ್ಸುಲಿನ್‌ಗ್ ಲಾಯ್ಕ್ ಸ್ಪಂದನೆ ಮಲ್ತ್‌ದ್ "
-            "ರಕ್ತದ ಸಕ್ಕರೆ ಕಡಮೆ ಮಲ್ಪುಂಡು. "
+            "ನೆತ್ತೆರ್ದ ಸಕ್ಕರೆ ಅಂಶನ್ ಕಡಮೆ ಮಲ್ಪುಂಡು. "
             "ಇನ್ಸುಲಿನ್ ಬಿಡ್ಪಾವಣೆ ಜಾಸ್ತಿ ಮಲ್ಪುಜಿ."
         ),
         "side_effects": (
@@ -249,17 +250,17 @@ records = [
             "ಟೈಪ್ 1 ಆದ್ ಟೈಪ್ 2 ಮಧುಮೇಹ ಎರಡ್‌ಗ್ ತೊಟ್ಟುಕೊಂಡಿಪ್ಪೆರ್."
         ),
         "side_effects": (
-            "ರಕ್ತದ ಸಕ್ಕರೆ ತುಂಬ ಕಡಮೆ (ಮುಖ್ಯ ತೊಂದರೆ), "
+            "ನೆತ್ತೆರ್ದ ಸಕ್ಕರೆ ಅಂಶ ತುಂಬ ಕಡಮೆ (ಮುಖ್ಯ ತೊಂದರೆ), "
             "ಚುಚ್ಚ್ ಜಾಗೆಡ್ ನೋವು, ಕೆಂಪ್, ಊತ, ತೂಕ ಜಾಸ್ತಿ, ಪಾದ ಊತ. "
             "ಅಪರೂಪ: ಅಲರ್ಜಿ ಪ್ರತಿಕ್ರಿಯೆ, ಪೊಟ್ಯಾಸಿಯಂ ಕಡಮೆ."
         ),
         "contraindications": (
             "ಇನ್ಸುಲಿನ್ ಗ್ಲಾರ್ಜಿನ್‌ಗ್ ಅಲರ್ಜಿ ಉಪ್ಪುನವೆರ್‌ಗ್ ಕೊರೊಡಾಪುಜಿ. "
-            "ರಕ್ತದ ಸಕ್ಕರೆ ಕಡಮೆ ಉಪ್ಪುನ ಸಮಯ ತೊಟ್ಟುಕೊಂಡ ಅಕ್ಕಿಜಿ. "
+            "ನೆತ್ತೆರ್ದ ಸಕ್ಕರೆ ಅಂಶ ಕಡಮೆ ಉಪ್ಪುನ ಸಮಯ ತೊಟ್ಟುಕೊಂಡ ಅಕ್ಕಿಜಿ. "
             "ರಕ್ತ ನಾಳೊಗ್ ನೇರ ಚುಚ್ಚ್‌ಯೊಡಾಪುಜಿ."
         ),
         "warnings": (
-            "ರಕ್ತದ ಸಕ್ಕರೆ ಕಡಮೆ ಆಪುನು ಪ್ರಾಣಾಂತಿಕ ಆಪ ಸಾಧ್ಯತೆ ಉಂಡು. "
+            "ನೆತ್ತೆರ್ದ ಸಕ್ಕರೆ ಅಂಶ ಕಡಮೆ ಆಪುನು ಪ್ರಾಣಾಂತಿಕ ಆಪ ಸಾಧ್ಯತೆ ಉಂಡು. "
             "ಬೇರೆ ಇನ್ಸುಲಿನ್‌ ಜತೆ ಬೆರಕ್ ಮಲ್ಪಡ. "
             "ಡೋಸ್ ಬದಲ್ ಡಾಕ್ಟ್ರೆ ಸಲಹೆ ಮೇರೆಗ್ ಮಾತ್ರ ಮಲ್ಪುಲೆ."
         ),
@@ -934,13 +935,24 @@ records = [
 COLUMNS = [
     "drug_id", "drug_name", "generic_name", "disease", "drug_class",
     "active_ingredient", "description", "side_effects",
-    "contraindications", "warnings", "source"
+    "contraindications", "warnings", "major_interactions", "source"
 ]
 
-df = pd.DataFrame(records, columns=COLUMNS)
+output_path = os.path.join(OUTPUT_DIR, OUTPUT_FILENAME)
+if os.path.exists(output_path):
+    df = pd.read_csv(output_path, dtype=str).fillna("")
+else:
+    df = pd.DataFrame(records)
+
+df["drug_id"] = df["drug_id"].str.strip().str.replace("_", "-", regex=False)
+english_path = os.path.join(OUTPUT_DIR, ENGLISH_INPUT)
+english_df = pd.read_csv(english_path, encoding="utf-8-sig")
+english_ids = english_df["drug_name"].str.strip().str.lower().str.replace(" ", "-", regex=False)
+interaction_by_id = dict(zip(english_ids, english_df["major_interactions"]))
+df["major_interactions"] = df["drug_id"].map(interaction_by_id).fillna("")
+df = df.reindex(columns=COLUMNS)
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
-output_path = os.path.join(OUTPUT_DIR, OUTPUT_FILENAME)
 df.to_csv(output_path, index=False, encoding="utf-8-sig")
 
 print("=== ತುಳು DATASET SUMMARY ===")

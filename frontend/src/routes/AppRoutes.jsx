@@ -24,6 +24,7 @@ import Settings from "../pages/Settings/Settings";
 import KnowledgeGraph from "../pages/KnowledgeGraph/KnowledgeGraph";
 import PatientProfile from "../pages/PatientProfile/PatientProfile";
 import Prescription from "../pages/Prescription/Prescription";
+import VoiceSearch from "../pages/VoiceSearch/VoiceSearch";
 
 
 function AppRoutes() {
@@ -66,6 +67,11 @@ function AppRoutes() {
                 <Route
                     path="admin"
                     element={<AdminPortal />}
+                />
+
+                <Route
+                    path="voice-search"
+                    element={<VoiceSearch />}
                 />
 
 

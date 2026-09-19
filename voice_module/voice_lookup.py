@@ -1,6 +1,13 @@
 import speech_recognition as sr
 import pandas as pd
+import pyttsx3
 from rapidfuzz import process
+
+
+def speak(text):
+    engine = pyttsx3.init()
+    engine.say(text)
+    engine.runAndWait()
 
 # -----------------------------
 # Load Dataset
@@ -68,8 +75,17 @@ try:
         print("Warnings:", result.iloc[0]["warnings"])
         print("Interactions:", result.iloc[0]["major_interactions"])
 
+        spoken_text = (
+            f"The medicine is {result.iloc[0]['drug_name']}. "
+            f"It is used for {result.iloc[0]['disease']}. "
+            f"Description: {result.iloc[0]['description']} "
+            f"Warnings: {result.iloc[0]['warnings']}"
+        )
+        speak(spoken_text)
+
     else:
         print("\nMedicine not found.")
+        speak("Medicine not found.")
 
 except sr.WaitTimeoutError:
     print("No speech detected. Please try again.")

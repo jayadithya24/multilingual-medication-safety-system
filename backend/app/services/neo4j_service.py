@@ -9,7 +9,9 @@ from backend.app.services.medicine_service import _load_dataset, search_medicine
 def _get_driver():
     uri = os.getenv("NEO4J_URI", "bolt://127.0.0.1:7687")
     user = os.getenv("NEO4J_USER", "neo4j")
-    password = os.getenv("NEO4J_PASSWORD", "password")
+    password = os.getenv("NEO4J_PASSWORD", "")
+    if not password or password.lower() in {"password", "your_password", "your_neo4j_password", "changeme"}:
+        raise RuntimeError("Set real NEO4J_URI, NEO4J_USER, and NEO4J_PASSWORD values before using Neo4j.")
     return GraphDatabase.driver(uri, auth=(user, password))
 
 
