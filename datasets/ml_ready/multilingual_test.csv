@@ -1,0 +1,190 @@
+﻿language,query,medicine,intent
+tulu,Pioglitazone ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Pioglitazone,interactions
+tulu,Celecoxib ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Celecoxib,side_effects
+en,What should I be careful about when taking Glimepiride?,Glimepiride,warnings
+en,Can Empagliflozin cause any side effects?,Empagliflozin,side_effects
+tulu,Sitagliptin ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Sitagliptin,dosage
+kn,Enalapril ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Enalapril,uses
+tulu,Pioglitazone ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Pioglitazone,uses
+en,Are there any warnings about Ibuprofen?,Ibuprofen,warnings
+kn,Leflunomide ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Leflunomide,uses
+tulu,Metformin ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Metformin,medicine_info
+en,Why is Ibuprofen used?,Ibuprofen,uses
+en,Who should not take Chlorthalidone?,Chlorthalidone,contraindications
+tulu,Ibuprofen ದೆಂದ್?,Ibuprofen,medicine_info
+tulu,Glimepiride ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Glimepiride,medicine_info
+tulu,Metformin ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Metformin,contraindications
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Empagliflozin ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Empagliflozin,interactions
+tulu,Acarbose ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Acarbose,contraindications
+kn,Naproxen ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Naproxen,interactions
+kn,Carvedilol ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Carvedilol,interactions
+tulu,Naproxen ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Naproxen,uses
+tulu,Empagliflozin ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Empagliflozin,contraindications
+kn,Dapagliflozin ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Dapagliflozin,side_effects
+en,Can Metformin interact with other drugs?,Metformin,interactions
+tulu,Hydroxychloroquine ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Hydroxychloroquine,warnings
+kn,Vildagliptin ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Vildagliptin,warnings
+tulu,Enalapril ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Enalapril,warnings
+kn,Metformin ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Metformin,dosage
+kn,Glimepiride ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Glimepiride,medicine_info
+en,What conditions is Celecoxib used for?,Celecoxib,uses
+en,What do I need to know about Dapagliflozin?,Dapagliflozin,medicine_info
+en,What medicines can interact with Chlorthalidone?,Chlorthalidone,interactions
+kn,Metformin ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Metformin,warnings
+tulu,Ramipril ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Ramipril,dosage
+kn,Naproxen ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Naproxen,dosage
+tulu,Telmisartan ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Telmisartan,interactions
+en,What medicines can interact with Dapagliflozin?,Dapagliflozin,interactions
+kn,Prednisolone ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Prednisolone,warnings
+tulu,Ibuprofen ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Ibuprofen,warnings
+kn,Hydroxychloroquine ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Hydroxychloroquine,side_effects
+kn,ಯಾರು Insulin Glargine ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Insulin Glargine,contraindications
+en,What is the dosage information for Sulfasalazine?,Sulfasalazine,dosage
+tulu,Amlodipine ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Amlodipine,side_effects
+en,What warnings should I know about Empagliflozin?,Empagliflozin,warnings
+tulu,Enalapril ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Enalapril,side_effects
+kn,Amlodipine ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Amlodipine,dosage
+kn,Sulfasalazine ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Sulfasalazine,dosage
+kn,Ramipril ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Ramipril,dosage
+tulu,Prednisolone ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Prednisolone,dosage
+en,How do I take Prednisolone?,Prednisolone,dosage
+en,How should Hydroxychloroquine be taken?,Hydroxychloroquine,dosage
+en,What is Pioglitazone used for?,Pioglitazone,uses
+en,What problems can Carvedilol cause?,Carvedilol,side_effects
+tulu,Glimepiride ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Glimepiride,contraindications
+en,How do I take Glipizide?,Glipizide,dosage
+kn,ಯಾವ ಔಷಧಿಗಳು Celecoxib ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Celecoxib,interactions
+kn,Carvedilol ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Carvedilol,medicine_info
+en,What is Vildagliptin?,Vildagliptin,medicine_info
+tulu,Dapagliflozin ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Dapagliflozin,uses
+tulu,Chlorthalidone ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Chlorthalidone,medicine_info
+en,What is the dosage information for Sitagliptin?,Sitagliptin,dosage
+kn,Hydrochlorothiazide ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Hydrochlorothiazide,contraindications
+tulu,Metformin ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Metformin,uses
+en,How do I take Telmisartan?,Telmisartan,dosage
+tulu,Empagliflozin ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Empagliflozin,warnings
+en,What conditions is Atenolol used for?,Atenolol,uses
+kn,Celecoxib ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Celecoxib,uses
+tulu,Telmisartan ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Telmisartan,dosage
+en,Tell me about Telmisartan.,Telmisartan,medicine_info
+kn,Ramipril ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Ramipril,interactions
+en,Can Insulin Glargine cause any side effects?,Insulin Glargine,side_effects
+kn,Empagliflozin ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Empagliflozin,side_effects
+en,Who should avoid Empagliflozin?,Empagliflozin,contraindications
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Hydrochlorothiazide ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Hydrochlorothiazide,interactions
+en,Tell me about Empagliflozin.,Empagliflozin,medicine_info
+en,What warnings should I know about Acarbose?,Acarbose,warnings
+tulu,Ramipril ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Ramipril,warnings
+en,What warnings should I know about Prednisolone?,Prednisolone,warnings
+tulu,Losartan ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Losartan,medicine_info
+kn,Glipizide ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Glipizide,dosage
+en,When should Prednisolone not be used?,Prednisolone,contraindications
+en,When should Metformin not be used?,Metformin,contraindications
+kn,Vildagliptin ಎಂದರೇನು?,Vildagliptin,medicine_info
+kn,Clonidine ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Clonidine,medicine_info
+kn,ಯಾರು Hydroxychloroquine ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Hydroxychloroquine,contraindications
+en,Can Carvedilol interact with other drugs?,Carvedilol,interactions
+tulu,Glipizide ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Glipizide,interactions
+kn,Methotrexate ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Methotrexate,warnings
+kn,Ramipril ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Ramipril,side_effects
+kn,Enalapril ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Enalapril,contraindications
+kn,Sitagliptin ಎಂದರೇನು?,Sitagliptin,medicine_info
+kn,Diclofenac ಎಂದರೇನು?,Diclofenac,medicine_info
+kn,Prednisolone ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Prednisolone,interactions
+tulu,Atenolol ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Atenolol,contraindications
+kn,Chlorthalidone ಎಂದರೇನು?,Chlorthalidone,medicine_info
+tulu,Leflunomide ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Leflunomide,dosage
+en,Why is Colchicine used?,Colchicine,uses
+en,What warnings should I know about Ibuprofen?,Ibuprofen,warnings
+tulu,Pioglitazone ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Pioglitazone,medicine_info
+en,Tell me about Enalapril.,Enalapril,medicine_info
+kn,Amlodipine ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Amlodipine,contraindications
+tulu,Metformin ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Metformin,uses
+en,Who should avoid Celecoxib?,Celecoxib,contraindications
+en,What problems can Dapagliflozin cause?,Dapagliflozin,side_effects
+kn,Dapagliflozin ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Dapagliflozin,interactions
+kn,Atenolol ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Atenolol,contraindications
+kn,Hydrochlorothiazide ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Hydrochlorothiazide,warnings
+tulu,Insulin Glargine ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Insulin Glargine,medicine_info
+kn,ಯಾರು Sulfasalazine ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Sulfasalazine,contraindications
+en,Who should avoid Dapagliflozin?,Dapagliflozin,contraindications
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Clonidine ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Clonidine,interactions
+en,What problems can Clonidine cause?,Clonidine,side_effects
+tulu,Sitagliptin ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Sitagliptin,side_effects
+en,Tell me about Naproxen.,Naproxen,medicine_info
+en,When should Enalapril not be used?,Enalapril,contraindications
+kn,Carvedilol ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Carvedilol,contraindications
+en,Can Amlodipine interact with other drugs?,Amlodipine,interactions
+en,What conditions is Enalapril used for?,Enalapril,uses
+tulu,ಯಾರೆ Colchicine ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Colchicine,contraindications
+tulu,Leflunomide ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Leflunomide,contraindications
+en,What are the side effects of Empagliflozin?,Empagliflozin,side_effects
+tulu,Celecoxib ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Celecoxib,side_effects
+en,What is Sitagliptin used for?,Sitagliptin,uses
+en,Who should avoid Hydroxychloroquine?,Hydroxychloroquine,contraindications
+kn,Leflunomide ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Leflunomide,side_effects
+kn,Dapagliflozin ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Dapagliflozin,warnings
+tulu,Losartan ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Losartan,side_effects
+kn,Leflunomide ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Leflunomide,side_effects
+tulu,Celecoxib ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Celecoxib,warnings
+kn,Chlorthalidone ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Chlorthalidone,dosage
+tulu,Ibuprofen ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Ibuprofen,uses
+tulu,Methotrexate ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Methotrexate,uses
+tulu,Diclofenac ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Diclofenac,warnings
+kn,Methotrexate ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Methotrexate,warnings
+en,Can Glimepiride cause any side effects?,Glimepiride,side_effects
+kn,Chlorthalidone ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Chlorthalidone,uses
+en,What are the side effects of Pioglitazone?,Pioglitazone,side_effects
+en,What warnings should I know about Chlorthalidone?,Chlorthalidone,warnings
+en,Why is Atenolol used?,Atenolol,uses
+kn,Ramipril ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Ramipril,warnings
+en,What medicines can interact with Sitagliptin?,Sitagliptin,interactions
+tulu,Ibuprofen ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Ibuprofen,medicine_info
+tulu,Pioglitazone ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Pioglitazone,side_effects
+kn,ಯಾರು Glipizide ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Glipizide,contraindications
+kn,Colchicine ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Colchicine,uses
+tulu,Dapagliflozin ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Dapagliflozin,dosage
+kn,Carvedilol ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Carvedilol,uses
+kn,Sulfasalazine ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Sulfasalazine,interactions
+en,What is Leflunomide used for?,Leflunomide,uses
+tulu,Sulfasalazine ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Sulfasalazine,contraindications
+en,What do I need to know about Hydroxychloroquine?,Hydroxychloroquine,medicine_info
+en,Who should avoid Metformin?,Metformin,contraindications
+kn,Hydroxychloroquine ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Hydroxychloroquine,dosage
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Dapagliflozin ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Dapagliflozin,interactions
+tulu,Diclofenac ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Diclofenac,dosage
+kn,Losartan ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Losartan,side_effects
+en,Does Leflunomide interact with other medicines?,Leflunomide,interactions
+tulu,Chlorthalidone ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Chlorthalidone,dosage
+kn,Ibuprofen ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Ibuprofen,interactions
+kn,Glipizide ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Glipizide,uses
+kn,Colchicine ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Colchicine,interactions
+en,What should I be careful about when taking Prednisolone?,Prednisolone,warnings
+tulu,Acarbose ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Acarbose,side_effects
+en,What is the dosage information for Amlodipine?,Amlodipine,dosage
+en,What is Ibuprofen?,Ibuprofen,medicine_info
+tulu,Hydrochlorothiazide ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Hydrochlorothiazide,warnings
+tulu,Vildagliptin ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Vildagliptin,uses
+en,Can Hydrochlorothiazide interact with other drugs?,Hydrochlorothiazide,interactions
+en,How should Metformin be taken?,Metformin,dosage
+kn,Acarbose ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Acarbose,uses
+en,How should Colchicine be taken?,Colchicine,dosage
+en,What are the side effects of Glimepiride?,Glimepiride,side_effects
+tulu,Empagliflozin ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Empagliflozin,interactions
+tulu,Clonidine ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Clonidine,uses
+kn,Vildagliptin ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Vildagliptin,medicine_info
+en,What do I need to know about Colchicine?,Colchicine,medicine_info
+kn,Losartan ಎಂದರೇನು?,Losartan,medicine_info
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Pioglitazone ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Pioglitazone,interactions
+kn,Clonidine ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Clonidine,side_effects
+tulu,Acarbose ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Acarbose,dosage
+tulu,Celecoxib ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Celecoxib,warnings
+en,Does Chlorthalidone interact with other medicines?,Chlorthalidone,interactions
+tulu,Atenolol ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Atenolol,side_effects
+kn,Amlodipine ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Amlodipine,warnings
+tulu,Atenolol ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Atenolol,medicine_info
+kn,Enalapril ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Enalapril,dosage
+kn,Amlodipine ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Amlodipine,uses
+en,What warnings should I know about Insulin Glargine?,Insulin Glargine,warnings
+tulu,ಯಾರೆ Amlodipine ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Amlodipine,contraindications
+kn,Glimepiride ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Glimepiride,side_effects

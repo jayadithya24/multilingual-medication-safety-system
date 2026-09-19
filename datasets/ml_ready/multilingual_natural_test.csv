@@ -1,0 +1,35 @@
+﻿language,query,medicine,intent
+en,I want to know more about Ibuprofen.,Ibuprofen,medicine_info
+tulu,Ibuprofen ಬಳಕೆ ಮುಂಚೆ ಎಂಚಿನ ಮಾಹಿತಿ ಗೊತ್ತುಪ್ಪು?,Ibuprofen,warnings
+kn,Aspirin ಔಷಧಿಯ ಬಗ್ಗೆ ತಿಳಿಸಿ.,Aspirin,medicine_info
+tulu,Paracetamol ದಿಂದ್ ಎಂಚಿನ ಅನಗತ್ಯ ಪರಿಣಾಮ ಆಪುಂಡು?,Paracetamol,side_effects
+kn,Aspirin ನ ಮುಖ್ಯ ಬಳಕೆ ಏನು?,Aspirin,uses
+en,What is the usual dose of Ibuprofen?,Ibuprofen,dosage
+en,Does Paracetamol have any drug interactions?,Paracetamol,interactions
+kn,Ibuprofen ತೆಗೆದುಕೊಂಡರೆ ಯಾವ ತೊಂದರೆಗಳು ಬರಬಹುದು?,Ibuprofen,side_effects
+kn,Aspirin ಅನ್ನು ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ತೆಗೆದುಕೊಳ್ಳಬಹುದೇ?,Aspirin,interactions
+tulu,Aspirin ಯಾತಕ್ಕೆ ಬಳಕೆ ಆಪುಂಡು?,Aspirin,uses
+tulu,Paracetamol ಜೊತೆಯಾದ್ ಬೇರೆ ಔಷಧಿ ತಿನ್ಪುಂಡಾ?,Paracetamol,interactions
+kn,Metformin ನ ಸರಿಯಾದ ಡೋಸ್ ಎಷ್ಟು?,Metformin,dosage
+tulu,Paracetamol ಬಳಕೆದ್ ಎಂಚಿನ ಜಾಗ್ರತೆ ಬೇಕು?,Paracetamol,warnings
+en,What precautions should I take with Metformin?,Metformin,warnings
+en,What should I know about Ibuprofen?,Ibuprofen,medicine_info
+kn,Metformin ತೆಗೆದುಕೊಳ್ಳುವಾಗ ಯಾವುದರ ಬಗ್ಗೆ ಜಾಗರೂಕರಾಗಬೇಕು?,Metformin,warnings
+tulu,Aspirin ಎಂಚಿನ ಪ್ರಮಾಣಡ್ ತಿನ್ಪುಂಡು?,Aspirin,dosage
+kn,Metformin ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳಿವೆ?,Metformin,warnings
+en,Does Metformin have any drug interactions?,Metformin,interactions
+tulu,Metformin ಬೇರೆ ಔಷಧಿಲೊಟ್ಟಿಗೆ ತಿನ್ಪುನೆ ಸಾಧ್ಯನಾ?,Metformin,interactions
+kn,Ibuprofen ಬೇರೆ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸುತ್ತದೆಯೇ?,Ibuprofen,interactions
+kn,Ibuprofen ಔಷಧಿಯ ಬಗ್ಗೆ ತಿಳಿಸಿ.,Ibuprofen,medicine_info
+en,What should I be careful about when using Metformin?,Metformin,warnings
+en,Can Paracetamol cause any unwanted effects?,Paracetamol,side_effects
+kn,ಯಾರಿಗೆ Aspirin ಸೂಕ್ತವಲ್ಲ?,Aspirin,contraindications
+tulu,Ibuprofen ಯಾತಕ್ಕೆ ತಿನ್ಪುಂಡು?,Ibuprofen,uses
+tulu,Ibuprofen ಯೆಂಚಿನ ಸಂದರ್ಭಡ್ ತಿನ್ಪುನೆ ಸರಿಯಲ್ಲ?,Ibuprofen,contraindications
+en,Why is Metformin prescribed?,Metformin,uses
+en,Can Metformin cause any unwanted effects?,Metformin,side_effects
+tulu,ಯೆರ್ Aspirin ತಿನ್ಪುನೆ ಸರಿಯಲ್ಲ?,Aspirin,contraindications
+en,When should Metformin be avoided?,Metformin,contraindications
+kn,Aspirin ಯಾವ ಸಂದರ್ಭಗಳಲ್ಲಿ ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Aspirin,contraindications
+kn,Metformin ಅನ್ನು ಎಷ್ಟು ಪ್ರಮಾಣದಲ್ಲಿ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Metformin,dosage
+tulu,Aspirin ದ ಬಗ್ಗೆ ತಿಳ್ಕೊಂಬೊಡು.,Aspirin,medicine_info

@@ -1,0 +1,35 @@
+﻿language,query,medicine,intent
+tulu,Ibuprofen ತಿಂದ್ ಯಾವುದೇ ತೊಂದರೆ ಉಂಡಾ?,Ibuprofen,side_effects
+en,When is Paracetamol not suitable?,Paracetamol,contraindications
+tulu,ಯಾರಿಗೆ Metformin ಸೂಕ್ತ ಅಲ್ಲ?,Metformin,contraindications
+tulu,Aspirin ಯಾತಕ್ಕೆ ತಿನ್ಪುಂಡು?,Aspirin,uses
+kn,Metformin ನಿಂದ ಯಾವುದೇ ಪ್ರತಿಕೂಲ ಪರಿಣಾಮಗಳಿವೆಯೇ?,Metformin,side_effects
+tulu,Ibuprofen ದ ಬಗ್ಗೆ ಎಂಚಿನ ಮಾಹಿತಿ ಉಂಡು?,Ibuprofen,medicine_info
+en,What safety information should I know about Ibuprofen?,Ibuprofen,warnings
+kn,Ibuprofen ಬಗ್ಗೆ ಇನ್ನಷ್ಟು ತಿಳಿದುಕೊಳ್ಳಬೇಕು.,Ibuprofen,medicine_info
+en,Can Paracetamol interact with other medicines?,Paracetamol,interactions
+kn,Ibuprofen ಯಾವ ಸಂದರ್ಭಗಳಲ್ಲಿ ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Ibuprofen,contraindications
+en,What is Ibuprofen used to treat?,Ibuprofen,uses
+tulu,Ibuprofen ಬಳಕೆದ್ ಎಂಚಿನ ಜಾಗ್ರತೆ ಬೇಕು?,Ibuprofen,warnings
+tulu,Metformin ಎಂಚಿನ ಪ್ರಮಾಣಡ್ ತಿನ್ಪುಂಡು?,Metformin,dosage
+kn,Paracetamol ಅನ್ನು ಏಕೆ ನೀಡುತ್ತಾರೆ?,Paracetamol,uses
+tulu,Aspirin ತಿಂದ್ ಎಂಚಿನ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಆಪುಂಡು?,Aspirin,side_effects
+kn,Paracetamol ನ ಮುಖ್ಯ ಬಳಕೆ ಏನು?,Paracetamol,uses
+tulu,Metformin ಯೆಂಚಿನ ಸಂದರ್ಭಡ್ ತಿನ್ಪುನೆ ಸರಿಯಲ್ಲ?,Metformin,contraindications
+kn,ಯಾರಿಗೆ Ibuprofen ಸೂಕ್ತವಲ್ಲ?,Ibuprofen,contraindications
+tulu,Ibuprofen ದ ಔಷಧಿ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಉಂಡಾ?,Ibuprofen,interactions
+tulu,Aspirin ದ ಪ್ರಮಾಣ ಎಷ್ಟ್ ಆಪುಂಡು?,Aspirin,dosage
+en,What safety information should I know about Aspirin?,Aspirin,warnings
+kn,Metformin ಬಳಸುವಾಗ ಯಾವ ಮುನ್ನೆಚ್ಚರಿಕೆ ಬೇಕು?,Metformin,warnings
+en,What should I know about Metformin?,Metformin,medicine_info
+en,Who should not take Aspirin?,Aspirin,contraindications
+tulu,Metformin ದ ಬಗ್ಗೆ ಎಂಚಿನ ಮಾಹಿತಿ ಉಂಡು?,Metformin,medicine_info
+tulu,Metformin ಯಾತಕ್ಕೆ ತಿನ್ಪುಂಡು?,Metformin,uses
+kn,Paracetamol ನಿಂದ ಯಾವ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಉಂಟಾಗಬಹುದು?,Paracetamol,side_effects
+en,How should the dose of Ibuprofen be taken?,Ibuprofen,dosage
+kn,Paracetamol ಬಗ್ಗೆ ನನಗೆ ವಿವರ ಬೇಕು.,Paracetamol,medicine_info
+kn,Aspirin ಅನ್ನು ಎಷ್ಟು ಪ್ರಮಾಣದಲ್ಲಿ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Aspirin,dosage
+en,What amount of Ibuprofen is recommended?,Ibuprofen,dosage
+kn,Ibuprofen ನ ಔಷಧಿ ಪರಸ್ಪರ ಕ್ರಿಯೆಗಳು ಯಾವುವು?,Ibuprofen,interactions
+en,What is Aspirin used to treat?,Aspirin,uses
+en,What problems might occur after taking Ibuprofen?,Ibuprofen,side_effects

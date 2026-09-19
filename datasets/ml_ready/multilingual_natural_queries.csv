@@ -1,0 +1,337 @@
+﻿language,query,medicine,intent
+en,Can you tell me about Metformin?,Metformin,medicine_info
+en,I want to know more about Metformin.,Metformin,medicine_info
+en,What should I know about Metformin?,Metformin,medicine_info
+en,Give me some information about Metformin.,Metformin,medicine_info
+en,Can you tell me about Aspirin?,Aspirin,medicine_info
+en,I want to know more about Aspirin.,Aspirin,medicine_info
+en,What should I know about Aspirin?,Aspirin,medicine_info
+en,Give me some information about Aspirin.,Aspirin,medicine_info
+en,Can you tell me about Paracetamol?,Paracetamol,medicine_info
+en,I want to know more about Paracetamol.,Paracetamol,medicine_info
+en,What should I know about Paracetamol?,Paracetamol,medicine_info
+en,Give me some information about Paracetamol.,Paracetamol,medicine_info
+en,Can you tell me about Ibuprofen?,Ibuprofen,medicine_info
+en,I want to know more about Ibuprofen.,Ibuprofen,medicine_info
+en,What should I know about Ibuprofen?,Ibuprofen,medicine_info
+en,Give me some information about Ibuprofen.,Ibuprofen,medicine_info
+en,What is Metformin used to treat?,Metformin,uses
+en,Why is Metformin prescribed?,Metformin,uses
+en,What conditions is Metformin used for?,Metformin,uses
+en,What is the purpose of taking Metformin?,Metformin,uses
+en,What is Aspirin used to treat?,Aspirin,uses
+en,Why is Aspirin prescribed?,Aspirin,uses
+en,What conditions is Aspirin used for?,Aspirin,uses
+en,What is the purpose of taking Aspirin?,Aspirin,uses
+en,What is Paracetamol used to treat?,Paracetamol,uses
+en,Why is Paracetamol prescribed?,Paracetamol,uses
+en,What conditions is Paracetamol used for?,Paracetamol,uses
+en,What is the purpose of taking Paracetamol?,Paracetamol,uses
+en,What is Ibuprofen used to treat?,Ibuprofen,uses
+en,Why is Ibuprofen prescribed?,Ibuprofen,uses
+en,What conditions is Ibuprofen used for?,Ibuprofen,uses
+en,What is the purpose of taking Ibuprofen?,Ibuprofen,uses
+en,What side effects can Metformin cause?,Metformin,side_effects
+en,Can Metformin cause any unwanted effects?,Metformin,side_effects
+en,What problems might occur after taking Metformin?,Metformin,side_effects
+en,Are there any adverse effects of Metformin?,Metformin,side_effects
+en,What side effects can Aspirin cause?,Aspirin,side_effects
+en,Can Aspirin cause any unwanted effects?,Aspirin,side_effects
+en,What problems might occur after taking Aspirin?,Aspirin,side_effects
+en,Are there any adverse effects of Aspirin?,Aspirin,side_effects
+en,What side effects can Paracetamol cause?,Paracetamol,side_effects
+en,Can Paracetamol cause any unwanted effects?,Paracetamol,side_effects
+en,What problems might occur after taking Paracetamol?,Paracetamol,side_effects
+en,Are there any adverse effects of Paracetamol?,Paracetamol,side_effects
+en,What side effects can Ibuprofen cause?,Ibuprofen,side_effects
+en,Can Ibuprofen cause any unwanted effects?,Ibuprofen,side_effects
+en,What problems might occur after taking Ibuprofen?,Ibuprofen,side_effects
+en,Are there any adverse effects of Ibuprofen?,Ibuprofen,side_effects
+en,Who should not take Metformin?,Metformin,contraindications
+en,When should Metformin be avoided?,Metformin,contraindications
+en,Are there people who cannot use Metformin?,Metformin,contraindications
+en,When is Metformin not suitable?,Metformin,contraindications
+en,Who should not take Aspirin?,Aspirin,contraindications
+en,When should Aspirin be avoided?,Aspirin,contraindications
+en,Are there people who cannot use Aspirin?,Aspirin,contraindications
+en,When is Aspirin not suitable?,Aspirin,contraindications
+en,Who should not take Paracetamol?,Paracetamol,contraindications
+en,When should Paracetamol be avoided?,Paracetamol,contraindications
+en,Are there people who cannot use Paracetamol?,Paracetamol,contraindications
+en,When is Paracetamol not suitable?,Paracetamol,contraindications
+en,Who should not take Ibuprofen?,Ibuprofen,contraindications
+en,When should Ibuprofen be avoided?,Ibuprofen,contraindications
+en,Are there people who cannot use Ibuprofen?,Ibuprofen,contraindications
+en,When is Ibuprofen not suitable?,Ibuprofen,contraindications
+en,What precautions should I take with Metformin?,Metformin,warnings
+en,Are there any warnings about Metformin?,Metformin,warnings
+en,What should I be careful about when using Metformin?,Metformin,warnings
+en,What safety information should I know about Metformin?,Metformin,warnings
+en,What precautions should I take with Aspirin?,Aspirin,warnings
+en,Are there any warnings about Aspirin?,Aspirin,warnings
+en,What should I be careful about when using Aspirin?,Aspirin,warnings
+en,What safety information should I know about Aspirin?,Aspirin,warnings
+en,What precautions should I take with Paracetamol?,Paracetamol,warnings
+en,Are there any warnings about Paracetamol?,Paracetamol,warnings
+en,What should I be careful about when using Paracetamol?,Paracetamol,warnings
+en,What safety information should I know about Paracetamol?,Paracetamol,warnings
+en,What precautions should I take with Ibuprofen?,Ibuprofen,warnings
+en,Are there any warnings about Ibuprofen?,Ibuprofen,warnings
+en,What should I be careful about when using Ibuprofen?,Ibuprofen,warnings
+en,What safety information should I know about Ibuprofen?,Ibuprofen,warnings
+en,Can Metformin interact with other medicines?,Metformin,interactions
+en,Which medicines should not be taken with Metformin?,Metformin,interactions
+en,Is it safe to combine Metformin with other drugs?,Metformin,interactions
+en,Does Metformin have any drug interactions?,Metformin,interactions
+en,Can Aspirin interact with other medicines?,Aspirin,interactions
+en,Which medicines should not be taken with Aspirin?,Aspirin,interactions
+en,Is it safe to combine Aspirin with other drugs?,Aspirin,interactions
+en,Does Aspirin have any drug interactions?,Aspirin,interactions
+en,Can Paracetamol interact with other medicines?,Paracetamol,interactions
+en,Which medicines should not be taken with Paracetamol?,Paracetamol,interactions
+en,Is it safe to combine Paracetamol with other drugs?,Paracetamol,interactions
+en,Does Paracetamol have any drug interactions?,Paracetamol,interactions
+en,Can Ibuprofen interact with other medicines?,Ibuprofen,interactions
+en,Which medicines should not be taken with Ibuprofen?,Ibuprofen,interactions
+en,Is it safe to combine Ibuprofen with other drugs?,Ibuprofen,interactions
+en,Does Ibuprofen have any drug interactions?,Ibuprofen,interactions
+en,How much Metformin should be taken?,Metformin,dosage
+en,What is the usual dose of Metformin?,Metformin,dosage
+en,How should the dose of Metformin be taken?,Metformin,dosage
+en,What amount of Metformin is recommended?,Metformin,dosage
+en,How much Aspirin should be taken?,Aspirin,dosage
+en,What is the usual dose of Aspirin?,Aspirin,dosage
+en,How should the dose of Aspirin be taken?,Aspirin,dosage
+en,What amount of Aspirin is recommended?,Aspirin,dosage
+en,How much Paracetamol should be taken?,Paracetamol,dosage
+en,What is the usual dose of Paracetamol?,Paracetamol,dosage
+en,How should the dose of Paracetamol be taken?,Paracetamol,dosage
+en,What amount of Paracetamol is recommended?,Paracetamol,dosage
+en,How much Ibuprofen should be taken?,Ibuprofen,dosage
+en,What is the usual dose of Ibuprofen?,Ibuprofen,dosage
+en,How should the dose of Ibuprofen be taken?,Ibuprofen,dosage
+en,What amount of Ibuprofen is recommended?,Ibuprofen,dosage
+kn,Metformin ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Metformin,medicine_info
+kn,Metformin ಔಷಧಿಯ ಬಗ್ಗೆ ತಿಳಿಸಿ.,Metformin,medicine_info
+kn,Metformin ಬಗ್ಗೆ ಇನ್ನಷ್ಟು ತಿಳಿದುಕೊಳ್ಳಬೇಕು.,Metformin,medicine_info
+kn,Metformin ಬಗ್ಗೆ ನನಗೆ ವಿವರ ಬೇಕು.,Metformin,medicine_info
+kn,Aspirin ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Aspirin,medicine_info
+kn,Aspirin ಔಷಧಿಯ ಬಗ್ಗೆ ತಿಳಿಸಿ.,Aspirin,medicine_info
+kn,Aspirin ಬಗ್ಗೆ ಇನ್ನಷ್ಟು ತಿಳಿದುಕೊಳ್ಳಬೇಕು.,Aspirin,medicine_info
+kn,Aspirin ಬಗ್ಗೆ ನನಗೆ ವಿವರ ಬೇಕು.,Aspirin,medicine_info
+kn,Paracetamol ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Paracetamol,medicine_info
+kn,Paracetamol ಔಷಧಿಯ ಬಗ್ಗೆ ತಿಳಿಸಿ.,Paracetamol,medicine_info
+kn,Paracetamol ಬಗ್ಗೆ ಇನ್ನಷ್ಟು ತಿಳಿದುಕೊಳ್ಳಬೇಕು.,Paracetamol,medicine_info
+kn,Paracetamol ಬಗ್ಗೆ ನನಗೆ ವಿವರ ಬೇಕು.,Paracetamol,medicine_info
+kn,Ibuprofen ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Ibuprofen,medicine_info
+kn,Ibuprofen ಔಷಧಿಯ ಬಗ್ಗೆ ತಿಳಿಸಿ.,Ibuprofen,medicine_info
+kn,Ibuprofen ಬಗ್ಗೆ ಇನ್ನಷ್ಟು ತಿಳಿದುಕೊಳ್ಳಬೇಕು.,Ibuprofen,medicine_info
+kn,Ibuprofen ಬಗ್ಗೆ ನನಗೆ ವಿವರ ಬೇಕು.,Ibuprofen,medicine_info
+kn,Metformin ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Metformin,uses
+kn,Metformin ಯಾವ ಕಾಯಿಲೆಗೆ ಉಪಯೋಗವಾಗುತ್ತದೆ?,Metformin,uses
+kn,Metformin ಅನ್ನು ಏಕೆ ನೀಡುತ್ತಾರೆ?,Metformin,uses
+kn,Metformin ನ ಮುಖ್ಯ ಬಳಕೆ ಏನು?,Metformin,uses
+kn,Aspirin ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Aspirin,uses
+kn,Aspirin ಯಾವ ಕಾಯಿಲೆಗೆ ಉಪಯೋಗವಾಗುತ್ತದೆ?,Aspirin,uses
+kn,Aspirin ಅನ್ನು ಏಕೆ ನೀಡುತ್ತಾರೆ?,Aspirin,uses
+kn,Aspirin ನ ಮುಖ್ಯ ಬಳಕೆ ಏನು?,Aspirin,uses
+kn,Paracetamol ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Paracetamol,uses
+kn,Paracetamol ಯಾವ ಕಾಯಿಲೆಗೆ ಉಪಯೋಗವಾಗುತ್ತದೆ?,Paracetamol,uses
+kn,Paracetamol ಅನ್ನು ಏಕೆ ನೀಡುತ್ತಾರೆ?,Paracetamol,uses
+kn,Paracetamol ನ ಮುಖ್ಯ ಬಳಕೆ ಏನು?,Paracetamol,uses
+kn,Ibuprofen ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Ibuprofen,uses
+kn,Ibuprofen ಯಾವ ಕಾಯಿಲೆಗೆ ಉಪಯೋಗವಾಗುತ್ತದೆ?,Ibuprofen,uses
+kn,Ibuprofen ಅನ್ನು ಏಕೆ ನೀಡುತ್ತಾರೆ?,Ibuprofen,uses
+kn,Ibuprofen ನ ಮುಖ್ಯ ಬಳಕೆ ಏನು?,Ibuprofen,uses
+kn,Metformin ನಿಂದ ಯಾವ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಉಂಟಾಗಬಹುದು?,Metformin,side_effects
+kn,Metformin ತೆಗೆದುಕೊಂಡರೆ ಯಾವ ತೊಂದರೆಗಳು ಬರಬಹುದು?,Metformin,side_effects
+kn,Metformin ಸೇವನೆಯಿಂದ ಅನಗತ್ಯ ಪರಿಣಾಮಗಳಿವೆಯೇ?,Metformin,side_effects
+kn,Metformin ನಿಂದ ಯಾವುದೇ ಪ್ರತಿಕೂಲ ಪರಿಣಾಮಗಳಿವೆಯೇ?,Metformin,side_effects
+kn,Aspirin ನಿಂದ ಯಾವ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಉಂಟಾಗಬಹುದು?,Aspirin,side_effects
+kn,Aspirin ತೆಗೆದುಕೊಂಡರೆ ಯಾವ ತೊಂದರೆಗಳು ಬರಬಹುದು?,Aspirin,side_effects
+kn,Aspirin ಸೇವನೆಯಿಂದ ಅನಗತ್ಯ ಪರಿಣಾಮಗಳಿವೆಯೇ?,Aspirin,side_effects
+kn,Aspirin ನಿಂದ ಯಾವುದೇ ಪ್ರತಿಕೂಲ ಪರಿಣಾಮಗಳಿವೆಯೇ?,Aspirin,side_effects
+kn,Paracetamol ನಿಂದ ಯಾವ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಉಂಟಾಗಬಹುದು?,Paracetamol,side_effects
+kn,Paracetamol ತೆಗೆದುಕೊಂಡರೆ ಯಾವ ತೊಂದರೆಗಳು ಬರಬಹುದು?,Paracetamol,side_effects
+kn,Paracetamol ಸೇವನೆಯಿಂದ ಅನಗತ್ಯ ಪರಿಣಾಮಗಳಿವೆಯೇ?,Paracetamol,side_effects
+kn,Paracetamol ನಿಂದ ಯಾವುದೇ ಪ್ರತಿಕೂಲ ಪರಿಣಾಮಗಳಿವೆಯೇ?,Paracetamol,side_effects
+kn,Ibuprofen ನಿಂದ ಯಾವ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಉಂಟಾಗಬಹುದು?,Ibuprofen,side_effects
+kn,Ibuprofen ತೆಗೆದುಕೊಂಡರೆ ಯಾವ ತೊಂದರೆಗಳು ಬರಬಹುದು?,Ibuprofen,side_effects
+kn,Ibuprofen ಸೇವನೆಯಿಂದ ಅನಗತ್ಯ ಪರಿಣಾಮಗಳಿವೆಯೇ?,Ibuprofen,side_effects
+kn,Ibuprofen ನಿಂದ ಯಾವುದೇ ಪ್ರತಿಕೂಲ ಪರಿಣಾಮಗಳಿವೆಯೇ?,Ibuprofen,side_effects
+kn,ಯಾರು Metformin ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Metformin,contraindications
+kn,ಯಾವಾಗ Metformin ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Metformin,contraindications
+kn,ಯಾರಿಗೆ Metformin ಸೂಕ್ತವಲ್ಲ?,Metformin,contraindications
+kn,Metformin ಯಾವ ಸಂದರ್ಭಗಳಲ್ಲಿ ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Metformin,contraindications
+kn,ಯಾರು Aspirin ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Aspirin,contraindications
+kn,ಯಾವಾಗ Aspirin ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Aspirin,contraindications
+kn,ಯಾರಿಗೆ Aspirin ಸೂಕ್ತವಲ್ಲ?,Aspirin,contraindications
+kn,Aspirin ಯಾವ ಸಂದರ್ಭಗಳಲ್ಲಿ ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Aspirin,contraindications
+kn,ಯಾರು Paracetamol ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Paracetamol,contraindications
+kn,ಯಾವಾಗ Paracetamol ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Paracetamol,contraindications
+kn,ಯಾರಿಗೆ Paracetamol ಸೂಕ್ತವಲ್ಲ?,Paracetamol,contraindications
+kn,Paracetamol ಯಾವ ಸಂದರ್ಭಗಳಲ್ಲಿ ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Paracetamol,contraindications
+kn,ಯಾರು Ibuprofen ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Ibuprofen,contraindications
+kn,ಯಾವಾಗ Ibuprofen ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Ibuprofen,contraindications
+kn,ಯಾರಿಗೆ Ibuprofen ಸೂಕ್ತವಲ್ಲ?,Ibuprofen,contraindications
+kn,Ibuprofen ಯಾವ ಸಂದರ್ಭಗಳಲ್ಲಿ ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Ibuprofen,contraindications
+kn,Metformin ಬಳಸುವಾಗ ಯಾವ ಮುನ್ನೆಚ್ಚರಿಕೆ ಬೇಕು?,Metformin,warnings
+kn,Metformin ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳಿವೆ?,Metformin,warnings
+kn,Metformin ತೆಗೆದುಕೊಳ್ಳುವಾಗ ಯಾವುದರ ಬಗ್ಗೆ ಜಾಗರೂಕರಾಗಬೇಕು?,Metformin,warnings
+kn,Metformin ಬಳಸುವ ಮೊದಲು ಯಾವ ಸುರಕ್ಷತಾ ಮಾಹಿತಿ ತಿಳಿದಿರಬೇಕು?,Metformin,warnings
+kn,Aspirin ಬಳಸುವಾಗ ಯಾವ ಮುನ್ನೆಚ್ಚರಿಕೆ ಬೇಕು?,Aspirin,warnings
+kn,Aspirin ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳಿವೆ?,Aspirin,warnings
+kn,Aspirin ತೆಗೆದುಕೊಳ್ಳುವಾಗ ಯಾವುದರ ಬಗ್ಗೆ ಜಾಗರೂಕರಾಗಬೇಕು?,Aspirin,warnings
+kn,Aspirin ಬಳಸುವ ಮೊದಲು ಯಾವ ಸುರಕ್ಷತಾ ಮಾಹಿತಿ ತಿಳಿದಿರಬೇಕು?,Aspirin,warnings
+kn,Paracetamol ಬಳಸುವಾಗ ಯಾವ ಮುನ್ನೆಚ್ಚರಿಕೆ ಬೇಕು?,Paracetamol,warnings
+kn,Paracetamol ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳಿವೆ?,Paracetamol,warnings
+kn,Paracetamol ತೆಗೆದುಕೊಳ್ಳುವಾಗ ಯಾವುದರ ಬಗ್ಗೆ ಜಾಗರೂಕರಾಗಬೇಕು?,Paracetamol,warnings
+kn,Paracetamol ಬಳಸುವ ಮೊದಲು ಯಾವ ಸುರಕ್ಷತಾ ಮಾಹಿತಿ ತಿಳಿದಿರಬೇಕು?,Paracetamol,warnings
+kn,Ibuprofen ಬಳಸುವಾಗ ಯಾವ ಮುನ್ನೆಚ್ಚರಿಕೆ ಬೇಕು?,Ibuprofen,warnings
+kn,Ibuprofen ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳಿವೆ?,Ibuprofen,warnings
+kn,Ibuprofen ತೆಗೆದುಕೊಳ್ಳುವಾಗ ಯಾವುದರ ಬಗ್ಗೆ ಜಾಗರೂಕರಾಗಬೇಕು?,Ibuprofen,warnings
+kn,Ibuprofen ಬಳಸುವ ಮೊದಲು ಯಾವ ಸುರಕ್ಷತಾ ಮಾಹಿತಿ ತಿಳಿದಿರಬೇಕು?,Ibuprofen,warnings
+kn,Metformin ಬೇರೆ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸುತ್ತದೆಯೇ?,Metformin,interactions
+kn,Metformin ಜೊತೆ ಯಾವ ಔಷಧಿಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Metformin,interactions
+kn,Metformin ಅನ್ನು ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ತೆಗೆದುಕೊಳ್ಳಬಹುದೇ?,Metformin,interactions
+kn,Metformin ನ ಔಷಧಿ ಪರಸ್ಪರ ಕ್ರಿಯೆಗಳು ಯಾವುವು?,Metformin,interactions
+kn,Aspirin ಬೇರೆ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸುತ್ತದೆಯೇ?,Aspirin,interactions
+kn,Aspirin ಜೊತೆ ಯಾವ ಔಷಧಿಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Aspirin,interactions
+kn,Aspirin ಅನ್ನು ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ತೆಗೆದುಕೊಳ್ಳಬಹುದೇ?,Aspirin,interactions
+kn,Aspirin ನ ಔಷಧಿ ಪರಸ್ಪರ ಕ್ರಿಯೆಗಳು ಯಾವುವು?,Aspirin,interactions
+kn,Paracetamol ಬೇರೆ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸುತ್ತದೆಯೇ?,Paracetamol,interactions
+kn,Paracetamol ಜೊತೆ ಯಾವ ಔಷಧಿಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Paracetamol,interactions
+kn,Paracetamol ಅನ್ನು ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ತೆಗೆದುಕೊಳ್ಳಬಹುದೇ?,Paracetamol,interactions
+kn,Paracetamol ನ ಔಷಧಿ ಪರಸ್ಪರ ಕ್ರಿಯೆಗಳು ಯಾವುವು?,Paracetamol,interactions
+kn,Ibuprofen ಬೇರೆ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸುತ್ತದೆಯೇ?,Ibuprofen,interactions
+kn,Ibuprofen ಜೊತೆ ಯಾವ ಔಷಧಿಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Ibuprofen,interactions
+kn,Ibuprofen ಅನ್ನು ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ತೆಗೆದುಕೊಳ್ಳಬಹುದೇ?,Ibuprofen,interactions
+kn,Ibuprofen ನ ಔಷಧಿ ಪರಸ್ಪರ ಕ್ರಿಯೆಗಳು ಯಾವುವು?,Ibuprofen,interactions
+kn,Metformin ಅನ್ನು ಎಷ್ಟು ಪ್ರಮಾಣದಲ್ಲಿ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Metformin,dosage
+kn,Metformin ನ ಸಾಮಾನ್ಯ ಪ್ರಮಾಣ ಎಷ್ಟು?,Metformin,dosage
+kn,Metformin ನ ಸರಿಯಾದ ಡೋಸ್ ಎಷ್ಟು?,Metformin,dosage
+kn,Metformin ಅನ್ನು ಹೇಗೆ ಮತ್ತು ಎಷ್ಟು ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Metformin,dosage
+kn,Aspirin ಅನ್ನು ಎಷ್ಟು ಪ್ರಮಾಣದಲ್ಲಿ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Aspirin,dosage
+kn,Aspirin ನ ಸಾಮಾನ್ಯ ಪ್ರಮಾಣ ಎಷ್ಟು?,Aspirin,dosage
+kn,Aspirin ನ ಸರಿಯಾದ ಡೋಸ್ ಎಷ್ಟು?,Aspirin,dosage
+kn,Aspirin ಅನ್ನು ಹೇಗೆ ಮತ್ತು ಎಷ್ಟು ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Aspirin,dosage
+kn,Paracetamol ಅನ್ನು ಎಷ್ಟು ಪ್ರಮಾಣದಲ್ಲಿ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Paracetamol,dosage
+kn,Paracetamol ನ ಸಾಮಾನ್ಯ ಪ್ರಮಾಣ ಎಷ್ಟು?,Paracetamol,dosage
+kn,Paracetamol ನ ಸರಿಯಾದ ಡೋಸ್ ಎಷ್ಟು?,Paracetamol,dosage
+kn,Paracetamol ಅನ್ನು ಹೇಗೆ ಮತ್ತು ಎಷ್ಟು ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Paracetamol,dosage
+kn,Ibuprofen ಅನ್ನು ಎಷ್ಟು ಪ್ರಮಾಣದಲ್ಲಿ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Ibuprofen,dosage
+kn,Ibuprofen ನ ಸಾಮಾನ್ಯ ಪ್ರಮಾಣ ಎಷ್ಟು?,Ibuprofen,dosage
+kn,Ibuprofen ನ ಸರಿಯಾದ ಡೋಸ್ ಎಷ್ಟು?,Ibuprofen,dosage
+kn,Ibuprofen ಅನ್ನು ಹೇಗೆ ಮತ್ತು ಎಷ್ಟು ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Ibuprofen,dosage
+tulu,Metformin ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Metformin,medicine_info
+tulu,Metformin ದ ಬಗ್ಗೆ ಎಂಚಿನ ಮಾಹಿತಿ ಉಂಡು?,Metformin,medicine_info
+tulu,Metformin ದ ಬಗ್ಗೆ ತಿಳ್ಕೊಂಬೊಡು.,Metformin,medicine_info
+tulu,Metformin ದ ಬಗ್ಗೆ ವಿವರ ಕೊರ್ಲೆ.,Metformin,medicine_info
+tulu,Aspirin ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Aspirin,medicine_info
+tulu,Aspirin ದ ಬಗ್ಗೆ ಎಂಚಿನ ಮಾಹಿತಿ ಉಂಡು?,Aspirin,medicine_info
+tulu,Aspirin ದ ಬಗ್ಗೆ ತಿಳ್ಕೊಂಬೊಡು.,Aspirin,medicine_info
+tulu,Aspirin ದ ಬಗ್ಗೆ ವಿವರ ಕೊರ್ಲೆ.,Aspirin,medicine_info
+tulu,Paracetamol ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Paracetamol,medicine_info
+tulu,Paracetamol ದ ಬಗ್ಗೆ ಎಂಚಿನ ಮಾಹಿತಿ ಉಂಡು?,Paracetamol,medicine_info
+tulu,Paracetamol ದ ಬಗ್ಗೆ ತಿಳ್ಕೊಂಬೊಡು.,Paracetamol,medicine_info
+tulu,Paracetamol ದ ಬಗ್ಗೆ ವಿವರ ಕೊರ್ಲೆ.,Paracetamol,medicine_info
+tulu,Ibuprofen ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Ibuprofen,medicine_info
+tulu,Ibuprofen ದ ಬಗ್ಗೆ ಎಂಚಿನ ಮಾಹಿತಿ ಉಂಡು?,Ibuprofen,medicine_info
+tulu,Ibuprofen ದ ಬಗ್ಗೆ ತಿಳ್ಕೊಂಬೊಡು.,Ibuprofen,medicine_info
+tulu,Ibuprofen ದ ಬಗ್ಗೆ ವಿವರ ಕೊರ್ಲೆ.,Ibuprofen,medicine_info
+tulu,Metformin ಎಂಚಿನ ಬಳಕೆಗ್ ಬರ್ಪುಂಡು?,Metformin,uses
+tulu,Metformin ಯಾತಕ್ಕೆ ಬಳಕೆ ಆಪುಂಡು?,Metformin,uses
+tulu,Metformin ದ ಮುಖ್ಯ ಬಳಕೆ ಎಂಚಿನದು?,Metformin,uses
+tulu,Metformin ಯಾತಕ್ಕೆ ತಿನ್ಪುಂಡು?,Metformin,uses
+tulu,Aspirin ಎಂಚಿನ ಬಳಕೆಗ್ ಬರ್ಪುಂಡು?,Aspirin,uses
+tulu,Aspirin ಯಾತಕ್ಕೆ ಬಳಕೆ ಆಪುಂಡು?,Aspirin,uses
+tulu,Aspirin ದ ಮುಖ್ಯ ಬಳಕೆ ಎಂಚಿನದು?,Aspirin,uses
+tulu,Aspirin ಯಾತಕ್ಕೆ ತಿನ್ಪುಂಡು?,Aspirin,uses
+tulu,Paracetamol ಎಂಚಿನ ಬಳಕೆಗ್ ಬರ್ಪುಂಡು?,Paracetamol,uses
+tulu,Paracetamol ಯಾತಕ್ಕೆ ಬಳಕೆ ಆಪುಂಡು?,Paracetamol,uses
+tulu,Paracetamol ದ ಮುಖ್ಯ ಬಳಕೆ ಎಂಚಿನದು?,Paracetamol,uses
+tulu,Paracetamol ಯಾತಕ್ಕೆ ತಿನ್ಪುಂಡು?,Paracetamol,uses
+tulu,Ibuprofen ಎಂಚಿನ ಬಳಕೆಗ್ ಬರ್ಪುಂಡು?,Ibuprofen,uses
+tulu,Ibuprofen ಯಾತಕ್ಕೆ ಬಳಕೆ ಆಪುಂಡು?,Ibuprofen,uses
+tulu,Ibuprofen ದ ಮುಖ್ಯ ಬಳಕೆ ಎಂಚಿನದು?,Ibuprofen,uses
+tulu,Ibuprofen ಯಾತಕ್ಕೆ ತಿನ್ಪುಂಡು?,Ibuprofen,uses
+tulu,Metformin ತಿಂದ್ ಎಂಚಿನ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಆಪುಂಡು?,Metformin,side_effects
+tulu,Metformin ತಿನ್ಪುನಗ ಎಂಚಿನ ತೊಂದರೆ ಆಪುಂಡು?,Metformin,side_effects
+tulu,Metformin ದಿಂದ್ ಎಂಚಿನ ಅನಗತ್ಯ ಪರಿಣಾಮ ಆಪುಂಡು?,Metformin,side_effects
+tulu,Metformin ತಿಂದ್ ಯಾವುದೇ ತೊಂದರೆ ಉಂಡಾ?,Metformin,side_effects
+tulu,Aspirin ತಿಂದ್ ಎಂಚಿನ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಆಪುಂಡು?,Aspirin,side_effects
+tulu,Aspirin ತಿನ್ಪುನಗ ಎಂಚಿನ ತೊಂದರೆ ಆಪುಂಡು?,Aspirin,side_effects
+tulu,Aspirin ದಿಂದ್ ಎಂಚಿನ ಅನಗತ್ಯ ಪರಿಣಾಮ ಆಪುಂಡು?,Aspirin,side_effects
+tulu,Aspirin ತಿಂದ್ ಯಾವುದೇ ತೊಂದರೆ ಉಂಡಾ?,Aspirin,side_effects
+tulu,Paracetamol ತಿಂದ್ ಎಂಚಿನ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಆಪುಂಡು?,Paracetamol,side_effects
+tulu,Paracetamol ತಿನ್ಪುನಗ ಎಂಚಿನ ತೊಂದರೆ ಆಪುಂಡು?,Paracetamol,side_effects
+tulu,Paracetamol ದಿಂದ್ ಎಂಚಿನ ಅನಗತ್ಯ ಪರಿಣಾಮ ಆಪುಂಡು?,Paracetamol,side_effects
+tulu,Paracetamol ತಿಂದ್ ಯಾವುದೇ ತೊಂದರೆ ಉಂಡಾ?,Paracetamol,side_effects
+tulu,Ibuprofen ತಿಂದ್ ಎಂಚಿನ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಆಪುಂಡು?,Ibuprofen,side_effects
+tulu,Ibuprofen ತಿನ್ಪುನಗ ಎಂಚಿನ ತೊಂದರೆ ಆಪುಂಡು?,Ibuprofen,side_effects
+tulu,Ibuprofen ದಿಂದ್ ಎಂಚಿನ ಅನಗತ್ಯ ಪರಿಣಾಮ ಆಪುಂಡು?,Ibuprofen,side_effects
+tulu,Ibuprofen ತಿಂದ್ ಯಾವುದೇ ತೊಂದರೆ ಉಂಡಾ?,Ibuprofen,side_effects
+tulu,ಯೆರ್ Metformin ತಿನ್ಪುನೆ ಸರಿಯಲ್ಲ?,Metformin,contraindications
+tulu,Metformin ಯೆಂಚಿನ ಸಂದರ್ಭಡ್ ತಿನ್ಪುನೆ ಸರಿಯಲ್ಲ?,Metformin,contraindications
+tulu,ಯಾರಿಗೆ Metformin ಸೂಕ್ತ ಅಲ್ಲ?,Metformin,contraindications
+tulu,Metformin ಯೆರ್ ತಿನ್ಪುನೆ ಬೇಡ?,Metformin,contraindications
+tulu,ಯೆರ್ Aspirin ತಿನ್ಪುನೆ ಸರಿಯಲ್ಲ?,Aspirin,contraindications
+tulu,Aspirin ಯೆಂಚಿನ ಸಂದರ್ಭಡ್ ತಿನ್ಪುನೆ ಸರಿಯಲ್ಲ?,Aspirin,contraindications
+tulu,ಯಾರಿಗೆ Aspirin ಸೂಕ್ತ ಅಲ್ಲ?,Aspirin,contraindications
+tulu,Aspirin ಯೆರ್ ತಿನ್ಪುನೆ ಬೇಡ?,Aspirin,contraindications
+tulu,ಯೆರ್ Paracetamol ತಿನ್ಪುನೆ ಸರಿಯಲ್ಲ?,Paracetamol,contraindications
+tulu,Paracetamol ಯೆಂಚಿನ ಸಂದರ್ಭಡ್ ತಿನ್ಪುನೆ ಸರಿಯಲ್ಲ?,Paracetamol,contraindications
+tulu,ಯಾರಿಗೆ Paracetamol ಸೂಕ್ತ ಅಲ್ಲ?,Paracetamol,contraindications
+tulu,Paracetamol ಯೆರ್ ತಿನ್ಪುನೆ ಬೇಡ?,Paracetamol,contraindications
+tulu,ಯೆರ್ Ibuprofen ತಿನ್ಪುನೆ ಸರಿಯಲ್ಲ?,Ibuprofen,contraindications
+tulu,Ibuprofen ಯೆಂಚಿನ ಸಂದರ್ಭಡ್ ತಿನ್ಪುನೆ ಸರಿಯಲ್ಲ?,Ibuprofen,contraindications
+tulu,ಯಾರಿಗೆ Ibuprofen ಸೂಕ್ತ ಅಲ್ಲ?,Ibuprofen,contraindications
+tulu,Ibuprofen ಯೆರ್ ತಿನ್ಪುನೆ ಬೇಡ?,Ibuprofen,contraindications
+tulu,Metformin ಬಳಕೆದ್ ಎಂಚಿನ ಜಾಗ್ರತೆ ಬೇಕು?,Metformin,warnings
+tulu,Metformin ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Metformin,warnings
+tulu,Metformin ತಿನ್ಪುನಗ ಯೆಂಚಿನ ಜಾಗ್ರತೆ ಬೇಕು?,Metformin,warnings
+tulu,Metformin ಬಳಕೆ ಮುಂಚೆ ಎಂಚಿನ ಮಾಹಿತಿ ಗೊತ್ತುಪ್ಪು?,Metformin,warnings
+tulu,Aspirin ಬಳಕೆದ್ ಎಂಚಿನ ಜಾಗ್ರತೆ ಬೇಕು?,Aspirin,warnings
+tulu,Aspirin ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Aspirin,warnings
+tulu,Aspirin ತಿನ್ಪುನಗ ಯೆಂಚಿನ ಜಾಗ್ರತೆ ಬೇಕು?,Aspirin,warnings
+tulu,Aspirin ಬಳಕೆ ಮುಂಚೆ ಎಂಚಿನ ಮಾಹಿತಿ ಗೊತ್ತುಪ್ಪು?,Aspirin,warnings
+tulu,Paracetamol ಬಳಕೆದ್ ಎಂಚಿನ ಜಾಗ್ರತೆ ಬೇಕು?,Paracetamol,warnings
+tulu,Paracetamol ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Paracetamol,warnings
+tulu,Paracetamol ತಿನ್ಪುನಗ ಯೆಂಚಿನ ಜಾಗ್ರತೆ ಬೇಕು?,Paracetamol,warnings
+tulu,Paracetamol ಬಳಕೆ ಮುಂಚೆ ಎಂಚಿನ ಮಾಹಿತಿ ಗೊತ್ತುಪ್ಪು?,Paracetamol,warnings
+tulu,Ibuprofen ಬಳಕೆದ್ ಎಂಚಿನ ಜಾಗ್ರತೆ ಬೇಕು?,Ibuprofen,warnings
+tulu,Ibuprofen ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Ibuprofen,warnings
+tulu,Ibuprofen ತಿನ್ಪುನಗ ಯೆಂಚಿನ ಜಾಗ್ರತೆ ಬೇಕು?,Ibuprofen,warnings
+tulu,Ibuprofen ಬಳಕೆ ಮುಂಚೆ ಎಂಚಿನ ಮಾಹಿತಿ ಗೊತ್ತುಪ್ಪು?,Ibuprofen,warnings
+tulu,Metformin ಬೇರೆ ಔಷಧಿಲೊಟ್ಟಿಗೆ ಪ್ರತಿಕ್ರಿಯೆ ಆಪುಂಡಾ?,Metformin,interactions
+tulu,Metformin ಜೊತೆಯಾದ್ ಬೇರೆ ಔಷಧಿ ತಿನ್ಪುಂಡಾ?,Metformin,interactions
+tulu,Metformin ಬೇರೆ ಔಷಧಿಲೊಟ್ಟಿಗೆ ತಿನ್ಪುನೆ ಸಾಧ್ಯನಾ?,Metformin,interactions
+tulu,Metformin ದ ಔಷಧಿ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಉಂಡಾ?,Metformin,interactions
+tulu,Aspirin ಬೇರೆ ಔಷಧಿಲೊಟ್ಟಿಗೆ ಪ್ರತಿಕ್ರಿಯೆ ಆಪುಂಡಾ?,Aspirin,interactions
+tulu,Aspirin ಜೊತೆಯಾದ್ ಬೇರೆ ಔಷಧಿ ತಿನ್ಪುಂಡಾ?,Aspirin,interactions
+tulu,Aspirin ಬೇರೆ ಔಷಧಿಲೊಟ್ಟಿಗೆ ತಿನ್ಪುನೆ ಸಾಧ್ಯನಾ?,Aspirin,interactions
+tulu,Aspirin ದ ಔಷಧಿ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಉಂಡಾ?,Aspirin,interactions
+tulu,Paracetamol ಬೇರೆ ಔಷಧಿಲೊಟ್ಟಿಗೆ ಪ್ರತಿಕ್ರಿಯೆ ಆಪುಂಡಾ?,Paracetamol,interactions
+tulu,Paracetamol ಜೊತೆಯಾದ್ ಬೇರೆ ಔಷಧಿ ತಿನ್ಪುಂಡಾ?,Paracetamol,interactions
+tulu,Paracetamol ಬೇರೆ ಔಷಧಿಲೊಟ್ಟಿಗೆ ತಿನ್ಪುನೆ ಸಾಧ್ಯನಾ?,Paracetamol,interactions
+tulu,Paracetamol ದ ಔಷಧಿ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಉಂಡಾ?,Paracetamol,interactions
+tulu,Ibuprofen ಬೇರೆ ಔಷಧಿಲೊಟ್ಟಿಗೆ ಪ್ರತಿಕ್ರಿಯೆ ಆಪುಂಡಾ?,Ibuprofen,interactions
+tulu,Ibuprofen ಜೊತೆಯಾದ್ ಬೇರೆ ಔಷಧಿ ತಿನ್ಪುಂಡಾ?,Ibuprofen,interactions
+tulu,Ibuprofen ಬೇರೆ ಔಷಧಿಲೊಟ್ಟಿಗೆ ತಿನ್ಪುನೆ ಸಾಧ್ಯನಾ?,Ibuprofen,interactions
+tulu,Ibuprofen ದ ಔಷಧಿ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಉಂಡಾ?,Ibuprofen,interactions
+tulu,Metformin ದ ಪ್ರಮಾಣ ಎಷ್ಟ್ ಆಪುಂಡು?,Metformin,dosage
+tulu,Metformin ಎಷ್ಟ್ ಪ್ರಮಾಣಡ್ ತಿನ್ಪುಂಡು?,Metformin,dosage
+tulu,Metformin ದ ಸಾಮಾನ್ಯ ಡೋಸ್ ಎಷ್ಟ್?,Metformin,dosage
+tulu,Metformin ಎಂಚಿನ ಪ್ರಮಾಣಡ್ ತಿನ್ಪುಂಡು?,Metformin,dosage
+tulu,Aspirin ದ ಪ್ರಮಾಣ ಎಷ್ಟ್ ಆಪುಂಡು?,Aspirin,dosage
+tulu,Aspirin ಎಷ್ಟ್ ಪ್ರಮಾಣಡ್ ತಿನ್ಪುಂಡು?,Aspirin,dosage
+tulu,Aspirin ದ ಸಾಮಾನ್ಯ ಡೋಸ್ ಎಷ್ಟ್?,Aspirin,dosage
+tulu,Aspirin ಎಂಚಿನ ಪ್ರಮಾಣಡ್ ತಿನ್ಪುಂಡು?,Aspirin,dosage
+tulu,Paracetamol ದ ಪ್ರಮಾಣ ಎಷ್ಟ್ ಆಪುಂಡು?,Paracetamol,dosage
+tulu,Paracetamol ಎಷ್ಟ್ ಪ್ರಮಾಣಡ್ ತಿನ್ಪುಂಡು?,Paracetamol,dosage
+tulu,Paracetamol ದ ಸಾಮಾನ್ಯ ಡೋಸ್ ಎಷ್ಟ್?,Paracetamol,dosage
+tulu,Paracetamol ಎಂಚಿನ ಪ್ರಮಾಣಡ್ ತಿನ್ಪುಂಡು?,Paracetamol,dosage
+tulu,Ibuprofen ದ ಪ್ರಮಾಣ ಎಷ್ಟ್ ಆಪುಂಡು?,Ibuprofen,dosage
+tulu,Ibuprofen ಎಷ್ಟ್ ಪ್ರಮಾಣಡ್ ತಿನ್ಪುಂಡು?,Ibuprofen,dosage
+tulu,Ibuprofen ದ ಸಾಮಾನ್ಯ ಡೋಸ್ ಎಷ್ಟ್?,Ibuprofen,dosage
+tulu,Ibuprofen ಎಂಚಿನ ಪ್ರಮಾಣಡ್ ತಿನ್ಪುಂಡು?,Ibuprofen,dosage

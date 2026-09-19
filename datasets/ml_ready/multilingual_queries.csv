@@ -1,0 +1,1891 @@
+﻿language,query,medicine,intent
+en,What is Metformin?,Metformin,medicine_info
+en,Tell me about Metformin.,Metformin,medicine_info
+en,What do I need to know about Metformin?,Metformin,medicine_info
+en,What is Metformin used for?,Metformin,uses
+en,Why is Metformin used?,Metformin,uses
+en,What conditions is Metformin used for?,Metformin,uses
+en,What are the side effects of Metformin?,Metformin,side_effects
+en,Can Metformin cause any side effects?,Metformin,side_effects
+en,What problems can Metformin cause?,Metformin,side_effects
+en,Who should not take Metformin?,Metformin,contraindications
+en,When should Metformin not be used?,Metformin,contraindications
+en,Who should avoid Metformin?,Metformin,contraindications
+en,What warnings should I know about Metformin?,Metformin,warnings
+en,Are there any warnings about Metformin?,Metformin,warnings
+en,What should I be careful about when taking Metformin?,Metformin,warnings
+en,Does Metformin interact with other medicines?,Metformin,interactions
+en,Can Metformin interact with other drugs?,Metformin,interactions
+en,What medicines can interact with Metformin?,Metformin,interactions
+en,How should Metformin be taken?,Metformin,dosage
+en,How do I take Metformin?,Metformin,dosage
+en,What is the dosage information for Metformin?,Metformin,dosage
+en,What is Glipizide?,Glipizide,medicine_info
+en,Tell me about Glipizide.,Glipizide,medicine_info
+en,What do I need to know about Glipizide?,Glipizide,medicine_info
+en,What is Glipizide used for?,Glipizide,uses
+en,Why is Glipizide used?,Glipizide,uses
+en,What conditions is Glipizide used for?,Glipizide,uses
+en,What are the side effects of Glipizide?,Glipizide,side_effects
+en,Can Glipizide cause any side effects?,Glipizide,side_effects
+en,What problems can Glipizide cause?,Glipizide,side_effects
+en,Who should not take Glipizide?,Glipizide,contraindications
+en,When should Glipizide not be used?,Glipizide,contraindications
+en,Who should avoid Glipizide?,Glipizide,contraindications
+en,What warnings should I know about Glipizide?,Glipizide,warnings
+en,Are there any warnings about Glipizide?,Glipizide,warnings
+en,What should I be careful about when taking Glipizide?,Glipizide,warnings
+en,Does Glipizide interact with other medicines?,Glipizide,interactions
+en,Can Glipizide interact with other drugs?,Glipizide,interactions
+en,What medicines can interact with Glipizide?,Glipizide,interactions
+en,How should Glipizide be taken?,Glipizide,dosage
+en,How do I take Glipizide?,Glipizide,dosage
+en,What is the dosage information for Glipizide?,Glipizide,dosage
+en,What is Glimepiride?,Glimepiride,medicine_info
+en,Tell me about Glimepiride.,Glimepiride,medicine_info
+en,What do I need to know about Glimepiride?,Glimepiride,medicine_info
+en,What is Glimepiride used for?,Glimepiride,uses
+en,Why is Glimepiride used?,Glimepiride,uses
+en,What conditions is Glimepiride used for?,Glimepiride,uses
+en,What are the side effects of Glimepiride?,Glimepiride,side_effects
+en,Can Glimepiride cause any side effects?,Glimepiride,side_effects
+en,What problems can Glimepiride cause?,Glimepiride,side_effects
+en,Who should not take Glimepiride?,Glimepiride,contraindications
+en,When should Glimepiride not be used?,Glimepiride,contraindications
+en,Who should avoid Glimepiride?,Glimepiride,contraindications
+en,What warnings should I know about Glimepiride?,Glimepiride,warnings
+en,Are there any warnings about Glimepiride?,Glimepiride,warnings
+en,What should I be careful about when taking Glimepiride?,Glimepiride,warnings
+en,Does Glimepiride interact with other medicines?,Glimepiride,interactions
+en,Can Glimepiride interact with other drugs?,Glimepiride,interactions
+en,What medicines can interact with Glimepiride?,Glimepiride,interactions
+en,How should Glimepiride be taken?,Glimepiride,dosage
+en,How do I take Glimepiride?,Glimepiride,dosage
+en,What is the dosage information for Glimepiride?,Glimepiride,dosage
+en,What is Sitagliptin?,Sitagliptin,medicine_info
+en,Tell me about Sitagliptin.,Sitagliptin,medicine_info
+en,What do I need to know about Sitagliptin?,Sitagliptin,medicine_info
+en,What is Sitagliptin used for?,Sitagliptin,uses
+en,Why is Sitagliptin used?,Sitagliptin,uses
+en,What conditions is Sitagliptin used for?,Sitagliptin,uses
+en,What are the side effects of Sitagliptin?,Sitagliptin,side_effects
+en,Can Sitagliptin cause any side effects?,Sitagliptin,side_effects
+en,What problems can Sitagliptin cause?,Sitagliptin,side_effects
+en,Who should not take Sitagliptin?,Sitagliptin,contraindications
+en,When should Sitagliptin not be used?,Sitagliptin,contraindications
+en,Who should avoid Sitagliptin?,Sitagliptin,contraindications
+en,What warnings should I know about Sitagliptin?,Sitagliptin,warnings
+en,Are there any warnings about Sitagliptin?,Sitagliptin,warnings
+en,What should I be careful about when taking Sitagliptin?,Sitagliptin,warnings
+en,Does Sitagliptin interact with other medicines?,Sitagliptin,interactions
+en,Can Sitagliptin interact with other drugs?,Sitagliptin,interactions
+en,What medicines can interact with Sitagliptin?,Sitagliptin,interactions
+en,How should Sitagliptin be taken?,Sitagliptin,dosage
+en,How do I take Sitagliptin?,Sitagliptin,dosage
+en,What is the dosage information for Sitagliptin?,Sitagliptin,dosage
+en,What is Empagliflozin?,Empagliflozin,medicine_info
+en,Tell me about Empagliflozin.,Empagliflozin,medicine_info
+en,What do I need to know about Empagliflozin?,Empagliflozin,medicine_info
+en,What is Empagliflozin used for?,Empagliflozin,uses
+en,Why is Empagliflozin used?,Empagliflozin,uses
+en,What conditions is Empagliflozin used for?,Empagliflozin,uses
+en,What are the side effects of Empagliflozin?,Empagliflozin,side_effects
+en,Can Empagliflozin cause any side effects?,Empagliflozin,side_effects
+en,What problems can Empagliflozin cause?,Empagliflozin,side_effects
+en,Who should not take Empagliflozin?,Empagliflozin,contraindications
+en,When should Empagliflozin not be used?,Empagliflozin,contraindications
+en,Who should avoid Empagliflozin?,Empagliflozin,contraindications
+en,What warnings should I know about Empagliflozin?,Empagliflozin,warnings
+en,Are there any warnings about Empagliflozin?,Empagliflozin,warnings
+en,What should I be careful about when taking Empagliflozin?,Empagliflozin,warnings
+en,Does Empagliflozin interact with other medicines?,Empagliflozin,interactions
+en,Can Empagliflozin interact with other drugs?,Empagliflozin,interactions
+en,What medicines can interact with Empagliflozin?,Empagliflozin,interactions
+en,How should Empagliflozin be taken?,Empagliflozin,dosage
+en,How do I take Empagliflozin?,Empagliflozin,dosage
+en,What is the dosage information for Empagliflozin?,Empagliflozin,dosage
+en,What is Pioglitazone?,Pioglitazone,medicine_info
+en,Tell me about Pioglitazone.,Pioglitazone,medicine_info
+en,What do I need to know about Pioglitazone?,Pioglitazone,medicine_info
+en,What is Pioglitazone used for?,Pioglitazone,uses
+en,Why is Pioglitazone used?,Pioglitazone,uses
+en,What conditions is Pioglitazone used for?,Pioglitazone,uses
+en,What are the side effects of Pioglitazone?,Pioglitazone,side_effects
+en,Can Pioglitazone cause any side effects?,Pioglitazone,side_effects
+en,What problems can Pioglitazone cause?,Pioglitazone,side_effects
+en,Who should not take Pioglitazone?,Pioglitazone,contraindications
+en,When should Pioglitazone not be used?,Pioglitazone,contraindications
+en,Who should avoid Pioglitazone?,Pioglitazone,contraindications
+en,What warnings should I know about Pioglitazone?,Pioglitazone,warnings
+en,Are there any warnings about Pioglitazone?,Pioglitazone,warnings
+en,What should I be careful about when taking Pioglitazone?,Pioglitazone,warnings
+en,Does Pioglitazone interact with other medicines?,Pioglitazone,interactions
+en,Can Pioglitazone interact with other drugs?,Pioglitazone,interactions
+en,What medicines can interact with Pioglitazone?,Pioglitazone,interactions
+en,How should Pioglitazone be taken?,Pioglitazone,dosage
+en,How do I take Pioglitazone?,Pioglitazone,dosage
+en,What is the dosage information for Pioglitazone?,Pioglitazone,dosage
+en,What is Insulin Glargine?,Insulin Glargine,medicine_info
+en,Tell me about Insulin Glargine.,Insulin Glargine,medicine_info
+en,What do I need to know about Insulin Glargine?,Insulin Glargine,medicine_info
+en,What is Insulin Glargine used for?,Insulin Glargine,uses
+en,Why is Insulin Glargine used?,Insulin Glargine,uses
+en,What conditions is Insulin Glargine used for?,Insulin Glargine,uses
+en,What are the side effects of Insulin Glargine?,Insulin Glargine,side_effects
+en,Can Insulin Glargine cause any side effects?,Insulin Glargine,side_effects
+en,What problems can Insulin Glargine cause?,Insulin Glargine,side_effects
+en,Who should not take Insulin Glargine?,Insulin Glargine,contraindications
+en,When should Insulin Glargine not be used?,Insulin Glargine,contraindications
+en,Who should avoid Insulin Glargine?,Insulin Glargine,contraindications
+en,What warnings should I know about Insulin Glargine?,Insulin Glargine,warnings
+en,Are there any warnings about Insulin Glargine?,Insulin Glargine,warnings
+en,What should I be careful about when taking Insulin Glargine?,Insulin Glargine,warnings
+en,Does Insulin Glargine interact with other medicines?,Insulin Glargine,interactions
+en,Can Insulin Glargine interact with other drugs?,Insulin Glargine,interactions
+en,What medicines can interact with Insulin Glargine?,Insulin Glargine,interactions
+en,How should Insulin Glargine be taken?,Insulin Glargine,dosage
+en,How do I take Insulin Glargine?,Insulin Glargine,dosage
+en,What is the dosage information for Insulin Glargine?,Insulin Glargine,dosage
+en,What is Dapagliflozin?,Dapagliflozin,medicine_info
+en,Tell me about Dapagliflozin.,Dapagliflozin,medicine_info
+en,What do I need to know about Dapagliflozin?,Dapagliflozin,medicine_info
+en,What is Dapagliflozin used for?,Dapagliflozin,uses
+en,Why is Dapagliflozin used?,Dapagliflozin,uses
+en,What conditions is Dapagliflozin used for?,Dapagliflozin,uses
+en,What are the side effects of Dapagliflozin?,Dapagliflozin,side_effects
+en,Can Dapagliflozin cause any side effects?,Dapagliflozin,side_effects
+en,What problems can Dapagliflozin cause?,Dapagliflozin,side_effects
+en,Who should not take Dapagliflozin?,Dapagliflozin,contraindications
+en,When should Dapagliflozin not be used?,Dapagliflozin,contraindications
+en,Who should avoid Dapagliflozin?,Dapagliflozin,contraindications
+en,What warnings should I know about Dapagliflozin?,Dapagliflozin,warnings
+en,Are there any warnings about Dapagliflozin?,Dapagliflozin,warnings
+en,What should I be careful about when taking Dapagliflozin?,Dapagliflozin,warnings
+en,Does Dapagliflozin interact with other medicines?,Dapagliflozin,interactions
+en,Can Dapagliflozin interact with other drugs?,Dapagliflozin,interactions
+en,What medicines can interact with Dapagliflozin?,Dapagliflozin,interactions
+en,How should Dapagliflozin be taken?,Dapagliflozin,dosage
+en,How do I take Dapagliflozin?,Dapagliflozin,dosage
+en,What is the dosage information for Dapagliflozin?,Dapagliflozin,dosage
+en,What is Vildagliptin?,Vildagliptin,medicine_info
+en,Tell me about Vildagliptin.,Vildagliptin,medicine_info
+en,What do I need to know about Vildagliptin?,Vildagliptin,medicine_info
+en,What is Vildagliptin used for?,Vildagliptin,uses
+en,Why is Vildagliptin used?,Vildagliptin,uses
+en,What conditions is Vildagliptin used for?,Vildagliptin,uses
+en,What are the side effects of Vildagliptin?,Vildagliptin,side_effects
+en,Can Vildagliptin cause any side effects?,Vildagliptin,side_effects
+en,What problems can Vildagliptin cause?,Vildagliptin,side_effects
+en,Who should not take Vildagliptin?,Vildagliptin,contraindications
+en,When should Vildagliptin not be used?,Vildagliptin,contraindications
+en,Who should avoid Vildagliptin?,Vildagliptin,contraindications
+en,What warnings should I know about Vildagliptin?,Vildagliptin,warnings
+en,Are there any warnings about Vildagliptin?,Vildagliptin,warnings
+en,What should I be careful about when taking Vildagliptin?,Vildagliptin,warnings
+en,Does Vildagliptin interact with other medicines?,Vildagliptin,interactions
+en,Can Vildagliptin interact with other drugs?,Vildagliptin,interactions
+en,What medicines can interact with Vildagliptin?,Vildagliptin,interactions
+en,How should Vildagliptin be taken?,Vildagliptin,dosage
+en,How do I take Vildagliptin?,Vildagliptin,dosage
+en,What is the dosage information for Vildagliptin?,Vildagliptin,dosage
+en,What is Acarbose?,Acarbose,medicine_info
+en,Tell me about Acarbose.,Acarbose,medicine_info
+en,What do I need to know about Acarbose?,Acarbose,medicine_info
+en,What is Acarbose used for?,Acarbose,uses
+en,Why is Acarbose used?,Acarbose,uses
+en,What conditions is Acarbose used for?,Acarbose,uses
+en,What are the side effects of Acarbose?,Acarbose,side_effects
+en,Can Acarbose cause any side effects?,Acarbose,side_effects
+en,What problems can Acarbose cause?,Acarbose,side_effects
+en,Who should not take Acarbose?,Acarbose,contraindications
+en,When should Acarbose not be used?,Acarbose,contraindications
+en,Who should avoid Acarbose?,Acarbose,contraindications
+en,What warnings should I know about Acarbose?,Acarbose,warnings
+en,Are there any warnings about Acarbose?,Acarbose,warnings
+en,What should I be careful about when taking Acarbose?,Acarbose,warnings
+en,Does Acarbose interact with other medicines?,Acarbose,interactions
+en,Can Acarbose interact with other drugs?,Acarbose,interactions
+en,What medicines can interact with Acarbose?,Acarbose,interactions
+en,How should Acarbose be taken?,Acarbose,dosage
+en,How do I take Acarbose?,Acarbose,dosage
+en,What is the dosage information for Acarbose?,Acarbose,dosage
+en,What is Amlodipine?,Amlodipine,medicine_info
+en,Tell me about Amlodipine.,Amlodipine,medicine_info
+en,What do I need to know about Amlodipine?,Amlodipine,medicine_info
+en,What is Amlodipine used for?,Amlodipine,uses
+en,Why is Amlodipine used?,Amlodipine,uses
+en,What conditions is Amlodipine used for?,Amlodipine,uses
+en,What are the side effects of Amlodipine?,Amlodipine,side_effects
+en,Can Amlodipine cause any side effects?,Amlodipine,side_effects
+en,What problems can Amlodipine cause?,Amlodipine,side_effects
+en,Who should not take Amlodipine?,Amlodipine,contraindications
+en,When should Amlodipine not be used?,Amlodipine,contraindications
+en,Who should avoid Amlodipine?,Amlodipine,contraindications
+en,What warnings should I know about Amlodipine?,Amlodipine,warnings
+en,Are there any warnings about Amlodipine?,Amlodipine,warnings
+en,What should I be careful about when taking Amlodipine?,Amlodipine,warnings
+en,Does Amlodipine interact with other medicines?,Amlodipine,interactions
+en,Can Amlodipine interact with other drugs?,Amlodipine,interactions
+en,What medicines can interact with Amlodipine?,Amlodipine,interactions
+en,How should Amlodipine be taken?,Amlodipine,dosage
+en,How do I take Amlodipine?,Amlodipine,dosage
+en,What is the dosage information for Amlodipine?,Amlodipine,dosage
+en,What is Losartan?,Losartan,medicine_info
+en,Tell me about Losartan.,Losartan,medicine_info
+en,What do I need to know about Losartan?,Losartan,medicine_info
+en,What is Losartan used for?,Losartan,uses
+en,Why is Losartan used?,Losartan,uses
+en,What conditions is Losartan used for?,Losartan,uses
+en,What are the side effects of Losartan?,Losartan,side_effects
+en,Can Losartan cause any side effects?,Losartan,side_effects
+en,What problems can Losartan cause?,Losartan,side_effects
+en,Who should not take Losartan?,Losartan,contraindications
+en,When should Losartan not be used?,Losartan,contraindications
+en,Who should avoid Losartan?,Losartan,contraindications
+en,What warnings should I know about Losartan?,Losartan,warnings
+en,Are there any warnings about Losartan?,Losartan,warnings
+en,What should I be careful about when taking Losartan?,Losartan,warnings
+en,Does Losartan interact with other medicines?,Losartan,interactions
+en,Can Losartan interact with other drugs?,Losartan,interactions
+en,What medicines can interact with Losartan?,Losartan,interactions
+en,How should Losartan be taken?,Losartan,dosage
+en,How do I take Losartan?,Losartan,dosage
+en,What is the dosage information for Losartan?,Losartan,dosage
+en,What is Enalapril?,Enalapril,medicine_info
+en,Tell me about Enalapril.,Enalapril,medicine_info
+en,What do I need to know about Enalapril?,Enalapril,medicine_info
+en,What is Enalapril used for?,Enalapril,uses
+en,Why is Enalapril used?,Enalapril,uses
+en,What conditions is Enalapril used for?,Enalapril,uses
+en,What are the side effects of Enalapril?,Enalapril,side_effects
+en,Can Enalapril cause any side effects?,Enalapril,side_effects
+en,What problems can Enalapril cause?,Enalapril,side_effects
+en,Who should not take Enalapril?,Enalapril,contraindications
+en,When should Enalapril not be used?,Enalapril,contraindications
+en,Who should avoid Enalapril?,Enalapril,contraindications
+en,What warnings should I know about Enalapril?,Enalapril,warnings
+en,Are there any warnings about Enalapril?,Enalapril,warnings
+en,What should I be careful about when taking Enalapril?,Enalapril,warnings
+en,Does Enalapril interact with other medicines?,Enalapril,interactions
+en,Can Enalapril interact with other drugs?,Enalapril,interactions
+en,What medicines can interact with Enalapril?,Enalapril,interactions
+en,How should Enalapril be taken?,Enalapril,dosage
+en,How do I take Enalapril?,Enalapril,dosage
+en,What is the dosage information for Enalapril?,Enalapril,dosage
+en,What is Telmisartan?,Telmisartan,medicine_info
+en,Tell me about Telmisartan.,Telmisartan,medicine_info
+en,What do I need to know about Telmisartan?,Telmisartan,medicine_info
+en,What is Telmisartan used for?,Telmisartan,uses
+en,Why is Telmisartan used?,Telmisartan,uses
+en,What conditions is Telmisartan used for?,Telmisartan,uses
+en,What are the side effects of Telmisartan?,Telmisartan,side_effects
+en,Can Telmisartan cause any side effects?,Telmisartan,side_effects
+en,What problems can Telmisartan cause?,Telmisartan,side_effects
+en,Who should not take Telmisartan?,Telmisartan,contraindications
+en,When should Telmisartan not be used?,Telmisartan,contraindications
+en,Who should avoid Telmisartan?,Telmisartan,contraindications
+en,What warnings should I know about Telmisartan?,Telmisartan,warnings
+en,Are there any warnings about Telmisartan?,Telmisartan,warnings
+en,What should I be careful about when taking Telmisartan?,Telmisartan,warnings
+en,Does Telmisartan interact with other medicines?,Telmisartan,interactions
+en,Can Telmisartan interact with other drugs?,Telmisartan,interactions
+en,What medicines can interact with Telmisartan?,Telmisartan,interactions
+en,How should Telmisartan be taken?,Telmisartan,dosage
+en,How do I take Telmisartan?,Telmisartan,dosage
+en,What is the dosage information for Telmisartan?,Telmisartan,dosage
+en,What is Hydrochlorothiazide?,Hydrochlorothiazide,medicine_info
+en,Tell me about Hydrochlorothiazide.,Hydrochlorothiazide,medicine_info
+en,What do I need to know about Hydrochlorothiazide?,Hydrochlorothiazide,medicine_info
+en,What is Hydrochlorothiazide used for?,Hydrochlorothiazide,uses
+en,Why is Hydrochlorothiazide used?,Hydrochlorothiazide,uses
+en,What conditions is Hydrochlorothiazide used for?,Hydrochlorothiazide,uses
+en,What are the side effects of Hydrochlorothiazide?,Hydrochlorothiazide,side_effects
+en,Can Hydrochlorothiazide cause any side effects?,Hydrochlorothiazide,side_effects
+en,What problems can Hydrochlorothiazide cause?,Hydrochlorothiazide,side_effects
+en,Who should not take Hydrochlorothiazide?,Hydrochlorothiazide,contraindications
+en,When should Hydrochlorothiazide not be used?,Hydrochlorothiazide,contraindications
+en,Who should avoid Hydrochlorothiazide?,Hydrochlorothiazide,contraindications
+en,What warnings should I know about Hydrochlorothiazide?,Hydrochlorothiazide,warnings
+en,Are there any warnings about Hydrochlorothiazide?,Hydrochlorothiazide,warnings
+en,What should I be careful about when taking Hydrochlorothiazide?,Hydrochlorothiazide,warnings
+en,Does Hydrochlorothiazide interact with other medicines?,Hydrochlorothiazide,interactions
+en,Can Hydrochlorothiazide interact with other drugs?,Hydrochlorothiazide,interactions
+en,What medicines can interact with Hydrochlorothiazide?,Hydrochlorothiazide,interactions
+en,How should Hydrochlorothiazide be taken?,Hydrochlorothiazide,dosage
+en,How do I take Hydrochlorothiazide?,Hydrochlorothiazide,dosage
+en,What is the dosage information for Hydrochlorothiazide?,Hydrochlorothiazide,dosage
+en,What is Atenolol?,Atenolol,medicine_info
+en,Tell me about Atenolol.,Atenolol,medicine_info
+en,What do I need to know about Atenolol?,Atenolol,medicine_info
+en,What is Atenolol used for?,Atenolol,uses
+en,Why is Atenolol used?,Atenolol,uses
+en,What conditions is Atenolol used for?,Atenolol,uses
+en,What are the side effects of Atenolol?,Atenolol,side_effects
+en,Can Atenolol cause any side effects?,Atenolol,side_effects
+en,What problems can Atenolol cause?,Atenolol,side_effects
+en,Who should not take Atenolol?,Atenolol,contraindications
+en,When should Atenolol not be used?,Atenolol,contraindications
+en,Who should avoid Atenolol?,Atenolol,contraindications
+en,What warnings should I know about Atenolol?,Atenolol,warnings
+en,Are there any warnings about Atenolol?,Atenolol,warnings
+en,What should I be careful about when taking Atenolol?,Atenolol,warnings
+en,Does Atenolol interact with other medicines?,Atenolol,interactions
+en,Can Atenolol interact with other drugs?,Atenolol,interactions
+en,What medicines can interact with Atenolol?,Atenolol,interactions
+en,How should Atenolol be taken?,Atenolol,dosage
+en,How do I take Atenolol?,Atenolol,dosage
+en,What is the dosage information for Atenolol?,Atenolol,dosage
+en,What is Ramipril?,Ramipril,medicine_info
+en,Tell me about Ramipril.,Ramipril,medicine_info
+en,What do I need to know about Ramipril?,Ramipril,medicine_info
+en,What is Ramipril used for?,Ramipril,uses
+en,Why is Ramipril used?,Ramipril,uses
+en,What conditions is Ramipril used for?,Ramipril,uses
+en,What are the side effects of Ramipril?,Ramipril,side_effects
+en,Can Ramipril cause any side effects?,Ramipril,side_effects
+en,What problems can Ramipril cause?,Ramipril,side_effects
+en,Who should not take Ramipril?,Ramipril,contraindications
+en,When should Ramipril not be used?,Ramipril,contraindications
+en,Who should avoid Ramipril?,Ramipril,contraindications
+en,What warnings should I know about Ramipril?,Ramipril,warnings
+en,Are there any warnings about Ramipril?,Ramipril,warnings
+en,What should I be careful about when taking Ramipril?,Ramipril,warnings
+en,Does Ramipril interact with other medicines?,Ramipril,interactions
+en,Can Ramipril interact with other drugs?,Ramipril,interactions
+en,What medicines can interact with Ramipril?,Ramipril,interactions
+en,How should Ramipril be taken?,Ramipril,dosage
+en,How do I take Ramipril?,Ramipril,dosage
+en,What is the dosage information for Ramipril?,Ramipril,dosage
+en,What is Chlorthalidone?,Chlorthalidone,medicine_info
+en,Tell me about Chlorthalidone.,Chlorthalidone,medicine_info
+en,What do I need to know about Chlorthalidone?,Chlorthalidone,medicine_info
+en,What is Chlorthalidone used for?,Chlorthalidone,uses
+en,Why is Chlorthalidone used?,Chlorthalidone,uses
+en,What conditions is Chlorthalidone used for?,Chlorthalidone,uses
+en,What are the side effects of Chlorthalidone?,Chlorthalidone,side_effects
+en,Can Chlorthalidone cause any side effects?,Chlorthalidone,side_effects
+en,What problems can Chlorthalidone cause?,Chlorthalidone,side_effects
+en,Who should not take Chlorthalidone?,Chlorthalidone,contraindications
+en,When should Chlorthalidone not be used?,Chlorthalidone,contraindications
+en,Who should avoid Chlorthalidone?,Chlorthalidone,contraindications
+en,What warnings should I know about Chlorthalidone?,Chlorthalidone,warnings
+en,Are there any warnings about Chlorthalidone?,Chlorthalidone,warnings
+en,What should I be careful about when taking Chlorthalidone?,Chlorthalidone,warnings
+en,Does Chlorthalidone interact with other medicines?,Chlorthalidone,interactions
+en,Can Chlorthalidone interact with other drugs?,Chlorthalidone,interactions
+en,What medicines can interact with Chlorthalidone?,Chlorthalidone,interactions
+en,How should Chlorthalidone be taken?,Chlorthalidone,dosage
+en,How do I take Chlorthalidone?,Chlorthalidone,dosage
+en,What is the dosage information for Chlorthalidone?,Chlorthalidone,dosage
+en,What is Carvedilol?,Carvedilol,medicine_info
+en,Tell me about Carvedilol.,Carvedilol,medicine_info
+en,What do I need to know about Carvedilol?,Carvedilol,medicine_info
+en,What is Carvedilol used for?,Carvedilol,uses
+en,Why is Carvedilol used?,Carvedilol,uses
+en,What conditions is Carvedilol used for?,Carvedilol,uses
+en,What are the side effects of Carvedilol?,Carvedilol,side_effects
+en,Can Carvedilol cause any side effects?,Carvedilol,side_effects
+en,What problems can Carvedilol cause?,Carvedilol,side_effects
+en,Who should not take Carvedilol?,Carvedilol,contraindications
+en,When should Carvedilol not be used?,Carvedilol,contraindications
+en,Who should avoid Carvedilol?,Carvedilol,contraindications
+en,What warnings should I know about Carvedilol?,Carvedilol,warnings
+en,Are there any warnings about Carvedilol?,Carvedilol,warnings
+en,What should I be careful about when taking Carvedilol?,Carvedilol,warnings
+en,Does Carvedilol interact with other medicines?,Carvedilol,interactions
+en,Can Carvedilol interact with other drugs?,Carvedilol,interactions
+en,What medicines can interact with Carvedilol?,Carvedilol,interactions
+en,How should Carvedilol be taken?,Carvedilol,dosage
+en,How do I take Carvedilol?,Carvedilol,dosage
+en,What is the dosage information for Carvedilol?,Carvedilol,dosage
+en,What is Clonidine?,Clonidine,medicine_info
+en,Tell me about Clonidine.,Clonidine,medicine_info
+en,What do I need to know about Clonidine?,Clonidine,medicine_info
+en,What is Clonidine used for?,Clonidine,uses
+en,Why is Clonidine used?,Clonidine,uses
+en,What conditions is Clonidine used for?,Clonidine,uses
+en,What are the side effects of Clonidine?,Clonidine,side_effects
+en,Can Clonidine cause any side effects?,Clonidine,side_effects
+en,What problems can Clonidine cause?,Clonidine,side_effects
+en,Who should not take Clonidine?,Clonidine,contraindications
+en,When should Clonidine not be used?,Clonidine,contraindications
+en,Who should avoid Clonidine?,Clonidine,contraindications
+en,What warnings should I know about Clonidine?,Clonidine,warnings
+en,Are there any warnings about Clonidine?,Clonidine,warnings
+en,What should I be careful about when taking Clonidine?,Clonidine,warnings
+en,Does Clonidine interact with other medicines?,Clonidine,interactions
+en,Can Clonidine interact with other drugs?,Clonidine,interactions
+en,What medicines can interact with Clonidine?,Clonidine,interactions
+en,How should Clonidine be taken?,Clonidine,dosage
+en,How do I take Clonidine?,Clonidine,dosage
+en,What is the dosage information for Clonidine?,Clonidine,dosage
+en,What is Ibuprofen?,Ibuprofen,medicine_info
+en,Tell me about Ibuprofen.,Ibuprofen,medicine_info
+en,What do I need to know about Ibuprofen?,Ibuprofen,medicine_info
+en,What is Ibuprofen used for?,Ibuprofen,uses
+en,Why is Ibuprofen used?,Ibuprofen,uses
+en,What conditions is Ibuprofen used for?,Ibuprofen,uses
+en,What are the side effects of Ibuprofen?,Ibuprofen,side_effects
+en,Can Ibuprofen cause any side effects?,Ibuprofen,side_effects
+en,What problems can Ibuprofen cause?,Ibuprofen,side_effects
+en,Who should not take Ibuprofen?,Ibuprofen,contraindications
+en,When should Ibuprofen not be used?,Ibuprofen,contraindications
+en,Who should avoid Ibuprofen?,Ibuprofen,contraindications
+en,What warnings should I know about Ibuprofen?,Ibuprofen,warnings
+en,Are there any warnings about Ibuprofen?,Ibuprofen,warnings
+en,What should I be careful about when taking Ibuprofen?,Ibuprofen,warnings
+en,Does Ibuprofen interact with other medicines?,Ibuprofen,interactions
+en,Can Ibuprofen interact with other drugs?,Ibuprofen,interactions
+en,What medicines can interact with Ibuprofen?,Ibuprofen,interactions
+en,How should Ibuprofen be taken?,Ibuprofen,dosage
+en,How do I take Ibuprofen?,Ibuprofen,dosage
+en,What is the dosage information for Ibuprofen?,Ibuprofen,dosage
+en,What is Diclofenac?,Diclofenac,medicine_info
+en,Tell me about Diclofenac.,Diclofenac,medicine_info
+en,What do I need to know about Diclofenac?,Diclofenac,medicine_info
+en,What is Diclofenac used for?,Diclofenac,uses
+en,Why is Diclofenac used?,Diclofenac,uses
+en,What conditions is Diclofenac used for?,Diclofenac,uses
+en,What are the side effects of Diclofenac?,Diclofenac,side_effects
+en,Can Diclofenac cause any side effects?,Diclofenac,side_effects
+en,What problems can Diclofenac cause?,Diclofenac,side_effects
+en,Who should not take Diclofenac?,Diclofenac,contraindications
+en,When should Diclofenac not be used?,Diclofenac,contraindications
+en,Who should avoid Diclofenac?,Diclofenac,contraindications
+en,What warnings should I know about Diclofenac?,Diclofenac,warnings
+en,Are there any warnings about Diclofenac?,Diclofenac,warnings
+en,What should I be careful about when taking Diclofenac?,Diclofenac,warnings
+en,Does Diclofenac interact with other medicines?,Diclofenac,interactions
+en,Can Diclofenac interact with other drugs?,Diclofenac,interactions
+en,What medicines can interact with Diclofenac?,Diclofenac,interactions
+en,How should Diclofenac be taken?,Diclofenac,dosage
+en,How do I take Diclofenac?,Diclofenac,dosage
+en,What is the dosage information for Diclofenac?,Diclofenac,dosage
+en,What is Naproxen?,Naproxen,medicine_info
+en,Tell me about Naproxen.,Naproxen,medicine_info
+en,What do I need to know about Naproxen?,Naproxen,medicine_info
+en,What is Naproxen used for?,Naproxen,uses
+en,Why is Naproxen used?,Naproxen,uses
+en,What conditions is Naproxen used for?,Naproxen,uses
+en,What are the side effects of Naproxen?,Naproxen,side_effects
+en,Can Naproxen cause any side effects?,Naproxen,side_effects
+en,What problems can Naproxen cause?,Naproxen,side_effects
+en,Who should not take Naproxen?,Naproxen,contraindications
+en,When should Naproxen not be used?,Naproxen,contraindications
+en,Who should avoid Naproxen?,Naproxen,contraindications
+en,What warnings should I know about Naproxen?,Naproxen,warnings
+en,Are there any warnings about Naproxen?,Naproxen,warnings
+en,What should I be careful about when taking Naproxen?,Naproxen,warnings
+en,Does Naproxen interact with other medicines?,Naproxen,interactions
+en,Can Naproxen interact with other drugs?,Naproxen,interactions
+en,What medicines can interact with Naproxen?,Naproxen,interactions
+en,How should Naproxen be taken?,Naproxen,dosage
+en,How do I take Naproxen?,Naproxen,dosage
+en,What is the dosage information for Naproxen?,Naproxen,dosage
+en,What is Methotrexate?,Methotrexate,medicine_info
+en,Tell me about Methotrexate.,Methotrexate,medicine_info
+en,What do I need to know about Methotrexate?,Methotrexate,medicine_info
+en,What is Methotrexate used for?,Methotrexate,uses
+en,Why is Methotrexate used?,Methotrexate,uses
+en,What conditions is Methotrexate used for?,Methotrexate,uses
+en,What are the side effects of Methotrexate?,Methotrexate,side_effects
+en,Can Methotrexate cause any side effects?,Methotrexate,side_effects
+en,What problems can Methotrexate cause?,Methotrexate,side_effects
+en,Who should not take Methotrexate?,Methotrexate,contraindications
+en,When should Methotrexate not be used?,Methotrexate,contraindications
+en,Who should avoid Methotrexate?,Methotrexate,contraindications
+en,What warnings should I know about Methotrexate?,Methotrexate,warnings
+en,Are there any warnings about Methotrexate?,Methotrexate,warnings
+en,What should I be careful about when taking Methotrexate?,Methotrexate,warnings
+en,Does Methotrexate interact with other medicines?,Methotrexate,interactions
+en,Can Methotrexate interact with other drugs?,Methotrexate,interactions
+en,What medicines can interact with Methotrexate?,Methotrexate,interactions
+en,How should Methotrexate be taken?,Methotrexate,dosage
+en,How do I take Methotrexate?,Methotrexate,dosage
+en,What is the dosage information for Methotrexate?,Methotrexate,dosage
+en,What is Hydroxychloroquine?,Hydroxychloroquine,medicine_info
+en,Tell me about Hydroxychloroquine.,Hydroxychloroquine,medicine_info
+en,What do I need to know about Hydroxychloroquine?,Hydroxychloroquine,medicine_info
+en,What is Hydroxychloroquine used for?,Hydroxychloroquine,uses
+en,Why is Hydroxychloroquine used?,Hydroxychloroquine,uses
+en,What conditions is Hydroxychloroquine used for?,Hydroxychloroquine,uses
+en,What are the side effects of Hydroxychloroquine?,Hydroxychloroquine,side_effects
+en,Can Hydroxychloroquine cause any side effects?,Hydroxychloroquine,side_effects
+en,What problems can Hydroxychloroquine cause?,Hydroxychloroquine,side_effects
+en,Who should not take Hydroxychloroquine?,Hydroxychloroquine,contraindications
+en,When should Hydroxychloroquine not be used?,Hydroxychloroquine,contraindications
+en,Who should avoid Hydroxychloroquine?,Hydroxychloroquine,contraindications
+en,What warnings should I know about Hydroxychloroquine?,Hydroxychloroquine,warnings
+en,Are there any warnings about Hydroxychloroquine?,Hydroxychloroquine,warnings
+en,What should I be careful about when taking Hydroxychloroquine?,Hydroxychloroquine,warnings
+en,Does Hydroxychloroquine interact with other medicines?,Hydroxychloroquine,interactions
+en,Can Hydroxychloroquine interact with other drugs?,Hydroxychloroquine,interactions
+en,What medicines can interact with Hydroxychloroquine?,Hydroxychloroquine,interactions
+en,How should Hydroxychloroquine be taken?,Hydroxychloroquine,dosage
+en,How do I take Hydroxychloroquine?,Hydroxychloroquine,dosage
+en,What is the dosage information for Hydroxychloroquine?,Hydroxychloroquine,dosage
+en,What is Celecoxib?,Celecoxib,medicine_info
+en,Tell me about Celecoxib.,Celecoxib,medicine_info
+en,What do I need to know about Celecoxib?,Celecoxib,medicine_info
+en,What is Celecoxib used for?,Celecoxib,uses
+en,Why is Celecoxib used?,Celecoxib,uses
+en,What conditions is Celecoxib used for?,Celecoxib,uses
+en,What are the side effects of Celecoxib?,Celecoxib,side_effects
+en,Can Celecoxib cause any side effects?,Celecoxib,side_effects
+en,What problems can Celecoxib cause?,Celecoxib,side_effects
+en,Who should not take Celecoxib?,Celecoxib,contraindications
+en,When should Celecoxib not be used?,Celecoxib,contraindications
+en,Who should avoid Celecoxib?,Celecoxib,contraindications
+en,What warnings should I know about Celecoxib?,Celecoxib,warnings
+en,Are there any warnings about Celecoxib?,Celecoxib,warnings
+en,What should I be careful about when taking Celecoxib?,Celecoxib,warnings
+en,Does Celecoxib interact with other medicines?,Celecoxib,interactions
+en,Can Celecoxib interact with other drugs?,Celecoxib,interactions
+en,What medicines can interact with Celecoxib?,Celecoxib,interactions
+en,How should Celecoxib be taken?,Celecoxib,dosage
+en,How do I take Celecoxib?,Celecoxib,dosage
+en,What is the dosage information for Celecoxib?,Celecoxib,dosage
+en,What is Sulfasalazine?,Sulfasalazine,medicine_info
+en,Tell me about Sulfasalazine.,Sulfasalazine,medicine_info
+en,What do I need to know about Sulfasalazine?,Sulfasalazine,medicine_info
+en,What is Sulfasalazine used for?,Sulfasalazine,uses
+en,Why is Sulfasalazine used?,Sulfasalazine,uses
+en,What conditions is Sulfasalazine used for?,Sulfasalazine,uses
+en,What are the side effects of Sulfasalazine?,Sulfasalazine,side_effects
+en,Can Sulfasalazine cause any side effects?,Sulfasalazine,side_effects
+en,What problems can Sulfasalazine cause?,Sulfasalazine,side_effects
+en,Who should not take Sulfasalazine?,Sulfasalazine,contraindications
+en,When should Sulfasalazine not be used?,Sulfasalazine,contraindications
+en,Who should avoid Sulfasalazine?,Sulfasalazine,contraindications
+en,What warnings should I know about Sulfasalazine?,Sulfasalazine,warnings
+en,Are there any warnings about Sulfasalazine?,Sulfasalazine,warnings
+en,What should I be careful about when taking Sulfasalazine?,Sulfasalazine,warnings
+en,Does Sulfasalazine interact with other medicines?,Sulfasalazine,interactions
+en,Can Sulfasalazine interact with other drugs?,Sulfasalazine,interactions
+en,What medicines can interact with Sulfasalazine?,Sulfasalazine,interactions
+en,How should Sulfasalazine be taken?,Sulfasalazine,dosage
+en,How do I take Sulfasalazine?,Sulfasalazine,dosage
+en,What is the dosage information for Sulfasalazine?,Sulfasalazine,dosage
+en,What is Prednisolone?,Prednisolone,medicine_info
+en,Tell me about Prednisolone.,Prednisolone,medicine_info
+en,What do I need to know about Prednisolone?,Prednisolone,medicine_info
+en,What is Prednisolone used for?,Prednisolone,uses
+en,Why is Prednisolone used?,Prednisolone,uses
+en,What conditions is Prednisolone used for?,Prednisolone,uses
+en,What are the side effects of Prednisolone?,Prednisolone,side_effects
+en,Can Prednisolone cause any side effects?,Prednisolone,side_effects
+en,What problems can Prednisolone cause?,Prednisolone,side_effects
+en,Who should not take Prednisolone?,Prednisolone,contraindications
+en,When should Prednisolone not be used?,Prednisolone,contraindications
+en,Who should avoid Prednisolone?,Prednisolone,contraindications
+en,What warnings should I know about Prednisolone?,Prednisolone,warnings
+en,Are there any warnings about Prednisolone?,Prednisolone,warnings
+en,What should I be careful about when taking Prednisolone?,Prednisolone,warnings
+en,Does Prednisolone interact with other medicines?,Prednisolone,interactions
+en,Can Prednisolone interact with other drugs?,Prednisolone,interactions
+en,What medicines can interact with Prednisolone?,Prednisolone,interactions
+en,How should Prednisolone be taken?,Prednisolone,dosage
+en,How do I take Prednisolone?,Prednisolone,dosage
+en,What is the dosage information for Prednisolone?,Prednisolone,dosage
+en,What is Leflunomide?,Leflunomide,medicine_info
+en,Tell me about Leflunomide.,Leflunomide,medicine_info
+en,What do I need to know about Leflunomide?,Leflunomide,medicine_info
+en,What is Leflunomide used for?,Leflunomide,uses
+en,Why is Leflunomide used?,Leflunomide,uses
+en,What conditions is Leflunomide used for?,Leflunomide,uses
+en,What are the side effects of Leflunomide?,Leflunomide,side_effects
+en,Can Leflunomide cause any side effects?,Leflunomide,side_effects
+en,What problems can Leflunomide cause?,Leflunomide,side_effects
+en,Who should not take Leflunomide?,Leflunomide,contraindications
+en,When should Leflunomide not be used?,Leflunomide,contraindications
+en,Who should avoid Leflunomide?,Leflunomide,contraindications
+en,What warnings should I know about Leflunomide?,Leflunomide,warnings
+en,Are there any warnings about Leflunomide?,Leflunomide,warnings
+en,What should I be careful about when taking Leflunomide?,Leflunomide,warnings
+en,Does Leflunomide interact with other medicines?,Leflunomide,interactions
+en,Can Leflunomide interact with other drugs?,Leflunomide,interactions
+en,What medicines can interact with Leflunomide?,Leflunomide,interactions
+en,How should Leflunomide be taken?,Leflunomide,dosage
+en,How do I take Leflunomide?,Leflunomide,dosage
+en,What is the dosage information for Leflunomide?,Leflunomide,dosage
+en,What is Colchicine?,Colchicine,medicine_info
+en,Tell me about Colchicine.,Colchicine,medicine_info
+en,What do I need to know about Colchicine?,Colchicine,medicine_info
+en,What is Colchicine used for?,Colchicine,uses
+en,Why is Colchicine used?,Colchicine,uses
+en,What conditions is Colchicine used for?,Colchicine,uses
+en,What are the side effects of Colchicine?,Colchicine,side_effects
+en,Can Colchicine cause any side effects?,Colchicine,side_effects
+en,What problems can Colchicine cause?,Colchicine,side_effects
+en,Who should not take Colchicine?,Colchicine,contraindications
+en,When should Colchicine not be used?,Colchicine,contraindications
+en,Who should avoid Colchicine?,Colchicine,contraindications
+en,What warnings should I know about Colchicine?,Colchicine,warnings
+en,Are there any warnings about Colchicine?,Colchicine,warnings
+en,What should I be careful about when taking Colchicine?,Colchicine,warnings
+en,Does Colchicine interact with other medicines?,Colchicine,interactions
+en,Can Colchicine interact with other drugs?,Colchicine,interactions
+en,What medicines can interact with Colchicine?,Colchicine,interactions
+en,How should Colchicine be taken?,Colchicine,dosage
+en,How do I take Colchicine?,Colchicine,dosage
+en,What is the dosage information for Colchicine?,Colchicine,dosage
+kn,Metformin ಎಂದರೇನು?,Metformin,medicine_info
+kn,Metformin ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Metformin,medicine_info
+kn,Metformin ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Metformin,medicine_info
+kn,Metformin ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Metformin,uses
+kn,Metformin ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Metformin,uses
+kn,Metformin ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Metformin,uses
+kn,Metformin ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Metformin,side_effects
+kn,Metformin ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Metformin,side_effects
+kn,Metformin ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Metformin,side_effects
+kn,Metformin ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Metformin,contraindications
+kn,Metformin ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Metformin,contraindications
+kn,ಯಾರು Metformin ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Metformin,contraindications
+kn,Metformin ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Metformin,warnings
+kn,Metformin ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Metformin,warnings
+kn,Metformin ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Metformin,warnings
+kn,Metformin ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Metformin,interactions
+kn,Metformin ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Metformin,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Metformin ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Metformin,interactions
+kn,Metformin ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Metformin,dosage
+kn,Metformin ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Metformin,dosage
+kn,Metformin ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Metformin,dosage
+kn,Glipizide ಎಂದರೇನು?,Glipizide,medicine_info
+kn,Glipizide ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Glipizide,medicine_info
+kn,Glipizide ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Glipizide,medicine_info
+kn,Glipizide ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Glipizide,uses
+kn,Glipizide ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Glipizide,uses
+kn,Glipizide ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Glipizide,uses
+kn,Glipizide ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Glipizide,side_effects
+kn,Glipizide ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Glipizide,side_effects
+kn,Glipizide ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Glipizide,side_effects
+kn,Glipizide ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Glipizide,contraindications
+kn,Glipizide ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Glipizide,contraindications
+kn,ಯಾರು Glipizide ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Glipizide,contraindications
+kn,Glipizide ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Glipizide,warnings
+kn,Glipizide ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Glipizide,warnings
+kn,Glipizide ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Glipizide,warnings
+kn,Glipizide ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Glipizide,interactions
+kn,Glipizide ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Glipizide,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Glipizide ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Glipizide,interactions
+kn,Glipizide ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Glipizide,dosage
+kn,Glipizide ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Glipizide,dosage
+kn,Glipizide ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Glipizide,dosage
+kn,Glimepiride ಎಂದರೇನು?,Glimepiride,medicine_info
+kn,Glimepiride ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Glimepiride,medicine_info
+kn,Glimepiride ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Glimepiride,medicine_info
+kn,Glimepiride ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Glimepiride,uses
+kn,Glimepiride ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Glimepiride,uses
+kn,Glimepiride ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Glimepiride,uses
+kn,Glimepiride ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Glimepiride,side_effects
+kn,Glimepiride ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Glimepiride,side_effects
+kn,Glimepiride ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Glimepiride,side_effects
+kn,Glimepiride ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Glimepiride,contraindications
+kn,Glimepiride ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Glimepiride,contraindications
+kn,ಯಾರು Glimepiride ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Glimepiride,contraindications
+kn,Glimepiride ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Glimepiride,warnings
+kn,Glimepiride ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Glimepiride,warnings
+kn,Glimepiride ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Glimepiride,warnings
+kn,Glimepiride ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Glimepiride,interactions
+kn,Glimepiride ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Glimepiride,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Glimepiride ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Glimepiride,interactions
+kn,Glimepiride ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Glimepiride,dosage
+kn,Glimepiride ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Glimepiride,dosage
+kn,Glimepiride ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Glimepiride,dosage
+kn,Sitagliptin ಎಂದರೇನು?,Sitagliptin,medicine_info
+kn,Sitagliptin ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Sitagliptin,medicine_info
+kn,Sitagliptin ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Sitagliptin,medicine_info
+kn,Sitagliptin ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Sitagliptin,uses
+kn,Sitagliptin ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Sitagliptin,uses
+kn,Sitagliptin ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Sitagliptin,uses
+kn,Sitagliptin ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Sitagliptin,side_effects
+kn,Sitagliptin ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Sitagliptin,side_effects
+kn,Sitagliptin ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Sitagliptin,side_effects
+kn,Sitagliptin ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Sitagliptin,contraindications
+kn,Sitagliptin ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Sitagliptin,contraindications
+kn,ಯಾರು Sitagliptin ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Sitagliptin,contraindications
+kn,Sitagliptin ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Sitagliptin,warnings
+kn,Sitagliptin ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Sitagliptin,warnings
+kn,Sitagliptin ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Sitagliptin,warnings
+kn,Sitagliptin ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Sitagliptin,interactions
+kn,Sitagliptin ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Sitagliptin,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Sitagliptin ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Sitagliptin,interactions
+kn,Sitagliptin ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Sitagliptin,dosage
+kn,Sitagliptin ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Sitagliptin,dosage
+kn,Sitagliptin ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Sitagliptin,dosage
+kn,Empagliflozin ಎಂದರೇನು?,Empagliflozin,medicine_info
+kn,Empagliflozin ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Empagliflozin,medicine_info
+kn,Empagliflozin ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Empagliflozin,medicine_info
+kn,Empagliflozin ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Empagliflozin,uses
+kn,Empagliflozin ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Empagliflozin,uses
+kn,Empagliflozin ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Empagliflozin,uses
+kn,Empagliflozin ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Empagliflozin,side_effects
+kn,Empagliflozin ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Empagliflozin,side_effects
+kn,Empagliflozin ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Empagliflozin,side_effects
+kn,Empagliflozin ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Empagliflozin,contraindications
+kn,Empagliflozin ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Empagliflozin,contraindications
+kn,ಯಾರು Empagliflozin ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Empagliflozin,contraindications
+kn,Empagliflozin ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Empagliflozin,warnings
+kn,Empagliflozin ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Empagliflozin,warnings
+kn,Empagliflozin ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Empagliflozin,warnings
+kn,Empagliflozin ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Empagliflozin,interactions
+kn,Empagliflozin ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Empagliflozin,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Empagliflozin ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Empagliflozin,interactions
+kn,Empagliflozin ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Empagliflozin,dosage
+kn,Empagliflozin ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Empagliflozin,dosage
+kn,Empagliflozin ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Empagliflozin,dosage
+kn,Pioglitazone ಎಂದರೇನು?,Pioglitazone,medicine_info
+kn,Pioglitazone ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Pioglitazone,medicine_info
+kn,Pioglitazone ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Pioglitazone,medicine_info
+kn,Pioglitazone ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Pioglitazone,uses
+kn,Pioglitazone ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Pioglitazone,uses
+kn,Pioglitazone ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Pioglitazone,uses
+kn,Pioglitazone ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Pioglitazone,side_effects
+kn,Pioglitazone ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Pioglitazone,side_effects
+kn,Pioglitazone ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Pioglitazone,side_effects
+kn,Pioglitazone ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Pioglitazone,contraindications
+kn,Pioglitazone ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Pioglitazone,contraindications
+kn,ಯಾರು Pioglitazone ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Pioglitazone,contraindications
+kn,Pioglitazone ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Pioglitazone,warnings
+kn,Pioglitazone ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Pioglitazone,warnings
+kn,Pioglitazone ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Pioglitazone,warnings
+kn,Pioglitazone ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Pioglitazone,interactions
+kn,Pioglitazone ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Pioglitazone,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Pioglitazone ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Pioglitazone,interactions
+kn,Pioglitazone ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Pioglitazone,dosage
+kn,Pioglitazone ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Pioglitazone,dosage
+kn,Pioglitazone ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Pioglitazone,dosage
+kn,Insulin Glargine ಎಂದರೇನು?,Insulin Glargine,medicine_info
+kn,Insulin Glargine ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Insulin Glargine,medicine_info
+kn,Insulin Glargine ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Insulin Glargine,medicine_info
+kn,Insulin Glargine ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Insulin Glargine,uses
+kn,Insulin Glargine ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Insulin Glargine,uses
+kn,Insulin Glargine ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Insulin Glargine,uses
+kn,Insulin Glargine ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Insulin Glargine,side_effects
+kn,Insulin Glargine ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Insulin Glargine,side_effects
+kn,Insulin Glargine ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Insulin Glargine,side_effects
+kn,Insulin Glargine ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Insulin Glargine,contraindications
+kn,Insulin Glargine ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Insulin Glargine,contraindications
+kn,ಯಾರು Insulin Glargine ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Insulin Glargine,contraindications
+kn,Insulin Glargine ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Insulin Glargine,warnings
+kn,Insulin Glargine ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Insulin Glargine,warnings
+kn,Insulin Glargine ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Insulin Glargine,warnings
+kn,Insulin Glargine ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Insulin Glargine,interactions
+kn,Insulin Glargine ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Insulin Glargine,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Insulin Glargine ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Insulin Glargine,interactions
+kn,Insulin Glargine ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Insulin Glargine,dosage
+kn,Insulin Glargine ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Insulin Glargine,dosage
+kn,Insulin Glargine ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Insulin Glargine,dosage
+kn,Dapagliflozin ಎಂದರೇನು?,Dapagliflozin,medicine_info
+kn,Dapagliflozin ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Dapagliflozin,medicine_info
+kn,Dapagliflozin ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Dapagliflozin,medicine_info
+kn,Dapagliflozin ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Dapagliflozin,uses
+kn,Dapagliflozin ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Dapagliflozin,uses
+kn,Dapagliflozin ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Dapagliflozin,uses
+kn,Dapagliflozin ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Dapagliflozin,side_effects
+kn,Dapagliflozin ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Dapagliflozin,side_effects
+kn,Dapagliflozin ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Dapagliflozin,side_effects
+kn,Dapagliflozin ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Dapagliflozin,contraindications
+kn,Dapagliflozin ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Dapagliflozin,contraindications
+kn,ಯಾರು Dapagliflozin ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Dapagliflozin,contraindications
+kn,Dapagliflozin ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Dapagliflozin,warnings
+kn,Dapagliflozin ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Dapagliflozin,warnings
+kn,Dapagliflozin ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Dapagliflozin,warnings
+kn,Dapagliflozin ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Dapagliflozin,interactions
+kn,Dapagliflozin ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Dapagliflozin,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Dapagliflozin ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Dapagliflozin,interactions
+kn,Dapagliflozin ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Dapagliflozin,dosage
+kn,Dapagliflozin ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Dapagliflozin,dosage
+kn,Dapagliflozin ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Dapagliflozin,dosage
+kn,Vildagliptin ಎಂದರೇನು?,Vildagliptin,medicine_info
+kn,Vildagliptin ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Vildagliptin,medicine_info
+kn,Vildagliptin ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Vildagliptin,medicine_info
+kn,Vildagliptin ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Vildagliptin,uses
+kn,Vildagliptin ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Vildagliptin,uses
+kn,Vildagliptin ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Vildagliptin,uses
+kn,Vildagliptin ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Vildagliptin,side_effects
+kn,Vildagliptin ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Vildagliptin,side_effects
+kn,Vildagliptin ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Vildagliptin,side_effects
+kn,Vildagliptin ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Vildagliptin,contraindications
+kn,Vildagliptin ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Vildagliptin,contraindications
+kn,ಯಾರು Vildagliptin ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Vildagliptin,contraindications
+kn,Vildagliptin ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Vildagliptin,warnings
+kn,Vildagliptin ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Vildagliptin,warnings
+kn,Vildagliptin ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Vildagliptin,warnings
+kn,Vildagliptin ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Vildagliptin,interactions
+kn,Vildagliptin ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Vildagliptin,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Vildagliptin ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Vildagliptin,interactions
+kn,Vildagliptin ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Vildagliptin,dosage
+kn,Vildagliptin ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Vildagliptin,dosage
+kn,Vildagliptin ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Vildagliptin,dosage
+kn,Acarbose ಎಂದರೇನು?,Acarbose,medicine_info
+kn,Acarbose ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Acarbose,medicine_info
+kn,Acarbose ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Acarbose,medicine_info
+kn,Acarbose ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Acarbose,uses
+kn,Acarbose ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Acarbose,uses
+kn,Acarbose ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Acarbose,uses
+kn,Acarbose ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Acarbose,side_effects
+kn,Acarbose ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Acarbose,side_effects
+kn,Acarbose ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Acarbose,side_effects
+kn,Acarbose ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Acarbose,contraindications
+kn,Acarbose ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Acarbose,contraindications
+kn,ಯಾರು Acarbose ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Acarbose,contraindications
+kn,Acarbose ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Acarbose,warnings
+kn,Acarbose ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Acarbose,warnings
+kn,Acarbose ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Acarbose,warnings
+kn,Acarbose ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Acarbose,interactions
+kn,Acarbose ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Acarbose,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Acarbose ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Acarbose,interactions
+kn,Acarbose ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Acarbose,dosage
+kn,Acarbose ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Acarbose,dosage
+kn,Acarbose ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Acarbose,dosage
+kn,Amlodipine ಎಂದರೇನು?,Amlodipine,medicine_info
+kn,Amlodipine ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Amlodipine,medicine_info
+kn,Amlodipine ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Amlodipine,medicine_info
+kn,Amlodipine ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Amlodipine,uses
+kn,Amlodipine ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Amlodipine,uses
+kn,Amlodipine ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Amlodipine,uses
+kn,Amlodipine ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Amlodipine,side_effects
+kn,Amlodipine ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Amlodipine,side_effects
+kn,Amlodipine ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Amlodipine,side_effects
+kn,Amlodipine ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Amlodipine,contraindications
+kn,Amlodipine ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Amlodipine,contraindications
+kn,ಯಾರು Amlodipine ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Amlodipine,contraindications
+kn,Amlodipine ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Amlodipine,warnings
+kn,Amlodipine ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Amlodipine,warnings
+kn,Amlodipine ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Amlodipine,warnings
+kn,Amlodipine ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Amlodipine,interactions
+kn,Amlodipine ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Amlodipine,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Amlodipine ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Amlodipine,interactions
+kn,Amlodipine ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Amlodipine,dosage
+kn,Amlodipine ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Amlodipine,dosage
+kn,Amlodipine ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Amlodipine,dosage
+kn,Losartan ಎಂದರೇನು?,Losartan,medicine_info
+kn,Losartan ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Losartan,medicine_info
+kn,Losartan ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Losartan,medicine_info
+kn,Losartan ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Losartan,uses
+kn,Losartan ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Losartan,uses
+kn,Losartan ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Losartan,uses
+kn,Losartan ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Losartan,side_effects
+kn,Losartan ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Losartan,side_effects
+kn,Losartan ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Losartan,side_effects
+kn,Losartan ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Losartan,contraindications
+kn,Losartan ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Losartan,contraindications
+kn,ಯಾರು Losartan ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Losartan,contraindications
+kn,Losartan ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Losartan,warnings
+kn,Losartan ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Losartan,warnings
+kn,Losartan ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Losartan,warnings
+kn,Losartan ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Losartan,interactions
+kn,Losartan ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Losartan,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Losartan ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Losartan,interactions
+kn,Losartan ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Losartan,dosage
+kn,Losartan ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Losartan,dosage
+kn,Losartan ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Losartan,dosage
+kn,Enalapril ಎಂದರೇನು?,Enalapril,medicine_info
+kn,Enalapril ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Enalapril,medicine_info
+kn,Enalapril ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Enalapril,medicine_info
+kn,Enalapril ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Enalapril,uses
+kn,Enalapril ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Enalapril,uses
+kn,Enalapril ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Enalapril,uses
+kn,Enalapril ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Enalapril,side_effects
+kn,Enalapril ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Enalapril,side_effects
+kn,Enalapril ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Enalapril,side_effects
+kn,Enalapril ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Enalapril,contraindications
+kn,Enalapril ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Enalapril,contraindications
+kn,ಯಾರು Enalapril ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Enalapril,contraindications
+kn,Enalapril ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Enalapril,warnings
+kn,Enalapril ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Enalapril,warnings
+kn,Enalapril ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Enalapril,warnings
+kn,Enalapril ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Enalapril,interactions
+kn,Enalapril ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Enalapril,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Enalapril ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Enalapril,interactions
+kn,Enalapril ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Enalapril,dosage
+kn,Enalapril ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Enalapril,dosage
+kn,Enalapril ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Enalapril,dosage
+kn,Telmisartan ಎಂದರೇನು?,Telmisartan,medicine_info
+kn,Telmisartan ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Telmisartan,medicine_info
+kn,Telmisartan ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Telmisartan,medicine_info
+kn,Telmisartan ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Telmisartan,uses
+kn,Telmisartan ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Telmisartan,uses
+kn,Telmisartan ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Telmisartan,uses
+kn,Telmisartan ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Telmisartan,side_effects
+kn,Telmisartan ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Telmisartan,side_effects
+kn,Telmisartan ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Telmisartan,side_effects
+kn,Telmisartan ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Telmisartan,contraindications
+kn,Telmisartan ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Telmisartan,contraindications
+kn,ಯಾರು Telmisartan ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Telmisartan,contraindications
+kn,Telmisartan ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Telmisartan,warnings
+kn,Telmisartan ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Telmisartan,warnings
+kn,Telmisartan ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Telmisartan,warnings
+kn,Telmisartan ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Telmisartan,interactions
+kn,Telmisartan ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Telmisartan,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Telmisartan ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Telmisartan,interactions
+kn,Telmisartan ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Telmisartan,dosage
+kn,Telmisartan ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Telmisartan,dosage
+kn,Telmisartan ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Telmisartan,dosage
+kn,Hydrochlorothiazide ಎಂದರೇನು?,Hydrochlorothiazide,medicine_info
+kn,Hydrochlorothiazide ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Hydrochlorothiazide,medicine_info
+kn,Hydrochlorothiazide ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Hydrochlorothiazide,medicine_info
+kn,Hydrochlorothiazide ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Hydrochlorothiazide,uses
+kn,Hydrochlorothiazide ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Hydrochlorothiazide,uses
+kn,Hydrochlorothiazide ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Hydrochlorothiazide,uses
+kn,Hydrochlorothiazide ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Hydrochlorothiazide,side_effects
+kn,Hydrochlorothiazide ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Hydrochlorothiazide,side_effects
+kn,Hydrochlorothiazide ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Hydrochlorothiazide,side_effects
+kn,Hydrochlorothiazide ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Hydrochlorothiazide,contraindications
+kn,Hydrochlorothiazide ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Hydrochlorothiazide,contraindications
+kn,ಯಾರು Hydrochlorothiazide ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Hydrochlorothiazide,contraindications
+kn,Hydrochlorothiazide ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Hydrochlorothiazide,warnings
+kn,Hydrochlorothiazide ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Hydrochlorothiazide,warnings
+kn,Hydrochlorothiazide ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Hydrochlorothiazide,warnings
+kn,Hydrochlorothiazide ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Hydrochlorothiazide,interactions
+kn,Hydrochlorothiazide ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Hydrochlorothiazide,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Hydrochlorothiazide ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Hydrochlorothiazide,interactions
+kn,Hydrochlorothiazide ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Hydrochlorothiazide,dosage
+kn,Hydrochlorothiazide ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Hydrochlorothiazide,dosage
+kn,Hydrochlorothiazide ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Hydrochlorothiazide,dosage
+kn,Atenolol ಎಂದರೇನು?,Atenolol,medicine_info
+kn,Atenolol ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Atenolol,medicine_info
+kn,Atenolol ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Atenolol,medicine_info
+kn,Atenolol ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Atenolol,uses
+kn,Atenolol ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Atenolol,uses
+kn,Atenolol ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Atenolol,uses
+kn,Atenolol ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Atenolol,side_effects
+kn,Atenolol ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Atenolol,side_effects
+kn,Atenolol ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Atenolol,side_effects
+kn,Atenolol ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Atenolol,contraindications
+kn,Atenolol ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Atenolol,contraindications
+kn,ಯಾರು Atenolol ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Atenolol,contraindications
+kn,Atenolol ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Atenolol,warnings
+kn,Atenolol ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Atenolol,warnings
+kn,Atenolol ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Atenolol,warnings
+kn,Atenolol ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Atenolol,interactions
+kn,Atenolol ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Atenolol,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Atenolol ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Atenolol,interactions
+kn,Atenolol ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Atenolol,dosage
+kn,Atenolol ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Atenolol,dosage
+kn,Atenolol ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Atenolol,dosage
+kn,Ramipril ಎಂದರೇನು?,Ramipril,medicine_info
+kn,Ramipril ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Ramipril,medicine_info
+kn,Ramipril ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Ramipril,medicine_info
+kn,Ramipril ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Ramipril,uses
+kn,Ramipril ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Ramipril,uses
+kn,Ramipril ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Ramipril,uses
+kn,Ramipril ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Ramipril,side_effects
+kn,Ramipril ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Ramipril,side_effects
+kn,Ramipril ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Ramipril,side_effects
+kn,Ramipril ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Ramipril,contraindications
+kn,Ramipril ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Ramipril,contraindications
+kn,ಯಾರು Ramipril ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Ramipril,contraindications
+kn,Ramipril ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Ramipril,warnings
+kn,Ramipril ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Ramipril,warnings
+kn,Ramipril ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Ramipril,warnings
+kn,Ramipril ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Ramipril,interactions
+kn,Ramipril ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Ramipril,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Ramipril ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Ramipril,interactions
+kn,Ramipril ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Ramipril,dosage
+kn,Ramipril ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Ramipril,dosage
+kn,Ramipril ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Ramipril,dosage
+kn,Chlorthalidone ಎಂದರೇನು?,Chlorthalidone,medicine_info
+kn,Chlorthalidone ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Chlorthalidone,medicine_info
+kn,Chlorthalidone ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Chlorthalidone,medicine_info
+kn,Chlorthalidone ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Chlorthalidone,uses
+kn,Chlorthalidone ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Chlorthalidone,uses
+kn,Chlorthalidone ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Chlorthalidone,uses
+kn,Chlorthalidone ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Chlorthalidone,side_effects
+kn,Chlorthalidone ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Chlorthalidone,side_effects
+kn,Chlorthalidone ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Chlorthalidone,side_effects
+kn,Chlorthalidone ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Chlorthalidone,contraindications
+kn,Chlorthalidone ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Chlorthalidone,contraindications
+kn,ಯಾರು Chlorthalidone ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Chlorthalidone,contraindications
+kn,Chlorthalidone ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Chlorthalidone,warnings
+kn,Chlorthalidone ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Chlorthalidone,warnings
+kn,Chlorthalidone ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Chlorthalidone,warnings
+kn,Chlorthalidone ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Chlorthalidone,interactions
+kn,Chlorthalidone ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Chlorthalidone,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Chlorthalidone ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Chlorthalidone,interactions
+kn,Chlorthalidone ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Chlorthalidone,dosage
+kn,Chlorthalidone ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Chlorthalidone,dosage
+kn,Chlorthalidone ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Chlorthalidone,dosage
+kn,Carvedilol ಎಂದರೇನು?,Carvedilol,medicine_info
+kn,Carvedilol ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Carvedilol,medicine_info
+kn,Carvedilol ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Carvedilol,medicine_info
+kn,Carvedilol ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Carvedilol,uses
+kn,Carvedilol ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Carvedilol,uses
+kn,Carvedilol ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Carvedilol,uses
+kn,Carvedilol ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Carvedilol,side_effects
+kn,Carvedilol ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Carvedilol,side_effects
+kn,Carvedilol ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Carvedilol,side_effects
+kn,Carvedilol ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Carvedilol,contraindications
+kn,Carvedilol ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Carvedilol,contraindications
+kn,ಯಾರು Carvedilol ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Carvedilol,contraindications
+kn,Carvedilol ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Carvedilol,warnings
+kn,Carvedilol ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Carvedilol,warnings
+kn,Carvedilol ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Carvedilol,warnings
+kn,Carvedilol ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Carvedilol,interactions
+kn,Carvedilol ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Carvedilol,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Carvedilol ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Carvedilol,interactions
+kn,Carvedilol ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Carvedilol,dosage
+kn,Carvedilol ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Carvedilol,dosage
+kn,Carvedilol ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Carvedilol,dosage
+kn,Clonidine ಎಂದರೇನು?,Clonidine,medicine_info
+kn,Clonidine ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Clonidine,medicine_info
+kn,Clonidine ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Clonidine,medicine_info
+kn,Clonidine ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Clonidine,uses
+kn,Clonidine ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Clonidine,uses
+kn,Clonidine ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Clonidine,uses
+kn,Clonidine ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Clonidine,side_effects
+kn,Clonidine ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Clonidine,side_effects
+kn,Clonidine ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Clonidine,side_effects
+kn,Clonidine ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Clonidine,contraindications
+kn,Clonidine ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Clonidine,contraindications
+kn,ಯಾರು Clonidine ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Clonidine,contraindications
+kn,Clonidine ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Clonidine,warnings
+kn,Clonidine ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Clonidine,warnings
+kn,Clonidine ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Clonidine,warnings
+kn,Clonidine ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Clonidine,interactions
+kn,Clonidine ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Clonidine,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Clonidine ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Clonidine,interactions
+kn,Clonidine ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Clonidine,dosage
+kn,Clonidine ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Clonidine,dosage
+kn,Clonidine ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Clonidine,dosage
+kn,Ibuprofen ಎಂದರೇನು?,Ibuprofen,medicine_info
+kn,Ibuprofen ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Ibuprofen,medicine_info
+kn,Ibuprofen ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Ibuprofen,medicine_info
+kn,Ibuprofen ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Ibuprofen,uses
+kn,Ibuprofen ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Ibuprofen,uses
+kn,Ibuprofen ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Ibuprofen,uses
+kn,Ibuprofen ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Ibuprofen,side_effects
+kn,Ibuprofen ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Ibuprofen,side_effects
+kn,Ibuprofen ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Ibuprofen,side_effects
+kn,Ibuprofen ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Ibuprofen,contraindications
+kn,Ibuprofen ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Ibuprofen,contraindications
+kn,ಯಾರು Ibuprofen ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Ibuprofen,contraindications
+kn,Ibuprofen ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Ibuprofen,warnings
+kn,Ibuprofen ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Ibuprofen,warnings
+kn,Ibuprofen ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Ibuprofen,warnings
+kn,Ibuprofen ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Ibuprofen,interactions
+kn,Ibuprofen ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Ibuprofen,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Ibuprofen ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Ibuprofen,interactions
+kn,Ibuprofen ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Ibuprofen,dosage
+kn,Ibuprofen ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Ibuprofen,dosage
+kn,Ibuprofen ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Ibuprofen,dosage
+kn,Diclofenac ಎಂದರೇನು?,Diclofenac,medicine_info
+kn,Diclofenac ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Diclofenac,medicine_info
+kn,Diclofenac ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Diclofenac,medicine_info
+kn,Diclofenac ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Diclofenac,uses
+kn,Diclofenac ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Diclofenac,uses
+kn,Diclofenac ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Diclofenac,uses
+kn,Diclofenac ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Diclofenac,side_effects
+kn,Diclofenac ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Diclofenac,side_effects
+kn,Diclofenac ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Diclofenac,side_effects
+kn,Diclofenac ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Diclofenac,contraindications
+kn,Diclofenac ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Diclofenac,contraindications
+kn,ಯಾರು Diclofenac ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Diclofenac,contraindications
+kn,Diclofenac ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Diclofenac,warnings
+kn,Diclofenac ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Diclofenac,warnings
+kn,Diclofenac ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Diclofenac,warnings
+kn,Diclofenac ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Diclofenac,interactions
+kn,Diclofenac ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Diclofenac,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Diclofenac ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Diclofenac,interactions
+kn,Diclofenac ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Diclofenac,dosage
+kn,Diclofenac ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Diclofenac,dosage
+kn,Diclofenac ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Diclofenac,dosage
+kn,Naproxen ಎಂದರೇನು?,Naproxen,medicine_info
+kn,Naproxen ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Naproxen,medicine_info
+kn,Naproxen ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Naproxen,medicine_info
+kn,Naproxen ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Naproxen,uses
+kn,Naproxen ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Naproxen,uses
+kn,Naproxen ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Naproxen,uses
+kn,Naproxen ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Naproxen,side_effects
+kn,Naproxen ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Naproxen,side_effects
+kn,Naproxen ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Naproxen,side_effects
+kn,Naproxen ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Naproxen,contraindications
+kn,Naproxen ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Naproxen,contraindications
+kn,ಯಾರು Naproxen ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Naproxen,contraindications
+kn,Naproxen ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Naproxen,warnings
+kn,Naproxen ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Naproxen,warnings
+kn,Naproxen ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Naproxen,warnings
+kn,Naproxen ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Naproxen,interactions
+kn,Naproxen ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Naproxen,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Naproxen ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Naproxen,interactions
+kn,Naproxen ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Naproxen,dosage
+kn,Naproxen ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Naproxen,dosage
+kn,Naproxen ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Naproxen,dosage
+kn,Methotrexate ಎಂದರೇನು?,Methotrexate,medicine_info
+kn,Methotrexate ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Methotrexate,medicine_info
+kn,Methotrexate ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Methotrexate,medicine_info
+kn,Methotrexate ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Methotrexate,uses
+kn,Methotrexate ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Methotrexate,uses
+kn,Methotrexate ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Methotrexate,uses
+kn,Methotrexate ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Methotrexate,side_effects
+kn,Methotrexate ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Methotrexate,side_effects
+kn,Methotrexate ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Methotrexate,side_effects
+kn,Methotrexate ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Methotrexate,contraindications
+kn,Methotrexate ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Methotrexate,contraindications
+kn,ಯಾರು Methotrexate ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Methotrexate,contraindications
+kn,Methotrexate ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Methotrexate,warnings
+kn,Methotrexate ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Methotrexate,warnings
+kn,Methotrexate ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Methotrexate,warnings
+kn,Methotrexate ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Methotrexate,interactions
+kn,Methotrexate ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Methotrexate,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Methotrexate ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Methotrexate,interactions
+kn,Methotrexate ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Methotrexate,dosage
+kn,Methotrexate ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Methotrexate,dosage
+kn,Methotrexate ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Methotrexate,dosage
+kn,Hydroxychloroquine ಎಂದರೇನು?,Hydroxychloroquine,medicine_info
+kn,Hydroxychloroquine ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Hydroxychloroquine,medicine_info
+kn,Hydroxychloroquine ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Hydroxychloroquine,medicine_info
+kn,Hydroxychloroquine ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Hydroxychloroquine,uses
+kn,Hydroxychloroquine ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Hydroxychloroquine,uses
+kn,Hydroxychloroquine ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Hydroxychloroquine,uses
+kn,Hydroxychloroquine ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Hydroxychloroquine,side_effects
+kn,Hydroxychloroquine ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Hydroxychloroquine,side_effects
+kn,Hydroxychloroquine ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Hydroxychloroquine,side_effects
+kn,Hydroxychloroquine ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Hydroxychloroquine,contraindications
+kn,Hydroxychloroquine ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Hydroxychloroquine,contraindications
+kn,ಯಾರು Hydroxychloroquine ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Hydroxychloroquine,contraindications
+kn,Hydroxychloroquine ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Hydroxychloroquine,warnings
+kn,Hydroxychloroquine ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Hydroxychloroquine,warnings
+kn,Hydroxychloroquine ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Hydroxychloroquine,warnings
+kn,Hydroxychloroquine ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Hydroxychloroquine,interactions
+kn,Hydroxychloroquine ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Hydroxychloroquine,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Hydroxychloroquine ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Hydroxychloroquine,interactions
+kn,Hydroxychloroquine ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Hydroxychloroquine,dosage
+kn,Hydroxychloroquine ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Hydroxychloroquine,dosage
+kn,Hydroxychloroquine ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Hydroxychloroquine,dosage
+kn,Celecoxib ಎಂದರೇನು?,Celecoxib,medicine_info
+kn,Celecoxib ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Celecoxib,medicine_info
+kn,Celecoxib ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Celecoxib,medicine_info
+kn,Celecoxib ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Celecoxib,uses
+kn,Celecoxib ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Celecoxib,uses
+kn,Celecoxib ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Celecoxib,uses
+kn,Celecoxib ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Celecoxib,side_effects
+kn,Celecoxib ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Celecoxib,side_effects
+kn,Celecoxib ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Celecoxib,side_effects
+kn,Celecoxib ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Celecoxib,contraindications
+kn,Celecoxib ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Celecoxib,contraindications
+kn,ಯಾರು Celecoxib ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Celecoxib,contraindications
+kn,Celecoxib ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Celecoxib,warnings
+kn,Celecoxib ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Celecoxib,warnings
+kn,Celecoxib ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Celecoxib,warnings
+kn,Celecoxib ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Celecoxib,interactions
+kn,Celecoxib ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Celecoxib,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Celecoxib ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Celecoxib,interactions
+kn,Celecoxib ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Celecoxib,dosage
+kn,Celecoxib ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Celecoxib,dosage
+kn,Celecoxib ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Celecoxib,dosage
+kn,Sulfasalazine ಎಂದರೇನು?,Sulfasalazine,medicine_info
+kn,Sulfasalazine ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Sulfasalazine,medicine_info
+kn,Sulfasalazine ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Sulfasalazine,medicine_info
+kn,Sulfasalazine ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Sulfasalazine,uses
+kn,Sulfasalazine ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Sulfasalazine,uses
+kn,Sulfasalazine ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Sulfasalazine,uses
+kn,Sulfasalazine ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Sulfasalazine,side_effects
+kn,Sulfasalazine ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Sulfasalazine,side_effects
+kn,Sulfasalazine ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Sulfasalazine,side_effects
+kn,Sulfasalazine ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Sulfasalazine,contraindications
+kn,Sulfasalazine ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Sulfasalazine,contraindications
+kn,ಯಾರು Sulfasalazine ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Sulfasalazine,contraindications
+kn,Sulfasalazine ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Sulfasalazine,warnings
+kn,Sulfasalazine ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Sulfasalazine,warnings
+kn,Sulfasalazine ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Sulfasalazine,warnings
+kn,Sulfasalazine ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Sulfasalazine,interactions
+kn,Sulfasalazine ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Sulfasalazine,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Sulfasalazine ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Sulfasalazine,interactions
+kn,Sulfasalazine ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Sulfasalazine,dosage
+kn,Sulfasalazine ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Sulfasalazine,dosage
+kn,Sulfasalazine ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Sulfasalazine,dosage
+kn,Prednisolone ಎಂದರೇನು?,Prednisolone,medicine_info
+kn,Prednisolone ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Prednisolone,medicine_info
+kn,Prednisolone ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Prednisolone,medicine_info
+kn,Prednisolone ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Prednisolone,uses
+kn,Prednisolone ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Prednisolone,uses
+kn,Prednisolone ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Prednisolone,uses
+kn,Prednisolone ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Prednisolone,side_effects
+kn,Prednisolone ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Prednisolone,side_effects
+kn,Prednisolone ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Prednisolone,side_effects
+kn,Prednisolone ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Prednisolone,contraindications
+kn,Prednisolone ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Prednisolone,contraindications
+kn,ಯಾರು Prednisolone ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Prednisolone,contraindications
+kn,Prednisolone ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Prednisolone,warnings
+kn,Prednisolone ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Prednisolone,warnings
+kn,Prednisolone ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Prednisolone,warnings
+kn,Prednisolone ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Prednisolone,interactions
+kn,Prednisolone ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Prednisolone,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Prednisolone ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Prednisolone,interactions
+kn,Prednisolone ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Prednisolone,dosage
+kn,Prednisolone ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Prednisolone,dosage
+kn,Prednisolone ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Prednisolone,dosage
+kn,Leflunomide ಎಂದರೇನು?,Leflunomide,medicine_info
+kn,Leflunomide ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Leflunomide,medicine_info
+kn,Leflunomide ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Leflunomide,medicine_info
+kn,Leflunomide ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Leflunomide,uses
+kn,Leflunomide ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Leflunomide,uses
+kn,Leflunomide ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Leflunomide,uses
+kn,Leflunomide ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Leflunomide,side_effects
+kn,Leflunomide ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Leflunomide,side_effects
+kn,Leflunomide ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Leflunomide,side_effects
+kn,Leflunomide ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Leflunomide,contraindications
+kn,Leflunomide ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Leflunomide,contraindications
+kn,ಯಾರು Leflunomide ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Leflunomide,contraindications
+kn,Leflunomide ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Leflunomide,warnings
+kn,Leflunomide ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Leflunomide,warnings
+kn,Leflunomide ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Leflunomide,warnings
+kn,Leflunomide ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Leflunomide,interactions
+kn,Leflunomide ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Leflunomide,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Leflunomide ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Leflunomide,interactions
+kn,Leflunomide ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Leflunomide,dosage
+kn,Leflunomide ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Leflunomide,dosage
+kn,Leflunomide ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Leflunomide,dosage
+kn,Colchicine ಎಂದರೇನು?,Colchicine,medicine_info
+kn,Colchicine ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ.,Colchicine,medicine_info
+kn,Colchicine ಬಗ್ಗೆ ನಾನು ಏನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Colchicine,medicine_info
+kn,Colchicine ಅನ್ನು ಯಾವುದಕ್ಕಾಗಿ ಬಳಸುತ್ತಾರೆ?,Colchicine,uses
+kn,Colchicine ಏಕೆ ಬಳಸಲಾಗುತ್ತದೆ?,Colchicine,uses
+kn,Colchicine ಯಾವ ಕಾಯಿಲೆಗೆ ಬಳಸಲಾಗುತ್ತದೆ?,Colchicine,uses
+kn,Colchicine ನ ಅಡ್ಡ ಪರಿಣಾಮಗಳು ಯಾವುವು?,Colchicine,side_effects
+kn,Colchicine ಅಡ್ಡ ಪರಿಣಾಮಗಳನ್ನು ಉಂಟುಮಾಡಬಹುದೇ?,Colchicine,side_effects
+kn,Colchicine ನಿಂದ ಯಾವ ಸಮಸ್ಯೆಗಳು ಉಂಟಾಗಬಹುದು?,Colchicine,side_effects
+kn,Colchicine ಅನ್ನು ಯಾರು ತೆಗೆದುಕೊಳ್ಳಬಾರದು?,Colchicine,contraindications
+kn,Colchicine ಅನ್ನು ಯಾವಾಗ ಬಳಸಬಾರದು?,Colchicine,contraindications
+kn,ಯಾರು Colchicine ಅನ್ನು ತಪ್ಪಿಸಬೇಕು?,Colchicine,contraindications
+kn,Colchicine ಬಗ್ಗೆ ಯಾವ ಎಚ್ಚರಿಕೆಗಳನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು?,Colchicine,warnings
+kn,Colchicine ಬಗ್ಗೆ ಯಾವುದೇ ಎಚ್ಚರಿಕೆಗಳಿವೆಯೇ?,Colchicine,warnings
+kn,Colchicine ತೆಗೆದುಕೊಳ್ಳುವಾಗ ನಾನು ಯಾವುದರ ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಬೇಕು?,Colchicine,warnings
+kn,Colchicine ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡುತ್ತದೆಯೇ?,Colchicine,interactions
+kn,Colchicine ಇತರ ಔಷಧಿಗಳೊಂದಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬಹುದೇ?,Colchicine,interactions
+kn,ಯಾವ ಔಷಧಿಗಳು Colchicine ಜೊತೆ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಾಡಬಹುದು?,Colchicine,interactions
+kn,Colchicine ಅನ್ನು ಹೇಗೆ ತೆಗೆದುಕೊಳ್ಳಬೇಕು?,Colchicine,dosage
+kn,Colchicine ಅನ್ನು ಹೇಗೆ ಬಳಸಬೇಕು?,Colchicine,dosage
+kn,Colchicine ನ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಏನು?,Colchicine,dosage
+tulu,Metformin ದೆಂದ್?,Metformin,medicine_info
+tulu,Metformin ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Metformin,medicine_info
+tulu,Metformin ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Metformin,medicine_info
+tulu,Metformin ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Metformin,uses
+tulu,Metformin ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Metformin,uses
+tulu,Metformin ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Metformin,uses
+tulu,Metformin ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Metformin,side_effects
+tulu,Metformin ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Metformin,side_effects
+tulu,Metformin ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Metformin,side_effects
+tulu,Metformin ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Metformin,contraindications
+tulu,Metformin ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Metformin,contraindications
+tulu,ಯಾರೆ Metformin ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Metformin,contraindications
+tulu,Metformin ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Metformin,warnings
+tulu,Metformin ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Metformin,warnings
+tulu,Metformin ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Metformin,warnings
+tulu,Metformin ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Metformin,interactions
+tulu,Metformin ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Metformin,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Metformin ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Metformin,interactions
+tulu,Metformin ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Metformin,dosage
+tulu,Metformin ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Metformin,dosage
+tulu,Metformin ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Metformin,dosage
+tulu,Glipizide ದೆಂದ್?,Glipizide,medicine_info
+tulu,Glipizide ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Glipizide,medicine_info
+tulu,Glipizide ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Glipizide,medicine_info
+tulu,Glipizide ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Glipizide,uses
+tulu,Glipizide ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Glipizide,uses
+tulu,Glipizide ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Glipizide,uses
+tulu,Glipizide ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Glipizide,side_effects
+tulu,Glipizide ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Glipizide,side_effects
+tulu,Glipizide ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Glipizide,side_effects
+tulu,Glipizide ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Glipizide,contraindications
+tulu,Glipizide ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Glipizide,contraindications
+tulu,ಯಾರೆ Glipizide ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Glipizide,contraindications
+tulu,Glipizide ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Glipizide,warnings
+tulu,Glipizide ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Glipizide,warnings
+tulu,Glipizide ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Glipizide,warnings
+tulu,Glipizide ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Glipizide,interactions
+tulu,Glipizide ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Glipizide,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Glipizide ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Glipizide,interactions
+tulu,Glipizide ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Glipizide,dosage
+tulu,Glipizide ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Glipizide,dosage
+tulu,Glipizide ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Glipizide,dosage
+tulu,Glimepiride ದೆಂದ್?,Glimepiride,medicine_info
+tulu,Glimepiride ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Glimepiride,medicine_info
+tulu,Glimepiride ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Glimepiride,medicine_info
+tulu,Glimepiride ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Glimepiride,uses
+tulu,Glimepiride ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Glimepiride,uses
+tulu,Glimepiride ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Glimepiride,uses
+tulu,Glimepiride ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Glimepiride,side_effects
+tulu,Glimepiride ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Glimepiride,side_effects
+tulu,Glimepiride ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Glimepiride,side_effects
+tulu,Glimepiride ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Glimepiride,contraindications
+tulu,Glimepiride ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Glimepiride,contraindications
+tulu,ಯಾರೆ Glimepiride ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Glimepiride,contraindications
+tulu,Glimepiride ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Glimepiride,warnings
+tulu,Glimepiride ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Glimepiride,warnings
+tulu,Glimepiride ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Glimepiride,warnings
+tulu,Glimepiride ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Glimepiride,interactions
+tulu,Glimepiride ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Glimepiride,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Glimepiride ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Glimepiride,interactions
+tulu,Glimepiride ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Glimepiride,dosage
+tulu,Glimepiride ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Glimepiride,dosage
+tulu,Glimepiride ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Glimepiride,dosage
+tulu,Sitagliptin ದೆಂದ್?,Sitagliptin,medicine_info
+tulu,Sitagliptin ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Sitagliptin,medicine_info
+tulu,Sitagliptin ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Sitagliptin,medicine_info
+tulu,Sitagliptin ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Sitagliptin,uses
+tulu,Sitagliptin ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Sitagliptin,uses
+tulu,Sitagliptin ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Sitagliptin,uses
+tulu,Sitagliptin ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Sitagliptin,side_effects
+tulu,Sitagliptin ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Sitagliptin,side_effects
+tulu,Sitagliptin ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Sitagliptin,side_effects
+tulu,Sitagliptin ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Sitagliptin,contraindications
+tulu,Sitagliptin ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Sitagliptin,contraindications
+tulu,ಯಾರೆ Sitagliptin ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Sitagliptin,contraindications
+tulu,Sitagliptin ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Sitagliptin,warnings
+tulu,Sitagliptin ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Sitagliptin,warnings
+tulu,Sitagliptin ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Sitagliptin,warnings
+tulu,Sitagliptin ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Sitagliptin,interactions
+tulu,Sitagliptin ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Sitagliptin,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Sitagliptin ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Sitagliptin,interactions
+tulu,Sitagliptin ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Sitagliptin,dosage
+tulu,Sitagliptin ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Sitagliptin,dosage
+tulu,Sitagliptin ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Sitagliptin,dosage
+tulu,Empagliflozin ದೆಂದ್?,Empagliflozin,medicine_info
+tulu,Empagliflozin ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Empagliflozin,medicine_info
+tulu,Empagliflozin ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Empagliflozin,medicine_info
+tulu,Empagliflozin ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Empagliflozin,uses
+tulu,Empagliflozin ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Empagliflozin,uses
+tulu,Empagliflozin ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Empagliflozin,uses
+tulu,Empagliflozin ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Empagliflozin,side_effects
+tulu,Empagliflozin ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Empagliflozin,side_effects
+tulu,Empagliflozin ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Empagliflozin,side_effects
+tulu,Empagliflozin ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Empagliflozin,contraindications
+tulu,Empagliflozin ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Empagliflozin,contraindications
+tulu,ಯಾರೆ Empagliflozin ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Empagliflozin,contraindications
+tulu,Empagliflozin ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Empagliflozin,warnings
+tulu,Empagliflozin ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Empagliflozin,warnings
+tulu,Empagliflozin ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Empagliflozin,warnings
+tulu,Empagliflozin ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Empagliflozin,interactions
+tulu,Empagliflozin ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Empagliflozin,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Empagliflozin ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Empagliflozin,interactions
+tulu,Empagliflozin ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Empagliflozin,dosage
+tulu,Empagliflozin ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Empagliflozin,dosage
+tulu,Empagliflozin ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Empagliflozin,dosage
+tulu,Pioglitazone ದೆಂದ್?,Pioglitazone,medicine_info
+tulu,Pioglitazone ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Pioglitazone,medicine_info
+tulu,Pioglitazone ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Pioglitazone,medicine_info
+tulu,Pioglitazone ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Pioglitazone,uses
+tulu,Pioglitazone ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Pioglitazone,uses
+tulu,Pioglitazone ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Pioglitazone,uses
+tulu,Pioglitazone ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Pioglitazone,side_effects
+tulu,Pioglitazone ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Pioglitazone,side_effects
+tulu,Pioglitazone ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Pioglitazone,side_effects
+tulu,Pioglitazone ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Pioglitazone,contraindications
+tulu,Pioglitazone ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Pioglitazone,contraindications
+tulu,ಯಾರೆ Pioglitazone ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Pioglitazone,contraindications
+tulu,Pioglitazone ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Pioglitazone,warnings
+tulu,Pioglitazone ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Pioglitazone,warnings
+tulu,Pioglitazone ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Pioglitazone,warnings
+tulu,Pioglitazone ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Pioglitazone,interactions
+tulu,Pioglitazone ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Pioglitazone,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Pioglitazone ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Pioglitazone,interactions
+tulu,Pioglitazone ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Pioglitazone,dosage
+tulu,Pioglitazone ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Pioglitazone,dosage
+tulu,Pioglitazone ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Pioglitazone,dosage
+tulu,Insulin Glargine ದೆಂದ್?,Insulin Glargine,medicine_info
+tulu,Insulin Glargine ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Insulin Glargine,medicine_info
+tulu,Insulin Glargine ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Insulin Glargine,medicine_info
+tulu,Insulin Glargine ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Insulin Glargine,uses
+tulu,Insulin Glargine ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Insulin Glargine,uses
+tulu,Insulin Glargine ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Insulin Glargine,uses
+tulu,Insulin Glargine ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Insulin Glargine,side_effects
+tulu,Insulin Glargine ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Insulin Glargine,side_effects
+tulu,Insulin Glargine ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Insulin Glargine,side_effects
+tulu,Insulin Glargine ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Insulin Glargine,contraindications
+tulu,Insulin Glargine ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Insulin Glargine,contraindications
+tulu,ಯಾರೆ Insulin Glargine ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Insulin Glargine,contraindications
+tulu,Insulin Glargine ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Insulin Glargine,warnings
+tulu,Insulin Glargine ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Insulin Glargine,warnings
+tulu,Insulin Glargine ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Insulin Glargine,warnings
+tulu,Insulin Glargine ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Insulin Glargine,interactions
+tulu,Insulin Glargine ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Insulin Glargine,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Insulin Glargine ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Insulin Glargine,interactions
+tulu,Insulin Glargine ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Insulin Glargine,dosage
+tulu,Insulin Glargine ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Insulin Glargine,dosage
+tulu,Insulin Glargine ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Insulin Glargine,dosage
+tulu,Dapagliflozin ದೆಂದ್?,Dapagliflozin,medicine_info
+tulu,Dapagliflozin ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Dapagliflozin,medicine_info
+tulu,Dapagliflozin ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Dapagliflozin,medicine_info
+tulu,Dapagliflozin ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Dapagliflozin,uses
+tulu,Dapagliflozin ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Dapagliflozin,uses
+tulu,Dapagliflozin ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Dapagliflozin,uses
+tulu,Dapagliflozin ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Dapagliflozin,side_effects
+tulu,Dapagliflozin ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Dapagliflozin,side_effects
+tulu,Dapagliflozin ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Dapagliflozin,side_effects
+tulu,Dapagliflozin ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Dapagliflozin,contraindications
+tulu,Dapagliflozin ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Dapagliflozin,contraindications
+tulu,ಯಾರೆ Dapagliflozin ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Dapagliflozin,contraindications
+tulu,Dapagliflozin ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Dapagliflozin,warnings
+tulu,Dapagliflozin ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Dapagliflozin,warnings
+tulu,Dapagliflozin ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Dapagliflozin,warnings
+tulu,Dapagliflozin ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Dapagliflozin,interactions
+tulu,Dapagliflozin ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Dapagliflozin,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Dapagliflozin ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Dapagliflozin,interactions
+tulu,Dapagliflozin ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Dapagliflozin,dosage
+tulu,Dapagliflozin ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Dapagliflozin,dosage
+tulu,Dapagliflozin ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Dapagliflozin,dosage
+tulu,Vildagliptin ದೆಂದ್?,Vildagliptin,medicine_info
+tulu,Vildagliptin ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Vildagliptin,medicine_info
+tulu,Vildagliptin ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Vildagliptin,medicine_info
+tulu,Vildagliptin ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Vildagliptin,uses
+tulu,Vildagliptin ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Vildagliptin,uses
+tulu,Vildagliptin ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Vildagliptin,uses
+tulu,Vildagliptin ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Vildagliptin,side_effects
+tulu,Vildagliptin ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Vildagliptin,side_effects
+tulu,Vildagliptin ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Vildagliptin,side_effects
+tulu,Vildagliptin ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Vildagliptin,contraindications
+tulu,Vildagliptin ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Vildagliptin,contraindications
+tulu,ಯಾರೆ Vildagliptin ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Vildagliptin,contraindications
+tulu,Vildagliptin ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Vildagliptin,warnings
+tulu,Vildagliptin ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Vildagliptin,warnings
+tulu,Vildagliptin ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Vildagliptin,warnings
+tulu,Vildagliptin ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Vildagliptin,interactions
+tulu,Vildagliptin ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Vildagliptin,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Vildagliptin ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Vildagliptin,interactions
+tulu,Vildagliptin ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Vildagliptin,dosage
+tulu,Vildagliptin ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Vildagliptin,dosage
+tulu,Vildagliptin ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Vildagliptin,dosage
+tulu,Acarbose ದೆಂದ್?,Acarbose,medicine_info
+tulu,Acarbose ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Acarbose,medicine_info
+tulu,Acarbose ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Acarbose,medicine_info
+tulu,Acarbose ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Acarbose,uses
+tulu,Acarbose ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Acarbose,uses
+tulu,Acarbose ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Acarbose,uses
+tulu,Acarbose ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Acarbose,side_effects
+tulu,Acarbose ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Acarbose,side_effects
+tulu,Acarbose ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Acarbose,side_effects
+tulu,Acarbose ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Acarbose,contraindications
+tulu,Acarbose ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Acarbose,contraindications
+tulu,ಯಾರೆ Acarbose ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Acarbose,contraindications
+tulu,Acarbose ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Acarbose,warnings
+tulu,Acarbose ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Acarbose,warnings
+tulu,Acarbose ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Acarbose,warnings
+tulu,Acarbose ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Acarbose,interactions
+tulu,Acarbose ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Acarbose,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Acarbose ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Acarbose,interactions
+tulu,Acarbose ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Acarbose,dosage
+tulu,Acarbose ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Acarbose,dosage
+tulu,Acarbose ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Acarbose,dosage
+tulu,Amlodipine ದೆಂದ್?,Amlodipine,medicine_info
+tulu,Amlodipine ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Amlodipine,medicine_info
+tulu,Amlodipine ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Amlodipine,medicine_info
+tulu,Amlodipine ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Amlodipine,uses
+tulu,Amlodipine ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Amlodipine,uses
+tulu,Amlodipine ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Amlodipine,uses
+tulu,Amlodipine ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Amlodipine,side_effects
+tulu,Amlodipine ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Amlodipine,side_effects
+tulu,Amlodipine ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Amlodipine,side_effects
+tulu,Amlodipine ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Amlodipine,contraindications
+tulu,Amlodipine ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Amlodipine,contraindications
+tulu,ಯಾರೆ Amlodipine ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Amlodipine,contraindications
+tulu,Amlodipine ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Amlodipine,warnings
+tulu,Amlodipine ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Amlodipine,warnings
+tulu,Amlodipine ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Amlodipine,warnings
+tulu,Amlodipine ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Amlodipine,interactions
+tulu,Amlodipine ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Amlodipine,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Amlodipine ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Amlodipine,interactions
+tulu,Amlodipine ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Amlodipine,dosage
+tulu,Amlodipine ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Amlodipine,dosage
+tulu,Amlodipine ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Amlodipine,dosage
+tulu,Losartan ದೆಂದ್?,Losartan,medicine_info
+tulu,Losartan ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Losartan,medicine_info
+tulu,Losartan ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Losartan,medicine_info
+tulu,Losartan ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Losartan,uses
+tulu,Losartan ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Losartan,uses
+tulu,Losartan ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Losartan,uses
+tulu,Losartan ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Losartan,side_effects
+tulu,Losartan ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Losartan,side_effects
+tulu,Losartan ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Losartan,side_effects
+tulu,Losartan ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Losartan,contraindications
+tulu,Losartan ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Losartan,contraindications
+tulu,ಯಾರೆ Losartan ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Losartan,contraindications
+tulu,Losartan ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Losartan,warnings
+tulu,Losartan ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Losartan,warnings
+tulu,Losartan ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Losartan,warnings
+tulu,Losartan ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Losartan,interactions
+tulu,Losartan ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Losartan,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Losartan ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Losartan,interactions
+tulu,Losartan ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Losartan,dosage
+tulu,Losartan ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Losartan,dosage
+tulu,Losartan ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Losartan,dosage
+tulu,Enalapril ದೆಂದ್?,Enalapril,medicine_info
+tulu,Enalapril ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Enalapril,medicine_info
+tulu,Enalapril ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Enalapril,medicine_info
+tulu,Enalapril ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Enalapril,uses
+tulu,Enalapril ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Enalapril,uses
+tulu,Enalapril ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Enalapril,uses
+tulu,Enalapril ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Enalapril,side_effects
+tulu,Enalapril ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Enalapril,side_effects
+tulu,Enalapril ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Enalapril,side_effects
+tulu,Enalapril ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Enalapril,contraindications
+tulu,Enalapril ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Enalapril,contraindications
+tulu,ಯಾರೆ Enalapril ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Enalapril,contraindications
+tulu,Enalapril ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Enalapril,warnings
+tulu,Enalapril ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Enalapril,warnings
+tulu,Enalapril ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Enalapril,warnings
+tulu,Enalapril ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Enalapril,interactions
+tulu,Enalapril ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Enalapril,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Enalapril ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Enalapril,interactions
+tulu,Enalapril ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Enalapril,dosage
+tulu,Enalapril ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Enalapril,dosage
+tulu,Enalapril ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Enalapril,dosage
+tulu,Telmisartan ದೆಂದ್?,Telmisartan,medicine_info
+tulu,Telmisartan ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Telmisartan,medicine_info
+tulu,Telmisartan ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Telmisartan,medicine_info
+tulu,Telmisartan ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Telmisartan,uses
+tulu,Telmisartan ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Telmisartan,uses
+tulu,Telmisartan ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Telmisartan,uses
+tulu,Telmisartan ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Telmisartan,side_effects
+tulu,Telmisartan ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Telmisartan,side_effects
+tulu,Telmisartan ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Telmisartan,side_effects
+tulu,Telmisartan ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Telmisartan,contraindications
+tulu,Telmisartan ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Telmisartan,contraindications
+tulu,ಯಾರೆ Telmisartan ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Telmisartan,contraindications
+tulu,Telmisartan ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Telmisartan,warnings
+tulu,Telmisartan ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Telmisartan,warnings
+tulu,Telmisartan ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Telmisartan,warnings
+tulu,Telmisartan ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Telmisartan,interactions
+tulu,Telmisartan ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Telmisartan,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Telmisartan ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Telmisartan,interactions
+tulu,Telmisartan ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Telmisartan,dosage
+tulu,Telmisartan ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Telmisartan,dosage
+tulu,Telmisartan ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Telmisartan,dosage
+tulu,Hydrochlorothiazide ದೆಂದ್?,Hydrochlorothiazide,medicine_info
+tulu,Hydrochlorothiazide ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Hydrochlorothiazide,medicine_info
+tulu,Hydrochlorothiazide ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Hydrochlorothiazide,medicine_info
+tulu,Hydrochlorothiazide ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Hydrochlorothiazide,uses
+tulu,Hydrochlorothiazide ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Hydrochlorothiazide,uses
+tulu,Hydrochlorothiazide ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Hydrochlorothiazide,uses
+tulu,Hydrochlorothiazide ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Hydrochlorothiazide,side_effects
+tulu,Hydrochlorothiazide ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Hydrochlorothiazide,side_effects
+tulu,Hydrochlorothiazide ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Hydrochlorothiazide,side_effects
+tulu,Hydrochlorothiazide ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Hydrochlorothiazide,contraindications
+tulu,Hydrochlorothiazide ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Hydrochlorothiazide,contraindications
+tulu,ಯಾರೆ Hydrochlorothiazide ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Hydrochlorothiazide,contraindications
+tulu,Hydrochlorothiazide ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Hydrochlorothiazide,warnings
+tulu,Hydrochlorothiazide ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Hydrochlorothiazide,warnings
+tulu,Hydrochlorothiazide ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Hydrochlorothiazide,warnings
+tulu,Hydrochlorothiazide ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Hydrochlorothiazide,interactions
+tulu,Hydrochlorothiazide ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Hydrochlorothiazide,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Hydrochlorothiazide ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Hydrochlorothiazide,interactions
+tulu,Hydrochlorothiazide ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Hydrochlorothiazide,dosage
+tulu,Hydrochlorothiazide ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Hydrochlorothiazide,dosage
+tulu,Hydrochlorothiazide ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Hydrochlorothiazide,dosage
+tulu,Atenolol ದೆಂದ್?,Atenolol,medicine_info
+tulu,Atenolol ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Atenolol,medicine_info
+tulu,Atenolol ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Atenolol,medicine_info
+tulu,Atenolol ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Atenolol,uses
+tulu,Atenolol ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Atenolol,uses
+tulu,Atenolol ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Atenolol,uses
+tulu,Atenolol ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Atenolol,side_effects
+tulu,Atenolol ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Atenolol,side_effects
+tulu,Atenolol ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Atenolol,side_effects
+tulu,Atenolol ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Atenolol,contraindications
+tulu,Atenolol ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Atenolol,contraindications
+tulu,ಯಾರೆ Atenolol ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Atenolol,contraindications
+tulu,Atenolol ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Atenolol,warnings
+tulu,Atenolol ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Atenolol,warnings
+tulu,Atenolol ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Atenolol,warnings
+tulu,Atenolol ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Atenolol,interactions
+tulu,Atenolol ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Atenolol,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Atenolol ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Atenolol,interactions
+tulu,Atenolol ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Atenolol,dosage
+tulu,Atenolol ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Atenolol,dosage
+tulu,Atenolol ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Atenolol,dosage
+tulu,Ramipril ದೆಂದ್?,Ramipril,medicine_info
+tulu,Ramipril ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Ramipril,medicine_info
+tulu,Ramipril ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Ramipril,medicine_info
+tulu,Ramipril ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Ramipril,uses
+tulu,Ramipril ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Ramipril,uses
+tulu,Ramipril ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Ramipril,uses
+tulu,Ramipril ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Ramipril,side_effects
+tulu,Ramipril ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Ramipril,side_effects
+tulu,Ramipril ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Ramipril,side_effects
+tulu,Ramipril ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Ramipril,contraindications
+tulu,Ramipril ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Ramipril,contraindications
+tulu,ಯಾರೆ Ramipril ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Ramipril,contraindications
+tulu,Ramipril ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Ramipril,warnings
+tulu,Ramipril ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Ramipril,warnings
+tulu,Ramipril ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Ramipril,warnings
+tulu,Ramipril ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Ramipril,interactions
+tulu,Ramipril ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Ramipril,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Ramipril ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Ramipril,interactions
+tulu,Ramipril ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Ramipril,dosage
+tulu,Ramipril ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Ramipril,dosage
+tulu,Ramipril ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Ramipril,dosage
+tulu,Chlorthalidone ದೆಂದ್?,Chlorthalidone,medicine_info
+tulu,Chlorthalidone ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Chlorthalidone,medicine_info
+tulu,Chlorthalidone ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Chlorthalidone,medicine_info
+tulu,Chlorthalidone ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Chlorthalidone,uses
+tulu,Chlorthalidone ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Chlorthalidone,uses
+tulu,Chlorthalidone ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Chlorthalidone,uses
+tulu,Chlorthalidone ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Chlorthalidone,side_effects
+tulu,Chlorthalidone ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Chlorthalidone,side_effects
+tulu,Chlorthalidone ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Chlorthalidone,side_effects
+tulu,Chlorthalidone ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Chlorthalidone,contraindications
+tulu,Chlorthalidone ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Chlorthalidone,contraindications
+tulu,ಯಾರೆ Chlorthalidone ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Chlorthalidone,contraindications
+tulu,Chlorthalidone ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Chlorthalidone,warnings
+tulu,Chlorthalidone ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Chlorthalidone,warnings
+tulu,Chlorthalidone ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Chlorthalidone,warnings
+tulu,Chlorthalidone ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Chlorthalidone,interactions
+tulu,Chlorthalidone ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Chlorthalidone,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Chlorthalidone ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Chlorthalidone,interactions
+tulu,Chlorthalidone ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Chlorthalidone,dosage
+tulu,Chlorthalidone ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Chlorthalidone,dosage
+tulu,Chlorthalidone ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Chlorthalidone,dosage
+tulu,Carvedilol ದೆಂದ್?,Carvedilol,medicine_info
+tulu,Carvedilol ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Carvedilol,medicine_info
+tulu,Carvedilol ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Carvedilol,medicine_info
+tulu,Carvedilol ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Carvedilol,uses
+tulu,Carvedilol ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Carvedilol,uses
+tulu,Carvedilol ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Carvedilol,uses
+tulu,Carvedilol ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Carvedilol,side_effects
+tulu,Carvedilol ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Carvedilol,side_effects
+tulu,Carvedilol ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Carvedilol,side_effects
+tulu,Carvedilol ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Carvedilol,contraindications
+tulu,Carvedilol ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Carvedilol,contraindications
+tulu,ಯಾರೆ Carvedilol ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Carvedilol,contraindications
+tulu,Carvedilol ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Carvedilol,warnings
+tulu,Carvedilol ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Carvedilol,warnings
+tulu,Carvedilol ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Carvedilol,warnings
+tulu,Carvedilol ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Carvedilol,interactions
+tulu,Carvedilol ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Carvedilol,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Carvedilol ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Carvedilol,interactions
+tulu,Carvedilol ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Carvedilol,dosage
+tulu,Carvedilol ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Carvedilol,dosage
+tulu,Carvedilol ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Carvedilol,dosage
+tulu,Clonidine ದೆಂದ್?,Clonidine,medicine_info
+tulu,Clonidine ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Clonidine,medicine_info
+tulu,Clonidine ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Clonidine,medicine_info
+tulu,Clonidine ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Clonidine,uses
+tulu,Clonidine ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Clonidine,uses
+tulu,Clonidine ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Clonidine,uses
+tulu,Clonidine ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Clonidine,side_effects
+tulu,Clonidine ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Clonidine,side_effects
+tulu,Clonidine ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Clonidine,side_effects
+tulu,Clonidine ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Clonidine,contraindications
+tulu,Clonidine ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Clonidine,contraindications
+tulu,ಯಾರೆ Clonidine ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Clonidine,contraindications
+tulu,Clonidine ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Clonidine,warnings
+tulu,Clonidine ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Clonidine,warnings
+tulu,Clonidine ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Clonidine,warnings
+tulu,Clonidine ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Clonidine,interactions
+tulu,Clonidine ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Clonidine,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Clonidine ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Clonidine,interactions
+tulu,Clonidine ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Clonidine,dosage
+tulu,Clonidine ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Clonidine,dosage
+tulu,Clonidine ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Clonidine,dosage
+tulu,Ibuprofen ದೆಂದ್?,Ibuprofen,medicine_info
+tulu,Ibuprofen ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Ibuprofen,medicine_info
+tulu,Ibuprofen ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Ibuprofen,medicine_info
+tulu,Ibuprofen ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Ibuprofen,uses
+tulu,Ibuprofen ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Ibuprofen,uses
+tulu,Ibuprofen ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Ibuprofen,uses
+tulu,Ibuprofen ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Ibuprofen,side_effects
+tulu,Ibuprofen ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Ibuprofen,side_effects
+tulu,Ibuprofen ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Ibuprofen,side_effects
+tulu,Ibuprofen ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Ibuprofen,contraindications
+tulu,Ibuprofen ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Ibuprofen,contraindications
+tulu,ಯಾರೆ Ibuprofen ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Ibuprofen,contraindications
+tulu,Ibuprofen ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Ibuprofen,warnings
+tulu,Ibuprofen ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Ibuprofen,warnings
+tulu,Ibuprofen ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Ibuprofen,warnings
+tulu,Ibuprofen ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Ibuprofen,interactions
+tulu,Ibuprofen ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Ibuprofen,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Ibuprofen ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Ibuprofen,interactions
+tulu,Ibuprofen ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Ibuprofen,dosage
+tulu,Ibuprofen ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Ibuprofen,dosage
+tulu,Ibuprofen ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Ibuprofen,dosage
+tulu,Diclofenac ದೆಂದ್?,Diclofenac,medicine_info
+tulu,Diclofenac ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Diclofenac,medicine_info
+tulu,Diclofenac ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Diclofenac,medicine_info
+tulu,Diclofenac ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Diclofenac,uses
+tulu,Diclofenac ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Diclofenac,uses
+tulu,Diclofenac ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Diclofenac,uses
+tulu,Diclofenac ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Diclofenac,side_effects
+tulu,Diclofenac ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Diclofenac,side_effects
+tulu,Diclofenac ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Diclofenac,side_effects
+tulu,Diclofenac ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Diclofenac,contraindications
+tulu,Diclofenac ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Diclofenac,contraindications
+tulu,ಯಾರೆ Diclofenac ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Diclofenac,contraindications
+tulu,Diclofenac ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Diclofenac,warnings
+tulu,Diclofenac ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Diclofenac,warnings
+tulu,Diclofenac ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Diclofenac,warnings
+tulu,Diclofenac ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Diclofenac,interactions
+tulu,Diclofenac ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Diclofenac,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Diclofenac ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Diclofenac,interactions
+tulu,Diclofenac ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Diclofenac,dosage
+tulu,Diclofenac ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Diclofenac,dosage
+tulu,Diclofenac ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Diclofenac,dosage
+tulu,Naproxen ದೆಂದ್?,Naproxen,medicine_info
+tulu,Naproxen ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Naproxen,medicine_info
+tulu,Naproxen ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Naproxen,medicine_info
+tulu,Naproxen ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Naproxen,uses
+tulu,Naproxen ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Naproxen,uses
+tulu,Naproxen ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Naproxen,uses
+tulu,Naproxen ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Naproxen,side_effects
+tulu,Naproxen ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Naproxen,side_effects
+tulu,Naproxen ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Naproxen,side_effects
+tulu,Naproxen ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Naproxen,contraindications
+tulu,Naproxen ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Naproxen,contraindications
+tulu,ಯಾರೆ Naproxen ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Naproxen,contraindications
+tulu,Naproxen ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Naproxen,warnings
+tulu,Naproxen ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Naproxen,warnings
+tulu,Naproxen ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Naproxen,warnings
+tulu,Naproxen ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Naproxen,interactions
+tulu,Naproxen ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Naproxen,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Naproxen ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Naproxen,interactions
+tulu,Naproxen ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Naproxen,dosage
+tulu,Naproxen ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Naproxen,dosage
+tulu,Naproxen ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Naproxen,dosage
+tulu,Methotrexate ದೆಂದ್?,Methotrexate,medicine_info
+tulu,Methotrexate ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Methotrexate,medicine_info
+tulu,Methotrexate ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Methotrexate,medicine_info
+tulu,Methotrexate ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Methotrexate,uses
+tulu,Methotrexate ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Methotrexate,uses
+tulu,Methotrexate ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Methotrexate,uses
+tulu,Methotrexate ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Methotrexate,side_effects
+tulu,Methotrexate ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Methotrexate,side_effects
+tulu,Methotrexate ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Methotrexate,side_effects
+tulu,Methotrexate ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Methotrexate,contraindications
+tulu,Methotrexate ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Methotrexate,contraindications
+tulu,ಯಾರೆ Methotrexate ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Methotrexate,contraindications
+tulu,Methotrexate ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Methotrexate,warnings
+tulu,Methotrexate ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Methotrexate,warnings
+tulu,Methotrexate ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Methotrexate,warnings
+tulu,Methotrexate ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Methotrexate,interactions
+tulu,Methotrexate ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Methotrexate,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Methotrexate ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Methotrexate,interactions
+tulu,Methotrexate ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Methotrexate,dosage
+tulu,Methotrexate ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Methotrexate,dosage
+tulu,Methotrexate ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Methotrexate,dosage
+tulu,Hydroxychloroquine ದೆಂದ್?,Hydroxychloroquine,medicine_info
+tulu,Hydroxychloroquine ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Hydroxychloroquine,medicine_info
+tulu,Hydroxychloroquine ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Hydroxychloroquine,medicine_info
+tulu,Hydroxychloroquine ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Hydroxychloroquine,uses
+tulu,Hydroxychloroquine ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Hydroxychloroquine,uses
+tulu,Hydroxychloroquine ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Hydroxychloroquine,uses
+tulu,Hydroxychloroquine ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Hydroxychloroquine,side_effects
+tulu,Hydroxychloroquine ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Hydroxychloroquine,side_effects
+tulu,Hydroxychloroquine ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Hydroxychloroquine,side_effects
+tulu,Hydroxychloroquine ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Hydroxychloroquine,contraindications
+tulu,Hydroxychloroquine ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Hydroxychloroquine,contraindications
+tulu,ಯಾರೆ Hydroxychloroquine ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Hydroxychloroquine,contraindications
+tulu,Hydroxychloroquine ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Hydroxychloroquine,warnings
+tulu,Hydroxychloroquine ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Hydroxychloroquine,warnings
+tulu,Hydroxychloroquine ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Hydroxychloroquine,warnings
+tulu,Hydroxychloroquine ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Hydroxychloroquine,interactions
+tulu,Hydroxychloroquine ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Hydroxychloroquine,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Hydroxychloroquine ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Hydroxychloroquine,interactions
+tulu,Hydroxychloroquine ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Hydroxychloroquine,dosage
+tulu,Hydroxychloroquine ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Hydroxychloroquine,dosage
+tulu,Hydroxychloroquine ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Hydroxychloroquine,dosage
+tulu,Celecoxib ದೆಂದ್?,Celecoxib,medicine_info
+tulu,Celecoxib ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Celecoxib,medicine_info
+tulu,Celecoxib ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Celecoxib,medicine_info
+tulu,Celecoxib ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Celecoxib,uses
+tulu,Celecoxib ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Celecoxib,uses
+tulu,Celecoxib ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Celecoxib,uses
+tulu,Celecoxib ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Celecoxib,side_effects
+tulu,Celecoxib ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Celecoxib,side_effects
+tulu,Celecoxib ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Celecoxib,side_effects
+tulu,Celecoxib ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Celecoxib,contraindications
+tulu,Celecoxib ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Celecoxib,contraindications
+tulu,ಯಾರೆ Celecoxib ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Celecoxib,contraindications
+tulu,Celecoxib ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Celecoxib,warnings
+tulu,Celecoxib ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Celecoxib,warnings
+tulu,Celecoxib ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Celecoxib,warnings
+tulu,Celecoxib ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Celecoxib,interactions
+tulu,Celecoxib ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Celecoxib,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Celecoxib ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Celecoxib,interactions
+tulu,Celecoxib ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Celecoxib,dosage
+tulu,Celecoxib ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Celecoxib,dosage
+tulu,Celecoxib ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Celecoxib,dosage
+tulu,Sulfasalazine ದೆಂದ್?,Sulfasalazine,medicine_info
+tulu,Sulfasalazine ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Sulfasalazine,medicine_info
+tulu,Sulfasalazine ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Sulfasalazine,medicine_info
+tulu,Sulfasalazine ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Sulfasalazine,uses
+tulu,Sulfasalazine ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Sulfasalazine,uses
+tulu,Sulfasalazine ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Sulfasalazine,uses
+tulu,Sulfasalazine ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Sulfasalazine,side_effects
+tulu,Sulfasalazine ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Sulfasalazine,side_effects
+tulu,Sulfasalazine ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Sulfasalazine,side_effects
+tulu,Sulfasalazine ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Sulfasalazine,contraindications
+tulu,Sulfasalazine ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Sulfasalazine,contraindications
+tulu,ಯಾರೆ Sulfasalazine ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Sulfasalazine,contraindications
+tulu,Sulfasalazine ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Sulfasalazine,warnings
+tulu,Sulfasalazine ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Sulfasalazine,warnings
+tulu,Sulfasalazine ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Sulfasalazine,warnings
+tulu,Sulfasalazine ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Sulfasalazine,interactions
+tulu,Sulfasalazine ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Sulfasalazine,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Sulfasalazine ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Sulfasalazine,interactions
+tulu,Sulfasalazine ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Sulfasalazine,dosage
+tulu,Sulfasalazine ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Sulfasalazine,dosage
+tulu,Sulfasalazine ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Sulfasalazine,dosage
+tulu,Prednisolone ದೆಂದ್?,Prednisolone,medicine_info
+tulu,Prednisolone ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Prednisolone,medicine_info
+tulu,Prednisolone ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Prednisolone,medicine_info
+tulu,Prednisolone ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Prednisolone,uses
+tulu,Prednisolone ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Prednisolone,uses
+tulu,Prednisolone ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Prednisolone,uses
+tulu,Prednisolone ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Prednisolone,side_effects
+tulu,Prednisolone ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Prednisolone,side_effects
+tulu,Prednisolone ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Prednisolone,side_effects
+tulu,Prednisolone ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Prednisolone,contraindications
+tulu,Prednisolone ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Prednisolone,contraindications
+tulu,ಯಾರೆ Prednisolone ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Prednisolone,contraindications
+tulu,Prednisolone ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Prednisolone,warnings
+tulu,Prednisolone ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Prednisolone,warnings
+tulu,Prednisolone ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Prednisolone,warnings
+tulu,Prednisolone ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Prednisolone,interactions
+tulu,Prednisolone ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Prednisolone,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Prednisolone ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Prednisolone,interactions
+tulu,Prednisolone ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Prednisolone,dosage
+tulu,Prednisolone ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Prednisolone,dosage
+tulu,Prednisolone ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Prednisolone,dosage
+tulu,Leflunomide ದೆಂದ್?,Leflunomide,medicine_info
+tulu,Leflunomide ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Leflunomide,medicine_info
+tulu,Leflunomide ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Leflunomide,medicine_info
+tulu,Leflunomide ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Leflunomide,uses
+tulu,Leflunomide ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Leflunomide,uses
+tulu,Leflunomide ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Leflunomide,uses
+tulu,Leflunomide ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Leflunomide,side_effects
+tulu,Leflunomide ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Leflunomide,side_effects
+tulu,Leflunomide ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Leflunomide,side_effects
+tulu,Leflunomide ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Leflunomide,contraindications
+tulu,Leflunomide ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Leflunomide,contraindications
+tulu,ಯಾರೆ Leflunomide ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Leflunomide,contraindications
+tulu,Leflunomide ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Leflunomide,warnings
+tulu,Leflunomide ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Leflunomide,warnings
+tulu,Leflunomide ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Leflunomide,warnings
+tulu,Leflunomide ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Leflunomide,interactions
+tulu,Leflunomide ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Leflunomide,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Leflunomide ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Leflunomide,interactions
+tulu,Leflunomide ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Leflunomide,dosage
+tulu,Leflunomide ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Leflunomide,dosage
+tulu,Leflunomide ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Leflunomide,dosage
+tulu,Colchicine ದೆಂದ್?,Colchicine,medicine_info
+tulu,Colchicine ದ ಬಗ್ಗೆ ಮಾಹಿತಿ ಕೊರ್ಲೆ.,Colchicine,medicine_info
+tulu,Colchicine ಬಗ್ಗೆ ಎಂಕ್ ಏನ್ ಗೊತ್ತ್ ಆಪುನ?,Colchicine,medicine_info
+tulu,Colchicine ಯಾನ್ ಎತ್ಕ್ ಉಪಯೋಗ ಆಪುಂಡು?,Colchicine,uses
+tulu,Colchicine ಯಾನ್ ಯಾಕೆ ಉಪಯೋಗ ಮಲ್ಪುಂಡು?,Colchicine,uses
+tulu,Colchicine ಯಾನ್ ಎತ್ ಕಾಯಿಲೆಗ್ ಉಪಯೋಗ ಆಪುಂಡು?,Colchicine,uses
+tulu,Colchicine ದ ಅಡ್ಡ ಪರಿಣಾಮೊಲು ಎಂಚಿನವು?,Colchicine,side_effects
+tulu,Colchicine ದಿಂದ ಅಡ್ಡ ಪರಿಣಾಮ ಆಪುಂಡಾ?,Colchicine,side_effects
+tulu,Colchicine ದಿಂದ ಎಂಚಿನ ಸಮಸ್ಯೆ ಆಪುಂಡು?,Colchicine,side_effects
+tulu,Colchicine ಯಾನ್ ಯಾರೆ ದೆತೊನ್ಬಾರದು?,Colchicine,contraindications
+tulu,Colchicine ಯಾನ್ ಯಾನ್ ಸಮಯಡ್ ದೆತೊನ್ಬಾರದು?,Colchicine,contraindications
+tulu,ಯಾರೆ Colchicine ಯಾನ್ ತಪ್ಪಿಸಾಯೆರೆ?,Colchicine,contraindications
+tulu,Colchicine ಬಗ್ಗೆ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಉಂಡು?,Colchicine,warnings
+tulu,Colchicine ಬಗ್ಗೆ ಎಚ್ಚರಿಕೆ ಉಂಡಾ?,Colchicine,warnings
+tulu,Colchicine ದೆತೊನುವಾಗ ಎಂಚಿನ ಎಚ್ಚರಿಕೆ ಕೊರ್ಲೆ?,Colchicine,warnings
+tulu,Colchicine ಬೊಕ್ಕ ಬೇತೆ ಮರ್ದ್‌ಲು ಒಟ್ಟುಗು ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Colchicine,interactions
+tulu,Colchicine ಬೇತೆ ಮರ್ದ್‌ದೊಟ್ಟುಗು ಪ್ರತಿಕ್ರಿಯೆ ಮಲ್ಪುಂಡಾ?,Colchicine,interactions
+tulu,ಎಂಚಿನ ಮರ್ದ್‌ಲು Colchicine ಬೊಕ್ಕ ಪರಸ್ಪರ ಕ್ರಿಯೆ ಮಲ್ಪುಂಡು?,Colchicine,interactions
+tulu,Colchicine ಯಾನ್ ಎಂಚ ದೆತೊನ್ಬೇಕು?,Colchicine,dosage
+tulu,Colchicine ಯಾನ್ ಎಂಚ ಉಪಯೋಗ ಮಲ್ಪುಲೆ?,Colchicine,dosage
+tulu,Colchicine ದ ಡೋಸೇಜ್ ಮಾಹಿತಿ ಎಂಚಿನದು?,Colchicine,dosage
