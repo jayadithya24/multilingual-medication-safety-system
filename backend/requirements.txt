@@ -1,6 +1,8 @@
 fastapi
 uvicorn
 pandas
+scikit-learn
+joblib
 pymongo
 python-multipart
 python-jose[cryptography]

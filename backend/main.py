@@ -27,6 +27,7 @@ from backend.app.routes.patient import router as patient_router
 from backend.app.routes.access_requests import router as access_requests_router
 from backend.app.services.ocr_service import warm_up_reader
 from backend.app.routes.fcm import router as fcm_router
+from backend.app.routes.risk_prediction import router as risk_prediction_router
 from backend.app.services.fcm_service import reminder_loop
 
 app = FastAPI(
@@ -61,6 +62,7 @@ app.include_router(patient_drugs_router)
 app.include_router(patient_router)
 app.include_router(access_requests_router)
 app.include_router(fcm_router)
+app.include_router(risk_prediction_router)
 
 reminder_stop_event = asyncio.Event()
 reminder_task = None

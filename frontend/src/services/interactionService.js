@@ -16,3 +16,8 @@ export const checkMultiDrugInteraction = async (drugs, lang = "en") => {
   const response = await api.post("/interaction/multi", { drugs }, { params: { lang } });
   return response.data;
 };
+
+export const predictRisk = async (data) => {
+  const response = await api.post("/ml/risk-predict", data);
+  return response.data;
+};

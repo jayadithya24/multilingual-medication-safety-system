@@ -1,6 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import Loading from "../../components/Loading/Loading";
-import { checkDrugInteraction } from "../../services/interactionService";
+import {
+  checkDrugInteraction,
+  predictRisk,
+} from "../../services/interactionService";
 import { fetchMedicines } from "../../services/medicineService";
 import { loginWithPassword } from "../../services/authService";
 import { getStoredToken } from "../../services/api";
@@ -12,6 +15,14 @@ function DrugInteraction() {
   const [lang] = useState("en");
   const [drug1, setDrug1] = useState("");
   const [drug2, setDrug2] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("Male");
+  const [conditions, setConditions] = useState("Hypertension");
+  const [kidneyFunction, setKidneyFunction] = useState("Normal");
+  const [liverFunction, setLiverFunction] = useState("Normal");
+  const [bmiCategory, setBmiCategory] = useState("Normal");
+  const [nDrugs, setNDrugs] = useState(2);
+  const [mlResult, setMlResult] = useState(null);
   const [medicineNames, setMedicineNames] = useState([]);
   const [loadingMedicines, setLoadingMedicines] = useState(true);
   const [checking, setChecking] = useState(false);
@@ -66,14 +77,41 @@ function DrugInteraction() {
     return "";
   }, [result]);
 
+  const formatPercent = (value) => {
+    const numericValue = Number(value);
+
+    if (Number.isNaN(numericValue)) return "N/A";
+
+    return `${(numericValue * 100).toFixed(1)}%`;
+  };
+
   const handleCheckInteraction = async () => {
     if (!isAuthenticated) {
       setError("Please sign in as a doctor before checking interactions.");
       return;
     }
 
-    if (!drug1.trim() || !drug2.trim()) {
+    const trimmedDrug1 = drug1.trim();
+    const trimmedDrug2 = drug2.trim();
+    const patientAge = Number(age);
+    const currentMedicineCount = Number(nDrugs);
+
+    if (!trimmedDrug1 || !trimmedDrug2) {
       setError("Please select or enter two medicines.");
+      return;
+    }
+
+    if (!age || !Number.isFinite(patientAge) || patientAge < 0 || patientAge > 120) {
+      setError("Please enter a valid patient age.");
+      return;
+    }
+
+    if (
+      !nDrugs ||
+      !Number.isFinite(currentMedicineCount) ||
+      currentMedicineCount < 1
+    ) {
+      setError("Please enter a valid number of current medicines.");
       return;
     }
 
@@ -81,9 +119,34 @@ function DrugInteraction() {
       setChecking(true);
       setError("");
       setResult(null);
+      setMlResult(null);
 
-      const response = await checkDrugInteraction(drug1.trim(), drug2.trim(), lang);
+      const response = await checkDrugInteraction(
+        trimmedDrug1,
+        trimmedDrug2,
+        lang
+      );
+
       setResult(response);
+
+      try {
+        const riskResponse = await predictRisk({
+          age: patientAge,
+          gender,
+          conditions,
+          kidney_function: kidneyFunction,
+          liver_function: liverFunction,
+          bmi_category: bmiCategory,
+          n_drugs: currentMedicineCount,
+          drug_1: trimmedDrug1,
+          drug_2: trimmedDrug2,
+        });
+
+        setMlResult(riskResponse);
+      } catch (riskError) {
+        console.error(riskError);
+        setError("Interaction checked, but ML risk prediction is unavailable right now.");
+      }
     } catch (checkError) {
       console.error(checkError);
       const detail = checkError?.response?.data?.detail;
@@ -165,6 +228,79 @@ function DrugInteraction() {
           )}
 
           <div className="interaction-form">
+          <label className="interaction-field">
+  <span>Age</span>
+  <input
+    type="number"
+    value={age}
+    onChange={(event) => setAge(event.target.value)}
+    placeholder="Enter patient age"
+  />
+</label>
+
+<label className="interaction-field">
+  <span>Gender</span>
+  <select value={gender} onChange={(event) => setGender(event.target.value)}>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select>
+</label>
+
+<label className="interaction-field">
+  <span>Condition</span>
+  <select value={conditions} onChange={(event) => setConditions(event.target.value)}>
+    <option value="Hypertension">Hypertension</option>
+    <option value="Arthritis">Arthritis</option>
+    <option value="Diabetes">Diabetes</option>
+  </select>
+</label>
+
+<label className="interaction-field">
+  <span>Kidney Function</span>
+  <select
+    value={kidneyFunction}
+    onChange={(event) => setKidneyFunction(event.target.value)}
+  >
+    <option value="Normal">Normal</option>
+    <option value="Mild Impairment">Mild Impairment</option>
+    <option value="Moderate Impairment">Moderate Impairment</option>
+    <option value="Severe Impairment">Severe Impairment</option>
+  </select>
+</label>
+
+<label className="interaction-field">
+  <span>Liver Function</span>
+  <select
+    value={liverFunction}
+    onChange={(event) => setLiverFunction(event.target.value)}
+  >
+    <option value="Normal">Normal</option>
+    <option value="Impaired">Impaired</option>
+  </select>
+</label>
+
+<label className="interaction-field">
+  <span>BMI Category</span>
+  <select
+    value={bmiCategory}
+    onChange={(event) => setBmiCategory(event.target.value)}
+  >
+    <option value="Normal">Normal</option>
+    <option value="Underweight">Underweight</option>
+    <option value="Overweight">Overweight</option>
+    <option value="Obese">Obese</option>
+  </select>
+</label>
+
+<label className="interaction-field">
+  <span>Number of Current Medicines</span>
+  <input
+    type="number"
+    min="1"
+    value={nDrugs}
+    onChange={(event) => setNDrugs(event.target.value)}
+  />
+</label>
             <label className="interaction-field">
               <span>Medicine 1</span>
               <input
@@ -240,6 +376,44 @@ function DrugInteraction() {
                   </p>
                 </div>
               ) : null}
+            </div>
+          )}
+
+          {mlResult && (
+            <div className="interaction-card">
+              <div className="interaction-card__header">
+                <div>
+                  <p className="interaction-card__label">Personalized ML Risk Prediction</p>
+                  <h2>{mlResult.risk_level}</h2>
+                </div>
+              </div>
+
+              <div className="interaction-card__body">
+                <div className="interaction-card__block">
+                  <h3>Risk Level</h3>
+                  <p>{mlResult.risk_level}</p>
+                </div>
+
+                <div className="interaction-card__block">
+                  <h3>Confidence</h3>
+                  <p>{formatPercent(mlResult.confidence)}</p>
+                </div>
+
+                <div className="interaction-card__block">
+                  <h3>Mild Probability</h3>
+                  <p>{formatPercent(mlResult.probabilities?.Mild)}</p>
+                </div>
+
+                <div className="interaction-card__block">
+                  <h3>Moderate Probability</h3>
+                  <p>{formatPercent(mlResult.probabilities?.Moderate)}</p>
+                </div>
+
+                <div className="interaction-card__block">
+                  <h3>Severe Probability</h3>
+                  <p>{formatPercent(mlResult.probabilities?.Severe)}</p>
+                </div>
+              </div>
             </div>
           )}
           {/* Interaction Knowledge Graph */}

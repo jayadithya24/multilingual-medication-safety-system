@@ -212,8 +212,8 @@ useEffect(() => {
                 formData,
                 {
                     timeout: 300000,
+                    params: { lang: language },
                 }
-                { params: { lang: language } }
             );
 
             console.log(

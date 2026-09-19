@@ -83,13 +83,14 @@ def _transcribe_with_whisper(file_path, lang="en"):
     if model is None:
         return None
 
-whisper_language = {"en": "en", "kn": "kn", "tulu": "kn"}.get(lang)
+    whisper_language = {"en": "en", "kn": "kn", "tulu": "kn"}.get(lang)
 
-options = {
-    "fp16": False,
-    "temperature": 0,
-}
-        if whisper_language:
+    options = {
+        "fp16": False,
+        "temperature": 0,
+    }
+
+    if whisper_language:
         options["language"] = whisper_language
 
     # Give Whisper the medicine vocabulary used by our system.
@@ -149,8 +150,6 @@ options = {
             err,
         )
         return None
-
-
 def _transcribe_with_speech_recognition(file_path, lang="en"):
     try:
         import speech_recognition as sr
