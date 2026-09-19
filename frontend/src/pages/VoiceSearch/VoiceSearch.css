@@ -189,6 +189,59 @@
   line-height: 1.7;
 }
 
+.voice-simple-info {
+  padding: 22px;
+  border-radius: 18px;
+  background: #f0fdfa;
+  border: 1px solid #99f6e4;
+}
+
+.voice-simple-info__language {
+  margin: 0 0 8px;
+  color: #0f766e;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.voice-simple-info h2 {
+  margin: 0 0 18px;
+  color: #134e4a;
+}
+
+.voice-simple-info dl {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+}
+
+.voice-simple-info dl > div {
+  display: grid;
+  gap: 4px;
+}
+
+.voice-simple-info dt {
+  color: #115e59;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.voice-simple-info dd {
+  margin: 0;
+  color: #334155;
+  line-height: 1.65;
+}
+
+.voice-simple-info__consult {
+  margin: 18px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid #99f6e4;
+  color: #115e59;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
 .voice-result__message {
   margin: 0;
   color: #475569;

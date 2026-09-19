@@ -23,7 +23,7 @@ VOICE_TRANSCRIPTION_TIMEOUT_SECONDS = 45
 def _medicine_not_found_message(lang):
     messages = {
         "kn": "ಈ ಮಾತ್ರೆ ಈ ವ್ಯವಸ್ಥೆಯಲ್ಲಿ ಇಲ್ಲ. ದಯವಿಟ್ಟು ವೈದ್ಯರನ್ನು ಸಂಪರ್ಕಿಸಿ.",
-        "tulu": "ಈ ಮದ್ದು ಈ ವ್ಯವಸ್ಥೆಡ್ ಇಲ್ಲ. ದಯವಿಟ್ಟು ಡಾಕ್ಟರ್ನ್ ಸಂಪರ್ಕ ಮಲ್ಪು.",
+        "tulu": "ಈ ಮರ್ದ್ ಈ ವ್ಯವಸ್ಥೆಡ್ ಇಜ್ಜಿ. ದಯೆ ಮಲ್ತ್‌ದ್ ವೈದ್ಯೆರೆನ್ ಸಂಪರ್ಕ ಮಲ್ಪುಲೆ.",
     }
     return messages.get(
         lang,
@@ -46,7 +46,7 @@ def _question_response(medicine, transcript, lang):
 
     asks_sugar = any(phrase in question for phrase in ["sugar", "diabetes", "ಮಧುಮೇಹ"])
     asks_pressure = any(phrase in question for phrase in ["bp", "blood pressure", "pressure", "ಒತ್ತಡ"])
-    disease_is_sugar = any(phrase in disease.lower() for phrase in ["diabetes", "ಮಧುಮೇಹ"])
+    disease_is_sugar = any(phrase in disease.lower() for phrase in ["diabetes", "ಮಧುಮೇಹ", "ಸಕ್ಕರೆ ಕಾಯಿಲೆ"])
     disease_is_pressure = any(phrase in disease.lower() for phrase in ["pressure", "hypertension", "ಒತ್ತಡ"])
     is_correct_use = (asks_sugar and disease_is_sugar) or (asks_pressure and disease_is_pressure)
 
@@ -106,6 +106,14 @@ async def voice_search(
         logger.info("Voice processing completed")
 
         detected_language = detect_transcript_language(transcript_text, requested_lang=lang)
+        if detected_language is None:
+            return {
+                "status": "language_uncertain",
+                "detected_text": transcript_text,
+                "detected_language": None,
+                "response_language": None,
+                "message": "Please say a short sentence with the medicine name, or choose English, Kannada, or Tulu and search again.",
+            }
 
         if medicine_name:
             medicine = search_medicine(medicine_name, lang=detected_language)

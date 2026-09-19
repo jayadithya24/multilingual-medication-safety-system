@@ -38,3 +38,7 @@ def load_project_env() -> None:
         if key and key not in os.environ:
             os.environ[key] = value
         index += 1
+
+    # Accept the documented MongoDB variable name used by the project bible.
+    if "MONGO_URI" not in os.environ and "MONGODB_URI" in os.environ:
+        os.environ["MONGO_URI"] = os.environ["MONGODB_URI"]
