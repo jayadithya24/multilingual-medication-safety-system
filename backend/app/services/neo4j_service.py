@@ -507,7 +507,7 @@ def _fallback_local_knowledge_graph() -> Dict[str, List[Dict[str, Any]]]:
 
 def get_diseases() -> List[str]:
     """
-    Return the diseases available in the Neo4j knowledge graph.
+    Return the diseases available in the Neo4j knowledge graph or dataset.
     """
     try:
         driver = _get_driver()
@@ -528,13 +528,20 @@ def get_diseases() -> List[str]:
             ]
 
     except Exception as err:
-        print(f"Neo4j disease lookup unavailable: {err}")
-        fallback = _fallback_local_knowledge_graph()
-        disease_names = []
-        for node in fallback.get("nodes", []):
-            if node.get("type") == "disease":
-                disease_names.append(node.get("name"))
-        return sorted(set(disease_names))
+        print(f"Neo4j disease lookup unavailable, falling back to CSV: {err}")
+
+    dataframe = _load_dataset("en")
+    if dataframe is None or "disease" not in dataframe.columns:
+        return []
+
+    return sorted(
+        {
+            str(disease).strip()
+            for disease in dataframe["disease"].dropna()
+            if str(disease).strip()
+        },
+        key=str.lower,
+    )
 
 
 def get_drugs_for_disease(disease_name: str) -> List[Dict[str, Any]]:
@@ -573,9 +580,29 @@ def get_drugs_for_disease(disease_name: str) -> List[Dict[str, Any]]:
             return [dict(record) for record in records]
 
     except Exception as err:
-        print(f"Neo4j disease-drug lookup unavailable: {err}")
+        print(f"Neo4j disease-drug lookup unavailable, falling back to CSV: {err}")
 
-    return []
+    dataframe = _load_dataset("en")
+    if dataframe is None or "disease" not in dataframe.columns:
+        return []
+
+    matches = dataframe[
+        dataframe["disease"].astype(str).str.strip().str.casefold()
+        == disease_name.strip().casefold()
+    ]
+
+    return [
+        {
+            "drug_id": row.get("drug_id"),
+            "drug_name": row.get("drug_name"),
+            "generic_name": row.get("generic_name"),
+            "drug_class": row.get("drug_class"),
+            "description_en": row.get("description_en"),
+            "warnings_en": row.get("warnings_en"),
+            "contraindications_en": row.get("contraindications_en"),
+        }
+        for _, row in matches.sort_values("drug_name").iterrows()
+    ]
 
 {
   "status": "success",
