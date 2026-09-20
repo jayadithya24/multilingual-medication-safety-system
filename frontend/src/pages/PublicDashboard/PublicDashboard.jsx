@@ -43,6 +43,16 @@ function getNextDose(schedules) {
     return doses.sort((first, second) => first.offset - second.offset)[0] || null;
 }
 
+function formatTakenAt(takenAt) {
+    if (!takenAt) return "—";
+    let dateStr = String(takenAt).trim();
+    if (!dateStr.endsWith("Z") && !dateStr.includes("+") && !dateStr.includes("-")) {
+        dateStr += "Z";
+    }
+    const d = new Date(dateStr);
+    return isNaN(d.getTime()) ? "—" : d.toLocaleString();
+}
+
 function PublicDashboard() {
     const [searchParams] = useSearchParams();
     const requestedTab = searchParams.get("tab");
@@ -630,7 +640,7 @@ function PublicDashboard() {
                                                 </div>
 
                                                 <div className="patient-schedule-details">
-                                                    {schedule.last_taken_at && <p>Last recorded dose: {new Date(schedule.last_taken_at).toLocaleString()}</p>}
+                                                    {schedule.last_taken_at && <p>Last recorded dose: {formatTakenAt(schedule.last_taken_at)}</p>}
                                                     {schedule.instructions && <p>Instructions: {schedule.instructions}</p>}
 
                                                     <div>
@@ -797,11 +807,7 @@ function PublicDashboard() {
 
                                                     <span>
                                                         Taken:{" "}
-                                                        {record.taken_at
-                                                            ? new Date(
-                                                                record.taken_at
-                                                            ).toLocaleString()
-                                                            : "—"}
+                                                        {formatTakenAt(record.taken_at)}
                                                     </span>
 
                                                 </div>

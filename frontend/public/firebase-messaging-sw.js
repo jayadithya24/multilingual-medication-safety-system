@@ -26,6 +26,8 @@ messaging.onBackgroundMessage((payload) => {
         {
             body: notification.body || "It is time to take your medicine.",
             tag: payload.data?.event_id || payload.messageId,
+            renotify: true,
+            requireInteraction: true,
             data: payload.data || {},
         },
     );

@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 
@@ -105,6 +106,11 @@ def get_patient_medication_history(
 
     for record in history:
         record.pop("_id", None)
+        taken_at = record.get("taken_at")
+        if isinstance(taken_at, datetime):
+            if taken_at.tzinfo is None:
+                taken_at = taken_at.replace(tzinfo=timezone.utc)
+            record["taken_at"] = taken_at.isoformat()
 
     return {
         "status": "success",

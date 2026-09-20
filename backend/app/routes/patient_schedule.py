@@ -290,5 +290,5 @@ def mark_medication_taken(
         "status": "success",
         "message": "Medication marked as taken.",
         "history_id": history_id,
-        "taken_at": taken_at,
+        "taken_at": taken_at.isoformat(),
     }

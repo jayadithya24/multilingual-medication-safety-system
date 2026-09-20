@@ -51,7 +51,8 @@ def _send(tokens, title, body, data):
             webpush=messaging.WebpushConfig(
                 headers={"Urgency": "high", "TTL": "300"},
                 notification=messaging.WebpushNotification(
-                    tag=data["event_id"], data={"url": "/patient-dashboard?tab=medicines"}),
+                    tag=data["event_id"], data={"url": "/patient-dashboard?tab=medicines"},
+                    renotify=True, require_interaction=True),
             ),
         ), app=app)
         for token, result in zip(batch, response.responses):

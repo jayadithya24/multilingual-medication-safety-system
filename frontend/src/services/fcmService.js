@@ -24,6 +24,8 @@ export async function listenForMedicationNotifications() {
         await registration?.showNotification(payload.notification?.title || "Medication reminder", {
             body: payload.notification?.body || "Your medication reminder is ready.",
             tag: payload.data?.event_id || payload.messageId,
+            renotify: true,
+            requireInteraction: true,
             data: { url: "/patient-dashboard?tab=medicines" },
         });
     });
