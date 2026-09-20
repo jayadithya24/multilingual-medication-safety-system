@@ -142,6 +142,8 @@ Sign-out attempts to unregister this device and revoke its browser subscription.
 
 ## 8. Patient test cases
 
+For a **single step-by-step walkthrough** of the whole dashboard (register → search → OCR → voice → medicines → profile → logout), use [PATIENT_DASHBOARD_E2E_TEST.md](PATIENT_DASHBOARD_E2E_TEST.md) (**TC-PAT-001**).
+
 Use a test account and labels that are clearly test data; do not change prescribed doses based on these samples.
 
 | Page | Test | Expected result |
