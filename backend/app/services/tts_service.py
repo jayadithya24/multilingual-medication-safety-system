@@ -1,8 +1,10 @@
 import asyncio
+import io
 import logging
 import re
 from functools import lru_cache
 import edge_tts
+from gtts import gTTS
 
 FEMALE_VOICES = {"en": "en-IN-NeerjaNeural", "kn": "kn-IN-SapnaNeural", "tulu": "kn-IN-SapnaNeural"}
 # User-provided pronunciations, applied to speech only. Never alter stored doses.
@@ -17,12 +19,27 @@ def prepare_speech_text(text, language):
                   lambda match: TULU_NUMBERS[int(match.group())], text)
 
 
+def _gtts_speech(clean_text, language):
+    tts_lang = "kn" if language in ("kn", "tulu") else "en"
+    tld = "co.in" if tts_lang == "en" else "com"
+    tts = gTTS(text=clean_text, lang=tts_lang, slow=False, tld=tld)
+    fp = io.BytesIO()
+    tts.write_to_fp(fp)
+    return fp.getvalue()
+
+
 async def _female_audio(clean_text, voice):
-    stream = edge_tts.Communicate(clean_text, voice, rate="+0%", connect_timeout=5, receive_timeout=15)
-    chunks = [chunk["data"] async for chunk in stream.stream() if chunk["type"] == "audio"]
-    if not chunks:
-        raise RuntimeError("No speech audio returned")
-    return b"".join(chunks)
+    # Native Indian accent TTS using Google TTS with Edge TTS fallback
+    try:
+        lang = "kn" if "Sapna" in voice else "en"
+        return await asyncio.to_thread(_gtts_speech, clean_text, lang)
+    except Exception as err:
+        logging.getLogger(__name__).warning("gTTS speech unavailable (%s), trying Edge TTS", err)
+        stream = edge_tts.Communicate(clean_text, voice, rate="+0%", connect_timeout=5, receive_timeout=15)
+        chunks = [chunk["data"] async for chunk in stream.stream() if chunk["type"] == "audio"]
+        if not chunks:
+            raise RuntimeError("No speech audio returned")
+        return b"".join(chunks)
 
 
 @lru_cache(maxsize=128)
