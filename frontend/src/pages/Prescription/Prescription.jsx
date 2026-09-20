@@ -255,7 +255,7 @@ useEffect(() => () => {
             const reviewNotice = {
                 en: "These are detected details. Check them against your prescription before saving.",
                 kn: "ಉಳಿಸುವ ಮೊದಲು ಈ ವಿವರಗಳನ್ನು ನಿಮ್ಮ ಔಷಧ ಚೀಟಿಯೊಂದಿಗೆ ಪರಿಶೀಲಿಸಿ.",
-                tulu: "",
+                tulu: "ಬಳಕೆ ಮಲ್ಪುನ ದುಂಬು ಈ ವಿವರನ್ ಈರ್ನ ಔಷಧ ಚೀಟಿದ ಒಟ್ಟು ಪರಿಶೀಲನೆ ಮಲ್ಪುಲೆ.",
             };
             setSpokenScan(detectedSummary ? `${detectedSummary}. ${reviewNotice[lang]}` : "");
             setSpeechRun((value) => value + 1);
@@ -576,7 +576,7 @@ useEffect(() => () => {
                 <div className="prescription-ocr">
                     <label className="prescription-field">
                         <span>Language</span>
-                        <select value={lang} onChange={(event) => { setLang(event.target.value); setMedicineDetails(null); setSpokenScan(""); }} disabled={ocrLoading}>
+                        <select aria-label="Language" value={lang} onChange={(event) => { setLang(event.target.value); setMedicineDetails(null); setSpokenScan(""); }} disabled={ocrLoading}>
                             <option value="en">English</option>
                             <option value="kn">Kannada</option>
                             <option value="tulu">Tulu</option>

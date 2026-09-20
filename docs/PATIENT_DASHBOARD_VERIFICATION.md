@@ -1,5 +1,11 @@
 # Patient dashboard verification — 20 September 2026
 
+## Speech correction follow-up
+
+The subsequent patient speech update replaces browser-selected/gTTS voices with explicitly selected female voices throughout OCR, medicine search and voice search: English `en-IN-NeerjaNeural`; Kannada/Tulu `kn-IN-SapnaNeural`. The provider's voice catalogue identifies both as Female. Actual synthesis returned audio in approximately 1.24 seconds (English sample) and 1.13 seconds (short Tulu sample). Network time varies; these are not latency guarantees. A failed service call leaves readable text instead of silently selecting a male/default voice.
+
+Tulu OCR now appends the user's supplied review sentence: “ಬಳಕೆ ಮಲ್ಪುನ ದುಂಬು ಈ ವಿವರನ್ ಈರ್ನ ಔಷಧ ಚೀಟಿದ ಒಟ್ಟು ಪರಿಶೀಲನೆ ಮಲ್ಪುಲೆ.” Speech-only replacements cover the supplied 1–10 pronunciations, while decimals, larger numbers, identifiers and stored dosages remain unchanged. The user's first workbook row (Metformin description and side effects) is synchronized to the CSV consumed by the app; other rows were preserved. Native-speaker pronunciation still needs user acceptance.
+
 ## Repository and integration
 
 Work was performed on `dev`, starting from `70d3bd6`. Existing patient work was preserved in `741478b`; `6fc9cae` merged the four newer remote commits through `ef43716`. A further remote Neo4j update, `c187173`, appeared during final verification and is included in the final integration. Use `git log -5 --oneline` for the published tip.
@@ -24,7 +30,7 @@ The [team setup guide](PATIENT_DASHBOARD_TEAM_SETUP.md) covers local credentials
 | Voice | Real upload and automatic recording search passed in English, Kannada and Tulu using the English Metformin audio fixture. Playback was invoked; pronunciation was not assessed by a native speaker. |
 | Frontend validation | Production build and lint passed. Initial JavaScript reduced from 636.39 KB to 426.45 KB before compression; graph/doctor features load separately. |
 
-The backend suite contains 71 tests plus 9 subtests, including the Mongo loader and Mongo integration tests. Existing dependency deprecation warnings remain (FastAPI lifecycle hooks, Starlette/httpx, Python audio modules and Firebase token naming); they are not hidden.
+The backend suite contains 73 tests plus 9 subtests, including female voice selection, speech-only Tulu numbers, Mongo loader and Mongo integration tests. Existing dependency deprecation warnings remain (FastAPI lifecycle hooks, Starlette/httpx, Python audio modules and Firebase token naming); they are not hidden.
 
 ## Local timing samples
 

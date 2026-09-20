@@ -16,7 +16,7 @@ npm ci
 cd ..
 ```
 
-Use Python 3.11 and Node 22.12 or newer compatible with the installed Vite version. The backend requirements pin the bcrypt/passlib combination used by this app. First OCR use needs downloaded Paddle models; internet access is also needed for Google's speech recognizer and gTTS. The local Whisper fallback may download a model and is slower on CPU. `imageio-ffmpeg` provides the audio conversion executable.
+Use Python 3.11 and Node 22.12 or newer compatible with the installed Vite version. The backend requirements pin the bcrypt/passlib combination used by this app. First OCR use needs downloaded Paddle models; internet access is also needed for Google's speech recognizer and the Microsoft online female-voice service used by `edge-tts`. Reinstall backend requirements after pulling the speech update. The local Whisper fallback may download a model and is slower on CPU. `imageio-ffmpeg` provides the audio conversion executable.
 
 For a new checkout only, copy `.env.example` to `.env`, and `frontend/.env.example` to `frontend/.env`. **Do not overwrite an existing configured `.env`.** Obtain private credentials from the project owner through a secure channel. Pulling Git does not supply them.
 
@@ -155,7 +155,7 @@ Use a test account and labels that are clearly test data; do not change prescrib
 | Notifications | Test notification, then schedule a future reminder; test visible/background tabs | One visible notification per event; a scheduled attempt is traceable in `reminder_deliveries`. |
 | Navigation | Visit all five pages at desktop/mobile width; sign out | Heading above nav, correct active link, back link on inner pages, no horizontal overflow; protected pages require login. |
 
-Tulu speech currently uses a Kannada speech engine for Kannada-script text; it is not a native Tulu voice. Speech engines/network availability and clinical accuracy of source material need separate validation. The dataset audit checks structural consistency and lookup coverage, not medical correctness.
+All patient readouts use the same selected female voices: `en-IN-NeerjaNeural` for English and `kn-IN-SapnaNeural` for Kannada/Tulu. No default browser or male voice is used as a fallback. If the service is unavailable, the app keeps the written result and reports the audio problem. Tulu uses a Kannada-script speech engine, not a native Tulu voice; pronunciation needs the user's review. Supplied pronunciations for standalone numbers 1–10 affect speech only, preserving stored doses and compound/decimal numbers. The updated first Excel row was copied to the runtime CSV; future workbook corrections also need exporting before the app can use them. The dataset audit checks structural consistency and lookup coverage, not medical correctness.
 
 ## 9. Automated checks
 

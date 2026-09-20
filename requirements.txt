@@ -54,6 +54,7 @@ google-auth[requests]
 Werkzeug==3.1.8
 SpeechRecognition
 gTTS
+edge-tts>=7.2.8,<8
 rapidfuzz
 PyAudio
 pyttsx3

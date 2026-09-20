@@ -5,94 +5,67 @@ const audioCache = new Map();
 
 export default function VoicePlayback({ text, language, controls = true }) {
   const audioRef = useRef(null);
-  const [audioUrl, setAudioUrl] = useState("");
-  const [message, setMessage] = useState("");
+  const [resource, setResource] = useState(null);
+  const [playbackMessage, setPlaybackMessage] = useState("");
+  const key = JSON.stringify([language, text]);
+  const current = resource?.key === key ? resource : null;
 
   useEffect(() => {
     if (!text) return;
-    // User-supplied Tulu pronunciation; preserve compound numbers and decimals.
-    const speechText = language === "tulu"
-      ? text.replace(/(?<![\p{L}\p{N}_.,])2(?![\p{L}\p{N}_]|[.,]\d)/gu, "ರಡ್ಡ್")
-      : text;
     let disposed = false;
     let objectUrl;
-    let fallbackStarted = false;
-    let startTimer;
     const controller = new AbortController();
-    const synthesis = window.speechSynthesis;
-    const fallback = async () => {
-      if (disposed || fallbackStarted) return;
-      fallbackStarted = true;
-      clearTimeout(startTimer);
-      synthesis?.cancel();
-      setMessage("Preparing spoken response...");
+    // Every page uses the same explicitly female server voices. Never let the
+    // browser silently choose its default (possibly male) system voice.
+    const load = async () => {
       try {
-        const cacheKey = JSON.stringify([language, speechText]);
-        let audioBlob = audioCache.get(cacheKey);
+        let audioBlob = audioCache.get(key);
         if (!audioBlob) {
           const response = await api.get("/tts", {
-            params: { text: speechText, lang: language }, responseType: "blob",
-            signal: controller.signal, timeout: 60000,
+            params: { text, lang: language }, responseType: "blob",
+            signal: controller.signal, timeout: 30000,
           });
           audioBlob = response.data;
           if (!audioBlob.type.startsWith("audio/")) throw new Error("No audio returned");
           if (audioCache.size >= 16) audioCache.delete(audioCache.keys().next().value);
-          audioCache.set(cacheKey, audioBlob);
+          audioCache.set(key, audioBlob);
         }
         if (disposed) return;
         objectUrl = URL.createObjectURL(audioBlob);
-        setAudioUrl(objectUrl);
-        setMessage("");
+        setPlaybackMessage("");
+        setResource({ key, url: objectUrl });
       } catch {
-        if (!disposed) setMessage("Speech is unavailable. Please try searching again; the text result is still available.");
+        if (!disposed) setResource({ key, message: "The female voice is unavailable. Please try again; the text result is still available." });
       }
     };
-    // Kannada/Tulu use server audio because installed browser voices vary.
-    if (language !== "en" || !synthesis) {
-      void fallback();
-    } else {
-      synthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "en-IN";
-      const englishVoices = synthesis.getVoices().filter(voice => /^en[-_]/i.test(voice.lang));
-      const preferred = englishVoices.find(voice => /female|zira|hazel|susan|samantha|heera|aria|jenny|sonia|libby|neerja/i.test(voice.name));
-      if (preferred) {
-        utterance.voice = preferred;
-        utterance.lang = preferred.lang;
-      }
-      utterance.rate = 1;
-      utterance.onstart = () => clearTimeout(startTimer);
-      utterance.onerror = () => { void fallback(); };
-      startTimer = setTimeout(() => { void fallback(); }, 4000);
-      synthesis.speak(utterance);
-    }
+    void load();
     return () => {
       disposed = true;
-      clearTimeout(startTimer);
       controller.abort();
-      synthesis?.cancel();
       if (objectUrl) URL.revokeObjectURL(objectUrl);
     };
-  }, [text, language]);
+  }, [text, language, key]);
 
   useEffect(() => {
-    if (!audioUrl || !audioRef.current) return;
+    if (!current?.url || !audioRef.current) return;
     let active = true;
     const audio = audioRef.current;
-    audio.playbackRate = language === "en" ? 1 : 1.2;
+    audio.playbackRate = 1;
     audio.preservesPitch = true;
     audio.play().catch(() => {
-      if (active) setMessage(controls ? "Press Play below to hear the response." : "Your browser blocked automatic audio. Allow sound for this site and search again.");
+      if (active) setPlaybackMessage(controls ? "Press Play below to hear the response." : "Your browser blocked automatic audio. Allow sound for this site and search again.");
     });
     return () => { active = false; audio.pause(); };
-  }, [audioUrl, language, controls]);
+  }, [current?.url, controls]);
 
+  if (!text) return null;
+  const message = current ? current.message || playbackMessage : "Preparing spoken response...";
   return (
     <div className="voice-response-audio">
       {message && <p role="status">{message}</p>}
-      {audioUrl && <audio ref={audioRef} controls={controls} hidden={!controls} src={audioUrl} aria-label="Spoken medicine response"
-        onPlaying={() => setMessage("")}
-        onError={() => setMessage("Audio could not play. Please try searching again.")} />}
+      {current?.url && <audio ref={audioRef} controls={controls} hidden={!controls} src={current.url} aria-label="Spoken medicine response"
+        onPlaying={() => setPlaybackMessage("")}
+        onError={() => setPlaybackMessage("Audio could not play. Please try searching again.")} />}
     </div>
   );
 }
