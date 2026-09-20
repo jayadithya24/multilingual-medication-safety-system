@@ -4,7 +4,8 @@ from pydantic import BaseModel
 
 from backend.app.auth import User, get_current_active_user
 
-from backend.app.services.interaction_service import get_interaction, get_multi_drug_interactions
+from backend.app.services.interaction_service import get_multi_drug_interactions
+from backend.app.services.neo4j_service import get_drug_interaction
 
 
 router = APIRouter()
@@ -24,7 +25,14 @@ async def check_interaction(
     if current_user.role != "doctor":
         raise HTTPException(status_code=403, detail="Only doctors can check drug interactions")
 
-    interaction = get_interaction(drug1, drug2, lang=lang)
+    try:
+        interaction = get_drug_interaction(drug1, drug2, lang=lang)
+    except Exception as error:
+        print(f"Neo4j interaction lookup failed: {error}")
+        raise HTTPException(
+            status_code=503,
+            detail="Neo4j is unavailable. Check the Neo4j credentials and database connection.",
+        ) from error
 
     if interaction:
         return {

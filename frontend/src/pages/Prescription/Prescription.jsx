@@ -2,9 +2,18 @@ import { useState, useRef, useEffect } from "react";
 import api from "../../services/api";
 import { getStoredToken } from "../../services/api";
 import { registerMedicationNotifications } from "../../services/fcmService";
+import { Link } from "react-router-dom";
+import MedicineCard from "../../components/MedicineCard/MedicineCard";
+import PatientNavigation from "../../components/PatientNavigation/PatientNavigation";
+import VoicePlayback from "../../components/VoicePlayback";
 import "./Prescription.css";
 
 function Prescription() {
+    const [lang, setLang] = useState("en");
+    const [medicineDetails, setMedicineDetails] = useState(null);
+    const [notificationMessage, setNotificationMessage] = useState("");
+    const [spokenScan, setSpokenScan] = useState("");
+    const [speechRun, setSpeechRun] = useState(0);
     const [medicineName, setMedicineName] = useState("");
     const [dosage, setDosage] = useState("");
     const [instructions, setInstructions] = useState("");
@@ -42,6 +51,8 @@ const cameraStreamRef = useRef(null);
         }
 
         setPrescriptionImage(file);
+        setMedicineDetails(null);
+        setSpokenScan("");
         setPreview(URL.createObjectURL(file));
 
         setOcrMessage("");
@@ -161,6 +172,8 @@ const capturePhoto = () => {
             );
 
             setPrescriptionImage(capturedFile);
+            setSpokenScan("");
+            setMedicineDetails(null);
 
             setPreview(
                 URL.createObjectURL(blob)
@@ -181,6 +194,12 @@ useEffect(() => {
         videoRef.current.srcObject = cameraStreamRef.current;
     }
 }, [cameraOpen]);
+useEffect(() => () => {
+    cameraStreamRef.current?.getTracks().forEach((track) => track.stop());
+}, []);
+useEffect(() => () => {
+    if (preview) URL.revokeObjectURL(preview);
+}, [preview]);
     // --------------------------------------------------
     // OCR scan
     // --------------------------------------------------
@@ -195,6 +214,8 @@ useEffect(() => {
 
         try {
             setOcrLoading(true);
+            setSpokenScan("");
+            setMedicineDetails(null);
             setOcrMessage("");
             setError("");
             setSaved(false);
@@ -211,6 +232,7 @@ useEffect(() => {
                 formData,
                 {
                     timeout: 300000,
+                    params: { lang },
                 }
             );
 
@@ -228,6 +250,18 @@ useEffect(() => {
                 );
                 return;
             }
+            setMedicineDetails(ocrResult.medicine_details || null);
+            const detectedSummary = [ocrResult.medicine, ocrResult.dosage, ocrResult.instructions].filter(Boolean).join(". ");
+            const reviewNotice = {
+                en: "These are detected details. Check them against your prescription before saving.",
+                kn: "ಉಳಿಸುವ ಮೊದಲು ಈ ವಿವರಗಳನ್ನು ನಿಮ್ಮ ಔಷಧ ಚೀಟಿಯೊಂದಿಗೆ ಪರಿಶೀಲಿಸಿ.",
+                tulu: "",
+            };
+            setSpokenScan(detectedSummary ? `${detectedSummary}. ${reviewNotice[lang]}` : "");
+            setSpeechRun((value) => value + 1);
+            setMedicineName(ocrResult.medicine || "");
+            setDosage(ocrResult.dosage || "");
+            setInstructions(ocrResult.instructions || "");
 
             // --------------------------------------------------
             // Fill only fields detected by OCR
@@ -400,7 +434,7 @@ useEffect(() => {
 
         if (
             frequency !== "As Needed" &&
-            scheduledTimes.length === 0
+            (scheduledTimes.length === 0 || scheduledTimes.some((time) => !/^\d{2}:\d{2}$/.test(time)))
         ) {
             setError(
                 "Please add at least one dosing time."
@@ -438,7 +472,15 @@ useEffect(() => {
                     }
                 );
 
-            await registerMedicationNotifications();
+            setNotificationMessage("");
+            if (reminderEnabled) {
+                try {
+                    const result = await registerMedicationNotifications();
+                    if (!result.registered) setNotificationMessage("Schedule saved. Browser reminders are unavailable on this device.");
+                } catch {
+                    setNotificationMessage("Schedule saved. Browser reminders could not be enabled. You can retry from My Medicines.");
+                }
+            }
 
             console.log(
                 "Medication schedule created:",
@@ -473,7 +515,7 @@ useEffect(() => {
                 err?.response?.data?.detail;
 
             setError(
-                detail ||
+                (Array.isArray(detail) ? detail.map((item) => item.msg).join(". ") : detail) || err.message ||
                 "Unable to add medication to your schedule."
             );
 
@@ -494,16 +536,17 @@ useEffect(() => {
                 </p>
 
                 <h1>
-                    Add Medication
+                    Scan &amp; Add Medicines
                 </h1>
 
                 <p>
-                    Upload a prescription for
-                    automatic extraction or enter
-                    the medication details manually.
+                    Scan a medicine label or prescription, view medicine information,
+                    or enter details manually. Review everything before adding a schedule.
                 </p>
 
             </section>
+
+            <PatientNavigation />
 
 
             {/* OCR */}
@@ -517,7 +560,7 @@ useEffect(() => {
                     </span>
 
                     <h2>
-                        Scan Your Prescription
+                        Scan a Label or Prescription
                     </h2>
 
                     <p>
@@ -531,6 +574,14 @@ useEffect(() => {
 
 
                 <div className="prescription-ocr">
+                    <label className="prescription-field">
+                        <span>Language</span>
+                        <select value={lang} onChange={(event) => { setLang(event.target.value); setMedicineDetails(null); setSpokenScan(""); }} disabled={ocrLoading}>
+                            <option value="en">English</option>
+                            <option value="kn">Kannada</option>
+                            <option value="tulu">Tulu</option>
+                        </select>
+                    </label>
 
                     <div className="prescription-image-options">
 
@@ -544,7 +595,7 @@ useEffect(() => {
 
         <div>
             <strong>
-                Upload Prescription
+                Upload Image
             </strong>
 
             <span>
@@ -576,7 +627,7 @@ useEffect(() => {
 
         <div>
             <strong>
-                Take Prescription Photo
+                Take Photo
             </strong>
 
             <span>
@@ -674,7 +725,7 @@ useEffect(() => {
                     >
                         {ocrLoading
                             ? "Scanning Prescription..."
-                            : "Scan Prescription"}
+                            : "Scan Image"}
                     </button>
 
 
@@ -685,6 +736,13 @@ useEffect(() => {
                         </div>
 
                     )}
+                    {spokenScan && (
+                        <div aria-label="Prescription read aloud">
+                            <VoicePlayback key={speechRun} text={spokenScan} language={lang} />
+                            <button type="button" className="prescription-add-time" onClick={() => setSpeechRun((value) => value + 1)}>Read scan aloud again</button>
+                            <button type="button" className="prescription-add-time" onClick={() => setSpokenScan("")}>Stop reading</button>
+                        </div>
+                    )}
 
                 </div>
 
@@ -692,6 +750,9 @@ useEffect(() => {
 
 
             {/* Manual / OCR Details */}
+            {medicineDetails && <MedicineCard medicine={medicineDetails} />}
+            {cameraError && !cameraOpen && <div className="prescription-error">{cameraError}</div>}
+            {notificationMessage && <p role="status">{notificationMessage}</p>}
 
             <section className="prescription-card">
 
@@ -714,7 +775,8 @@ useEffect(() => {
                 </div>
 
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} onChange={() => setSaved(false)}>
+                    <fieldset disabled={ocrLoading || saving} style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}>
 
                     {/* Medicine */}
 
@@ -813,9 +875,6 @@ useEffect(() => {
                                 Four Times Daily
                             </option>
 
-                            <option>
-                                As Needed
-                            </option>
 
                             <option>
                                 Custom
@@ -931,6 +990,10 @@ useEffect(() => {
                                 scheduled dosing times.
                             </p>
 
+                            <p className="prescription-reminder-note">
+                                Allow browser notifications when asked. Reminders appear as browser popups and are not a guaranteed alarm if notifications, the browser, or the device blocks background activity.
+                            </p>
+
                         </div>
 
 
@@ -1002,12 +1065,14 @@ useEffect(() => {
                     <button
                         type="submit"
                         className="prescription-submit"
-                        disabled={saving}
+                        disabled={saving || saved || !getStoredToken()}
                     >
                         {saving
                             ? "Adding to Schedule..."
                             : "Add to Schedule"}
                     </button>
+                    {!getStoredToken() && <p><Link to="/public">Log in as a patient</Link> to save a medication schedule.</p>}
+                    </fieldset>
 
                 </form>
 

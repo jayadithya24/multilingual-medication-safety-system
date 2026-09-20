@@ -16,6 +16,8 @@ db = client[MONGO_DB]
 
 # Collections used by the patient medication system
 users_collection = db["users"]
+users_collection.create_index("username", unique=True)
+users_collection.create_index("google_sub", unique=True, sparse=True)
 
 patient_schedules_collection = db["patient_schedules"]
 medication_history_collection = db["medication_history"]

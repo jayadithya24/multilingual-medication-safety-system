@@ -69,7 +69,7 @@ reminder_task = None
 @app.on_event("startup")
 def warm_up_ocr():
     # PaddleOCR loads native model libraries; defer that work for Uvicorn reload.
-    if os.getenv("WARM_UP_OCR", "false").lower() == "true":
+    if os.getenv("WARM_UP_OCR", "true").lower() == "true":
         warm_up_reader()
 
 

@@ -12,12 +12,12 @@ function persistAuth(responseData) {
   }
 }
 
-export async function loginWithPassword(username, password) {
+export async function loginWithPassword(username, password, patientOnly = false) {
   const body = new URLSearchParams();
   body.append("username", username);
   body.append("password", password);
 
-  const response = await api.post("/auth/token", body, {
+  const response = await api.post(patientOnly ? "/auth/patient-token" : "/auth/token", body, {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
@@ -39,5 +39,12 @@ export async function registerPatient(name, email, password, confirmPassword) {
 }
 
 export function logout() {
+  window.google?.accounts?.id?.disableAutoSelect();
   clearStoredToken();
+}
+
+export async function loginWithGoogle(credential, mode = "login", password) {
+  const response = await api.post("/auth/google", { credential, mode, password });
+  persistAuth(response.data);
+  return response.data;
 }

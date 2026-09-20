@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route } from "react-router-dom";
 
 import MainLayout from "../layouts/MainLayout";
 import DoctorLayout from "../layouts/DoctorLayout";
@@ -17,6 +17,7 @@ import AdminPortal from "../pages/AdminPortal/AdminPortal";
 import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
 
 import RequireRole from "../components/RequireRole/RequireRole";
+import RequirePatientProfile from "../components/RequirePatientProfile/RequirePatientProfile";
 import DiseaseProtocols from "../pages/DiseaseProtocols/DiseaseProtocols";
 import PatientDrugLists from "../pages/PatientDrugLists/PatientDrugLists";
 import AnalysisHistory from "../pages/AnalysisHistory/AnalysisHistory";
@@ -70,8 +71,13 @@ function AppRoutes() {
                 />
 
                 <Route
-                    path="voice-search"
-                    element={<VoiceSearch />}
+                    path="ocr"
+                    element={<Navigate to="/scan-medicines" replace />}
+                />
+
+                <Route
+                    path="knowledge-graph"
+                    element={<KnowledgeGraph />}
                 />
 
 
@@ -83,18 +89,28 @@ function AppRoutes() {
                         <RequireRole allowedRoles={["patient"]} />
                     }
                 >
+                    <Route element={<RequirePatientProfile />}>
+                        <Route
+                            path="patient-dashboard"
+                            element={<PublicDashboard />}
+                        />
+                        <Route
+                            path="scan-medicines"
+                            element={<Prescription />}
+                        />
+                        <Route
+                            path="voice-search"
+                            element={<VoiceSearch />}
+                        />
+                    </Route>
                     <Route
-                        path="patient-dashboard"
-                        element={<PublicDashboard />}
+                        path="patient-profile"
+                        element={<PatientProfile />}
                     />
                     <Route
-        path="patient-profile"
-        element={<PatientProfile />}
-    />
-    <Route
-    path="prescription"
-    element={<Prescription />}
-/>
+                        path="prescription"
+                        element={<Navigate to="/scan-medicines" replace />}
+                    />
                 </Route>
 
 
@@ -149,12 +165,7 @@ function AppRoutes() {
     path="doctor-settings"
     element={<Settings />}
 />
-<Route
-    path="knowledge-graph"
-    element={<KnowledgeGraph />}
-/>
-
-    </Route>
+</Route>
 
 </Route>
 

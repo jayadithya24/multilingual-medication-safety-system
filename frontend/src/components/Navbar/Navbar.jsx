@@ -1,7 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { getStoredRole, getStoredToken } from "../../services/api";
+import { logout } from "../../services/authService";
 import "./Navbar.css";
 
 function Navbar() {
+    useLocation();
+    const navigate = useNavigate();
+    const isPatient = getStoredRole() === "patient" && Boolean(getStoredToken());
 
     return (
 
@@ -23,23 +28,25 @@ function Navbar() {
                         </NavLink>
                     </li>
 
-                    <li>
+                    {!isPatient && <li>
                         <NavLink to="/research">
                             Doctor Portal
                         </NavLink>
-                    </li>
+                    </li>}
 
                     <li>
+                        {isPatient ? <NavLink to="/patient-dashboard">My Dashboard</NavLink> :
                         <NavLink to="/public">
                             Patient Portal
-                        </NavLink>
+                        </NavLink>}
                     </li>
+                    {isPatient && <li><button className="navbar-signout" onClick={() => { logout(); navigate("/public", { replace: true }); }}>Sign out</button></li>}
 
-                    <li>
+                    {!isPatient && <li>
                         <NavLink to="/admin">
                             Admin Portal
                         </NavLink>
-                    </li>
+                    </li>}
                 </ul>
 
             </nav>

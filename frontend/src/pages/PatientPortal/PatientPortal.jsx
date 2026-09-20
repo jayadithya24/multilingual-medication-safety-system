@@ -2,12 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginWithPassword, registerPatient } from "../../services/authService";
 import { clearStoredToken } from "../../services/api";
-import { fetchMedicines } from "../../services/medicineService";
 import "./PatientPortal.css";
+import GoogleSignIn from "../../components/GoogleSignIn/GoogleSignIn";
 
 function PatientPortal() {
   const navigate = useNavigate();
-  const [tab, setTab] = useState("login");
+  const [tab, setTab] = useState(() => new URLSearchParams(window.location.search).get("session") === "expired" ? "login" : "register");
   const [loginIdentity, setLoginIdentity] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [registerName, setRegisterName] = useState("");
@@ -16,19 +16,23 @@ function PatientPortal() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [notice, setNotice] = useState(() => new URLSearchParams(window.location.search).get("session") === "expired" ? "Your session expired. Please sign in again." : "");
 
  const handleLogin = async () => {
   try {
     setLoading(true);
     setError("");
+    setNotice("");
 
     await loginWithPassword(
       loginIdentity.trim(),
-      loginPassword
+      loginPassword,
+      true
     );
 
-    // Login successful → go to patient dashboard
-    navigate("/patient-dashboard", { replace: true });
+    // Patients complete their profile before using the dashboard.
+    navigate("/patient-profile", { replace: true });
 
   } catch (loginError) {
     console.error("Login error:", loginError);
@@ -68,6 +72,7 @@ function PatientPortal() {
 
     // Switch back to Login tab
     setTab("login");
+    setNotice("Account created successfully. Sign in with your email and password.");
 
     // Put the registered email into the login field
     setLoginIdentity(registerEmail.trim());
@@ -113,54 +118,59 @@ function PatientPortal() {
         </div>
 
         <div className="portal-auth-card">
+          {notice && <p className="portal-auth-success" role="status">{notice}</p>}
           <div className="portal-auth-tabs">
-            <button className={tab === "login" ? "is-active" : ""} onClick={() => setTab("login")}>
+            <button disabled={loading} aria-pressed={tab === "login"} className={tab === "login" ? "is-active" : ""} onClick={() => { setTab("login"); setError(""); }}>
               Login
             </button>
-            <button className={tab === "register" ? "is-active" : ""} onClick={() => setTab("register")}>
+            <button disabled={loading} aria-pressed={tab === "register"} className={tab === "register" ? "is-active" : ""} onClick={() => { setTab("register"); setError(""); setNotice(""); }}>
               Register
             </button>
           </div>
 
+          <GoogleSignIn key={tab} mode={tab} />
+
           {tab === "login" ? (
-            <div className="portal-auth-form">
+            <form className="portal-auth-form" onSubmit={(event) => { event.preventDefault(); if (!loading) handleLogin(); }}>
               <label>
                 <span>Email or username</span>
-                <input value={loginIdentity} onChange={(event) => setLoginIdentity(event.target.value)} />
+                <input required autoComplete="username" value={loginIdentity} onChange={(event) => setLoginIdentity(event.target.value)} />
               </label>
               <label>
                 <span>Password</span>
-                <input type="password" value={loginPassword} onChange={(event) => setLoginPassword(event.target.value)} />
+                <input required autoComplete="current-password" type={showPassword ? "text" : "password"} value={loginPassword} onChange={(event) => setLoginPassword(event.target.value)} />
               </label>
-              <button onClick={handleLogin} disabled={loading}>
+              <button type="submit" disabled={loading}>
                 {loading ? "Signing in..." : "Login"}
               </button>
-            </div>
+            </form>
           ) : (
-            <div className="portal-auth-form">
+            <form className="portal-auth-form" onSubmit={(event) => { event.preventDefault(); if (!loading) handleRegister(); }}>
               <label>
                 <span>Name</span>
-                <input value={registerName} onChange={(event) => setRegisterName(event.target.value)} />
+                <input required autoComplete="name" value={registerName} onChange={(event) => setRegisterName(event.target.value)} />
               </label>
               <label>
                 <span>Email</span>
-                <input value={registerEmail} onChange={(event) => setRegisterEmail(event.target.value)} />
+                <input required type="email" autoComplete="email" value={registerEmail} onChange={(event) => setRegisterEmail(event.target.value)} />
               </label>
               <label>
                 <span>Password</span>
-                <input type="password" value={registerPassword} onChange={(event) => setRegisterPassword(event.target.value)} />
+                <input required minLength={8} autoComplete="new-password" type={showPassword ? "text" : "password"} value={registerPassword} onChange={(event) => setRegisterPassword(event.target.value)} />
               </label>
               <label>
                 <span>Confirm Password</span>
-                <input type="password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
+                <input required minLength={8} autoComplete="new-password" type={showPassword ? "text" : "password"} value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
               </label>
-              <button onClick={handleRegister} disabled={loading}>
+              <small>Use at least 8 characters.</small>
+              <button type="submit" disabled={loading}>
                 {loading ? "Creating account..." : "Register"}
               </button>
-            </div>
+            </form>
           )}
 
-          {error && <div className="portal-auth-error">{error}</div>}
+          <label className="portal-password-toggle"><input type="checkbox" checked={showPassword} onChange={(event) => setShowPassword(event.target.checked)} /> Show password</label>
+          {error && <div className="portal-auth-error" role="alert">{error}</div>}
 
         </div>
       </section>

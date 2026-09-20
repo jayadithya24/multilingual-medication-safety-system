@@ -1,40 +1,55 @@
 .prescription-page {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 40px 24px 80px;
+    min-height: 100vh;
+    padding: 40px 20px 64px;
+    background:
+        radial-gradient(circle at top left, rgba(14, 165, 233, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(34, 197, 94, 0.16), transparent 26%),
+        linear-gradient(180deg, #f7fbff 0%, #eef4ff 100%);
+    color: #0f172a;
+}
+
+.prescription-page > * {
+    width: min(1180px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
 }
 
 .prescription-page__hero {
-    margin-bottom: 32px;
+    text-align: center;
+    margin-bottom: 24px;
 }
 
 .prescription-page__kicker {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: #2563eb;
-    margin-bottom: 10px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: #0f766e;
+    margin: 0 0 10px;
 }
 
 .prescription-page__hero h1 {
     margin: 0;
-    font-size: 38px;
-    color: #111827;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    line-height: 1.08;
+    color: #0f172a;
 }
 
-.prescription-page__hero p {
-    max-width: 700px;
-    margin-top: 10px;
-    color: #6b7280;
-    line-height: 1.6;
+.prescription-page__hero p:last-child {
+    max-width: 760px;
+    margin: 14px auto 0;
+    color: #475569;
+    font-size: 1.05rem;
+    line-height: 1.7;
 }
 
 .prescription-card {
     background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 18px;
-    padding: 32px;
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    border: 1px solid rgba(37, 99, 235, 0.12);
+    border-radius: 28px;
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
 }
 
 .prescription-card__header {
@@ -192,6 +207,13 @@
     color: #6b7280;
 }
 
+.prescription-reminder .prescription-reminder-note {
+    max-width: 720px;
+    color: #92400e;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
 .prescription-switch input {
     display: none;
 }
@@ -286,7 +308,7 @@
 
 @media (max-width: 700px) {
     .prescription-page {
-        padding: 24px 16px 60px;
+        padding: 40px 20px 64px;
     }
 
     .prescription-card {
@@ -294,7 +316,7 @@
     }
 
     .prescription-page__hero h1 {
-        font-size: 30px;
+        font-size: 32px;
     }
 
     .prescription-times__header {

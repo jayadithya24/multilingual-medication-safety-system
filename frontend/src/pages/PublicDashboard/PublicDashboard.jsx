@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import PatientNavigation from "../../components/PatientNavigation/PatientNavigation";
 import Loading from "../../components/Loading/Loading";
 import MedicineCard from "../../components/MedicineCard/MedicineCard";
+import VoicePlayback from "../../components/VoicePlayback";
 
 import { searchMedicine, fetchMedicines } from "../../services/medicineService";
-import { scanMedicine } from "../../services/ocrService";
-import { sendVoiceSearchAudio } from "../../services/voiceService";
+import VoiceSearch from "../VoiceSearch/VoiceSearch";
 import api from "../../services/api";
 import { registerMedicationNotifications, sendTestNotification } from "../../services/fcmService";
 
@@ -42,9 +43,10 @@ function getNextDose(schedules) {
 }
 
 function PublicDashboard() {
-    const [activeTab, setActiveTab] = useState("text");
+    const [searchParams] = useSearchParams();
+    const requestedTab = searchParams.get("tab");
+    const activeTab = ["voice", "medicines"].includes(requestedTab) ? requestedTab : "text";
     const [lang, setLang] = useState("en");
-    const voiceLang = lang;
 
     // Medicine search
     const [medicineNames, setMedicineNames] = useState([]);
@@ -52,25 +54,7 @@ function PublicDashboard() {
     const [textLoading, setTextLoading] = useState(false);
     const [textError, setTextError] = useState("");
     const [textResult, setTextResult] = useState(null);
-
-    // OCR
-    const [imageFile, setImageFile] = useState(null);
-    const [imagePreview, setImagePreview] = useState("");
-    const [ocrLoading, setOcrLoading] = useState(false);
-    const [ocrError, setOcrError] = useState("");
-    const [ocrResult, setOcrResult] = useState(null);
-const [cameraOpen, setCameraOpen] = useState(false);
-const [cameraError, setCameraError] = useState("");
-
-const videoRef = useRef(null);
-const cameraStreamRef = useRef(null);
-    // Voice
-    const [audioFile, setAudioFile] = useState(null);
-    const [audioPreview, setAudioPreview] = useState("");
-    const [voiceLoading, setVoiceLoading] = useState(false);
-    const [voiceError, setVoiceError] = useState("");
-    const [voiceResult, setVoiceResult] = useState(null);
-    const [isRecording, setIsRecording] = useState(false);
+    const searchVersion = useRef(0);
 
     // Patient medication
     const [schedules, setSchedules] = useState([]);
@@ -84,11 +68,6 @@ const cameraStreamRef = useRef(null);
     const [accessRequestError, setAccessRequestError] = useState("");
     const [notificationStatus, setNotificationStatus] = useState("");
     const [testNotificationLoading, setTestNotificationLoading] = useState(false);
-
-    const mediaRecorderRef = useRef(null);
-    const mediaStreamRef = useRef(null);
-    const chunksRef = useRef([]);
-    const fileInputRef = useRef(null);
 
     // Load medicine names
     useEffect(() => {
@@ -117,7 +96,7 @@ const cameraStreamRef = useRef(null);
         };
     }, [lang]);
 
-    useEffect(() => {
+    const enableNotifications = () => {
         registerMedicationNotifications()
             .then((result) => {
                 console.info("[FCM] Registration result:", result);
@@ -131,7 +110,7 @@ const cameraStreamRef = useRef(null);
                 console.error("[FCM] Registration failed:", error);
                 setNotificationStatus(`Medication reminders failed: ${error.message}`);
             });
-    }, []);
+    };
 
     const handleTestNotification = async () => {
         try {
@@ -145,30 +124,6 @@ const cameraStreamRef = useRef(null);
             setTestNotificationLoading(false);
         }
     };
-
-    // Cleanup
-    useEffect(() => {
-        return () => {
-            if (imagePreview) {
-                URL.revokeObjectURL(imagePreview);
-            }
-
-            if (audioPreview) {
-                URL.revokeObjectURL(audioPreview);
-            }
-
-            if (mediaStreamRef.current) {
-                mediaStreamRef.current
-                    .getTracks()
-                    .forEach((track) => track.stop());
-            }
-             if (cameraStreamRef.current) {
-            cameraStreamRef.current
-                .getTracks()
-                .forEach((track) => track.stop());
-        }
-        };
-    }, [imagePreview, audioPreview]);
 
     // -----------------------------
     // TEXT SEARCH
@@ -185,379 +140,22 @@ const cameraStreamRef = useRef(null);
             return;
         }
 
+        const version = ++searchVersion.current;
         try {
             setTextLoading(true);
             resetTextState();
 
             const response = await searchMedicine(query.trim(), lang);
+            if (version !== searchVersion.current) return;
             setTextResult(response);
         } catch (error) {
+            if (version !== searchVersion.current) return;
             console.error(error);
             setTextError(
                 "Unable to search for that medicine right now."
             );
         } finally {
-            setTextLoading(false);
-        }
-    };
-
-    // -----------------------------
-    // OCR
-    // -----------------------------
-
-    const resetOcrState = () => {
-        setOcrError("");
-        setOcrResult(null);
-    };
-
-    const handleImageChange = (event) => {
-        const selectedFile = event.target.files?.[0];
-
-        if (!selectedFile) {
-            return;
-        }
-
-        if (imagePreview) {
-            URL.revokeObjectURL(imagePreview);
-        }
-
-        setImageFile(selectedFile);
-        setImagePreview(URL.createObjectURL(selectedFile));
-        resetOcrState();
-    };
-
-    const openCamera = async () => {
-    try {
-        setCameraError("");
-
-        if (!navigator.mediaDevices?.getUserMedia) {
-            setCameraError(
-                "Camera access is not supported by this browser."
-            );
-            return;
-        }
-
-        const stream =
-            await navigator.mediaDevices.getUserMedia({
-                video: {
-                    facingMode: {
-                        ideal: "environment",
-                    },
-                },
-                audio: false,
-            });
-
-        cameraStreamRef.current = stream;
-
-        setCameraOpen(true);
-
-        setTimeout(() => {
-            if (videoRef.current) {
-                videoRef.current.srcObject = stream;
-            }
-        }, 100);
-
-    } catch (error) {
-        console.error("Camera error:", error);
-
-        if (error.name === "NotAllowedError") {
-            setCameraError(
-                "Camera permission was denied. Please allow camera access."
-            );
-        } else if (error.name === "NotFoundError") {
-            setCameraError(
-                "No camera was found on this device."
-            );
-        } else {
-            setCameraError(
-                "Unable to open the camera."
-            );
-        }
-    }
-};
-
-
-const closeCamera = () => {
-    if (cameraStreamRef.current) {
-        cameraStreamRef.current
-            .getTracks()
-            .forEach((track) => track.stop());
-
-        cameraStreamRef.current = null;
-    }
-
-    if (videoRef.current) {
-        videoRef.current.srcObject = null;
-    }
-
-    setCameraOpen(false);
-};
-
-
-const capturePhoto = () => {
-    if (!videoRef.current) {
-        return;
-    }
-
-    const video = videoRef.current;
-
-    const canvas = document.createElement("canvas");
-
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-
-    const context = canvas.getContext("2d");
-
-    context.drawImage(
-        video,
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    canvas.toBlob(
-        (blob) => {
-            if (!blob) {
-                setCameraError(
-                    "Unable to capture the photo."
-                );
-                return;
-            }
-
-            const capturedFile = new File(
-                [blob],
-                "prescription-camera.jpg",
-                {
-                    type: "image/jpeg",
-                }
-            );
-
-            if (imagePreview) {
-                URL.revokeObjectURL(imagePreview);
-            }
-
-            setImageFile(capturedFile);
-
-            setImagePreview(
-                URL.createObjectURL(blob)
-            );
-
-            resetOcrState();
-
-            closeCamera();
-        },
-        "image/jpeg",
-        0.95
-    );
-};
-
-    const handleOcrScan = async () => {
-        if (!imageFile) {
-            setOcrError("Please upload a medicine image first.");
-            return;
-        }
-
-        try {
-            setOcrLoading(true);
-            resetOcrState();
-
-            const response = await scanMedicine(imageFile, lang);
-            setOcrResult(response);
-        } catch (error) {
-            console.error(error);
-
-            setOcrError(
-                error.message ||
-                "Unable to scan the medicine image."
-            );
-        } finally {
-            setOcrLoading(false);
-        }
-    };
-
-    // -----------------------------
-    // VOICE
-    // -----------------------------
-
-    const resetVoiceState = () => {
-        setVoiceError("");
-        setVoiceResult(null);
-    };
-
-    const handleAudioFileChange = (event) => {
-        const selectedFile = event.target.files?.[0];
-
-        if (!selectedFile) {
-            return;
-        }
-
-        if (audioPreview) {
-            URL.revokeObjectURL(audioPreview);
-        }
-
-        setAudioFile(selectedFile);
-        setAudioPreview(URL.createObjectURL(selectedFile));
-        resetVoiceState();
-    };
-
-    const startRecording = async () => {
-        try {
-            resetVoiceState();
-
-            const stream =
-                await navigator.mediaDevices.getUserMedia({
-                    audio: true,
-                });
-
-            mediaStreamRef.current = stream;
-
-            const preferredMimeType = [
-                "audio/webm;codecs=opus",
-                "audio/webm",
-                "audio/mp4",
-            ].find(
-                (mimeType) =>
-                    window.MediaRecorder &&
-                    MediaRecorder.isTypeSupported(mimeType)
-            );
-
-            const mediaRecorder = preferredMimeType
-                ? new MediaRecorder(stream, {
-                    mimeType: preferredMimeType,
-                })
-                : new MediaRecorder(stream);
-
-            console.debug("Recording started", {
-                mimeType: mediaRecorder.mimeType || "browser default",
-            });
-
-            chunksRef.current = [];
-
-            mediaRecorder.ondataavailable = (event) => {
-                if (event.data.size > 0) {
-                    chunksRef.current.push(event.data);
-                    console.debug("Audio chunk received", event.data.size);
-                }
-            };
-
-            mediaRecorder.onstop = () => {
-                const mimeType = mediaRecorder.mimeType || preferredMimeType || "audio/webm";
-                const recordingBlob = new Blob(
-                    chunksRef.current,
-                    {
-                        type: mimeType,
-                    }
-                );
-
-                console.debug("Recording stopped", {
-                    chunks: chunksRef.current.length,
-                    blobSize: recordingBlob.size,
-                    blobType: recordingBlob.type,
-                });
-
-                if (recordingBlob.size === 0) {
-                    setAudioFile(null);
-                    setVoiceError("No audio was recorded. Please try again.");
-                    mediaStreamRef.current?.getTracks().forEach((track) => track.stop());
-                    mediaStreamRef.current = null;
-                    return;
-                }
-
-                const extension = mimeType.includes("mp4") ? "mp4" : "webm";
-                const recordingFile = new File(
-                    [recordingBlob],
-                    `voice-search.${extension}`,
-                    {
-                        type: recordingBlob.type,
-                    }
-                );
-
-                if (audioPreview) {
-                    URL.revokeObjectURL(audioPreview);
-                }
-
-                setAudioFile(recordingFile);
-                setAudioPreview(
-                    URL.createObjectURL(recordingBlob)
-                );
-
-                mediaStreamRef.current
-                    ?.getTracks()
-                    .forEach((track) => track.stop());
-
-                mediaStreamRef.current = null;
-                chunksRef.current = [];
-            };
-
-            mediaRecorder.start(250);
-
-            mediaRecorderRef.current = mediaRecorder;
-            setIsRecording(true);
-        } catch (error) {
-            console.error(error);
-            setVoiceError(
-                error?.name === "NotAllowedError"
-                    ? "Microphone permission is required."
-                    : "Unable to access the microphone."
-            );
-        }
-    };
-
-    const stopRecording = () => {
-        if (
-            !mediaRecorderRef.current ||
-            mediaRecorderRef.current.state !== "recording"
-        ) {
-            return;
-        }
-
-        console.debug("Stopping recording");
-        mediaRecorderRef.current.requestData?.();
-        mediaRecorderRef.current.stop();
-        setIsRecording(false);
-    };
-
-    const handleVoiceSearch = async () => {
-        if (!audioFile) {
-            setVoiceError(
-                "Please record or upload an audio file first."
-            );
-            return;
-        }
-
-        try {
-            setVoiceLoading(true);
-            resetVoiceState();
-
-            const response =
-    await sendVoiceSearchAudio(
-        audioFile,
-        voiceLang
-    );
-
-console.log("========== VOICE SEARCH RESPONSE ==========");
-console.log(response);
-console.log("============================================");
-
-setVoiceResult(response);
-
-            if (response.response_text && "speechSynthesis" in window) {
-                window.speechSynthesis.cancel();
-                const spokenResponse = new SpeechSynthesisUtterance(response.response_text);
-                spokenResponse.lang = response.response_language === "en" ? "en-IN" : "kn-IN";
-                window.speechSynthesis.speak(spokenResponse);
-            }
-        } catch (error) {
-            console.error(error);
-
-            setVoiceError(
-                error?.response?.data?.detail ||
-                error?.message ||
-                "Unable to process the voice search request."
-            );
-        } finally {
-            setVoiceLoading(false);
+            if (version === searchVersion.current) setTextLoading(false);
         }
     };
 
@@ -634,10 +232,20 @@ setVoiceResult(response);
 
     // Load patient schedule/history when My Medicines tab opens
     useEffect(() => {
-        if (activeTab === "medicines") {
-            loadPatientMedication();
-            loadAccessRequests();
-        }
+        if (activeTab !== "medicines") return;
+        let active = true;
+        Promise.all([fetchPatientSchedule(), fetchMedicationHistory()])
+            .then(([scheduleResponse, historyResponse]) => {
+                if (!active) return;
+                setSchedules(scheduleResponse.schedules || []);
+                setHistory(historyResponse.history || []);
+                setScheduleError("");
+            })
+            .catch(() => { if (active) setScheduleError("Unable to load your medicines. Refresh or sign in again."); });
+        api.get("/patient/access-requests")
+            .then(({ data }) => { if (active) { setAccessRequests(data.requests || []); setAccessRequestError(""); } })
+            .catch(() => { if (active) setAccessRequestError("Unable to load access requests. Please refresh."); });
+        return () => { active = false; };
     }, [activeTab]);
 
     const handleMarkAsTaken = async (scheduleId) => {
@@ -665,19 +273,27 @@ setVoiceResult(response);
     // -----------------------------
 
     const textMedicine = textResult?.results?.[0] ?? null;
+    const firstSentence = (value) => String(value || "").trim().match(/^.*?(?:[.!?।](?=\s|$)|$)/u)?.[0] || "";
+    const spokenSummary = textMedicine ? [
+        textMedicine.drug_name,
+        firstSentence(textMedicine.description || textMedicine.disease),
+        firstSentence(textMedicine.warnings),
+    ].filter(Boolean).join(". ") : "";
 
-const ocrMedicine =
-    ocrResult?.ocr_result?.medicine_details ?? null;
-const ocrRawText =
-    ocrResult?.ocr_result?.raw_text?.trim() ?? "";
 
-const voiceMedicine =
-    voiceResult?.medicine_details ?? null;
+
+
     const nextDose = getNextDose(schedules);
+    const pageHeading = {
+        text: ["My Medication Dashboard", "Search medicines, scan medicine strips, use voice search, and manage your medication schedule."],
+        voice: ["Voice Search", "Speak a medicine name or question, upload audio, and listen to medicine information in your language."],
+        medicines: ["My Medicines", "Manage your medication schedule, mark doses as taken, and review your medication history."],
+    }[activeTab];
 
     return (
         <div className="patient-portal">
             <section className="patient-shell">
+
 
                 {/* HERO */}
                 <div className="patient-hero">
@@ -686,104 +302,31 @@ const voiceMedicine =
                     </p>
 
                     <h1>
-                        My Medication Dashboard
+                        {pageHeading[0]}
                     </h1>
 
                     <p>
-                        Search medicines, scan medicine strips,
-                        use voice search, and manage your
-                        medication schedule.
+                        {pageHeading[1]}
                     </p>
                 </div>
 
+            <PatientNavigation />
+
                 {/* TOOLBAR */}
-                <div className="patient-toolbar">
-
-                    <div
-                        className="patient-tabs"
-                        role="tablist"
-                        aria-label="Patient portal tabs"
-                    >
-
-                        <button
-                            type="button"
-                            className={`patient-tab ${
-                                activeTab === "text"
-                                    ? "is-active"
-                                    : ""
-                            }`}
-                            onClick={() =>
-                                setActiveTab("text")
-                            }
-                        >
-                            Medicine Search
-                        </button>
-
-                        <button
-                            type="button"
-                            className={`patient-tab ${
-                                activeTab === "ocr"
-                                    ? "is-active"
-                                    : ""
-                            }`}
-                            onClick={() =>
-                                setActiveTab("ocr")
-                            }
-                        >
-                            OCR Scan
-                        </button>
-
-                        <button
-                            type="button"
-                            className={`patient-tab ${
-                                activeTab === "voice"
-                                    ? "is-active"
-                                    : ""
-                            }`}
-                            onClick={() =>
-                                setActiveTab("voice")
-                            }
-                        >
-                            Voice Search
-                        </button>
-
-                        <button
-                            type="button"
-                            className={`patient-tab ${
-                                activeTab === "medicines"
-                                    ? "is-active"
-                                    : ""
-                            }`}
-                            onClick={() =>
-                                setActiveTab("medicines")
-                            }
-                        >
-                            My Medicines
-                        </button>
-                        <Link
-    to="/prescription"
-    className="patient-tab"
->
-    Prescription
-</Link>
-
-<Link
-    to="/patient-profile"
-    className="patient-tab patient-profile-link"
->
-    My Profile
-</Link>
-
-                    </div>
+                {activeTab === "text" && <div className="patient-toolbar">
 
                     <label className="patient-language">
                         <span>Language</span>
 
                         <select
                             value={lang}
-                            onChange={(event) =>
-                                setLang(event.target.value)
-                            }
+                            onChange={(event) => {
+                                searchVersion.current += 1;
+                                setLang(event.target.value);
+                                setTextResult(null);
+                                setTextLoading(false);
+                                setTextError("");
+                            }}
                         >
                             {languageOptions.map(
                                 (option) => (
@@ -798,6 +341,8 @@ const voiceMedicine =
                         </select>
                     </label>
                 </div>
+
+                }
 
                 {/* MAIN PANEL */}
                 <div className="patient-panel">
@@ -867,6 +412,7 @@ const voiceMedicine =
 
                             {textResult && (
                                 <div className="patient-result">
+                                    {spokenSummary && <VoicePlayback text={spokenSummary} language={lang} controls={false} />}
 
                                     {textMedicine ? (
                                         <MedicineCard
@@ -886,354 +432,9 @@ const voiceMedicine =
                     )}
 
                     {/* =========================
-                        OCR
-                    ========================= */}
-                    {/* =========================
-    OCR
-========================= */}
-{activeTab === "ocr" && (
-    <div className="patient-section">
-
-        <div className="patient-section__header">
-            <p className="patient-section__kicker">
-                PRESCRIPTION OCR
-            </p>
-
-            <h2>
-                OCR Scan
-            </h2>
-
-            <p>
-                Upload a prescription image or take a photo.
-                OCR will automatically detect available
-                medicine information.
-            </p>
-        </div>
-
-        {/* OCR IMAGE OPTIONS */}
-        <div className="ocr-options">
-
-            {/* Upload Image */}
-            <label className="ocr-option">
-                <div className="ocr-option-icon">
-                    📁
-                </div>
-
-                <div className="ocr-option-content">
-                    <strong>
-                        Upload Prescription
-                    </strong>
-
-                    <span>
-                        Choose an image from your device
-                    </span>
-                </div>
-
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    hidden
-                />
-            </label>
-
-
-            {/* Take Photo */}
-            {/* Take Photo */}
-<button
-    type="button"
-    className="ocr-option"
-    onClick={openCamera}
->
-    <div className="ocr-option-icon">
-        📷
-    </div>
-
-    <div className="ocr-option-content">
-        <strong>
-            Take Prescription Photo
-        </strong>
-
-        <span>
-            Use your device camera
-        </span>
-    </div>
-</button>
-        </div>
-{/* =========================
-    CAMERA
-========================= */}
-
-{cameraOpen && (
-    <div className="camera-container">
-
-        <div className="camera-header">
-
-            <h3>
-                Take Prescription Photo
-            </h3>
-
-            <button
-                type="button"
-                className="camera-close"
-                onClick={closeCamera}
-            >
-                ✕
-            </button>
-
-        </div>
-
-        <video
-            ref={videoRef}
-            autoPlay
-            playsInline
-            muted
-            className="camera-video"
-        />
-
-        <div className="camera-controls">
-
-            <button
-                type="button"
-                className="camera-capture-button"
-                onClick={capturePhoto}
-            >
-                📷 Capture Photo
-            </button>
-
-            <button
-                type="button"
-                className="camera-cancel-button"
-                onClick={closeCamera}
-            >
-                Cancel
-            </button>
-
-        </div>
-
-    </div>
-)}
-
-{cameraError && (
-    <div className="patient-error">
-        {cameraError}
-    </div>
-)}
-
-
-        {/* IMAGE PREVIEW */}
-        {imagePreview && (
-            <div className="patient-preview">
-
-                <p className="ocr-preview-label">
-                    Prescription Preview
-                </p>
-
-                <img
-                    src={imagePreview}
-                    alt="Prescription preview"
-                />
-
-            </div>
-        )}
-
-
-        {/* SCAN BUTTON */}
-        <button
-            type="button"
-            onClick={handleOcrScan}
-            disabled={ocrLoading || !imageFile}
-        >
-            {ocrLoading
-                ? "Scanning Prescription..."
-                : "Scan Prescription"}
-        </button>
-
-
-        {ocrLoading && <Loading />}
-
-
-        {/* ERROR */}
-        {ocrError && (
-            <div className="patient-error">
-                {ocrError}
-            </div>
-        )}
-
-
-        {/* OCR RESULT */}
-        {ocrResult && (
-            <div className="patient-result">
-
-                <h3>
-                    OCR Result
-                </h3>
-
-                {ocrMedicine ? (
-                    <MedicineCard
-                        medicine={ocrMedicine}
-                    />
-                ) : (
-                    <div className="patient-empty">
-                        {ocrRawText
-                            ? "Text was detected, but this medicine is not in the supported 30-medicine dataset."
-                            : "No medicine text could be detected."}
-                        {ocrRawText && (
-                            <p>
-                                Detected text: {ocrRawText.slice(0, 500)}
-                            </p>
-                        )}
-                        <p>Please verify the medicine name manually.</p>
-                    </div>
-                )}
-
-            </div>
-        )}
-
-    </div>
-)}
-
-                    {/* =========================
                         VOICE
                     ========================= */}
-                    {activeTab === "voice" && (
-                        <div className="patient-section">
-
-                            <div className="patient-section__header">
-
-                                <h2>
-                                    Voice Search
-                                </h2>
-
-                                <p>
-                                    Record a medicine name
-                                    or upload an audio clip.
-                                </p>
-
-                            </div>
-
-                            <div className="patient-voice-controls">
-
-                                <button
-                                    type="button"
-                                    onClick={startRecording}
-                                    disabled={
-                                        voiceLoading ||
-                                        isRecording
-                                    }
-                                >
-                                    {isRecording
-                                        ? "Recording..."
-                                        : "Record"}
-                                </button>
-
-                                <button
-                                    type="button"
-                                    onClick={stopRecording}
-                                    disabled={!isRecording}
-                                >
-                                    Stop
-                                </button>
-
-                                <button
-                                    type="button"
-                                    onClick={() =>
-                                        fileInputRef.current?.click()
-                                    }
-                                    disabled={voiceLoading}
-                                >
-                                    Upload Audio
-                                </button>
-
-                                <input
-                                    ref={fileInputRef}
-                                    type="file"
-                                    accept="audio/*"
-                                    onChange={
-                                        handleAudioFileChange
-                                    }
-                                    className="patient-hidden-input"
-                                />
-
-                            </div>
-
-                            {audioPreview && (
-                                <div className="patient-audio-preview">
-                                    <audio
-                                        controls
-                                        src={audioPreview}
-                                    />
-                                </div>
-                            )}
-
-                            <button
-                                type="button"
-                                onClick={
-                                    handleVoiceSearch
-                                }
-                                disabled={
-                                    voiceLoading ||
-                                    isRecording
-                                }
-                            >
-                                {voiceLoading
-                                    ? "Processing..."
-                                    : "Search medicine"}
-                            </button>
-
-                            {(voiceLoading ||
-                                isRecording) && (
-                                <Loading />
-                            )}
-
-                            {voiceError && (
-                                <div className="patient-error">
-                                    {voiceError}
-                                </div>
-                            )}
-
-                            {voiceResult && (
-                                <div className="patient-result">
-
-                                    {voiceResult.response_text && (
-                                        <p className="patient-voice-response">
-                                            {voiceResult.response_text}
-                                        </p>
-                                    )}
-
-                                    {voiceResult.detected_medicine && (
-                                        <p className="patient-voice-detected-medicine">
-                                            Detected medicine: {voiceResult.detected_medicine}
-                                        </p>
-                                    )}
-
-                                    {voiceResult.matching_medicines?.length > 0 && (
-                                        <ul className="patient-voice-medicines">
-                                            {voiceResult.matching_medicines.map((medicine) => (
-                                                <li key={medicine.drug_name}>
-                                                    {medicine.drug_name}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    )}
-
-                                    {voiceMedicine ? (
-                                        <MedicineCard
-                                            medicine={
-                                                voiceMedicine
-                                            }
-                                        />
-                                    ) : (
-                                        <div className="patient-empty">
-                                            Medicine not found.
-                                        </div>
-                                    )}
-
-                                </div>
-                            )}
-
-                        </div>
-                    )}
+                    {activeTab === "voice" && <VoiceSearch embedded />}
 
                     {/* =========================
                         MY MEDICINES
@@ -1260,7 +461,7 @@ const voiceMedicine =
                                     type="button"
                                     className="patient-refresh-button"
                                     onClick={
-                                        loadPatientMedication
+                                        () => { loadPatientMedication(); loadAccessRequests(); }
                                     }
                                     disabled={
                                         scheduleLoading ||
@@ -1312,6 +513,7 @@ const voiceMedicine =
                                     </span>
                                 </div>
                                 {notificationStatus && <div className="patient-empty">{notificationStatus}</div>}
+                                <button type="button" onClick={enableNotifications}>Enable Notifications</button>
                                 <button
                                     type="button"
                                     className="patient-refresh-button"
@@ -1394,6 +596,8 @@ const voiceMedicine =
                                                 </div>
 
                                                 <div className="patient-schedule-details">
+                                                    {schedule.last_taken_at && <p>Last recorded dose: {new Date(schedule.last_taken_at).toLocaleString()}</p>}
+                                                    {schedule.instructions && <p>Instructions: {schedule.instructions}</p>}
 
                                                     <div>
                                                         <span>
@@ -1450,6 +654,13 @@ const voiceMedicine =
                                                             : "✓ Mark as Taken"}
                                                     </button>
                                                 )}
+                                                <button type="button" onClick={async () => {
+                                                    if (!window.confirm("Remove this medicine from your active schedule?")) return;
+                                                    try {
+                                                        await api.delete(`/patient-schedule/${schedule.schedule_id}`);
+                                                        await loadPatientMedication();
+                                                    } catch { setScheduleError("Unable to remove this medicine. Please retry."); }
+                                                }}>Remove from schedule</button>
 
                                                 {schedule.status ===
                                                     "taken" && (

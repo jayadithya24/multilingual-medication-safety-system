@@ -26,6 +26,7 @@ pyyaml
 pyclipper
 pydantic
 firebase-admin
+google-auth[requests]
 annotated-doc
 typing-inspection
 

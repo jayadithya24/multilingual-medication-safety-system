@@ -38,6 +38,7 @@ async def get_patient_profile(
         )
 
     patient.pop("_id", None)
+    patient.pop("hashed_password", None)
 
     return {
         "status": "success",
@@ -83,6 +84,7 @@ async def update_patient_profile(
     })
 
     updated_patient.pop("_id", None)
+    updated_patient.pop("hashed_password", None)
 
     return {
         "status": "success",

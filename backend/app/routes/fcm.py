@@ -50,6 +50,8 @@ async def send_patient_test_notification(current_user: User = Depends(get_curren
     logger.info("[FCM] Test requested patient=%s stored_tokens=%s", current_user.username, len(tokens))
     try:
         success_count = send_test_notification(tokens)
+        if success_count == 0:
+            raise RuntimeError("No device accepted the notification. Enable notifications again and retry.")
     except (RuntimeError, ValueError) as error:
         raise HTTPException(status_code=503, detail=str(error)) from error
     return {"status": "success", "message": f"Test notification sent to {success_count} device(s)."}

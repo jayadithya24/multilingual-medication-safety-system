@@ -19,17 +19,25 @@ def _firebase():
     if _firebase_app is not None:
         return _firebase_app
 
-    credentials_json = os.getenv("FIREBASE_SERVICE_ACCOUNT_JSON")
-    if not credentials_json:
-        logger.error("[FCM] FIREBASE_SERVICE_ACCOUNT_JSON is not configured")
-        return None
-
     import firebase_admin
     from firebase_admin import credentials
 
-    _firebase_app = firebase_admin.initialize_app(
-        credentials.Certificate(json.loads(credentials_json))
-    )
+    credentials_file = os.getenv("FIREBASE_SERVICE_ACCOUNT_FILE")
+    credentials_json = os.getenv("FIREBASE_SERVICE_ACCOUNT_JSON")
+    if credentials_file:
+        _firebase_app = firebase_admin.initialize_app(
+            credentials.Certificate(credentials_file)
+        )
+    elif credentials_json:
+        _firebase_app = firebase_admin.initialize_app(
+            credentials.Certificate(json.loads(credentials_json))
+        )
+    else:
+        logger.error(
+            "[FCM] Configure FIREBASE_SERVICE_ACCOUNT_FILE or FIREBASE_SERVICE_ACCOUNT_JSON"
+        )
+        return None
+
     logger.info("[FCM] Firebase Admin initialized")
     return _firebase_app
 
@@ -66,7 +74,7 @@ def _current_time():
 def send_fcm_reminder(tokens: list[str], medicine_name: str, dosage: str) -> None:
     app = _firebase()
     if not app or not tokens:
-        return
+        raise RuntimeError("Firebase credentials and registered devices are required")
 
     from firebase_admin import messaging
 
@@ -87,6 +95,8 @@ def send_fcm_reminder(tokens: list[str], medicine_name: str, dosage: str) -> Non
                 invalid_tokens.append(token)
     if invalid_tokens:
         fcm_tokens_collection.delete_many({"token": {"$in": invalid_tokens}})
+    if response.success_count == 0:
+        raise RuntimeError("No device accepted the reminder")
 
 
 def process_due_reminders(now=None) -> int:
