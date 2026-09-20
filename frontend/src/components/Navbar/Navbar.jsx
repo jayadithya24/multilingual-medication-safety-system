@@ -40,7 +40,6 @@ function Navbar() {
                             Patient Portal
                         </NavLink>}
                     </li>
-                    {isPatient && <li><button className="navbar-signout" onClick={async () => { await logout(); navigate("/public", { replace: true }); }}>Sign out</button></li>}
 
                     {!isPatient && <li>
                         <NavLink to="/admin">

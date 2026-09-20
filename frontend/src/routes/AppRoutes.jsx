@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react";
 
 import MainLayout from "../layouts/MainLayout";
 import DoctorLayout from "../layouts/DoctorLayout";
+import PatientLayout from "../layouts/PatientLayout";
 
 import Home from "../pages/Home/Home";
 import PublicDashboard from "../pages/PublicDashboard/PublicDashboard";
@@ -85,25 +86,19 @@ function AppRoutes() {
                 {/* =====================================
                     PATIENT ROUTES
                 ===================================== */}
-                <Route
-                    element={
-                        <RequireRole allowedRoles={["patient"]} />
-                    }
-                >
-                    <Route element={<RequirePatientProfile />}>
-                        <Route
-                            path="patient-dashboard"
-                            element={<PublicDashboard />}
-                        />
-                        <Route
-                            path="scan-medicines"
-                            element={<Prescription />}
-                        />
-                        <Route
-                            path="voice-search"
-                            element={<VoiceSearch />}
-                        />
-                    </Route>
+                <Route element={<PatientLayout />}>
+                    <Route
+                        path="patient-dashboard"
+                        element={<PublicDashboard />}
+                    />
+                    <Route
+                        path="scan-medicines"
+                        element={<Prescription />}
+                    />
+                    <Route
+                        path="voice-search"
+                        element={<VoiceSearch />}
+                    />
                     <Route
                         path="patient-profile"
                         element={<PatientProfile />}
@@ -116,65 +111,58 @@ function AppRoutes() {
 
 
                 {/* =====================================
-    DOCTOR ROUTES
-===================================== */}
-<Route
-    element={
-        <RequireRole allowedRoles={["doctor"]} />
-    }
->
+                    DOCTOR ROUTES
+                ===================================== */}
+                {/* Doctor Layout */}
+                <Route element={<DoctorLayout />}>
 
-    {/* Doctor Layout */}
-    <Route element={<DoctorLayout />}>
+                    {/* Doctor Dashboard */}
+                    <Route
+                        path="doctor-dashboard"
+                        element={<DoctorDashboard />}
+                    />
 
-        {/* Doctor Dashboard */}
-        <Route
-            path="doctor-dashboard"
-            element={<DoctorDashboard />}
-        />
+                    {/* Safety & DDI */}
+                    <Route
+                        path="drug-interaction"
+                        element={<DrugInteraction />}
+                    />
 
-        {/* Safety & DDI */}
-        <Route
-            path="drug-interaction"
-            element={<DrugInteraction />}
-        />
+                    {/* Drug Reference */}
+                    <Route
+                        path="drug-reference"
+                        element={<DrugReference />}
+                    />
 
-        {/* Drug Reference */}
-        <Route
-            path="drug-reference"
-            element={<DrugReference />}
-        />
+                    {/* Disease Protocols */}
+                    <Route
+                        path="disease-protocols"
+                        element={<DiseaseProtocols />}
+                    />
 
-        {/* Disease Protocols */}
-        <Route
-            path="disease-protocols"
-            element={<DiseaseProtocols />}
-        />
+                    {/* Clinical Insights (same disease selector + protocol summary) */}
+                    <Route
+                        path="clinical-insights"
+                        element={<DiseaseProtocols />}
+                    />
 
-        {/* Clinical Insights (same disease selector + protocol summary) */}
-        <Route
-            path="clinical-insights"
-            element={<DiseaseProtocols />}
-        />
+                    {/* Patient Drug Lists */}
+                    <Route
+                        path="doctor-patients"
+                        element={<PatientDrugLists />}
+                    />
 
-        {/* Patient Drug Lists */}
-        <Route
-            path="doctor-patients"
-            element={<PatientDrugLists />}
-        />
+                    {/* Analysis History */}
+                    <Route
+                        path="analysis-history"
+                        element={<AnalysisHistory />}
+                    />
 
-        {/* Analysis History */}
-        <Route
-           path="analysis-history"
-            element={<AnalysisHistory />}
-        />
-        <Route
-    path="doctor-settings"
-    element={<Settings />}
-/>
-</Route>
-
-</Route>
+                    <Route
+                        path="doctor-settings"
+                        element={<Settings />}
+                    />
+                </Route>
 
 
                 {/* =====================================

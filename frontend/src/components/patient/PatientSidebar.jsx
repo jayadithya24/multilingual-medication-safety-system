@@ -1,79 +1,75 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { getStoredRole, getStoredToken } from "../../services/api";
 import { logout } from "../../services/authService";
-import "./DoctorSidebar.css";
+import "./PatientSidebar.css";
 
-function DoctorSidebar() {
+function PatientSidebar() {
     const navigate = useNavigate();
     const [lang, setLang] = useState("en");
+    const isPatient = getStoredRole() === "patient" && Boolean(getStoredToken());
 
-    const handleLogout = () => {
-        logout();
-        navigate("/research", { replace: true });
+    const handleLogout = async () => {
+        await logout();
+        navigate("/public", { replace: true });
     };
 
     const navItems = [
         {
-            path: "/doctor-dashboard",
+            path: "/patient-dashboard",
             label: "Dashboard",
             icon: "⌂",
         },
         {
-            path: "/drug-interaction",
-            label: "Safety & DDI",
-            icon: "⚡",
-        },
-       {
-    path: "/drug-reference",
-    label: "Drug Reference",
-    icon: "💊",
-},
-        {
-            path: "/disease-protocols",
-            label: "Disease Protocols",
-            icon: "🏥",
+            path: "/scan-medicines",
+            label: "Scan Medicines",
+            icon: "📷",
         },
         {
-            path: "/clinical-insights",
-            label: "Clinical Insights",
-            icon: "📖",
+            path: "/voice-search",
+            label: "Voice Search",
+            icon: "🎙️",
         },
         {
-            path: "/doctor-patients",
-            label: "Patient Drug Lists",
+            path: "/knowledge-graph",
+            label: "Knowledge Graph",
+            icon: "🕸️",
+        },
+        {
+            path: "/patient-profile",
+            label: "Patient Profile",
             icon: "👤",
         },
     ];
 
     return (
-        <aside className="doctor-sidebar">
+        <aside className="patient-sidebar">
 
-            <div className="doctor-sidebar__brand">
-                <div className="doctor-sidebar__logo">
+            <div className="patient-sidebar__brand">
+                <div className="patient-sidebar__logo">
                     NG
                 </div>
 
                 <div>
                     <h2>NeoGraphMed</h2>
-                    <span>Clinical Workspace</span>
+                    <span>Patient Workspace</span>
                 </div>
             </div>
 
-            <div className="doctor-sidebar__profile">
-                <div className="doctor-sidebar__avatar">
-                    Dr
+            <div className="patient-sidebar__profile">
+                <div className="patient-sidebar__avatar">
+                    PT
                 </div>
 
                 <div>
-                    <strong>Doctor</strong>
-                    <span>Clinical User</span>
+                    <strong>Patient User</strong>
+                    <span>Personal Health</span>
                 </div>
             </div>
 
-            <nav className="doctor-sidebar__nav">
-
-                <p className="doctor-sidebar__section-title">
-                    WORKSPACE
+            <nav className="patient-sidebar__nav">
+                <p className="patient-sidebar__section-title">
+                    NAVIGATION
                 </p>
 
                 {navItems.map((item) => (
@@ -81,14 +77,10 @@ function DoctorSidebar() {
                         key={item.path}
                         to={item.path}
                         className={({ isActive }) =>
-                            `doctor-sidebar__link ${
-                                isActive
-                                    ? "is-active"
-                                    : ""
-                            }`
+                            `patient-sidebar__link ${isActive ? "is-active" : ""}`
                         }
                     >
-                        <span className="doctor-sidebar__icon">
+                        <span className="patient-sidebar__icon">
                             {item.icon}
                         </span>
 
@@ -97,14 +89,12 @@ function DoctorSidebar() {
                         </span>
                     </NavLink>
                 ))}
-
             </nav>
 
-            <div className="doctor-sidebar__bottom">
+            <div className="patient-sidebar__bottom">
 
-                <div className="doctor-sidebar__language">
+                <div className="patient-sidebar__language">
                     <button
-                        type="button"
                         className={lang === "en" ? "is-active" : ""}
                         onClick={() => setLang("en")}
                     >
@@ -112,7 +102,6 @@ function DoctorSidebar() {
                     </button>
 
                     <button
-                        type="button"
                         className={lang === "kn" ? "is-active" : ""}
                         onClick={() => setLang("kn")}
                     >
@@ -122,7 +111,7 @@ function DoctorSidebar() {
 
                 <button
                     type="button"
-                    className="doctor-sidebar__logout"
+                    className="patient-sidebar__logout"
                     onClick={handleLogout}
                 >
                     <span>↪</span>
@@ -135,4 +124,4 @@ function DoctorSidebar() {
     );
 }
 
-export default DoctorSidebar;
+export default PatientSidebar;

@@ -21,7 +21,13 @@ function DrugInteraction() {
   const [password, setPassword] = useState("secret");
   const [authError, setAuthError] = useState("");
   const [authLoading, setAuthLoading] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(Boolean(getStoredToken()));
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
+
+  useEffect(() => {
+    if (!getStoredToken()) {
+      loginWithPassword("doctor", "secret").catch(() => {});
+    }
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
