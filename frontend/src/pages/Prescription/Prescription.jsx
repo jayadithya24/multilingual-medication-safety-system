@@ -254,7 +254,7 @@ useEffect(() => () => {
             const detectedSummary = [ocrResult.medicine, ocrResult.dosage, ocrResult.instructions].filter(Boolean).join(". ");
             const reviewNotice = {
                 en: "These are detected details. Check them against your prescription before saving.",
-                kn: "ಉಳಿಸುವ ಮೊದಲು ಈ ವಿವರಗಳನ್ನು ನಿಮ್ಮ ಔಷಧ ಚೀಟಿಯೊಂದಿಗೆ ಪರಿಶೀಲಿಸಿ.",
+                kn: "ಬಳಸುವ ಮೊದಲು ಈ ವಿವರಗಳನ್ನು ನಿಮ್ಮ ಔಷಧ ಚೀಟಿಯೊಂದಿಗೆ ಪರಿಶೀಲಿಸಿ.",
                 tulu: "ಬಳಕೆ ಮಲ್ಪುನ ದುಂಬು ಈ ವಿವರಣ್ ಈರ್ನ ಔಷಧ ಚೀಟಿ ದ ಒಟ್ಟು ಪರಿಶೀಲನೆ ಮಲ್ಪುಲೆ.",
             };
             setSpokenScan(detectedSummary ? `${detectedSummary}. ${reviewNotice[lang]}` : "");
