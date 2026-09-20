@@ -61,6 +61,44 @@
 
 
 /* =========================
+   TABS
+========================= */
+
+.disease-protocols__tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: min(900px, 100%);
+    margin: 0 auto 22px;
+}
+
+.disease-protocols__tabs button {
+    min-height: 44px;
+    padding: 0 18px;
+    border: 1px solid #dbe4f0;
+    border-radius: 14px;
+    background: #ffffff;
+    color: #334155;
+    font-size: 0.92rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+}
+
+.disease-protocols__tabs button.is-active {
+    border-color: rgba(37, 99, 235, 0.35);
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: #ffffff;
+}
+
+.disease-protocols__tabs button:hover:not(.is-active) {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+}
+
+
+/* =========================
    DISEASE SELECTOR
 ========================= */
 
@@ -313,6 +351,120 @@
     font-weight: 800;
 }
 
+.clinical-reviewed {
+    width: min(1100px, 100%);
+    margin: 0 auto 16px;
+    padding: 14px 16px;
+    border: 1px solid #dbeafe;
+    border-radius: 14px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-size: 0.92rem;
+    font-weight: 800;
+}
+
+.clinical-sources {
+    width: min(1100px, 100%);
+    margin: 20px auto 0;
+    padding: 30px;
+    border: 1px solid #dbe4f0;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+}
+
+.clinical-sources__header h3 {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+    color: #0f172a;
+}
+
+.clinical-sources__header p {
+    margin: 0 0 22px;
+    color: #475569;
+    line-height: 1.7;
+}
+
+.clinical-sources__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.clinical-source-card {
+    padding: 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #f8fafc;
+}
+
+.clinical-source-card__kicker {
+    margin: 0 0 8px;
+    color: #0f766e;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+}
+
+.clinical-source-card h4 {
+    margin: 0 0 16px;
+    color: #0f172a;
+    font-size: 1.08rem;
+}
+
+.clinical-source-card__meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.clinical-source-card .drug-info-card {
+    padding: 18px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.clinical-source-card .drug-info-card span {
+    display: block;
+    margin-bottom: 7px;
+    color: #64748b;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.clinical-source-card .drug-info-card strong {
+    color: #0f172a;
+    font-size: 1rem;
+}
+
+.clinical-source-card__summary {
+    margin: 16px 0 0;
+    color: #475569;
+    line-height: 1.75;
+}
+
+.clinical-source-card__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    margin-top: 16px;
+    padding: 0 16px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: #ffffff;
+    font-size: 0.86rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.clinical-source-card__link:hover {
+    filter: brightness(1.05);
+}
+
 .disease-drug-card__description {
     grid-column: 1 / -1;
 
@@ -373,6 +525,14 @@
     .disease-protocols__grid {
         grid-template-columns: 1fr;
     }
+
+    .clinical-sources {
+        padding: 22px;
+    }
+
+    .clinical-source-card__meta {
+        grid-template-columns: 1fr;
+    }
 }
 
 
@@ -387,6 +547,11 @@
     }
 
     .disease-protocols__results {
+        padding: 18px;
+        border-radius: 20px;
+    }
+
+    .clinical-sources {
         padding: 18px;
         border-radius: 20px;
     }

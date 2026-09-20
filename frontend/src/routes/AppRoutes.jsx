@@ -132,6 +132,12 @@ function AppRoutes() {
             element={<DiseaseProtocols />}
         />
 
+        {/* Clinical Insights (same disease selector + protocol summary) */}
+        <Route
+            path="clinical-insights"
+            element={<DiseaseProtocols />}
+        />
+
         {/* Patient Drug Lists */}
         <Route
             path="doctor-patients"

@@ -32,6 +32,11 @@ function DoctorSidebar() {
             icon: "🏥",
         },
         {
+            path: "/clinical-insights",
+            label: "Clinical Insights",
+            icon: "📖",
+        },
+        {
             path: "/doctor-patients",
             label: "Patient Drug Lists",
             icon: "👤",

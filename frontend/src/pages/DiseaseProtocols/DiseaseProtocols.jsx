@@ -1,15 +1,41 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
     fetchDiseases,
     fetchDrugsForDisease,
 } from "../../services/neo4jService";
+import clinicalSources from "../../data/clinicalSources.json";
+import ClinicalSources from "./ClinicalSources";
+import DiseaseProtocolSummary from "./DiseaseProtocolSummary";
 
 import "./DiseaseProtocols.css";
 
+function matchClinicalEntry(diseaseName) {
+    if (!diseaseName) {
+        return null;
+    }
+
+    const selected = diseaseName.trim().toLowerCase();
+
+    return clinicalSources.find(
+        (entry) => entry.disease.trim().toLowerCase() === selected
+    ) || null;
+}
+
+const SELECTED_DISEASE_KEY = "mmss-clinical-selected-disease";
+
 function DiseaseProtocols() {
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const activeTab = location.pathname.includes("clinical-insights")
+        ? "insights"
+        : "protocols";
 
     const [diseases, setDiseases] = useState([]);
-    const [selectedDisease, setSelectedDisease] = useState("");
+    const [selectedDisease, setSelectedDisease] = useState(
+        () => sessionStorage.getItem(SELECTED_DISEASE_KEY) || ""
+    );
     const [drugs, setDrugs] = useState([]);
 
     const [loadingDiseases, setLoadingDiseases] = useState(true);
@@ -17,8 +43,12 @@ function DiseaseProtocols() {
 
     const [error, setError] = useState("");
 
-    useEffect(() => {
+    const clinicalEntry = useMemo(
+        () => matchClinicalEntry(selectedDisease),
+        [selectedDisease]
+    );
 
+    useEffect(() => {
         const loadDiseases = async () => {
             try {
                 setLoadingDiseases(true);
@@ -27,7 +57,6 @@ function DiseaseProtocols() {
                 const data = await fetchDiseases();
 
                 setDiseases(data.diseases || []);
-
             } catch (err) {
                 console.error(err);
                 setError("Unable to load disease list.");
@@ -37,12 +66,45 @@ function DiseaseProtocols() {
         };
 
         loadDiseases();
-
     }, []);
 
+    useEffect(() => {
+        if (!selectedDisease) {
+            setDrugs([]);
+            return undefined;
+        }
 
-    const handleDiseaseChange = async (event) => {
+        sessionStorage.setItem(SELECTED_DISEASE_KEY, selectedDisease);
 
+        let active = true;
+
+        const loadDrugs = async () => {
+            try {
+                setLoadingDrugs(true);
+                const data = await fetchDrugsForDisease(selectedDisease);
+                if (active) {
+                    setDrugs(data.drugs || []);
+                }
+            } catch (err) {
+                console.error(err);
+                if (active) {
+                    setError("Unable to load medicines for this disease.");
+                }
+            } finally {
+                if (active) {
+                    setLoadingDrugs(false);
+                }
+            }
+        };
+
+        loadDrugs();
+
+        return () => {
+            active = false;
+        };
+    }, [selectedDisease]);
+
+    const handleDiseaseChange = (event) => {
         const disease = event.target.value;
 
         setSelectedDisease(disease);
@@ -50,54 +112,53 @@ function DiseaseProtocols() {
         setError("");
 
         if (!disease) {
-            return;
-        }
-
-        try {
-            setLoadingDrugs(true);
-
-            const data = await fetchDrugsForDisease(disease);
-
-            setDrugs(data.drugs || []);
-
-        } catch (err) {
-            console.error(err);
-            setError(
-                "Unable to load medicines for this disease."
-            );
-        } finally {
-            setLoadingDrugs(false);
+            sessionStorage.removeItem(SELECTED_DISEASE_KEY);
         }
     };
-
 
     return (
         <div className="disease-protocols">
 
-            {/* Hero */}
-
             <section className="disease-protocols__hero">
-
                 <p className="disease-protocols__kicker">
                     CLINICAL REFERENCE
                 </p>
 
                 <h1>
-                    Disease Protocols
+                    {activeTab === "insights"
+                        ? "Clinical Insights"
+                        : "Disease Protocols"}
                 </h1>
 
                 <p>
-                    Review medicines associated with specific diseases
-                    from the medication safety knowledge graph.
+                    {activeTab === "insights"
+                        ? "Review the disease protocol summary together with curated sources already used in the MMSS reference list."
+                        : "Review medicines associated with specific diseases from the medication safety knowledge graph."}
                 </p>
-
             </section>
 
-
-            {/* Disease Selector */}
+            <div className="disease-protocols__tabs" role="tablist" aria-label="Clinical reference views">
+                <button
+                    type="button"
+                    role="tab"
+                    aria-selected={activeTab === "protocols"}
+                    className={activeTab === "protocols" ? "is-active" : ""}
+                    onClick={() => navigate("/disease-protocols")}
+                >
+                    Disease Protocols
+                </button>
+                <button
+                    type="button"
+                    role="tab"
+                    aria-selected={activeTab === "insights"}
+                    className={activeTab === "insights" ? "is-active" : ""}
+                    onClick={() => navigate("/clinical-insights")}
+                >
+                    Clinical Insights
+                </button>
+            </div>
 
             <section className="disease-protocols__panel">
-
                 <label htmlFor="disease-select">
                     Select Disease
                 </label>
@@ -108,7 +169,6 @@ function DiseaseProtocols() {
                     onChange={handleDiseaseChange}
                     disabled={loadingDiseases}
                 >
-
                     <option value="">
                         {loadingDiseases
                             ? "Loading diseases..."
@@ -123,13 +183,8 @@ function DiseaseProtocols() {
                             {disease}
                         </option>
                     ))}
-
                 </select>
-
             </section>
-
-
-            {/* Error */}
 
             {error && (
                 <div className="disease-protocols__error">
@@ -137,101 +192,24 @@ function DiseaseProtocols() {
                 </div>
             )}
 
-
-            {/* Results */}
+            {selectedDisease && activeTab === "insights" && clinicalEntry?.lastReviewed && (
+                <p className="clinical-reviewed">
+                    Clinical references reviewed: {clinicalEntry.lastReviewed}.
+                </p>
+            )}
 
             {selectedDisease && (
+                <>
+                    <DiseaseProtocolSummary
+                        selectedDisease={selectedDisease}
+                        drugs={drugs}
+                        loadingDrugs={loadingDrugs}
+                    />
 
-                <section className="disease-protocols__results">
-
-                    <div className="disease-protocols__results-header">
-
-                        <div>
-
-                            <p>
-                                MEDICATION OPTIONS
-                            </p>
-
-                            <h2>
-                                {selectedDisease}
-                            </h2>
-
-                        </div>
-
-                        <span>
-                            {drugs.length} medicines
-                        </span>
-
-                    </div>
-
-
-                    {/* Loading */}
-
-                    {loadingDrugs ? (
-
-                        <div className="disease-protocols__loading">
-                            Loading medicines...
-                        </div>
-
-                    ) : drugs.length === 0 ? (
-
-                        <div className="disease-protocols__empty">
-                            No medicines found for this disease.
-                        </div>
-
-                    ) : (
-
-                        <div className="disease-protocols__grid">
-
-                            {drugs.map((drug) => (
-
-                                <article
-                                    className="disease-drug-card"
-                                    key={
-                                        drug.drug_id ||
-                                        drug.drug_name
-                                    }
-                                >
-
-                                    <div className="disease-drug-card__icon">
-                                        💊
-                                    </div>
-
-                                    <div className="disease-drug-card__content">
-
-                                        <h3>
-                                            {drug.drug_name}
-                                        </h3>
-
-                                        <p className="disease-drug-card__generic">
-                                            {drug.generic_name}
-                                        </p>
-
-                                        {drug.drug_class && (
-                                            <span className="disease-drug-card__class">
-                                                {drug.drug_class}
-                                            </span>
-                                        )}
-
-                                    </div>
-
-
-                                    {drug.description_en && (
-                                        <p className="disease-drug-card__description">
-                                            {drug.description_en}
-                                        </p>
-                                    )}
-
-                                </article>
-
-                            ))}
-
-                        </div>
-
+                    {activeTab === "insights" && (
+                        <ClinicalSources entry={clinicalEntry} />
                     )}
-
-                </section>
-
+                </>
             )}
 
         </div>
