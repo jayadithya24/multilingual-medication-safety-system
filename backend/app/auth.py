@@ -61,6 +61,11 @@ class User(BaseModel):
     full_name: Optional[str] = None
     role: Optional[str] = "patient"
     disabled: Optional[bool] = None
+    doctor_id: Optional[str] = None
+    specialization: Optional[str] = None
+    license_number: Optional[str] = None
+    phone: Optional[str] = None
+    hospital: Optional[str] = None
 
 
 class UserInDB(User):
@@ -68,26 +73,10 @@ class UserInDB(User):
 
 
 # ============================================================
-# EXISTING USERS
+# LEGACY PATIENT DEMO ACCOUNT
 # ============================================================
 
 fake_users_db = {
-    "admin": {
-        "username": "admin",
-        "full_name": "Admin User",
-        "email": "admin@example.com",
-        "role": "doctor",
-        "hashed_password": "$2b$12$zA6ilqwM1GzNkijm9iVnVeklyeG9sp1EGuuoSwhlMcN9jxJujKhOu",
-    },
-
-    "doctor": {
-        "username": "doctor",
-        "full_name": "Doctor User",
-        "email": "doctor@gmail.com",
-        "role": "doctor",
-        "hashed_password": "$2b$12$GQS.25nau21FJXuguXePVeRf0B.Sgf7lyHKTGe5eoDcjoc7njV1NS",
-    },
-
     "patient": {
         "username": "patient",
         "full_name": "Patient User",
@@ -140,7 +129,7 @@ def get_password_hash(password: str) -> str:
 
 
 # ============================================================
-# GET USER FROM FAKE DATABASE
+# GET USER FROM LEGACY DEMO DATA
 # ============================================================
 
 def get_user(
@@ -197,7 +186,8 @@ def authenticate_user(
         return user
 
     # --------------------------------------------------------
-    # SECOND: CHECK EXISTING FAKE USERS
+    # SECOND: CHECK THE LEGACY PATIENT DEMO ACCOUNT.
+    # Doctor accounts are stored exclusively in MongoDB.
     # --------------------------------------------------------
 
     user = get_user(
@@ -297,11 +287,17 @@ async def get_current_user(
                 full_name=mongo_user.get("full_name"),
                 role=mongo_user.get("role", "patient"),
                 disabled=mongo_user.get("disabled"),
+                doctor_id=mongo_user.get("doctor_id"),
+                specialization=mongo_user.get("specialization"),
+                license_number=mongo_user.get("license_number"),
+                phone=mongo_user.get("phone"),
+                hospital=mongo_user.get("hospital"),
             )
         except Exception:
             raise credentials_exception
 
-    # Fallback to fake users
+    # Fallback to the legacy patient demo account. Doctor accounts are
+    # deliberately not hard-coded and must exist in MongoDB.
     fake_user = get_user(
         fake_users_db,
         token_data.username
@@ -332,4 +328,15 @@ async def get_current_active_user(
             detail="Inactive user"
         )
 
+    return current_user
+
+
+async def get_current_admin(
+    current_user: User = Depends(get_current_active_user),
+) -> User:
+    if current_user.role != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Only administrators can perform this action.",
+        )
     return current_user

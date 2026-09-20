@@ -20,8 +20,6 @@ import RequireRole from "../components/RequireRole/RequireRole";
 import RequirePatientProfile from "../components/RequirePatientProfile/RequirePatientProfile";
 import DiseaseProtocols from "../pages/DiseaseProtocols/DiseaseProtocols";
 import PatientDrugLists from "../pages/PatientDrugLists/PatientDrugLists";
-import AnalysisHistory from "../pages/AnalysisHistory/AnalysisHistory";
-import Settings from "../pages/Settings/Settings";
 import KnowledgeGraph from "../pages/KnowledgeGraph/KnowledgeGraph";
 import PatientProfile from "../pages/PatientProfile/PatientProfile";
 import Prescription from "../pages/Prescription/Prescription";
@@ -147,6 +145,12 @@ function AppRoutes() {
         {/* Disease Protocols */}
         <Route
             path="disease-protocols"
+            element={<DiseaseProtocols />}
+        />
+
+        {/* Clinical Insights (same disease selector + protocol summary) */}
+        <Route
+            path="clinical-insights"
             element={<DiseaseProtocols />}
         />
 

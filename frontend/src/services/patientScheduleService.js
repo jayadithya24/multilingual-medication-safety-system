@@ -26,3 +26,15 @@ export async function fetchMedicationHistory() {
     );
     return response.data;
 }
+
+export async function fetchRemovedPatientSchedules() {
+    const response = await api.get("/patient-schedule/removed");
+    return response.data;
+}
+
+export async function deletePatientSchedule(scheduleId) {
+    const response = await api.delete(
+        `/patient-schedule/${encodeURIComponent(scheduleId)}`
+    );
+    return response.data;
+}

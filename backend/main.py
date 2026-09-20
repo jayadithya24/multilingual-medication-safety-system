@@ -25,6 +25,7 @@ from backend.app.routes.patient_schedule import router as patient_schedule_route
 from backend.app.routes.patient_drugs import router as patient_drugs_router
 from backend.app.routes.patient import router as patient_router
 from backend.app.routes.access_requests import router as access_requests_router
+from backend.app.routes.doctor_requests import router as doctor_requests_router
 from backend.app.services.ocr_service import warm_up_reader
 from backend.app.routes.fcm import router as fcm_router
 from backend.app.services.fcm_service import reminder_loop
@@ -43,7 +44,10 @@ app.add_middleware(
         "http://127.0.0.1:5174",
         "http://localhost:5175",
         "http://127.0.0.1:5175",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
     ],
+    allow_origin_regex=r"https?://(localhost|127\.0\.0\.1)(:\d+)?",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -60,6 +64,7 @@ app.include_router(patient_schedule_router)
 app.include_router(patient_drugs_router)
 app.include_router(patient_router)
 app.include_router(access_requests_router)
+app.include_router(doctor_requests_router)
 app.include_router(fcm_router)
 
 reminder_stop_event = asyncio.Event()

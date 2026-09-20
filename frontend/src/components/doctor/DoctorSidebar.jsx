@@ -32,19 +32,14 @@ function DoctorSidebar() {
             icon: "🏥",
         },
         {
+            path: "/clinical-insights",
+            label: "Clinical Insights",
+            icon: "📖",
+        },
+        {
             path: "/doctor-patients",
             label: "Patient Drug Lists",
             icon: "👤",
-        },
-        {
-            path: "/doctor-history",
-            label: "Analysis History",
-            icon: "📋",
-        },
-        {
-            path: "/doctor-settings",
-            label: "Settings",
-            icon: "⚙",
         },
     ];
 

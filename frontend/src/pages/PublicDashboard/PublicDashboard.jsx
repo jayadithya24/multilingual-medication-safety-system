@@ -14,6 +14,7 @@ import { registerMedicationNotifications, sendTestNotification } from "../../ser
 import {
     fetchPatientSchedule,
     markMedicineAsTaken,
+    deletePatientSchedule,
     fetchMedicationHistory,
 } from "../../services/patientScheduleService";
 
@@ -64,6 +65,8 @@ function PublicDashboard() {
     const [scheduleError, setScheduleError] = useState("");
     const [historyError, setHistoryError] = useState("");
     const [takingMedicineId, setTakingMedicineId] = useState(null);
+    const [deletingMedicineId, setDeletingMedicineId] = useState(null);
+    const [schedulePendingDeletion, setSchedulePendingDeletion] = useState(null);
     const [accessRequests, setAccessRequests] = useState([]);
     const [accessRequestError, setAccessRequestError] = useState("");
     const [notificationStatus, setNotificationStatus] = useState("");
@@ -184,6 +187,7 @@ function PublicDashboard() {
             setHistory(
                 historyResponse.history || []
             );
+
         } catch (error) {
             console.error(error);
 
@@ -265,6 +269,34 @@ function PublicDashboard() {
             );
         } finally {
             setTakingMedicineId(null);
+        }
+    };
+
+    const confirmDeleteMedicine = async () => {
+        if (!schedulePendingDeletion) {
+            return;
+        }
+
+        const schedule = schedulePendingDeletion;
+        try {
+            setDeletingMedicineId(schedule.schedule_id);
+            setScheduleError("");
+
+            await deletePatientSchedule(schedule.schedule_id);
+            setSchedules((currentSchedules) =>
+                currentSchedules.filter(
+                    (item) => item.schedule_id !== schedule.schedule_id
+                )
+            );
+            setSchedulePendingDeletion(null);
+        } catch (error) {
+            console.error(error);
+            setScheduleError(
+                error?.response?.data?.detail ||
+                "Unable to remove this medicine from your schedule."
+            );
+        } finally {
+            setDeletingMedicineId(null);
         }
     };
 
@@ -633,34 +665,50 @@ function PublicDashboard() {
 
                                                 </div>
 
-                                                {schedule.status !==
-                                                    "taken" && (
+                                                <div className="patient-schedule-actions">
+                                                    {schedule.status !==
+                                                        "taken" && (
+                                                        <button
+                                                            type="button"
+                                                            className="patient-taken-button"
+                                                            onClick={() =>
+                                                                handleMarkAsTaken(
+                                                                    schedule.schedule_id
+                                                                )
+                                                            }
+                                                            disabled={
+                                                                takingMedicineId ===
+                                                                    schedule.schedule_id ||
+                                                                deletingMedicineId ===
+                                                                    schedule.schedule_id
+                                                            }
+                                                        >
+                                                            {takingMedicineId ===
+                                                            schedule.schedule_id
+                                                                ? "Saving..."
+                                                                : "✓ Mark as Taken"}
+                                                        </button>
+                                                    )}
+
                                                     <button
                                                         type="button"
-                                                        className="patient-taken-button"
+                                                        className="patient-delete-button"
                                                         onClick={() =>
-                                                            handleMarkAsTaken(
-                                                                schedule.schedule_id
-                                                            )
+                                                            setSchedulePendingDeletion(schedule)
                                                         }
                                                         disabled={
                                                             takingMedicineId ===
-                                                            schedule.schedule_id
+                                                                schedule.schedule_id ||
+                                                            deletingMedicineId ===
+                                                                schedule.schedule_id
                                                         }
                                                     >
-                                                        {takingMedicineId ===
+                                                        {deletingMedicineId ===
                                                         schedule.schedule_id
-                                                            ? "Saving..."
-                                                            : "✓ Mark as Taken"}
+                                                            ? "Removing..."
+                                                            : "Delete medicine"}
                                                     </button>
-                                                )}
-                                                <button type="button" onClick={async () => {
-                                                    if (!window.confirm("Remove this medicine from your active schedule?")) return;
-                                                    try {
-                                                        await api.delete(`/patient-schedule/${schedule.schedule_id}`);
-                                                        await loadPatientMedication();
-                                                    } catch { setScheduleError("Unable to remove this medicine. Please retry."); }
-                                                }}>Remove from schedule</button>
+                                                </div>
 
                                                 {schedule.status ===
                                                     "taken" && (
@@ -773,6 +821,54 @@ function PublicDashboard() {
 
                 </div>
             </section>
+
+            {schedulePendingDeletion && (
+                <div
+                    className="medicine-delete-modal-backdrop"
+                    role="presentation"
+                    onMouseDown={(event) => {
+                        if (event.target === event.currentTarget && !deletingMedicineId) {
+                            setSchedulePendingDeletion(null);
+                        }
+                    }}
+                >
+                    <section
+                        className="medicine-delete-modal"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="delete-medicine-title"
+                        aria-describedby="delete-medicine-description"
+                    >
+                        <div className="medicine-delete-modal__icon" aria-hidden="true">
+                            🗑
+                        </div>
+                        <p className="medicine-delete-modal__eyebrow">Medication schedule</p>
+                        <h2 id="delete-medicine-title">Remove medicine?</h2>
+                        <p id="delete-medicine-description">
+                            Remove <strong>{schedulePendingDeletion.medicine_name}</strong> from your active schedule?
+                            Its reminders will stop, but your medication history will stay available.
+                        </p>
+                        <div className="medicine-delete-modal__actions">
+                            <button
+                                type="button"
+                                className="medicine-delete-modal__cancel"
+                                onClick={() => setSchedulePendingDeletion(null)}
+                                disabled={Boolean(deletingMedicineId)}
+                            >
+                                Keep medicine
+                            </button>
+                            <button
+                                type="button"
+                                className="medicine-delete-modal__confirm"
+                                onClick={confirmDeleteMedicine}
+                                disabled={Boolean(deletingMedicineId)}
+                            >
+                                {deletingMedicineId ? "Removing..." : "Remove medicine"}
+                            </button>
+                        </div>
+                    </section>
+                </div>
+            )}
         </div>
     );
 }

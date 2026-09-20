@@ -16,8 +16,8 @@ db = client[MONGO_DB]
 
 # Collections used by the patient medication system
 users_collection = db["users"]
-users_collection.create_index("username", unique=True)
 users_collection.create_index("google_sub", unique=True, sparse=True)
+doctor_requests_collection = db["doctor_requests"]
 
 patient_schedules_collection = db["patient_schedules"]
 medication_history_collection = db["medication_history"]
@@ -25,6 +25,22 @@ access_requests_collection = db["access_requests"]
 fcm_tokens_collection = db["fcm_tokens"]
 
 # Useful indexes
+users_collection.create_index(
+    [("username", 1)],
+    unique=True,
+)
+users_collection.create_index(
+    [("doctor_id", 1)],
+    unique=True,
+    sparse=True,
+)
+doctor_requests_collection.create_index(
+    [("email", 1)],
+    unique=True,
+    partialFilterExpression={"status": "pending"},
+)
+doctor_requests_collection.create_index([("status", 1), ("created_at", -1)])
+
 patient_schedules_collection.create_index(
     [("patient_username", 1), ("scheduled_time", 1)]
 )

@@ -1,6 +1,38 @@
 import axios from "axios";
 
-const BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+function resolveApiBaseUrl() {
+  const configured = import.meta.env.VITE_API_URL;
+
+  if (configured && typeof window !== "undefined") {
+    try {
+      const apiUrl = new URL(configured, window.location.origin);
+      const pageHost = window.location.hostname;
+      const loopbackSwap =
+        (apiUrl.hostname === "127.0.0.1" && pageHost === "localhost") ||
+        (apiUrl.hostname === "localhost" && pageHost === "127.0.0.1");
+
+      if (loopbackSwap) {
+        apiUrl.hostname = pageHost;
+      }
+
+      return apiUrl.origin;
+    } catch {
+      return configured;
+    }
+  }
+
+  if (configured) {
+    return configured;
+  }
+
+  if (import.meta.env.DEV) {
+    return "";
+  }
+
+  return "http://127.0.0.1:8000";
+}
+
+const BASE_URL = resolveApiBaseUrl();
 
 export function getStoredToken() {
   const token = localStorage.getItem("mmss_token") || "";

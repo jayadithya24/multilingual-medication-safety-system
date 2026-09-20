@@ -1,0 +1,68 @@
+[
+  {
+    "disease": "Type 2 Diabetes",
+    "lastReviewed": "March 2026",
+    "sources": [
+      {
+        "title": "ICMR Diabetes Guidelines 2018",
+        "authors": "ICMR",
+        "year": 2018,
+        "journal": null,
+        "summary": "This project’s type 2 diabetes medicine records cite the 2018 ICMR diabetes guidelines for first-line Indian outpatient treatment context, including metformin and carbohydrate-absorption agents such as acarbose.",
+        "url": null
+      },
+      {
+        "title": "ADA clinical guidelines",
+        "authors": "ADA",
+        "year": null,
+        "journal": null,
+        "summary": "The synthetic patient–drug generator lists ADA clinical guidelines as a source used when assigning type 2 diabetes medicines to patient records.",
+        "url": null
+      }
+    ]
+  },
+  {
+    "disease": "Hypertension",
+    "lastReviewed": "March 2026",
+    "sources": [
+      {
+        "title": "ICMR Hypertension Guidelines",
+        "authors": "ICMR",
+        "year": null,
+        "journal": null,
+        "summary": "Hypertension drug descriptions in the master dataset, including first-choice calcium-channel blockers such as amlodipine, cite ICMR hypertension guidelines as treatment-context support.",
+        "url": null
+      },
+      {
+        "title": "JNC 8",
+        "authors": "JNC 8",
+        "year": null,
+        "journal": null,
+        "summary": "The chlorthalidone record cites JNC 8 among the references used for hypertension treatment context in this dataset.",
+        "url": null
+      }
+    ]
+  },
+  {
+    "disease": "Arthritis",
+    "lastReviewed": "March 2026",
+    "sources": [
+      {
+        "title": "ACR Guidelines",
+        "authors": "ACR",
+        "year": null,
+        "journal": null,
+        "summary": "Disease-modifying arthritis medicines in this dataset—including methotrexate, sulfasalazine, and leflunomide—cite ACR guidelines as the clinical source for long-term rheumatoid arthritis therapy.",
+        "url": null
+      },
+      {
+        "title": "ICMR",
+        "authors": "ICMR",
+        "year": null,
+        "journal": null,
+        "summary": "The prednisolone arthritis record cites ICMR as a source for short-term anti-inflammatory use while slower arthritis medicines take effect.",
+        "url": null
+      }
+    ]
+  }
+]

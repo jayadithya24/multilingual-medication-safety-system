@@ -38,6 +38,21 @@ export async function registerPatient(name, email, password, confirmPassword) {
   return response.data;
 }
 
+export async function requestDoctorAccount(request) {
+  const response = await api.post("/auth/doctor-request", {
+    name: request.name,
+    email: request.email,
+    phone: request.phone,
+    doctor_id: request.medicalRegistrationNo,
+    specialization: request.specialization,
+    hospital: request.hospital,
+    password: request.password,
+    confirm_password: request.confirmPassword,
+  });
+
+  return response.data;
+}
+
 export function logout() {
   window.google?.accounts?.id?.disableAutoSelect();
   clearStoredToken();

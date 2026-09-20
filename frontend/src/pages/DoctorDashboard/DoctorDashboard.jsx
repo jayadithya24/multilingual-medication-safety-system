@@ -109,7 +109,6 @@ function DoctorDashboard() {
 
 
                     {/* Disease Protocols */}
-                    {/* Disease Protocols */}
 <Link
      to="/disease-protocols"
     className="doctor-tool"
@@ -130,6 +129,35 @@ function DoctorDashboard() {
         <p>
             Review disease-specific medication
             information and treatment context.
+        </p>
+    </div>
+
+    <span className="doctor-tool__arrow">
+        →
+    </span>
+</Link>
+
+                    {/* Clinical Insights */}
+<Link
+     to="/clinical-insights"
+    className="doctor-tool"
+>
+    <div className="doctor-tool__icon">
+        📖
+    </div>
+
+    <div className="doctor-tool__content">
+        <span className="doctor-tool__label">
+            CLINICAL
+        </span>
+
+        <h3>
+            Clinical Insights
+        </h3>
+
+        <p>
+            View protocol summaries with curated
+            sources and further reading.
         </p>
     </div>
 
@@ -199,34 +227,6 @@ function DoctorDashboard() {
 </Link>
 
 
-{/* Analysis History */}
-<Link
-     to="/analysis-history"
-    className="doctor-tool"
->
-    <div className="doctor-tool__icon">
-        📋
-    </div>
-
-    <div className="doctor-tool__content">
-        <span className="doctor-tool__label">
-            HISTORY
-        </span>
-
-        <h3>
-            Analysis History
-        </h3>
-
-        <p>
-            Review previously recorded medication intake
-            and patient medication activity.
-        </p>
-    </div>
-
-    <span className="doctor-tool__arrow">
-        →
-    </span>
-</Link>
                 </div>
 
             </section>
