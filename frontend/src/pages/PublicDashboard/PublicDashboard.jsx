@@ -109,12 +109,22 @@ function PublicDashboard() {
         };
     }, [lang]);
 
+    useEffect(() => {
+        if ("Notification" in window && Notification.permission === "granted") {
+            registerMedicationNotifications().then((res) => {
+                if (res.registered) {
+                    setNotificationStatus("Medication reminders active on this device.");
+                }
+            }).catch(() => {});
+        }
+    }, []);
+
     const enableNotifications = () => {
         registerMedicationNotifications()
             .then((result) => {
                 console.info("[FCM] Registration result:", result);
                 if (result.registered) {
-                    setNotificationStatus("Medication reminders enabled");
+                    setNotificationStatus("Medication reminders active on this device.");
                 } else {
                     setNotificationStatus(`Medication reminders unavailable: ${result.reason}`);
                 }
@@ -553,7 +563,11 @@ function PublicDashboard() {
                                     </span>
                                 </div>
                                 {notificationStatus && <div className="patient-empty">{notificationStatus}</div>}
-                                <button type="button" onClick={enableNotifications}>Enable Notifications</button>
+                                {("Notification" in window && Notification.permission !== "granted") && (
+                                    <button type="button" className="patient-refresh-button" onClick={enableNotifications}>
+                                        Enable Reminders & Notifications
+                                    </button>
+                                )}
                                 <details className="patient-notification-tools">
                                 <summary>Check notification delivery</summary>
                                 <p>Keep the backend running and enable browser notifications on this device.</p>
