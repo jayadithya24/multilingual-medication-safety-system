@@ -204,6 +204,7 @@ function DiseaseProtocols() {
                         selectedDisease={selectedDisease}
                         drugs={drugs}
                         loadingDrugs={loadingDrugs}
+                        compact={activeTab === "insights"}
                     />
 
                     {activeTab === "insights" && (

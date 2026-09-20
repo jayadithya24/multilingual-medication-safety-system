@@ -1,8 +1,21 @@
+function SourceMeta({ label, value }) {
+    if (value === null || value === undefined || value === "") {
+        return null;
+    }
+
+    return (
+        <div className="drug-info-card">
+            <span>{label}</span>
+            <strong>{value}</strong>
+        </div>
+    );
+}
+
 function ClinicalSources({ entry }) {
     if (!entry) {
         return (
             <div className="disease-protocols__empty">
-                No curated clinical sources are available for this disease.
+                No curated academic sources are available for this disease.
             </div>
         );
     }
@@ -12,7 +25,7 @@ function ClinicalSources({ entry }) {
     if (sources.length === 0) {
         return (
             <div className="disease-protocols__empty">
-                No curated clinical sources are available for this disease.
+                No curated academic sources are available for this disease.
             </div>
         );
     }
@@ -22,8 +35,8 @@ function ClinicalSources({ entry }) {
             <div className="clinical-sources__header">
                 <h3>Sources &amp; Further Reading</h3>
                 <p>
-                    Curated references already used in the MMSS dataset
-                    for this disease. Full article text is not shown here.
+                    Academic papers from the project reference list that
+                    support this disease. Full article text is not shown here.
                 </p>
             </div>
 
@@ -40,18 +53,9 @@ function ClinicalSources({ entry }) {
                         <h4>{source.title}</h4>
 
                         <div className="clinical-source-card__meta">
-                            <div className="drug-info-card">
-                                <span>Authors</span>
-                                <strong>{source.authors || "Not listed"}</strong>
-                            </div>
-                            <div className="drug-info-card">
-                                <span>Year</span>
-                                <strong>{source.year ?? "Not listed"}</strong>
-                            </div>
-                            <div className="drug-info-card">
-                                <span>Journal</span>
-                                <strong>{source.journal || "Not listed"}</strong>
-                            </div>
+                            <SourceMeta label="Authors" value={source.authors} />
+                            <SourceMeta label="Year" value={source.year} />
+                            <SourceMeta label="Journal" value={source.journal} />
                         </div>
 
                         <p className="clinical-source-card__summary">
