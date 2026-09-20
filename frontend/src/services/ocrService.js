@@ -42,7 +42,7 @@ export const scanMedicine = async (imageFile, lang = "en") => {
   } catch (err) {
     // Surface a clearer error for the UI
     if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
-      throw new Error('OCR request timed out. Try a smaller image or try again.');
+      throw new Error('OCR request timed out. Try a smaller image or try again.', { cause: err });
     }
     throw err;
   }

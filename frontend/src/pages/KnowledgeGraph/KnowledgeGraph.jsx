@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ForceGraph2D from "react-force-graph-2d";
 
 import { fetchKnowledgeGraph } from "../../services/neo4jService";
@@ -19,20 +19,9 @@ function KnowledgeGraph() {
 const [searchText, setSearchText] =
     useState("");
 
-const [filteredGraphData, setFilteredGraphData] =
-    useState({
-        nodes: [],
-        links: [],
-    });
-
 const graphRef = useRef(null);
 
-    const loadGraph = async () => {
-    try {
-        setLoading(true);
-        setError("");
-
-        const data = await fetchKnowledgeGraph();
+    const loadGraph = () => fetchKnowledgeGraph().then((data) => {
 
         console.log("Knowledge Graph Data:", data);
 
@@ -158,9 +147,8 @@ const graphRef = useRef(null);
         };
 
         setGraphData(newGraphData);
-        setFilteredGraphData(newGraphData);
 
-    } catch (err) {
+    }).catch((err) => {
 
         console.error(
             "Knowledge graph error:",
@@ -171,17 +159,16 @@ const graphRef = useRef(null);
             "Unable to load the medication knowledge graph."
         );
 
-    } finally {
+    }).finally(() => {
 
         setLoading(false);
 
-    }
-};
+    });
 useEffect(() => {
     loadGraph();
 }, []);
 
-useEffect(() => {
+const filteredGraphData = useMemo(() => {
     let nodes = graphData.nodes;
     let links = graphData.links;
 
@@ -217,10 +204,10 @@ useEffect(() => {
         );
     }
 
-    setFilteredGraphData({
+    return {
         nodes,
         links,
-    });
+    };
 }, [graphData, relationshipFilter]);
 
 const handleFindNode = () => {

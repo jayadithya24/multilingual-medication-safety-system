@@ -22,7 +22,7 @@ class PatientProfileUpdate(BaseModel):
 
 
 @router.get("/profile")
-async def get_patient_profile(
+def get_patient_profile(
     current_user: User = Depends(get_current_active_user)
 ):
 
@@ -38,6 +38,7 @@ async def get_patient_profile(
         )
 
     patient.pop("_id", None)
+    patient.pop("hashed_password", None)
 
     return {
         "status": "success",
@@ -46,7 +47,7 @@ async def get_patient_profile(
 
 
 @router.put("/profile")
-async def update_patient_profile(
+def update_patient_profile(
     payload: PatientProfileUpdate,
     current_user: User = Depends(get_current_active_user)
 ):
@@ -83,6 +84,7 @@ async def update_patient_profile(
     })
 
     updated_patient.pop("_id", None)
+    updated_patient.pop("hashed_password", None)
 
     return {
         "status": "success",
@@ -90,7 +92,7 @@ async def update_patient_profile(
         "profile": updated_patient
     }
 @router.get("/medication-history")
-async def get_patient_medication_history(
+def get_patient_medication_history(
     current_user=Depends(get_current_active_user)
 ):
     history = list(

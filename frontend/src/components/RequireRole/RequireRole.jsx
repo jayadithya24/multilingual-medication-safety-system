@@ -7,7 +7,7 @@ function RequireRole({ allowedRoles }) {
   const role = getStoredRole();
 
   if (!token) {
-    return <Navigate to="/" replace state={{ from: location }} />;
+    return <Navigate to={allowedRoles.includes("patient") ? "/public" : "/"} replace state={{ from: location }} />;
   }
 
   if (allowedRoles.length > 0 && !allowedRoles.includes(role)) {

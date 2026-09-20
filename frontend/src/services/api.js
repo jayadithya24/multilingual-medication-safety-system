@@ -84,6 +84,11 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    const patientPage = ["/patient-dashboard", "/patient-profile", "/scan-medicines", "/prescription"].includes(window.location.pathname);
+    if (error.response?.status === 401 && getStoredRole() === "patient" && patientPage) {
+      clearStoredToken();
+      window.location.replace("/public?session=expired");
+    }
     if (import.meta.env.DEV && error.response) {
       console.debug("API error", {
         method: error.config?.method?.toUpperCase(),

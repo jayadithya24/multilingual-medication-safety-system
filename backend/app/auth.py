@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta, timezone
+import os
 from typing import Optional
 
 from jose import JWTError, jwt
@@ -14,7 +15,9 @@ from backend.app.database import users_collection
 # JWT CONFIGURATION
 # ============================================================
 
-SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
+SECRET_KEY = os.getenv("JWT_SECRET_KEY", "")
+if len(SECRET_KEY) < 32:
+    raise RuntimeError("Set JWT_SECRET_KEY to a random secret of at least 32 characters in .env")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
@@ -167,6 +170,9 @@ def authenticate_user(
 
     if mongo_user:
 
+        if not mongo_user.get("hashed_password"):
+            return False
+
         user = UserInDB(
             **mongo_user
         )
@@ -189,7 +195,7 @@ def authenticate_user(
         username
     )
 
-    if not user:
+    if not user or user.role == "patient":
         return False
 
     if not verify_password(
@@ -243,7 +249,7 @@ def create_access_token(
 # GET CURRENT USER
 # ============================================================
 
-async def get_current_user(
+def get_current_user(
     token: str = Depends(oauth2_scheme)
 ) -> User:
 
@@ -297,7 +303,7 @@ async def get_current_user(
         token_data.username
     )
 
-    if fake_user is None:
+    if fake_user is None or fake_user.role == "patient":
         raise credentials_exception
 
     return User(
@@ -312,7 +318,7 @@ async def get_current_user(
 # ACTIVE USER
 # ============================================================
 
-async def get_current_active_user(
+def get_current_active_user(
     current_user: User = Depends(get_current_user)
 ) -> User:
 
@@ -325,7 +331,7 @@ async def get_current_active_user(
     return current_user
 
 
-async def get_current_admin(
+def get_current_admin(
     current_user: User = Depends(get_current_active_user),
 ) -> User:
     if current_user.role != "admin":

@@ -53,10 +53,6 @@ function DrugInteraction() {
     };
   }, []);
 
-  useEffect(() => {
-    setIsAuthenticated(Boolean(getStoredToken()));
-  }, []);
-
   const severityClass = useMemo(() => {
     const severity = result?.interaction?.severity?.toLowerCase();
 

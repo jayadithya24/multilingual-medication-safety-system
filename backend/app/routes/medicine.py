@@ -5,7 +5,7 @@ router = APIRouter()
 
 
 @router.get("/medicines")
-async def get_medicines(lang: str = Query("en")):
+def get_medicines(lang: str = Query("en")):
     return {
         "status": "success",
         "medicines": list_medicine_names(lang=lang)
@@ -13,7 +13,7 @@ async def get_medicines(lang: str = Query("en")):
 
 
 @router.get("/medicine/{medicine_name}")
-async def get_medicine(medicine_name: str, lang: str = Query("en")):
+def get_medicine(medicine_name: str, lang: str = Query("en")):
     medicine = search_medicine(medicine_name, lang=lang)
 
     if medicine:
@@ -25,4 +25,4 @@ async def get_medicine(medicine_name: str, lang: str = Query("en")):
     raise HTTPException(
         status_code=404,
         detail=f"Medicine '{medicine_name}' not found in database."
-    )
+    )

@@ -15,7 +15,7 @@ function PatientDashboard() {
     const [history, setHistory] = useState([]);
 
     const [loading, setLoading] = useState(true);
-    const [historyLoading, setHistoryLoading] = useState(false);
+    const [historyLoading, setHistoryLoading] = useState(true);
 
     const [error, setError] = useState("");
     const [actionLoading, setActionLoading] = useState("");
@@ -55,8 +55,16 @@ function PatientDashboard() {
     };
 
     useEffect(() => {
-        loadSchedule();
-        loadHistory();
+        let active = true;
+        getPatientSchedule().then((response) => {
+            if (active) setSchedules(response.schedules || []);
+        }).catch(() => { if (active) setError("Unable to load your medication schedule."); })
+            .finally(() => { if (active) setLoading(false); });
+        getMedicationHistory().then((response) => {
+            if (active) setHistory(response.history || []);
+        }).catch(() => { if (active) setError("Unable to load your medication history."); })
+            .finally(() => { if (active) setHistoryLoading(false); });
+        return () => { active = false; };
     }, []);
 
     const handleMarkAsTaken = async (scheduleId) => {

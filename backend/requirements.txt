@@ -4,15 +4,15 @@ pandas
 pymongo
 python-multipart
 python-jose[cryptography]
-passlib[bcrypt]
-bcrypt
+passlib[bcrypt]==1.7.4
+bcrypt==4.0.1
 neo4j
 pytest
 mongomock
 paddleocr>=3.3.0
 paddlepaddle>=3.2.0
 SpeechRecognition
-gTTS
+gTTS>=2.5.4,<3
 openai-whisper
 imageio-ffmpeg
 numpy
@@ -27,6 +27,8 @@ pyyaml
 pyclipper
 pydantic
 firebase-admin
+tzdata
+google-auth[requests]
 annotated-doc
 typing-inspection
 

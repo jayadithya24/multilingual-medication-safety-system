@@ -3,7 +3,7 @@ import api from "../services/api";
 
 const audioCache = new Map();
 
-export default function VoicePlayback({ text, language }) {
+export default function VoicePlayback({ text, language, controls = true }) {
   const audioRef = useRef(null);
   const [audioUrl, setAudioUrl] = useState("");
   const [message, setMessage] = useState("");
@@ -82,15 +82,15 @@ export default function VoicePlayback({ text, language }) {
     audio.playbackRate = language === "en" ? 1 : 1.2;
     audio.preservesPitch = true;
     audio.play().catch(() => {
-      if (active) setMessage("Press Play below to hear the response.");
+      if (active) setMessage(controls ? "Press Play below to hear the response." : "Your browser blocked automatic audio. Allow sound for this site and search again.");
     });
     return () => { active = false; audio.pause(); };
-  }, [audioUrl, language]);
+  }, [audioUrl, language, controls]);
 
   return (
     <div className="voice-response-audio">
       {message && <p role="status">{message}</p>}
-      {audioUrl && <audio ref={audioRef} controls src={audioUrl} aria-label="Spoken medicine response"
+      {audioUrl && <audio ref={audioRef} controls={controls} hidden={!controls} src={audioUrl} aria-label="Spoken medicine response"
         onPlaying={() => setMessage("")}
         onError={() => setMessage("Audio could not play. Please try searching again.")} />}
     </div>

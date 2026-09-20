@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
     getPatientProfile,
     updatePatientProfile,
 } from "../../services/patientService";
 import "./PatientProfile.css";
+import PatientNavigation from "../../components/PatientNavigation/PatientNavigation";
 
 function PatientProfile() {
+    const navigate = useNavigate();
     const [profile, setProfile] = useState({
         name: "",
         patientId: "",
@@ -21,12 +24,14 @@ function PatientProfile() {
 
     // Load logged-in patient's profile from MongoDB
     useEffect(() => {
+        let active = true;
         const loadProfile = async () => {
             try {
                 setLoading(true);
                 setError("");
 
                 const response = await getPatientProfile();
+                if (!active) return;
 
                 const patient = response.profile;
 
@@ -39,6 +44,7 @@ function PatientProfile() {
                 });
 
             } catch (profileError) {
+                if (!active) return;
                 console.error("Unable to load patient profile:", profileError);
 
                 const detail = profileError?.response?.data?.detail;
@@ -47,11 +53,12 @@ function PatientProfile() {
                     detail || "Unable to load patient profile."
                 );
             } finally {
-                setLoading(false);
+                if (active) setLoading(false);
             }
         };
 
         loadProfile();
+        return () => { active = false; };
     }, []);
 
     const handleChange = (event) => {
@@ -90,7 +97,7 @@ function PatientProfile() {
                 condition: patient.medical_condition || "",
             });
 
-            setSaved(true);
+            navigate("/patient-dashboard", { replace: true });
 
         } catch (saveError) {
             console.error("Profile update failed:", saveError);
@@ -119,6 +126,8 @@ function PatientProfile() {
                         Loading your profile...
                     </p>
                 </section>
+
+            <PatientNavigation />
             </div>
         );
     }
@@ -143,6 +152,8 @@ function PatientProfile() {
                 </p>
 
             </section>
+
+            <PatientNavigation />
 
 
             {/* Profile Card */}

@@ -1,6 +1,7 @@
 import asyncio
 import sys
 import os
+import logging
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -28,7 +29,7 @@ from backend.app.routes.access_requests import router as access_requests_router
 from backend.app.routes.doctor_requests import router as doctor_requests_router
 from backend.app.services.ocr_service import warm_up_reader
 from backend.app.routes.fcm import router as fcm_router
-from backend.app.services.fcm_service import reminder_loop
+from backend.app.services.fcm_service import reminder_loop, _firebase
 
 app = FastAPI(
     title="Medication Safety System",
@@ -74,13 +75,19 @@ reminder_task = None
 @app.on_event("startup")
 def warm_up_ocr():
     # PaddleOCR loads native model libraries; defer that work for Uvicorn reload.
-    if os.getenv("WARM_UP_OCR", "false").lower() == "true":
+    if os.getenv("WARM_UP_OCR", "true").lower() == "true":
         warm_up_reader()
 
 
 @app.on_event("startup")
 async def start_medication_reminder_worker():
     global reminder_task
+    try:
+        await asyncio.to_thread(_firebase)
+        app.state.firebase_admin_ready = True
+    except Exception as error:
+        app.state.firebase_admin_ready = False
+        logging.getLogger(__name__).warning("Firebase Admin unavailable (%s); check backend configuration", type(error).__name__)
     reminder_stop_event.clear()
     reminder_task = asyncio.create_task(reminder_loop(reminder_stop_event))
 
@@ -103,5 +110,9 @@ def root():
 def health():
     return {
         "status": "running",
-        "project": "Multilingual Medication Safety System"
+        "project": "Multilingual Medication Safety System",
+        "firebase_admin_ready": getattr(app.state, "firebase_admin_ready", False),
+        "reminder_worker_running": reminder_task is not None and not reminder_task.done(),
+        "reminder_timezone": os.getenv("REMINDER_TIMEZONE", "Asia/Kolkata"),
+        "reminder_poll_seconds": max(1, int(os.getenv("REMINDER_POLL_SECONDS", "2"))),
     }

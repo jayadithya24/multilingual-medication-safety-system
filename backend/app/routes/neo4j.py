@@ -20,7 +20,7 @@ router = APIRouter(
 # =========================================================
 
 @router.get("/search")
-async def drug_search(
+def drug_search(
     term: str = Query(..., min_length=1),
     limit: int = Query(10, ge=1, le=50),
     lang: str = Query("en")
@@ -41,7 +41,7 @@ async def drug_search(
 # =========================================================
 
 @router.get("/drugs/{drug_id}")
-async def drug_details(drug_id: str):
+def drug_details(drug_id: str):
 
     result = get_drug_by_id(drug_id)
 
@@ -59,7 +59,7 @@ async def drug_details(drug_id: str):
 # =========================================================
 
 @router.get("/diseases")
-async def disease_list():
+def disease_list():
 
     diseases = get_diseases()
 
@@ -74,7 +74,7 @@ async def disease_list():
 # =========================================================
 
 @router.get("/diseases/{disease_name}/drugs")
-async def disease_drugs(disease_name: str):
+def disease_drugs(disease_name: str):
 
     drugs = get_drugs_for_disease(
         disease_name
@@ -93,7 +93,7 @@ async def disease_drugs(disease_name: str):
 # =========================================================
 
 @router.get("/graph")
-async def knowledge_graph():
+def knowledge_graph():
 
     try:
 
@@ -126,7 +126,7 @@ async def knowledge_graph():
 # =========================================================
 
 @router.get("/interaction-graph")
-async def interaction_graph(
+def interaction_graph(
     drug1: str = Query(..., min_length=1),
     drug2: str = Query(..., min_length=1)
 ):

@@ -27,6 +27,10 @@ BRAND_ALIASES = {
     "glim": "Glimepiride",
     "amaryl": "Glimepiride",
     "glipizide": "Glipizide",
+    "ಗ್ಲಿಪಿಝೈಡ್": "Glipizide",
+    "ಗ್ಲಿಪಿಜೈಡ್": "Glipizide",
+    "ಗ್ಲಿಪ್ ಡಿಸೈನ್": "Glipizide",
+    "ಗ್ಲಿಪ್ ಡಿಸೈಡ್": "Glipizide",
     " januvia": "Sitagliptin",
     "jardiance": "Empagliflozin",
     "forxiga": "Dapagliflozin",
@@ -143,31 +147,16 @@ def _read_detected_text(reader, file_path):
     # Avoid enlarging small images: it significantly increases PaddleOCR
     # inference time and does not improve clear medicine-pack text reliably.
 
-    grayscale = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    enhanced = cv2.createCLAHE(
-        clipLimit=2.0,
-        tileGridSize=(8, 8),
-    ).apply(grayscale)
-    thresholded = cv2.threshold(
-        enhanced, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU
-    )[1]
-    adaptive = cv2.adaptiveThreshold(
-        enhanced,
-        255,
-        cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
-        cv2.THRESH_BINARY,
-        31,
-        11,
-    )
     # PaddleOCR inference is expensive. Start with the original image and use
     # one enhanced fallback only when the first pass finds no text.
-    variants = [
-        image,
-        cv2.cvtColor(enhanced, cv2.COLOR_GRAY2BGR),
-    ]
     detected_text = []
 
-    for index, variant in enumerate(variants):
+    for index in range(2):
+        variant = image
+        if index:
+            grayscale = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+            enhanced = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8)).apply(grayscale)
+            variant = cv2.cvtColor(enhanced, cv2.COLOR_GRAY2BGR)
         try:
             results = reader.predict(input=variant)
             for result in results or []:
@@ -190,9 +179,8 @@ def _read_detected_text(reader, file_path):
 
 def _find_supported_medicine(raw_text, medicines):
     normalized_text = " ".join(raw_text.lower().split())
-    normalized_compact = " ".join(
-        "".join(character for character in word if character.isalnum())
-        for word in normalized_text.split()
+    normalized_compact = "".join(
+        character for character in normalized_text if character.isalnum()
     )
 
     for alias, medicine in BRAND_ALIASES.items():

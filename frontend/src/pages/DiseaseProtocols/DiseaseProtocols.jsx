@@ -70,7 +70,6 @@ function DiseaseProtocols() {
 
     useEffect(() => {
         if (!selectedDisease) {
-            setDrugs([]);
             return undefined;
         }
 
@@ -109,6 +108,7 @@ function DiseaseProtocols() {
 
         setSelectedDisease(disease);
         setDrugs([]);
+        setLoadingDrugs(Boolean(disease));
         setError("");
 
         if (!disease) {

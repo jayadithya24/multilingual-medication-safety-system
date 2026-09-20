@@ -28,7 +28,7 @@ def _load_dataset(lang: str = "en"):
     for path in possible_paths:
         if path.exists():
             try:
-                dataframe = pd.read_csv(path)
+                dataframe = pd.read_csv(path).fillna("")
                 if "drug_name" in dataframe.columns:
                     dataframe["drug_name"] = dataframe["drug_name"].astype(str)
                     return dataframe

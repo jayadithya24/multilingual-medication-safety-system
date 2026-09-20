@@ -1,6 +1,8 @@
 import os
+from pathlib import Path
 from typing import Any, Dict, List
 
+import pandas as pd
 from neo4j import GraphDatabase
 
 from backend.app.services.medicine_service import _load_dataset, search_medicine
@@ -12,7 +14,51 @@ def _get_driver():
     password = os.getenv("NEO4J_PASSWORD", "")
     if not password or password.lower() in {"password", "your_password", "your_neo4j_password", "changeme"}:
         raise RuntimeError("Set real NEO4J_URI, NEO4J_USER, and NEO4J_PASSWORD values before using Neo4j.")
-    return GraphDatabase.driver(uri, auth=(user, password))
+    return GraphDatabase.driver(uri, auth=(user, password), connection_timeout=2,
+                               connection_acquisition_timeout=3, max_transaction_retry_time=2)
+
+
+def get_drug_interaction(drug1: str, drug2: str, lang: str = "en"):
+    """Return the Neo4j interaction relationship for two drug names."""
+    if not drug1 or not drug2:
+        return None
+
+    driver = _get_driver()
+    try:
+        query = """
+        MATCH (d1:Drug)-[r:INTERACTS_WITH]-(d2:Drug)
+        WHERE (
+            toLower(coalesce(d1.drug_name, d1.name, d1.drug_id)) = toLower($drug1)
+            AND toLower(coalesce(d2.drug_name, d2.name, d2.drug_id)) = toLower($drug2)
+        ) OR (
+            toLower(coalesce(d1.drug_name, d1.name, d1.drug_id)) = toLower($drug2)
+            AND toLower(coalesce(d2.drug_name, d2.name, d2.drug_id)) = toLower($drug1)
+        )
+        RETURN
+            coalesce(d1.drug_name, d1.name, d1.drug_id) AS drug1,
+            coalesce(d2.drug_name, d2.name, d2.drug_id) AS drug2,
+            r.severity AS severity,
+            r.description AS description,
+            r.disclaimer AS disclaimer
+        LIMIT 1
+        """
+
+        with driver.session() as session:
+            record = session.run(query, drug1=drug1.strip(), drug2=drug2.strip()).single()
+
+        if not record:
+            return None
+
+        return {
+            "drug1": record["drug1"],
+            "drug2": record["drug2"],
+            "severity": record["severity"] or "Moderate",
+            "description": record["description"] or "",
+            "recommendation": record["disclaimer"] or "Consult your doctor before acting on this information.",
+            "lang": lang,
+        }
+    finally:
+        driver.close()
 
 
 def _serialize_drug(
@@ -242,6 +288,11 @@ def search_drug_by_text(
     if not query:
         return []
 
+    # Patient search uses the same complete, cached multilingual data as OCR.
+    dataset_results = _fallback_search(query, limit, lang=lang)
+    if dataset_results:
+        return dataset_results
+    driver = None
     try:
         driver = _get_driver()
         with driver.session() as session:
@@ -288,10 +339,13 @@ LIMIT $limit
 
                 # If the medicine is not available in the dataset,
                 # use the Neo4j result as a fallback.
-                results = [_serialize_drug(record, lang=lang) for record in records]
+                return [_serialize_drug(record, lang=lang) for record in records]
 
     except Exception as err:
         print(f"Neo4j unavailable, falling back to CSV: {err}")
+    finally:
+        if driver:
+            driver.close()
 
     return _fallback_search(
     query,
@@ -345,6 +399,111 @@ RETURN
         "contraindications_tulu": fallback.get("contraindications_tulu"),
         "interactions": [],
     }
+
+def _fallback_local_knowledge_graph() -> Dict[str, List[Dict[str, Any]]]:
+    """Return a medication graph built from the local CSV datasets when Neo4j is unavailable."""
+    project_root = Path(__file__).resolve().parents[3]
+    datasets_dir = project_root / "datasets"
+
+    nodes: List[Dict[str, Any]] = []
+    edges: List[Dict[str, Any]] = []
+    seen_nodes = set()
+    seen_edges = set()
+
+    def add_node(node_id: Any, name: Any, node_type: str, extra: Dict[str, Any] | None = None) -> None:
+        if node_id is None or node_id == "" or name is None:
+            return
+        key = str(node_id).strip()
+        if not key:
+            return
+        if key in seen_nodes:
+            return
+        payload = {
+            "id": key,
+            "node_id": key,
+            "name": str(name).strip(),
+            "type": node_type,
+        }
+        if extra:
+            payload.update(extra)
+        nodes.append(payload)
+        seen_nodes.add(key)
+
+    def add_edge(source: Any, target: Any, relationship: str, edge_type: str, extra: Dict[str, Any] | None = None) -> None:
+        if source is None or target is None:
+            return
+        source_key = str(source).strip()
+        target_key = str(target).strip()
+        if not source_key or not target_key:
+            return
+        edge_key = (source_key, target_key, relationship)
+        if edge_key in seen_edges:
+            return
+        payload = {
+            "source": source_key,
+            "target": target_key,
+            "relationship": relationship,
+            "type": edge_type,
+        }
+        if extra:
+            payload.update(extra)
+        edges.append(payload)
+        seen_edges.add(edge_key)
+
+    master_path = datasets_dir / "english_master_dataset.csv"
+    if master_path.exists():
+        master_df = pd.read_csv(master_path)
+        for _, row in master_df.iterrows():
+            drug_id = row.get("drug_id") or row.get("drug_name")
+            drug_name = row.get("drug_name") or row.get("generic_name")
+            if drug_id is None:
+                continue
+            add_node(drug_id, drug_name or drug_id, "drug", {
+                "generic_name": row.get("generic_name"),
+                "drug_class": row.get("drug_class"),
+            })
+
+    disease_path = datasets_dir / "drug_disease.csv"
+    if disease_path.exists():
+        disease_df = pd.read_csv(disease_path)
+        for _, row in disease_df.iterrows():
+            drug_id = row.get("drug_id")
+            disease_id = row.get("disease_id") or row.get("disease")
+            disease_name = row.get("disease") or row.get("disease_id")
+            if drug_id is not None:
+                add_node(drug_id, drug_id, "drug")
+            if disease_id is not None:
+                add_node(disease_id, disease_name or disease_id, "disease")
+            if drug_id is not None and disease_id is not None:
+                add_edge(drug_id, disease_id, "TREATS", "treats")
+
+    side_effect_path = datasets_dir / "drug_sideeffects.csv"
+    if side_effect_path.exists():
+        side_df = pd.read_csv(side_effect_path)
+        for _, row in side_df.iterrows():
+            drug_id = row.get("drug_id")
+            side_effect = row.get("side_effect")
+            if drug_id is not None and side_effect is not None:
+                add_node(str(side_effect), side_effect, "sideeffect")
+                add_edge(drug_id, side_effect, "CAUSES", "causes")
+
+    interaction_path = datasets_dir / "drug_interactions.csv"
+    if interaction_path.exists():
+        interaction_df = pd.read_csv(interaction_path)
+        for _, row in interaction_df.iterrows():
+            if str(row.get("drug2_in_scope", "")).strip().lower() != "yes":
+                continue
+            drug1 = row.get("drug1_id") or row.get("drug1")
+            drug2 = row.get("drug2_id") or row.get("drug2")
+            severity = row.get("severity")
+            if drug1 is None or drug2 is None:
+                continue
+            add_node(drug1, drug1, "drug")
+            add_node(drug2, drug2, "drug")
+            add_edge(drug1, drug2, "INTERACTS_WITH", "interaction", {"severity": severity})
+
+    return {"nodes": nodes, "edges": edges}
+
 
 def get_diseases() -> List[str]:
     """
@@ -434,13 +593,13 @@ def get_drugs_for_disease(disease_name: str) -> List[Dict[str, Any]]:
 
     return [
         {
-            "drug_id": row.get("drug_id"),
+            "drug_id": row.get("drug_id") or row.get("drug_name"),
             "drug_name": row.get("drug_name"),
             "generic_name": row.get("generic_name"),
             "drug_class": row.get("drug_class"),
-            "description_en": row.get("description_en"),
-            "warnings_en": row.get("warnings_en"),
-            "contraindications_en": row.get("contraindications_en"),
+            "description_en": row.get("description_en") or row.get("description", ""),
+            "warnings_en": row.get("warnings_en") or row.get("warnings", ""),
+            "contraindications_en": row.get("contraindications_en") or row.get("contraindications", ""),
         }
         for _, row in matches.sort_values("drug_name").iterrows()
     ]
@@ -495,9 +654,9 @@ def get_knowledge_graph() -> Dict[str, List[Dict[str, Any]]]:
         CAUSES
     """
 
-    driver = _get_driver()
-
     try:
+        driver = _get_driver()
+
         with driver.session() as session:
 
             cypher = """
@@ -565,8 +724,12 @@ def get_knowledge_graph() -> Dict[str, List[Dict[str, Any]]]:
                 "edges": edges
             }
 
+    except Exception as err:
+        print(f"Neo4j graph unavailable, falling back to local CSV data: {err}")
+        return _fallback_local_knowledge_graph()
     finally:
-        driver.close()
+        if "driver" in locals():
+            driver.close()
 
 
 

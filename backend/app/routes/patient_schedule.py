@@ -51,7 +51,7 @@ class MedicationScheduleCreate(BaseModel):
 # ============================================================
 
 @router.post("")
-async def create_medication_schedule(
+def create_medication_schedule(
     payload: MedicationScheduleCreate,
     current_user: User = Depends(
         get_current_active_user
@@ -100,7 +100,7 @@ async def create_medication_schedule(
 
         "frequency": payload.frequency.strip(),
 
-        "scheduled_times": payload.scheduled_times,
+        "scheduled_times": sorted(set(datetime.strptime(value, "%H:%M").strftime("%H:%M") for value in payload.scheduled_times)),
 
         "reminder_enabled": payload.reminder_enabled,
 
@@ -135,7 +135,7 @@ async def create_medication_schedule(
 # ============================================================
 
 @router.get("")
-async def get_my_medication_schedule(
+def get_my_medication_schedule(
     current_user: User = Depends(
         get_current_active_user
     )
@@ -173,7 +173,7 @@ async def get_my_medication_schedule(
 # ============================================================
 
 @router.get("/removed")
-async def get_removed_medication_schedules(
+def get_removed_medication_schedules(
     current_user: User = Depends(get_current_active_user)
 ):
     if current_user.role != "patient":
@@ -202,7 +202,7 @@ async def get_removed_medication_schedules(
 # ============================================================
 
 @router.delete("/{schedule_id}")
-async def delete_medication_schedule(
+def delete_medication_schedule(
     schedule_id: str,
     current_user: User = Depends(
         get_current_active_user
@@ -255,7 +255,7 @@ async def delete_medication_schedule(
 
 
 @router.post("/{schedule_id}/taken")
-async def mark_medication_taken(
+def mark_medication_taken(
     schedule_id: str,
     current_user: User = Depends(get_current_active_user),
 ):

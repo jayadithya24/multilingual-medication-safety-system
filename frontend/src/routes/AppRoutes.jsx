@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route } from "react-router-dom";
+import { lazy, Suspense } from "react";
 
 import MainLayout from "../layouts/MainLayout";
 import DoctorLayout from "../layouts/DoctorLayout";
@@ -9,25 +10,28 @@ import PublicDashboard from "../pages/PublicDashboard/PublicDashboard";
 import PatientPortal from "../pages/PatientPortal/PatientPortal";
 
 import DoctorPortal from "../pages/DoctorPortal/DoctorPortal";
-import DoctorDashboard from "../pages/DoctorDashboard/DoctorDashboard";
-import DrugInteraction from "../pages/DrugInteraction/DrugInteraction";
+const DoctorDashboard = lazy(() => import("../pages/DoctorDashboard/DoctorDashboard"));
+const DrugInteraction = lazy(() => import("../pages/DrugInteraction/DrugInteraction"));
 import DrugReference from "../pages/DrugReference/DrugReference";
 
 import AdminPortal from "../pages/AdminPortal/AdminPortal";
-import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
+const AdminDashboard = lazy(() => import("../pages/AdminDashboard/AdminDashboard"));
 
 import RequireRole from "../components/RequireRole/RequireRole";
+import RequirePatientProfile from "../components/RequirePatientProfile/RequirePatientProfile";
 import DiseaseProtocols from "../pages/DiseaseProtocols/DiseaseProtocols";
 import PatientDrugLists from "../pages/PatientDrugLists/PatientDrugLists";
-import KnowledgeGraph from "../pages/KnowledgeGraph/KnowledgeGraph";
+const KnowledgeGraph = lazy(() => import("../pages/KnowledgeGraph/KnowledgeGraph"));
 import PatientProfile from "../pages/PatientProfile/PatientProfile";
 import Prescription from "../pages/Prescription/Prescription";
 import VoiceSearch from "../pages/VoiceSearch/VoiceSearch";
+import AnalysisHistory from "../pages/AnalysisHistory/AnalysisHistory";
+import Settings from "../pages/Settings/Settings";
 
 
 function AppRoutes() {
     return (
-        <Routes>
+        <Suspense fallback={<p role="status">Loading page…</p>}><Routes>
 
             {/* =========================================
                 MAIN APPLICATION LAYOUT
@@ -68,8 +72,13 @@ function AppRoutes() {
                 />
 
                 <Route
-                    path="voice-search"
-                    element={<VoiceSearch />}
+                    path="ocr"
+                    element={<Navigate to="/scan-medicines" replace />}
+                />
+
+                <Route
+                    path="knowledge-graph"
+                    element={<KnowledgeGraph />}
                 />
 
 
@@ -81,18 +90,28 @@ function AppRoutes() {
                         <RequireRole allowedRoles={["patient"]} />
                     }
                 >
+                    <Route element={<RequirePatientProfile />}>
+                        <Route
+                            path="patient-dashboard"
+                            element={<PublicDashboard />}
+                        />
+                        <Route
+                            path="scan-medicines"
+                            element={<Prescription />}
+                        />
+                        <Route
+                            path="voice-search"
+                            element={<VoiceSearch />}
+                        />
+                    </Route>
                     <Route
-                        path="patient-dashboard"
-                        element={<PublicDashboard />}
+                        path="patient-profile"
+                        element={<PatientProfile />}
                     />
                     <Route
-        path="patient-profile"
-        element={<PatientProfile />}
-    />
-    <Route
-    path="prescription"
-    element={<Prescription />}
-/>
+                        path="prescription"
+                        element={<Navigate to="/scan-medicines" replace />}
+                    />
                 </Route>
 
 
@@ -144,12 +163,16 @@ function AppRoutes() {
             element={<PatientDrugLists />}
         />
 
-<Route
-    path="knowledge-graph"
-    element={<KnowledgeGraph />}
+        {/* Analysis History */}
+        <Route
+           path="analysis-history"
+            element={<AnalysisHistory />}
+        />
+        <Route
+    path="doctor-settings"
+    element={<Settings />}
 />
-
-    </Route>
+</Route>
 
 </Route>
 
@@ -170,7 +193,7 @@ function AppRoutes() {
 
             </Route>
 
-        </Routes>
+        </Routes></Suspense>
     );
 }
 

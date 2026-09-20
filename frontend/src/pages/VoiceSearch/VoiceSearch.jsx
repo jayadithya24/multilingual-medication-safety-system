@@ -51,7 +51,7 @@ function getSimpleInfo(medicine, language) {
   };
 }
 
-function VoiceSearch() {
+function VoiceSearch({ embedded = false }) {
   const [lang, setLang] = useState("auto");
   const [isRecording, setIsRecording] = useState(false);
   const [processing, setProcessing] = useState(false);
@@ -311,11 +311,13 @@ function VoiceSearch() {
     : result?.response_text;
 
   return (
-    <div className="voice-search-page">
+    <div className={`voice-search-page${embedded ? " voice-search-page--embedded" : ""}`}>
       <section className="voice-shell">
         <div className="voice-hero">
-          <p className="voice-kicker">Voice Search</p>
-          <h1>Speak or upload an audio clip to find a medicine</h1>
+          {!embedded && <p className="voice-kicker">Voice Search</p>}
+          {embedded
+            ? <h2>Speak or upload an audio clip to find a medicine</h2>
+            : <h1>Speak or upload an audio clip to find a medicine</h1>}
           <p>
             Record your medicine name or question. After you speak, pause for about 3 seconds to search automatically. Maximum recording: 30 seconds. You can also press Stop.
           </p>
