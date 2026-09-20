@@ -14,7 +14,8 @@ def _get_driver():
     password = os.getenv("NEO4J_PASSWORD", "")
     if not password or password.lower() in {"password", "your_password", "your_neo4j_password", "changeme"}:
         raise RuntimeError("Set real NEO4J_URI, NEO4J_USER, and NEO4J_PASSWORD values before using Neo4j.")
-    return GraphDatabase.driver(uri, auth=(user, password))
+    return GraphDatabase.driver(uri, auth=(user, password), connection_timeout=2,
+                               connection_acquisition_timeout=3, max_transaction_retry_time=2)
 
 
 def get_drug_interaction(drug1: str, drug2: str, lang: str = "en"):
@@ -287,6 +288,11 @@ def search_drug_by_text(
     if not query:
         return []
 
+    # Patient search uses the same complete, cached multilingual data as OCR.
+    dataset_results = _fallback_search(query, limit, lang=lang)
+    if dataset_results:
+        return dataset_results
+    driver = None
     try:
         driver = _get_driver()
         with driver.session() as session:
@@ -333,10 +339,13 @@ LIMIT $limit
 
                 # If the medicine is not available in the dataset,
                 # use the Neo4j result as a fallback.
-                results = [_serialize_drug(record, lang=lang) for record in records]
+                return [_serialize_drug(record, lang=lang) for record in records]
 
     except Exception as err:
         print(f"Neo4j unavailable, falling back to CSV: {err}")
+    finally:
+        if driver:
+            driver.close()
 
     return _fallback_search(
     query,

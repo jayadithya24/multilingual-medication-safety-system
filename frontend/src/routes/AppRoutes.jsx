@@ -1,4 +1,5 @@
 import { Navigate, Routes, Route } from "react-router-dom";
+import { lazy, Suspense } from "react";
 
 import MainLayout from "../layouts/MainLayout";
 import DoctorLayout from "../layouts/DoctorLayout";
@@ -9,26 +10,28 @@ import PublicDashboard from "../pages/PublicDashboard/PublicDashboard";
 import PatientPortal from "../pages/PatientPortal/PatientPortal";
 
 import DoctorPortal from "../pages/DoctorPortal/DoctorPortal";
-import DoctorDashboard from "../pages/DoctorDashboard/DoctorDashboard";
-import DrugInteraction from "../pages/DrugInteraction/DrugInteraction";
+const DoctorDashboard = lazy(() => import("../pages/DoctorDashboard/DoctorDashboard"));
+const DrugInteraction = lazy(() => import("../pages/DrugInteraction/DrugInteraction"));
 import DrugReference from "../pages/DrugReference/DrugReference";
 
 import AdminPortal from "../pages/AdminPortal/AdminPortal";
-import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
+const AdminDashboard = lazy(() => import("../pages/AdminDashboard/AdminDashboard"));
 
 import RequireRole from "../components/RequireRole/RequireRole";
 import RequirePatientProfile from "../components/RequirePatientProfile/RequirePatientProfile";
 import DiseaseProtocols from "../pages/DiseaseProtocols/DiseaseProtocols";
 import PatientDrugLists from "../pages/PatientDrugLists/PatientDrugLists";
-import KnowledgeGraph from "../pages/KnowledgeGraph/KnowledgeGraph";
+const KnowledgeGraph = lazy(() => import("../pages/KnowledgeGraph/KnowledgeGraph"));
 import PatientProfile from "../pages/PatientProfile/PatientProfile";
 import Prescription from "../pages/Prescription/Prescription";
 import VoiceSearch from "../pages/VoiceSearch/VoiceSearch";
+import AnalysisHistory from "../pages/AnalysisHistory/AnalysisHistory";
+import Settings from "../pages/Settings/Settings";
 
 
 function AppRoutes() {
     return (
-        <Routes>
+        <Suspense fallback={<p role="status">Loading page…</p>}><Routes>
 
             {/* =========================================
                 MAIN APPLICATION LAYOUT
@@ -190,7 +193,7 @@ function AppRoutes() {
 
             </Route>
 
-        </Routes>
+        </Routes></Suspense>
     );
 }
 

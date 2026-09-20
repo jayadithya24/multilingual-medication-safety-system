@@ -20,13 +20,15 @@ class FCMTokenPayload(BaseModel):
 
 
 @router.post("/fcm-token")
-async def register_fcm_token(
+def register_fcm_token(
     payload: FCMTokenPayload,
     current_user: User = Depends(get_current_active_user),
 ):
     if current_user.role != "patient":
         raise HTTPException(status_code=403, detail="Only patients can register notification devices.")
 
+    # A browser subscription belongs only to the patient currently using it.
+    fcm_tokens_collection.delete_many({"token": payload.token, "patient_username": {"$ne": current_user.username}})
     result = fcm_tokens_collection.update_one(
         {"patient_username": current_user.username, "token": payload.token},
         {"$set": {"platform": payload.platform}, "$setOnInsert": {"created_at": datetime.now(timezone.utc)}},
@@ -40,7 +42,7 @@ async def register_fcm_token(
 
 
 @router.post("/fcm-test")
-async def send_patient_test_notification(current_user: User = Depends(get_current_active_user)):
+def send_patient_test_notification(current_user: User = Depends(get_current_active_user)):
     if current_user.role != "patient":
         raise HTTPException(status_code=403, detail="Only patients can send notification tests.")
 
@@ -54,11 +56,14 @@ async def send_patient_test_notification(current_user: User = Depends(get_curren
             raise RuntimeError("No device accepted the notification. Enable notifications again and retry.")
     except (RuntimeError, ValueError) as error:
         raise HTTPException(status_code=503, detail=str(error)) from error
+    except Exception as error:
+        logger.warning("FCM test failed (%s)", type(error).__name__)
+        raise HTTPException(503, "Firebase could not accept the notification. Check the backend credentials, project and device registration.") from error
     return {"status": "success", "message": f"Test notification sent to {success_count} device(s)."}
 
 
 @router.delete("/fcm-token")
-async def unregister_fcm_token(
+def unregister_fcm_token(
     payload: FCMTokenPayload,
     current_user: User = Depends(get_current_active_user),
 ):

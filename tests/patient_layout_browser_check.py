@@ -7,7 +7,7 @@ from playwright.sync_api import sync_playwright, expect
 
 
 def main():
-    backend = os.getenv("PATIENT_TEST_API_URL", "http://127.0.0.1:8000")
+    backend = os.getenv("PATIENT_TEST_API_URL", "http://localhost:8000")
     with sync_playwright() as p:
         browser = p.chromium.launch(channel='msedge', headless=True)
         page = browser.new_page()

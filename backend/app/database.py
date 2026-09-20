@@ -23,6 +23,9 @@ patient_schedules_collection = db["patient_schedules"]
 medication_history_collection = db["medication_history"]
 access_requests_collection = db["access_requests"]
 fcm_tokens_collection = db["fcm_tokens"]
+reminder_deliveries_collection = db["reminder_deliveries"]
+reminder_deliveries_collection.create_index([("schedule_id", 1), ("due_at", 1)], unique=True)
+reminder_deliveries_collection.create_index("expires_at", expireAfterSeconds=0)
 
 # Useful indexes
 users_collection.create_index(
@@ -42,11 +45,12 @@ doctor_requests_collection.create_index(
 doctor_requests_collection.create_index([("status", 1), ("created_at", -1)])
 
 patient_schedules_collection.create_index(
-    [("patient_username", 1), ("scheduled_time", 1)]
+    [("patient_username", 1), ("created_at", -1)]
 )
+patient_schedules_collection.create_index([("status", 1), ("scheduled_times", 1)])
 
 medication_history_collection.create_index(
-    [("patient_username", 1), ("date", -1)]
+    [("patient_username", 1), ("taken_at", -1)]
 )
 
 access_requests_collection.create_index(

@@ -1,28 +1,22 @@
 import fs from "node:fs";
 import path from "node:path";
+import process from "node:process";
 import { fileURLToPath } from "node:url";
+import { loadEnv } from "vite";
 
 const frontendRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const envPath = path.join(frontendRoot, ".env");
-const values = {};
 
-if (fs.existsSync(envPath)) {
-    for (const line of fs.readFileSync(envPath, "utf8").split(/\r?\n/)) {
-        const match = line.match(/^\s*(VITE_FIREBASE_[A-Z0-9_]+)\s*=\s*(.*)\s*$/);
-        if (match) values[match[1]] = match[2].replace(/^['"]|['"]$/g, "");
-    }
+export function generateFirebaseConfig(mode = "development") {
+    const values = loadEnv(mode, frontendRoot, "VITE_FIREBASE_");
+    // Only explicitly public Firebase web-app fields are written to the browser.
+    const config = Object.fromEntries(Object.entries({
+        apiKey: "API_KEY", authDomain: "AUTH_DOMAIN", projectId: "PROJECT_ID",
+        storageBucket: "STORAGE_BUCKET", messagingSenderId: "MESSAGING_SENDER_ID", appId: "APP_ID",
+    }).map(([key, suffix]) => [key, values[`VITE_FIREBASE_${suffix}`] || ""]));
+    fs.writeFileSync(path.join(frontendRoot, "public", "firebase-public-config.js"),
+        `self.FIREBASE_CONFIG = ${JSON.stringify(config)};\n`);
 }
 
-const config = {
-    apiKey: values.VITE_FIREBASE_API_KEY || "",
-    authDomain: values.VITE_FIREBASE_AUTH_DOMAIN || "",
-    projectId: values.VITE_FIREBASE_PROJECT_ID || "",
-    storageBucket: values.VITE_FIREBASE_STORAGE_BUCKET || "",
-    messagingSenderId: values.VITE_FIREBASE_MESSAGING_SENDER_ID || "",
-    appId: values.VITE_FIREBASE_APP_ID || "",
-};
-
-fs.writeFileSync(
-    path.join(frontendRoot, "public", "firebase-public-config.js"),
-    `self.FIREBASE_CONFIG = ${JSON.stringify(config)};\n`,
-);
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+    generateFirebaseConfig(process.argv[2] || "development");
+}

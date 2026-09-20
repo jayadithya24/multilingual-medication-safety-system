@@ -1,5 +1,15 @@
 import io
+from functools import lru_cache
 from gtts import gTTS
+
+
+@lru_cache(maxsize=128)
+def _synthesize(clean_text, language):
+    # Repeated medicine responses reuse audio; unsuccessful requests are not cached.
+    tts = gTTS(text=clean_text, lang=language, slow=False, timeout=(3, 8))
+    fp = io.BytesIO()
+    tts.write_to_fp(fp)
+    return fp.getvalue()
 
 
 def generate_tts_audio(text: str, lang: str = "en"):
@@ -15,11 +25,7 @@ def generate_tts_audio(text: str, lang: str = "en"):
         gtts_lang = "kn"
 
     try:
-        tts = gTTS(text=clean_text, lang=gtts_lang, slow=False)
-        fp = io.BytesIO()
-        tts.write_to_fp(fp)
-        fp.seek(0)
-        return fp.read()
+        return _synthesize(clean_text, gtts_lang)
     except Exception as err:
         print(f"TTS generation error: {err}")
         return None

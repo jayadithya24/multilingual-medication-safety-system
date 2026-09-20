@@ -1,4 +1,5 @@
 import api, { clearStoredToken, setStoredRole, setStoredToken } from "./api";
+import { unregisterMedicationNotifications } from "./fcmService";
 
 function persistAuth(responseData) {
   const accessToken = responseData?.access_token || responseData?.token;
@@ -53,7 +54,9 @@ export async function requestDoctorAccount(request) {
   return response.data;
 }
 
-export function logout() {
+export async function logout() {
+  try { await unregisterMedicationNotifications(); }
+  catch { console.warn("Could not fully unregister notifications on this device."); }
   window.google?.accounts?.id?.disableAutoSelect();
   clearStoredToken();
 }

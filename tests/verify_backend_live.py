@@ -53,7 +53,7 @@ def main():
             page.get_by_label("Email or username", exact=True).fill(username)
             page.get_by_label("Password", exact=True).fill(password)
             page.get_by_label("Password", exact=True).press("Enter")
-            expect(page).to_have_url("http://localhost:5173/patient-dashboard")
+            expect(page).to_have_url("http://localhost:5173/patient-profile")
             results["browser_password_login"] = True
             page.get_by_role("link", name="My Profile", exact=True).click()
             expect(page.get_by_label("Full Name", exact=True)).to_have_value("Disposable verification patient")
@@ -63,7 +63,7 @@ def main():
             page.get_by_label("Age", exact=True).fill("45")
             expect(page.get_by_label("Age", exact=True)).to_have_value("45")
             page.get_by_role("button", name="Save Profile", exact=True).click()
-            expect(page.locator(".patient-profile__saved")).to_be_visible()
+            expect(page).to_have_url("http://localhost:5173/patient-dashboard")
             assert db.users.find_one({"username": username})["age"] == 45
             results["browser_profile_persisted"] = True
             page.get_by_role("link", name="Scan & Add Medicines", exact=True).click()
@@ -82,6 +82,9 @@ def main():
             results["browser_taken_persisted"] = True
             page.on("dialog", lambda dialog: dialog.accept())
             page.get_by_role("button", name="Remove from schedule", exact=True).click()
+            with page.expect_response(lambda response: '/patient-schedule/' in response.url and response.request.method == 'DELETE') as removed:
+                page.get_by_role("button", name="Remove medicine", exact=True).click()
+            assert removed.value.status == 200
             expect(page.get_by_role("button", name="Remove from schedule", exact=True)).to_have_count(0)
             assert db.patient_schedules.count_documents({"patient_username": username, "status": "active"}) == 0
             assert db.medication_history.count_documents({"patient_username": username}) == 1
@@ -106,12 +109,12 @@ def main():
         schedule_id = response.json()["schedule"]["schedule_id"]
         assert call("POST", f"/patient-schedule/{schedule_id}/taken", headers=headers).status_code == 200
         results["history_stored"] = db.medication_history.count_documents({"patient_username": username}) == 2
+        assert call("DELETE", "/patient/fcm-token", headers=headers, json={"token": token}).status_code == 200
+        # Never send a synthetic registration token to a real Firebase project.
         response = call("POST", "/patient/fcm-test", headers=headers)
+        assert response.status_code == 503
         results["test_notification_delivered"] = False
-        results["test_notification_missing_credentials"] = (
-            response.status_code == 503 and
-            response.json().get("detail") == "Firebase Admin credentials are not configured"
-        )
+        results["test_notification_no_device_handled"] = True
     finally:
         for collection in ("fcm_tokens", "patient_schedules", "medication_history"):
             db[collection].delete_many({"patient_username": username})

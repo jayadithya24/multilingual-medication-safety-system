@@ -145,7 +145,7 @@ def create_doctor_request(payload: DoctorRegisterRequest) -> dict:
 
 
 @router.post("/token", response_model=Token)
-async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
+def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
     user = authenticate_user(fake_users_db, form_data.username, form_data.password)
     if not user or user.disabled:
         raise HTTPException(
@@ -161,7 +161,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
 
 
 @router.post("/register", response_model=Token)
-async def register_patient(payload: RegisterRequest):
+def register_patient(payload: RegisterRequest):
 
     if payload.password != payload.confirm_password:
         raise HTTPException(
@@ -233,9 +233,9 @@ async def register_patient(payload: RegisterRequest):
 
 @router.post("/doctor-request")
 @router.post("/register-doctor")
-async def register_doctor(payload: DoctorRegisterRequest):
+def register_doctor(payload: DoctorRegisterRequest):
     """Submit a doctor account for administrator approval."""
     return create_doctor_request(payload)
 @router.get("/me", response_model=User)
-async def read_users_me(current_user: User = Depends(get_current_active_user)):
+def read_users_me(current_user: User = Depends(get_current_active_user)):
     return current_user

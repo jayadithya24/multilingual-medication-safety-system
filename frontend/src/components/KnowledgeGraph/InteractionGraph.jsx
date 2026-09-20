@@ -582,8 +582,7 @@ function InteractionGraph({ drug1, drug2 }) {
 
                     nodeCanvasObject={(
                         node,
-                        ctx,
-                        globalScale
+                        ctx
                     ) => {
 
                         const name =

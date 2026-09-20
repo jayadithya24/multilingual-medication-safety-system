@@ -790,3 +790,10 @@
         width: 100%;
     }
 }
+.patient-medication-block > summary,
+.patient-notification-tools > summary {
+    cursor: pointer;
+    font-weight: 600;
+    padding: 12px 0;
+}
+.patient-notification-tools { margin: 12px 0; }

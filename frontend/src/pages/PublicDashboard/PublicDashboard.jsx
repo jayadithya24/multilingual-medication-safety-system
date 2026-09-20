@@ -505,10 +505,8 @@ function PublicDashboard() {
 
                             </div>
 
-                            <div className="patient-medication-block">
-                                <div className="patient-medication-title">
-                                    <h3>Medication Access Requests</h3>
-                                </div>
+                            <details className="patient-medication-block">
+                                <summary>Doctor access requests ({accessRequests.filter((request) => request.status === "PENDING").length} pending)</summary>
                                 {accessRequestError && <div className="patient-error">{accessRequestError}</div>}
                                 {accessRequests.length === 0 && !accessRequestError && (
                                     <div className="patient-empty">No medication access requests.</div>
@@ -527,7 +525,7 @@ function PublicDashboard() {
                                         )}
                                     </div>
                                 ))}
-                            </div>
+                            </details>
 
                             {/* SCHEDULE */}
                             <div className="patient-medication-block">
@@ -546,6 +544,9 @@ function PublicDashboard() {
                                 </div>
                                 {notificationStatus && <div className="patient-empty">{notificationStatus}</div>}
                                 <button type="button" onClick={enableNotifications}>Enable Notifications</button>
+                                <details className="patient-notification-tools">
+                                <summary>Check notification delivery</summary>
+                                <p>Keep the backend running and enable browser notifications on this device.</p>
                                 <button
                                     type="button"
                                     className="patient-refresh-button"
@@ -554,6 +555,7 @@ function PublicDashboard() {
                                 >
                                     {testNotificationLoading ? "Sending..." : "Send Test Notification"}
                                 </button>
+                                </details>
                                 {nextDose && (
                                     <div className="patient-empty">
                                         Next scheduled dose: {nextDose.label} at {nextDose.time}
@@ -622,7 +624,7 @@ function PublicDashboard() {
                                                         {schedule.status ===
                                                         "taken"
                                                             ? "✓ Taken"
-                                                            : "Pending"}
+                                                            : schedule.reminder_enabled ? "Reminders on" : "Reminders off"}
                                                     </span>
 
                                                 </div>
@@ -706,7 +708,7 @@ function PublicDashboard() {
                                                         {deletingMedicineId ===
                                                         schedule.schedule_id
                                                             ? "Removing..."
-                                                            : "Delete medicine"}
+                                                            : "Remove from schedule"}
                                                     </button>
                                                 </div>
 

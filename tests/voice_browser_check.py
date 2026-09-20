@@ -26,7 +26,7 @@ def check_playback(page, language):
 def main():
     results = []
     frontend = os.getenv("PATIENT_TEST_FRONTEND_URL", "http://localhost:5173")
-    backend = os.getenv("PATIENT_TEST_API_URL", "http://127.0.0.1:8001")
+    backend = os.getenv("PATIENT_TEST_API_URL", "http://localhost:8000")
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(channel="msedge", headless=True, args=[
             "--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream",
@@ -76,12 +76,10 @@ def main():
         for language in ("en", "kn", "tulu"):
             page.goto(f"{frontend}/voice-search")
             page.get_by_role("combobox").select_option(language)
-            page.get_by_role("button", name="Record", exact=True).click()
-            expect(page.get_by_role("button", name="Recording...")).to_be_visible()
-            expect(page.locator("audio")).to_be_visible(timeout=35000)
-            expect(page.get_by_role("button", name="Record", exact=True)).to_be_enabled()
-            with page.expect_response(lambda response: "/voice-search?" in response.url and response.request.method == "POST", timeout=65000) as pending:
-                page.get_by_role("button", name="Search Medicine", exact=True).click()
+            with page.expect_response(lambda response: "/voice-search?" in response.url and response.request.method == "POST", timeout=95000) as pending:
+                page.get_by_role("button", name="Record", exact=True).click()
+                expect(page.get_by_role("button", name="Recording...")).to_be_visible()
+                expect(page.locator(".voice-simple-info")).to_be_visible(timeout=95000)
             response = pending.value
             assert response.ok, response.text()
             assert response.json().get("detected_medicine", "").casefold() == "metformin", response.json()
