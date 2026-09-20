@@ -525,27 +525,44 @@ function PublicDashboard() {
 
                             </div>
 
-                            <details className="patient-medication-block">
-                                <summary>Doctor access requests ({accessRequests.filter((request) => request.status === "PENDING").length} pending)</summary>
+                            <div className="patient-medication-block">
+                                <div className="patient-medication-title">
+                                    <h3>👨‍⚕️ Doctor Access Requests</h3>
+                                    <span>
+                                        {accessRequests.filter((request) => request.status === "PENDING").length} pending
+                                    </span>
+                                </div>
                                 {accessRequestError && <div className="patient-error">{accessRequestError}</div>}
                                 {accessRequests.length === 0 && !accessRequestError && (
-                                    <div className="patient-empty">No medication access requests.</div>
+                                    <div className="patient-empty">No pending doctor access requests.</div>
                                 )}
-                                {accessRequests.map((request) => (
-                                    <div className="patient-history-card" key={request.requestId}>
-                                        <div>
-                                            <h3>Dr. {request.doctorName} wants access to your medication details.</h3>
-                                            <p>Status: {request.status}</p>
-                                        </div>
-                                        {request.status === "PENDING" && (
-                                            <div>
-                                                <button type="button" onClick={() => respondToAccessRequest(request.requestId, "accept")}>Accept</button>
-                                                <button type="button" onClick={() => respondToAccessRequest(request.requestId, "reject")}>Reject</button>
+                                <div className="patient-access-requests-list">
+                                    {accessRequests.map((request) => (
+                                        <div className="patient-access-card" key={request.requestId}>
+                                            <div className="patient-access-card__main">
+                                                <div className="patient-access-card__avatar">👨‍⚕️</div>
+                                                <div>
+                                                    <h3>Dr. {request.doctorName || "Medical Professional"}</h3>
+                                                    <p>Requesting permission to view medication schedule & history</p>
+                                                    <span className={`patient-badge patient-status--${request.status?.toLowerCase() || 'pending'}`}>
+                                                        {request.status}
+                                                    </span>
+                                                </div>
                                             </div>
-                                        )}
-                                    </div>
-                                ))}
-                            </details>
+                                            {request.status === "PENDING" && (
+                                                <div className="patient-access-card__actions">
+                                                    <button type="button" className="patient-btn--accept" onClick={() => respondToAccessRequest(request.requestId, "accept")}>
+                                                        ✓ Grant Access
+                                                    </button>
+                                                    <button type="button" className="patient-btn--reject" onClick={() => respondToAccessRequest(request.requestId, "reject")}>
+                                                        ✕ Decline
+                                                    </button>
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
 
                             {/* SCHEDULE */}
                             <div className="patient-medication-block">

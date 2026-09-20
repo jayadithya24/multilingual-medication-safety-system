@@ -1,621 +1,251 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ForceGraph2D from "react-force-graph-2d";
 import api from "../../services/api";
-
 import "./KnowledgeGraph.css";
 
+const NODE_COLORS = {
+    drug: { fill: "#38bdf8", stroke: "#0284c7", glow: "rgba(56, 189, 248, 0.4)", label: "Medicine" },
+    disease: { fill: "#34d399", stroke: "#059669", glow: "rgba(52, 211, 153, 0.4)", label: "Disease" },
+    sideeffect: { fill: "#fbbf24", stroke: "#d97706", glow: "rgba(251, 191, 36, 0.4)", label: "Side Effect" },
+    side_effect: { fill: "#fbbf24", stroke: "#d97706", glow: "rgba(251, 191, 36, 0.4)", label: "Side Effect" },
+    patient: { fill: "#c084fc", stroke: "#9333ea", glow: "rgba(192, 132, 252, 0.4)", label: "Patient" },
+    default: { fill: "#94a3b8", stroke: "#475569", glow: "rgba(148, 163, 184, 0.3)", label: "Entity" },
+};
+
 function KnowledgeGraph({ drug1 = "", drug2 = "" }) {
-
-    const [graphData, setGraphData] = useState({
-        nodes: [],
-        links: [],
-    });
-
+    const [graphData, setGraphData] = useState({ nodes: [], links: [] });
     const [disease, setDisease] = useState("");
-
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [selectedNode, setSelectedNode] = useState(null);
+    const [hoverNode, setHoverNode] = useState(null);
+    const [containerDimensions, setContainerDimensions] = useState({ width: 900, height: 500 });
 
-
-    // =========================================================
-    // Load graph
-    // =========================================================
+    const graphRef = useRef(null);
+    const containerRef = useRef(null);
 
     useEffect(() => {
-
-        const loadGraph = async () => {
-
-            /*
-             * Do not load anything until two medicines
-             * have been selected.
-             */
-
-            if (!drug1 || !drug2) {
-
-                setGraphData({
-                    nodes: [],
-                    links: [],
+        if (!containerRef.current) return;
+        const updateDimensions = () => {
+            if (containerRef.current) {
+                setContainerDimensions({
+                    width: containerRef.current.clientWidth || 900,
+                    height: 500,
                 });
+            }
+        };
+        updateDimensions();
+        const observer = new ResizeObserver(updateDimensions);
+        observer.observe(containerRef.current);
+        return () => observer.disconnect();
+    }, []);
 
+    useEffect(() => {
+        const loadGraph = async () => {
+            if (!drug1 || !drug2) {
+                setGraphData({ nodes: [], links: [] });
                 setDisease("");
-
                 return;
             }
-
-
             try {
-
                 setLoading(true);
                 setError("");
-
-
-                const response = await api.get(
-                    "/neo4j/interaction-graph",
-                    {
-                        params: {
-                            drug1,
-                            drug2
-                        }
-                    }
-                );
-
-
-                console.log(
-                    "Interaction Graph Data:",
-                    response.data
-                );
-
-
-                setGraphData({
-                    nodes: response.data.nodes || [],
-                    links:
-                        response.data.links ||
-                        response.data.edges ||
-                        [],
+                const response = await api.get("/neo4j/interaction-graph", {
+                    params: { drug1, drug2 },
                 });
+                const rawNodes = response.data.nodes || [];
+                const rawLinks = response.data.links || response.data.edges || [];
 
+                const nodes = rawNodes.map((n) => ({
+                    ...n,
+                    id: String(n.node_id || n.id || n.name || "").trim(),
+                    name: String(n.name || n.node_id || n.id || "").trim(),
+                    type: String(n.type || "drug").toLowerCase(),
+                }));
 
-                setDisease(
-                    response.data.disease || ""
-                );
+                const nodeIds = new Set(nodes.map((n) => n.id));
+                const links = rawLinks
+                    .map((l) => ({
+                        ...l,
+                        source: String(typeof l.source === "object" ? l.source.id : l.source).trim(),
+                        target: String(typeof l.target === "object" ? l.target.id : l.target).trim(),
+                        relationship: String(l.relationship || l.type || "RELATED").toUpperCase(),
+                    }))
+                    .filter((l) => l.source && l.target && nodeIds.has(l.source) && nodeIds.has(l.target));
 
-
+                setGraphData({ nodes, links });
+                setDisease(response.data.disease || "");
             } catch (err) {
-
-                console.error(
-                    "Interaction graph error:",
-                    err
-                );
-
-                setError(
-                    "Unable to load the medication interaction graph."
-                );
-
+                console.error("Interaction graph error:", err);
+                setError("Unable to load the medication interaction graph.");
             } finally {
-
                 setLoading(false);
-
             }
-
         };
-
-
         loadGraph();
-
     }, [drug1, drug2]);
 
+    const { neighbors, neighborLinks } = useMemo(() => {
+        const activeNode = hoverNode || selectedNode;
+        const nSet = new Set();
+        const lSet = new Set();
 
-    // =========================================================
-    // Normalize graph
-    // =========================================================
+        if (activeNode) {
+            nSet.add(activeNode.id);
+            graphData.links.forEach((l) => {
+                const sId = typeof l.source === "object" ? l.source.id : l.source;
+                const tId = typeof l.target === "object" ? l.target.id : l.target;
+                if (sId === activeNode.id) {
+                    nSet.add(tId);
+                    lSet.add(l);
+                } else if (tId === activeNode.id) {
+                    nSet.add(sId);
+                    lSet.add(l);
+                }
+            });
+        }
 
-    const safeGraphData = useMemo(() => {
-
-        const nodes = (graphData.nodes || []).map(
-            (node) => ({
-
-                ...node,
-
-                id: String(
-                    node.node_id ||
-                    node.id ||
-                    node.name
-                ).trim(),
-
-                label:
-                    node.name ||
-                    node.node_id
-
-            })
-        );
-
-
-        const nodeIds = new Set(
-            nodes.map(
-                (node) => node.id
-            )
-        );
-
-
-        const normalizeId = (value) => {
-
-            if (!value) {
-                return null;
-            }
-
-
-            if (typeof value === "object") {
-
-                return String(
-                    value.node_id ||
-                    value.id ||
-                    value.name ||
-                    ""
-                ).trim();
-
-            }
-
-
-            return String(value).trim();
-
-        };
-
-
-        const links = (graphData.links || [])
-            .map((link) => ({
-
-                ...link,
-
-                source:
-                    normalizeId(link.source),
-
-                target:
-                    normalizeId(link.target)
-
-            }))
-            .filter(
-                (link) =>
-                    link.source &&
-                    link.target &&
-                    nodeIds.has(link.source) &&
-                    nodeIds.has(link.target)
-            );
-
-
-        console.log(
-            "Interaction graph nodes:",
-            nodes.length
-        );
-
-        console.log(
-            "Interaction graph links:",
-            links.length
-        );
-
-
-        return {
-            nodes,
-            links
-        };
-
-    }, [graphData]);
-
-
-    // =========================================================
-    // Loading
-    // =========================================================
+        return { neighbors: nSet, neighborLinks: lSet };
+    }, [graphData, hoverNode, selectedNode]);
 
     if (loading) {
-
         return (
             <div className="knowledge-graph__loading">
-                Loading interaction graph...
+                <div className="graph-spinner" />
+                <span>Loading interaction graph...</span>
             </div>
         );
-
     }
-
-
-    // =========================================================
-    // Error
-    // =========================================================
 
     if (error) {
-
-        return (
-            <div className="knowledge-graph__error">
-                {error}
-            </div>
-        );
-
+        return <div className="knowledge-graph__error">{error}</div>;
     }
-
-
-    // =========================================================
-    // No medicines selected
-    // =========================================================
 
     if (!drug1 || !drug2) {
-
         return null;
-
     }
 
-
-    // =========================================================
-    // Empty graph
-    // =========================================================
-
-    if (!safeGraphData.nodes.length) {
-
-        return (
-            <div className="knowledge-graph__empty">
-                No relationship data found for the selected medicines.
-            </div>
-        );
-
+    if (!graphData.nodes.length) {
+        return <div className="knowledge-graph__empty">No relationship data found for selected medicines.</div>;
     }
-
-
-    // =========================================================
-    // Render
-    // =========================================================
 
     return (
-
         <div className="knowledge-graph">
-
-            {/* Header */}
-
             <div className="knowledge-graph__header">
-
                 <div>
-
-                    <span className="knowledge-graph__label">
-                        MEDICATION RELATIONSHIP
-                    </span>
-
-                    <h2>
-                        Drug Interaction Graph
-                    </h2>
-
+                    <span className="knowledge-graph__label">MEDICATION RELATIONSHIP</span>
+                    <h2>Drug Interaction Graph</h2>
                     <p>
-
                         {disease
                             ? `Relationships between ${drug1}, ${drug2}, and medicines associated with ${disease}.`
-                            : `Relationship between ${drug1} and ${drug2}.`
-                        }
-
+                            : `Relationship between ${drug1} and ${drug2}.`}
                     </p>
-
                 </div>
-
-
                 <div className="knowledge-graph__stats">
-
                     <div>
-
-                        <strong>
-                            {safeGraphData.nodes.length}
-                        </strong>
-
-                        <span>
-                            Nodes
-                        </span>
-
+                        <strong>{graphData.nodes.length}</strong>
+                        <span>Nodes</span>
                     </div>
-
-
                     <div>
-
-                        <strong>
-                            {safeGraphData.links.length}
-                        </strong>
-
-                        <span>
-                            Relationships
-                        </span>
-
+                        <strong>{graphData.links.length}</strong>
+                        <span>Relationships</span>
                     </div>
-
                 </div>
-
             </div>
-
-
-            {/* Legend */}
 
             <div className="knowledge-graph__legend">
-
-                <span>
-
-                    <i className="legend-dot legend-dot--drug"></i>
-
-                    Medicine
-
-                </span>
-
-
-                <span>
-
-                    <i className="legend-dot legend-dot--disease"></i>
-
-                    Disease
-
-                </span>
-
-
-                <span>
-
-                    <i
-                        className="legend-dot"
-                        style={{
-                            backgroundColor: "#ef4444"
-                        }}
-                    ></i>
-
-                    Drug Interaction
-
-                </span>
-
+                <span><i className="legend-dot legend-dot--drug" /> Medicine</span>
+                <span><i className="legend-dot legend-dot--disease" /> Disease</span>
+                <span><i className="legend-dot legend-dot--sideeffect" /> Side Effect</span>
+                <span><i className="legend-line legend-line--interacts" /> Interaction</span>
             </div>
 
-
-            {/* Graph */}
-
-            <div className="knowledge-graph__canvas">
-
+            <div className="knowledge-graph__canvas" ref={containerRef}>
                 <ForceGraph2D
-
-                    graphData={safeGraphData}
-
+                    ref={graphRef}
+                    graphData={graphData}
                     nodeId="id"
+                    width={containerDimensions.width}
+                    height={containerDimensions.height}
+                    backgroundColor="#090d16"
+                    nodeRelSize={6}
+                    onNodeClick={(node) => setSelectedNode(node)}
+                    onNodeHover={(node) => setHoverNode(node)}
+                    linkDirectionalParticles={(link) => (neighborLinks.has(link) || !hoverNode ? 2 : 0)}
+                    linkDirectionalParticleSpeed={0.005}
+                    linkDirectionalParticleWidth={3}
+                    linkDirectionalParticleColor={(link) => (link.relationship === "INTERACTS_WITH" ? "#ef4444" : "#38bdf8")}
+                    linkDirectionalArrowLength={4}
+                    linkDirectionalArrowRelPos={1}
+                    linkColor={(link) => {
+                        const active = hoverNode || selectedNode;
+                        if (active && !neighborLinks.has(link)) return "rgba(51, 65, 85, 0.25)";
+                        if (link.relationship === "INTERACTS_WITH") return "#ef4444";
+                        if (link.relationship === "TREATS") return "#10b981";
+                        return "#64748b";
+                    }}
+                    linkWidth={(link) => {
+                        const active = hoverNode || selectedNode;
+                        if (active && neighborLinks.has(link)) return 3;
+                        return link.relationship === "INTERACTS_WITH" ? 2.5 : 1.5;
+                    }}
+                    linkLabel={(link) => `${link.relationship}${link.severity ? ` (${link.severity})` : ""}`}
+                    nodeCanvasObject={(node, ctx, globalScale) => {
+                        const active = hoverNode || selectedNode;
+                        const isHighlighted = active ? neighbors.has(node.id) : true;
+                        const isSelected = selectedNode?.id === node.id || node.name === drug1 || node.name === drug2;
+                        const config = NODE_COLORS[node.type] || NODE_COLORS.default;
 
-                    linkSource="source"
+                        const baseRadius = node.type === "disease" ? 12 : isSelected ? 10 : 7;
 
-                    linkTarget="target"
+                        ctx.save();
+                        ctx.globalAlpha = isHighlighted ? 1.0 : 0.25;
 
-
-                    nodeLabel={(node) =>
-                        node.label || node.id
-                    }
-
-
-                    nodeCanvasObject={(
-                        node,
-                        ctx,
-                        globalScale
-                    ) => {
-
-                        const label =
-                            node.label ||
-                            node.id;
-
-
-                        const isSelected =
-                            label === drug1 ||
-                            label === drug2;
-
-
-                        const isDisease =
-                            node.type === "disease";
-
-
-                        let nodeColor =
-                            "#3b82f6";
-
-
-                        if (isDisease) {
-
-                            nodeColor =
-                                "#10b981";
-
+                        if (isSelected || hoverNode?.id === node.id) {
+                            ctx.beginPath();
+                            ctx.arc(node.x, node.y, baseRadius + 4, 0, 2 * Math.PI);
+                            ctx.fillStyle = config.glow;
+                            ctx.fill();
                         }
-
-
-                        const radius =
-                            isDisease
-                                ? 14
-                                : isSelected
-                                    ? 12
-                                    : 7;
-
 
                         ctx.beginPath();
-
-                        ctx.arc(
-                            node.x,
-                            node.y,
-                            radius,
-                            0,
-                            2 * Math.PI
-                        );
-
-
-                        ctx.fillStyle =
-                            nodeColor;
-
+                        ctx.arc(node.x, node.y, baseRadius, 0, 2 * Math.PI);
+                        ctx.fillStyle = config.fill;
                         ctx.fill();
+                        ctx.lineWidth = isSelected ? 2.5 : 1.5;
+                        ctx.strokeStyle = isSelected ? "#ffffff" : config.stroke;
+                        ctx.stroke();
 
+                        const label = node.name || node.id;
+                        const fontSize = Math.max(9, Math.min(13, 12 / globalScale));
+                        ctx.font = `600 ${fontSize}px Inter, system-ui, sans-serif`;
 
-                        /*
-                         * White border around selected
-                         * medicines and disease.
-                         */
+                        const textWidth = ctx.measureText(label).width;
+                        const paddingX = 5 / globalScale;
+                        const paddingY = 2 / globalScale;
+                        const boxX = node.x - textWidth / 2 - paddingX;
+                        const boxY = node.y + baseRadius + 3;
+                        const boxW = textWidth + paddingX * 2;
+                        const boxH = fontSize + paddingY * 2;
 
-                        if (
-                            isSelected ||
-                            isDisease
-                        ) {
+                        ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
+                        ctx.beginPath();
+                        ctx.roundRect(boxX, boxY, boxW, boxH, 3 / globalScale);
+                        ctx.fill();
+                        ctx.strokeStyle = config.stroke;
+                        ctx.lineWidth = 1 / globalScale;
+                        ctx.stroke();
 
-                            ctx.strokeStyle =
-                                "#ffffff";
-
-                            ctx.lineWidth =
-                                2;
-
-                            ctx.stroke();
-
-                        }
-
-
-                        const fontSize =
-                            (
-                                isSelected ||
-                                isDisease
-                            )
-                                ? 14 / globalScale
-                                : 10 / globalScale;
-
-
-                        ctx.font =
-                            `${fontSize}px Inter, Arial, sans-serif`;
-
-
-                        ctx.textAlign =
-                            "center";
-
-
-                        ctx.textBaseline =
-                            "top";
-
-
-                        ctx.fillStyle =
-                            "#ffffff";
-
-
-                        ctx.fillText(
-                            label,
-                            node.x,
-                            node.y + radius + 4
-                        );
-
+                        ctx.textAlign = "center";
+                        ctx.textBaseline = "middle";
+                        ctx.fillStyle = "#ffffff";
+                        ctx.fillText(label, node.x, boxY + boxH / 2);
+                        ctx.restore();
                     }}
-
-
-                    linkColor={(link) => {
-
-                        if (
-                            link.relationship ===
-                            "INTERACTS_WITH"
-                        ) {
-
-                            return "#ef4444";
-
-                        }
-
-
-                        if (
-                            link.relationship ===
-                            "TREATS"
-                        ) {
-
-                            return "#10b981";
-
-                        }
-
-
-                        return "#64748b";
-
-                    }}
-
-
-                    linkWidth={(link) => {
-
-                        if (
-                            link.relationship ===
-                            "INTERACTS_WITH"
-                        ) {
-
-                            return 3;
-
-                        }
-
-
-                        if (
-                            link.relationship ===
-                            "TREATS"
-                        ) {
-
-                            return 2;
-
-                        }
-
-
-                        return 1;
-
-                    }}
-
-
-                    linkDirectionalArrowLength={5}
-
-                    linkDirectionalArrowRelPos={1}
-
-
-                    linkLabel={(link) => {
-
-                        if (
-                            link.relationship ===
-                            "INTERACTS_WITH"
-                        ) {
-
-                            return (
-                                `INTERACTS_WITH — ${
-                                    link.severity ||
-                                    "Unknown severity"
-                                }`
-                            );
-
-                        }
-
-
-                        if (
-                            link.relationship ===
-                            "TREATS"
-                        ) {
-
-                            return "TREATS";
-
-                        }
-
-
-                        return link.relationship || "";
-
-                    }}
-
-
-                    width={1000}
-
-                    height={550}
-
-                    backgroundColor="#0b1220"
-
-                    cooldownTicks={150}
-
-                    d3VelocityDecay={0.35}
-
-                    enableZoomInteraction={true}
-
-                    enablePanInteraction={true}
-
-
-                    onNodeClick={(node) => {
-
-                        console.log(
-                            "Selected graph node:",
-                            node
-                        );
-
-                    }}
-
                 />
-
             </div>
-
         </div>
-
     );
-
 }
 
 export default KnowledgeGraph;

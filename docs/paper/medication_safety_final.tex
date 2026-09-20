@@ -1,0 +1,186 @@
+\documentclass[9pt,journal,twoside,web]{ieeecolor}
+\usepackage{generic}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\markboth{IEEE JOURNAL OF BIOMEDICAL AND HEALTH INFORMATICS, VOL. XX, NO. XX, 2026}
+{Salian \MakeLowercase{\textit{et al.}}: Multilingual Voice-Assisted Medication Information and Safety Monitoring System}
+
+\begin{document}
+
+\title{Multilingual Voice-Assisted Medication Information and Safety Monitoring System}
+
+\author{Jayadithya G Salian, Nidhi K, Shreyas Damle, Vijayalakshmi Kannan, and Akhila Thejaswi R
+\thanks{Manuscript submitted 2026. This work was carried out as part of a final-year B.E. project at Sahyadri College of Engineering and Management (SCEM), Mangaluru, India.}
+\thanks{All authors are with the Department of Information Science and Engineering, Sahyadri College of Engineering and Management, Mangaluru, Karnataka, India (e-mail: author@example.com).}}
+
+\maketitle
+
+\begin{abstract}
+Medication errors caused by misread prescriptions and limited language accessibility remain a significant risk in regions with high linguistic diversity, where patients often cannot understand drug labels or verify potential interactions in their native tongue. This paper presents a multilingual voice-assisted system for medication information retrieval and drug safety monitoring, designed to bridge this accessibility gap for speakers of English, Kannada, and Tulu. The system combines PaddleOCR for prescription digitization, automatic speech recognition (ASR) for voice query input, and a hybrid backend utilizing structured clinical CSV datasets for rapid API lookup alongside a Neo4j drug knowledge graph for interaction traversal and explainable visualization. The dataset is scoped to thirty commonly prescribed drugs across three conditions---hypertension, type 2 diabetes, and arthritis---encompassing 321 side-effect records and 157 drug interaction records (including 10 direct in-scope pairwise interactions and 147 class-level records). A FastAPI backend coordinates asynchronous OCR, speech processing, and lookup pipelines, while MongoDB stores user state and medication schedules. Speech processing prioritizes Google Speech Recognition with regional locale fallbacks (\texttt{tcy-IN}, \texttt{kn-IN}), utilizing OpenAI Whisper as a secondary ASR pipeline, while Tulu audio synthesis leverages Kannada phonetic text-to-speech engine proxies. This work demonstrates the feasibility of combining structured biomedical data stores with multilingual speech interfaces to improve medication safety for linguistically underserved populations.
+\end{abstract}
+
+\begin{IEEEkeywords}
+drug interaction detection, knowledge graph, multilingual speech recognition, voice assistant, healthcare informatics
+\end{IEEEkeywords}
+
+\section{Introduction}
+\label{sec:introduction}
+Medication management for elderly patients with multiple chronic conditions often breaks down not at the point of diagnosis, but during transitions in care. A common scenario illustrates this: an elderly patient with several ongoing conditions---say, hypertension, diabetes, and a history of stroke---changes healthcare providers, whether due to relocation or simple inconvenience of long-term follow-up. When the original prescription is unavailable, the new provider must reconstruct the patient's medical history from what the patient or a family member can recall verbally. This account is often incomplete or imprecise---a symptom described loosely, a medication history stated from memory rather than a written record. Medications that require close monitoring can end up being continued for years without adequate review, and early warning signs of an adverse reaction, such as fatigue or abdominal discomfort, are easily misattributed to unrelated causes or treated at home rather than flagged for urgent medical attention. By the time a serious complication is identified, the underlying medication interaction may have gone unnoticed for a long period. This reflects a structural gap in how medication history and interaction risk are tracked outside of a single continuous provider relationship.
+
+Language adds a second, compounding barrier. Prescription labels, drug inserts, and pharmacy guidance are typically issued in English or a single regional language, which leaves patients who are more comfortable in other native languages at a disadvantage when trying to independently verify what they are taking or whether a new medication is safe to combine with existing ones. This is especially relevant in linguistically diverse regions such as coastal Karnataka, India, where English, Kannada, and Tulu are all in everyday use, but digital health tools rarely support more than one of these languages at a time.
+
+Existing medication information tools generally address only one of these two barriers, and often assume a level of technical comfort that does not hold across all users. Optical character recognition (OCR) based tools work well for users who are comfortable operating a smartphone camera and app interface---they can photograph a label or prescription and get a fast, accurate digitized result. But this assumes the user can navigate that interface in the first place, which is often not true for older users unfamiliar with smart devices. Voice-based tools address that access barrier, but most existing systems are limited to high-resource languages such as English, and none combine voice input with a structured, explainable interaction-checking backend. Voice input is also useful in a way that goes beyond just accessibility: even a person who could technically type a query often cannot reliably spell or pronounce a drug name precisely enough to search for it, particularly for less common formulations or when the patient is themselves elderly. In practice, these are two distinct failure modes with two distinct fixes---OCR handles users who can operate a device but should not have to describe a medication in words, and voice handles users for whom device interaction itself, or precise medication naming, is the barrier.
+
+This paper introduces a multilingual voice-assisted medication information and safety monitoring system that addresses both barriers together. The system allows a user to query drug information, photograph a prescription, or ask about a potential interaction by voice, in English, Kannada, or Tulu. Rather than relying on free-text retrieval, responses are generated from structured clinical datasets and a knowledge graph, so that any interaction or risk information returned to the user is traceable to an explicit, verifiable relationship rather than a black-box output.
+
+The main contributions of this work are as follows:
+\begin{itemize}
+\item A structured biomedical dataset covering thirty core drugs across hypertension, type 2 diabetes, and arthritis, containing 321 side-effect records and 157 interaction records derived from DailyMed, DrugBank, and RxNorm.
+\item A hybrid data architecture combining Pandas-indexed CSV knowledge lookup for real-time API performance with a Neo4j graph model supporting Cypher-based queries and relationship visualization.
+\item A multilingual voice and OCR pipeline combining PaddleOCR for prescription parsing, primary Google Speech ASR with locale fallbacks (\texttt{tcy-IN}, \texttt{kn-IN}), secondary OpenAI Whisper ASR, and localized text-to-speech synthesis using Kannada phonetic proxies for Tulu audio.
+\item An end-to-end system architecture built on FastAPI and MongoDB, integrating these components into a single voice-first medication safety assistant supporting distinct patient and clinician workflows.
+\end{itemize}
+
+The remainder of this paper is organized as follows. Section~\ref{sec:related-work} reviews related work in medication safety systems, multilingual healthcare NLP, and graph-based drug interaction detection. Section~\ref{sec:architecture} describes the system architecture. Section~\ref{sec:implementation} details the implementation. Section~\ref{sec:results} presents dataset metrics, and Section~\ref{sec:conclusion} concludes the paper.
+
+\section{Related Work}
+\label{sec:related-work}
+Prior research relevant to this system spans drug information resources and interaction prediction, conversational medication support, multilingual speech recognition, and optical character recognition. These areas provide complementary foundations for integrating medication lookup with accessible input and output interfaces.
+
+\subsection{Drug Interaction Databases and Knowledge Graphs}
+Tatonetti \emph{et al.}~\cite{tatonetti2012} developed methods for analyzing adverse event reports while accounting for confounding factors. Their work produced drug-effect and drug-interaction resources and corroborated selected findings using electronic medical records. This approach supports the discovery of potential adverse effects and interactions from observational data; its reported results do not establish the accuracy of a separate medication lookup application.
+
+DrugBank provides structured information about drugs and their biological relationships. Wishart \emph{et al.}~\cite{wishart2018} described the expansion of DrugBank 5.0, including drug interaction information and pharmacological data. Such resources can support the construction of a medication knowledge base, although the correctness of a locally curated subset must be evaluated independently.
+
+Farrugia \emph{et al.}~\cite{farrugia2023} proposed medicX, a framework that integrates drug features into a knowledge graph and uses graph embeddings with machine learning to predict previously unknown drug--drug interactions. Their study examines predictive modeling, whereas the present work focuses on retrieving recorded medication information and presenting relationships within a scoped dataset. Graph-based prediction and direct interaction lookup therefore represent different evaluation tasks.
+
+\subsection{Conversational Medication Support and Multilingual Speech}
+Schulte to Brinke \emph{et al.}~\cite{schulte2021} developed a multimodal medication assistant connected to a database maintained by healthcare professionals. The assistant analyzes medication plans, identifies adverse drug reactions and side effects, and provides medication reminders. Its evaluation involved three experienced pharmacists. This work demonstrates that conversational medication support can include safety-related functions as well as adherence support; accordingly, the present system's contribution should be assessed through its particular integration and language scope rather than an assertion that earlier assistants lack safety functionality.
+
+Radford \emph{et al.}~\cite{radford2023} introduced Whisper, a speech recognition approach trained using 680,000 hours of multilingual and multitask supervision. They reported generalization across speech benchmarks without dataset-specific fine-tuning. However, benchmark performance does not establish recognition accuracy for regional medication queries or for the Tulu fallback pathway used in this project. Those tasks require evaluation using representative recordings and reference transcriptions. The present work considers English, Kannada, and Tulu interfaces within this application-specific evaluation setting.
+
+\subsection{Optical Character Recognition for Medication Input}
+Smith~\cite{smith2007} described the Tesseract OCR engine, including its text-line processing, character classification, and adaptive recognition methods. Du \emph{et al.}~\cite{du2020} subsequently presented PP-OCR, a lightweight OCR system combining text detection, direction classification, and text recognition, with models released through PaddleOCR. These studies provide technical foundations for image-to-text processing; they do not by themselves demonstrate reliable recognition of handwritten prescriptions or medication-specific fields.
+
+In the present application, OCR provides text that must subsequently be matched to medication records. Recognition quality, drug-name matching, and interaction lookup are distinct stages and should be evaluated separately. The system brings these components together with regional-language interfaces and graph visualization, while the effectiveness of the complete workflow remains a matter for end-to-end evaluation.
+
+
+\section{System Architecture}
+\label{sec:architecture}
+The system follows a modular pipeline architecture in which user input, whether spoken or captured from a prescription image, is converted into a structured query against the drug data layer, with results returned as synthesized multilingual speech or text.
+
+\begin{figure}[!t]
+\IfFileExists{architecture.png}{
+\centerline{\includegraphics[width=\columnwidth]{architecture.png}}
+}{\centering\fbox{\parbox{0.9\columnwidth}{\centering Architecture figure: add architecture.png to this project.}}}
+\caption{System architecture overview: input capture (voice/OCR), backend orchestration (FastAPI), hybrid data layer (Pandas CSV \& Neo4j Graph), and multilingual response delivery.}
+\label{fig:architecture}
+\end{figure}
+
+\subsection{Hybrid Data Layer (Pandas \& Neo4j)}
+The core of the safety-checking capability is built on a dual-tier data architecture:
+\begin{enumerate}
+    \item \textbf{Pandas Lookup Engine}: For high-throughput API endpoints, the system executes low-latency entity lookups and direct pairwise interaction checks using Pandas over structured CSV datasets curated from DailyMed, DrugBank, and RxNorm.
+    \item \textbf{Neo4j Graph Engine}: The scoped dataset is encoded into a Neo4j knowledge graph covering thirty drugs across hypertension, type 2 diabetes, and arthritis. The dataset contains 321 recorded side-effect entries and 157 interaction entries (10 direct in-scope pairwise pairs and 147 class-level rules). Cypher queries traverse these paths to generate explainable graph visualization outputs showing the exact relationship path underlying a flagged interaction.
+\end{enumerate}
+
+\subsection{Multilingual Speech and OCR Pipeline}
+User input is accepted either as spoken queries or as photographed prescriptions and drug labels. PaddleOCR is used to extract text from prescription and label images, running asynchronously via \texttt{asyncio.to\_thread}. Spoken queries are processed through a multi-engine speech recognition pipeline: Google Speech Recognition is attempted first using regional locales (\texttt{tcy-IN} for Tulu, \texttt{kn-IN} for Kannada, \texttt{en-IN} for English), with OpenAI Whisper used as a fallback. As Whisper does not provide native Tulu support, Tulu audio queries are handled by transcribing speech via the Kannada model and producing Tulu text output. Text-to-speech synthesis utilizes \texttt{gTTS}, where Tulu text responses leverage Kannada phonetic synthesis as a regional pronunciation proxy.
+
+\subsection{Backend and Data Layer}
+A FastAPI backend orchestrates requests across the OCR, speech, and query components, exposing a unified API. MongoDB stores user profiles, access requests, medication schedules, and notification push tokens, while the Pandas/Neo4j data services execute interaction logic.
+
+\section{Implementation Details}
+\label{sec:implementation}
+The system was implemented as a set of loosely coupled services communicating through the FastAPI backend. OCR and speech processing run as separate processing modules invoked asynchronously. Incoming text, whether from transcription or OCR, passes through a lightweight string-matching step to resolve drug names (including common regional and colloquial variants) to canonical entity IDs before executing safety queries.
+
+The API layer separates patient and clinician endpoints. Patient endpoints handle single-entity voice/text drug lookup, disease information queries, prescription image scanning, and daily schedule management. Clinical endpoints provide multi-drug interaction checking, evaluating pairwise combinations against interaction matrices and returning severity tiers (\textit{Severe}, \textit{Moderate}, \textit{Mild}) alongside mandatory decision-support disclaimers.
+
+\section{Results and Dataset Scope}
+\label{sec:results}
+End-to-end quantitative evaluation (including native-language WER/CER and clinical interaction accuracy) is pending complete test-suite execution. Table~\ref{tab:results} summarizes the confirmed scope of the underlying CSV datasets.
+
+\begin{table}[!h]
+\caption{Confirmed Dataset Scope}
+\label{tab:results}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{|p{80pt}|p{30pt}|p{105pt}|}
+\hline
+\textbf{Metric} & \textbf{Value} & \textbf{Notes / Scope} \\
+\hline
+Drug coverage & 30 & Hypertension, Diabetes, Arthritis \\
+\hline
+Conditions covered & 3 & Hypertension, Type 2 Diabetes, Arthritis \\
+\hline
+Side-effect records & 321 & Associated adverse reactions \\
+\hline
+Total Interaction records & 157 & 10 in-scope pairs; 147 class-level rules \\
+\hline
+Supported languages & 3 & English, Kannada, Tulu (via ASR fallback) \\
+\hline
+Data Sources & -- & DailyMed, DrugBank, RxNorm \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Conclusion}
+\label{sec:conclusion}
+This paper presented a multilingual voice-assisted medication information and safety monitoring system that combines structured CSV lookups and a Neo4j drug interaction knowledge graph with multilingual speech and OCR interfaces. By grounding risk information in verified clinical datasets rather than free-text generative retrieval, the system provides explainable safety warnings across languages that are typically underserved by digital health tools. Current limitations include the scoped coverage of thirty drugs across three conditions, reliance on a Kannada speech-to-text proxy and phonetic TTS for Tulu, and restriction of voice interaction queries to single-entity lookups. Future work includes expanding drug coverage, fine-tuning native acoustic models for Tulu, and conducting structured usability and WER/CER evaluations with real prescription data in clinical settings.
+
+\section*{Acknowledgment}
+The authors thank the Department of Information Science and Engineering, SCEM, Mangaluru, for their support.
+
+\begin{thebibliography}{00}
+
+\bibitem{tatonetti2012}
+N. P. Tatonetti, P. P. Ye, R. Daneshjou, and R. B. Altman,
+`\texttt{Data-driven prediction of drug effects and interactions,''
+\emph{Sci. Transl. Med.}, vol. 4, no. 125, Art. no. 125ra31, 2012,
+doi: 10.1126/scitranslmed.3003377.
+
+\bibitem{wishart2018}
+D. S. Wishart \emph{et al.},
+}\texttt{DrugBank 5.0: A major update to the DrugBank database for 2018,''
+\emph{Nucleic Acids Res.}, vol. 46, no. D1, pp. D1074--D1082, 2018,
+doi: 10.1093/nar/gkx1037.
+
+\bibitem{farrugia2023}
+L. Farrugia, L. M. Azzopardi, J. Debattista, and C. Abela,
+}\texttt{Predicting drug-drug interactions using knowledge graphs,''
+2023, arXiv:2308.04172.
+
+\bibitem{schulte2021}
+J. Schulte to Brinke, C. Fitte, E. Anton, P. Meier, and F. Teuteberg,
+}\texttt{With a little help from my conversational agent: Towards a voice assistant for improved patient compliance and medication therapy safety,''
+in \emph{Proc. 14th Int. Joint Conf. Biomed. Eng. Syst. Technol. (BIOSTEC)},
+vol. 5, 2021, pp. 789--800,
+doi: 10.5220/0010411707890800.
+
+\bibitem{radford2023}
+A. Radford, J. W. Kim, T. Xu, G. Brockman, C. McLeavey, and I. Sutskever,
+}\texttt{Robust speech recognition via large-scale weak supervision,''
+in \emph{Proc. 40th Int. Conf. Mach. Learn.},
+vol. 202, 2023, pp. 28492--28518.
+
+\bibitem{smith2007}
+R. Smith, }\texttt{An overview of the Tesseract OCR engine,''
+in \emph{Proc. 9th Int. Conf. Document Anal. Recognit. (ICDAR)},
+2007, pp. 629--633.
+
+\bibitem{du2020}
+Y. Du \emph{et al.}, }`PP-OCR: A practical ultra lightweight OCR system,''
+2020, arXiv:2009.09941.
+
+\end{thebibliography}
+
+
+\end{document}
