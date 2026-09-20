@@ -1,67 +1,64 @@
 [
   {
     "disease": "Type 2 Diabetes",
-    "lastReviewed": "March 2026",
     "sources": [
       {
-        "title": "ICMR Diabetes Guidelines 2018",
-        "authors": "ICMR",
-        "year": 2018,
-        "journal": null,
-        "summary": "This project’s type 2 diabetes medicine records cite the 2018 ICMR diabetes guidelines for first-line Indian outpatient treatment context, including metformin and carbohydrate-absorption agents such as acarbose.",
-        "url": null
+        "title": "Knowledge-driven drug repurposing using a comprehensive drug knowledge graph",
+        "authors": "Yongjun Zhu, Chao Che, Bo Jin, Ningrui Zhang, Chang Su, Fei Wang",
+        "year": 2020,
+        "journal": "Health Informatics Journal",
+        "summary": "Zhu and colleagues assemble a drug knowledge graph with treats, interacts, and side-effect links, then show that those paths can recover known diabetes treatments. That is the same graph pattern MMSS uses for type 2 diabetes medicines.",
+        "url": "https://doi.org/10.1177/1460458220937101"
       },
       {
-        "title": "ADA clinical guidelines",
-        "authors": "ADA",
-        "year": null,
-        "journal": null,
-        "summary": "The synthetic patient–drug generator lists ADA clinical guidelines as a source used when assigning type 2 diabetes medicines to patient records.",
-        "url": null
+        "title": "Data-driven prediction of drug effects and interactions",
+        "authors": "Nicholas P. Tatonetti, Patrick P. Ye, Roxana Daneshjou, Russ B. Altman",
+        "year": 2012,
+        "journal": "Science Translational Medicine",
+        "summary": "Tatonetti and colleagues show that combining medicines can produce effects that are easy to miss if each drug is reviewed alone. MMSS does not use their reporting-data signal method; our pairs are curated. The paper is cited because it supports checking type 2 diabetes medicines for interactions.",
+        "url": "https://doi.org/10.1126/scitranslmed.3003377"
       }
     ]
   },
   {
     "disease": "Hypertension",
-    "lastReviewed": "March 2026",
     "sources": [
       {
-        "title": "ICMR Hypertension Guidelines",
-        "authors": "ICMR",
-        "year": null,
-        "journal": null,
-        "summary": "Hypertension drug descriptions in the master dataset, including first-choice calcium-channel blockers such as amlodipine, cite ICMR hypertension guidelines as treatment-context support.",
-        "url": null
+        "title": "Cardiovascular diseases in India: current epidemiology and future directions",
+        "authors": "Dorairaj Prabhakaran, Panniyammakal Jeemon, Ambuj Roy",
+        "year": 2016,
+        "journal": "Circulation",
+        "summary": "Prabhakaran and colleagues describe India’s cardiovascular burden and the central role of raised blood pressure. That epidemiology is why MMSS treats hypertension as a core outpatient disease rather than a generic drug list.",
+        "url": "https://doi.org/10.1161/CIRCULATIONAHA.114.008729"
       },
       {
-        "title": "JNC 8",
-        "authors": "JNC 8",
-        "year": null,
-        "journal": null,
-        "summary": "The chlorthalidone record cites JNC 8 among the references used for hypertension treatment context in this dataset.",
-        "url": null
+        "title": "Data-driven prediction of drug effects and interactions",
+        "authors": "Nicholas P. Tatonetti, Patrick P. Ye, Roxana Daneshjou, Russ B. Altman",
+        "year": 2012,
+        "journal": "Science Translational Medicine",
+        "summary": "Tatonetti and colleagues document that co-prescribed drugs can interact in ways a single-drug review will not catch. MMSS does not replicate their signal-detection pipeline; hypertension interaction checks use curated pairs. The paper is cited to explain why those checks matter.",
+        "url": "https://doi.org/10.1126/scitranslmed.3003377"
       }
     ]
   },
   {
     "disease": "Arthritis",
-    "lastReviewed": "March 2026",
     "sources": [
       {
-        "title": "ACR Guidelines",
-        "authors": "ACR",
-        "year": null,
-        "journal": null,
-        "summary": "Disease-modifying arthritis medicines in this dataset—including methotrexate, sulfasalazine, and leflunomide—cite ACR guidelines as the clinical source for long-term rheumatoid arthritis therapy.",
-        "url": null
+        "title": "Clinical profile of rheumatoid arthritis patients reporting to a tertiary care center – data from southwestern part of India",
+        "authors": "A.V.S. Anil Kumar, Kapil Gupta, Shipra Kartik, Shruti Kumar",
+        "year": 2019,
+        "journal": "International Journal of Contemporary Medical Research",
+        "summary": "Kumar and colleagues report the clinical profile of rheumatoid arthritis in southwestern India and note methotrexate as the usual disease-modifying medicine. That matches the arthritis set used in this project.",
+        "url": "https://doi.org/10.21276/ijcmr.2019.6.6.49"
       },
       {
-        "title": "ICMR",
-        "authors": "ICMR",
-        "year": null,
-        "journal": null,
-        "summary": "The prednisolone arthritis record cites ICMR as a source for short-term anti-inflammatory use while slower arthritis medicines take effect.",
-        "url": null
+        "title": "Data-driven prediction of drug effects and interactions",
+        "authors": "Nicholas P. Tatonetti, Patrick P. Ye, Roxana Daneshjou, Russ B. Altman",
+        "year": 2012,
+        "journal": "Science Translational Medicine",
+        "summary": "Tatonetti and colleagues show why combinations such as methotrexate and NSAIDs should be checked together, not only as separate medicines. MMSS does not use their Twosides/Offsides detection method; arthritis interactions are curated pairs. The paper supports the need for that check.",
+        "url": "https://doi.org/10.1126/scitranslmed.3003377"
       }
     ]
   }

@@ -1,13 +1,16 @@
+import { Link } from "react-router-dom";
+
 function DiseaseProtocolSummary({
     selectedDisease,
     drugs,
     loadingDrugs,
+    compact = false,
 }) {
     return (
-        <section className="disease-protocols__results">
+        <section className={`disease-protocols__results${compact ? " disease-protocols__results--compact" : ""}`}>
             <div className="disease-protocols__results-header">
                 <div>
-                    <p>MEDICATION OPTIONS</p>
+                    <p>{compact ? "PROTOCOL SUMMARY" : "MEDICATION OPTIONS"}</p>
                     <h2>{selectedDisease}</h2>
                 </div>
                 <span>{drugs.length} medicines</span>
@@ -20,6 +23,27 @@ function DiseaseProtocolSummary({
             ) : drugs.length === 0 ? (
                 <div className="disease-protocols__empty">
                     No medicines found for this disease.
+                </div>
+            ) : compact ? (
+                <div className="clinical-protocol-summary">
+                    <p>
+                        Medicines currently linked to this disease in the
+                        knowledge graph. Full descriptions stay on Disease
+                        Protocols so this page can focus on sources.
+                    </p>
+                    <ul className="clinical-protocol-summary__chips">
+                        {drugs.map((drug) => (
+                            <li key={drug.drug_id || drug.drug_name}>
+                                {drug.drug_name}
+                            </li>
+                        ))}
+                    </ul>
+                    <Link
+                        className="clinical-source-card__link"
+                        to="/disease-protocols"
+                    >
+                        View full protocol
+                    </Link>
                 </div>
             ) : (
                 <div className="disease-protocols__grid">
