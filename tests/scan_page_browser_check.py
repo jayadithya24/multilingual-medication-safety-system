@@ -88,7 +88,7 @@ def main():
         page.get_by_role('button', name='Scan Image', exact=True).click()
         expect(page.get_by_label('Spoken medicine response')).to_be_visible()
         assert speech[-1]['lang'] == ['tulu']
-        assert 'ಬಳಕೆ ಮಲ್ಪುನ ದುಂಬು ಈ ವಿವರನ್ ಈರ್ನ ಔಷಧ ಚೀಟಿದ ಒಟ್ಟು ಪರಿಶೀಲನೆ ಮಲ್ಪುಲೆ.' in speech[-1]['text'][0]
+        assert 'ಬಳಕೆ ಮಲ್ಪುನ ದುಂಬು ಈ ವಿವರಣ್ ಈರ್ನ ಔಷಧ ಚೀಟಿ ದ ಒಟ್ಟು ಪರಿಶೀಲನೆ ಮಲ್ಪುಲೆ.' in speech[-1]['text'][0]
         page.get_by_placeholder('e.g. Metformin').fill('Manual test')
         expect(page.get_by_role('button', name='Add to Schedule', exact=True)).to_be_enabled()
         for legacy in ('ocr', 'prescription'):

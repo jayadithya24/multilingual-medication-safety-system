@@ -255,7 +255,7 @@ useEffect(() => () => {
             const reviewNotice = {
                 en: "These are detected details. Check them against your prescription before saving.",
                 kn: "ಉಳಿಸುವ ಮೊದಲು ಈ ವಿವರಗಳನ್ನು ನಿಮ್ಮ ಔಷಧ ಚೀಟಿಯೊಂದಿಗೆ ಪರಿಶೀಲಿಸಿ.",
-                tulu: "ಬಳಕೆ ಮಲ್ಪುನ ದುಂಬು ಈ ವಿವರನ್ ಈರ್ನ ಔಷಧ ಚೀಟಿದ ಒಟ್ಟು ಪರಿಶೀಲನೆ ಮಲ್ಪುಲೆ.",
+                tulu: "ಬಳಕೆ ಮಲ್ಪುನ ದುಂಬು ಈ ವಿವರಣ್ ಈರ್ನ ಔಷಧ ಚೀಟಿ ದ ಒಟ್ಟು ಪರಿಶೀಲನೆ ಮಲ್ಪುಲೆ.",
             };
             setSpokenScan(detectedSummary ? `${detectedSummary}. ${reviewNotice[lang]}` : "");
             setSpeechRun((value) => value + 1);

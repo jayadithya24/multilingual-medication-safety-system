@@ -6,7 +6,7 @@ import edge_tts
 
 FEMALE_VOICES = {"en": "en-IN-NeerjaNeural", "kn": "kn-IN-SapnaNeural", "tulu": "kn-IN-SapnaNeural"}
 # User-provided pronunciations, applied to speech only. Never alter stored doses.
-TULU_NUMBERS = dict(zip(range(1, 11), ["ಒಂಜಿ", "ರಡ್ಡ್", "ಮೂಜಿ", "ನಾಲ್", "ಐನ್", "ಆಜಿ", "ಏಳ್", "ಎನ್ಮ", "ಒರ್ಮ", "ಪತ್"]))
+TULU_NUMBERS = dict(zip(range(1, 11), ["ಒಂಜಿ", "ರಡ್ಡ್", "ಮೂಜಿ", "ನಾಲ್", "ಐನ್", "ಆಜಿ", "ಎಲ್", "ಎನ್ಮ", "ಒರ್ಮ", "ಪಾತ್"]))
 
 
 def prepare_speech_text(text, language):

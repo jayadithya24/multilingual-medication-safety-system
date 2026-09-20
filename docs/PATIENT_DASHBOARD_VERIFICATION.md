@@ -4,7 +4,7 @@
 
 The subsequent patient speech update replaces browser-selected/gTTS voices with explicitly selected female voices throughout OCR, medicine search and voice search: English `en-IN-NeerjaNeural`; Kannada/Tulu `kn-IN-SapnaNeural`. The provider's voice catalogue identifies both as Female. Actual synthesis returned audio in approximately 1.24 seconds (English sample) and 1.13 seconds (short Tulu sample). Network time varies; these are not latency guarantees. A failed service call leaves readable text instead of silently selecting a male/default voice.
 
-Tulu OCR now appends the user's supplied review sentence: “ಬಳಕೆ ಮಲ್ಪುನ ದುಂಬು ಈ ವಿವರನ್ ಈರ್ನ ಔಷಧ ಚೀಟಿದ ಒಟ್ಟು ಪರಿಶೀಲನೆ ಮಲ್ಪುಲೆ.” Speech-only replacements cover the supplied 1–10 pronunciations, while decimals, larger numbers, identifiers and stored dosages remain unchanged. The user's first workbook row (Metformin description and side effects) is synchronized to the CSV consumed by the app; other rows were preserved. Native-speaker pronunciation still needs user acceptance.
+Tulu OCR now appends the user's supplied review sentence: “ಬಳಕೆ ಮಲ್ಪುನ ದುಂಬು ಈ ವಿವರಣ್ ಈರ್ನ ಔಷಧ ಚೀಟಿ ದ ಒಟ್ಟು ಪರಿಶೀಲನೆ ಮಲ್ಪುಲೆ.” Speech-only replacements cover the supplied 1–10 pronunciations (`onji` through `path`), while decimals, larger numbers, identifiers and stored dosages remain unchanged. The user's first workbook row (Metformin description and side effects) is synchronized to the CSV consumed by the app; other rows were preserved. Native-speaker pronunciation still needs user acceptance.
 
 ## Repository and integration
 

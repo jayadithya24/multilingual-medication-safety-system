@@ -30,7 +30,7 @@ def test_tts_failure_is_not_cached(monkeypatch):
 
 
 def test_user_tulu_numbers_preserve_doses_and_identifiers():
-    assert tts_service.prepare_speech_text('1 2 3 4 5 6 7 8 9 10', 'tulu') == 'ಒಂಜಿ ರಡ್ಡ್ ಮೂಜಿ ನಾಲ್ ಐನ್ ಆಜಿ ಏಳ್ ಎನ್ಮ ಒರ್ಮ ಪತ್'
+    assert tts_service.prepare_speech_text('1 2 3 4 5 6 7 8 9 10', 'tulu') == 'ಒಂಜಿ ರಡ್ಡ್ ಮೂಜಿ ನಾಲ್ ಐನ್ ಆಜಿ ಎಲ್ ಎನ್ಮ ಒರ್ಮ ಪಾತ್'
     unchanged = '500 mg, 2.5 mg, 1,000 mg, B12, 12, 20, 100, 5mg'
     assert tts_service.prepare_speech_text(unchanged, 'tulu') == unchanged
     assert tts_service.prepare_speech_text('Type 2. Take 1 tablet.', 'tulu') == 'Type ರಡ್ಡ್. Take ಒಂಜಿ tablet.'
