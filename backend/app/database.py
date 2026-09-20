@@ -23,6 +23,16 @@ access_requests_collection = db["access_requests"]
 fcm_tokens_collection = db["fcm_tokens"]
 
 # Useful indexes
+users_collection.create_index(
+    [("username", 1)],
+    unique=True,
+)
+users_collection.create_index(
+    [("doctor_id", 1)],
+    unique=True,
+    sparse=True,
+)
+
 patient_schedules_collection.create_index(
     [("patient_username", 1), ("scheduled_time", 1)]
 )

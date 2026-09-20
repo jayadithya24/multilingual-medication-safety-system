@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import Loading from "../../components/Loading/Loading";
 import MedicineCard from "../../components/MedicineCard/MedicineCard";
+import VoicePlayback from "../../components/VoicePlayback";
 
 import { searchMedicine, fetchMedicines } from "../../services/medicineService";
 import { scanMedicine } from "../../services/ocrService";
@@ -13,6 +14,7 @@ import { registerMedicationNotifications, sendTestNotification } from "../../ser
 import {
     fetchPatientSchedule,
     markMedicineAsTaken,
+    deletePatientSchedule,
     fetchMedicationHistory,
 } from "../../services/patientScheduleService";
 
@@ -80,6 +82,8 @@ const cameraStreamRef = useRef(null);
     const [scheduleError, setScheduleError] = useState("");
     const [historyError, setHistoryError] = useState("");
     const [takingMedicineId, setTakingMedicineId] = useState(null);
+    const [deletingMedicineId, setDeletingMedicineId] = useState(null);
+    const [schedulePendingDeletion, setSchedulePendingDeletion] = useState(null);
     const [accessRequests, setAccessRequests] = useState([]);
     const [accessRequestError, setAccessRequestError] = useState("");
     const [notificationStatus, setNotificationStatus] = useState("");
@@ -541,13 +545,6 @@ console.log(response);
 console.log("============================================");
 
 setVoiceResult(response);
-
-            if (response.response_text && "speechSynthesis" in window) {
-                window.speechSynthesis.cancel();
-                const spokenResponse = new SpeechSynthesisUtterance(response.response_text);
-                spokenResponse.lang = response.response_language === "en" ? "en-IN" : "kn-IN";
-                window.speechSynthesis.speak(spokenResponse);
-            }
         } catch (error) {
             console.error(error);
 
@@ -586,6 +583,7 @@ setVoiceResult(response);
             setHistory(
                 historyResponse.history || []
             );
+
         } catch (error) {
             console.error(error);
 
@@ -657,6 +655,34 @@ setVoiceResult(response);
             );
         } finally {
             setTakingMedicineId(null);
+        }
+    };
+
+    const confirmDeleteMedicine = async () => {
+        if (!schedulePendingDeletion) {
+            return;
+        }
+
+        const schedule = schedulePendingDeletion;
+        try {
+            setDeletingMedicineId(schedule.schedule_id);
+            setScheduleError("");
+
+            await deletePatientSchedule(schedule.schedule_id);
+            setSchedules((currentSchedules) =>
+                currentSchedules.filter(
+                    (item) => item.schedule_id !== schedule.schedule_id
+                )
+            );
+            setSchedulePendingDeletion(null);
+        } catch (error) {
+            console.error(error);
+            setScheduleError(
+                error?.response?.data?.detail ||
+                "Unable to remove this medicine from your schedule."
+            );
+        } finally {
+            setDeletingMedicineId(null);
         }
     };
 
@@ -1196,9 +1222,15 @@ const voiceMedicine =
                                 <div className="patient-result">
 
                                     {voiceResult.response_text && (
-                                        <p className="patient-voice-response">
-                                            {voiceResult.response_text}
-                                        </p>
+                                        <>
+                                            <p className="patient-voice-response">
+                                                {voiceResult.response_text}
+                                            </p>
+                                            <VoicePlayback
+                                                text={voiceResult.response_text}
+                                                language={voiceResult.response_language || lang}
+                                            />
+                                        </>
                                     )}
 
                                     {voiceResult.detected_medicine && (
@@ -1429,27 +1461,50 @@ const voiceMedicine =
 
                                                 </div>
 
-                                                {schedule.status !==
-                                                    "taken" && (
+                                                <div className="patient-schedule-actions">
+                                                    {schedule.status !==
+                                                        "taken" && (
+                                                        <button
+                                                            type="button"
+                                                            className="patient-taken-button"
+                                                            onClick={() =>
+                                                                handleMarkAsTaken(
+                                                                    schedule.schedule_id
+                                                                )
+                                                            }
+                                                            disabled={
+                                                                takingMedicineId ===
+                                                                    schedule.schedule_id ||
+                                                                deletingMedicineId ===
+                                                                    schedule.schedule_id
+                                                            }
+                                                        >
+                                                            {takingMedicineId ===
+                                                            schedule.schedule_id
+                                                                ? "Saving..."
+                                                                : "✓ Mark as Taken"}
+                                                        </button>
+                                                    )}
+
                                                     <button
                                                         type="button"
-                                                        className="patient-taken-button"
+                                                        className="patient-delete-button"
                                                         onClick={() =>
-                                                            handleMarkAsTaken(
-                                                                schedule.schedule_id
-                                                            )
+                                                            setSchedulePendingDeletion(schedule)
                                                         }
                                                         disabled={
                                                             takingMedicineId ===
-                                                            schedule.schedule_id
+                                                                schedule.schedule_id ||
+                                                            deletingMedicineId ===
+                                                                schedule.schedule_id
                                                         }
                                                     >
-                                                        {takingMedicineId ===
+                                                        {deletingMedicineId ===
                                                         schedule.schedule_id
-                                                            ? "Saving..."
-                                                            : "✓ Mark as Taken"}
+                                                            ? "Removing..."
+                                                            : "Delete medicine"}
                                                     </button>
-                                                )}
+                                                </div>
 
                                                 {schedule.status ===
                                                     "taken" && (
@@ -1562,6 +1617,54 @@ const voiceMedicine =
 
                 </div>
             </section>
+
+            {schedulePendingDeletion && (
+                <div
+                    className="medicine-delete-modal-backdrop"
+                    role="presentation"
+                    onMouseDown={(event) => {
+                        if (event.target === event.currentTarget && !deletingMedicineId) {
+                            setSchedulePendingDeletion(null);
+                        }
+                    }}
+                >
+                    <section
+                        className="medicine-delete-modal"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="delete-medicine-title"
+                        aria-describedby="delete-medicine-description"
+                    >
+                        <div className="medicine-delete-modal__icon" aria-hidden="true">
+                            🗑
+                        </div>
+                        <p className="medicine-delete-modal__eyebrow">Medication schedule</p>
+                        <h2 id="delete-medicine-title">Remove medicine?</h2>
+                        <p id="delete-medicine-description">
+                            Remove <strong>{schedulePendingDeletion.medicine_name}</strong> from your active schedule?
+                            Its reminders will stop, but your medication history will stay available.
+                        </p>
+                        <div className="medicine-delete-modal__actions">
+                            <button
+                                type="button"
+                                className="medicine-delete-modal__cancel"
+                                onClick={() => setSchedulePendingDeletion(null)}
+                                disabled={Boolean(deletingMedicineId)}
+                            >
+                                Keep medicine
+                            </button>
+                            <button
+                                type="button"
+                                className="medicine-delete-modal__confirm"
+                                onClick={confirmDeleteMedicine}
+                                disabled={Boolean(deletingMedicineId)}
+                            >
+                                {deletingMedicineId ? "Removing..." : "Remove medicine"}
+                            </button>
+                        </div>
+                    </section>
+                </div>
+            )}
         </div>
     );
 }

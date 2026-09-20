@@ -10,7 +10,7 @@ function LanguageSelector({ selectedLanguage, onLanguageChange }) {
   const languages = [
     { code: "en", name: "English", nativeName: "English" },
     { code: "kn", name: "Kannada", nativeName: "ಕನ್ನಡ" },
-    { code: "te", name: "Tulu", nativeName: "ತುಳು" }
+    { code: "tulu", name: "Tulu", nativeName: "ತುಳು" }
   ];
 
   const handleSelect = (langCode) => {

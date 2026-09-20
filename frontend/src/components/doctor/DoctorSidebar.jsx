@@ -36,16 +36,6 @@ function DoctorSidebar() {
             label: "Patient Drug Lists",
             icon: "👤",
         },
-        {
-            path: "/doctor-history",
-            label: "Analysis History",
-            icon: "📋",
-        },
-        {
-            path: "/doctor-settings",
-            label: "Settings",
-            icon: "⚙",
-        },
     ];
 
     return (

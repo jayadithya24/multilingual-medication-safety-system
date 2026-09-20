@@ -169,6 +169,35 @@ async def get_my_medication_schedule(
 
 
 # ============================================================
+# GET REMOVED MEDICATION SCHEDULES
+# ============================================================
+
+@router.get("/removed")
+async def get_removed_medication_schedules(
+    current_user: User = Depends(get_current_active_user)
+):
+    if current_user.role != "patient":
+        raise HTTPException(
+            status_code=403,
+            detail="Only patients can access removed medication schedules."
+        )
+
+    schedules = list(
+        patient_schedules_collection.find(
+            {
+                "patient_username": current_user.username,
+                "status": "inactive",
+            }
+        ).sort("deleted_at", -1)
+    )
+
+    for schedule in schedules:
+        schedule.pop("_id", None)
+
+    return {"status": "success", "schedules": schedules}
+
+
+# ============================================================
 # DELETE MEDICATION SCHEDULE
 # ============================================================
 
@@ -186,14 +215,19 @@ async def delete_medication_schedule(
             detail="Only patients can delete medication schedules."
         )
 
+    deleted_at = datetime.now(timezone.utc)
     result = patient_schedules_collection.update_one(
         {
             "schedule_id": schedule_id,
-            "patient_username": current_user.username
+            "patient_username": current_user.username,
+            "status": "active",
         },
         {
             "$set": {
-                "status": "inactive"
+                "status": "inactive",
+                "is_active": False,
+                "reminder_enabled": False,
+                "deleted_at": deleted_at,
             }
         }
     )
@@ -205,9 +239,18 @@ async def delete_medication_schedule(
             detail="Medication schedule not found."
         )
 
+    removed_schedule = patient_schedules_collection.find_one(
+        {
+            "schedule_id": schedule_id,
+            "patient_username": current_user.username,
+        },
+        {"_id": 0},
+    )
+
     return {
         "status": "success",
-        "message": "Medication removed from schedule."
+        "message": "Medication removed from schedule.",
+        "schedule": removed_schedule,
     }
 
 

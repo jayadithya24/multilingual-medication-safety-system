@@ -199,34 +199,6 @@ function DoctorDashboard() {
 </Link>
 
 
-{/* Analysis History */}
-<Link
-     to="/analysis-history"
-    className="doctor-tool"
->
-    <div className="doctor-tool__icon">
-        📋
-    </div>
-
-    <div className="doctor-tool__content">
-        <span className="doctor-tool__label">
-            HISTORY
-        </span>
-
-        <h3>
-            Analysis History
-        </h3>
-
-        <p>
-            Review previously recorded medication intake
-            and patient medication activity.
-        </p>
-    </div>
-
-    <span className="doctor-tool__arrow">
-        →
-    </span>
-</Link>
                 </div>
 
             </section>

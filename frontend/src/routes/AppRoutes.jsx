@@ -19,8 +19,6 @@ import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
 import RequireRole from "../components/RequireRole/RequireRole";
 import DiseaseProtocols from "../pages/DiseaseProtocols/DiseaseProtocols";
 import PatientDrugLists from "../pages/PatientDrugLists/PatientDrugLists";
-import AnalysisHistory from "../pages/AnalysisHistory/AnalysisHistory";
-import Settings from "../pages/Settings/Settings";
 import KnowledgeGraph from "../pages/KnowledgeGraph/KnowledgeGraph";
 import PatientProfile from "../pages/PatientProfile/PatientProfile";
 import Prescription from "../pages/Prescription/Prescription";
@@ -140,15 +138,6 @@ function AppRoutes() {
             element={<PatientDrugLists />}
         />
 
-        {/* Analysis History */}
-        <Route
-           path="analysis-history"
-            element={<AnalysisHistory />}
-        />
-        <Route
-    path="doctor-settings"
-    element={<Settings />}
-/>
 <Route
     path="knowledge-graph"
     element={<KnowledgeGraph />}

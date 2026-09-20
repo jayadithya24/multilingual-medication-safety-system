@@ -382,7 +382,6 @@
 
 .patient-taken-button {
     width: 100%;
-    margin-top: 16px;
     min-height: 46px;
     border: none;
     border-radius: 12px;
@@ -648,4 +647,146 @@
     width: 100%;
     text-align: left;
     font-family: inherit;
+}
+
+.patient-schedule-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.patient-delete-button {
+    min-height: 46px;
+    padding: 0 18px;
+    border: 1px solid #fecaca;
+    border-radius: 12px;
+    background: #fff1f2;
+    color: #b91c1c;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.patient-delete-button:hover:not(:disabled) {
+    background: #fee2e2;
+}
+
+.patient-delete-button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.medicine-delete-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(15, 23, 42, 0.58);
+    backdrop-filter: blur(5px);
+}
+
+.medicine-delete-modal {
+    width: min(440px, 100%);
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 24px;
+    background: #ffffff;
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.3);
+    animation: medicine-delete-modal-enter 180ms ease-out;
+}
+
+.medicine-delete-modal__icon {
+    display: grid;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 18px;
+    place-items: center;
+    border-radius: 16px;
+    background: #fff1f2;
+    font-size: 24px;
+}
+
+.medicine-delete-modal__eyebrow {
+    margin: 0 0 6px;
+    color: #be123c;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.medicine-delete-modal h2 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 1.55rem;
+}
+
+.medicine-delete-modal > p:not(.medicine-delete-modal__eyebrow) {
+    margin: 12px 0 0;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.medicine-delete-modal__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 26px;
+}
+
+.medicine-delete-modal__actions button {
+    min-height: 44px;
+    padding: 0 17px;
+    border-radius: 11px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.medicine-delete-modal__cancel {
+    border: 1px solid #dbe3ef;
+    background: #ffffff;
+    color: #334155;
+}
+
+.medicine-delete-modal__confirm {
+    border: 1px solid #be123c;
+    background: #e11d48;
+    color: #ffffff;
+    box-shadow: 0 8px 18px rgba(225, 29, 72, 0.22);
+}
+
+.medicine-delete-modal__confirm:hover:not(:disabled) {
+    background: #be123c;
+}
+
+.medicine-delete-modal__actions button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+@keyframes medicine-delete-modal-enter {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 480px) {
+    .medicine-delete-modal {
+        padding: 24px;
+    }
+
+    .medicine-delete-modal__actions {
+        flex-direction: column-reverse;
+    }
+
+    .medicine-delete-modal__actions button {
+        width: 100%;
+    }
 }

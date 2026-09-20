@@ -1,4 +1,5 @@
-from datetime import timedelta
+from datetime import datetime, timedelta, timezone
+from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from backend.app.database import users_collection
@@ -22,6 +23,14 @@ class RegisterRequest(BaseModel):
     email: str = Field(..., min_length=3)
     password: str = Field(..., min_length=4)
     confirm_password: str = Field(..., min_length=4)
+
+
+class DoctorRegisterRequest(RegisterRequest):
+    doctor_id: str = Field(..., min_length=2)
+    specialization: str = Field(..., min_length=2)
+    license_number: str = Field(..., min_length=2)
+    phone: Optional[str] = None
+    hospital: Optional[str] = None
 
 
 @router.post("/token", response_model=Token)
@@ -108,6 +117,43 @@ async def register_patient(payload: RegisterRequest):
         "token_type": "bearer",
         "role": "patient"
     }
+
+
+@router.post("/register-doctor", response_model=Token)
+async def register_doctor(payload: DoctorRegisterRequest):
+    """Create a doctor account and profile in MongoDB."""
+    if payload.password != payload.confirm_password:
+        raise HTTPException(status_code=400, detail="Passwords do not match")
+
+    username = payload.email.strip().lower()
+    doctor_id = payload.doctor_id.strip().upper()
+
+    if users_collection.find_one({"username": username}):
+        raise HTTPException(status_code=400, detail="User already exists")
+    if users_collection.find_one({"doctor_id": doctor_id}):
+        raise HTTPException(status_code=400, detail="Doctor ID already exists")
+
+    doctor_document = {
+        "username": username,
+        "full_name": payload.name.strip(),
+        "email": username,
+        "role": "doctor",
+        "hashed_password": get_password_hash(payload.password),
+        "doctor_id": doctor_id,
+        "specialization": payload.specialization.strip(),
+        "license_number": payload.license_number.strip(),
+        "phone": payload.phone.strip() if payload.phone else None,
+        "hospital": payload.hospital.strip() if payload.hospital else None,
+        "disabled": False,
+        "created_at": datetime.now(timezone.utc),
+    }
+    users_collection.insert_one(doctor_document)
+
+    access_token = create_access_token(
+        data={"sub": username, "role": "doctor"},
+        expires_delta=timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES),
+    )
+    return {"access_token": access_token, "token_type": "bearer", "role": "doctor"}
 @router.get("/me", response_model=User)
 async def read_users_me(current_user: User = Depends(get_current_active_user)):
     return current_user

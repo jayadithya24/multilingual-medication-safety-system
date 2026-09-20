@@ -12,6 +12,7 @@ mongomock
 paddleocr>=3.3.0
 paddlepaddle>=3.2.0
 SpeechRecognition
+gTTS
 openai-whisper
 imageio-ffmpeg
 numpy
