@@ -24,7 +24,7 @@ The [team setup guide](PATIENT_DASHBOARD_TEAM_SETUP.md) covers local credentials
 | Voice | Real upload and automatic recording search passed in English, Kannada and Tulu using the English Metformin audio fixture. Playback was invoked; pronunciation was not assessed by a native speaker. |
 | Frontend validation | Production build and lint passed. Initial JavaScript reduced from 636.39 KB to 426.45 KB before compression; graph/doctor features load separately. |
 
-The backend suite contains 70 tests plus 9 subtests, including the Mongo loader and Mongo integration tests. Existing dependency deprecation warnings remain (FastAPI lifecycle hooks, Starlette/httpx, Python audio modules and Firebase token naming); they are not hidden.
+The backend suite contains 71 tests plus 9 subtests, including the Mongo loader and Mongo integration tests. Existing dependency deprecation warnings remain (FastAPI lifecycle hooks, Starlette/httpx, Python audio modules and Firebase token naming); they are not hidden.
 
 ## Local timing samples
 

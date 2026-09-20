@@ -593,13 +593,13 @@ def get_drugs_for_disease(disease_name: str) -> List[Dict[str, Any]]:
 
     return [
         {
-            "drug_id": row.get("drug_id"),
+            "drug_id": row.get("drug_id") or row.get("drug_name"),
             "drug_name": row.get("drug_name"),
             "generic_name": row.get("generic_name"),
             "drug_class": row.get("drug_class"),
-            "description_en": row.get("description_en"),
-            "warnings_en": row.get("warnings_en"),
-            "contraindications_en": row.get("contraindications_en"),
+            "description_en": row.get("description_en") or row.get("description", ""),
+            "warnings_en": row.get("warnings_en") or row.get("warnings", ""),
+            "contraindications_en": row.get("contraindications_en") or row.get("contraindications", ""),
         }
         for _, row in matches.sort_values("drug_name").iterrows()
     ]
