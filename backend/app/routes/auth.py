@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
-from backend.app.database import users_collection
+from backend.app.database import doctor_requests_collection, users_collection
 from backend.app.auth import (
     authenticate_user,
     create_access_token,
@@ -14,6 +14,7 @@ from backend.app.auth import (
     Token,
 )
 from pydantic import BaseModel, Field
+from pymongo.errors import DuplicateKeyError
 
 router = APIRouter(prefix="/auth", tags=["authentication"])
 
@@ -28,9 +29,43 @@ class RegisterRequest(BaseModel):
 class DoctorRegisterRequest(RegisterRequest):
     doctor_id: str = Field(..., min_length=2)
     specialization: str = Field(..., min_length=2)
-    license_number: str = Field(..., min_length=2)
     phone: Optional[str] = None
     hospital: Optional[str] = None
+
+
+def create_doctor_request(payload: DoctorRegisterRequest) -> dict:
+    if payload.password != payload.confirm_password:
+        raise HTTPException(status_code=400, detail="Passwords do not match")
+
+    username = payload.email.strip().lower()
+    registration_number = payload.doctor_id.strip()
+
+    if users_collection.find_one({"username": username}):
+        raise HTTPException(status_code=409, detail="An account already exists for this email.")
+    if users_collection.find_one({"license_number": registration_number}):
+        raise HTTPException(status_code=409, detail="A doctor account already uses this registration number.")
+    if doctor_requests_collection.find_one({"email": username, "status": "pending"}):
+        raise HTTPException(status_code=409, detail="A doctor request is already pending for this email.")
+    if doctor_requests_collection.find_one({"medical_registration_no": registration_number, "status": "pending"}):
+        raise HTTPException(status_code=409, detail="A doctor request is already pending for this registration number.")
+
+    request = {
+        "request_id": f"DRQ-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S%f')}",
+        "full_name": payload.name.strip(),
+        "email": username,
+        "phone": payload.phone.strip() if payload.phone else None,
+        "medical_registration_no": registration_number,
+        "specialization": payload.specialization.strip(),
+        "hospital": payload.hospital.strip() if payload.hospital else None,
+        "hashed_password": get_password_hash(payload.password),
+        "status": "pending",
+        "created_at": datetime.now(timezone.utc),
+    }
+    try:
+        doctor_requests_collection.insert_one(request)
+    except DuplicateKeyError:
+        raise HTTPException(status_code=409, detail="A doctor request is already pending.")
+    return {"status": "pending", "request_id": request["request_id"]}
 
 
 @router.post("/token", response_model=Token)
@@ -119,41 +154,11 @@ async def register_patient(payload: RegisterRequest):
     }
 
 
-@router.post("/register-doctor", response_model=Token)
+@router.post("/doctor-request")
+@router.post("/register-doctor")
 async def register_doctor(payload: DoctorRegisterRequest):
-    """Create a doctor account and profile in MongoDB."""
-    if payload.password != payload.confirm_password:
-        raise HTTPException(status_code=400, detail="Passwords do not match")
-
-    username = payload.email.strip().lower()
-    doctor_id = payload.doctor_id.strip().upper()
-
-    if users_collection.find_one({"username": username}):
-        raise HTTPException(status_code=400, detail="User already exists")
-    if users_collection.find_one({"doctor_id": doctor_id}):
-        raise HTTPException(status_code=400, detail="Doctor ID already exists")
-
-    doctor_document = {
-        "username": username,
-        "full_name": payload.name.strip(),
-        "email": username,
-        "role": "doctor",
-        "hashed_password": get_password_hash(payload.password),
-        "doctor_id": doctor_id,
-        "specialization": payload.specialization.strip(),
-        "license_number": payload.license_number.strip(),
-        "phone": payload.phone.strip() if payload.phone else None,
-        "hospital": payload.hospital.strip() if payload.hospital else None,
-        "disabled": False,
-        "created_at": datetime.now(timezone.utc),
-    }
-    users_collection.insert_one(doctor_document)
-
-    access_token = create_access_token(
-        data={"sub": username, "role": "doctor"},
-        expires_delta=timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES),
-    )
-    return {"access_token": access_token, "token_type": "bearer", "role": "doctor"}
+    """Submit a doctor account for administrator approval."""
+    return create_doctor_request(payload)
 @router.get("/me", response_model=User)
 async def read_users_me(current_user: User = Depends(get_current_active_user)):
     return current_user
