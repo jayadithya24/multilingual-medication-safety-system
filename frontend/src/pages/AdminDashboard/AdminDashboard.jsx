@@ -55,52 +55,206 @@ function AdminDashboard() {
     navigate("/admin", { replace: true });
   };
 
+  const pendingCount = requests.length;
+  const refreshClassName = loading
+    ? "admin-dashboard__refresh is-spinning"
+    : "admin-dashboard__refresh";
+
   return (
     <main className="admin-dashboard">
-      <section className="admin-dashboard__hero">
-        <div>
-          <p className="admin-dashboard__eyebrow">Operations / Admin</p>
-          <h1>Administration workspace</h1>
-          <p className="admin-dashboard__intro">Review access requests and keep the MMSS clinical network ready for verified professionals.</p>
-        </div>
-        <button className="admin-dashboard__refresh" onClick={loadRequests} disabled={loading}>
-          <span aria-hidden="true">↻</span> {loading ? "Refreshing" : "Refresh"}
-        </button>
-      </section>
+      <div className="admin-dashboard__shell">
+        <section className="admin-dashboard__hero">
+          <div className="admin-dashboard__hero-copy">
+            <p className="admin-dashboard__eyebrow">MMSS Administration</p>
+            <h1>Admin Dashboard</h1>
+            <p className="admin-dashboard__intro">
+              Review doctor account requests, monitor platform health, and keep the MMSS clinical network ready for verified professionals.
+            </p>
+          </div>
+          <div className="admin-dashboard__toolbar">
+            <button
+              type="button"
+              className={refreshClassName}
+              onClick={loadRequests}
+              disabled={loading}
+            >
+              <span className="admin-dashboard__refresh-icon" aria-hidden="true">↻</span>
+              {loading ? "Refreshing…" : "Refresh"}
+            </button>
+            <button type="button" className="admin-dashboard__sign-out" onClick={handleLogout}>
+              Sign out
+            </button>
+          </div>
+        </section>
 
-      <section className="admin-dashboard__summary" aria-label="Dashboard summary">
-        <div className="admin-stat admin-stat--accent"><span className="admin-stat__label">Pending review</span><strong>{requests.length}</strong><span className="admin-stat__hint">Doctor account requests</span></div>
-        <div className="admin-stat"><span className="admin-stat__label">Access policy</span><strong>Manual</strong><span className="admin-stat__hint">Approval required before login</span></div>
-        <div className="admin-stat"><span className="admin-stat__label">System status</span><strong className="admin-stat__online"><i /> Operational</strong><span className="admin-stat__hint">Authentication services active</span></div>
-      </section>
+        <section className="admin-dashboard__summary" aria-label="Dashboard summary">
+          <div className="admin-stat admin-stat--accent">
+            <span className="admin-stat__label">Pending Doctor Requests</span>
+            <strong>{pendingCount}</strong>
+            <span className="admin-stat__hint">Awaiting administrator review</span>
+          </div>
+          <div className="admin-stat">
+            <span className="admin-stat__label">Approved Doctors</span>
+            <strong className="admin-stat__muted" title="User directory metrics are not exposed by the current API">—</strong>
+            <span className="admin-stat__hint">Verified doctor portal accounts</span>
+          </div>
+          <div className="admin-stat">
+            <span className="admin-stat__label">Total Patients</span>
+            <strong className="admin-stat__muted" title="User directory metrics are not exposed by the current API">—</strong>
+            <span className="admin-stat__hint">Registered patient portal users</span>
+          </div>
+          <div className="admin-stat admin-stat--status">
+            <span className="admin-stat__label">System Status</span>
+            <strong className="admin-stat__online">
+              <i aria-hidden="true" />
+              Operational
+            </strong>
+            <span className="admin-stat__hint">Authentication and API services active</span>
+          </div>
+        </section>
 
-      <section className="admin-panel">
-        <div className="admin-panel__header">
-          <div><p className="admin-panel__eyebrow">Verification queue</p><h2>Doctor Requests</h2><p>Review professional details before granting Doctor Portal access.</p></div>
-          <span className="admin-panel__count">{requests.length} pending</span>
-        </div>
-        <div className="admin-panel__body">
-          {loading && <p>Loading requests...</p>}
-          {!loading && requests.length === 0 && <div className="admin-empty"><span aria-hidden="true">✓</span><strong>Queue is clear</strong><p>No pending doctor requests require attention.</p></div>}
-          {requests.map((request) => (
-            <article className="doctor-request" key={request.request_id}>
-              <div className="doctor-request__identity"><div className="doctor-request__avatar">{request.full_name?.charAt(0).toUpperCase()}</div><div><h3>{request.full_name}</h3><p>{request.email}</p></div></div>
-              <div className="doctor-request__details">
-                <span><b>Specialization</b>{request.specialization}</span>
-                <span><b>Registration</b>{request.medical_registration_no}</span>
-                <span><b>Hospital / Clinic</b>{request.hospital || "Not provided"}</span>
+        <section className="admin-panel" aria-labelledby="admin-doctor-requests-heading">
+          <div className="admin-panel__header">
+            <div>
+              <p className="admin-panel__eyebrow">Verification queue</p>
+              <h2 id="admin-doctor-requests-heading">Doctor Account Requests</h2>
+              <p>Review professional credentials before granting access to the Doctor Portal.</p>
+            </div>
+            <span className="admin-panel__count">{pendingCount} pending</span>
+          </div>
+
+          <div className="admin-panel__body">
+            {loading && <p className="admin-panel__loading">Loading doctor requests…</p>}
+
+            {!loading && requests.length === 0 && (
+              <div className="admin-empty">
+                <span aria-hidden="true">✓</span>
+                <strong>Queue is clear</strong>
+                <p>No pending doctor requests require attention right now.</p>
               </div>
-              <div className="doctor-request__actions">
-                <button onClick={() => decideRequest(request.request_id, "approve")}>Approve</button>
-                <button onClick={() => decideRequest(request.request_id, "reject")}>Reject</button>
-              </div>
-            </article>
-          ))}
-          {error && <div className="portal-auth-error">{error}</div>}
-        </div>
-      </section>
+            )}
 
-      <footer className="admin-dashboard__footer"><span>MMSS Administration</span><button onClick={handleLogout}>Sign out</button></footer>
+            {!loading && requests.length > 0 && (
+              <>
+                <div className="admin-requests-table-wrap">
+                  <table className="admin-requests-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Medical Registration No.</th>
+                        <th scope="col">Specialization</th>
+                        <th scope="col">Hospital / Clinic</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {requests.map((request) => (
+                        <tr key={request.request_id}>
+                          <td>
+                            <div className="admin-requests-table__name">
+                              <div className="doctor-request__avatar" aria-hidden="true">
+                                {request.full_name?.charAt(0).toUpperCase()}
+                              </div>
+                              <div>
+                                <h3>{request.full_name}</h3>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="admin-requests-table__cell-muted">{request.email}</td>
+                          <td>{request.medical_registration_no}</td>
+                          <td>{request.specialization}</td>
+                          <td>{request.hospital || "Not provided"}</td>
+                          <td>
+                            <span className="admin-status-badge">
+                              {request.status || "pending"}
+                            </span>
+                          </td>
+                          <td>
+                            <div className="admin-requests-table__actions">
+                              <button
+                                type="button"
+                                className="admin-btn admin-btn--approve"
+                                onClick={() => decideRequest(request.request_id, "approve")}
+                              >
+                                Approve
+                              </button>
+                              <button
+                                type="button"
+                                className="admin-btn admin-btn--reject"
+                                onClick={() => decideRequest(request.request_id, "reject")}
+                              >
+                                Reject
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                <div className="admin-requests-cards" aria-label="Doctor account requests">
+                  {requests.map((request) => (
+                    <article className="doctor-request" key={`card-${request.request_id}`}>
+                      <div className="doctor-request__identity">
+                        <div className="doctor-request__avatar" aria-hidden="true">
+                          {request.full_name?.charAt(0).toUpperCase()}
+                        </div>
+                        <div>
+                          <h3>{request.full_name}</h3>
+                          <p>{request.email}</p>
+                        </div>
+                      </div>
+                      <div className="doctor-request__details">
+                        <span>
+                          <b>Medical Registration No.</b>
+                          {request.medical_registration_no}
+                        </span>
+                        <span>
+                          <b>Specialization</b>
+                          {request.specialization}
+                        </span>
+                        <span>
+                          <b>Hospital / Clinic</b>
+                          {request.hospital || "Not provided"}
+                        </span>
+                        <span>
+                          <b>Status</b>
+                          <span className="admin-status-badge">{request.status || "pending"}</span>
+                        </span>
+                      </div>
+                      <div className="doctor-request__actions">
+                        <button
+                          type="button"
+                          className="admin-btn admin-btn--approve"
+                          onClick={() => decideRequest(request.request_id, "approve")}
+                        >
+                          Approve
+                        </button>
+                        <button
+                          type="button"
+                          className="admin-btn admin-btn--reject"
+                          onClick={() => decideRequest(request.request_id, "reject")}
+                        >
+                          Reject
+                        </button>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </>
+            )}
+
+            {error && <div className="portal-auth-error">{error}</div>}
+          </div>
+        </section>
+
+        <footer className="admin-dashboard__footer">
+          <span>MMSS Administration · Secure access management</span>
+        </footer>
+      </div>
     </main>
   );
 }
