@@ -1,7 +1,6 @@
 [
   {
     "disease": "Type 2 Diabetes",
-    "lastReviewed": "March 2026",
     "sources": [
       {
         "title": "Knowledge-driven drug repurposing using a comprehensive drug knowledge graph",
@@ -16,14 +15,13 @@
         "authors": "Nicholas P. Tatonetti, Patrick P. Ye, Roxana Daneshjou, Russ B. Altman",
         "year": 2012,
         "journal": "Science Translational Medicine",
-        "summary": "Tatonetti and colleagues mine observational data to flag drug–drug interaction effects at population scale. That work underpins why this project checks type 2 diabetes medicines against interacting outpatient drugs.",
+        "summary": "Tatonetti and colleagues show that combining medicines can produce effects that are easy to miss if each drug is reviewed alone. MMSS does not use their reporting-data signal method; our pairs are curated. The paper is cited because it supports checking type 2 diabetes medicines for interactions.",
         "url": "https://doi.org/10.1126/scitranslmed.3003377"
       }
     ]
   },
   {
     "disease": "Hypertension",
-    "lastReviewed": "March 2026",
     "sources": [
       {
         "title": "Cardiovascular diseases in India: current epidemiology and future directions",
@@ -38,14 +36,13 @@
         "authors": "Nicholas P. Tatonetti, Patrick P. Ye, Roxana Daneshjou, Russ B. Altman",
         "year": 2012,
         "journal": "Science Translational Medicine",
-        "summary": "This paper’s interaction-signal methods are the literature basis for checking blood-pressure medicines against interacting analgesics and other co-prescribed drugs.",
+        "summary": "Tatonetti and colleagues document that co-prescribed drugs can interact in ways a single-drug review will not catch. MMSS does not replicate their signal-detection pipeline; hypertension interaction checks use curated pairs. The paper is cited to explain why those checks matter.",
         "url": "https://doi.org/10.1126/scitranslmed.3003377"
       }
     ]
   },
   {
     "disease": "Arthritis",
-    "lastReviewed": "March 2026",
     "sources": [
       {
         "title": "Clinical profile of rheumatoid arthritis patients reporting to a tertiary care center – data from southwestern part of India",
@@ -60,7 +57,7 @@
         "authors": "Nicholas P. Tatonetti, Patrick P. Ye, Roxana Daneshjou, Russ B. Altman",
         "year": 2012,
         "journal": "Science Translational Medicine",
-        "summary": "The Twosides-style interaction evidence in this paper is why arthritis medicines such as methotrexate and NSAIDs are checked as interacting pairs rather than reviewed in isolation.",
+        "summary": "Tatonetti and colleagues show why combinations such as methotrexate and NSAIDs should be checked together, not only as separate medicines. MMSS does not use their Twosides/Offsides detection method; arthritis interactions are curated pairs. The paper supports the need for that check.",
         "url": "https://doi.org/10.1126/scitranslmed.3003377"
       }
     ]

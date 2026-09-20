@@ -192,12 +192,6 @@ function DiseaseProtocols() {
                 </div>
             )}
 
-            {selectedDisease && activeTab === "insights" && clinicalEntry?.lastReviewed && (
-                <p className="clinical-reviewed">
-                    Clinical references reviewed: {clinicalEntry.lastReviewed}.
-                </p>
-            )}
-
             {selectedDisease && (
                 <>
                     <DiseaseProtocolSummary
