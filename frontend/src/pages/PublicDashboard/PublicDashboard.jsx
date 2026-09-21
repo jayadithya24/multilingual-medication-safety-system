@@ -941,6 +941,8 @@ function PublicDashboard() {
                             </button>
                         </div>
                     </section>
+                </div>
+            )}
             {showReportModal && (
                 <PatientReportGeneratorModal
                     doctorName="Dr. Smith"
