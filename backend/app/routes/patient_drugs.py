@@ -20,8 +20,10 @@ router = APIRouter(
 
 
 def require_doctor(current_user):
-    # Allowed during development testing
-    pass
+    if not current_user or not getattr(current_user, "role", None):
+        raise HTTPException(status_code=401, detail="Authentication required.")
+    if current_user.role != "doctor":
+        raise HTTPException(status_code=403, detail="Only doctor accounts can access this endpoint.")
 
 
 @router.get("/patients")

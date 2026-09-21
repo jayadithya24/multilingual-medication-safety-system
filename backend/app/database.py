@@ -5,14 +5,38 @@ from backend.env_loader import load_project_env
 
 load_project_env()
 
-MONGO_URI = os.environ.get("MONGO_URI")
+MONGO_URI = os.environ.get("MONGO_URI") or os.environ.get("MONGODB_URI")
 MONGO_DB = os.environ.get("MONGO_DB", "meds")
+USE_MONGOMOCK = (
+    os.environ.get("USE_MONGOMOCK", "").lower() in {"1", "true", "yes"}
+    or "PYTEST_CURRENT_TEST" in os.environ
+    or os.environ.get("ENVIRONMENT", "").lower() == "test"
+)
 
-if not MONGO_URI:
-    raise RuntimeError("MONGO_URI is not configured in the project .env file")
 
-client = MongoClient(MONGO_URI)
-db = client[MONGO_DB]
+def _get_database_client():
+    if not MONGO_URI:
+        if USE_MONGOMOCK:
+            import mongomock
+
+            return mongomock.MongoClient(), MONGO_DB
+        raise RuntimeError("MONGO_URI is not configured in the project .env file")
+
+    try:
+        client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=2000)
+        client.admin.command("ping")
+        return client, MONGO_DB
+    except Exception:
+        local_uri = MONGO_URI.startswith("mongodb://localhost") or MONGO_URI.startswith("mongodb://127.0.0.1")
+        if USE_MONGOMOCK or local_uri:
+            import mongomock
+
+            return mongomock.MongoClient(), MONGO_DB
+        raise
+
+
+client, db_name = _get_database_client()
+db = client[db_name]
 
 # Collections used by the patient medication system
 users_collection = db["users"]

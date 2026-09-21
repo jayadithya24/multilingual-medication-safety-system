@@ -113,55 +113,56 @@ function AppRoutes() {
                 {/* =====================================
                     DOCTOR ROUTES
                 ===================================== */}
-                {/* Doctor Layout */}
-                <Route element={<DoctorLayout />}>
+                <Route element={<RequireRole allowedRoles={["doctor"]} />}>
+                    <Route element={<DoctorLayout />}>
 
-                    {/* Doctor Dashboard */}
-                    <Route
-                        path="doctor-dashboard"
-                        element={<DoctorDashboard />}
-                    />
+                        {/* Doctor Dashboard */}
+                        <Route
+                            path="doctor-dashboard"
+                            element={<DoctorDashboard />}
+                        />
 
-                    {/* Safety & DDI */}
-                    <Route
-                        path="drug-interaction"
-                        element={<DrugInteraction />}
-                    />
+                        {/* Safety & DDI */}
+                        <Route
+                            path="drug-interaction"
+                            element={<DrugInteraction />}
+                        />
 
-                    {/* Drug Reference */}
-                    <Route
-                        path="drug-reference"
-                        element={<DrugReference />}
-                    />
+                        {/* Drug Reference */}
+                        <Route
+                            path="drug-reference"
+                            element={<DrugReference />}
+                        />
 
-                    {/* Disease Protocols */}
-                    <Route
-                        path="disease-protocols"
-                        element={<DiseaseProtocols />}
-                    />
+                        {/* Disease Protocols */}
+                        <Route
+                            path="disease-protocols"
+                            element={<DiseaseProtocols />}
+                        />
 
-                    {/* Clinical Insights (same disease selector + protocol summary) */}
-                    <Route
-                        path="clinical-insights"
-                        element={<DiseaseProtocols />}
-                    />
+                        {/* Clinical Insights (same disease selector + protocol summary) */}
+                        <Route
+                            path="clinical-insights"
+                            element={<DiseaseProtocols />}
+                        />
 
-                    {/* Patient Drug Lists */}
-                    <Route
-                        path="doctor-patients"
-                        element={<PatientDrugLists />}
-                    />
+                        {/* Patient Drug Lists */}
+                        <Route
+                            path="doctor-patients"
+                            element={<PatientDrugLists />}
+                        />
 
-                    {/* Analysis History */}
-                    <Route
-                        path="analysis-history"
-                        element={<AnalysisHistory />}
-                    />
+                        {/* Analysis History */}
+                        <Route
+                            path="analysis-history"
+                            element={<AnalysisHistory />}
+                        />
 
-                    <Route
-                        path="doctor-settings"
-                        element={<Settings />}
-                    />
+                        <Route
+                            path="doctor-settings"
+                            element={<Settings />}
+                        />
+                    </Route>
                 </Route>
 
 

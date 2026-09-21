@@ -1,6 +1,7 @@
 import os
 import logging
 import asyncio
+from typing import Optional
 
 from fastapi import APIRouter, File, HTTPException, UploadFile, Query
 
@@ -64,7 +65,7 @@ def _question_response(medicine, transcript, lang):
 async def voice_search(
     file: UploadFile = File(...),
     lang: str = Query("auto"),
-    medicine_name: str | None = Query(None),
+    medicine_name: Optional[str] = Query(None),
 ):
     try:
         file_path = save_uploaded_file(file)

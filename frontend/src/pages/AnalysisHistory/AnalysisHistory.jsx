@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import api, { getStoredToken } from "../../services/api";
 import "./AnalysisHistory.css";
 
 function AnalysisHistory() {
@@ -12,29 +13,13 @@ function AnalysisHistory() {
                 setLoading(true);
                 setError("");
 
-                const token =
-    localStorage.getItem("mmss_token") ||
-    localStorage.getItem("token") ||
-    localStorage.getItem("access_token");
-
-                const response = await fetch(
-                    "http://127.0.0.1:8000/doctor/medication-history",
-                    {
-                        method: "GET",
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                            "Content-Type": "application/json",
-                        },
-                    }
-                );
-
-                if (!response.ok) {
-                    throw new Error("Failed to load medication history");
+                const token = getStoredToken();
+                if (!token) {
+                    throw new Error("Doctor authentication required.");
                 }
 
-                const data = await response.json();
-
-                setHistory(data.history || []);
+                const response = await api.get("/doctor/medication-history");
+                setHistory(response.data.history || []);
             } catch (err) {
                 console.error(err);
                 setError("Unable to load medication history.");

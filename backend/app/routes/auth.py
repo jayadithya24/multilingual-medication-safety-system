@@ -25,7 +25,7 @@ router = APIRouter(prefix="/auth", tags=["authentication"])
 class GoogleLoginRequest(BaseModel):
     credential: str = Field(..., min_length=20, max_length=10000)
     mode: Literal["login", "register"] = "login"
-    password: str | None = Field(default=None, max_length=200)
+    password: Optional[str] = Field(default=None, max_length=200)
 
 
 @router.get("/providers")

@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 import pandas as pd
 from neo4j import GraphDatabase
@@ -410,7 +410,7 @@ def _fallback_local_knowledge_graph() -> Dict[str, List[Dict[str, Any]]]:
     seen_nodes = set()
     seen_edges = set()
 
-    def add_node(node_id: Any, name: Any, node_type: str, extra: Dict[str, Any] | None = None) -> None:
+    def add_node(node_id: Any, name: Any, node_type: str, extra: Optional[Dict[str, Any]] = None) -> None:
         if node_id is None or node_id == "" or name is None:
             return
         key = str(node_id).strip()
@@ -429,7 +429,7 @@ def _fallback_local_knowledge_graph() -> Dict[str, List[Dict[str, Any]]]:
         nodes.append(payload)
         seen_nodes.add(key)
 
-    def add_edge(source: Any, target: Any, relationship: str, edge_type: str, extra: Dict[str, Any] | None = None) -> None:
+    def add_edge(source: Any, target: Any, relationship: str, edge_type: str, extra: Optional[Dict[str, Any]] = None) -> None:
         if source is None or target is None:
             return
         source_key = str(source).strip()

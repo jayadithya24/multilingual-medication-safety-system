@@ -1,4 +1,4 @@
-import api from "./api";
+import api, { getStoredToken } from "./api";
 
 export const fetchDiseases = async () => {
     const response = await api.get("/neo4j/diseases");
@@ -32,30 +32,16 @@ export const fetchInteractionGraph = async (
 };
 
 export async function fetchDoctorPatients() {
-    const token =
-        localStorage.getItem("token") ||
-        localStorage.getItem("access_token");
+    const token = getStoredToken();
 
-    const response = await fetch(
-        "http://127.0.0.1:8000/doctor/patients",
-        {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-        }
-    );
-
-    if (!response.ok) {
-        throw new Error("Failed to load doctor patients");
+    if (!token) {
+        throw new Error("Doctor authentication required.");
     }
 
-    return response.json();
-};
+    const response = await api.get("/doctor/patients");
+    return response.data;
+}
 
-
-// ⭐ ADD THIS
 export const fetchKnowledgeGraph = async () => {
     const response = await api.get("/neo4j/graph");
     return response.data;

@@ -20,8 +20,10 @@ class AccessRequestCreate(BaseModel):
 
 
 def require_role(current_user: User, role: str) -> None:
-    # Relaxed for development testing
-    pass
+    if not current_user or not getattr(current_user, "role", None):
+        raise HTTPException(status_code=401, detail="Authentication required.")
+    if current_user.role != role:
+        raise HTTPException(status_code=403, detail=f"Only {role} accounts can access this endpoint.")
 
 
 def public_request(request: dict) -> dict:

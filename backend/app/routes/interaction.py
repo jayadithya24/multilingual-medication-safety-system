@@ -37,12 +37,10 @@ async def check_interaction(
             print(f"Dataset interaction lookup failed: {error}")
 
     if not interaction:
-        interaction = {
-            "drug1": drug1.strip(),
-            "drug2": drug2.strip(),
-            "severity": "Moderate",
-            "description": f"Co-administration of {drug1.strip()} and {drug2.strip()} requires clinical monitoring for potential antihypertensive effect alteration or renal parameter changes.",
-            "recommendation": "Consult physician for dosage adjustment and routine blood pressure/kidney function monitoring.",
+        return {
+            "status": "not_found",
+            "message": f"No interaction record was found for {drug1.strip()} and {drug2.strip()} in the current supported dataset.",
+            "interaction": None,
             "lang": lang,
         }
 
