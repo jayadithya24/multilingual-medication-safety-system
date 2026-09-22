@@ -16,7 +16,7 @@ from backend.app.auth import (
     User,
     Token,
 )
-from pydantic import BaseModel, Field
+from pydantic import AliasChoices, BaseModel, ConfigDict, Field
 from pymongo.errors import DuplicateKeyError
 
 router = APIRouter(prefix="/auth", tags=["authentication"])
@@ -103,10 +103,22 @@ def patient_login(form_data: OAuth2PasswordRequestForm = Depends()):
 
 
 class DoctorRegisterRequest(RegisterRequest):
-    doctor_id: str = Field(..., min_length=2)
+    model_config = ConfigDict(populate_by_name=True)
+
+    doctor_id: str = Field(
+        ...,
+        min_length=2,
+        validation_alias=AliasChoices("doctor_id", "medicalRegistrationNo"),
+    )
     specialization: str = Field(..., min_length=2)
     phone: Optional[str] = None
     hospital: Optional[str] = None
+    confirm_password: str = Field(
+        ...,
+        min_length=8,
+        max_length=72,
+        validation_alias=AliasChoices("confirm_password", "confirmPassword"),
+    )
 
 
 def create_doctor_request(payload: DoctorRegisterRequest) -> dict:

@@ -6,6 +6,15 @@ from neo4j import GraphDatabase
 import os
 
 class Neo4jLoader:
+    @staticmethod
+    def resolve_drug_id(row):
+        """Normalize the drug identifier across dataset variants."""
+        if row.get('drug_id'):
+            return str(row['drug_id']).strip()
+
+        drug_name = row.get('drug_name') or row.get('Drug Name') or ''
+        return str(drug_name).strip().lower().replace(' ', '-')
+
     def __init__(self, uri, user, password):
         self.driver = GraphDatabase.driver(uri, auth=(user, password))
         self.uri = uri
@@ -83,8 +92,9 @@ class Neo4jLoader:
                     source: $source
                 })
                 """
+                drug_id = self.resolve_drug_id(row)
                 session.run(cypher,
-                           drug_id=row['drug_id'],
+                           drug_id=drug_id,
                            drug_name=row['drug_name'],
                            generic_name=row.get('generic_name', ''),
                            drug_class=row.get('drug_class', ''),
@@ -118,7 +128,7 @@ class Neo4jLoader:
                 CREATE (d)-[:TREATS]->(dis)
                 """
                 session.run(cypher,
-                           drug_id=row['drug_id'],
+                           drug_id=self.resolve_drug_id(row),
                            disease_id=row['disease_id'])
 
             print(f"✓ Created {len(df_disease)} TREATS relationships")
@@ -134,7 +144,7 @@ class Neo4jLoader:
                 CREATE (d)-[:HAS_SIDE_EFFECT]->(se)
                 """
                 session.run(cypher,
-                           drug_id=row['drug_id'],
+                           drug_id=self.resolve_drug_id(row),
                            side_effect_name=row['side_effect'])
 
             print(f"✓ Created {len(df_sideeffects)} HAS_SIDE_EFFECT relationships")
@@ -191,7 +201,7 @@ class Neo4jLoader:
                     d.contraindications_kn = $contraindications_kn
                 """
                 session.run(cypher,
-                           drug_id=row['drug_id'],
+                           drug_id=self.resolve_drug_id(row),
                            description_kn=row.get('description_kn', ''),
                            warnings_kn=row.get('warnings_kn', ''),
                            contraindications_kn=row.get('contraindications_kn', ''))
@@ -208,7 +218,7 @@ class Neo4jLoader:
                     d.contraindications_tulu = $contraindications_tulu
                 """
                 session.run(cypher,
-                           drug_id=row['drug_id'],
+                           drug_id=self.resolve_drug_id(row),
                            description_tulu=row.get('description_tulu', ''),
                            warnings_tulu=row.get('warnings_tulu', ''),
                            contraindications_tulu=row.get('contraindications_tulu', ''))

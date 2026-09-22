@@ -155,7 +155,8 @@ activemq-data/
 .venv-*/
 *-firebase-adminsdk-*.json
 credentials/
-app/uploads/
+backend/app/uploads/
+**/uploads/
 .envrc
 .venv
 env/

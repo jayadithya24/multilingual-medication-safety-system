@@ -4,20 +4,20 @@ function StatsSection() {
 
     const stats = [
         {
-            number: "1000+",
+            number: "30",
             title: "Medicines"
         },
         {
-            number: "12+",
+            number: "3",
             title: "Languages"
         },
         {
-            number: "500+",
+            number: "157",
             title: "Drug Interactions"
         },
         {
-            number: "99%",
-            title: "Accuracy"
+            number: "Rule-Based",
+            title: "Safety Monitoring"
         }
     ];
 

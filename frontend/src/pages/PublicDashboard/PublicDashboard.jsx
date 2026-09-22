@@ -8,6 +8,7 @@ import VoicePlayback from "../../components/VoicePlayback";
 import { searchMedicine, fetchMedicines } from "../../services/medicineService";
 import VoiceSearch from "../VoiceSearch/VoiceSearch";
 import api from "../../services/api";
+import { fetchDiseases } from "../../services/neo4jService";
 import { registerMedicationNotifications, sendTestNotification } from "../../services/fcmService";
 import PatientReportGeneratorModal from "../../components/patient/PatientReportGeneratorModal";
 
@@ -160,8 +161,9 @@ function PublicDashboard() {
     };
 
     const handleSearch = async () => {
-        if (!query.trim()) {
-            setTextError("Enter a medicine name first.");
+        const trimmedQuery = query.trim();
+        if (!trimmedQuery) {
+            setTextError("Enter a medicine or disease name first.");
             return;
         }
 
@@ -170,14 +172,33 @@ function PublicDashboard() {
             setTextLoading(true);
             resetTextState();
 
-            const response = await searchMedicine(query.trim(), lang);
+            const [medicineResponse, diseaseResponse] = await Promise.all([
+                searchMedicine(trimmedQuery, lang).catch(() => ({ results: [] })),
+                fetchDiseases().catch(() => ({ diseases: [] })),
+            ]);
+
             if (version !== searchVersion.current) return;
-            setTextResult(response);
+
+            const medicines = Array.isArray(medicineResponse?.results) ? medicineResponse.results : [];
+            const diseaseOptions = Array.isArray(diseaseResponse?.diseases) ? diseaseResponse.diseases : [];
+            const normalizedQuery = trimmedQuery.toLowerCase();
+            const diseases = diseaseOptions.filter(
+                (disease) => typeof disease === "string" && disease.toLowerCase().includes(normalizedQuery)
+            );
+
+            setTextResult({
+                results: medicines,
+                medicines,
+                diseases: diseases.map((disease) => ({
+                    disease_name: disease,
+                    disease_id: String(disease).toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+                })),
+            });
         } catch (error) {
             if (version !== searchVersion.current) return;
             console.error(error);
             setTextError(
-                "Unable to search for that medicine right now."
+                "Unable to search for that medicine or disease right now."
             );
         } finally {
             if (version === searchVersion.current) setTextLoading(false);
@@ -326,8 +347,9 @@ function PublicDashboard() {
     // RESULTS
     // -----------------------------
 
-    const textMedicine = textResult?.results?.[0] ?? null;
-    const firstSentence = (value) => String(value || "").trim().match(/^.*?(?:[.!?।](?=\s|$)|$)/u)?.[0] || "";
+    const textMedicine = textResult?.medicines?.[0] ?? textResult?.results?.[0] ?? null;
+    const diseaseMatches = textResult?.diseases || [];
+    const firstSentence = (value) => String(value || "").trim().match(/^.*?(?:[.!?။](?=\s|$)|$)/u)?.[0] || "";
     const spokenSummary = textMedicine ? [
         textMedicine.drug_name,
         firstSentence(textMedicine.description || textMedicine.disease),
@@ -441,7 +463,7 @@ function PublicDashboard() {
                                             event.target.value
                                         )
                                     }
-                                    placeholder="Type a medicine name"
+                                    placeholder="Search disease or drug"
                                 />
 
                                 <button
@@ -474,9 +496,35 @@ function PublicDashboard() {
                                                 textMedicine
                                             }
                                         />
+                                    ) : diseaseMatches.length > 0 ? (
+                                        <div className="patient-empty">
+                                            No medicine match found, but these disease records match your search:
+                                        </div>
                                     ) : (
                                         <div className="patient-empty">
-                                            Medicine not found.
+                                            No matching medicine or disease found.
+                                        </div>
+                                    )}
+
+                                    {diseaseMatches.length > 0 && (
+                                        <div className="patient-result__diseases" style={{ marginTop: 16 }}>
+                                            {diseaseMatches.map((disease) => (
+                                                <span
+                                                    key={disease.disease_id}
+                                                    style={{
+                                                        display: "inline-block",
+                                                        padding: "6px 10px",
+                                                        margin: "0 8px 8px 0",
+                                                        borderRadius: 999,
+                                                        background: "#e0f2fe",
+                                                        color: "#0f172a",
+                                                        fontSize: 14,
+                                                        fontWeight: 600,
+                                                    }}
+                                                >
+                                                    {disease.disease_name}
+                                                </span>
+                                            ))}
                                         </div>
                                     )}
 

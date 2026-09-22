@@ -8,8 +8,9 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from pydantic import BaseModel
 
-from backend.app.database import users_collection
+from backend.app.database import users_collection as mongo_users_collection
 
+users_collection = mongo_users_collection
 
 # ============================================================
 # JWT CONFIGURATION
@@ -103,10 +104,15 @@ fake_users_db = {
 
 def get_mongo_user(username: str) -> Optional[dict]:
 
-    username = username.strip().lower()
+    normalized = (username or "").strip().lower()
+    if not normalized:
+        return None
 
     user_dict = users_collection.find_one({
-        "username": username
+        "$or": [
+            {"username": normalized},
+            {"email": normalized},
+        ]
     })
 
     if not user_dict:

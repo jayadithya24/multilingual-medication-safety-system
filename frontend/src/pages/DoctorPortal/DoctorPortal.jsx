@@ -3,6 +3,27 @@ import { useNavigate } from "react-router-dom";
 import { loginWithPassword, requestDoctorAccount } from "../../services/authService";
 import "./DoctorPortal.css";
 
+function formatApiError(error) {
+  const detail = error?.response?.data?.detail;
+
+  if (Array.isArray(detail)) {
+    return detail
+      .map((item) => item?.msg || item?.message || JSON.stringify(item))
+      .filter(Boolean)
+      .join("; ");
+  }
+
+  if (typeof detail === "string") {
+    return detail;
+  }
+
+  if (detail && typeof detail === "object") {
+    return detail.msg || detail.message || JSON.stringify(detail);
+  }
+
+  return error?.message || "Request failed.";
+}
+
 function DoctorPortal() {
   const navigate = useNavigate();
   const [identity, setIdentity] = useState("");
@@ -29,7 +50,7 @@ function DoctorPortal() {
       navigate("/doctor-dashboard", { replace: true });
     } catch (loginError) {
       console.error(loginError);
-      setError(loginError?.response?.data?.detail || "Doctor login failed.");
+      setError(formatApiError(loginError) || "Doctor login failed.");
     } finally {
       setLoading(false);
     }
@@ -53,7 +74,7 @@ function DoctorPortal() {
       });
     } catch (requestError) {
       console.error(requestError);
-      setError(requestError?.response?.data?.detail || "Doctor account request failed.");
+      setError(formatApiError(requestError) || "Doctor account request failed.");
     } finally {
       setLoading(false);
     }
