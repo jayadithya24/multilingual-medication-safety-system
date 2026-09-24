@@ -1,6 +1,7 @@
 import os
 import logging
 import time
+import re
 from difflib import SequenceMatcher
 from functools import lru_cache
 
@@ -144,17 +145,18 @@ def _read_detected_text(reader, file_path):
             (int(original_width * scale), int(original_height * scale)),
             interpolation=cv2.INTER_AREA,
         )
-    # Avoid enlarging small images: it significantly increases PaddleOCR
-    # inference time and does not improve clear medicine-pack text reliably.
-
-    # PaddleOCR inference is expensive. Start with the original image and use
-    # one enhanced fallback only when the first pass finds no text.
+    # Retry when text exists but does not identify a supported medicine. Small
+    # foil-pack lettering benefits from bounded enlargement on the fallback.
     detected_text = []
+    medicines = list_medicine_names(lang="en")
 
     for index in range(2):
         variant = image
         if index:
             grayscale = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+            if max(grayscale.shape) < 1000:
+                scale = min(3.0, 1200 / max(grayscale.shape))
+                grayscale = cv2.resize(grayscale, None, fx=scale, fy=scale, interpolation=cv2.INTER_CUBIC)
             enhanced = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8)).apply(grayscale)
             variant = cv2.cvtColor(enhanced, cv2.COLOR_GRAY2BGR)
         try:
@@ -163,7 +165,7 @@ def _read_detected_text(reader, file_path):
                 detected_text.extend(
                     text for text, _confidence in _extract_paddle_result(result)
                 )
-            if detected_text:
+            if _find_supported_medicine(" ".join(detected_text), medicines):
                 break
         except Exception as err:
             logger.warning("PaddleOCR pass failed for %s: %s", file_path, err)
@@ -209,6 +211,19 @@ def _find_supported_medicine(raw_text, medicines):
     return best_medicine if best_score >= 0.86 else None
 
 
+def _find_supported_medicines(raw_text, medicines):
+    """Preserve every explicitly read ingredient, in label order."""
+    matches = []
+    for medicine in medicines:
+        match = re.search(r"(?<!\w)" + re.escape(medicine) + r"(?!\w)", raw_text, re.IGNORECASE)
+        if match:
+            matches.append((match.start(), medicine))
+    if matches:
+        return [name for _, name in sorted(matches)]
+    match = _find_supported_medicine(raw_text, medicines)
+    return [match] if match else []
+
+
 def extract_text(file_path, lang: str = "en"):
     """Run OCR, clean detected text, and return all matching medicine records."""
     if not file_path or not os.path.exists(file_path):
@@ -223,18 +238,15 @@ def extract_text(file_path, lang: str = "en"):
     if reader is not None:
         detected_text = _read_detected_text(reader, file_path)
 
-    filename = os.path.basename(file_path).lower()
-
-    # Extract all matching medicines from detected text or filename
+    # Identify medicines from label text, never from an arbitrary filename.
     all_medicines = list_medicine_names(lang=lang)
     found_medicines = []
     found_details = []
 
     # Check text tokens
-    full_text = " ".join(detected_text).lower() + " " + filename
+    full_text = " ".join(detected_text)
 
-    medicine_match = _find_supported_medicine(full_text, all_medicines)
-    if medicine_match:
+    for medicine_match in _find_supported_medicines(full_text, all_medicines):
         med_info = search_medicine(medicine_match, lang=lang)
         if med_info:
             found_medicines.append(medicine_match)
@@ -326,14 +338,16 @@ def extract_prescription_details(file_path, lang: str = "en"):
     found_medicines = []
     found_details = []
 
-    medicine_match = _find_supported_medicine(raw_text, all_medicines)
-    if medicine_match:
+    for medicine_match in _find_supported_medicines(raw_text, all_medicines):
         med_info = search_medicine(medicine_match, lang=lang)
         if med_info:
             found_medicines.append(medicine_match)
             found_details.append(med_info)
 
     medicine = found_medicines[0] if found_medicines else None
+    multiple = len(found_medicines) > 1
+    if multiple:
+        medicine = " + ".join(found_medicines)
 
     # ---------------------------------------------------------
     # 2. Try to detect dosage
@@ -390,6 +404,8 @@ def extract_prescription_details(file_path, lang: str = "en"):
     # ---------------------------------------------------------
 
     status = "success" if medicine else "partial"
+    if multiple:
+        dosage = None  # Do not assign one ingredient's strength to the whole pack.
 
     return {
         "status": status,
@@ -403,7 +419,8 @@ def extract_prescription_details(file_path, lang: str = "en"):
         "raw_text": raw_text,
         "lang": lang,
         "message": (
-            "Prescription details detected."
+            "Multiple medicine names detected: " + ", ".join(found_medicines) + ". Verify whether these belong to a combination pack or separate medicines, and enter the complete strength manually."
+            if multiple else "Prescription details detected."
             if medicine
             else "Text was detected, but no supported medicine matched this project's 30-medicine dataset. Please verify the name manually."
         ),
