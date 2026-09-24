@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { getStoredRole } from "../../services/api";
 import { searchMedicine } from "../../services/medicineService";
 import { fetchDiseases } from "../../services/neo4jService";
 import "./DoctorTopbar.css";
 
-function DoctorTopbar() {
-    const role = getStoredRole();
+function DoctorTopbar({ user }) {
+    const name = user?.full_name || user?.username || "Loading account…";
+    const initials = user ? name.split(/\s+/).map(part => part[0]).slice(0, 2).join("").toUpperCase() : "…";
     const [searchQuery, setSearchQuery] = useState("");
     const [results, setResults] = useState({ medicines: [], diseases: [] });
     const [loading, setLoading] = useState(false);
@@ -107,16 +107,16 @@ function DoctorTopbar() {
 
                 <div className="doctor-topbar__user">
                     <div className="doctor-topbar__avatar">
-                        Dr
+                        {initials}
                     </div>
 
                     <div>
                         <strong>
-                            {role || "doctor"}
+                            {name}
                         </strong>
 
                         <span>
-                            Medical Professional
+                            {user?.username || ""}
                         </span>
                     </div>
                 </div>

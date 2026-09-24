@@ -85,6 +85,12 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     const patientPage = ["/patient-dashboard", "/patient-profile", "/scan-medicines", "/prescription"].includes(window.location.pathname);
+    const role = getStoredRole();
+    const loginRequest = ["/auth/token", "/auth/patient-token", "/auth/google"].includes(error.config?.url);
+    if (error.response?.status === 401 && role === "doctor" && !loginRequest) {
+      clearStoredToken();
+      window.location.replace("/research?session=expired");
+    }
     if (error.response?.status === 401 && getStoredRole() === "patient" && patientPage) {
       clearStoredToken();
       window.location.replace("/public?session=expired");

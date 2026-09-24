@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { loginWithPassword, requestDoctorAccount } from "../../services/authService";
 import "./DoctorPortal.css";
 
@@ -30,6 +30,7 @@ function formatApiError(error) {
 
 function DoctorPortal() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [identity, setIdentity] = useState("");
   const [password, setPassword] = useState("");
   const [mode, setMode] = useState("login");
@@ -94,6 +95,7 @@ function DoctorPortal() {
         </div>
 
         <div className="portal-auth-card">
+          {searchParams.get("session") === "expired" && <p role="status">Your session has expired or is no longer valid. Please sign in again.</p>}
           <div className="portal-auth-tabs">
             <button className={mode === "login" ? "is-active" : ""} onClick={() => { setMode("login"); setError(""); }}>
               Doctor Login

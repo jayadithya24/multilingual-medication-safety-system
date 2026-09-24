@@ -11,6 +11,7 @@ def main():
         errors = []
         page.on("pageerror", lambda error: errors.append(str(error)))
         page.add_init_script("localStorage.setItem('mmss_token','ui-test'); localStorage.setItem('mmss_role','doctor');")
+        page.route("**/auth/me", lambda route: route.fulfill(json={"username": "graph.test@example.invalid", "full_name": "Graph Doctor", "role": "doctor"}))
         page.goto("http://localhost:5173/drug-reference")
         picker = page.get_by_label("Choose a medicine", exact=True)
         expect(picker).to_be_enabled()

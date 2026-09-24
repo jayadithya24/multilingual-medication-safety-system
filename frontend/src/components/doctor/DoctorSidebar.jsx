@@ -1,14 +1,14 @@
-import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout } from "../../services/authService";
 import "./DoctorSidebar.css";
 
-function DoctorSidebar() {
+function DoctorSidebar({ user }) {
     const navigate = useNavigate();
-    const [lang, setLang] = useState("en");
+    const name = user?.full_name || user?.username || "Loading account…";
+    const initials = user ? name.split(/\s+/).map(part => part[0]).slice(0, 2).join("").toUpperCase() : "…";
 
-    const handleLogout = () => {
-        logout();
+    const handleLogout = async () => {
+        await logout();
         navigate("/research", { replace: true });
     };
 
@@ -62,12 +62,12 @@ function DoctorSidebar() {
 
             <div className="doctor-sidebar__profile">
                 <div className="doctor-sidebar__avatar">
-                    Dr
+                    {initials}
                 </div>
 
                 <div>
-                    <strong>Doctor</strong>
-                    <span>Clinical User</span>
+                    <strong>{name}</strong>
+                    <span>{user?.username || ""}</span>
                 </div>
             </div>
 
@@ -102,24 +102,6 @@ function DoctorSidebar() {
             </nav>
 
             <div className="doctor-sidebar__bottom">
-
-                <div className="doctor-sidebar__language">
-                    <button
-                        type="button"
-                        className={lang === "en" ? "is-active" : ""}
-                        onClick={() => setLang("en")}
-                    >
-                        EN
-                    </button>
-
-                    <button
-                        type="button"
-                        className={lang === "kn" ? "is-active" : ""}
-                        onClick={() => setLang("kn")}
-                    >
-                        ಕನ್ನಡ
-                    </button>
-                </div>
 
                 <button
                     type="button"

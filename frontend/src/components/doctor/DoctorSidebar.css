@@ -194,3 +194,6 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+.doctor-sidebar__profile > div:last-child { min-width: 0; overflow-wrap: anywhere; }
+.doctor-sidebar__avatar { flex-shrink: 0; }

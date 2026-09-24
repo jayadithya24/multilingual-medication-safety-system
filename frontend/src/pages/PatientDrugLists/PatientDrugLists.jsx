@@ -89,7 +89,7 @@ function PatientDrugLists() {
                         <p>PATIENT ACCESS & CONSENT</p>
                         <h2>Registered Patients</h2>
                     </div>
-                    <span>{patients.length} patients</span>
+                    <span>{loading ? "Loading…" : error ? "Unavailable" : `${patients.length} patients`}</span>
                 </div>
                 {loading ? (
                     <div className="patient-drug-lists__loading">Loading patients...</div>

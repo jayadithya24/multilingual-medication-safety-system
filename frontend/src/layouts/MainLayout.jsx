@@ -1,4 +1,4 @@
-import { Outlet, useMatch } from "react-router-dom";
+import { Outlet, useMatch, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { listenForMedicationNotifications } from "../services/fcmService";
 
@@ -7,6 +7,8 @@ import Footer from "../components/Footer/Footer";
 import "./PatientConsistency.css";
 
 function MainLayout() {
+    const { pathname } = useLocation();
+    const hasDoctorSidebar = ["/doctor-dashboard", "/drug-interaction", "/drug-reference", "/disease-protocols", "/clinical-insights", "/doctor-patients", "/reports", "/settings", "/analysis-history"].includes(pathname);
     const patientDashboard = useMatch("/patient-dashboard");
     const patientScan = useMatch("/scan-medicines");
     const patientVoice = useMatch("/voice-search");
@@ -27,7 +29,7 @@ function MainLayout() {
 
         <>
 
-            {!hasPatientSidebar && <Navbar />}
+            {!hasPatientSidebar && !hasDoctorSidebar && <Navbar />}
 
             <Outlet />
 

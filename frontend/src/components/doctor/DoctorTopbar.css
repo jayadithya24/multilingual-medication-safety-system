@@ -155,3 +155,6 @@
         padding: 14px 18px;
     }
 }
+
+.doctor-topbar__user { min-width: 0; max-width: 280px; overflow-wrap: anywhere; }
+.doctor-topbar__avatar { flex-shrink: 0; }
