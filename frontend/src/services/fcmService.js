@@ -38,11 +38,14 @@ export async function unregisterMedicationNotifications() {
     try {
         await api.delete("/patient/fcm-token", { data: { token }, timeout: 5000 });
     } finally {
-        if (hasFirebaseConfig() && await isSupported()) {
-            const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-            await deleteToken(getMessaging(app));
+        try {
+            if (hasFirebaseConfig() && await isSupported()) {
+                const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+                await deleteToken(getMessaging(app));
+            }
+        } finally {
+            localStorage.removeItem("mmss_fcm_token");
         }
-        localStorage.removeItem("mmss_fcm_token");
     }
 }
 

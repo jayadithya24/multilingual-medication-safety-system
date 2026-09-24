@@ -1,11 +1,13 @@
-"""Read-only service/dataset audit. Never prints secrets or patient records.
+"""Service/dataset audit, read-only by default. Never prints secrets or patient records.
 
 Run from the repository root: python tools/verify_patient_environment.py
-FCM uses dry_run=True: no device is notified. No datasets are imported or deleted.
+FCM uses dry_run=True: no device is notified. --prune-unregistered removes only
+tokens explicitly rejected as unregistered. No datasets are imported or deleted.
 """
 import json
 import os
 import sys
+import argparse
 from pathlib import Path
 from time import perf_counter
 
@@ -16,6 +18,9 @@ load_project_env()
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--prune-unregistered', action='store_true', help='Remove only tokens Firebase explicitly reports as unregistered during dry-run')
+    args = parser.parse_args()
     report = {}
     from backend.app.database import db
     db.command('ping')
@@ -42,6 +47,9 @@ def main():
                 except Exception as error:
                     errors = report['fcm_dry_run']['errors']
                     errors[type(error).__name__] = errors.get(type(error).__name__, 0) + 1
+                    if args.prune_unregistered and isinstance(error, messaging.UnregisteredError):
+                        removed = db.fcm_tokens.delete_one({'_id': token['_id'], 'token': token['token']})
+                        report['fcm_dry_run']['expired_tokens_removed'] = report['fcm_dry_run'].get('expired_tokens_removed', 0) + removed.deleted_count
         else:
             report['fcm_dry_run'] = 'No registered browser token'
     except Exception as error:

@@ -74,19 +74,20 @@
     "node_types": {
       "drug": 30,
       "disease": 3,
-      "sideeffect": 191
+      "sideeffect": 179
     },
     "edge_types": {
       "TREATS": 30,
       "CAUSES": 321,
-      "INTERACTS_WITH": 10
+      "INTERACTS_WITH": 8
     },
     "dangling_edges": 0
   },
   "running_backend_graph": {
-    "nodes": 224,
-    "relationships": 361,
-    "exactly_matches_csv_fallback": true
+    "source": "neo4j",
+    "nodes": 212,
+    "relationships": 359,
+    "exactly_matches_csv_fallback": false
   },
   "identity_audit": {
     "condition_side_effect_id_collisions": [
@@ -224,7 +225,12 @@
     ]
   },
   "live_graph": {
-    "available": false,
-    "error_type": "AuthError"
+    "nodes": 212,
+    "relationships": 359,
+    "interaction_properties": {
+      "total": 8,
+      "with_severity": 8,
+      "with_description": 8
+    }
   }
 }

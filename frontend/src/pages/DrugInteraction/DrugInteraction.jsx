@@ -48,9 +48,10 @@ function DrugInteraction() {
   const severityClass = useMemo(() => {
     const severity = result?.interaction?.severity?.toLowerCase();
 
-    if (severity === "low") return "interaction-card--low";
+    if (severity === "low" || severity === "mild") return "interaction-card--low";
     if (severity === "moderate") return "interaction-card--moderate";
-    if (severity === "high") return "interaction-card--high";
+    if (severity === "high" || severity === "severe") return "interaction-card--high";
+    if (severity === "review required") return "interaction-card--moderate";
     return "";
   }, [result]);
 
@@ -131,15 +132,20 @@ function DrugInteraction() {
                 <>
                   <div className="interaction-card__header">
                     <div>
-                      <p className="interaction-card__label">Interaction Severity</p>
+                      <p className="interaction-card__label">Recorded interaction severity</p>
                       <h2>{interaction.severity}</h2>
                     </div>
-                    <span className={`interaction-pill interaction-pill--${interaction.severity.toLowerCase()}`}>
+                    <span className={`interaction-pill interaction-pill--${interaction.severity.toLowerCase().replaceAll(" ", "-")}`}>
                       {interaction.severity}
                     </span>
                   </div>
 
                   <div className="interaction-card__body">
+                    <div className="interaction-card__block">
+                      <h3>Evidence</h3>
+                      <p>Source: {interaction.source === "neo4j" ? "Neo4j medication dataset" : "Local medication dataset"}. These dataset ratings have not been independently clinically validated.</p>
+                      {interaction.source_severities?.length > 1 && <p>Recorded ratings: {interaction.source_severities.join(", ")}.</p>}
+                    </div>
                     <div className="interaction-card__block">
                       <h3>Description</h3>
                       <p>{interaction.description}</p>
@@ -153,9 +159,10 @@ function DrugInteraction() {
                 </>
               ) : isNotFound ? (
                 <div className="interaction-card__empty">
-                  <h2>No known interaction found</h2>
+                  <h2>No interaction record found</h2>
                   <p>
                     The selected medicines are not listed as interacting in the current dataset.
+                    This does not establish that combining them is safe.
                   </p>
                 </div>
               ) : null}

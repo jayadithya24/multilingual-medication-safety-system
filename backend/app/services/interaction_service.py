@@ -37,7 +37,7 @@ def _load_interaction_table():
             dataframe = None
 
     if dataframe is None:
-        return None
+        raise RuntimeError("Interaction dataset is unavailable")
 
     # Handle root dataset column names (drug1, drug2)
     if "drug1" in dataframe.columns and "drug2" in dataframe.columns:
@@ -45,39 +45,33 @@ def _load_interaction_table():
         dataframe["drug_2"] = dataframe["drug2"].astype(str)
 
     if "drug_1" not in dataframe.columns or "drug_2" not in dataframe.columns:
-        return None
+        raise RuntimeError("Interaction dataset has no medicine columns")
 
     dataframe["drug_1"] = dataframe["drug_1"].astype(str)
     dataframe["drug_2"] = dataframe["drug_2"].astype(str)
 
     if "severity" not in dataframe.columns:
-        dataframe["severity"] = "Moderate"
+        dataframe["severity"] = "Unknown"
     else:
-        dataframe["severity"] = dataframe["severity"].astype(str)
+        dataframe["severity"] = dataframe["severity"].fillna("Unknown").astype(str)
 
     if "description" not in dataframe.columns:
-        dataframe["description"] = dataframe.apply(
-            lambda r: f"Co-administration of {r['drug_1']} and {r['drug_2']} has a recognized {r['severity']} interaction potential.",
-            axis=1,
-        )
+        dataframe["description"] = "An interaction is recorded in the local dataset; a supporting clinical description is not provided."
 
     if "recommendation" not in dataframe.columns:
-        dataframe["recommendation"] = dataframe.apply(
-            lambda r: f"Clinical monitoring advised when combining {r['drug_1']} and {r['drug_2']}.",
-            axis=1,
-        )
+        dataframe["recommendation"] = "No source-backed management recommendation is available in this dataset."
 
     return dataframe
 
 
 def get_interaction(drug1, drug2, lang: str = "en"):
-    """Return the first matching interaction for the two drugs regardless of order."""
+    """Match exact names in either order and preserve conflicting source ratings."""
     if not drug1 or not drug2:
         return None
 
     dataframe = _load_interaction_table()
     if dataframe is None:
-        return None
+        raise RuntimeError("Interaction dataset is unavailable")
 
     normalized_drug1 = _normalize_drug_name(drug1)
     normalized_drug2 = _normalize_drug_name(drug2)
@@ -91,31 +85,42 @@ def get_interaction(drug1, drug2, lang: str = "en"):
     forward_match = (drug_a == normalized_drug1) & (drug_b == normalized_drug2)
     reverse_match = (drug_a == normalized_drug2) & (drug_b == normalized_drug1)
 
-    # Also try partial matching on drug names if exact fails
     matches = dataframe[forward_match | reverse_match]
-
-    if matches.empty:
-        forward_partial = (drug_a.str.contains(normalized_drug1, regex=False)) & (
-            drug_b.str.contains(normalized_drug2, regex=False)
-        )
-        reverse_partial = (drug_a.str.contains(normalized_drug2, regex=False)) & (
-            drug_b.str.contains(normalized_drug1, regex=False)
-        )
-        matches = dataframe[forward_partial | reverse_partial]
 
     if matches.empty:
         return None
 
     first_match = matches.iloc[0]
+    severities = sorted({str(value).strip().capitalize() or "Unknown" for value in matches["severity"]})
+    conflict = len(severities) > 1
 
     return {
         "drug1": str(first_match["drug_1"]),
         "drug2": str(first_match["drug_2"]),
-        "severity": str(first_match["severity"]),
-        "description": str(first_match["description"]),
+        "severity": "Review required" if conflict else severities[0],
+        "source_severities": severities,
+        "review_required": conflict or "Unknown" in severities,
+        "source": "local_dataset",
+        "source_rows": [int(index) + 2 for index in matches.index],
+        "description": ("Source records disagree on severity: " + ", ".join(severities) + ". Clinical review is required before assigning a rating.") if conflict else str(first_match["description"]),
         "recommendation": str(first_match["recommendation"]),
         "lang": lang,
     }
+
+
+def get_medicine_interactions(name, lang="en"):
+    """Return all recorded partners, reconciling duplicate reverse rows."""
+    table = _load_interaction_table()
+    normalized = _normalize_drug_name(name)
+    partners = set()
+    for row in table.to_dict("records"):
+        if _normalize_drug_name(row["drug_1"]) == normalized:
+            partners.add(row["drug_2"])
+        elif _normalize_drug_name(row["drug_2"]) == normalized:
+            partners.add(row["drug_1"])
+    return [dict(get_interaction(name, partner, lang), drug_name=partner,
+                 drug_id=_normalize_drug_name(partner).replace(" ", "-"))
+            for partner in sorted(partners)]
 
 
 def get_multi_drug_interactions(drugs, lang: str = "en"):
@@ -143,6 +148,8 @@ def get_multi_drug_interactions(drugs, lang: str = "en"):
     max_sev = "None"
     if severities_found:
         max_sev = max(severities_found, key=lambda s: severity_order.get(s, 0))
+    if any(item["review_required"] for item in interactions):
+        max_sev = "Review required"
 
     return {
         "status": "success",

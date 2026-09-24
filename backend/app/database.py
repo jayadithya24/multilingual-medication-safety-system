@@ -40,6 +40,10 @@ db = client[db_name]
 # Collections used by the patient medication system
 users_collection = db["users"]
 users_collection.create_index("google_sub", unique=True, sparse=True)
+users_collection.create_index(
+    "license_number", unique=True,
+    partialFilterExpression={"license_number": {"$type": "string"}},
+)
 doctor_requests_collection = db["doctor_requests"]
 
 patient_schedules_collection = db["patient_schedules"]

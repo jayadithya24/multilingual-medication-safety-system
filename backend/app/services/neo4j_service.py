@@ -39,7 +39,10 @@ def get_drug_interaction(drug1: str, drug2: str, lang: str = "en"):
             coalesce(d2.drug_name, d2.name, d2.drug_id) AS drug2,
             r.severity AS severity,
             r.description AS description,
-            r.disclaimer AS disclaimer
+            coalesce(r.recommendation, r.disclaimer) AS disclaimer,
+            r.source_severities AS source_severities,
+            r.source_rows AS source_rows,
+            r.review_required AS review_required
         LIMIT 1
         """
 
@@ -56,6 +59,10 @@ def get_drug_interaction(drug1: str, drug2: str, lang: str = "en"):
             "description": record["description"] or "",
             "recommendation": record["disclaimer"] or "Consult your doctor before acting on this information.",
             "lang": lang,
+            "source": "neo4j",
+            "source_severities": record["source_severities"] or [],
+            "source_rows": record["source_rows"] or [],
+            "review_required": bool(record["review_required"]),
         }
     finally:
         driver.close()
@@ -226,6 +233,7 @@ def _fallback_search(
     limit: int,
     lang: str = "en"
 ) -> List[Dict[str, Any]]:
+    from backend.app.services.interaction_service import get_medicine_interactions
     dataframe = _load_dataset(lang)
     if dataframe is None:
         return []
@@ -260,7 +268,7 @@ def _fallback_search(
     _serialize_drug(
         {
             "drug": fallback,
-            "interactions": []
+            "interactions": get_medicine_interactions(fallback.get("drug_name", ""), lang)
         },
         lang=lang
     )
@@ -272,7 +280,7 @@ def _fallback_search(
     _serialize_drug(
         {
             "drug": row.to_dict(),
-            "interactions": []
+            "interactions": get_medicine_interactions(row.get("drug_name", ""), lang)
         },
         lang=lang
     )
@@ -305,7 +313,7 @@ OPTIONAL MATCH (d)-[:TREATS]->(disease:Disease)
 
 OPTIONAL MATCH (d)-[:CAUSES]->(side:SideEffect)
 
-OPTIONAL MATCH (d)-[r:INTERACTS_WITH]->(o:Drug)
+OPTIONAL MATCH (d)-[r:INTERACTS_WITH]-(o:Drug)
 
 RETURN
     d AS drug,
@@ -354,6 +362,7 @@ LIMIT $limit
 )
 
 def get_drug_by_id(drug_id: str) -> Dict[str, Any]:
+    driver = None
     try:
         driver = _get_driver()
         with driver.session() as session:
@@ -361,7 +370,7 @@ def get_drug_by_id(drug_id: str) -> Dict[str, Any]:
             MATCH (d:Drug)
 WHERE d.name = $drug_id
    OR d.drug_id = $drug_id
-            OPTIONAL MATCH (d)-[r:INTERACTS_WITH]->(o:Drug)
+            OPTIONAL MATCH (d)-[r:INTERACTS_WITH]-(o:Drug)
 
 RETURN
     d AS drug,
@@ -377,6 +386,9 @@ RETURN
                 return _serialize_drug(record)
     except Exception as err:
         print(f"Neo4j unavailable, falling back to CSV: {err}")
+    finally:
+        if driver:
+            driver.close()
 
     fallback = search_medicine(drug_id, lang="en")
     if not fallback:
@@ -490,18 +502,22 @@ def _fallback_local_knowledge_graph() -> Dict[str, List[Dict[str, Any]]]:
 
     interaction_path = datasets_dir / "drug_interactions.csv"
     if interaction_path.exists():
+        from backend.app.services.interaction_service import get_interaction
         interaction_df = pd.read_csv(interaction_path)
         for _, row in interaction_df.iterrows():
             if str(row.get("drug2_in_scope", "")).strip().lower() != "yes":
                 continue
             drug1 = row.get("drug1_id") or row.get("drug1")
             drug2 = row.get("drug2_id") or row.get("drug2")
-            severity = row.get("severity")
             if drug1 is None or drug2 is None:
                 continue
+            drug1, drug2 = sorted((str(drug1), str(drug2)))
+            interaction = get_interaction(row["drug1"], row["drug2"])
             add_node(drug1, drug1, "drug")
             add_node(drug2, drug2, "drug")
-            add_edge(drug1, drug2, "INTERACTS_WITH", "interaction", {"severity": severity})
+            add_edge(drug1, drug2, "INTERACTS_WITH", "interaction", {
+                key: interaction[key] for key in ("severity", "source_severities", "source_rows", "review_required", "description", "recommendation")
+            })
 
     return {"nodes": nodes, "edges": edges, "source": "local_csv"}
 
@@ -510,6 +526,7 @@ def get_diseases() -> List[str]:
     """
     Return the diseases available in the Neo4j knowledge graph or dataset.
     """
+    driver = None
     try:
         driver = _get_driver()
 
@@ -530,6 +547,9 @@ def get_diseases() -> List[str]:
 
     except Exception as err:
         print(f"Neo4j disease lookup unavailable, falling back to CSV: {err}")
+    finally:
+        if driver:
+            driver.close()
 
     dataframe = _load_dataset("en")
     if dataframe is None or "disease" not in dataframe.columns:
@@ -553,6 +573,7 @@ def get_drugs_for_disease(disease_name: str) -> List[Dict[str, Any]]:
     if not disease_name:
         return []
 
+    driver = None
     try:
         driver = _get_driver()
 
@@ -582,6 +603,9 @@ def get_drugs_for_disease(disease_name: str) -> List[Dict[str, Any]]:
 
     except Exception as err:
         print(f"Neo4j disease-drug lookup unavailable, falling back to CSV: {err}")
+    finally:
+        if driver:
+            driver.close()
 
     dataframe = _load_dataset("en")
     if dataframe is None or "disease" not in dataframe.columns:
@@ -696,7 +720,10 @@ def get_knowledge_graph() -> Dict[str, List[Dict[str, Any]]]:
                             ELSE toLower(type(r))
                         END,
                         relationship: type(r),
-                        severity: coalesce(r.severity, "")
+                        severity: coalesce(r.severity, ""),
+                        source_severities: r.source_severities,
+                        source_rows: r.source_rows,
+                        review_required: r.review_required
                     }
                     ELSE NULL
                 END) AS edges

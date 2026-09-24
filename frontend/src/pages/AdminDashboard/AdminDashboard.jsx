@@ -184,13 +184,13 @@ function AdminDashboard() {
                                 onClick={() => decideRequest(request.request_id, "approve")}
                                 disabled={Boolean(reviewing)}
                               >
-                                Approve
+                                {request.status === "approving" ? "Complete approval" : "Approve"}
                               </button>
                               <button
                                 type="button"
                                 className="admin-btn admin-btn--reject"
                                 onClick={() => decideRequest(request.request_id, "reject")}
-                                disabled={Boolean(reviewing)}
+                                disabled={Boolean(reviewing) || request.status === "approving"}
                               >
                                 Reject
                               </button>
@@ -239,13 +239,13 @@ function AdminDashboard() {
                           onClick={() => decideRequest(request.request_id, "approve")}
                           disabled={Boolean(reviewing)}
                         >
-                          Approve
+                          {request.status === "approving" ? "Complete approval" : "Approve"}
                         </button>
                         <button
                           type="button"
                           className="admin-btn admin-btn--reject"
                           onClick={() => decideRequest(request.request_id, "reject")}
-                          disabled={Boolean(reviewing)}
+                          disabled={Boolean(reviewing) || request.status === "approving"}
                         >
                           Reject
                         </button>

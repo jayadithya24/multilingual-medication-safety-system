@@ -63,6 +63,7 @@ def main():
             api_graph = json.load(response)
         canonical = lambda rows: sorted(json.dumps(row, sort_keys=True) for row in rows)
         report['running_backend_graph'] = {
+            'source': api_graph.get('source', 'unknown'),
             'nodes': len(api_graph.get('nodes', [])),
             'relationships': len(api_graph.get('links', [])),
             'exactly_matches_csv_fallback': canonical(api_graph.get('nodes', [])) == canonical(graph['nodes'])

@@ -1,8 +1,8 @@
 # Neo4j validation — 24 September 2026
 
-The local server accepts connections on 7474 and 7687. A fresh process using the current project configuration (`neo4j://127.0.0.1:7687`) fails authentication with `AuthError`. Successful application Cypher execution against this database has therefore not been established.
+The local server accepts connections on 7474 and 7687. Authentication using the corrected database username now succeeds. The importer ran twice and verified 212 nodes and 359 relationships against the dataset, without creating duplicates.
 
-The running application's `/neo4j/graph` response exactly matches the CSV fallback: 224 nodes and 361 relationships. A rendered graph is not proof of a working Neo4j connection. The recent browser and regression tests establish UI behavior and filtering, not clinical correctness.
+The running application's `/neo4j/graph` reports `source: neo4j`. Read-only API assertions verify real graph queries, focused relationships and conflict handling. These checks establish agreement with the dataset, not clinical correctness. See [remediation results](REMEDIATION_2026-09-24.md).
 
 The read-only evidence is in `neo4j-audit-2026-09-24.json`. No database records or credentials were changed by the audit.
 

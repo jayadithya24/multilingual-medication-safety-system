@@ -36,6 +36,11 @@ def main():
         page.get_by_role("button", name="Reject", exact=True).filter(visible=True).first.click()
         expect(page.get_by_text("No pending doctor requests require attention right now.")).to_be_visible()
         assert decisions == ["approve", "reject"]
+        requests.append({"request_id": "RETRY", "full_name": "Interrupted Approval", "email": "retry@example.invalid", "status": "approving"})
+        page.reload()
+        expect(page.get_by_role("button", name="Reject", exact=True).filter(visible=True)).to_be_disabled()
+        page.get_by_role("button", name="Complete approval", exact=True).filter(visible=True).click()
+        expect(page.get_by_text("No pending doctor requests require attention right now.")).to_be_visible()
         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1")
         for role in ("patient", "doctor"):
             guest = browser.new_page()

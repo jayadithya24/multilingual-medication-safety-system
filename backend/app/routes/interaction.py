@@ -1,8 +1,6 @@
 from typing import List
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
-
-from backend.app.auth import User, get_current_active_user
 
 from backend.app.services.interaction_service import (
     get_interaction,
@@ -24,17 +22,20 @@ async def check_interaction(
     drug2: str = Query(..., min_length=1),
     lang: str = Query("en"),
 ):
-    interaction = None
+    # The dataset reconciles both directions; a single graph edge must not hide
+    # conflicting ratings from another source row.
     try:
-        interaction = get_drug_interaction(drug1, drug2, lang=lang)
+        interaction = get_interaction(drug1, drug2, lang=lang)
     except Exception as error:
-        print(f"Neo4j interaction lookup fallback to dataset: {error}")
+        raise HTTPException(status_code=503, detail="Interaction data is unavailable. Please try again later.") from error
 
-    if not interaction:
+    if interaction and not interaction.get("review_required"):
         try:
-            interaction = get_interaction(drug1, drug2, lang=lang)
-        except Exception as error:
-            print(f"Dataset interaction lookup failed: {error}")
+            live = get_drug_interaction(drug1, drug2, lang=lang)
+            if live and live["severity"] == interaction["severity"]:
+                interaction = live
+        except Exception:
+            pass  # The reconciled dataset remains available during graph outages.
 
     if not interaction:
         return {
@@ -55,5 +56,7 @@ async def check_multi_interaction(
     body: MultiDrugRequest,
     lang: str = Query("en"),
 ):
-    result = get_multi_drug_interactions(body.drugs, lang=lang)
-    return result
+    try:
+        return get_multi_drug_interactions(body.drugs, lang=lang)
+    except Exception as error:
+        raise HTTPException(status_code=503, detail="Interaction data is unavailable. Please try again later.") from error

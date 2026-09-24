@@ -132,9 +132,9 @@ def create_doctor_request(payload: DoctorRegisterRequest) -> dict:
         raise HTTPException(status_code=409, detail="An account already exists for this email.")
     if users_collection.find_one({"license_number": registration_number}):
         raise HTTPException(status_code=409, detail="A doctor account already uses this registration number.")
-    if doctor_requests_collection.find_one({"email": username, "status": "pending"}):
+    if doctor_requests_collection.find_one({"email": username, "status": {"$in": ["pending", "approving"]}}):
         raise HTTPException(status_code=409, detail="A doctor request is already pending for this email.")
-    if doctor_requests_collection.find_one({"medical_registration_no": registration_number, "status": "pending"}):
+    if doctor_requests_collection.find_one({"medical_registration_no": registration_number, "status": {"$in": ["pending", "approving"]}}):
         raise HTTPException(status_code=409, detail="A doctor request is already pending for this registration number.")
 
     request = {

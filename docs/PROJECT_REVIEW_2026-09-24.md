@@ -1,5 +1,7 @@
 # Project review — 24 September 2026
 
+Follow-up: [integration remediation](REMEDIATION_2026-09-24.md) resolves the Neo4j connection/import and interaction lookup findings below and records newer validation results. The remaining sections describe the original review snapshot.
+
 Scope: patient, doctor and administrator dashboards; routing and role boundaries; account approval, consent, medication schedules and history; graph/reference/interaction integration; Google/Firebase, OCR/voice integration paths; test isolation and publication hygiene. Includes the working changes accumulated on `dev` since `8dce9d0`.
 
 ## Corrections included
