@@ -57,15 +57,8 @@ async def approve_doctor_request(
         "disabled": False,
         "created_at": datetime.now(timezone.utc),
     }
-    email_match = {"$or": [{"username": email}, {"email": email}]}
     try:
-        result = users_collection.update_one(
-            email_match,
-            {"$set": doctor, "$setOnInsert": {"created_at": doctor["created_at"]}},
-            upsert=True,
-        )
-        if result.upserted_id is None and not users_collection.find_one(email_match):
-            users_collection.insert_one(doctor)
+        users_collection.insert_one(doctor)
     except DuplicateKeyError:
         raise HTTPException(status_code=409, detail="A matching doctor account already exists.")
 

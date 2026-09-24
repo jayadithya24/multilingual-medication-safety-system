@@ -19,9 +19,9 @@ import AdminPortal from "../pages/AdminPortal/AdminPortal";
 const AdminDashboard = lazy(() => import("../pages/AdminDashboard/AdminDashboard"));
 
 import RequireRole from "../components/RequireRole/RequireRole";
-import RequirePatientProfile from "../components/RequirePatientProfile/RequirePatientProfile";
 import DiseaseProtocols from "../pages/DiseaseProtocols/DiseaseProtocols";
 import PatientDrugLists from "../pages/PatientDrugLists/PatientDrugLists";
+import Reports from "../pages/Reports/Reports";
 const KnowledgeGraph = lazy(() => import("../pages/KnowledgeGraph/KnowledgeGraph"));
 import PatientProfile from "../pages/PatientProfile/PatientProfile";
 import Prescription from "../pages/Prescription/Prescription";
@@ -153,6 +153,7 @@ function AppRoutes() {
                         />
 
                         {/* Analysis History */}
+                        <Route path="reports" element={<Reports />} />
                         <Route
                             path="analysis-history"
                             element={<AnalysisHistory />}

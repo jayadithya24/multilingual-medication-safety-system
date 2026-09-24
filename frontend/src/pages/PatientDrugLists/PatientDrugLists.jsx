@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import api, { getStoredToken } from "../../services/api";
-import { loginWithPassword } from "../../services/authService";
+import api from "../../services/api";
 import "./PatientDrugLists.css";
 
 function PatientDrugLists() {
@@ -15,27 +14,19 @@ function PatientDrugLists() {
     const [loadingMedications, setLoadingMedications] = useState(false);
     const [error, setError] = useState("");
 
-    const loadPatients = async () => {
-        try {
-            setLoading(true);
-            setError("");
-
-            if (!getStoredToken()) {
-                await loginWithPassword("doctor", "secret");
-            }
-
-            const response = await api.get("/doctor/patients");
-            setPatients(response.data.patients || []);
-        } catch (err) {
-            console.error("Error loading patients:", err);
-            setError(err?.response?.data?.detail || "Unable to load registered patients.");
-        } finally {
-            setLoading(false);
-        }
-    };
-
     useEffect(() => {
-        loadPatients();
+        const controller = new AbortController();
+        api.get("/doctor/patients", { signal: controller.signal })
+            .then(response => {
+                if (!controller.signal.aborted) setPatients(response.data.patients || []);
+            })
+            .catch(err => {
+                if (!controller.signal.aborted) setError(err?.response?.data?.detail || "Unable to load registered patients.");
+            })
+            .finally(() => {
+                if (!controller.signal.aborted) setLoading(false);
+            });
+        return () => controller.abort();
     }, []);
 
     const requestAccess = async (patientId) => {
@@ -46,23 +37,10 @@ function PatientDrugLists() {
                 prev.map((p) => (p.patient_id === patientId ? { ...p, status: "PENDING" } : p))
             );
         } catch (err) {
-            // For demo patient IDs, update locally
-            if (patientId.startswith("PAT-DEMO")) {
-                setPatients((prev) =>
-                    prev.map((p) => (p.patient_id === patientId ? { ...p, status: "PENDING" } : p))
-                );
-            } else {
-                setError(err?.response?.data?.detail || "Unable to request access.");
-            }
+            setError(err?.response?.data?.detail || "Unable to request access.");
         } finally {
             setRequestingPatient("");
         }
-    };
-
-    const grantDemoConsent = (patientId) => {
-        setPatients((prev) =>
-            prev.map((p) => (p.patient_id === patientId ? { ...p, status: "ACCEPTED" } : p))
-        );
     };
 
     const viewPatientDetails = async (patientId) => {
@@ -70,10 +48,6 @@ function PatientDrugLists() {
             setLoadingMedications(true);
             setSelectedPatient(patientId);
             
-            if (!getStoredToken()) {
-                await loginWithPassword("doctor", "secret");
-            }
-
             const response = await api.get(`/doctor/patients/${encodeURIComponent(patientId)}/medications`);
             setMedications(response.data.medications || []);
             setHistory(response.data.history || []);
@@ -147,13 +121,6 @@ function PatientDrugLists() {
                                     {patient.status === "PENDING" && (
                                         <div style={{ display: "flex", flexDirection: "column", gap: "6px", alignItems: "flex-end" }}>
                                             <span style={{ color: "#d97706", fontWeight: 600 }}>Access Pending</span>
-                                            <button
-                                                type="button"
-                                                style={{ fontSize: "0.8rem", padding: "4px 8px" }}
-                                                onClick={() => grantDemoConsent(patient.patient_id)}
-                                            >
-                                                (Demo: Grant Consent)
-                                            </button>
                                         </div>
                                     )}
                                     {patient.status === "REJECTED" && <strong style={{ color: "#ef4444" }}>Rejected</strong>}

@@ -26,15 +26,19 @@ export default function GoogleSignIn({ mode = "login" }) {
   const [linkCredential, setLinkCredential] = useState("");
   const [password, setPassword] = useState("");
   const [linking, setLinking] = useState(false);
+  const [retry, setRetry] = useState(0);
+  const [canRetry, setCanRetry] = useState(false);
   useEffect(() => {
     let active = true;
     let pending = false;
-    api.get("/auth/providers").then(async ({ data }) => {
+    let stage = "configuration";
+    api.get("/auth/providers", { timeout: 10000 }).then(async ({ data }) => {
       if (!active) return;
       if (!data.google_client_id) {
         setMessage("Google sign-in is not available yet. You can use email and password below.");
         return;
       }
+      stage = "google";
       await loadGoogle();
       if (!active) return;
       window.google.accounts.id.initialize({
@@ -60,9 +64,15 @@ export default function GoogleSignIn({ mode = "login" }) {
         theme: "outline", size: "large", text: mode === "register" ? "signup_with" : "signin_with", shape: "pill",
       });
       setMessage("");
-    }).catch(() => { if (active) setMessage("Google sign-in is unavailable. Use email and password or reload to retry."); });
+    }).catch(() => {
+      if (!active) return;
+      setCanRetry(true);
+      setMessage(stage === "configuration"
+        ? "Cannot reach the sign-in service. Please retry in a moment."
+        : "Google sign-in could not load. Check your connection and retry.");
+    });
     return () => { active = false; };
-  }, [navigate, mode]);
+  }, [navigate, mode, retry]);
   const linkAccount = async (event) => {
     event.preventDefault();
     if (linking) return;
@@ -78,6 +88,11 @@ export default function GoogleSignIn({ mode = "login" }) {
     } finally { setLinking(false); }
   };
   return <div className="portal-google"><div ref={container} />{message && <p role="status">{message}</p>}
+    {canRetry && <button type="button" onClick={() => {
+      setCanRetry(false);
+      setMessage("Checking Google sign-in availability…");
+      setRetry((value) => value + 1);
+    }}>Retry Google sign-in</button>}
     {linkCredential && <form className="portal-auth-form" onSubmit={linkAccount}>
       <label>Existing account password<input required type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} /></label>
       <button disabled={linking} type="submit">{linking ? "Linking…" : "Link Google and sign in"}</button>

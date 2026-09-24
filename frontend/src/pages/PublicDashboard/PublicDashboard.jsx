@@ -1,6 +1,5 @@
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import PatientNavigation from "../../components/PatientNavigation/PatientNavigation";
 import Loading from "../../components/Loading/Loading";
 import MedicineCard from "../../components/MedicineCard/MedicineCard";
 import VoicePlayback from "../../components/VoicePlayback";
@@ -386,7 +385,6 @@ function PublicDashboard() {
                     </p>
                 </div>
 
-            <PatientNavigation />
 
                 {/* TOOLBAR */}
                 {activeTab === "text" && <div className="patient-toolbar">

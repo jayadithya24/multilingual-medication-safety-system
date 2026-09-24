@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useMatch } from "react-router-dom";
 import { useEffect } from "react";
 import { listenForMedicationNotifications } from "../services/fcmService";
 
@@ -7,6 +7,12 @@ import Footer from "../components/Footer/Footer";
 import "./PatientConsistency.css";
 
 function MainLayout() {
+    const patientDashboard = useMatch("/patient-dashboard");
+    const patientScan = useMatch("/scan-medicines");
+    const patientVoice = useMatch("/voice-search");
+    const patientProfile = useMatch("/patient-profile");
+    const patientPrescription = useMatch("/prescription");
+    const hasPatientSidebar = patientDashboard || patientScan || patientVoice || patientProfile || patientPrescription;
     useEffect(() => {
         let disposed = false;
         let unsubscribe;
@@ -21,7 +27,7 @@ function MainLayout() {
 
         <>
 
-            <Navbar />
+            {!hasPatientSidebar && <Navbar />}
 
             <Outlet />
 

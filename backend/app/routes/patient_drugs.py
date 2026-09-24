@@ -45,44 +45,16 @@ async def get_patients(
         )
     )
 
-    if not patients:
-        patients = [
+    for patient in patients:
+        request = access_requests_collection.find_one(
             {
-                "full_name": "Ramesh Kumar",
-                "patient_id": "PAT-DEMO-001",
-                "username": "patient",
-                "status": "ACCEPTED",
-                "conditions": ["Type 2 Diabetes", "Hypertension"],
-                "age": 54,
+                "doctorId": current_user.username,
+                "patientId": patient.get("patient_id"),
             },
-            {
-                "full_name": "Sunita Sharma",
-                "patient_id": "PAT-DEMO-002",
-                "username": "sunita_s",
-                "status": "PENDING",
-                "conditions": ["Rheumatoid Arthritis"],
-                "age": 48,
-            },
-            {
-                "full_name": "John Doe",
-                "patient_id": "PAT-DEMO-003",
-                "username": "johndoe",
-                "status": "NONE",
-                "conditions": ["Hypertension"],
-                "age": 62,
-            },
-        ]
-    else:
-        for patient in patients:
-            request = access_requests_collection.find_one(
-                {
-                    "doctorId": current_user.username,
-                    "patientId": patient.get("patient_id"),
-                },
-                sort=[("createdAt", -1)],
-            )
-            patient["status"] = request["status"] if request else "NONE"
-            patient["requestId"] = request.get("requestId") if request else None
+            sort=[("createdAt", -1)],
+        )
+        patient["status"] = request["status"] if request else "NONE"
+        patient["requestId"] = request.get("requestId") if request else None
 
     return {
         "status": "success",

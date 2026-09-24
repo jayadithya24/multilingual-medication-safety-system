@@ -274,6 +274,7 @@ def mark_medication_taken(
     history_id = f"HIS-{uuid4().hex[:8].upper()}"
     medication_history_collection.insert_one({
         "history_id": history_id,
+        "status": "TAKEN",
         "schedule_id": schedule_id,
         "patient_username": current_user.username,
         "patient_id": schedule.get("patient_id"),

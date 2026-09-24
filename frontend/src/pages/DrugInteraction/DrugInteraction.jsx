@@ -2,8 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import Loading from "../../components/Loading/Loading";
 import { checkDrugInteraction } from "../../services/interactionService";
 import { fetchMedicines } from "../../services/medicineService";
-import { loginWithPassword } from "../../services/authService";
-import { getStoredToken } from "../../services/api";
 import "./DrugInteraction.css";
 import InteractionGraph from "../../components/KnowledgeGraph/InteractionGraph";
 
@@ -17,18 +15,6 @@ function DrugInteraction() {
   const [checking, setChecking] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
-  const [username, setUsername] = useState("doctor");
-  const [password, setPassword] = useState("secret");
-  const [authError, setAuthError] = useState("");
-  const [authLoading, setAuthLoading] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
-
-  useEffect(() => {
-    if (!getStoredToken()) {
-      loginWithPassword("doctor", "secret").catch(() => {});
-    }
-  }, []);
-
   useEffect(() => {
     let isMounted = true;
 
@@ -69,11 +55,6 @@ function DrugInteraction() {
   }, [result]);
 
   const handleCheckInteraction = async () => {
-    if (!isAuthenticated) {
-      setError("Please sign in as a doctor before checking interactions.");
-      return;
-    }
-
     if (!drug1.trim() || !drug2.trim()) {
       setError("Please select or enter two medicines.");
       return;
@@ -95,22 +76,6 @@ function DrugInteraction() {
     }
   };
 
-  const handleLogin = async () => {
-    try {
-      setAuthLoading(true);
-      setAuthError("");
-      await loginWithPassword(username.trim(), password);
-      setIsAuthenticated(true);
-    } catch (loginError) {
-      console.error(loginError);
-      setAuthError(loginError?.response?.data?.detail || "Doctor login failed.");
-    } finally {
-      setAuthLoading(false);
-    }
-  };
-
-  
-
   const interaction = result?.interaction ?? null;
   const isNotFound = result?.status === "not_found";
 
@@ -121,78 +86,36 @@ function DrugInteraction() {
           <p className="interaction-kicker">Drug Interaction Checker</p>
           <h1>Check how two medicines may interact</h1>
           <p>
-            Select medicines from the dataset or type to search, then compare them in one click.
+            Choose two medicines to review their interaction and connected conditions.
           </p>
         </div>
 
         <div className="interaction-panel">
-          {!isAuthenticated ? (
-            <div className="interaction-auth">
-              <h2>Doctor Sign In</h2>
-              <p>Sign in to enable interaction checking.</p>
-
-              <label className="interaction-field">
-                <span>Username</span>
-                <input
-                  type="text"
-                  value={username}
-                  onChange={(event) => setUsername(event.target.value)}
-                  placeholder="doctor"
-                />
-              </label>
-
-              <label className="interaction-field">
-                <span>Password</span>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  placeholder="secret"
-                />
-              </label>
-
-              <button className="interaction-button" onClick={handleLogin} disabled={authLoading}>
-                {authLoading ? "Signing in..." : "Sign in"}
-              </button>
-
-              {authError && <div className="interaction-error">{authError}</div>}
-            </div>
-          ) : (
-            <div className="interaction-auth interaction-auth--signed-in">
-  <div>
-    <h2>Signed in as doctor</h2>
-    <p>You can now check drug interactions.</p>
-  </div>
-</div>
-          )}
-
           <div className="interaction-form">
             <label className="interaction-field">
               <span>Medicine 1</span>
-              <input
-                type="text"
-                list="medicine-options"
+              <select
+                aria-label="Medicine 1"
+                disabled={checking || loadingMedicines}
                 value={drug1}
-                onChange={(event) => setDrug1(event.target.value)}
-                placeholder="Start typing a medicine name"
-              />
+                onChange={(event) => { setDrug1(event.target.value); setResult(null); }}
+              ><option value="">Select a medicine</option>{medicineNames.map(name => <option key={name} disabled={name === drug2}>{name}</option>)}</select>
             </label>
 
             <label className="interaction-field">
               <span>Medicine 2</span>
-              <input
-                type="text"
-                list="medicine-options"
+              <select
+                aria-label="Medicine 2"
+                disabled={checking || loadingMedicines}
                 value={drug2}
-                onChange={(event) => setDrug2(event.target.value)}
-                placeholder="Start typing another medicine"
-              />
+                onChange={(event) => { setDrug2(event.target.value); setResult(null); }}
+              ><option value="">Select a medicine</option>{medicineNames.map(name => <option key={name} disabled={name === drug1}>{name}</option>)}</select>
             </label>
 
             <button
               className="interaction-button"
               onClick={handleCheckInteraction}
-              disabled={checking || loadingMedicines || !isAuthenticated}
+              disabled={checking || loadingMedicines || !drug1 || !drug2}
             >
               {checking ? "Checking..." : "Check Interaction"}
             </button>
@@ -201,12 +124,6 @@ function DrugInteraction() {
           {loadingMedicines && <Loading />}
 
           {error && <div className="interaction-error">{error}</div>}
-
-          <datalist id="medicine-options">
-            {medicineNames.map((medicine) => (
-              <option key={medicine} value={medicine} />
-            ))}
-          </datalist>
 
           {result && (
             <div className={`interaction-card ${severityClass}`.trim()}>

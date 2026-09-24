@@ -1,3 +1,13 @@
+.reference-workspace .drug-reference-hero { text-align: left; max-width: none; margin-bottom: 26px; }
+.reference-workspace .drug-reference-hero h1 { font-size: clamp(28px, 3vw, 40px); }
+.reference-workspace .drug-reference-hero > p:last-child { margin-left: 0; }
+.reference-picker { display: flex; gap: 24px; align-items: flex-end; margin-bottom: 28px; padding: 22px; background: #fff; border: 1px solid #dce7eb; border-radius: 14px; }
+.reference-picker > label { display: grid; gap: 10px; flex: 1; font-size: 13px; font-weight: 700; }
+.reference-picker select { width: 100%; min-height: 46px; background: #f8fbfc; border: 1px solid #cadbdf; border-radius: 8px; padding: 10px 14px; font: inherit; color: #234653; }
+.reference-welcome { padding: 60px 32px; background: linear-gradient(120deg, #e9f6f2, #f7fbff); border: 1px solid #d6e8e6; border-radius: 18px; text-align: center; }
+.reference-welcome span { font-size: 11px; letter-spacing: .15em; color: #14867c; }.reference-welcome h2 { font-size: 25px; color: #254853; }.reference-welcome p { color: #637e8c; line-height: 1.7; }.reference-welcome div { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 30px; }.reference-welcome b { padding: 12px 18px; border-radius: 10px; background: #fff; font-size: 12px; color: #45636f; }
+.reference-details { margin-top: 32px; }.reference-details h2 { margin: 0; font-size: 25px; }.reference-details header > p:last-child { color: #627784; font-size: 13px; }.reference-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 20px; }.reference-detail-grid article { padding: 24px; border: 1px solid #dce7eb; background: white; border-radius: 14px; }.reference-detail-grid h3 { margin: 0 0 12px; font-size: 15px; }.reference-detail-grid p, .reference-detail-grid li { font-size: 13px; line-height: 1.85; color: #526b79; }.reference-detail-grid .reference-warning { background: #fffaf0; border-color: #e9dcb9; }
+@media(max-width: 700px) { .reference-picker { flex-direction: column; align-items: stretch; }.reference-detail-grid { grid-template-columns: 1fr; } }
 .drug-reference-page {
     min-height: 100%;
     padding: 48px 42px 70px;

@@ -77,25 +77,8 @@ class UserInDB(User):
 # LEGACY PATIENT DEMO ACCOUNT
 # ============================================================
 
-fake_users_db = {
-    "patient": {
-        "username": "patient",
-        "full_name": "Patient User",
-        "email": "patient@example.com",
-        "role": "patient",
-        "hashed_password": "$2b$12$Fw7DAAMZ3.GJExtd/yw6CehbXW/K1Yc04ZYCTEPBcNVgB0SL/yqMy",
-    },
-    "doctor": {
-        "username": "doctor",
-        "full_name": "Dr. Smith",
-        "email": "doctor@example.com",
-        "role": "doctor",
-        "doctor_id": "DOC001",
-        "specialization": "General Medicine",
-        "hospital": "City General Hospital",
-        "hashed_password": "$2b$12$Fw7DAAMZ3.GJExtd/yw6CehbXW/K1Yc04ZYCTEPBcNVgB0SL/yqMy",
-    }
-}
+# Compatibility for older callers; all accounts must exist in MongoDB.
+fake_users_db = {}
 
 
 # ============================================================
@@ -312,26 +295,7 @@ def get_current_user(
         except Exception:
             raise credentials_exception
 
-    # Fallback to the legacy patient demo account. Doctor accounts are
-    # deliberately not hard-coded and must exist in MongoDB.
-    fake_user = get_user(
-        fake_users_db,
-        token_data.username
-    )
-
-    if fake_user is None:
-        raise credentials_exception
-
-    return User(
-        username=fake_user.username,
-        email=fake_user.email,
-        full_name=fake_user.full_name,
-        role=fake_user.role,
-        disabled=fake_user.disabled,
-        doctor_id=getattr(fake_user, "doctor_id", "DOC001" if fake_user.role == "doctor" else None),
-        specialization=getattr(fake_user, "specialization", "General Medicine" if fake_user.role == "doctor" else None),
-        hospital=getattr(fake_user, "hospital", "City General Hospital" if fake_user.role == "doctor" else None),
-    )
+    raise credentials_exception
 
 # ============================================================
 # ACTIVE USER

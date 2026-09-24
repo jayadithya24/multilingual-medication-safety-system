@@ -40,7 +40,7 @@ def main():
         page.goto('http://localhost:5173/patient-dashboard')
         expect(page.get_by_role('link', name='Scan & Add Medicines')).to_have_count(1)
         expect(page.get_by_role('button', name='OCR Scan', exact=True)).to_have_count(0)
-        page.get_by_placeholder('Type a medicine name').fill('Metformin')
+        page.get_by_placeholder('Search disease or drug').fill('Metformin')
         page.get_by_role('button', name='Search', exact=True).click()
         expect(page.locator('.patient-result audio')).to_have_count(1)
         assert 'More details' not in speech[-1]['text'][0]
@@ -51,7 +51,7 @@ def main():
         page.get_by_role('link', name='My Profile', exact=True).click()
         expect(page.get_by_label('Full Name', exact=True)).to_have_value('UI Test Patient')
         expect(page.get_by_role('link', name='My Profile', exact=True)).to_have_attribute('aria-current', 'page')
-        expect(page.get_by_role('link', name='Back to dashboard')).to_be_visible()
+        expect(page.get_by_role('link', name='Dashboard', exact=True)).to_be_visible()
         page.set_viewport_size({'width': 390, 'height': 844})
         expect(page.get_by_role('link', name='My Medicines', exact=True)).to_be_visible()
         page.get_by_role('link', name='My Medicines', exact=True).click()
@@ -96,8 +96,8 @@ def main():
             expect(page).to_have_url('http://localhost:5173/scan-medicines')
         page = browser.new_page()
         page.goto('http://localhost:5173/scan-medicines')
-        expect(page).to_have_url('http://localhost:5173/public')
-        expect(page.get_by_role('button', name='Register', exact=True).first).to_be_visible()
+        expect(page.get_by_role('button', name='Add to Schedule', exact=True)).to_be_disabled()
+        expect(page.get_by_role('link', name='Log in as a patient', exact=True)).to_be_visible()
         browser.close()
         print('PASS: unified navigation, scan review, explicit save, corrected dosage, manual entry, legacy redirects, guest profile guard')
 

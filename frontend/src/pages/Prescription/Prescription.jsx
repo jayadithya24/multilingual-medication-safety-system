@@ -4,7 +4,6 @@ import { getStoredToken } from "../../services/api";
 import { registerMedicationNotifications } from "../../services/fcmService";
 import { Link } from "react-router-dom";
 import MedicineCard from "../../components/MedicineCard/MedicineCard";
-import PatientNavigation from "../../components/PatientNavigation/PatientNavigation";
 import VoicePlayback from "../../components/VoicePlayback";
 import "./Prescription.css";
 
@@ -546,7 +545,6 @@ useEffect(() => () => {
 
             </section>
 
-            <PatientNavigation />
 
 
             {/* OCR */}

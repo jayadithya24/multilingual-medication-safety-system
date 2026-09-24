@@ -4,6 +4,10 @@ import { loginWithPassword, requestDoctorAccount } from "../../services/authServ
 import "./DoctorPortal.css";
 
 function formatApiError(error) {
+  if (!error?.response && error?.code === "ERR_NETWORK") {
+    return "Unable to connect to the server. Please try again when the service is available. Your details have been kept in the form.";
+  }
+
   const detail = error?.response?.data?.detail;
 
   if (Array.isArray(detail)) {
@@ -46,7 +50,7 @@ function DoctorPortal() {
     try {
       setLoading(true);
       setError("");
-      await loginWithPassword(identity.trim(), password);
+      await loginWithPassword(identity.trim(), password, false, "doctor");
       navigate("/doctor-dashboard", { replace: true });
     } catch (loginError) {
       console.error(loginError);

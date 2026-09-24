@@ -27,7 +27,7 @@ function DoctorDashboard() {
 
                 <div className="doctor-dashboard__status">
                     <span className="doctor-dashboard__status-dot"></span>
-                    System Online
+                    Doctor workspace
                 </div>
             </section>
 

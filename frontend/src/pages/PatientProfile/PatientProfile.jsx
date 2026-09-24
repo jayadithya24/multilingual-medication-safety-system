@@ -5,7 +5,6 @@ import {
     updatePatientProfile,
 } from "../../services/patientService";
 import "./PatientProfile.css";
-import PatientNavigation from "../../components/PatientNavigation/PatientNavigation";
 
 function PatientProfile() {
     const navigate = useNavigate();
@@ -127,7 +126,6 @@ function PatientProfile() {
                     </p>
                 </section>
 
-            <PatientNavigation />
             </div>
         );
     }
@@ -153,7 +151,6 @@ function PatientProfile() {
 
             </section>
 
-            <PatientNavigation />
 
 
             {/* Profile Card */}

@@ -1,377 +1,102 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import ForceGraph2D from "react-force-graph-2d";
+import { useEffect, useId, useMemo, useState } from "react";
 import api from "../../services/api";
 import "./KnowledgeGraph.css";
 
-const NODE_CONFIGS = {
-    drug: { fill: "#38bdf8", stroke: "#0284c7", glow: "rgba(56, 189, 248, 0.4)", label: "Medicine", icon: "💊" },
-    disease: { fill: "#34d399", stroke: "#059669", glow: "rgba(52, 211, 153, 0.4)", label: "Disease", icon: "🏥" },
-    sideeffect: { fill: "#fbbf24", stroke: "#d97706", glow: "rgba(251, 191, 36, 0.4)", label: "Side Effect", icon: "⚠️" },
-    side_effect: { fill: "#fbbf24", stroke: "#d97706", glow: "rgba(251, 191, 36, 0.4)", label: "Side Effect", icon: "⚠️" },
-    patient: { fill: "#c084fc", stroke: "#9333ea", glow: "rgba(192, 132, 252, 0.4)", label: "Patient", icon: "👤" },
-    default: { fill: "#94a3b8", stroke: "#475569", glow: "rgba(148, 163, 184, 0.3)", label: "Entity", icon: "🌐" },
-};
+const kind = n => n.type?.includes("side") ? "sideeffect" : n.type || "drug";
+const labels = { drug: "Medicine", disease: "Condition", sideeffect: "Side effect" };
+const relation = l => (l.relationship || l.type || "related").replaceAll("_", " ").toLowerCase();
+const endpoint = v => String(typeof v === "object" ? v.id : v);
 
-function KnowledgeGraph({ drug1 = "", drug2 = "" }) {
-    const [rawGraphData, setRawGraphData] = useState({ nodes: [], links: [] });
-    const [disease, setDisease] = useState("");
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-    const [selectedNode, setSelectedNode] = useState(null);
-    const [hoverNode, setHoverNode] = useState(null);
-    const [searchTerm, setSearchTerm] = useState("");
-    const [activeFilter, setActiveFilter] = useState("all");
-    const [containerDimensions, setContainerDimensions] = useState({ width: 900, height: 520 });
-
-    const graphRef = useRef(null);
-    const containerRef = useRef(null);
-
-    // Responsive container dimensions
-    useEffect(() => {
-        if (!containerRef.current) return;
-        const updateDimensions = () => {
-            if (containerRef.current) {
-                setContainerDimensions({
-                    width: containerRef.current.clientWidth || 900,
-                    height: 520,
-                });
-            }
-        };
-        updateDimensions();
-        const observer = new ResizeObserver(updateDimensions);
-        observer.observe(containerRef.current);
-        return () => observer.disconnect();
-    }, []);
-
-    // Load graph data: either focused interaction graph or full knowledge graph
-    useEffect(() => {
-        let isMounted = true;
-        const loadGraph = async () => {
-            try {
-                setLoading(true);
-                setError("");
-
-                let response;
-                if (drug1 && drug2) {
-                    response = await api.get("/neo4j/interaction-graph", {
-                        params: { drug1, drug2 },
-                    });
-                } else {
-                    response = await api.get("/neo4j/graph");
-                }
-
-                if (!isMounted) return;
-
-                const rawNodes = response.data.nodes || [];
-                const rawLinks = response.data.links || response.data.edges || [];
-
-                const nodes = rawNodes.map((n) => ({
-                    ...n,
-                    id: String(n.node_id || n.id || n.name || "").trim(),
-                    name: String(n.name || n.node_id || n.id || "").trim(),
-                    type: String(n.type || "drug").toLowerCase(),
-                }));
-
-                const nodeIds = new Set(nodes.map((n) => n.id));
-                const links = rawLinks
-                    .map((l) => ({
-                        ...l,
-                        source: String(typeof l.source === "object" ? l.source.id : l.source).trim(),
-                        target: String(typeof l.target === "object" ? l.target.id : l.target).trim(),
-                        relationship: String(l.relationship || l.type || "RELATED").toUpperCase(),
-                    }))
-                    .filter((l) => l.source && l.target && nodeIds.has(l.source) && nodeIds.has(l.target));
-
-                setRawGraphData({ nodes, links });
-                setDisease(response.data.disease || "");
-            } catch (err) {
-                console.error("Knowledge graph error:", err);
-                setError("Unable to load knowledge graph.");
-            } finally {
-                if (isMounted) setLoading(false);
-            }
-        };
-
-        loadGraph();
-        return () => {
-            isMounted = false;
-        };
-    }, [drug1, drug2]);
-
-    // Filter nodes & links based on user search term & category filter
-    const filteredGraphData = useMemo(() => {
-        let nodes = rawGraphData.nodes;
-
-        if (activeFilter !== "all") {
-            nodes = nodes.filter((n) => {
-                if (activeFilter === "drug") return n.type === "drug";
-                if (activeFilter === "disease") return n.type === "disease";
-                if (activeFilter === "sideeffect") return n.type.includes("side");
-                if (activeFilter === "patient") return n.type === "patient";
-                return true;
-            });
-        }
-
-        if (searchTerm.trim()) {
-            const term = searchTerm.toLowerCase();
-            nodes = nodes.filter(
-                (n) =>
-                    n.name.toLowerCase().includes(term) ||
-                    (n.generic_name && n.generic_name.toLowerCase().includes(term)) ||
-                    (n.drug_class && n.drug_class.toLowerCase().includes(term))
-            );
-        }
-
-        const validIds = new Set(nodes.map((n) => n.id));
-        const links = rawGraphData.links.filter(
-            (l) =>
-                validIds.has(typeof l.source === "object" ? l.source.id : l.source) &&
-                validIds.has(typeof l.target === "object" ? l.target.id : l.target)
-        );
-
-        return { nodes, links };
-    }, [rawGraphData, activeFilter, searchTerm]);
-
-    // Calculate highlighted neighbors and links on node hover or select
-    const { neighbors, neighborLinks } = useMemo(() => {
-        const activeNode = hoverNode || selectedNode;
-        const nSet = new Set();
-        const lSet = new Set();
-
-        if (activeNode) {
-            nSet.add(activeNode.id);
-            filteredGraphData.links.forEach((l) => {
-                const sId = typeof l.source === "object" ? l.source.id : l.source;
-                const tId = typeof l.target === "object" ? l.target.id : l.target;
-                if (sId === activeNode.id) {
-                    nSet.add(tId);
-                    lSet.add(l);
-                } else if (tId === activeNode.id) {
-                    nSet.add(sId);
-                    lSet.add(l);
-                }
-            });
-        }
-
-        return { neighbors: nSet, neighborLinks: lSet };
-    }, [filteredGraphData, hoverNode, selectedNode]);
-
-    // Graph Controls
-    const handleZoomIn = () => graphRef.current?.zoom(graphRef.current.zoom() * 1.3, 400);
-    const handleZoomOut = () => graphRef.current?.zoom(graphRef.current.zoom() / 1.3, 400);
-    const handleResetZoom = () => graphRef.current?.zoomToFit(400, 40);
-
-    if (loading) {
-        return (
-            <div className="knowledge-graph__loading">
-                <div className="graph-spinner" />
-                <span>Loading NeoGraphMed Knowledge Graph...</span>
-            </div>
-        );
-    }
-
-    if (error) {
-        return <div className="knowledge-graph__error">{error}</div>;
-    }
-
-    return (
-        <div className="knowledge-graph">
-            {/* Header & Controls */}
-            <div className="knowledge-graph__header">
-                <div>
-                    <span className="knowledge-graph__label">CLINICAL KNOWLEDGE GRAPH</span>
-                    <h2>NeoGraphMed Interactive Graph</h2>
-                    <p>Explore relationships between medicines, diseases, side effects, and patient profiles.</p>
-                </div>
-                <div className="knowledge-graph__stats">
-                    <div>
-                        <strong>{filteredGraphData.nodes.length}</strong>
-                        <span>Nodes</span>
-                    </div>
-                    <div>
-                        <strong>{filteredGraphData.links.length}</strong>
-                        <span>Links</span>
-                    </div>
-                </div>
-            </div>
-
-            {/* Filter Toolbar & Search */}
-            <div className="knowledge-graph__toolbar">
-                <div className="knowledge-graph__search">
-                    <span>⌕</span>
-                    <input
-                        type="text"
-                        placeholder="Search nodes in graph..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    {searchTerm && <button onClick={() => setSearchTerm("")}>×</button>}
-                </div>
-
-                <div className="knowledge-graph__filters">
-                    <button className={activeFilter === "all" ? "is-active" : ""} onClick={() => setActiveFilter("all")}>All</button>
-                    <button className={activeFilter === "drug" ? "is-active" : ""} onClick={() => setActiveFilter("drug")}>💊 Medicines</button>
-                    <button className={activeFilter === "disease" ? "is-active" : ""} onClick={() => setActiveFilter("disease")}>🏥 Diseases</button>
-                    <button className={activeFilter === "sideeffect" ? "is-active" : ""} onClick={() => setActiveFilter("sideeffect")}>⚠️ Side Effects</button>
-                    <button className={activeFilter === "patient" ? "is-active" : ""} onClick={() => setActiveFilter("patient")}>👤 Patients</button>
-                </div>
-
-                <div className="knowledge-graph__controls">
-                    <button title="Zoom In" onClick={handleZoomIn}>+</button>
-                    <button title="Zoom Out" onClick={handleZoomOut}>−</button>
-                    <button title="Fit to View" onClick={handleResetZoom}>⛶</button>
-                </div>
-            </div>
-
-            {/* Canvas Container */}
-            <div className="knowledge-graph__canvas" ref={containerRef}>
-                {filteredGraphData.nodes.length === 0 ? (
-                    <div className="knowledge-graph__empty">No matching nodes found for your filter.</div>
-                ) : (
-                    <ForceGraph2D
-                        ref={graphRef}
-                        graphData={filteredGraphData}
-                        nodeId="id"
-                        width={containerDimensions.width}
-                        height={containerDimensions.height}
-                        backgroundColor="#090d16"
-                        nodeRelSize={6}
-                        onNodeClick={(node) => setSelectedNode(node)}
-                        onNodeHover={(node) => setHoverNode(node)}
-                        onBackgroundClick={() => setSelectedNode(null)}
-                        linkDirectionalParticles={(link) => (neighborLinks.has(link) || !hoverNode ? 2 : 0)}
-                        linkDirectionalParticleSpeed={0.005}
-                        linkDirectionalParticleWidth={3}
-                        linkDirectionalParticleColor={(link) => (link.relationship === "INTERACTS_WITH" ? "#ef4444" : "#38bdf8")}
-                        linkDirectionalArrowLength={4}
-                        linkDirectionalArrowRelPos={1}
-                        linkColor={(link) => {
-                            const active = hoverNode || selectedNode;
-                            if (active && !neighborLinks.has(link)) return "rgba(51, 65, 85, 0.2)";
-                            if (link.relationship === "INTERACTS_WITH") return "#ef4444";
-                            if (link.relationship === "TREATS") return "#10b981";
-                            if (link.relationship === "CAUSES") return "#f59e0b";
-                            return "#64748b";
-                        }}
-                        linkWidth={(link) => {
-                            const active = hoverNode || selectedNode;
-                            if (active && neighborLinks.has(link)) return 3.5;
-                            return link.relationship === "INTERACTS_WITH" ? 2.5 : 1.5;
-                        }}
-                        linkLabel={(link) => `${link.relationship}${link.severity ? ` (${link.severity})` : ""}`}
-                        nodeCanvasObject={(node, ctx, globalScale) => {
-                            const active = hoverNode || selectedNode;
-                            const isHighlighted = active ? neighbors.has(node.id) : true;
-                            const isSelected = selectedNode?.id === node.id;
-                            const config = NODE_CONFIGS[node.type] || NODE_CONFIGS.default;
-
-                            const baseRadius = node.type === "disease" ? 13 : isSelected ? 11 : 8;
-
-                            ctx.save();
-                            ctx.globalAlpha = isHighlighted ? 1.0 : 0.2;
-
-                            // Glowing halo
-                            if (isSelected || hoverNode?.id === node.id) {
-                                ctx.beginPath();
-                                ctx.arc(node.x, node.y, baseRadius + 5, 0, 2 * Math.PI);
-                                ctx.fillStyle = config.glow;
-                                ctx.fill();
-                            }
-
-                            // Core node
-                            ctx.beginPath();
-                            ctx.arc(node.x, node.y, baseRadius, 0, 2 * Math.PI);
-                            ctx.fillStyle = config.fill;
-                            ctx.fill();
-                            ctx.lineWidth = isSelected ? 3 : 1.5;
-                            ctx.strokeStyle = isSelected ? "#ffffff" : config.stroke;
-                            ctx.stroke();
-
-                            // Node label pill
-                            const label = `${config.icon} ${node.name || node.id}`;
-                            const fontSize = Math.max(9, Math.min(13, 12 / globalScale));
-                            ctx.font = `600 ${fontSize}px Inter, system-ui, sans-serif`;
-
-                            const textWidth = ctx.measureText(label).width;
-                            const paddingX = 6 / globalScale;
-                            const paddingY = 2 / globalScale;
-                            const boxX = node.x - textWidth / 2 - paddingX;
-                            const boxY = node.y + baseRadius + 4;
-                            const boxW = textWidth + paddingX * 2;
-                            const boxH = fontSize + paddingY * 2;
-
-                            ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
-                            ctx.beginPath();
-                            ctx.roundRect(boxX, boxY, boxW, boxH, 4 / globalScale);
-                            ctx.fill();
-                            ctx.strokeStyle = config.stroke;
-                            ctx.lineWidth = 1 / globalScale;
-                            ctx.stroke();
-
-                            ctx.textAlign = "center";
-                            ctx.textBaseline = "middle";
-                            ctx.fillStyle = "#ffffff";
-                            ctx.fillText(label, node.x, boxY + boxH / 2);
-                            ctx.restore();
-                        }}
-                    />
-                )}
-            </div>
-
-            {/* Node Inspector Drawer */}
-            {selectedNode && (
-                <div className="knowledge-graph__inspector">
-                    <div className="knowledge-graph__inspector-header">
-                        <div>
-                            <span className="knowledge-graph__inspector-type">
-                                {(NODE_CONFIGS[selectedNode.type] || NODE_CONFIGS.default).icon} {(NODE_CONFIGS[selectedNode.type] || NODE_CONFIGS.default).label}
-                            </span>
-                            <h3>{selectedNode.name}</h3>
-                        </div>
-                        <button onClick={() => setSelectedNode(null)}>×</button>
-                    </div>
-
-                    <div className="knowledge-graph__inspector-body">
-                        {selectedNode.generic_name && (
-                            <div>
-                                <strong>Generic Name:</strong> {selectedNode.generic_name}
-                            </div>
-                        )}
-                        {selectedNode.drug_class && (
-                            <div>
-                                <strong>Drug Class:</strong> {selectedNode.drug_class}
-                            </div>
-                        )}
-                        <div>
-                            <strong>Connected Relationships:</strong>
-                            <ul>
-                                {filteredGraphData.links
-                                    .filter(
-                                        (l) =>
-                                            (typeof l.source === "object" ? l.source.id : l.source) === selectedNode.id ||
-                                            (typeof l.target === "object" ? l.target.id : l.target) === selectedNode.id
-                                    )
-                                    .map((l, idx) => {
-                                        const otherId = (typeof l.source === "object" ? l.source.id : l.source) === selectedNode.id
-                                            ? (typeof l.target === "object" ? l.target.id : l.target)
-                                            : (typeof l.source === "object" ? l.source.id : l.source);
-                                        return (
-                                            <li key={idx}>
-                                                <span style={{ color: l.relationship === "INTERACTS_WITH" ? "#ef4444" : "#3b82f6" }}>
-                                                    {l.relationship}
-                                                </span>{" "}
-                                                ➔ <strong>{otherId}</strong>
-                                                {l.description && <p className="inspector-desc">{l.description}</p>}
-                                            </li>
-                                        );
-                                    })}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </div>
-    );
+export default function KnowledgeGraph({ drug1 = "", drug2 = "" }) {
+  const [data, setData] = useState({ nodes: [], links: [] });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [focus, setFocus] = useState("");
+  const [filter, setFilter] = useState("all");
+  const [page, setPage] = useState(0);
+  const [selected, setSelected] = useState(null);
+  const [zoom, setZoom] = useState(1);
+  const [retry, setRetry] = useState(0);
+  const marker = useId().replaceAll(":", "");
+  useEffect(() => {
+    let active = true;
+    const url = drug2 ? "/neo4j/interaction-graph" : drug1 ? "/neo4j/drug-graph" : "/neo4j/graph";
+    api.get(url, { params: drug2 ? { drug1, drug2 } : drug1 ? { drug: drug1 } : {} }).then(({ data: response }) => {
+      if (!active) return;
+      const aliases = new Map();
+      const nodes = (response.nodes || []).map(n => {
+        const id = String(n.node_id || n.id || n.name);
+        [n.id, n.node_id, n.name].filter(Boolean).forEach(v => aliases.set(String(v), id));
+        return { ...n, id, name: n.name || id };
+      });
+      const links = (response.links || response.edges || []).map(l => ({ ...l,
+        source: aliases.get(endpoint(l.source)), target: aliases.get(endpoint(l.target)),
+      })).filter(l => l.source && l.target);
+      setData({ nodes, links, source: response.source }); setError(""); setLoading(false);
+    }).catch(() => { if (active) { setError("Medicine relationships could not be loaded. Please retry."); setLoading(false); } });
+    return () => { active = false; };
+  }, [drug1, drug2, retry]);
+  const medicines = useMemo(() => data.nodes.filter(n => kind(n) === "drug").sort((a, b) => a.name.localeCompare(b.name)), [data]);
+  const focused = drug1 || focus || medicines[0]?.name || "";
+  const centers = data.nodes.filter(n => kind(n) === "drug" && [focused.toLowerCase(), drug2.toLowerCase()].includes(n.name.toLowerCase()));
+  const centerIds = new Set(centers.map(n => n.id));
+  const relatedLinks = data.links.filter(l => centerIds.has(l.source) || centerIds.has(l.target));
+  const connected = new Set(relatedLinks.flatMap(l => [l.source, l.target]));
+  const neighbors = data.nodes.filter(n => connected.has(n.id) && !centerIds.has(n.id) && (filter === "all" || kind(n) === filter))
+    .sort((a, b) => kind(a).localeCompare(kind(b)) || a.name.localeCompare(b.name));
+  const visible = neighbors.slice(page * 10, page * 10 + 10);
+  const height = Math.max(380, Math.ceil(visible.length / 2) * 94 + 90);
+  const positions = new Map();
+  centers.forEach((n, i) => positions.set(n.id, { x: 500, y: height / 2 + (i - (centers.length - 1) / 2) * 160 }));
+  visible.forEach((n, i) => {
+    const side = i % 2, count = Math.ceil((visible.length - side) / 2);
+    positions.set(n.id, { x: side ? 865 : 135, y: height / 2 + (Math.floor(i / 2) - (count - 1) / 2) * 94 });
+  });
+  const links = relatedLinks.filter(l => positions.has(l.source) && positions.has(l.target));
+  const isSelectedLink = link => selected && (link.source === selected.id || link.target === selected.id);
+  const highlightedIds = new Set(selected ? [selected.id] : []);
+  links.filter(isSelectedLink).forEach(link => {
+    highlightedIds.add(link.source);
+    highlightedIds.add(link.target);
+  });
+  // Draw highlighted paths last so they remain visible at crossings.
+  const orderedLinks = [...links].sort((a, b) => Number(Boolean(isSelectedLink(a))) - Number(Boolean(isSelectedLink(b))));
+  const selectNode = node => setSelected(current => current?.id === node.id ? null : node);
+  const reset = () => { setPage(0); setSelected(null); setZoom(1); };
+  return <section className="med-graph" aria-label="Medication knowledge graph">
+    <header className="med-graph__header"><div><p className="med-graph__eyebrow">CONNECTED MEDICINE</p>
+      <h2>{drug2 ? "Interaction knowledge graph" : "Medication knowledge graph"}</h2>
+      <p>{drug2 ? `${drug1} and ${drug2}.` : "One medicine. Its direct connections."} Select a node to explore its relationships.</p></div>
+      <span className="med-graph__count">{relatedLinks.length} relationships</span></header>
+    {!loading && !error && <p className="med-graph__source">Source: {data.source === "neo4j" ? "Neo4j database" : data.source === "local_csv" ? "Local dataset (Neo4j unavailable)" : "Not reported"}</p>}
+    <div className="med-graph__toolbar">
+      {!drug1 && <label>Medicine<select aria-label="Graph medicine" value={focused} onChange={e => { setFocus(e.target.value); reset(); }}>{medicines.map(n => <option key={n.id}>{n.name}</option>)}</select></label>}
+      <label>Show connections<select value={filter} onChange={e => { setFilter(e.target.value); reset(); }}><option value="all">All relationships</option><option value="disease">Conditions</option><option value="sideeffect">Side effects</option><option value="drug">Medicines</option></select></label>
+      <div className="med-graph__controls"><button aria-label="Zoom out" disabled={zoom <= 1} onClick={() => setZoom(Math.max(1, zoom - .25))}>−</button><button onClick={() => setZoom(1)}>Fit view</button><button aria-label="Zoom in" disabled={zoom >= 2} onClick={() => setZoom(Math.min(2, zoom + .25))}>+</button></div>
+    </div>
+    <div className="med-graph__legend">{Object.entries(labels).map(([type, label]) => <span key={type}><i className={`med-graph__dot med-graph__dot--${type}`} />{label}</span>)}<span>Arrows show relationship direction</span></div>
+    {loading ? <p className="med-graph__message" role="status">Loading medicine relationships…</p> : error ? <div className="med-graph__message" role="alert">{error} <button onClick={() => { setLoading(true); setRetry(retry + 1); }}>Retry</button></div> : !centers.length ? <p className="med-graph__message">No graph data is available for this medicine.</p> : <>
+      <div className="med-graph__viewport"><svg className="med-graph__svg" onClick={e => { if (e.target === e.currentTarget) setSelected(null); }} onKeyDown={e => { if (e.key === "Escape") setSelected(null); }} role="group" aria-label={`Relationships for ${focused}${drug2 ? ` and ${drug2}` : ""}`} viewBox={`0 0 1000 ${height}`} style={{ width: `${zoom * 100}%`, minWidth: 760 * zoom }}>
+        <defs><marker id={marker} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" /></marker></defs>
+        <defs><marker id={`${marker}-highlight`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#087f77" /></marker></defs>
+        {orderedLinks.map((l, i) => {
+          const a = positions.get(l.source), b = positions.get(l.target), vertical = a.x === b.x;
+          const direction = b.x > a.x ? 1 : -1, down = b.y > a.y ? 1 : -1;
+          const x1 = a.x + (vertical ? 0 : direction * 110), x2 = b.x - (vertical ? 0 : direction * 115);
+          const y1 = a.y + (vertical ? down * 34 : 0), y2 = b.y - (vertical ? down * 38 : 0);
+          return <g key={`${l.source}-${l.target}-${i}`} className={`med-graph__edge ${selected ? isSelectedLink(l) ? "is-highlighted" : "is-dimmed" : ""} ${l.relationship === "INTERACTS_WITH" ? "med-graph__edge--interaction" : ""}`}><path d={`M${x1},${y1} C${(x1 + x2) / 2},${y1} ${(x1 + x2) / 2},${y2} ${x2},${y2}`} markerEnd={`url(#${isSelectedLink(l) ? `${marker}-highlight` : marker})`} /><text x={(x1 + x2) / 2} y={(y1 + y2) / 2 - 7} textAnchor="middle">{relation(l)}</text></g>;
+        })}
+        {[...centers, ...visible].map(n => {
+          const p = positions.get(n.id), words = n.name.match(/.{1,25}(\s|$)|\S{1,25}/g) || [n.name];
+          return <g key={n.id} role="button" tabIndex="0" aria-label={`${labels[kind(n)] || "Entity"}: ${n.name}`} aria-pressed={selected?.id === n.id} onClick={() => selectNode(n)} onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selectNode(n); } }} className={`med-graph__node ${selected ? highlightedIds.has(n.id) ? "is-connected" : "is-dimmed" : ""} med-graph__node--${kind(n)} ${centerIds.has(n.id) ? "med-graph__node--focus" : ""} ${selected?.id === n.id ? "is-selected" : ""}`} transform={`translate(${p.x},${p.y})`}>
+            <title>{n.name}</title><rect x="-110" y="-34" width="220" height="68" rx="12" /><circle cx="-93" cy="-19" r="4" /><text className="med-graph__type" x="-82" y="-15">{centerIds.has(n.id) ? "SELECTED MEDICINE" : labels[kind(n)]}</text>
+            {words.slice(0, 2).map((line, i) => <text key={i} x="-94" y={5 + i * 16}>{line.trim()}{i === 1 && words.length > 2 ? "…" : ""}</text>)}
+          </g>;
+        })}
+      </svg></div>
+      {!relatedLinks.length && <p className="med-graph__message">No relationships are recorded for this selection in the current dataset.</p>}
+      <footer className="med-graph__footer"><span>{neighbors.length ? `Showing ${page * 10 + 1}–${Math.min((page + 1) * 10, neighbors.length)} of ${neighbors.length} related nodes` : "No related nodes in this view"}</span>{neighbors.length > 10 && <div><button disabled={!page} onClick={() => { setPage(page - 1); setSelected(null); }}>Previous</button><button disabled={(page + 1) * 10 >= neighbors.length} onClick={() => { setPage(page + 1); setSelected(null); }}>Next connections</button></div>}</footer>
+      {selected && <aside className="med-graph__details" aria-label="Node details"><button className="med-graph__close" aria-label="Close node details" onClick={() => setSelected(null)}>×</button><p className="med-graph__eyebrow">{labels[kind(selected)]}</p><h3>{selected.name}</h3><ul>{relatedLinks.filter(l => l.source === selected.id || l.target === selected.id).map((l, i) => <li key={i}>{data.nodes.find(n => n.id === l.source)?.name} <strong>{relation(l)}</strong> {data.nodes.find(n => n.id === l.target)?.name}{l.severity ? ` · ${l.severity}` : ""}</li>)}</ul></aside>}
+    </>}
+  </section>;
 }
-
-export default KnowledgeGraph;

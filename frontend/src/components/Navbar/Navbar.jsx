@@ -1,11 +1,9 @@
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { getStoredRole, getStoredToken } from "../../services/api";
-import { logout } from "../../services/authService";
 import "./Navbar.css";
 
 function Navbar() {
     useLocation();
-    const navigate = useNavigate();
     const isPatient = getStoredRole() === "patient" && Boolean(getStoredToken());
 
     return (

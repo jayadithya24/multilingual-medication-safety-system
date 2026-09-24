@@ -13,7 +13,7 @@ function persistAuth(responseData) {
   }
 }
 
-export async function loginWithPassword(username, password, patientOnly = false) {
+export async function loginWithPassword(username, password, patientOnly = false, expectedRole = null) {
   const body = new URLSearchParams();
   body.append("username", username);
   body.append("password", password);
@@ -24,6 +24,9 @@ export async function loginWithPassword(username, password, patientOnly = false)
     },
   });
 
+  if (expectedRole && response.data?.role !== expectedRole) {
+    throw new Error(`Please sign in with a registered ${expectedRole} account.`);
+  }
   persistAuth(response.data);
   return response.data;
 }

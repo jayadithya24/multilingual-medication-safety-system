@@ -1,335 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import LanguageSelector from "../../components/LanguageSelector/LanguageSelector";
-import { searchMedicine } from "../../services/medicineService";
+import KnowledgeGraph from "../../components/KnowledgeGraph/KnowledgeGraph";
+import { fetchMedicines, searchMedicine } from "../../services/medicineService";
 import "./DrugReference.css";
 
-function DrugReference() {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [lang, setLang] = useState("en");
-    const [results, setResults] = useState([]);
-    const [selectedDrug, setSelectedDrug] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-
-    const handleSearch = async (event) => {
-        event.preventDefault();
-
-        if (!searchTerm.trim()) {
-            setError("Please enter a medicine name.");
-            return;
-        }
-
-        try {
-            setLoading(true);
-            setError("");
-            setSelectedDrug(null);
-
-            const response = await searchMedicine(searchTerm.trim(), lang);
-
-            // Your backend returns { results: [...] }
-            setResults(response.results || []);
-        } catch (err) {
-            console.error(err);
-            setError("Unable to search medicines.");
-            setResults([]);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleSelectDrug = (drug) => {
-        setSelectedDrug(drug);
-    };
-
-    return (
-        <div className="drug-reference-page">
-
-            {/* Header */}
-            <section className="drug-reference-hero">
-                <p className="drug-reference-kicker">
-                    MEDICATION REFERENCE
-                </p>
-
-                <h1>
-                    Drug Reference
-                </h1>
-
-                <p>
-                    Search medicine information, warnings,
-                    contraindications, and safety details.
-                </p>
-            </section>
-
-
-            {/* Search */}
-            <section className="drug-reference-search">
-                <div style={{ marginBottom: "16px" }}>
-    <LanguageSelector
-        selectedLanguage={lang}
-        onLanguageChange={setLang}
-    />
-</div>
-
-                <form onSubmit={handleSearch}>
-
-                    <div className="drug-reference-search-box">
-                        <span>⌕</span>
-
-                        <input
-                            type="text"
-                            value={searchTerm}
-                            onChange={(event) =>
-                                setSearchTerm(event.target.value)
-                            }
-                            placeholder="Search medicine name..."
-                        />
-
-                        <button
-                            type="submit"
-                            disabled={loading}
-                        >
-                            {loading ? "Searching..." : "Search"}
-                        </button>
-                    </div>
-
-                </form>
-
-                {error && (
-                    <div className="drug-reference-error">
-                        {error}
-                    </div>
-                )}
-
-            </section>
-
-
-            {/* Search Results */}
-            {results.length > 0 && (
-                <section className="drug-reference-section">
-
-                    <div className="drug-reference-section-header">
-                        <div>
-                            <h2>Search Results</h2>
-                            <p>
-                                Medicines matching your search.
-                            </p>
-                        </div>
-                    </div>
-
-
-                    <div className="drug-reference-results">
-
-                        {results.map((drug, index) => (
-                            <button
-                                key={
-                                    drug.drug_id ||
-                                    drug.drug_name ||
-                                    index
-                                }
-                                className="drug-result-card"
-                                onClick={() =>
-                                    handleSelectDrug(drug)
-                                }
-                            >
-
-                                <div className="drug-result-icon">
-                                    💊
-                                </div>
-
-                                <div className="drug-result-content">
-
-                                    <h3>
-                                        {drug.drug_name}
-                                    </h3>
-
-                                    <p>
-                                        Generic:{" "}
-                                        {drug.generic_name || "Not available"}
-                                    </p>
-
-                                    <span>
-                                        {drug.drug_class || "Medicine"}
-                                    </span>
-
-                                </div>
-
-                                <div className="drug-result-arrow">
-                                    →
-                                </div>
-
-                            </button>
-                        ))}
-
-                    </div>
-
-                </section>
-            )}
-
-
-            {/* Drug Details */}
-            {selectedDrug && (
-                <section className="drug-details">
-
-                    <div className="drug-details-header">
-
-                        <div>
-                            <p className="drug-details-kicker">
-                                DRUG INFORMATION
-                            </p>
-
-                            <h2>
-                                {selectedDrug.drug_name}
-                            </h2>
-
-                            <p>
-                                {selectedDrug.generic_name}
-                            </p>
-                        </div>
-
-                        <button
-                            className="drug-details-close"
-                            onClick={() =>
-                                setSelectedDrug(null)
-                            }
-                        >
-                            ×
-                        </button>
-
-                    </div>
-
-
-                    <div className="drug-details-grid">
-
-                        <div className="drug-info-card">
-                            <span>Drug Class</span>
-                            <strong>
-                                {selectedDrug.drug_class ||
-                                    "Not available"}
-                            </strong>
-                        </div>
-
-
-                        <div className="drug-info-card">
-                            <span>Active Ingredient</span>
-                            <strong>
-                                {selectedDrug.active_ingredient ||
-                                    "Not available"}
-                            </strong>
-                        </div>
-
-                    </div>
-
-
-                    {/* Description */}
-                    <div className="drug-details-block">
-                        <h3>Description</h3>
-
-                        <p>
-                           {(
-    lang === "kn"
-        ? selectedDrug.description_kn
-        : lang === "tulu"
-            ? selectedDrug.description_tulu
-            : selectedDrug.description_en
-) || selectedDrug.description || "No description available."}
-                        </p>
-                    </div>
-
-
-                    {/* Warnings */}
-                    <div className="drug-details-block drug-details-block--warning">
-
-                        <h3>
-                            ⚠ Warnings
-                        </h3>
-
-                        <p>
-                           {(
-    lang === "kn"
-        ? selectedDrug.warnings_kn
-        : lang === "tulu"
-            ? selectedDrug.warnings_tulu
-            : selectedDrug.warnings_en
-) || selectedDrug.warnings || "No warnings available."}
-                        </p>
-
-                    </div>
-
-
-                    {/* Contraindications */}
-                    <div className="drug-details-block">
-
-                        <h3>
-                            Contraindications
-                        </h3>
-
-                        <p>
-                            {(
-    lang === "kn"
-        ? selectedDrug.contraindications_kn
-        : lang === "tulu"
-            ? selectedDrug.contraindications_tulu
-            : selectedDrug.contraindications_en
-) || selectedDrug.contraindications || "No contraindications available."}
-                        </p>
-
-                    </div>
-
-
-                    {/* Interactions */}
-                    <div className="drug-details-block">
-
-                        <h3>
-                            Drug Interactions
-                        </h3>
-
-                        {selectedDrug.interactions?.length > 0 ? (
-
-                            <div className="drug-interactions-list">
-
-                                {selectedDrug.interactions.map(
-                                    (interaction, index) => (
-                                        <div
-                                            key={index}
-                                            className="drug-interaction-item"
-                                        >
-                                            <strong>
-                                                {interaction.drug_name}
-                                            </strong>
-
-                                            {interaction.severity && (
-                                                <span>
-                                                    {interaction.severity}
-                                                </span>
-                                            )}
-
-                                            {interaction.description && (
-                                                <p>
-                                                    {interaction.description}
-                                                </p>
-                                            )}
-                                        </div>
-                                    )
-                                )}
-
-                            </div>
-
-                        ) : (
-
-                            <p>
-                                No known interactions found
-                                in the current dataset.
-                            </p>
-
-                        )}
-
-                    </div>
-
-                </section>
-            )}
-
-        </div>
-    );
+export default function DrugReference() {
+  const [medicines, setMedicines] = useState([]);
+  const [medicine, setMedicine] = useState("");
+  const [lang, setLang] = useState("en");
+  const [drug, setDrug] = useState(null);
+  const [error, setError] = useState("");
+  const [listError, setListError] = useState("");
+  const [retry, setRetry] = useState(0);
+  useEffect(() => {
+    let active = true;
+    fetchMedicines().then(data => { if (active) { setMedicines((data.medicines || []).sort()); setListError(""); } })
+      .catch(() => { if (active) setListError("Unable to load medicines."); });
+    return () => { active = false; };
+  }, [retry]);
+  useEffect(() => {
+    if (!medicine) return;
+    let active = true;
+    searchMedicine(medicine, lang).then(data => {
+      if (!active) return;
+      const match = (data.results || []).find(n => n.drug_name?.toLowerCase() === medicine.toLowerCase());
+      setDrug(match || null); setError(match ? "" : "No reference information is available for this medicine.");
+    }).catch(() => { if (active) setError("Unable to load medicine information."); });
+    return () => { active = false; };
+  }, [medicine, lang]);
+  const text = field => drug?.[`${field}_${lang}`] || drug?.[`${field}_en`] || drug?.[field] || "Not available in the current dataset.";
+  return <div className="drug-reference-page reference-workspace">
+    <section className="drug-reference-hero"><p className="drug-reference-kicker">MEDICATION REFERENCE</p><h1>Explore a medicine</h1><p>Choose a medicine to see its connected conditions, side effects and interactions.</p></section>
+    <section className="reference-picker"><label>Choose a medicine<select aria-label="Choose a medicine" value={medicine} onChange={e => { setMedicine(e.target.value); setDrug(null); setError(""); }} disabled={!medicines.length}><option value="">{medicines.length ? "Select from the medicine list" : "Loading medicines…"}</option>{medicines.map(name => <option key={name}>{name}</option>)}</select></label><LanguageSelector selectedLanguage={lang} onLanguageChange={value => { setLang(value); setDrug(null); setError(""); }} /></section>
+    {listError && <p role="alert">{listError} <button onClick={() => setRetry(retry + 1)}>Retry</button></p>}
+    {!medicine ? <section className="reference-welcome"><span>01 / SELECT A MEDICINE</span><h2>Start with a medicine. Follow its connections.</h2><p>The graph will show only directly related nodes, with clinical reference details below.</p><div><b>Conditions treated</b><b>Recorded side effects</b><b>Related medicines</b></div></section> : <>
+      <KnowledgeGraph key={medicine} drug1={medicine} />
+      {error ? <p role="alert" className="drug-reference-error">{error}</p> : !drug ? <p role="status">Loading reference details…</p> : <section className="reference-details"><header><p className="drug-reference-kicker">CLINICAL REFERENCE</p><h2>{drug.drug_name}</h2><p>{drug.generic_name} · {drug.drug_class}</p></header><div className="reference-detail-grid">
+        <article><h3>Overview</h3><p>{text("description")}</p><p><strong>Active ingredient:</strong> {drug.active_ingredient || drug.generic_name || "Not available"}</p></article>
+        <article className="reference-warning"><h3>Warnings</h3><p>{text("warnings")}</p></article>
+        <article><h3>Contraindications</h3><p>{text("contraindications")}</p></article>
+        <article><h3>Explore interactions</h3><p>Select a medicine node in the graph to inspect its recorded relationships, or compare a specific pair in the interaction checker.</p><Link to="/drug-interaction">Compare two medicines →</Link></article>
+      </div></section>}
+    </>}
+  </div>;
 }
-
-export default DrugReference;

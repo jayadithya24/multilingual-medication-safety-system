@@ -68,7 +68,8 @@
   color: #1d4ed8;
 }
 
-.interaction-field input {
+.interaction-field input,
+.interaction-field select {
   width: 100%;
   border: 1px solid #cbd5e1;
   border-radius: 14px;
@@ -80,7 +81,8 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.interaction-field input:focus {
+.interaction-field input:focus,
+.interaction-field select:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
 }
@@ -234,11 +236,13 @@
     padding: 24px 14px 40px;
   }
 
-  .interaction-panel {
+.interaction-panel {
+  min-width: 0;
     padding: 18px;
   }
 
-  .interaction-card {
+.interaction-card {
+  margin-bottom: 24px;
     padding: 18px;
   }
 }

@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { getStoredRole, getStoredToken } from "../../services/api";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../services/authService";
 import "./PatientSidebar.css";
 
 function PatientSidebar() {
     const navigate = useNavigate();
+    const { pathname, search } = useLocation();
+    const tab = new URLSearchParams(search).get("tab") || "text";
     const [lang, setLang] = useState("en");
-    const isPatient = getStoredRole() === "patient" && Boolean(getStoredToken());
 
     const handleLogout = async () => {
         await logout();
@@ -18,29 +18,36 @@ function PatientSidebar() {
         {
             path: "/patient-dashboard",
             label: "Dashboard",
+            tab: "text",
             icon: "⌂",
         },
         {
             path: "/scan-medicines",
-            label: "Scan Medicines",
+            label: "Scan & Add Medicines",
             icon: "📷",
         },
         {
-            path: "/voice-search",
+            path: "/patient-dashboard?tab=voice",
+            tab: "voice",
             label: "Voice Search",
             icon: "🎙️",
         },
         {
-            path: "/knowledge-graph",
-            label: "Knowledge Graph",
-            icon: "🕸️",
+            path: "/patient-dashboard?tab=medicines",
+            label: "My Medicines",
+            icon: "▤",
+            tab: "medicines",
         },
         {
             path: "/patient-profile",
-            label: "Patient Profile",
+            label: "My Profile",
             icon: "👤",
         },
     ];
+
+    const isActive = (item) => item.tab
+        ? (pathname === "/patient-dashboard" && tab === item.tab) || (item.tab === "voice" && pathname === "/voice-search")
+        : pathname === item.path;
 
     return (
         <aside className="patient-sidebar">
@@ -67,27 +74,26 @@ function PatientSidebar() {
                 </div>
             </div>
 
-            <nav className="patient-sidebar__nav">
+            <nav className="patient-sidebar__nav" aria-label="Patient navigation">
                 <p className="patient-sidebar__section-title">
                     NAVIGATION
                 </p>
 
                 {navItems.map((item) => (
-                    <NavLink
+                    <Link
                         key={item.path}
                         to={item.path}
-                        className={({ isActive }) =>
-                            `patient-sidebar__link ${isActive ? "is-active" : ""}`
-                        }
+                        aria-current={isActive(item) ? "page" : undefined}
+                        className={`patient-sidebar__link ${isActive(item) ? "is-active" : ""}`}
                     >
-                        <span className="patient-sidebar__icon">
+                        <span className="patient-sidebar__icon" aria-hidden="true">
                             {item.icon}
                         </span>
 
                         <span>
                             {item.label}
                         </span>
-                    </NavLink>
+                    </Link>
                 ))}
             </nav>
 

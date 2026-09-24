@@ -52,7 +52,7 @@ def get_drug_interaction(drug1: str, drug2: str, lang: str = "en"):
         return {
             "drug1": record["drug1"],
             "drug2": record["drug2"],
-            "severity": record["severity"] or "Moderate",
+            "severity": record["severity"] or "Unknown",
             "description": record["description"] or "",
             "recommendation": record["disclaimer"] or "Consult your doctor before acting on this information.",
             "lang": lang,
@@ -454,7 +454,7 @@ def _fallback_local_knowledge_graph() -> Dict[str, List[Dict[str, Any]]]:
     if master_path.exists():
         master_df = pd.read_csv(master_path)
         for _, row in master_df.iterrows():
-            drug_id = row.get("drug_id") or row.get("drug_name")
+            drug_id = row.get("drug_id") or str(row.get("drug_name", "")).strip().lower().replace(" ", "-")
             drug_name = row.get("drug_name") or row.get("generic_name")
             if drug_id is None:
                 continue
@@ -484,8 +484,9 @@ def _fallback_local_knowledge_graph() -> Dict[str, List[Dict[str, Any]]]:
             drug_id = row.get("drug_id")
             side_effect = row.get("side_effect")
             if drug_id is not None and side_effect is not None:
-                add_node(str(side_effect), side_effect, "sideeffect")
-                add_edge(drug_id, side_effect, "CAUSES", "causes")
+                side_effect_id = "sideeffect:" + str(side_effect).strip().casefold()
+                add_node(side_effect_id, side_effect, "sideeffect")
+                add_edge(drug_id, side_effect_id, "CAUSES", "causes")
 
     interaction_path = datasets_dir / "drug_interactions.csv"
     if interaction_path.exists():
@@ -502,7 +503,7 @@ def _fallback_local_knowledge_graph() -> Dict[str, List[Dict[str, Any]]]:
             add_node(drug2, drug2, "drug")
             add_edge(drug1, drug2, "INTERACTS_WITH", "interaction", {"severity": severity})
 
-    return {"nodes": nodes, "edges": edges}
+    return {"nodes": nodes, "edges": edges, "source": "local_csv"}
 
 
 def get_diseases() -> List[str]:
@@ -721,7 +722,8 @@ def get_knowledge_graph() -> Dict[str, List[Dict[str, Any]]]:
 
             return {
                 "nodes": nodes,
-                "edges": edges
+                "edges": edges,
+                "source": "neo4j",
             }
 
     except Exception as err:
@@ -733,386 +735,26 @@ def get_knowledge_graph() -> Dict[str, List[Dict[str, Any]]]:
 
 
 
-def get_interaction_graph(
-    drug1: str,
-    drug2: str
-) -> Dict[str, Any]:
-
-    if not drug1 or not drug2:
-        return {
-            "status": "success",
-            "nodes": [],
-            "links": [],
-            "disease": None,
-            "selected_drugs": []
-        }
-
-    driver = _get_driver()
-
-    try:
-        with driver.session() as session:
-
-            # =====================================================
-            # 1. Find ONLY the two selected medicines
-            # =====================================================
-
-            selected_query = """
-            MATCH (d1:Drug), (d2:Drug)
-
-            WHERE toLower(d1.name) = toLower($drug1)
-              AND toLower(d2.name) = toLower($drug2)
-
-            RETURN d1, d2
-            """
-
-            selected = session.run(
-                selected_query,
-                drug1=drug1.strip(),
-                drug2=drug2.strip()
-            ).single()
-
-            if not selected:
-                return {
-                    "status": "success",
-                    "nodes": [],
-                    "links": [],
-                    "disease": None,
-                    "selected_drugs": []
-                }
-
-            d1 = selected["d1"]
-            d2 = selected["d2"]
-
-            selected_drug_names = [
-                d1["name"],
-                d2["name"]
-            ]
-
-
-            # =====================================================
-            # 2. Prepare nodes and links
-            # =====================================================
-
-            nodes = []
-            links = []
-            node_ids = set()
-
-
-            def add_drug_node(drug):
-
-                if not drug:
-                    return
-
-                node_id = str(
-                    drug.get("name") or
-                    drug.get("drug_id") or
-                    drug.get("id")
-                ).strip()
-
-                if not node_id:
-                    return
-
-                if node_id in node_ids:
-                    return
-
-                nodes.append({
-                    "id": node_id,
-                    "node_id": node_id,
-                    "name": drug.get("name") or node_id,
-                    "type": "drug",
-                    "generic_name": drug.get("generic_name"),
-                    "drug_class": drug.get("drug_class")
-                })
-
-                node_ids.add(node_id)
-
-
-            def add_disease_node(disease):
-
-                if not disease:
-                    return
-
-                node_id = str(
-                    disease.get("name") or
-                    disease.get("id")
-                ).strip()
-
-                if not node_id:
-                    return
-
-                if node_id in node_ids:
-                    return
-
-                nodes.append({
-                    "id": node_id,
-                    "node_id": node_id,
-                    "name": disease.get("name") or node_id,
-                    "type": "disease"
-                })
-
-                node_ids.add(node_id)
-
-
-            def add_side_effect_node(side_effect):
-
-                if not side_effect:
-                    return
-
-                node_id = str(
-                    side_effect.get("name") or
-                    side_effect.get("id")
-                ).strip()
-
-                if not node_id:
-                    return
-
-                if node_id in node_ids:
-                    return
-
-                nodes.append({
-                    "id": node_id,
-                    "node_id": node_id,
-                    "name": side_effect.get("name") or node_id,
-                    "type": "sideeffect"
-                })
-
-                node_ids.add(node_id)
-
-
-            # =====================================================
-            # 3. Add ONLY the two selected drug nodes
-            # =====================================================
-
-            add_drug_node(d1)
-            add_drug_node(d2)
-
-
-            # =====================================================
-            # 4. Find diseases connected ONLY to these two drugs
-            #
-            # Methotrexate ── TREATS ──> Arthritis
-            # Ibuprofen    ── TREATS ──> Arthritis
-            #
-            # We do NOT fetch other drugs.
-            # =====================================================
-
-            disease_query = """
-            MATCH (drug:Drug)-[:TREATS]->(d:Disease)
-
-            WHERE toLower(drug.name) IN [
-                toLower($drug1),
-                toLower($drug2)
-            ]
-
-            RETURN DISTINCT
-                drug.name AS drug_name,
-                d AS disease
-
-            ORDER BY d.name
-            """
-
-            disease_records = session.run(
-                disease_query,
-                drug1=drug1.strip(),
-                drug2=drug2.strip()
-            )
-
-
-            diseases = []
-
-            for record in disease_records:
-
-                drug_name = record["drug_name"]
-                disease = record["disease"]
-
-                if not disease:
-                    continue
-
-                disease_name = disease.get("name")
-
-                if not disease_name:
-                    continue
-
-                # Add disease node
-                add_disease_node(disease)
-
-                # Add relationship:
-                #
-                # Drug ── TREATS ──> Disease
-                #
-                links.append({
-                    "source": drug_name,
-                    "target": disease_name,
-                    "relationship": "TREATS",
-                    "type": "treats"
-                })
-
-                diseases.append(disease_name)
-
-
-            # =====================================================
-            # 5. Find side effects ONLY for the two selected drugs
-            #
-            # IMPORTANT:
-            # We are NOT finding side effects for every medicine
-            # associated with the disease.
-            # =====================================================
-
-            side_effect_query = """
-            MATCH (drug:Drug)-[:CAUSES]->(side:SideEffect)
-
-            WHERE toLower(drug.name) IN [
-                toLower($drug1),
-                toLower($drug2)
-            ]
-
-            RETURN DISTINCT
-                drug.name AS drug_name,
-                side AS side_effect
-
-            ORDER BY drug_name, side_effect.name
-            """
-
-            side_effect_records = session.run(
-                side_effect_query,
-                drug1=drug1.strip(),
-                drug2=drug2.strip()
-            )
-
-
-            for record in side_effect_records:
-
-                drug_name = record["drug_name"]
-                side_effect = record["side_effect"]
-
-                if not drug_name or not side_effect:
-                    continue
-
-                side_effect_name = (
-                    side_effect.get("name")
-                    or side_effect.get("id")
-                )
-
-                if not side_effect_name:
-                    continue
-
-
-                # Add side effect node
-                add_side_effect_node(side_effect)
-
-
-                # Add CAUSES relationship
-                links.append({
-                    "source": drug_name,
-                    "target": side_effect_name,
-                    "relationship": "CAUSES",
-                    "type": "causes"
-                })
-
-
-            # =====================================================
-            # 6. Find interaction ONLY between the two selected
-            # medicines
-            #
-            # Methotrexate ── INTERACTS_WITH ── Ibuprofen
-            # =====================================================
-
-            interaction_query = """
-            MATCH (d1:Drug)-[r:INTERACTS_WITH]-(d2:Drug)
-
-            WHERE (
-                    toLower(d1.name) = toLower($drug1)
-                    AND
-                    toLower(d2.name) = toLower($drug2)
-                  )
-               OR (
-                    toLower(d1.name) = toLower($drug2)
-                    AND
-                    toLower(d2.name) = toLower($drug1)
-                  )
-
-            RETURN DISTINCT
-                d1.name AS source,
-                d2.name AS target,
-                r.severity AS severity,
-                r.description AS description
-            """
-
-            interaction_records = session.run(
-                interaction_query,
-                drug1=drug1.strip(),
-                drug2=drug2.strip()
-            )
-
-
-            for record in interaction_records:
-
-                source = record["source"]
-                target = record["target"]
-
-                if not source or not target:
-                    continue
-
-                links.append({
-                    "source": source,
-                    "target": target,
-                    "relationship": "INTERACTS_WITH",
-                    "type": "interaction",
-                    "severity": record["severity"],
-                    "description": record["description"]
-                })
-
-
-            # =====================================================
-            # 7. Remove duplicate relationships
-            # =====================================================
-
-            unique_links = []
-            seen = set()
-
-            for link in links:
-
-                source = link["source"]
-                target = link["target"]
-                relationship = link["relationship"]
-
-                if relationship == "INTERACTS_WITH":
-
-                    key = (
-                        tuple(sorted([source, target])),
-                        relationship
-                    )
-
-                else:
-
-                    key = (
-                        source,
-                        target,
-                        relationship
-                    )
-
-                if key in seen:
-                    continue
-
-                seen.add(key)
-                unique_links.append(link)
-
-
-            # =====================================================
-            # 8. Return graph
-            # =====================================================
-
-            return {
-                "status": "success",
-
-                "nodes": nodes,
-
-                "links": unique_links,
-
-                "disease": diseases,
-
-                "selected_drugs": selected_drug_names
-            }
-
-    finally:
-        driver.close()
+def get_related_graph(drug_names: List[str], pair_only: bool = False) -> Dict[str, Any]:
+    """Keep only recorded, direct relationships to the selected medicines."""
+    graph = get_knowledge_graph()
+    nodes = graph["nodes"]
+    names = {name.strip().casefold() for name in drug_names if name.strip()}
+    def node_id(node):
+        return str(node.get("node_id") or node.get("id") or node.get("name"))
+    selected = [node for node in nodes if node.get("type") == "drug"
+                and str(node.get("name", "")).casefold() in names]
+    selected_ids = {node_id(node) for node in selected}
+    allowed = {node_id(node) for node in nodes
+               if not pair_only or node.get("type") != "drug" or node_id(node) in selected_ids}
+    links = [link for link in graph.get("links", graph.get("edges", []))
+             if (str(link["source"]) in selected_ids or str(link["target"]) in selected_ids)
+             and str(link["source"]) in allowed and str(link["target"]) in allowed]
+    connected = selected_ids | {str(link[key]) for link in links for key in ("source", "target")}
+    return {"nodes": [node for node in nodes if node_id(node) in connected],
+            "links": links, "selected_drugs": [node["name"] for node in selected],
+            "source": graph.get("source", "unknown")}
+
+
+def get_interaction_graph(drug1: str, drug2: str) -> Dict[str, Any]:
+    return get_related_graph([drug1, drug2], pair_only=True)

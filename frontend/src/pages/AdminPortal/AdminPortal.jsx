@@ -14,11 +14,11 @@ function AdminPortal() {
     try {
       setLoading(true);
       setError("");
-      await loginWithPassword(identity.trim(), password);
+      await loginWithPassword(identity.trim(), password, false, "admin");
       navigate("/admin-dashboard", { replace: true });
     } catch (loginError) {
       console.error(loginError);
-      setError(loginError?.response?.data?.detail || "Admin login failed.");
+      setError(loginError?.response?.data?.detail || loginError.message || "Admin login failed.");
     } finally {
       setLoading(false);
     }

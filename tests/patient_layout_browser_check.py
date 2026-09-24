@@ -26,11 +26,16 @@ def main():
                 expect(page.locator('h1')).to_have_count(1)
                 nav = page.get_by_role('navigation', name='Patient navigation')
                 expect(nav).to_be_visible()
-                assert nav.bounding_box()['y'] > heading.bounding_box()['y']
+                expect(page.locator('.patient-navigation')).to_have_count(0)
+                expect(page.locator('.patient-sidebar')).to_be_visible()
+                expect(nav.get_by_role('link', name='Knowledge Graph')).to_have_count(0)
+                expect(nav.get_by_role('link', name='My Medicines', exact=True)).to_be_visible()
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), route
                 expect(nav.locator('[aria-current="page"]')).to_have_count(1)
-                if route != '/patient-dashboard':
-                    expect(page.get_by_role('link', name='Back to dashboard')).to_be_visible()
+                expect(nav.get_by_role('link', name='Dashboard', exact=True)).to_be_visible()
+                if route == '/patient-dashboard?tab=medicines':
+                    expect(page.get_by_role('heading', name='Medicine Schedule', exact=False)).to_be_visible()
+                    expect(page.get_by_text('Check notification delivery', exact=True)).to_be_visible()
             if width == 1440:
                 output = Path(tempfile.gettempdir()) / 'patient-scan-layout.png'
                 page.screenshot(path=str(output), full_page=True)

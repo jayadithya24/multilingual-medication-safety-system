@@ -13,6 +13,7 @@ function DoctorSidebar() {
     };
 
     const navItems = [
+        { path: "/reports", label: "Reports", icon: "▤" },
         {
             path: "/doctor-dashboard",
             label: "Dashboard",

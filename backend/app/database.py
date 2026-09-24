@@ -15,11 +15,12 @@ USE_MONGOMOCK = (
 
 
 def _get_database_client():
-    if not MONGO_URI:
-        if USE_MONGOMOCK:
-            import mongomock
+    if USE_MONGOMOCK:
+        import mongomock
 
-            return mongomock.MongoClient(), MONGO_DB
+        return mongomock.MongoClient(), MONGO_DB
+
+    if not MONGO_URI:
         raise RuntimeError("MONGO_URI is not configured in the project .env file")
 
     try:
@@ -27,11 +28,9 @@ def _get_database_client():
         client.admin.command("ping")
         return client, MONGO_DB
     except Exception:
-        local_uri = MONGO_URI.startswith("mongodb://localhost") or MONGO_URI.startswith("mongodb://127.0.0.1")
-        if USE_MONGOMOCK or local_uri:
-            import mongomock
-
-            return mongomock.MongoClient(), MONGO_DB
+        # Never report a successful write to an ephemeral database after an outage.
+        if "client" in locals():
+            client.close()
         raise
 
 

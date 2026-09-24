@@ -9,6 +9,7 @@ function AdminDashboard() {
   const [requests, setRequests] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [reviewing, setReviewing] = useState("");
 
   const loadRequests = async () => {
     try {
@@ -42,11 +43,15 @@ function AdminDashboard() {
   }, []);
 
   const decideRequest = async (requestId, decision) => {
+    if (reviewing) return;
+    setReviewing(requestId);
     try {
       await api.put(`/admin/doctor-requests/${requestId}/${decision}`);
       await loadRequests();
     } catch (requestError) {
       setError(requestError?.response?.data?.detail || `Unable to ${decision} request.`);
+    } finally {
+      setReviewing("");
     }
   };
 
@@ -104,12 +109,12 @@ function AdminDashboard() {
             <span className="admin-stat__hint">Registered patient portal users</span>
           </div>
           <div className="admin-stat admin-stat--status">
-            <span className="admin-stat__label">System Status</span>
+            <span className="admin-stat__label">Review Queue</span>
             <strong className="admin-stat__online">
               <i aria-hidden="true" />
-              Operational
+              {loading ? "Loading" : error ? "Needs attention" : "Ready"}
             </strong>
-            <span className="admin-stat__hint">Authentication and API services active</span>
+            <span className="admin-stat__hint">Doctor request review status</span>
           </div>
         </section>
 
@@ -177,6 +182,7 @@ function AdminDashboard() {
                                 type="button"
                                 className="admin-btn admin-btn--approve"
                                 onClick={() => decideRequest(request.request_id, "approve")}
+                                disabled={Boolean(reviewing)}
                               >
                                 Approve
                               </button>
@@ -184,6 +190,7 @@ function AdminDashboard() {
                                 type="button"
                                 className="admin-btn admin-btn--reject"
                                 onClick={() => decideRequest(request.request_id, "reject")}
+                                disabled={Boolean(reviewing)}
                               >
                                 Reject
                               </button>
@@ -230,6 +237,7 @@ function AdminDashboard() {
                           type="button"
                           className="admin-btn admin-btn--approve"
                           onClick={() => decideRequest(request.request_id, "approve")}
+                          disabled={Boolean(reviewing)}
                         >
                           Approve
                         </button>
@@ -237,6 +245,7 @@ function AdminDashboard() {
                           type="button"
                           className="admin-btn admin-btn--reject"
                           onClick={() => decideRequest(request.request_id, "reject")}
+                          disabled={Boolean(reviewing)}
                         >
                           Reject
                         </button>
