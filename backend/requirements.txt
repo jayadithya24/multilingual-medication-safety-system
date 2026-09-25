@@ -32,4 +32,5 @@ tzdata
 google-auth[requests]
 annotated-doc
 typing-inspection
-
+scikit-learn
+joblib
