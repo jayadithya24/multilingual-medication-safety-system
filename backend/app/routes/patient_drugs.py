@@ -26,6 +26,34 @@ def require_doctor(current_user):
         raise HTTPException(status_code=403, detail="Only doctor accounts can access this endpoint.")
 
 
+@router.get("/patients/{patient_username}/report")
+def get_patient_report(patient_username: str, current_user=Depends(get_current_active_user)):
+    require_doctor(current_user)
+    patient = users_collection.find_one({"username": patient_username, "role": "patient"})
+    if not patient:
+        raise HTTPException(status_code=404, detail="Patient not found.")
+    if not has_accepted_access(current_user.username, patient.get("patient_id")):
+        raise HTTPException(status_code=403, detail="Patient medication access has not been accepted.")
+
+    def records(collection, sort_field):
+        result = list(collection.find({"patient_username": patient_username}, {"_id": 0}).sort(sort_field, -1))
+        for record in result:
+            for key, value in record.items():
+                if isinstance(value, datetime):
+                    record[key] = (value if value.tzinfo else value.replace(tzinfo=timezone.utc)).isoformat()
+        return result
+
+    return {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "doctor": current_user.username,
+        "patient": {key: patient.get(key) for key in (
+            "username", "patient_id", "full_name", "age", "gender", "medical_condition"
+        )},
+        "prescriptions": records(patient_schedules_collection, "created_at"),
+        "history": records(medication_history_collection, "taken_at"),
+    }
+
+
 @router.get("/patients")
 async def get_patients(
     current_user=Depends(get_current_active_user)
