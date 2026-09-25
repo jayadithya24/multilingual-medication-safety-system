@@ -1,6 +1,6 @@
 .patient-drug-lists {
     min-height: 100%;
-    padding: 50px 60px 80px;
+    padding: 24px 40px 60px;
     background:
         radial-gradient(
             circle at top left,
@@ -17,7 +17,7 @@
 
 .patient-drug-lists__hero {
     max-width: 900px;
-    margin: 0 auto 35px;
+    margin: 0 auto 20px;
     text-align: center;
 }
 
@@ -32,7 +32,7 @@
 .patient-drug-lists__hero h1 {
     margin: 0;
     color: #111827;
-    font-size: 42px;
+    font-size: 32px;
     font-weight: 750;
     letter-spacing: -1px;
 }
@@ -368,4 +368,44 @@
     .patient-drug-lists__results {
         padding: 22px;
     }
+}
+
+.patient-drug-card--access {
+    min-height: 0;
+    gap: 12px;
+}
+
+.patient-drug-card--access button,
+.patient-drug-lists__action {
+    background: #008b83;
+    color: #fff;
+    border: 0;
+    border-radius: 8px;
+    padding: 11px 16px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.patient-drug-card--access button:disabled,
+.patient-drug-lists__action:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.patient-drug-card--access button:focus-visible,
+.patient-drug-lists__action:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 3px;
+}
+
+.patient-drug-lists__notice {
+    padding: 12px;
+    background: #ecfdf5;
+    color: #065f46;
+    border-radius: 8px;
+}
+
+.patient-drug-lists__results-header {
+    flex-wrap: wrap;
 }

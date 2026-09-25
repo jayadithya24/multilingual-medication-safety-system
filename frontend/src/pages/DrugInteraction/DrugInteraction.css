@@ -171,6 +171,7 @@
   font-weight: 800;
 }
 
+.interaction-pill--mild,
 .interaction-pill--low {
   background: #dcfce7;
   color: #15803d;
@@ -181,10 +182,20 @@
   color: #a16207;
 }
 
+.interaction-pill--severe,
 .interaction-pill--high {
   background: #fee2e2;
   color: #b91c1c;
 }
+
+.interaction-pill--review-required,
+.interaction-pill--not-graded {
+  background: #fef3c7;
+  color: #854d0e;
+}
+
+.interaction-card__block a { overflow-wrap: anywhere; color: #1d4ed8; }
+.interaction-card__block p + p { margin-top: 10px; }
 
 .interaction-card__body {
   display: grid;

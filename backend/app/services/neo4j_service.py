@@ -1,4 +1,5 @@
 import os
+import itertools
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -500,24 +501,20 @@ def _fallback_local_knowledge_graph() -> Dict[str, List[Dict[str, Any]]]:
                 add_node(side_effect_id, side_effect, "sideeffect")
                 add_edge(drug_id, side_effect_id, "CAUSES", "causes")
 
-    interaction_path = datasets_dir / "drug_interactions.csv"
-    if interaction_path.exists():
-        from backend.app.services.interaction_service import get_interaction
-        interaction_df = pd.read_csv(interaction_path)
-        for _, row in interaction_df.iterrows():
-            if str(row.get("drug2_in_scope", "")).strip().lower() != "yes":
-                continue
-            drug1 = row.get("drug1_id") or row.get("drug1")
-            drug2 = row.get("drug2_id") or row.get("drug2")
-            if drug1 is None or drug2 is None:
-                continue
-            drug1, drug2 = sorted((str(drug1), str(drug2)))
-            interaction = get_interaction(row["drug1"], row["drug2"])
-            add_node(drug1, drug1, "drug")
-            add_node(drug2, drug2, "drug")
-            add_edge(drug1, drug2, "INTERACTS_WITH", "interaction", {
-                key: interaction[key] for key in ("severity", "source_severities", "source_rows", "review_required", "description", "recommendation")
-            })
+    # Use the same resolver as the checker, including explicitly evidenced class
+    # mappings. Individual side effects never generate drug-pair interactions.
+    from backend.app.services.interaction_service import get_interaction
+    medicines = [node for node in nodes if node["type"] == "drug"]
+    for first, second in itertools.combinations(medicines, 2):
+        interaction = get_interaction(first["name"], second["name"])
+        if interaction:
+            drug1, drug2 = sorted((first["node_id"], second["node_id"]))
+            properties = {key: interaction[key] for key in (
+                "severity", "source_severities", "source_rows", "review_required",
+                "description", "recommendation", "match_basis", "severity_basis")}
+            properties["evidence_urls"] = [source["url"] for source in interaction["evidence_sources"]]
+            properties["evidence_titles"] = [source["title"] for source in interaction["evidence_sources"]]
+            add_edge(drug1, drug2, "INTERACTS_WITH", "interaction", properties)
 
     return {"nodes": nodes, "edges": edges, "source": "local_csv"}
 

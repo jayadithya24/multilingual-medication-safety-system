@@ -87,7 +87,8 @@ function DrugInteraction() {
           <p className="interaction-kicker">Drug Interaction Checker</p>
           <h1>Check how two medicines may interact</h1>
           <p>
-            Choose two medicines to review their interaction and connected conditions.
+            Review possible effects on the body when two medicines are taken together,
+            including medicines prescribed for different conditions.
           </p>
         </div>
 
@@ -132,7 +133,7 @@ function DrugInteraction() {
                 <>
                   <div className="interaction-card__header">
                     <div>
-                      <p className="interaction-card__label">Recorded interaction severity</p>
+                      <p className="interaction-card__label">{interaction.drug1} + {interaction.drug2}</p>
                       <h2>{interaction.severity}</h2>
                     </div>
                     <span className={`interaction-pill interaction-pill--${interaction.severity.toLowerCase().replaceAll(" ", "-")}`}>
@@ -142,18 +143,21 @@ function DrugInteraction() {
 
                   <div className="interaction-card__body">
                     <div className="interaction-card__block">
-                      <h3>Evidence</h3>
-                      <p>Source: {interaction.source === "neo4j" ? "Neo4j medication dataset" : "Local medication dataset"}. These dataset ratings have not been independently clinically validated.</p>
-                      {interaction.source_severities?.length > 1 && <p>Recorded ratings: {interaction.source_severities.join(", ")}.</p>}
-                    </div>
-                    <div className="interaction-card__block">
-                      <h3>Description</h3>
+                      <h3>Possible effect when taken together</h3>
                       <p>{interaction.description}</p>
                     </div>
-
                     <div className="interaction-card__block">
-                      <h3>Recommendation</h3>
+                      <h3>What needs monitoring or review</h3>
                       <p>{interaction.recommendation}</p>
+                    </div>
+                    <div className="interaction-card__block">
+                      <h3>Severity and evidence</h3>
+                      <p>{interaction.severity_basis || "Severity is a project dataset label and has not been independently clinically validated."}</p>
+                      {interaction.source_severities?.length > 0 && <p>Recorded dataset ratings: {interaction.source_severities.join(", ")}.</p>}
+                      {interaction.review_note && <p><strong>{interaction.review_note}</strong></p>}
+                      <p>{interaction.evidence_basis || interaction.match_basis}</p>
+                      {interaction.evidence_sources?.length > 0 ? <ul>{interaction.evidence_sources.map(source => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></li>)}</ul> : <p>No pair-specific prescribing reference has been added for this record.</p>}
+                      <p>Record source: {interaction.source === "neo4j" ? "Neo4j medication dataset" : "Local medication dataset"}.</p>
                     </div>
                   </div>
                 </>
@@ -162,7 +166,8 @@ function DrugInteraction() {
                   <h2>No interaction record found</h2>
                   <p>
                     The selected medicines are not listed as interacting in the current dataset.
-                    This does not establish that combining them is safe.
+                    This does not establish that taking them together is safe. Individual
+                    side effects in the graph do not establish a reaction between this pair.
                   </p>
                 </div>
               ) : null}

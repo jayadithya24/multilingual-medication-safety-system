@@ -1,0 +1,89 @@
+{
+  "reviewed_on": "2026-09-24",
+  "severity_note": "Prescribing labels support the effects and monitoring statements, not the project's Mild/Moderate/Severe scale. Existing ratings remain unvalidated dataset labels. New label-only matches are ungraded.",
+  "rules": [
+    {
+      "id": "acarbose-diuretics",
+      "left": ["Acarbose"],
+      "right": ["Chlorthalidone", "Hydrochlorothiazide"],
+      "basis": "Acarbose label warning for thiazides and other diuretics; explicit mapping to the two supported diuretics.",
+      "description": "The diuretic may raise blood glucose and reduce blood-glucose control during acarbose treatment.",
+      "recommendation": "The prescriber should monitor blood glucose when the diuretic is started or stopped and review diabetes treatment if control changes.",
+      "sources": [
+        {"title": "DailyMed: Acarbose — Drug interactions", "url": "https://dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=722ce9eb-8f7b-4651-a287-d53dd7ab3707"},
+        {"title": "DailyMed: Chlorthalidone — Metabolic disturbances", "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3f0f3ee0-f5a6-4bda-8160-a77744e9fa46"}
+      ]
+    },
+    {
+      "id": "methotrexate-nsaids",
+      "left": ["Methotrexate"],
+      "right": ["Ibuprofen", "Diclofenac", "Naproxen", "Celecoxib"],
+      "basis": "Prescribing-label NSAID class warning mapped only to the four supported NSAIDs.",
+      "description": "Taking an NSAID with methotrexate can increase methotrexate toxicity, including reduced white blood cells or platelets and impaired kidney function. Risk depends on the treatment and patient factors.",
+      "recommendation": "The prescriber should monitor for methotrexate toxicity during combined treatment, including blood counts and kidney function as clinically appropriate.",
+      "sources": [
+        {"title": "DailyMed: Naproxen — Methotrexate interaction", "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a9549a47-3fa4-4a2b-95ac-b00e43aedae7"},
+        {"title": "DailyMed: Diclofenac — Drug interactions", "url": "https://dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=50886f90-8cd0-4d38-e063-6294a90a44e4&type=display"}
+      ]
+    },
+    {
+      "id": "nsaids-ace-arb",
+      "left": ["Ibuprofen", "Diclofenac", "Naproxen", "Celecoxib"],
+      "right": ["Enalapril", "Ramipril", "Losartan", "Telmisartan"],
+      "left_terms": ["NSAIDs"],
+      "terms_by_drug": {"Enalapril": ["ACE inhibitors"], "Ramipril": ["ACE inhibitors"], "Losartan": ["ARBs"], "Telmisartan": ["ARBs"]},
+      "basis": "NSAID class warning with ACE inhibitors or ARBs; explicit membership mapping, not partial-name matching.",
+      "description": "The NSAID may reduce the blood-pressure-lowering effect of the other medicine. Kidney function can worsen, especially in older people, people with dehydration, or people with existing kidney impairment.",
+      "recommendation": "The prescriber should review blood pressure and kidney function during combined treatment, particularly in patients with these risk factors.",
+      "sources": [
+        {"title": "DailyMed: Diclofenac — ACE inhibitors and ARBs", "url": "https://dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=50886f90-8cd0-4d38-e063-6294a90a44e4&type=display"}
+      ]
+    },
+    {
+      "id": "clonidine-beta-blockers",
+      "left": ["Clonidine"],
+      "right": ["Atenolol", "Carvedilol"],
+      "right_terms": ["Beta-blockers"],
+      "basis": "Clonidine warning for concomitant beta-blocker therapy, mapped to the two supported beta-blockers.",
+      "description": "Beta-blocker treatment can increase the risk of a marked rise in blood pressure if clonidine is stopped abruptly. This warning depends on withdrawal of clonidine, not simply taking a dose of both medicines.",
+      "recommendation": "Do not stop clonidine abruptly. A prescriber should plan and supervise any change to this combination.",
+      "sources": [
+        {"title": "DailyMed: Clonidine — Withdrawal warning", "url": "https://dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=f65d90dc-11b4-4d63-b4a9-30603bc332ea"}
+      ]
+    },
+    {
+      "id": "telmisartan-ramipril",
+      "left": ["Telmisartan"],
+      "right": ["Ramipril"],
+      "basis": "Named combination in the telmisartan prescribing label.",
+      "review_note": "The legacy dataset labels this pair Mild, but the label advises avoiding combined renin-angiotensin-system blockade. Clinical review of the dataset rating is required.",
+      "description": "Combined treatment can increase low blood pressure, high potassium, and kidney dysfunction. The label reports more kidney dysfunction without added benefit for this combination in the ONTARGET population.",
+      "recommendation": "The label advises generally avoiding combined renin-angiotensin-system blockade. The prescriber should review the combination and monitor blood pressure, kidney function, and electrolytes when used.",
+      "sources": [
+        {"title": "DailyMed: Telmisartan — Dual blockade of the RAS", "url": "https://www.dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=593a53a4-91bc-4e4a-aeff-08fc2efe3dd4&type=display"}
+      ]
+    },
+    {
+      "id": "leflunomide-methotrexate",
+      "left": ["Leflunomide"],
+      "right": ["Methotrexate"],
+      "basis": "Named concomitant methotrexate risk in the leflunomide label.",
+      "description": "Combined treatment increases concern for liver toxicity and bone marrow suppression, which can reduce blood-cell counts.",
+      "recommendation": "The prescriber should monitor liver tests and blood-cell counts during combined treatment.",
+      "sources": [
+        {"title": "DailyMed: Leflunomide — Liver and bone marrow warnings", "url": "https://dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=fc044417-cd9a-42f6-8a3d-a14e7c2f81a2&type=display"}
+      ]
+    },
+    {
+      "id": "sulfasalazine-methotrexate",
+      "left": ["Sulfasalazine"],
+      "right": ["Methotrexate"],
+      "basis": "Combination evidence in the delayed-release sulfasalazine label for rheumatoid arthritis.",
+      "description": "In rheumatoid arthritis studies, the combination produced more gastrointestinal adverse effects, particularly nausea, than either medicine alone.",
+      "recommendation": "Discuss persistent nausea or other gastrointestinal symptoms with the prescriber so treatment tolerance can be reviewed.",
+      "sources": [
+        {"title": "DailyMed: Sulfasalazine delayed release — Methotrexate", "url": "https://dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=d596ac59-b643-4181-80ba-f2db1cc3459c&type=display"}
+      ]
+    }
+  ]
+}

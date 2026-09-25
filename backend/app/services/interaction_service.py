@@ -10,6 +10,32 @@ APP_CSV = Path(__file__).resolve().parents[1] / "datasets" / "drug_interactions.
 JSON_PATH = Path(__file__).resolve().parents[1] / "datasets" / "drug_interactions.json"
 
 
+@lru_cache(maxsize=1)
+def _load_evidence():
+    with (PROJECT_ROOT / "datasets" / "interaction_evidence.json").open(encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+def _matching_rule(drug1, drug2):
+    for rule in _load_evidence()["rules"]:
+        left = {name.lower() for name in rule["left"]}
+        right = {name.lower() for name in rule["right"]}
+        if (drug1 in left and drug2 in right) or (drug2 in left and drug1 in right):
+            return rule
+    return None
+
+
+def _rule_terms(name, rule):
+    terms = {name}
+    for side in ("left", "right"):
+        if name in {item.lower() for item in rule[side]}:
+            terms.update(item.lower() for item in rule.get(f"{side}_terms", []))
+    for medicine, aliases in rule.get("terms_by_drug", {}).items():
+        if medicine.lower() == name:
+            terms.update(item.lower() for item in aliases)
+    return terms
+
+
 def _normalize_drug_name(drug_name):
     return str(drug_name).strip().lower()
 
@@ -86,26 +112,48 @@ def get_interaction(drug1, drug2, lang: str = "en"):
     reverse_match = (drug_a == normalized_drug2) & (drug_b == normalized_drug1)
 
     matches = dataframe[forward_match | reverse_match]
+    rule = _matching_rule(normalized_drug1, normalized_drug2)
+    match_basis = "Named medicine pair in the project dataset."
+    if matches.empty and rule:
+        terms1 = _rule_terms(normalized_drug1, rule)
+        terms2 = _rule_terms(normalized_drug2, rule)
+        matches = dataframe[(drug_a.isin(terms1) & drug_b.isin(terms2)) |
+                            (drug_a.isin(terms2) & drug_b.isin(terms1))]
+        match_basis = rule["basis"]
 
-    if matches.empty:
+    if matches.empty and not rule:
         return None
 
-    first_match = matches.iloc[0]
+    first_match = matches.iloc[0] if not matches.empty else {}
     severities = sorted({str(value).strip().capitalize() or "Unknown" for value in matches["severity"]})
     conflict = len(severities) > 1
-
-    return {
-        "drug1": str(first_match["drug_1"]),
-        "drug2": str(first_match["drug_2"]),
-        "severity": "Review required" if conflict else severities[0],
+    names = sorted((str(drug1).strip(), str(drug2).strip()), key=str.lower)
+    if rule:
+        canonical = {name.lower(): name for side in ("left", "right") for name in rule[side]}
+        names = sorted((canonical[normalized_drug1], canonical[normalized_drug2]), key=str.lower)
+    else:
+        names = [str(first_match["drug_1"]), str(first_match["drug_2"])]
+    result = {
+        "drug1": names[0],
+        "drug2": names[1],
+        "severity": "Review required" if conflict or (rule and rule.get("review_note")) else (severities[0] if severities else "Not graded"),
         "source_severities": severities,
-        "review_required": conflict or "Unknown" in severities,
+        "review_required": conflict or not severities or "Unknown" in severities or bool(rule and rule.get("review_note")),
         "source": "local_dataset",
         "source_rows": [int(index) + 2 for index in matches.index],
-        "description": ("Source records disagree on severity: " + ", ".join(severities) + ". Clinical review is required before assigning a rating.") if conflict else str(first_match["description"]),
-        "recommendation": str(first_match["recommendation"]),
+        "description": ("Source records disagree on severity: " + ", ".join(severities) + ". Clinical review is required before assigning a rating.") if conflict else str(first_match.get("description", "")),
+        "recommendation": str(first_match.get("recommendation", "")),
+        "match_basis": match_basis,
+        "severity_basis": "Project dataset rating; prescribing labels do not assign this severity scale." if severities else "The prescribing label identifies a risk but does not assign a Mild, Moderate, or Severe rating.",
+        "evidence_sources": [],
         "lang": lang,
     }
+    if rule:
+        result.update(description=rule["description"], recommendation=rule["recommendation"],
+                      evidence_sources=rule["sources"], evidence_rule=rule["id"],
+                      evidence_basis=rule["basis"], evidence_reviewed_on=_load_evidence()["reviewed_on"],
+                      review_note=rule.get("review_note", "Source severity ratings disagree; clinical review is required." if conflict else ""))
+    return result
 
 
 def get_medicine_interactions(name, lang="en"):
@@ -118,6 +166,11 @@ def get_medicine_interactions(name, lang="en"):
             partners.add(row["drug_2"])
         elif _normalize_drug_name(row["drug_2"]) == normalized:
             partners.add(row["drug_1"])
+    for rule in _load_evidence()["rules"]:
+        if normalized in {n.lower() for n in rule["left"]}:
+            partners.update(rule["right"])
+        if normalized in {n.lower() for n in rule["right"]}:
+            partners.update(rule["left"])
     return [dict(get_interaction(name, partner, lang), drug_name=partner,
                  drug_id=_normalize_drug_name(partner).replace(" ", "-"))
             for partner in sorted(partners)]

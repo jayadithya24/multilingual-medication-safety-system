@@ -13,12 +13,17 @@ function PatientDrugLists() {
     const [loading, setLoading] = useState(true);
     const [loadingMedications, setLoadingMedications] = useState(false);
     const [error, setError] = useState("");
+    const [notice, setNotice] = useState("");
+    const [refreshVersion, setRefreshVersion] = useState(0);
 
     useEffect(() => {
         const controller = new AbortController();
         api.get("/doctor/patients", { signal: controller.signal })
             .then(response => {
-                if (!controller.signal.aborted) setPatients(response.data.patients || []);
+                if (!controller.signal.aborted) {
+                    setPatients(response.data.patients || []);
+                    setError("");
+                }
             })
             .catch(err => {
                 if (!controller.signal.aborted) setError(err?.response?.data?.detail || "Unable to load registered patients.");
@@ -27,15 +32,18 @@ function PatientDrugLists() {
                 if (!controller.signal.aborted) setLoading(false);
             });
         return () => controller.abort();
-    }, []);
+    }, [refreshVersion]);
 
     const requestAccess = async (patientId) => {
         try {
             setRequestingPatient(patientId);
-            await api.post("/doctor/access-request", { patient_id: patientId });
+            setError("");
+            setNotice("");
+            const response = await api.post("/doctor/access-request", { patient_id: patientId });
             setPatients((prev) =>
-                prev.map((p) => (p.patient_id === patientId ? { ...p, status: "PENDING" } : p))
+                prev.map((p) => (p.patient_id === patientId ? { ...p, status: response.data.request.status } : p))
             );
+            setNotice("Request sent. The patient can respond in My Medicines. Refresh patients after they respond.");
         } catch (err) {
             setError(err?.response?.data?.detail || "Unable to request access.");
         } finally {
@@ -79,7 +87,7 @@ function PatientDrugLists() {
                     Patient History & Drug Lists
                 </h1>
                 <p>
-                    Review patient prescription history, adherence logs, and survey feedback following consent approval.
+                    Send an access request to a patient. Once they approve it in My Medicines, you can view their medication history.
                 </p>
             </section>
 
@@ -89,14 +97,18 @@ function PatientDrugLists() {
                         <p>PATIENT ACCESS & CONSENT</p>
                         <h2>Registered Patients</h2>
                     </div>
+                    <button className="patient-drug-lists__action" type="button" disabled={loading} onClick={() => { setLoading(true); setRefreshVersion((value) => value + 1); }}>
+                        Refresh patients
+                    </button>
                     <span>{loading ? "Loading…" : error ? "Unavailable" : `${patients.length} patients`}</span>
                 </div>
+                {notice && <p role="status" className="patient-drug-lists__notice">{notice}</p>}
                 {loading ? (
                     <div className="patient-drug-lists__loading">Loading patients...</div>
                 ) : (
                     <div className="patient-drug-lists__grid">
                         {patients.map((patient) => (
-                            <article className="patient-drug-card" key={patient.patient_id}>
+                            <article className="patient-drug-card patient-drug-card--access" key={patient.patient_id}>
                                 <div className="patient-drug-card__content">
                                     <h3>{patient.full_name}</h3>
                                     <p className="patient-drug-card__generic">
@@ -113,14 +125,14 @@ function PatientDrugLists() {
                                         <button
                                             type="button"
                                             onClick={() => requestAccess(patient.patient_id)}
-                                            disabled={requestingPatient === patient.patient_id}
+                                            disabled={Boolean(requestingPatient)}
                                         >
                                             {requestingPatient === patient.patient_id ? "Requesting..." : "Request Access"}
                                         </button>
                                     )}
                                     {patient.status === "PENDING" && (
                                         <div style={{ display: "flex", flexDirection: "column", gap: "6px", alignItems: "flex-end" }}>
-                                            <span style={{ color: "#d97706", fontWeight: 600 }}>Access Pending</span>
+                                            <span style={{ color: "#d97706", fontWeight: 600 }}>Awaiting patient approval</span>
                                         </div>
                                     )}
                                     {patient.status === "REJECTED" && <strong style={{ color: "#ef4444" }}>Rejected</strong>}
@@ -132,6 +144,7 @@ function PatientDrugLists() {
                                 </div>
                             </article>
                         ))}
+                        {patients.length === 0 && <p>No registered patients found.</p>}
                     </div>
                 )}
             </section>

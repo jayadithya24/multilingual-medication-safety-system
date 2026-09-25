@@ -33,7 +33,8 @@ async def check_interaction(
         try:
             live = get_drug_interaction(drug1, drug2, lang=lang)
             if live and live["severity"] == interaction["severity"]:
-                interaction = live
+                # Keep curated evidence and class-match provenance from the resolver.
+                interaction = dict(interaction, source="neo4j")
         except Exception:
             pass  # The reconciled dataset remains available during graph outages.
 

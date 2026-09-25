@@ -69,6 +69,8 @@ export default function KnowledgeGraph({ drug1 = "", drug2 = "" }) {
       <p>{drug2 ? `${drug1} and ${drug2}.` : "One medicine. Its direct connections."} Select a node to explore its relationships.</p></div>
       <span className="med-graph__count">{relatedLinks.length} relationships</span></header>
     {!loading && !error && <p className="med-graph__source">Source: {data.source === "neo4j" ? "Neo4j database" : data.source === "local_csv" ? "Local dataset (Neo4j unavailable)" : "Not reported"}</p>}
+    {drug2 && <p className="med-graph__source">Conditions and side effects belong to each medicine individually. Only an “interacts with” connection represents a recorded risk from taking the pair together.</p>}
+    {!loading && !error && data.source === "local_csv" && <button onClick={() => { setLoading(true); setRetry(retry + 1); }}>Retry Neo4j connection</button>}
     <div className="med-graph__toolbar">
       {!drug1 && <label>Medicine<select aria-label="Graph medicine" value={focused} onChange={e => { setFocus(e.target.value); reset(); }}>{medicines.map(n => <option key={n.id}>{n.name}</option>)}</select></label>}
       <label>Show connections<select value={filter} onChange={e => { setFilter(e.target.value); reset(); }}><option value="all">All relationships</option><option value="disease">Conditions</option><option value="sideeffect">Side effects</option><option value="drug">Medicines</option></select></label>

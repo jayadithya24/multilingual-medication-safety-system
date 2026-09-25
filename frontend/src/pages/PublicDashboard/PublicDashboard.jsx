@@ -79,6 +79,7 @@ function PublicDashboard() {
     const [deletingMedicineId, setDeletingMedicineId] = useState(null);
     const [schedulePendingDeletion, setSchedulePendingDeletion] = useState(null);
     const [accessRequests, setAccessRequests] = useState([]);
+    const pendingAccessRequests = accessRequests.filter((request) => request.status === "PENDING");
     const [accessRequestError, setAccessRequestError] = useState("");
     const [notificationStatus, setNotificationStatus] = useState("");
     const [testNotificationLoading, setTestNotificationLoading] = useState(false);
@@ -270,6 +271,8 @@ function PublicDashboard() {
     const respondToAccessRequest = async (requestId, decision) => {
         try {
             await api.put(`/patient/access-request/${encodeURIComponent(requestId)}/${decision}`);
+            setAccessRequests((requests) => requests.filter((request) => request.requestId !== requestId));
+            setAccessRequestError("");
             await loadAccessRequests();
         } catch (error) {
             setAccessRequestError(error?.response?.data?.detail || "Unable to update access request.");
@@ -577,48 +580,20 @@ function PublicDashboard() {
                                 <div className="patient-medication-title">
                                     <h3>👨‍⚕️ Doctor Research Requests & Automated Reports</h3>
                                     <span>
-                                        {accessRequests.filter((request) => request.status === "PENDING").length || 1} request
+                                        {pendingAccessRequests.length} pending request{pendingAccessRequests.length === 1 ? "" : "s"}
                                     </span>
                                 </div>
                                 {accessRequestError && <div className="patient-error">{accessRequestError}</div>}
                                 
                                 <div className="patient-access-requests-list">
-                                    {/* Demo / Real Request Card */}
-                                    <div className="patient-access-card" style={{ background: "#ffffff", border: "1.5px solid #e2e8f0", borderRadius: "14px", padding: "16px" }}>
-                                        <div className="patient-access-card__main" style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-                                            <div className="patient-access-card__avatar" style={{ fontSize: "1.8rem" }}>👨‍⚕️</div>
-                                            <div>
-                                                <h3 style={{ margin: "0 0 4px", fontSize: "1.05rem", color: "#0f172a" }}>Dr. Smith (City General Hospital)</h3>
-                                                <p style={{ margin: 0, fontSize: "0.85rem", color: "#64748b" }}>
-                                                    Requesting medication schedule & search history records for clinical research survey.
-                                                </p>
-                                                <span className="patient-badge" style={{ display: "inline-block", marginTop: "6px", background: "#fef3c7", color: "#b45309", padding: "2px 8px", borderRadius: "6px", fontSize: "0.75rem", fontWeight: 700 }}>
-                                                    RESEARCH REQUEST PENDING
-                                                </span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div className="patient-access-card__actions" style={{ marginTop: "14px", display: "flex", gap: "8px", flexWrap: "wrap" }}>
-                                            <button
-                                                type="button"
-                                                className="patient-btn--accept"
-                                                style={{ background: "linear-gradient(135deg, #2563eb, #1d4ed8)", color: "#ffffff", padding: "8px 14px", borderRadius: "8px", border: 0, fontWeight: 700, cursor: "pointer" }}
-                                                onClick={() => setShowReportModal(true)}
-                                            >
-                                                📄 Select Searches & Generate Report (PDF)
-                                            </button>
-                                            <button
-                                                type="button"
-                                                className="patient-btn--accept"
-                                                style={{ background: "#10b981", color: "#ffffff", padding: "8px 12px", borderRadius: "8px", border: 0, fontWeight: 700, cursor: "pointer" }}
-                                                onClick={() => setShowReportModal(true)}
-                                            >
-                                                ✓ Grant Access
-                                            </button>
-                                        </div>
-                                    </div>
+                                    <button type="button" className="patient-btn--accept" onClick={() => setShowReportModal(true)}>
+                                        Select Searches & Generate Report (PDF)
+                                    </button>
+                                    {!accessRequestError && pendingAccessRequests.length === 0 && (
+                                        <p>No pending doctor access requests.</p>
+                                    )}
 
-                                    {accessRequests.map((request) => (
+                                    {pendingAccessRequests.map((request) => (
                                         <div className="patient-access-card" key={request.requestId}>
                                             <div className="patient-access-card__main">
                                                 <div className="patient-access-card__avatar">👨‍⚕️</div>
