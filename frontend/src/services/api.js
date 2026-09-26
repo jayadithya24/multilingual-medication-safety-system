@@ -1,4 +1,112 @@
-﻿const BASE_URL = "http://127.0.0.1:8000";
+import axios from "axios";
+
+function resolveApiBaseUrl() {
+  const configured = import.meta.env.VITE_API_URL;
+
+  if (configured && typeof window !== "undefined") {
+    try {
+      const apiUrl = new URL(configured, window.location.origin);
+      const pageHost = window.location.hostname;
+      const loopbackSwap =
+        (apiUrl.hostname === "127.0.0.1" && pageHost === "localhost") ||
+        (apiUrl.hostname === "localhost" && pageHost === "127.0.0.1");
+
+      if (loopbackSwap) {
+        apiUrl.hostname = pageHost;
+      }
+
+      return apiUrl.origin;
+    } catch {
+      return configured;
+    }
+  }
+
+  if (configured) {
+    return configured;
+  }
+
+  if (import.meta.env.DEV) {
+    return "";
+  }
+
+  return "http://127.0.0.1:8000";
+}
+
+const BASE_URL = resolveApiBaseUrl();
+
+export function getStoredToken() {
+  const token = localStorage.getItem("mmss_token") || "";
+  return token.replace(/^Bearer\s+/i, "").trim();
+}
+
+export function getStoredRole() {
+  return localStorage.getItem("mmss_role") || "";
+}
+
+export function setStoredToken(token) {
+  localStorage.setItem("mmss_token", token);
+}
+
+export function setStoredRole(role) {
+  localStorage.setItem("mmss_role", role);
+}
+
+export function clearStoredToken() {
+  localStorage.removeItem("mmss_token");
+  localStorage.removeItem("mmss_role");
+}
+
+export const api = axios.create({
+  baseURL: BASE_URL,
+  timeout: 300000,
+});
+
+api.interceptors.request.use((config) => {
+  const token = getStoredToken();
+
+  config.headers = config.headers || {};
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  if (import.meta.env.DEV) {
+    console.debug("API request", {
+      method: config.method?.toUpperCase(),
+      url: `${config.baseURL || ""}${config.url || ""}`,
+      tokenPresent: Boolean(token),
+    });
+  }
+
+  return config;
+});
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const patientPage = ["/patient-dashboard", "/patient-profile", "/scan-medicines", "/prescription"].includes(window.location.pathname);
+    const role = getStoredRole();
+    const loginRequest = ["/auth/token", "/auth/patient-token", "/auth/google"].includes(error.config?.url);
+    if (error.response?.status === 401 && role === "doctor" && !loginRequest) {
+      clearStoredToken();
+      window.location.replace("/research?session=expired");
+    }
+    if (error.response?.status === 401 && getStoredRole() === "patient" && patientPage) {
+      clearStoredToken();
+      window.location.replace("/public?session=expired");
+    }
+    if (import.meta.env.DEV && error.response) {
+      console.debug("API error", {
+        method: error.config?.method?.toUpperCase(),
+        url: `${error.config?.baseURL || ""}${error.config?.url || ""}`,
+        status: error.response.status,
+        detail: error.response.data?.detail,
+      });
+    }
+
+    return Promise.reject(error);
+  }
+);
 
 export async function getHealth() {
   const response = await fetch(`${BASE_URL}/health`);
@@ -28,3 +136,5 @@ export async function searchDrug(term) {
   }
   return response.json();
 }
+
+export default api;

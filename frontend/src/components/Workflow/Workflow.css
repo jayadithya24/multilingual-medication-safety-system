@@ -1,0 +1,59 @@
+.workflow{
+
+    padding:80px;
+
+    background:#F8FAFC;
+
+}
+
+.workflow h2{
+
+    text-align:center;
+
+    color:#1E3A8A;
+
+    margin-bottom:50px;
+
+    font-size:38px;
+
+}
+
+.workflow-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+
+}
+
+.workflow-card{
+
+    background:white;
+
+    padding:25px;
+
+    min-width:180px;
+
+    text-align:center;
+
+    border-radius:12px;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+    font-weight:600;
+
+}
+
+.arrow{
+
+    font-size:30px;
+
+    color:#2563EB;
+
+}

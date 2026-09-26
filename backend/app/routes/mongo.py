@@ -1,13 +1,10 @@
-from fastapi import APIRouter, Depends
-from datetime import timedelta
-from fastapi import HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
+import os
+from fastapi import APIRouter, Depends, HTTPException
 from backend.app.auth import (
     get_current_active_user,
-    create_access_token,
-    ACCESS_TOKEN_EXPIRE_MINUTES,
+    User,
 )
-from backend.app.services.mongo_service import insert_to_mongo
+from backend.mongo_loader import insert_to_mongo
 from pydantic import BaseModel
 from typing import List, Dict, Any
 
@@ -25,12 +22,13 @@ async def insert_documents(
     current_user: User = Depends(get_current_active_user),
 ):
     try:
-        # Convert ACCESS_TOKEN_EXPIRE_MINUTES to timedelta
-        expires_delta = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-        # The user is already authenticated and active
+        mongo_uri = os.environ.get("MONGO_URI")
+        if not mongo_uri:
+            raise HTTPException(status_code=400, detail="Set MONGO_URI to connect to MongoDB")
+
         insert_to_mongo(
-            uri="mongodb+srv://user:pass@cluster.mongodb.net/medication_db",
-            db_name="meds",
+            uri=mongo_uri,
+            db_name=os.environ.get("MONGO_DB", "meds"),
             documents=payload.documents,
         )
         return {"message": "Documents inserted successfully"}

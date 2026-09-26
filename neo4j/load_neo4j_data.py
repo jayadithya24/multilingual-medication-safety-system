@@ -9,7 +9,7 @@ from neo4j import GraphDatabase
 
 NEO4J_URI = "bolt://127.0.0.1:7687"
 NEO4J_USER = "neo4j"
-NEO4J_PASSWORD = "12345678"
+NEO4J_PASSWORD = "neo4j123"
 CSV_PATH = "english_master_dataset.csv"
 
 
@@ -44,7 +44,7 @@ def main():
 
     driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
 
-    with driver.session(database="neographmed") as session:
+    with driver.session(database="neo4j") as session:
         session.run("MATCH (n) DETACH DELETE n")
         print("Cleared existing graph data.")
 
