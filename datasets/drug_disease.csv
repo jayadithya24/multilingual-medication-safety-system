@@ -29,3 +29,73 @@ sulfasalazine,Sulfasalazine,arthritis,Arthritis
 prednisolone,Prednisolone,arthritis,Arthritis
 leflunomide,Leflunomide,arthritis,Arthritis
 colchicine,Colchicine,arthritis,Arthritis
+chlorpheniramine,Chlorpheniramine,common-cold,Common Cold
+cetirizine,Cetirizine,common-cold,Common Cold
+phenylephrine,Phenylephrine,common-cold,Common Cold
+xylometazoline,Xylometazoline,common-cold,Common Cold
+oxymetazoline,Oxymetazoline,common-cold,Common Cold
+dextromethorphan,Dextromethorphan,common-cold,Common Cold
+guaifenesin,Guaifenesin,common-cold,Common Cold
+ambroxol,Ambroxol,common-cold,Common Cold
+bromhexine,Bromhexine,common-cold,Common Cold
+diphenhydramine,Diphenhydramine,common-cold,Common Cold
+paracetamol,Paracetamol,fever-body-ache,Fever & Body Ache
+aspirin,Aspirin,fever-body-ache,Fever & Body Ache
+mefenamic-acid,Mefenamic Acid,fever-body-ache,Fever & Body Ache
+aceclofenac,Aceclofenac,fever-body-ache,Fever & Body Ache
+etoricoxib,Etoricoxib,fever-body-ache,Fever & Body Ache
+ketorolac,Ketorolac,fever-body-ache,Fever & Body Ache
+thiocolchicoside,Thiocolchicoside,fever-body-ache,Fever & Body Ache
+chlorzoxazone,Chlorzoxazone,fever-body-ache,Fever & Body Ache
+tizanidine,Tizanidine,fever-body-ache,Fever & Body Ache
+piroxicam,Piroxicam,fever-body-ache,Fever & Body Ache
+salbutamol,Salbutamol,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+levosalbutamol,Levosalbutamol,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+budesonide,Budesonide,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+fluticasone,Fluticasone,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+formoterol,Formoterol,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+montelukast,Montelukast,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+theophylline,Theophylline,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+ipratropium,Ipratropium,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+tiotropium,Tiotropium,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+fexofenadine,Fexofenadine,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+levocetirizine,Levocetirizine,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+loratadine,Loratadine,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+omeprazole,Omeprazole,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+pantoprazole,Pantoprazole,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+esomeprazole,Esomeprazole,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+rabeprazole,Rabeprazole,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+lansoprazole,Lansoprazole,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+famotidine,Famotidine,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+domperidone,Domperidone,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+sucralfate,Sucralfate,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+aluminium-magnesium-antacid,Aluminium-Magnesium Antacid,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+sodium-alginate,Sodium Alginate,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+itopride,Itopride,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+chloroquine,Chloroquine,malaria,Malaria
+primaquine,Primaquine,malaria,Malaria
+artemether-lumefantrine,Artemether-Lumefantrine,malaria,Malaria
+artesunate,Artesunate,malaria,Malaria
+sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,malaria,Malaria
+quinine,Quinine,malaria,Malaria
+doxycycline,Doxycycline,malaria,Malaria
+mefloquine,Mefloquine,malaria,Malaria
+atovaquone-proguanil,Atovaquone-Proguanil,malaria,Malaria
+tafenoquine,Tafenoquine,malaria,Malaria
+ringer-s-lactate,Ringer's Lactate,dengue-fever,Dengue Fever
+normal-saline,Normal Saline,dengue-fever,Dengue Fever
+dextrose-saline,Dextrose Saline,dengue-fever,Dengue Fever
+ondansetron,Ondansetron,dengue-fever,Dengue Fever
+metoclopramide,Metoclopramide,dengue-fever,Dengue Fever
+oral-rehydration-salts,Oral Rehydration Salts,gastroenteritis-diarrhea,Gastroenteritis / Diarrhea
+zinc-sulfate,Zinc Sulfate,gastroenteritis-diarrhea,Gastroenteritis / Diarrhea
+racecadotril,Racecadotril,gastroenteritis-diarrhea,Gastroenteritis / Diarrhea
+loperamide,Loperamide,gastroenteritis-diarrhea,Gastroenteritis / Diarrhea
+metronidazole,Metronidazole,gastroenteritis-diarrhea,Gastroenteritis / Diarrhea
+tinidazole,Tinidazole,gastroenteritis-diarrhea,Gastroenteritis / Diarrhea
+ciprofloxacin,Ciprofloxacin,gastroenteritis-diarrhea,Gastroenteritis / Diarrhea
+norfloxacin,Norfloxacin,gastroenteritis-diarrhea,Gastroenteritis / Diarrhea
+azithromycin,Azithromycin,gastroenteritis-diarrhea,Gastroenteritis / Diarrhea
+nitazoxanide,Nitazoxanide,gastroenteritis-diarrhea,Gastroenteritis / Diarrhea
+saccharomyces-boulardii,Saccharomyces boulardii,gastroenteritis-diarrhea,Gastroenteritis / Diarrhea
+dicyclomine,Dicyclomine,gastroenteritis-diarrhea,Gastroenteritis / Diarrhea

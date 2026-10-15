@@ -1,0 +1,160 @@
+.doctor-topbar {
+    min-height: 82px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 16px 32px;
+    background: rgba(255,255,255,0.94);
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.doctor-topbar__eyebrow {
+    margin: 0 0 4px;
+    color: #0f766e;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.doctor-topbar h1 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 1.35rem;
+}
+
+.doctor-topbar__right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.doctor-topbar__search-wrap {
+    position: relative;
+}
+
+.doctor-topbar__search {
+    width: 280px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 11px;
+    background: #f8fafc;
+}
+
+.doctor-topbar__search span {
+    color: #64748b;
+    font-size: 1.2rem;
+}
+
+.doctor-topbar__search input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #0f172a;
+}
+
+.doctor-topbar__search-results {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 100%;
+    max-height: 260px;
+    overflow: auto;
+    padding: 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+    z-index: 20;
+}
+
+.doctor-topbar__search-status,
+.doctor-topbar__search-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    color: #0f172a;
+    font-size: 0.82rem;
+}
+
+.doctor-topbar__search-status {
+    color: #475569;
+}
+
+.doctor-topbar__search-item:hover {
+    background: #f1f5f9;
+}
+
+.doctor-topbar__search-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    padding: 3px 7px;
+    border-radius: 999px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.doctor-topbar__search-tag--disease {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.doctor-topbar__user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.doctor-topbar__avatar {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #ccfbf1;
+    color: #0f766e;
+    font-size: 0.75rem;
+    font-weight: 900;
+}
+
+.doctor-topbar__user strong {
+    display: block;
+    color: #0f172a;
+    font-size: 0.85rem;
+}
+
+.doctor-topbar__user span {
+    display: block;
+    margin-top: 2px;
+    color: #64748b;
+    font-size: 0.7rem;
+}
+
+@media (max-width: 800px) {
+    .doctor-topbar__search {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .doctor-topbar {
+        padding: 14px 18px;
+    }
+}
+
+.doctor-topbar__user { min-width: 0; max-width: 280px; overflow-wrap: anywhere; }
+.doctor-topbar__avatar { flex-shrink: 0; }

@@ -1,0 +1,574 @@
+{
+  "task": "synthetic_patient_worst_recorded_interaction_severity",
+  "seed": 42,
+  "source_sha256": {
+    "english_master_dataset.csv": "12ef860463a9e8292f1ecf6d15e45ba24137b06b2778cf5e9bb33f8323a7e332",
+    "kannada_master_dataset.csv": "7d6eb403a714fc543228d74ad0c5f4d7161f6d53e9d8eb9511dae4b6650684e9",
+    "tulu_master_dataset.csv": "4fea3e6e55c59c9b36d63d4d3db4f2ebbb1066a4dee648a90538edb5f384ddc0",
+    "synthetic_patients.csv": "ed97776ca2df72db258ee77a6c29a1861deaef1547b3ca68b7faef4ad5b0a2f6",
+    "synthetic_patient_drugs.csv": "98b7583370bd6f5ced575bdbc4cf731f5947d42675718498392d388cf6224f7a",
+    "synthetic_patient_interactions.csv": "b4f4b74a68318c4931d12d7e6e94fd0612546838d052262de9122c07139c92e6",
+    "drug_interactions.csv": "e34aafda56f2a9f76ac6036aeddf3b3c440a713d74a8cff6ef8ca62fb7a2de5d"
+  },
+  "splits": {
+    "train": {
+      "patients": 34959,
+      "labels": {
+        "None": 33643,
+        "Severe": 1135,
+        "Mild": 181
+      }
+    },
+    "validation": {
+      "patients": 4370,
+      "labels": {
+        "None": 4205,
+        "Severe": 142,
+        "Mild": 23
+      }
+    },
+    "test": {
+      "patients": 4371,
+      "labels": {
+        "None": 4206,
+        "Severe": 142,
+        "Mild": 23
+      }
+    }
+  },
+  "features": [
+    "age",
+    "gender",
+    "kidney_function",
+    "liver_function",
+    "bmi_category",
+    "condition__arthritis",
+    "condition__asthma_allergies",
+    "condition__common_cold",
+    "condition__dengue_fever",
+    "condition__fever_body_ache",
+    "condition__gastroenteritis_diarrhea",
+    "condition__gerd_gastritis",
+    "condition__hypertension",
+    "condition__malaria",
+    "condition__type_2_diabetes",
+    "drug__acarbose",
+    "drug__aceclofenac",
+    "drug__aluminium-magnesium-antacid",
+    "drug__ambroxol",
+    "drug__amlodipine",
+    "drug__artemether-lumefantrine",
+    "drug__artesunate",
+    "drug__aspirin",
+    "drug__atenolol",
+    "drug__atovaquone-proguanil",
+    "drug__azithromycin",
+    "drug__bromhexine",
+    "drug__budesonide",
+    "drug__carvedilol",
+    "drug__celecoxib",
+    "drug__cetirizine",
+    "drug__chloroquine",
+    "drug__chlorpheniramine",
+    "drug__chlorthalidone",
+    "drug__chlorzoxazone",
+    "drug__ciprofloxacin",
+    "drug__clonidine",
+    "drug__colchicine",
+    "drug__dapagliflozin",
+    "drug__dextromethorphan",
+    "drug__dextrose-saline",
+    "drug__diclofenac",
+    "drug__dicyclomine",
+    "drug__diphenhydramine",
+    "drug__domperidone",
+    "drug__doxycycline",
+    "drug__empagliflozin",
+    "drug__enalapril",
+    "drug__esomeprazole",
+    "drug__etoricoxib",
+    "drug__famotidine",
+    "drug__fexofenadine",
+    "drug__fluticasone",
+    "drug__formoterol",
+    "drug__glimepiride",
+    "drug__glipizide",
+    "drug__guaifenesin",
+    "drug__hydrochlorothiazide",
+    "drug__hydroxychloroquine",
+    "drug__ibuprofen",
+    "drug__insulin-glargine",
+    "drug__ipratropium",
+    "drug__itopride",
+    "drug__ketorolac",
+    "drug__lansoprazole",
+    "drug__leflunomide",
+    "drug__levocetirizine",
+    "drug__levosalbutamol",
+    "drug__loperamide",
+    "drug__loratadine",
+    "drug__losartan",
+    "drug__mefenamic-acid",
+    "drug__mefloquine",
+    "drug__metformin",
+    "drug__methotrexate",
+    "drug__metoclopramide",
+    "drug__metronidazole",
+    "drug__montelukast",
+    "drug__naproxen",
+    "drug__nitazoxanide",
+    "drug__norfloxacin",
+    "drug__normal-saline",
+    "drug__omeprazole",
+    "drug__ondansetron",
+    "drug__oral-rehydration-salts",
+    "drug__oxymetazoline",
+    "drug__pantoprazole",
+    "drug__paracetamol",
+    "drug__phenylephrine",
+    "drug__pioglitazone",
+    "drug__piroxicam",
+    "drug__prednisolone",
+    "drug__primaquine",
+    "drug__quinine",
+    "drug__rabeprazole",
+    "drug__racecadotril",
+    "drug__ramipril",
+    "drug__ringer-s-lactate",
+    "drug__saccharomyces-boulardii",
+    "drug__salbutamol",
+    "drug__sitagliptin",
+    "drug__sodium-alginate",
+    "drug__sucralfate",
+    "drug__sulfadoxine-pyrimethamine",
+    "drug__sulfasalazine",
+    "drug__tafenoquine",
+    "drug__telmisartan",
+    "drug__theophylline",
+    "drug__thiocolchicoside",
+    "drug__tinidazole",
+    "drug__tiotropium",
+    "drug__tizanidine",
+    "drug__vildagliptin",
+    "drug__xylometazoline",
+    "drug__zinc-sulfate"
+  ],
+  "target": "target_severity",
+  "train_class_weights": {
+    "None": 0.3463722022411794,
+    "Severe": 10.266960352422908,
+    "Mild": 64.38121546961327
+  },
+  "absent_target_classes": [
+    "Moderate"
+  ],
+  "source_rule_conflicts": [
+    {
+      "drug_ids": [
+        "ibuprofen",
+        "methotrexate"
+      ],
+      "ratings": [
+        "Moderate",
+        "Severe"
+      ]
+    }
+  ],
+  "drug_count": 100,
+  "patient_count": 43700,
+  "prescription_count": 99877,
+  "interaction_count": 2041,
+  "localized_row_count": 160,
+  "missing_translations": {
+    "en": [],
+    "kn": [
+      "Aceclofenac",
+      "Aluminium-Magnesium Antacid",
+      "Ambroxol",
+      "Artemether-Lumefantrine",
+      "Artesunate",
+      "Aspirin",
+      "Atovaquone-Proguanil",
+      "Azithromycin",
+      "Bromhexine",
+      "Budesonide",
+      "Cetirizine",
+      "Chloroquine",
+      "Chlorpheniramine",
+      "Chlorzoxazone",
+      "Ciprofloxacin",
+      "Dextromethorphan",
+      "Dextrose Saline",
+      "Dicyclomine",
+      "Diphenhydramine",
+      "Domperidone",
+      "Doxycycline",
+      "Esomeprazole",
+      "Etoricoxib",
+      "Famotidine",
+      "Fexofenadine",
+      "Fluticasone",
+      "Formoterol",
+      "Guaifenesin",
+      "Ipratropium",
+      "Itopride",
+      "Ketorolac",
+      "Lansoprazole",
+      "Levocetirizine",
+      "Levosalbutamol",
+      "Loperamide",
+      "Loratadine",
+      "Mefenamic Acid",
+      "Mefloquine",
+      "Metoclopramide",
+      "Metronidazole",
+      "Montelukast",
+      "Nitazoxanide",
+      "Norfloxacin",
+      "Normal Saline",
+      "Omeprazole",
+      "Ondansetron",
+      "Oral Rehydration Salts",
+      "Oxymetazoline",
+      "Pantoprazole",
+      "Paracetamol",
+      "Phenylephrine",
+      "Piroxicam",
+      "Primaquine",
+      "Quinine",
+      "Rabeprazole",
+      "Racecadotril",
+      "Ringer's Lactate",
+      "Saccharomyces boulardii",
+      "Salbutamol",
+      "Sodium Alginate",
+      "Sucralfate",
+      "Sulfadoxine-Pyrimethamine",
+      "Tafenoquine",
+      "Theophylline",
+      "Thiocolchicoside",
+      "Tinidazole",
+      "Tiotropium",
+      "Tizanidine",
+      "Xylometazoline",
+      "Zinc Sulfate"
+    ],
+    "tulu": [
+      "Aceclofenac",
+      "Aluminium-Magnesium Antacid",
+      "Ambroxol",
+      "Artemether-Lumefantrine",
+      "Artesunate",
+      "Aspirin",
+      "Atovaquone-Proguanil",
+      "Azithromycin",
+      "Bromhexine",
+      "Budesonide",
+      "Cetirizine",
+      "Chloroquine",
+      "Chlorpheniramine",
+      "Chlorzoxazone",
+      "Ciprofloxacin",
+      "Dextromethorphan",
+      "Dextrose Saline",
+      "Dicyclomine",
+      "Diphenhydramine",
+      "Domperidone",
+      "Doxycycline",
+      "Esomeprazole",
+      "Etoricoxib",
+      "Famotidine",
+      "Fexofenadine",
+      "Fluticasone",
+      "Formoterol",
+      "Guaifenesin",
+      "Ipratropium",
+      "Itopride",
+      "Ketorolac",
+      "Lansoprazole",
+      "Levocetirizine",
+      "Levosalbutamol",
+      "Loperamide",
+      "Loratadine",
+      "Mefenamic Acid",
+      "Mefloquine",
+      "Metoclopramide",
+      "Metronidazole",
+      "Montelukast",
+      "Nitazoxanide",
+      "Norfloxacin",
+      "Normal Saline",
+      "Omeprazole",
+      "Ondansetron",
+      "Oral Rehydration Salts",
+      "Oxymetazoline",
+      "Pantoprazole",
+      "Paracetamol",
+      "Phenylephrine",
+      "Piroxicam",
+      "Primaquine",
+      "Quinine",
+      "Rabeprazole",
+      "Racecadotril",
+      "Ringer's Lactate",
+      "Saccharomyces boulardii",
+      "Salbutamol",
+      "Sodium Alginate",
+      "Sucralfate",
+      "Sulfadoxine-Pyrimethamine",
+      "Tafenoquine",
+      "Theophylline",
+      "Thiocolchicoside",
+      "Tinidazole",
+      "Tiotropium",
+      "Tizanidine",
+      "Xylometazoline",
+      "Zinc Sulfate"
+    ]
+  },
+  "prescribed_drug_count": 30,
+  "unrepresented_drug_ids": [
+    "aceclofenac",
+    "aluminium-magnesium-antacid",
+    "ambroxol",
+    "artemether-lumefantrine",
+    "artesunate",
+    "aspirin",
+    "atovaquone-proguanil",
+    "azithromycin",
+    "bromhexine",
+    "budesonide",
+    "cetirizine",
+    "chloroquine",
+    "chlorpheniramine",
+    "chlorzoxazone",
+    "ciprofloxacin",
+    "dextromethorphan",
+    "dextrose-saline",
+    "dicyclomine",
+    "diphenhydramine",
+    "domperidone",
+    "doxycycline",
+    "esomeprazole",
+    "etoricoxib",
+    "famotidine",
+    "fexofenadine",
+    "fluticasone",
+    "formoterol",
+    "guaifenesin",
+    "ipratropium",
+    "itopride",
+    "ketorolac",
+    "lansoprazole",
+    "levocetirizine",
+    "levosalbutamol",
+    "loperamide",
+    "loratadine",
+    "mefenamic-acid",
+    "mefloquine",
+    "metoclopramide",
+    "metronidazole",
+    "montelukast",
+    "nitazoxanide",
+    "norfloxacin",
+    "normal-saline",
+    "omeprazole",
+    "ondansetron",
+    "oral-rehydration-salts",
+    "oxymetazoline",
+    "pantoprazole",
+    "paracetamol",
+    "phenylephrine",
+    "piroxicam",
+    "primaquine",
+    "quinine",
+    "rabeprazole",
+    "racecadotril",
+    "ringer-s-lactate",
+    "saccharomyces-boulardii",
+    "salbutamol",
+    "sodium-alginate",
+    "sucralfate",
+    "sulfadoxine-pyrimethamine",
+    "tafenoquine",
+    "theophylline",
+    "thiocolchicoside",
+    "tinidazole",
+    "tiotropium",
+    "tizanidine",
+    "xylometazoline",
+    "zinc-sulfate"
+  ],
+  "unrepresented_disease_ids": [
+    "asthma_allergies",
+    "common_cold",
+    "dengue_fever",
+    "fever_body_ache",
+    "gastroenteritis_diarrhea",
+    "gerd_gastritis",
+    "malaria"
+  ],
+  "ungraded_interaction_pairs": [
+    [
+      "aceclofenac",
+      "methotrexate"
+    ],
+    [
+      "aluminium-magnesium-antacid",
+      "ciprofloxacin"
+    ],
+    [
+      "aspirin",
+      "ketorolac"
+    ],
+    [
+      "aspirin",
+      "methotrexate"
+    ],
+    [
+      "atenolol",
+      "salbutamol"
+    ],
+    [
+      "atovaquone-proguanil",
+      "metoclopramide"
+    ],
+    [
+      "azithromycin",
+      "domperidone"
+    ],
+    [
+      "azithromycin",
+      "ondansetron"
+    ],
+    [
+      "azithromycin",
+      "quinine"
+    ],
+    [
+      "carvedilol",
+      "salbutamol"
+    ],
+    [
+      "cetirizine",
+      "theophylline"
+    ],
+    [
+      "chlorzoxazone",
+      "paracetamol"
+    ],
+    [
+      "ciprofloxacin",
+      "sucralfate"
+    ],
+    [
+      "ciprofloxacin",
+      "theophylline"
+    ],
+    [
+      "ciprofloxacin",
+      "tizanidine"
+    ],
+    [
+      "ciprofloxacin",
+      "zinc-sulfate"
+    ],
+    [
+      "dicyclomine",
+      "itopride"
+    ],
+    [
+      "domperidone",
+      "ondansetron"
+    ],
+    [
+      "domperidone",
+      "quinine"
+    ],
+    [
+      "enalapril",
+      "racecadotril"
+    ],
+    [
+      "formoterol",
+      "theophylline"
+    ],
+    [
+      "ketorolac",
+      "methotrexate"
+    ],
+    [
+      "lansoprazole",
+      "theophylline"
+    ],
+    [
+      "levocetirizine",
+      "theophylline"
+    ],
+    [
+      "mefenamic-acid",
+      "methotrexate"
+    ],
+    [
+      "mefloquine",
+      "quinine"
+    ],
+    [
+      "metformin",
+      "tafenoquine"
+    ],
+    [
+      "methotrexate",
+      "omeprazole"
+    ],
+    [
+      "methotrexate",
+      "pantoprazole"
+    ],
+    [
+      "methotrexate",
+      "piroxicam"
+    ],
+    [
+      "methotrexate",
+      "rabeprazole"
+    ],
+    [
+      "norfloxacin",
+      "theophylline"
+    ],
+    [
+      "ondansetron",
+      "quinine"
+    ],
+    [
+      "racecadotril",
+      "ramipril"
+    ],
+    [
+      "salbutamol",
+      "theophylline"
+    ]
+  ],
+  "limitations": [
+    "Synthetic rule-derived labels, not measured clinical outcomes.",
+    "Missing translations are reported; localized exports contain only supplied translations.",
+    "Catalog expansion does not create patient examples for the newly added medicines.",
+    "New explicit-name interaction candidates are ungraded and cannot supply training labels.",
+    "None means no recorded interaction in the supplied rules, not proven safety.",
+    "Same medicine combinations may occur in different patient splits; this does not test unseen-pair generalization.",
+    "Do not train on IDs, split, interaction severity, highest_severity, or master warning/interaction text.",
+    "Class weights computed on training only; absent classes cannot be learned.",
+    "Conflicting source ratings use the original generator's maximum-severity policy and need domain review."
+  ],
+  "output_sha256": {
+    "drug_catalog.csv": "f357edee70a2e776762fb0edd55ad225ce77e5e8aedebfcbd0e4b9218f80872f",
+    "master_localized.csv": "3c5d09026a25e6cd7e47905448be07688151bdce85c624cd9e2c41532251fca1",
+    "patient_drugs.csv": "06bb5ddd2e0ff639d9469188128da6bbf8427fa4b05e70465af70b3c9738166c",
+    "patient_interactions.csv": "2efc05a5841383c7559cdcd8aaf165d2f4875b4ebaf3f59a02873cd791d64b95",
+    "patient_splits.csv": "3a7124e0fd0541d9afc5592b21f91e33608c1e93cd043709e7ffe7b06fa373ac",
+    "test.csv": "e89709e6ea90798739af36423c8001645ab191dc1b7aa05a6556c1d2f3288d2d",
+    "train.csv": "e60ee0a29c7001c8c04251c1a81ae2b8d8ab463c894758aabfa60675964e4d21",
+    "validation.csv": "cf0f8be43c3d409a84d297775d4d13c7c1995a9bfd3fe7ab774c0a3aaaf47411"
+  }
+}

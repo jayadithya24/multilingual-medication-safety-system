@@ -20,15 +20,43 @@ USAGE:
     pip install pandas
     python build_kannada_dataset.py
 
+The generator reads the current English master dataset and uses an online
+English-to-Kannada translation service for the plain-language narrative fields.
+
 Output:
     ./kannada_master_dataset.csv
 """
 
 import os
+import json
+import urllib.parse
+import urllib.request
 import pandas as pd
 
-OUTPUT_DIR = "."
+OUTPUT_DIR = os.path.dirname(__file__)
 OUTPUT_FILENAME = "kannada_master_dataset.csv"
+ENGLISH_INPUT = "english_master_dataset.csv"
+
+
+def translate_to_kannada(text):
+    if not text:
+        return ""
+
+    query = urllib.parse.urlencode({
+        "client": "gtx",
+        "sl": "en",
+        "tl": "kn",
+        "dt": "t",
+        "q": text,
+    })
+    url = f"https://translate.googleapis.com/translate_a/single?{query}"
+    with urllib.request.urlopen(url, timeout=30) as response:
+        translated = json.loads(response.read().decode("utf-8"))
+    return "".join(part[0] for part in translated[0] if part[0])
+
+
+def english_drug_id(drug_name):
+    return drug_name.strip().lower().replace(" ", "-")
 
 records = [
 
@@ -864,10 +892,26 @@ records = [
 # BUILD AND SAVE
 # ─────────────────────────────────────────────────────────
 
+english_path = os.path.join(os.path.dirname(__file__), ENGLISH_INPUT)
+english_df = pd.read_csv(english_path, encoding="utf-8-sig")
+records_by_id = {record["drug_id"]: record for record in records}
+translated_fields = [
+    "description", "side_effects", "contraindications",
+    "warnings", "major_interactions",
+]
+
+for _, english_row in english_df.iterrows():
+    drug_id = english_drug_id(english_row["drug_name"])
+    record = records_by_id.get(drug_id)
+    if record is None:
+        raise ValueError(f"Missing Kannada record for {drug_id}")
+    for field in translated_fields:
+        record[field] = translate_to_kannada(str(english_row[field]))
+
 COLUMNS = [
     "drug_id", "drug_name", "generic_name", "disease", "drug_class",
     "active_ingredient", "description", "side_effects",
-    "contraindications", "warnings", "source"
+    "contraindications", "warnings", "major_interactions", "source"
 ]
 
 df = pd.DataFrame(records, columns=COLUMNS)

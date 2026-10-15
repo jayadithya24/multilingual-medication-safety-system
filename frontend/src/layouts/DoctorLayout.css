@@ -1,0 +1,19 @@
+.doctor-layout {
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+.doctor-layout__main {
+    min-height: 100vh;
+    margin-left: 240px;
+}
+
+.doctor-layout__content {
+    min-height: calc(100vh - 82px);
+}
+
+@media (max-width: 900px) {
+    .doctor-layout__main {
+        margin-left: 0;
+    }
+}

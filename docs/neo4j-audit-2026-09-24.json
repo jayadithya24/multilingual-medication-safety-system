@@ -1,0 +1,236 @@
+{
+  "configured_connection": {
+    "scheme": "neo4j",
+    "host": "127.0.0.1",
+    "port": 7687,
+    "local": true
+  },
+  "local_ports": {
+    "7474": "accepting connections",
+    "7687": "accepting connections"
+  },
+  "english_master_dataset": {
+    "rows": 30,
+    "columns": [
+      "drug_name",
+      "generic_name",
+      "disease",
+      "drug_class",
+      "active_ingredient",
+      "description",
+      "side_effects",
+      "contraindications",
+      "warnings",
+      "major_interactions",
+      "source"
+    ]
+  },
+  "drug_disease": {
+    "rows": 30,
+    "columns": [
+      "drug_id",
+      "drug_name",
+      "disease_id",
+      "disease"
+    ]
+  },
+  "drug_sideeffects": {
+    "rows": 321,
+    "columns": [
+      "drug_id",
+      "drug_name",
+      "side_effect"
+    ]
+  },
+  "drug_interactions": {
+    "rows": 157,
+    "columns": [
+      "drug1_id",
+      "drug1",
+      "drug2_id",
+      "drug2",
+      "drug2_in_scope",
+      "severity"
+    ]
+  },
+  "interaction_audit": {
+    "unique_pairs": 155,
+    "in_scope_rows": 10,
+    "duplicate_pairs": 2,
+    "conflicting_severities": [
+      {
+        "pair": [
+          "ibuprofen",
+          "methotrexate"
+        ],
+        "severities": [
+          "Moderate",
+          "Severe"
+        ]
+      }
+    ]
+  },
+  "fallback_graph": {
+    "node_types": {
+      "drug": 30,
+      "disease": 3,
+      "sideeffect": 179
+    },
+    "edge_types": {
+      "TREATS": 30,
+      "CAUSES": 321,
+      "INTERACTS_WITH": 8
+    },
+    "dangling_edges": 0
+  },
+  "running_backend_graph": {
+    "source": "neo4j",
+    "nodes": 212,
+    "relationships": 359,
+    "exactly_matches_csv_fallback": false
+  },
+  "identity_audit": {
+    "condition_side_effect_id_collisions": [
+      "hypertension"
+    ],
+    "side_effect_case_variants": [
+      [
+        "Abdominal pain",
+        "abdominal pain"
+      ],
+      [
+        "Bradycardia",
+        "bradycardia"
+      ],
+      [
+        "Diarrhea",
+        "diarrhea"
+      ],
+      [
+        "Dizziness",
+        "dizziness"
+      ],
+      [
+        "Fluid retention",
+        "fluid retention"
+      ],
+      [
+        "Headache",
+        "headache"
+      ],
+      [
+        "Hypokalemia",
+        "hypokalemia"
+      ],
+      [
+        "Nasopharyngitis",
+        "nasopharyngitis"
+      ],
+      [
+        "Nausea",
+        "nausea"
+      ],
+      [
+        "Teratogenicity",
+        "teratogenicity"
+      ],
+      [
+        "Upper respiratory infection",
+        "upper respiratory infection"
+      ],
+      [
+        "Urinary tract infections",
+        "urinary tract infections"
+      ],
+      [
+        "Weight gain",
+        "weight gain"
+      ]
+    ]
+  },
+  "celecoxib_source_records": {
+    "conditions": [
+      {
+        "drug_id": "celecoxib",
+        "drug_name": "Celecoxib",
+        "disease_id": "arthritis",
+        "disease": "Arthritis"
+      }
+    ],
+    "side_effects": [
+      "Abdominal pain",
+      "dyspepsia",
+      "diarrhea",
+      "nausea",
+      "headache",
+      "dizziness",
+      "fluid retention",
+      "hypertension",
+      "peripheral edema",
+      "upper respiratory infection",
+      "serious cardiovascular events (MI, stroke)",
+      "serious GI events",
+      "serious skin reactions",
+      "hepatotoxicity"
+    ],
+    "interactions": [
+      {
+        "drug1_id": "celecoxib",
+        "drug1": "Celecoxib",
+        "drug2_id": "warfarin",
+        "drug2": "Warfarin",
+        "drug2_in_scope": "no",
+        "severity": "Moderate"
+      },
+      {
+        "drug1_id": "celecoxib",
+        "drug1": "Celecoxib",
+        "drug2_id": "ace-inhibitors",
+        "drug2": "ACE inhibitors",
+        "drug2_in_scope": "no",
+        "severity": "Moderate"
+      },
+      {
+        "drug1_id": "celecoxib",
+        "drug1": "Celecoxib",
+        "drug2_id": "arbs",
+        "drug2": "ARBs",
+        "drug2_in_scope": "no",
+        "severity": "Moderate"
+      },
+      {
+        "drug1_id": "celecoxib",
+        "drug1": "Celecoxib",
+        "drug2_id": "lithium",
+        "drug2": "Lithium",
+        "drug2_in_scope": "no",
+        "severity": "Moderate"
+      },
+      {
+        "drug1_id": "celecoxib",
+        "drug1": "Celecoxib",
+        "drug2_id": "cyp2c9-inhibitor",
+        "drug2": "CYP2C9 inhibitor",
+        "drug2_in_scope": "no",
+        "severity": "Mild"
+      },
+      {
+        "drug1_id": "celecoxib",
+        "drug1": "Celecoxib",
+        "drug2_id": "methotrexate",
+        "drug2": "Methotrexate",
+        "drug2_in_scope": "yes",
+        "severity": "Moderate"
+      }
+    ]
+  },
+  "live_graph": {
+    "nodes": 212,
+    "relationships": 359,
+    "interaction_properties": {
+      "total": 8,
+      "with_severity": 8,
+      "with_description": 8
+    }
+  }
+}

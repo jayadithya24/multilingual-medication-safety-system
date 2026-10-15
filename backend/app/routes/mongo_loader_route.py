@@ -3,7 +3,7 @@ import os
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
-from backend.app.auth import get_current_active_user
+from backend.app.auth import get_current_admin
 from backend.mongo_loader import load_csvs, build_documents, insert_to_mongo
 
 router = APIRouter(prefix="/admin", tags=["admin"])
@@ -15,10 +15,10 @@ class LoadRequest(BaseModel):
 
 
 @router.post("/load-mongo")
-async def load_mongo(req: LoadRequest, current_user=Depends(get_current_active_user)):
+async def load_mongo(req: LoadRequest, current_user=Depends(get_current_admin)):
     """JWT-protected endpoint to build documents from CSVs and insert into MongoDB.
 
-    The caller must be authenticated (Bearer token). If `mongo_uri` is not supplied
+    The caller must be an administrator (Bearer token). If `mongo_uri` is not supplied
     it will use the `MONGO_URI` environment variable.
     """
     dfs = load_csvs()

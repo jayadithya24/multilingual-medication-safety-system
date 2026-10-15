@@ -1,0 +1,101 @@
+drug_id,drug_name,disease_id
+metformin,Metformin,type_2_diabetes
+glipizide,Glipizide,type_2_diabetes
+glimepiride,Glimepiride,type_2_diabetes
+sitagliptin,Sitagliptin,type_2_diabetes
+empagliflozin,Empagliflozin,type_2_diabetes
+pioglitazone,Pioglitazone,type_2_diabetes
+insulin-glargine,Insulin Glargine,type_2_diabetes
+dapagliflozin,Dapagliflozin,type_2_diabetes
+vildagliptin,Vildagliptin,type_2_diabetes
+acarbose,Acarbose,type_2_diabetes
+amlodipine,Amlodipine,hypertension
+losartan,Losartan,hypertension
+enalapril,Enalapril,hypertension
+telmisartan,Telmisartan,hypertension
+hydrochlorothiazide,Hydrochlorothiazide,hypertension
+atenolol,Atenolol,hypertension
+ramipril,Ramipril,hypertension
+chlorthalidone,Chlorthalidone,hypertension
+carvedilol,Carvedilol,hypertension
+clonidine,Clonidine,hypertension
+ibuprofen,Ibuprofen,arthritis
+diclofenac,Diclofenac,arthritis
+naproxen,Naproxen,arthritis
+methotrexate,Methotrexate,arthritis
+hydroxychloroquine,Hydroxychloroquine,arthritis
+celecoxib,Celecoxib,arthritis
+sulfasalazine,Sulfasalazine,arthritis
+prednisolone,Prednisolone,arthritis
+leflunomide,Leflunomide,arthritis
+colchicine,Colchicine,arthritis
+chlorpheniramine,Chlorpheniramine,common_cold
+cetirizine,Cetirizine,common_cold
+phenylephrine,Phenylephrine,common_cold
+xylometazoline,Xylometazoline,common_cold
+oxymetazoline,Oxymetazoline,common_cold
+dextromethorphan,Dextromethorphan,common_cold
+guaifenesin,Guaifenesin,common_cold
+ambroxol,Ambroxol,common_cold
+bromhexine,Bromhexine,common_cold
+diphenhydramine,Diphenhydramine,common_cold
+paracetamol,Paracetamol,fever_body_ache
+aspirin,Aspirin,fever_body_ache
+mefenamic-acid,Mefenamic Acid,fever_body_ache
+aceclofenac,Aceclofenac,fever_body_ache
+etoricoxib,Etoricoxib,fever_body_ache
+ketorolac,Ketorolac,fever_body_ache
+thiocolchicoside,Thiocolchicoside,fever_body_ache
+chlorzoxazone,Chlorzoxazone,fever_body_ache
+tizanidine,Tizanidine,fever_body_ache
+piroxicam,Piroxicam,fever_body_ache
+salbutamol,Salbutamol,asthma_allergies
+levosalbutamol,Levosalbutamol,asthma_allergies
+budesonide,Budesonide,asthma_allergies
+fluticasone,Fluticasone,asthma_allergies
+formoterol,Formoterol,asthma_allergies
+montelukast,Montelukast,asthma_allergies
+theophylline,Theophylline,asthma_allergies
+ipratropium,Ipratropium,asthma_allergies
+tiotropium,Tiotropium,asthma_allergies
+fexofenadine,Fexofenadine,asthma_allergies
+levocetirizine,Levocetirizine,asthma_allergies
+loratadine,Loratadine,asthma_allergies
+omeprazole,Omeprazole,gerd_gastritis
+pantoprazole,Pantoprazole,gerd_gastritis
+esomeprazole,Esomeprazole,gerd_gastritis
+rabeprazole,Rabeprazole,gerd_gastritis
+lansoprazole,Lansoprazole,gerd_gastritis
+famotidine,Famotidine,gerd_gastritis
+domperidone,Domperidone,gerd_gastritis
+sucralfate,Sucralfate,gerd_gastritis
+aluminium-magnesium-antacid,Aluminium-Magnesium Antacid,gerd_gastritis
+sodium-alginate,Sodium Alginate,gerd_gastritis
+itopride,Itopride,gerd_gastritis
+chloroquine,Chloroquine,malaria
+primaquine,Primaquine,malaria
+artemether-lumefantrine,Artemether-Lumefantrine,malaria
+artesunate,Artesunate,malaria
+sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,malaria
+quinine,Quinine,malaria
+doxycycline,Doxycycline,malaria
+mefloquine,Mefloquine,malaria
+atovaquone-proguanil,Atovaquone-Proguanil,malaria
+tafenoquine,Tafenoquine,malaria
+ringer-s-lactate,Ringer's Lactate,dengue_fever
+normal-saline,Normal Saline,dengue_fever
+dextrose-saline,Dextrose Saline,dengue_fever
+ondansetron,Ondansetron,dengue_fever
+metoclopramide,Metoclopramide,dengue_fever
+oral-rehydration-salts,Oral Rehydration Salts,gastroenteritis_diarrhea
+zinc-sulfate,Zinc Sulfate,gastroenteritis_diarrhea
+racecadotril,Racecadotril,gastroenteritis_diarrhea
+loperamide,Loperamide,gastroenteritis_diarrhea
+metronidazole,Metronidazole,gastroenteritis_diarrhea
+tinidazole,Tinidazole,gastroenteritis_diarrhea
+ciprofloxacin,Ciprofloxacin,gastroenteritis_diarrhea
+norfloxacin,Norfloxacin,gastroenteritis_diarrhea
+azithromycin,Azithromycin,gastroenteritis_diarrhea
+nitazoxanide,Nitazoxanide,gastroenteritis_diarrhea
+saccharomyces-boulardii,Saccharomyces boulardii,gastroenteritis_diarrhea
+dicyclomine,Dicyclomine,gastroenteritis_diarrhea

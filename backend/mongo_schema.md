@@ -120,13 +120,33 @@ Example:
 }
 ```
 
-6) `users` (optional)
+6) `users`
 
-Minimum fields for admin operations (used by JWT auth in Phase 1):
+All authenticated people, including patients and doctors, are stored in this
+collection. `username` is the case-normalized login identifier and has a unique
+index. A doctor's authentication record and profile must never be hard-coded in
+the application.
+
+Doctor example:
 
 ```json
-{ "username": "admin", "email": "admin@example.com", "hashed_password": "...", "roles": ["admin"] }
+{
+  "username": "doctor@example.com",
+  "full_name": "Dr. Asha Rao",
+  "email": "doctor@example.com",
+  "role": "doctor",
+  "hashed_password": "...",
+  "doctor_id": "DR-001",
+  "specialization": "General Medicine",
+  "license_number": "KMC-12345",
+  "phone": "+91-0000000000",
+  "hospital": "Example Hospital",
+  "created_at": "2026-09-19T00:00:00Z"
+}
 ```
+
+Patient documents use `role: "patient"` and retain the existing profile fields
+such as `patient_id`, `age`, `gender`, and `medical_condition`.
 
 Loader responsibilities
 -----------------------
