@@ -42,7 +42,13 @@ def test_full_export_integrity(tmp_path):
     assert not {"highest_severity", "severity", "patient_id", "target_severity", "major_interactions"} & set(report["features"])
     localized = pd.read_csv(tmp_path / "master_localized.csv", keep_default_na=False)
     assert not localized.duplicated(["drug_id", "language"]).any()
-    assert len(localized) == report["drug_count"] * 3
+    assert len(localized) == report["localized_row_count"]
+    assert len(localized[localized.language.eq("en")]) == report["drug_count"]
+    catalog = pd.read_csv(tmp_path / "drug_catalog.csv", keep_default_na=False)
+    for lang in ("kn", "tulu"):
+        present = set(localized.loc[localized.language.eq(lang), "drug_name"])
+        assert set(report["missing_translations"][lang]) == set(catalog.drug_name) - present
+    assert set(report["unrepresented_drug_ids"]) <= set(catalog.drug_id)
     assert json.loads((tmp_path / "manifest.json").read_text())["source_sha256"] == report["source_sha256"]
     repeated = module.prepare(ROOT / "datasets", tmp_path / "repeat")
     assert repeated["output_sha256"] == report["output_sha256"]

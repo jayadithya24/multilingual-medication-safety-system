@@ -2,12 +2,15 @@ import os
 import re
 import sys
 import pandas as pd
+import json
+from pathlib import Path
  
 # ------------------------------------------------------------------
-# CONFIG — reads and writes in the current folder (e.g. datasets/)
+# CONFIG — reads and writes alongside this script from any working directory
 # ------------------------------------------------------------------
-INPUT_CSV = "english_master_dataset.csv"
-OUTPUT_DIR = "."
+ROOT = Path(__file__).resolve().parent
+INPUT_CSV = ROOT / "english_master_dataset.csv"
+OUTPUT_DIR = ROOT
  
 if not os.path.exists(INPUT_CSV):
     sys.exit(
@@ -328,6 +331,32 @@ def build_drug_interactions(df: pd.DataFrame, known_drug_ids: set) -> pd.DataFra
     )
     out = out.drop_duplicates().reset_index(drop=True)
     return out
+
+
+def extract_named_interactions(frame, catalog):
+    """Extract explicit catalog medicine names from prose, without class inference.
+
+    These source-text matches are ungraded. In particular, comparison statements
+    must not turn into interaction edges (e.g. pantoprazole vs omeprazole).
+    """
+    rows, evidence = [], []
+    names = list(catalog.drug_name)
+    for record in frame.to_dict("records"):
+        for sentence in split_into_sentences(strip_citation(record["major_interactions"])):
+            if re.search(r"\b(less likely than|compared (?:with|to)|no major|not documented)\b", sentence, re.I):
+                continue
+            for name in names:
+                if name == record["drug_name"]:
+                    continue
+                if not re.search(r"(?<![a-z0-9])" + re.escape(name) + r"(?![a-z0-9])", sentence, re.I):
+                    continue
+                pair = {"drug1_id": slugify(record["drug_name"]), "drug1": record["drug_name"],
+                        "drug2_id": slugify(name), "drug2": name,
+                        "drug2_in_scope": "yes", "severity": "Unknown"}
+                rows.append(pair)
+                evidence.append({**pair, "description": sentence, "source": record["source"],
+                                 "basis": "Explicit medicine name in supplied English interaction text; unreviewed and ungraded."})
+    return pd.DataFrame(rows, columns=["drug1_id", "drug1", "drug2_id", "drug2", "drug2_in_scope", "severity"]).drop_duplicates(), evidence
  
  
 # ------------------------------------------------------------------
@@ -338,8 +367,16 @@ def main():
     drug_disease_df = build_drug_disease(df)
     known_drug_ids = set(drug_disease_df["drug_id"])
  
-    drug_sideeffects_df = build_drug_sideeffects(df)
-    drug_interactions_df = build_drug_interactions(df, known_drug_ids)
+    legacy_side = pd.DataFrame(json.loads((ROOT / "legacy_sideeffect_records.json").read_text(encoding="utf-8")))
+    drug_sideeffects_df = pd.concat([legacy_side, build_drug_sideeffects(
+        df[~df.drug_name.map(slugify).isin(set(legacy_side.drug_id))])], ignore_index=True).drop_duplicates()
+    # Keep original ratings/conflicts, which underpin the saved patient labels.
+    legacy = pd.DataFrame(json.loads((ROOT / "legacy_interaction_records.json").read_text(encoding="utf-8")))
+    original_ids = set(legacy.drug1_id)
+    additions, evidence = extract_named_interactions(df[~df.drug_name.map(slugify).isin(original_ids)], df)
+    drug_interactions_df = pd.concat([legacy, additions], ignore_index=True).drop_duplicates()
+    drug_interactions_df["drug2_in_scope"] = drug_interactions_df.drug2_id.map(
+        lambda value: "yes" if value in known_drug_ids else "no")
  
     drug_disease_path = os.path.join(OUTPUT_DIR, "drug_disease.csv")
     drug_sideeffects_path = os.path.join(OUTPUT_DIR, "drug_sideeffects.csv")
@@ -348,6 +385,8 @@ def main():
     drug_disease_df.to_csv(drug_disease_path, index=False, encoding="utf-8")
     drug_sideeffects_df.to_csv(drug_sideeffects_path, index=False, encoding="utf-8")
     drug_interactions_df.to_csv(drug_interactions_path, index=False, encoding="utf-8")
+    (ROOT / "new_interaction_candidates.json").write_text(
+        json.dumps(evidence, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
  
     in_scope_count = (drug_interactions_df["drug2_in_scope"] == "yes").sum()
     out_scope_count = (drug_interactions_df["drug2_in_scope"] == "no").sum()

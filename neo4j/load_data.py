@@ -3,6 +3,7 @@ import argparse
 import csv
 import json
 import os
+import re
 from pathlib import Path
 from neo4j import GraphDatabase
 
@@ -15,7 +16,7 @@ class Neo4jLoader:
     def resolve_drug_id(row):
         if row.get("drug_id"):
             return str(row["drug_id"]).strip()
-        return str(row.get("drug_name") or row.get("Drug Name") or "").strip().lower().replace(" ", "-")
+        return re.sub(r"[^a-z0-9]+", "-", str(row.get("drug_name") or row.get("Drug Name") or "").strip().lower()).strip("-")
 
     def __init__(self, uri, user, password, database="neo4j"):
         self.driver = GraphDatabase.driver(uri, auth=(user, password), connection_timeout=5)

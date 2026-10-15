@@ -83,6 +83,16 @@ def _load_interaction_table():
 
     if "description" not in dataframe.columns:
         dataframe["description"] = "An interaction is recorded in the local dataset; a supporting clinical description is not provided."
+        candidates = PROJECT_ROOT / "datasets" / "new_interaction_candidates.json"
+        if candidates.exists():
+            grouped = {}
+            for record in json.loads(candidates.read_text(encoding="utf-8")):
+                key = (record["drug1"].strip().lower(), record["drug2"].strip().lower())
+                grouped.setdefault(key, []).append(record["description"])
+            for index, row in dataframe.iterrows():
+                key = (row["drug_1"].strip().lower(), row["drug_2"].strip().lower())
+                if key in grouped:
+                    dataframe.at[index, "description"] = ". ".join(dict.fromkeys(grouped[key])) + "."
 
     if "recommendation" not in dataframe.columns:
         dataframe["recommendation"] = "No source-backed management recommendation is available in this dataset."

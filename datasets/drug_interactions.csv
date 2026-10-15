@@ -37,7 +37,7 @@ insulin-glargine,Insulin Glargine,atypical-antipsychotics,Atypical Antipsychotic
 dapagliflozin,Dapagliflozin,insulin,Insulin,no,Moderate
 dapagliflozin,Dapagliflozin,sulfonylureas,Sulfonylureas,no,Moderate
 dapagliflozin,Dapagliflozin,diuretics,Diuretics,no,Moderate
-dapagliflozin,Dapagliflozin,mefenamic-acid,Mefenamic Acid,no,Moderate
+dapagliflozin,Dapagliflozin,mefenamic-acid,Mefenamic Acid,yes,Moderate
 vildagliptin,Vildagliptin,insulin,Insulin,no,Moderate
 vildagliptin,Vildagliptin,sulfonylureas,Sulfonylureas,no,Moderate
 vildagliptin,Vildagliptin,ace-inhibitors,ACE inhibitors,no,Moderate
@@ -97,7 +97,7 @@ clonidine,Clonidine,beta-blockers,Beta-blockers,no,Mild
 clonidine,Clonidine,tricyclic-antidepressants,Tricyclic Antidepressants,no,Moderate
 clonidine,Clonidine,cns-depressants,CNS depressants,no,Moderate
 clonidine,Clonidine,alcohol,Alcohol,no,Moderate
-ibuprofen,Ibuprofen,aspirin,Aspirin,no,Moderate
+ibuprofen,Ibuprofen,aspirin,Aspirin,yes,Moderate
 ibuprofen,Ibuprofen,warfarin,Warfarin,no,Moderate
 ibuprofen,Ibuprofen,ace-inhibitors,ACE inhibitors,no,Moderate
 ibuprofen,Ibuprofen,arbs,ARBs,no,Moderate
@@ -123,7 +123,7 @@ methotrexate,Methotrexate,sulfamethoxazole,Sulfamethoxazole,no,Moderate
 methotrexate,Methotrexate,penicillins,Penicillins,no,Moderate
 methotrexate,Methotrexate,proton-pump-inhibitors,Proton pump inhibitors,no,Moderate
 methotrexate,Methotrexate,alcohol,Alcohol,no,Moderate
-hydroxychloroquine,Hydroxychloroquine,azithromycin,Azithromycin,no,Severe
+hydroxychloroquine,Hydroxychloroquine,azithromycin,Azithromycin,yes,Severe
 hydroxychloroquine,Hydroxychloroquine,fluoroquinolones,Fluoroquinolones,no,Severe
 hydroxychloroquine,Hydroxychloroquine,antiarrhythmics,Antiarrhythmics,no,Severe
 hydroxychloroquine,Hydroxychloroquine,digoxin,Digoxin,no,Moderate
@@ -156,3 +156,41 @@ colchicine,Colchicine,cyclosporine,Cyclosporine,no,Moderate
 colchicine,Colchicine,ranolazine,Ranolazine,no,Moderate
 colchicine,Colchicine,statins,Statins,no,Moderate
 colchicine,Colchicine,digoxin,Digoxin,no,Moderate
+cetirizine,Cetirizine,theophylline,Theophylline,yes,Unknown
+aspirin,Aspirin,methotrexate,Methotrexate,yes,Unknown
+mefenamic-acid,Mefenamic Acid,methotrexate,Methotrexate,yes,Unknown
+aceclofenac,Aceclofenac,methotrexate,Methotrexate,yes,Unknown
+ketorolac,Ketorolac,aspirin,Aspirin,yes,Unknown
+ketorolac,Ketorolac,methotrexate,Methotrexate,yes,Unknown
+chlorzoxazone,Chlorzoxazone,paracetamol,Paracetamol,yes,Unknown
+tizanidine,Tizanidine,ciprofloxacin,Ciprofloxacin,yes,Unknown
+piroxicam,Piroxicam,methotrexate,Methotrexate,yes,Unknown
+salbutamol,Salbutamol,atenolol,Atenolol,yes,Unknown
+salbutamol,Salbutamol,carvedilol,Carvedilol,yes,Unknown
+salbutamol,Salbutamol,theophylline,Theophylline,yes,Unknown
+formoterol,Formoterol,theophylline,Theophylline,yes,Unknown
+theophylline,Theophylline,ciprofloxacin,Ciprofloxacin,yes,Unknown
+levocetirizine,Levocetirizine,theophylline,Theophylline,yes,Unknown
+omeprazole,Omeprazole,methotrexate,Methotrexate,yes,Unknown
+pantoprazole,Pantoprazole,methotrexate,Methotrexate,yes,Unknown
+rabeprazole,Rabeprazole,methotrexate,Methotrexate,yes,Unknown
+lansoprazole,Lansoprazole,theophylline,Theophylline,yes,Unknown
+domperidone,Domperidone,ondansetron,Ondansetron,yes,Unknown
+sucralfate,Sucralfate,ciprofloxacin,Ciprofloxacin,yes,Unknown
+aluminium-magnesium-antacid,Aluminium-Magnesium Antacid,ciprofloxacin,Ciprofloxacin,yes,Unknown
+itopride,Itopride,dicyclomine,Dicyclomine,yes,Unknown
+quinine,Quinine,domperidone,Domperidone,yes,Unknown
+mefloquine,Mefloquine,quinine,Quinine,yes,Unknown
+atovaquone-proguanil,Atovaquone-Proguanil,metoclopramide,Metoclopramide,yes,Unknown
+tafenoquine,Tafenoquine,metformin,Metformin,yes,Unknown
+ondansetron,Ondansetron,domperidone,Domperidone,yes,Unknown
+ondansetron,Ondansetron,quinine,Quinine,yes,Unknown
+zinc-sulfate,Zinc Sulfate,ciprofloxacin,Ciprofloxacin,yes,Unknown
+racecadotril,Racecadotril,enalapril,Enalapril,yes,Unknown
+racecadotril,Racecadotril,ramipril,Ramipril,yes,Unknown
+ciprofloxacin,Ciprofloxacin,tizanidine,Tizanidine,yes,Unknown
+ciprofloxacin,Ciprofloxacin,theophylline,Theophylline,yes,Unknown
+norfloxacin,Norfloxacin,theophylline,Theophylline,yes,Unknown
+azithromycin,Azithromycin,domperidone,Domperidone,yes,Unknown
+azithromycin,Azithromycin,quinine,Quinine,yes,Unknown
+azithromycin,Azithromycin,ondansetron,Ondansetron,yes,Unknown

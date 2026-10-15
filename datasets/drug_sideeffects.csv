@@ -320,3 +320,439 @@ colchicine,Colchicine,Neuromuscular toxicity: myopathy
 colchicine,Colchicine,rhabdomyolysis (especially with statins/CsA)
 colchicine,Colchicine,Bone marrow suppression: pancytopenia with overdose or in renal impairment
 colchicine,Colchicine,Alopecia with long-term use
+chlorpheniramine,Chlorpheniramine,Drowsiness
+chlorpheniramine,Chlorpheniramine,dry mouth
+chlorpheniramine,Chlorpheniramine,blurred vision
+chlorpheniramine,Chlorpheniramine,difficulty passing urine
+chlorpheniramine,Chlorpheniramine,constipation
+chlorpheniramine,Chlorpheniramine,dizziness
+chlorpheniramine,Chlorpheniramine,Some people (especially children) may feel restless or excited instead of sleepy
+cetirizine,Cetirizine,Mild drowsiness
+cetirizine,Cetirizine,dry mouth
+cetirizine,Cetirizine,tiredness
+cetirizine,Cetirizine,headache
+cetirizine,Cetirizine,sore throat
+cetirizine,Cetirizine,Rarely: fast heartbeat or allergic skin reactions
+phenylephrine,Phenylephrine,Raised blood pressure
+phenylephrine,Phenylephrine,fast or pounding heartbeat
+phenylephrine,Phenylephrine,headache
+phenylephrine,Phenylephrine,nervousness
+phenylephrine,Phenylephrine,trouble sleeping
+phenylephrine,Phenylephrine,dizziness
+xylometazoline,Xylometazoline,Burning or dryness in the nose
+xylometazoline,Xylometazoline,sneezing
+xylometazoline,Xylometazoline,nosebleeds
+xylometazoline,Xylometazoline,Using it for too long can cause the blockage to come back worse (rebound congestion)
+oxymetazoline,Oxymetazoline,Nasal burning or stinging
+oxymetazoline,Oxymetazoline,dryness
+oxymetazoline,Oxymetazoline,sneezing
+oxymetazoline,Oxymetazoline,headache
+oxymetazoline,Oxymetazoline,Prolonged use causes rebound congestion
+dextromethorphan,Dextromethorphan,Dizziness
+dextromethorphan,Dextromethorphan,drowsiness
+dextromethorphan,Dextromethorphan,nausea
+dextromethorphan,Dextromethorphan,stomach upset
+dextromethorphan,Dextromethorphan,Very high doses can cause confusion
+dextromethorphan,Dextromethorphan,hallucinations and fast heartbeat
+guaifenesin,Guaifenesin,Nausea
+guaifenesin,Guaifenesin,vomiting
+guaifenesin,Guaifenesin,stomach upset
+guaifenesin,Guaifenesin,dizziness
+guaifenesin,Guaifenesin,headache
+guaifenesin,Guaifenesin,occasionally rash
+guaifenesin,Guaifenesin,Large doses may cause kidney stones in rare cases
+ambroxol,Ambroxol,Upset stomach
+ambroxol,Ambroxol,nausea
+ambroxol,Ambroxol,a mild numb feeling in the mouth or throat
+ambroxol,Ambroxol,change in taste
+ambroxol,Ambroxol,Rarely: allergic skin reactions
+bromhexine,Bromhexine,Nausea
+bromhexine,Bromhexine,stomach upset
+bromhexine,Bromhexine,dizziness
+bromhexine,Bromhexine,sweating and rash
+bromhexine,Bromhexine,Rarely
+bromhexine,Bromhexine,wheezing or skin reactions
+diphenhydramine,Diphenhydramine,Strong drowsiness
+diphenhydramine,Diphenhydramine,dry mouth
+diphenhydramine,Diphenhydramine,blurred vision
+diphenhydramine,Diphenhydramine,constipation
+diphenhydramine,Diphenhydramine,difficulty passing urine
+diphenhydramine,Diphenhydramine,dizziness
+diphenhydramine,Diphenhydramine,confusion in the elderly
+paracetamol,Paracetamol,Usually well tolerated
+paracetamol,Paracetamol,Rarely: skin rash
+paracetamol,Paracetamol,An overdose can badly damage the liver
+aspirin,Aspirin,Stomach upset
+aspirin,Aspirin,heartburn
+aspirin,Aspirin,stomach bleeding or ulcers
+aspirin,Aspirin,easy bruising
+aspirin,Aspirin,ringing in the ears at high doses
+aspirin,Aspirin,allergic reactions including wheezing in sensitive people
+mefenamic-acid,Mefenamic Acid,Stomach pain
+mefenamic-acid,Mefenamic Acid,nausea
+mefenamic-acid,Mefenamic Acid,diarrhea
+mefenamic-acid,Mefenamic Acid,indigestion
+mefenamic-acid,Mefenamic Acid,dizziness
+mefenamic-acid,Mefenamic Acid,rash
+mefenamic-acid,Mefenamic Acid,Rarely: stomach bleeding
+mefenamic-acid,Mefenamic Acid,kidney problems
+mefenamic-acid,Mefenamic Acid,blood disorders
+aceclofenac,Aceclofenac,Indigestion
+aceclofenac,Aceclofenac,abdominal pain
+aceclofenac,Aceclofenac,nausea
+aceclofenac,Aceclofenac,diarrhea
+aceclofenac,Aceclofenac,dizziness
+aceclofenac,Aceclofenac,raised liver enzymes
+aceclofenac,Aceclofenac,Rarely: stomach bleeding
+aceclofenac,Aceclofenac,rash
+aceclofenac,Aceclofenac,kidney problems
+etoricoxib,Etoricoxib,Stomach upset
+etoricoxib,Etoricoxib,heartburn
+etoricoxib,Etoricoxib,swelling of ankles
+etoricoxib,Etoricoxib,headache
+etoricoxib,Etoricoxib,dizziness
+etoricoxib,Etoricoxib,raised blood pressure
+etoricoxib,Etoricoxib,Rarely: heart and kidney problems
+ketorolac,Ketorolac,Stomach pain
+ketorolac,Ketorolac,nausea
+ketorolac,Ketorolac,indigestion
+ketorolac,Ketorolac,headache
+ketorolac,Ketorolac,dizziness
+ketorolac,Ketorolac,drowsiness
+ketorolac,Ketorolac,stomach bleeding
+ketorolac,Ketorolac,kidney damage
+ketorolac,Ketorolac,bleeding problems
+thiocolchicoside,Thiocolchicoside,Drowsiness
+thiocolchicoside,Thiocolchicoside,nausea
+thiocolchicoside,Thiocolchicoside,diarrhea
+thiocolchicoside,Thiocolchicoside,stomach upset
+thiocolchicoside,Thiocolchicoside,dizziness
+thiocolchicoside,Thiocolchicoside,Seizures may occur in people who are prone to them
+chlorzoxazone,Chlorzoxazone,Drowsiness
+chlorzoxazone,Chlorzoxazone,dizziness
+chlorzoxazone,Chlorzoxazone,light-headedness
+chlorzoxazone,Chlorzoxazone,stomach upset
+chlorzoxazone,Chlorzoxazone,Urine may turn orange or reddish
+chlorzoxazone,Chlorzoxazone,which is harmless
+chlorzoxazone,Chlorzoxazone,Rarely: serious liver damage
+tizanidine,Tizanidine,Drowsiness
+tizanidine,Tizanidine,dry mouth
+tizanidine,Tizanidine,low blood pressure
+tizanidine,Tizanidine,dizziness
+tizanidine,Tizanidine,weakness
+tizanidine,Tizanidine,slow heartbeat
+tizanidine,Tizanidine,Rarely: liver injury
+piroxicam,Piroxicam,Stomach pain
+piroxicam,Piroxicam,nausea
+piroxicam,Piroxicam,indigestion
+piroxicam,Piroxicam,dizziness
+piroxicam,Piroxicam,swelling
+piroxicam,Piroxicam,rash
+piroxicam,Piroxicam,sun sensitivity
+piroxicam,Piroxicam,Rarely: stomach bleeding and serious skin reactions
+salbutamol,Salbutamol,Shaky hands
+salbutamol,Salbutamol,fast heartbeat
+salbutamol,Salbutamol,headache
+salbutamol,Salbutamol,muscle cramps
+salbutamol,Salbutamol,nervousness
+salbutamol,Salbutamol,Low potassium with high doses
+levosalbutamol,Levosalbutamol,Tremor
+levosalbutamol,Levosalbutamol,fast heartbeat
+levosalbutamol,Levosalbutamol,headache
+levosalbutamol,Levosalbutamol,nervousness
+levosalbutamol,Levosalbutamol,muscle cramps
+levosalbutamol,Levosalbutamol,low potassium
+budesonide,Budesonide,Hoarse voice
+budesonide,Budesonide,sore throat
+budesonide,Budesonide,mouth thrush (a fungal infection)
+budesonide,Budesonide,High doses over a long time may slow growth in children and thin bones
+fluticasone,Fluticasone,Hoarse voice
+fluticasone,Fluticasone,throat irritation
+fluticasone,Fluticasone,mouth thrush
+fluticasone,Fluticasone,nosebleeds (nasal form)
+fluticasone,Fluticasone,headache
+formoterol,Formoterol,Tremor
+formoterol,Formoterol,palpitations
+formoterol,Formoterol,headache
+formoterol,Formoterol,muscle cramps
+formoterol,Formoterol,low potassium
+formoterol,Formoterol,throat irritation
+montelukast,Montelukast,Headache
+montelukast,Montelukast,stomach pain
+montelukast,Montelukast,cough
+montelukast,Montelukast,sore throat
+montelukast,Montelukast,tiredness
+montelukast,Montelukast,mood or behaviour changes
+montelukast,Montelukast,sleep problems
+montelukast,Montelukast,low mood or suicidal thoughts
+theophylline,Theophylline,Nausea
+theophylline,Theophylline,vomiting
+theophylline,Theophylline,headache
+theophylline,Theophylline,restlessness
+theophylline,Theophylline,trouble sleeping
+theophylline,Theophylline,fast heartbeat
+theophylline,Theophylline,High levels can cause seizures and heart rhythm problems
+ipratropium,Ipratropium,Dry mouth
+ipratropium,Ipratropium,cough
+ipratropium,Ipratropium,throat irritation
+ipratropium,Ipratropium,headache
+ipratropium,Ipratropium,nausea
+ipratropium,Ipratropium,dizziness
+ipratropium,Ipratropium,Rarely: blurred vision
+ipratropium,Ipratropium,urinary retention
+tiotropium,Tiotropium,Dry mouth
+tiotropium,Tiotropium,constipation
+tiotropium,Tiotropium,throat irritation
+tiotropium,Tiotropium,urinary difficulty
+tiotropium,Tiotropium,sinus infection
+tiotropium,Tiotropium,Rarely: fast heartbeat
+tiotropium,Tiotropium,narrow-angle glaucoma worsening
+fexofenadine,Fexofenadine,Headache
+fexofenadine,Fexofenadine,mild drowsiness
+fexofenadine,Fexofenadine,nausea
+fexofenadine,Fexofenadine,dizziness
+fexofenadine,Fexofenadine,Rarely: allergic reactions
+levocetirizine,Levocetirizine,Drowsiness
+levocetirizine,Levocetirizine,dry mouth
+levocetirizine,Levocetirizine,tiredness
+levocetirizine,Levocetirizine,headache
+levocetirizine,Levocetirizine,Rarely: weight gain or urinary difficulty
+loratadine,Loratadine,Headache
+loratadine,Loratadine,dry mouth
+loratadine,Loratadine,tiredness
+loratadine,Loratadine,mild drowsiness
+loratadine,Loratadine,stomach upset
+loratadine,Loratadine,Rarely: palpitations
+omeprazole,Omeprazole,Headache
+omeprazole,Omeprazole,stomach pain
+omeprazole,Omeprazole,diarrhea
+omeprazole,Omeprazole,nausea
+omeprazole,Omeprazole,gas
+omeprazole,Omeprazole,constipation
+omeprazole,Omeprazole,Long-term use may lower vitamin B12 and magnesium levels and slightly raise fracture risk
+pantoprazole,Pantoprazole,Headache
+pantoprazole,Pantoprazole,diarrhea
+pantoprazole,Pantoprazole,nausea
+pantoprazole,Pantoprazole,gas
+pantoprazole,Pantoprazole,dizziness
+pantoprazole,Pantoprazole,Long-term: low magnesium
+pantoprazole,Pantoprazole,low vitamin B12
+pantoprazole,Pantoprazole,bone fracture risk
+esomeprazole,Esomeprazole,Headache
+esomeprazole,Esomeprazole,stomach pain
+esomeprazole,Esomeprazole,diarrhea
+esomeprazole,Esomeprazole,nausea
+esomeprazole,Esomeprazole,gas
+esomeprazole,Esomeprazole,Long term: low magnesium and vitamin B12
+esomeprazole,Esomeprazole,fracture risk
+rabeprazole,Rabeprazole,Headache
+rabeprazole,Rabeprazole,diarrhea
+rabeprazole,Rabeprazole,nausea
+rabeprazole,Rabeprazole,stomach pain
+rabeprazole,Rabeprazole,dizziness
+rabeprazole,Rabeprazole,Long term: low magnesium and vitamin B12
+lansoprazole,Lansoprazole,Headache
+lansoprazole,Lansoprazole,diarrhea
+lansoprazole,Lansoprazole,constipation
+lansoprazole,Lansoprazole,nausea
+lansoprazole,Lansoprazole,abdominal pain
+lansoprazole,Lansoprazole,Long-term: low magnesium and B12
+famotidine,Famotidine,Headache
+famotidine,Famotidine,dizziness
+famotidine,Famotidine,constipation or diarrhea
+famotidine,Famotidine,Rarely: confusion
+famotidine,Famotidine,especially in the elderly and in kidney disease
+domperidone,Domperidone,Dry mouth
+domperidone,Domperidone,headache
+domperidone,Domperidone,diarrhea
+domperidone,Domperidone,cramps
+domperidone,Domperidone,breast tenderness
+domperidone,Domperidone,Serious but rare: dangerous heart rhythm changes (QT prolongation)
+sucralfate,Sucralfate,Constipation
+sucralfate,Sucralfate,dry mouth
+sucralfate,Sucralfate,nausea
+sucralfate,Sucralfate,indigestion
+sucralfate,Sucralfate,rash
+sucralfate,Sucralfate,Rarely: high aluminium levels in kidney failure
+aluminium-magnesium-antacid,Aluminium-Magnesium Antacid,Constipation (aluminium) or loose stools (magnesium)
+aluminium-magnesium-antacid,Aluminium-Magnesium Antacid,chalky taste
+aluminium-magnesium-antacid,Aluminium-Magnesium Antacid,mild stomach upset
+aluminium-magnesium-antacid,Aluminium-Magnesium Antacid,High levels of aluminium or magnesium may build up in kidney failure
+sodium-alginate,Sodium Alginate,Generally well tolerated
+sodium-alginate,Sodium Alginate,Occasional bloating
+sodium-alginate,Sodium Alginate,nausea
+sodium-alginate,Sodium Alginate,diarrhea or constipation
+itopride,Itopride,Diarrhea
+itopride,Itopride,abdominal pain
+itopride,Itopride,headache
+itopride,Itopride,dizziness
+itopride,Itopride,Rarely: raised prolactin with breast tenderness
+chloroquine,Chloroquine,Nausea
+chloroquine,Chloroquine,stomach upset
+chloroquine,Chloroquine,headache
+chloroquine,Chloroquine,itching
+chloroquine,Chloroquine,dizziness
+chloroquine,Chloroquine,blurred vision
+chloroquine,Chloroquine,Rarely: heart rhythm changes
+chloroquine,Chloroquine,retina damage with long use
+primaquine,Primaquine,Stomach pain
+primaquine,Primaquine,nausea
+primaquine,Primaquine,vomiting
+primaquine,Primaquine,loss of appetite
+primaquine,Primaquine,breakdown of red blood cells in people with G6PD deficiency
+artemether-lumefantrine,Artemether-Lumefantrine,Headache
+artemether-lumefantrine,Artemether-Lumefantrine,dizziness
+artemether-lumefantrine,Artemether-Lumefantrine,loss of appetite
+artemether-lumefantrine,Artemether-Lumefantrine,weakness
+artemether-lumefantrine,Artemether-Lumefantrine,joint and muscle pain
+artemether-lumefantrine,Artemether-Lumefantrine,stomach upset
+artemether-lumefantrine,Artemether-Lumefantrine,Rarely: heart rhythm changes
+artesunate,Artesunate,Dizziness
+artesunate,Artesunate,nausea
+artesunate,Artesunate,vomiting
+artesunate,Artesunate,loss of appetite
+artesunate,Artesunate,headache
+artesunate,Artesunate,Delayed breakdown of red blood cells can occur one to three weeks after treatment
+sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,Nausea
+sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,vomiting
+sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,rash
+sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,itching
+sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,headache
+sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,severe skin reactions (Stevens-Johnson syndrome)
+sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,blood disorders
+sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,liver injury
+quinine,Quinine,Ringing in the ears
+quinine,Quinine,headache
+quinine,Quinine,nausea
+quinine,Quinine,blurred vision
+quinine,Quinine,dizziness (cinchonism)
+quinine,Quinine,Low blood sugar
+quinine,Quinine,heart rhythm changes
+quinine,Quinine,rare blood disorders
+doxycycline,Doxycycline,Nausea
+doxycycline,Doxycycline,stomach upset
+doxycycline,Doxycycline,sun sensitivity
+doxycycline,Doxycycline,throat irritation or ulcers
+doxycycline,Doxycycline,Rarely: liver injury
+doxycycline,Doxycycline,headache with raised pressure inside the skull
+mefloquine,Mefloquine,Dizziness
+mefloquine,Mefloquine,nausea
+mefloquine,Mefloquine,vivid dreams
+mefloquine,Mefloquine,headache
+mefloquine,Mefloquine,sleep problems
+mefloquine,Mefloquine,anxiety
+mefloquine,Mefloquine,psychiatric symptoms
+mefloquine,Mefloquine,seizures
+mefloquine,Mefloquine,balance problems that may persist
+atovaquone-proguanil,Atovaquone-Proguanil,Stomach pain
+atovaquone-proguanil,Atovaquone-Proguanil,nausea
+atovaquone-proguanil,Atovaquone-Proguanil,vomiting
+atovaquone-proguanil,Atovaquone-Proguanil,diarrhea
+atovaquone-proguanil,Atovaquone-Proguanil,headache
+atovaquone-proguanil,Atovaquone-Proguanil,cough
+atovaquone-proguanil,Atovaquone-Proguanil,raised liver enzymes and mouth ulcers
+tafenoquine,Tafenoquine,Headache
+tafenoquine,Tafenoquine,dizziness
+tafenoquine,Tafenoquine,nausea
+tafenoquine,Tafenoquine,back pain
+tafenoquine,Tafenoquine,high blood methaemoglobin
+tafenoquine,Tafenoquine,sleep problems
+tafenoquine,Tafenoquine,hemolysis in G6PD deficiency and psychiatric symptoms
+ringer-s-lactate,Ringer's Lactate,"Fluid overload (swelling, breathlessness)"
+ringer-s-lactate,Ringer's Lactate,if given too much or too fast
+ringer-s-lactate,Ringer's Lactate,Rarely: high potassium or injection-site irritation
+normal-saline,Normal Saline,Fluid overload
+normal-saline,Normal Saline,swelling
+normal-saline,Normal Saline,breathlessness
+normal-saline,Normal Saline,raised sodium and chloride levels if given in excess
+dextrose-saline,Dextrose Saline,High blood sugar
+dextrose-saline,Dextrose Saline,low sodium
+dextrose-saline,Dextrose Saline,swelling
+dextrose-saline,Dextrose Saline,fluid overload
+dextrose-saline,Dextrose Saline,irritation at the injection site
+ondansetron,Ondansetron,Headache
+ondansetron,Ondansetron,constipation
+ondansetron,Ondansetron,tiredness
+ondansetron,Ondansetron,dizziness
+ondansetron,Ondansetron,Rarely: heart rhythm changes (QT prolongation)
+metoclopramide,Metoclopramide,Drowsiness
+metoclopramide,Metoclopramide,restlessness
+metoclopramide,Metoclopramide,tiredness
+metoclopramide,Metoclopramide,diarrhea
+metoclopramide,Metoclopramide,involuntary muscle movements (tardive dyskinesia)
+metoclopramide,Metoclopramide,muscle spasms
+metoclopramide,Metoclopramide,especially in children and the young
+oral-rehydration-salts,Oral Rehydration Salts,Vomiting if taken too quickly; swelling of the eyelids or face with excessive intake
+zinc-sulfate,Zinc Sulfate,Nausea
+zinc-sulfate,Zinc Sulfate,vomiting
+zinc-sulfate,Zinc Sulfate,stomach upset
+zinc-sulfate,Zinc Sulfate,metallic taste
+zinc-sulfate,Zinc Sulfate,Long use of high doses can cause copper deficiency
+racecadotril,Racecadotril,Headache
+racecadotril,Racecadotril,mild rash
+racecadotril,Racecadotril,Rarely: swelling of the face or lips (angioedema)
+racecadotril,Racecadotril,serious skin reactions
+loperamide,Loperamide,Constipation
+loperamide,Loperamide,abdominal cramps
+loperamide,Loperamide,bloating
+loperamide,Loperamide,dizziness
+loperamide,Loperamide,nausea
+loperamide,Loperamide,dry mouth
+loperamide,Loperamide,Very high doses can cause dangerous heart rhythm problems
+metronidazole,Metronidazole,Metallic taste
+metronidazole,Metronidazole,nausea
+metronidazole,Metronidazole,vomiting
+metronidazole,Metronidazole,loss of appetite
+metronidazole,Metronidazole,headache
+metronidazole,Metronidazole,dark urine
+metronidazole,Metronidazole,Rarely: numbness or tingling in hands and feet
+metronidazole,Metronidazole,seizures
+tinidazole,Tinidazole,Metallic taste
+tinidazole,Tinidazole,nausea
+tinidazole,Tinidazole,vomiting
+tinidazole,Tinidazole,stomach pain
+tinidazole,Tinidazole,dark urine
+tinidazole,Tinidazole,dizziness
+tinidazole,Tinidazole,nerve problems and seizures
+ciprofloxacin,Ciprofloxacin,Nausea
+ciprofloxacin,Ciprofloxacin,diarrhea
+ciprofloxacin,Ciprofloxacin,headache
+ciprofloxacin,Ciprofloxacin,dizziness
+ciprofloxacin,Ciprofloxacin,rash
+ciprofloxacin,Ciprofloxacin,sun sensitivity
+ciprofloxacin,Ciprofloxacin,tendon pain or rupture
+ciprofloxacin,Ciprofloxacin,nerve damage
+ciprofloxacin,Ciprofloxacin,mood changes
+ciprofloxacin,Ciprofloxacin,heart rhythm changes
+norfloxacin,Norfloxacin,Nausea
+norfloxacin,Norfloxacin,abdominal pain
+norfloxacin,Norfloxacin,headache
+norfloxacin,Norfloxacin,dizziness
+norfloxacin,Norfloxacin,sleep problems
+norfloxacin,Norfloxacin,tendon injury
+norfloxacin,Norfloxacin,nerve damage and mood changes
+azithromycin,Azithromycin,Nausea
+azithromycin,Azithromycin,diarrhea
+azithromycin,Azithromycin,stomach pain
+azithromycin,Azithromycin,vomiting
+azithromycin,Azithromycin,Rarely: liver problems
+azithromycin,Azithromycin,hearing changes
+azithromycin,Azithromycin,heart rhythm changes
+nitazoxanide,Nitazoxanide,Stomach pain
+nitazoxanide,Nitazoxanide,nausea
+nitazoxanide,Nitazoxanide,headache
+nitazoxanide,Nitazoxanide,diarrhea
+nitazoxanide,Nitazoxanide,Urine may turn yellow-green
+nitazoxanide,Nitazoxanide,which is harmless
+saccharomyces-boulardii,Saccharomyces boulardii,Gas
+saccharomyces-boulardii,Saccharomyces boulardii,bloating
+saccharomyces-boulardii,Saccharomyces boulardii,constipation
+saccharomyces-boulardii,Saccharomyces boulardii,thirst
+saccharomyces-boulardii,Saccharomyces boulardii,Rarely: infection in severely ill or immunocompromised people
+dicyclomine,Dicyclomine,Dry mouth
+dicyclomine,Dicyclomine,dizziness
+dicyclomine,Dicyclomine,blurred vision
+dicyclomine,Dicyclomine,constipation
+dicyclomine,Dicyclomine,drowsiness
+dicyclomine,Dicyclomine,fast heartbeat
+dicyclomine,Dicyclomine,difficulty passing urine

@@ -1,0 +1,1607 @@
+[
+  {
+    "drug_id": "metformin",
+    "drug_name": "Metformin",
+    "side_effect": "Diarrhea"
+  },
+  {
+    "drug_id": "metformin",
+    "drug_name": "Metformin",
+    "side_effect": "nausea"
+  },
+  {
+    "drug_id": "metformin",
+    "drug_name": "Metformin",
+    "side_effect": "vomiting"
+  },
+  {
+    "drug_id": "metformin",
+    "drug_name": "Metformin",
+    "side_effect": "flatulence"
+  },
+  {
+    "drug_id": "metformin",
+    "drug_name": "Metformin",
+    "side_effect": "abdominal discomfort"
+  },
+  {
+    "drug_id": "metformin",
+    "drug_name": "Metformin",
+    "side_effect": "indigestion"
+  },
+  {
+    "drug_id": "metformin",
+    "drug_name": "Metformin",
+    "side_effect": "headache"
+  },
+  {
+    "drug_id": "metformin",
+    "drug_name": "Metformin",
+    "side_effect": "decreased vitamin B12 absorption (long-term use)"
+  },
+  {
+    "drug_id": "metformin",
+    "drug_name": "Metformin",
+    "side_effect": "metallic taste"
+  },
+  {
+    "drug_id": "metformin",
+    "drug_name": "Metformin",
+    "side_effect": "lactic acidosis"
+  },
+  {
+    "drug_id": "glipizide",
+    "drug_name": "Glipizide",
+    "side_effect": "Hypoglycemia (most common)"
+  },
+  {
+    "drug_id": "glipizide",
+    "drug_name": "Glipizide",
+    "side_effect": "nausea"
+  },
+  {
+    "drug_id": "glipizide",
+    "drug_name": "Glipizide",
+    "side_effect": "diarrhea"
+  },
+  {
+    "drug_id": "glipizide",
+    "drug_name": "Glipizide",
+    "side_effect": "constipation"
+  },
+  {
+    "drug_id": "glipizide",
+    "drug_name": "Glipizide",
+    "side_effect": "dizziness"
+  },
+  {
+    "drug_id": "glipizide",
+    "drug_name": "Glipizide",
+    "side_effect": "headache"
+  },
+  {
+    "drug_id": "glipizide",
+    "drug_name": "Glipizide",
+    "side_effect": "skin rash"
+  },
+  {
+    "drug_id": "glipizide",
+    "drug_name": "Glipizide",
+    "side_effect": "photosensitivity"
+  },
+  {
+    "drug_id": "glipizide",
+    "drug_name": "Glipizide",
+    "side_effect": "weight gain"
+  },
+  {
+    "drug_id": "glipizide",
+    "drug_name": "Glipizide",
+    "side_effect": "blood dyscrasias"
+  },
+  {
+    "drug_id": "glipizide",
+    "drug_name": "Glipizide",
+    "side_effect": "hepatotoxicity"
+  },
+  {
+    "drug_id": "glipizide",
+    "drug_name": "Glipizide",
+    "side_effect": "hyponatremia (SIADH)"
+  },
+  {
+    "drug_id": "glimepiride",
+    "drug_name": "Glimepiride",
+    "side_effect": "Hypoglycemia"
+  },
+  {
+    "drug_id": "glimepiride",
+    "drug_name": "Glimepiride",
+    "side_effect": "dizziness"
+  },
+  {
+    "drug_id": "glimepiride",
+    "drug_name": "Glimepiride",
+    "side_effect": "headache"
+  },
+  {
+    "drug_id": "glimepiride",
+    "drug_name": "Glimepiride",
+    "side_effect": "nausea"
+  },
+  {
+    "drug_id": "glimepiride",
+    "drug_name": "Glimepiride",
+    "side_effect": "asthenia"
+  },
+  {
+    "drug_id": "glimepiride",
+    "drug_name": "Glimepiride",
+    "side_effect": "weight gain"
+  },
+  {
+    "drug_id": "glimepiride",
+    "drug_name": "Glimepiride",
+    "side_effect": "skin reactions (pruritus, erythema, urticaria)"
+  },
+  {
+    "drug_id": "glimepiride",
+    "drug_name": "Glimepiride",
+    "side_effect": "leukopenia"
+  },
+  {
+    "drug_id": "glimepiride",
+    "drug_name": "Glimepiride",
+    "side_effect": "agranulocytosis"
+  },
+  {
+    "drug_id": "glimepiride",
+    "drug_name": "Glimepiride",
+    "side_effect": "thrombocytopenia"
+  },
+  {
+    "drug_id": "glimepiride",
+    "drug_name": "Glimepiride",
+    "side_effect": "hemolytic anemia"
+  },
+  {
+    "drug_id": "sitagliptin",
+    "drug_name": "Sitagliptin",
+    "side_effect": "Nasopharyngitis"
+  },
+  {
+    "drug_id": "sitagliptin",
+    "drug_name": "Sitagliptin",
+    "side_effect": "upper respiratory tract infection"
+  },
+  {
+    "drug_id": "sitagliptin",
+    "drug_name": "Sitagliptin",
+    "side_effect": "headache"
+  },
+  {
+    "drug_id": "sitagliptin",
+    "drug_name": "Sitagliptin",
+    "side_effect": "urinary tract infection"
+  },
+  {
+    "drug_id": "sitagliptin",
+    "drug_name": "Sitagliptin",
+    "side_effect": "acute pancreatitis"
+  },
+  {
+    "drug_id": "sitagliptin",
+    "drug_name": "Sitagliptin",
+    "side_effect": "severe joint pain (arthralgia)"
+  },
+  {
+    "drug_id": "sitagliptin",
+    "drug_name": "Sitagliptin",
+    "side_effect": "bullous pemphigoid"
+  },
+  {
+    "drug_id": "sitagliptin",
+    "drug_name": "Sitagliptin",
+    "side_effect": "hypersensitivity reactions (anaphylaxis, angioedema)"
+  },
+  {
+    "drug_id": "empagliflozin",
+    "drug_name": "Empagliflozin",
+    "side_effect": "Urinary tract infections"
+  },
+  {
+    "drug_id": "empagliflozin",
+    "drug_name": "Empagliflozin",
+    "side_effect": "genital mycotic infections (candidiasis)"
+  },
+  {
+    "drug_id": "empagliflozin",
+    "drug_name": "Empagliflozin",
+    "side_effect": "increased urination"
+  },
+  {
+    "drug_id": "empagliflozin",
+    "drug_name": "Empagliflozin",
+    "side_effect": "nasopharyngitis"
+  },
+  {
+    "drug_id": "empagliflozin",
+    "drug_name": "Empagliflozin",
+    "side_effect": "dyslipidemia"
+  },
+  {
+    "drug_id": "empagliflozin",
+    "drug_name": "Empagliflozin",
+    "side_effect": "nausea"
+  },
+  {
+    "drug_id": "empagliflozin",
+    "drug_name": "Empagliflozin",
+    "side_effect": "diabetic ketoacidosis (even with near-normal glucose)"
+  },
+  {
+    "drug_id": "empagliflozin",
+    "drug_name": "Empagliflozin",
+    "side_effect": "Fournier's gangrene"
+  },
+  {
+    "drug_id": "empagliflozin",
+    "drug_name": "Empagliflozin",
+    "side_effect": "lower limb amputation risk"
+  },
+  {
+    "drug_id": "pioglitazone",
+    "drug_name": "Pioglitazone",
+    "side_effect": "Weight gain"
+  },
+  {
+    "drug_id": "pioglitazone",
+    "drug_name": "Pioglitazone",
+    "side_effect": "edema"
+  },
+  {
+    "drug_id": "pioglitazone",
+    "drug_name": "Pioglitazone",
+    "side_effect": "upper respiratory infection"
+  },
+  {
+    "drug_id": "pioglitazone",
+    "drug_name": "Pioglitazone",
+    "side_effect": "headache"
+  },
+  {
+    "drug_id": "pioglitazone",
+    "drug_name": "Pioglitazone",
+    "side_effect": "sinusitis"
+  },
+  {
+    "drug_id": "pioglitazone",
+    "drug_name": "Pioglitazone",
+    "side_effect": "fluid retention/heart failure exacerbation"
+  },
+  {
+    "drug_id": "pioglitazone",
+    "drug_name": "Pioglitazone",
+    "side_effect": "bone fractures (especially in women)"
+  },
+  {
+    "drug_id": "pioglitazone",
+    "drug_name": "Pioglitazone",
+    "side_effect": "macular edema"
+  },
+  {
+    "drug_id": "pioglitazone",
+    "drug_name": "Pioglitazone",
+    "side_effect": "bladder cancer risk with prolonged use"
+  },
+  {
+    "drug_id": "insulin-glargine",
+    "drug_name": "Insulin Glargine",
+    "side_effect": "Hypoglycemia (most common and serious)"
+  },
+  {
+    "drug_id": "insulin-glargine",
+    "drug_name": "Insulin Glargine",
+    "side_effect": "injection site reactions (pain, redness, swelling, lipodystrophy)"
+  },
+  {
+    "drug_id": "insulin-glargine",
+    "drug_name": "Insulin Glargine",
+    "side_effect": "weight gain"
+  },
+  {
+    "drug_id": "insulin-glargine",
+    "drug_name": "Insulin Glargine",
+    "side_effect": "edema"
+  },
+  {
+    "drug_id": "insulin-glargine",
+    "drug_name": "Insulin Glargine",
+    "side_effect": "peripheral edema"
+  },
+  {
+    "drug_id": "insulin-glargine",
+    "drug_name": "Insulin Glargine",
+    "side_effect": "hypokalemia"
+  },
+  {
+    "drug_id": "insulin-glargine",
+    "drug_name": "Insulin Glargine",
+    "side_effect": "allergic reactions"
+  },
+  {
+    "drug_id": "dapagliflozin",
+    "drug_name": "Dapagliflozin",
+    "side_effect": "Female genital mycotic infections"
+  },
+  {
+    "drug_id": "dapagliflozin",
+    "drug_name": "Dapagliflozin",
+    "side_effect": "urinary tract infections"
+  },
+  {
+    "drug_id": "dapagliflozin",
+    "drug_name": "Dapagliflozin",
+    "side_effect": "nasopharyngitis"
+  },
+  {
+    "drug_id": "dapagliflozin",
+    "drug_name": "Dapagliflozin",
+    "side_effect": "back pain"
+  },
+  {
+    "drug_id": "dapagliflozin",
+    "drug_name": "Dapagliflozin",
+    "side_effect": "increased urination"
+  },
+  {
+    "drug_id": "dapagliflozin",
+    "drug_name": "Dapagliflozin",
+    "side_effect": "nausea"
+  },
+  {
+    "drug_id": "dapagliflozin",
+    "drug_name": "Dapagliflozin",
+    "side_effect": "dyslipidemia"
+  },
+  {
+    "drug_id": "dapagliflozin",
+    "drug_name": "Dapagliflozin",
+    "side_effect": "diabetic ketoacidosis (DKA)"
+  },
+  {
+    "drug_id": "dapagliflozin",
+    "drug_name": "Dapagliflozin",
+    "side_effect": "Fournier's gangrene"
+  },
+  {
+    "drug_id": "dapagliflozin",
+    "drug_name": "Dapagliflozin",
+    "side_effect": "urosepsis"
+  },
+  {
+    "drug_id": "vildagliptin",
+    "drug_name": "Vildagliptin",
+    "side_effect": "Nasopharyngitis"
+  },
+  {
+    "drug_id": "vildagliptin",
+    "drug_name": "Vildagliptin",
+    "side_effect": "headache"
+  },
+  {
+    "drug_id": "vildagliptin",
+    "drug_name": "Vildagliptin",
+    "side_effect": "dizziness"
+  },
+  {
+    "drug_id": "vildagliptin",
+    "drug_name": "Vildagliptin",
+    "side_effect": "peripheral edema"
+  },
+  {
+    "drug_id": "vildagliptin",
+    "drug_name": "Vildagliptin",
+    "side_effect": "nausea"
+  },
+  {
+    "drug_id": "vildagliptin",
+    "drug_name": "Vildagliptin",
+    "side_effect": "Hepatic enzyme elevations (liver function monitoring required)"
+  },
+  {
+    "drug_id": "vildagliptin",
+    "drug_name": "Vildagliptin",
+    "side_effect": "acute pancreatitis"
+  },
+  {
+    "drug_id": "vildagliptin",
+    "drug_name": "Vildagliptin",
+    "side_effect": "severe cutaneous adverse reactions"
+  },
+  {
+    "drug_id": "vildagliptin",
+    "drug_name": "Vildagliptin",
+    "side_effect": "upper respiratory infections"
+  },
+  {
+    "drug_id": "acarbose",
+    "drug_name": "Acarbose",
+    "side_effect": "Flatulence (very common)"
+  },
+  {
+    "drug_id": "acarbose",
+    "drug_name": "Acarbose",
+    "side_effect": "abdominal pain"
+  },
+  {
+    "drug_id": "acarbose",
+    "drug_name": "Acarbose",
+    "side_effect": "diarrhea"
+  },
+  {
+    "drug_id": "acarbose",
+    "drug_name": "Acarbose",
+    "side_effect": "bloating — these are dose-related and often decrease over time"
+  },
+  {
+    "drug_id": "acarbose",
+    "drug_name": "Acarbose",
+    "side_effect": "elevated liver enzymes"
+  },
+  {
+    "drug_id": "acarbose",
+    "drug_name": "Acarbose",
+    "side_effect": "hepatotoxicity with high doses"
+  },
+  {
+    "drug_id": "acarbose",
+    "drug_name": "Acarbose",
+    "side_effect": "ileus"
+  },
+  {
+    "drug_id": "amlodipine",
+    "drug_name": "Amlodipine",
+    "side_effect": "Peripheral edema (most common)"
+  },
+  {
+    "drug_id": "amlodipine",
+    "drug_name": "Amlodipine",
+    "side_effect": "flushing"
+  },
+  {
+    "drug_id": "amlodipine",
+    "drug_name": "Amlodipine",
+    "side_effect": "headache"
+  },
+  {
+    "drug_id": "amlodipine",
+    "drug_name": "Amlodipine",
+    "side_effect": "dizziness"
+  },
+  {
+    "drug_id": "amlodipine",
+    "drug_name": "Amlodipine",
+    "side_effect": "palpitations"
+  },
+  {
+    "drug_id": "amlodipine",
+    "drug_name": "Amlodipine",
+    "side_effect": "fatigue"
+  },
+  {
+    "drug_id": "amlodipine",
+    "drug_name": "Amlodipine",
+    "side_effect": "somnolence"
+  },
+  {
+    "drug_id": "amlodipine",
+    "drug_name": "Amlodipine",
+    "side_effect": "nausea"
+  },
+  {
+    "drug_id": "amlodipine",
+    "drug_name": "Amlodipine",
+    "side_effect": "gingival hyperplasia"
+  },
+  {
+    "drug_id": "amlodipine",
+    "drug_name": "Amlodipine",
+    "side_effect": "hepatotoxicity"
+  },
+  {
+    "drug_id": "amlodipine",
+    "drug_name": "Amlodipine",
+    "side_effect": "severe hypotension"
+  },
+  {
+    "drug_id": "losartan",
+    "drug_name": "Losartan",
+    "side_effect": "Dizziness"
+  },
+  {
+    "drug_id": "losartan",
+    "drug_name": "Losartan",
+    "side_effect": "upper respiratory infection"
+  },
+  {
+    "drug_id": "losartan",
+    "drug_name": "Losartan",
+    "side_effect": "nasal congestion"
+  },
+  {
+    "drug_id": "losartan",
+    "drug_name": "Losartan",
+    "side_effect": "back pain"
+  },
+  {
+    "drug_id": "losartan",
+    "drug_name": "Losartan",
+    "side_effect": "fatigue"
+  },
+  {
+    "drug_id": "losartan",
+    "drug_name": "Losartan",
+    "side_effect": "hyperkalemia"
+  },
+  {
+    "drug_id": "losartan",
+    "drug_name": "Losartan",
+    "side_effect": "elevated serum creatinine"
+  },
+  {
+    "drug_id": "losartan",
+    "drug_name": "Losartan",
+    "side_effect": "angioedema (rare vs. ACE inhibitors)"
+  },
+  {
+    "drug_id": "losartan",
+    "drug_name": "Losartan",
+    "side_effect": "hypotension"
+  },
+  {
+    "drug_id": "losartan",
+    "drug_name": "Losartan",
+    "side_effect": "renal impairment"
+  },
+  {
+    "drug_id": "enalapril",
+    "drug_name": "Enalapril",
+    "side_effect": "Dry persistent cough (very common, 10–20%)"
+  },
+  {
+    "drug_id": "enalapril",
+    "drug_name": "Enalapril",
+    "side_effect": "dizziness"
+  },
+  {
+    "drug_id": "enalapril",
+    "drug_name": "Enalapril",
+    "side_effect": "headache"
+  },
+  {
+    "drug_id": "enalapril",
+    "drug_name": "Enalapril",
+    "side_effect": "fatigue"
+  },
+  {
+    "drug_id": "enalapril",
+    "drug_name": "Enalapril",
+    "side_effect": "hyperkalemia"
+  },
+  {
+    "drug_id": "enalapril",
+    "drug_name": "Enalapril",
+    "side_effect": "elevated creatinine"
+  },
+  {
+    "drug_id": "enalapril",
+    "drug_name": "Enalapril",
+    "side_effect": "angioedema (can be life-threatening)"
+  },
+  {
+    "drug_id": "enalapril",
+    "drug_name": "Enalapril",
+    "side_effect": "neutropenia/agranulocytosis (in renal impairment)"
+  },
+  {
+    "drug_id": "telmisartan",
+    "drug_name": "Telmisartan",
+    "side_effect": "Upper respiratory infection"
+  },
+  {
+    "drug_id": "telmisartan",
+    "drug_name": "Telmisartan",
+    "side_effect": "back pain"
+  },
+  {
+    "drug_id": "telmisartan",
+    "drug_name": "Telmisartan",
+    "side_effect": "sinusitis"
+  },
+  {
+    "drug_id": "telmisartan",
+    "drug_name": "Telmisartan",
+    "side_effect": "diarrhea"
+  },
+  {
+    "drug_id": "telmisartan",
+    "drug_name": "Telmisartan",
+    "side_effect": "dizziness"
+  },
+  {
+    "drug_id": "telmisartan",
+    "drug_name": "Telmisartan",
+    "side_effect": "hyperkalemia"
+  },
+  {
+    "drug_id": "telmisartan",
+    "drug_name": "Telmisartan",
+    "side_effect": "UTI"
+  },
+  {
+    "drug_id": "telmisartan",
+    "drug_name": "Telmisartan",
+    "side_effect": "angioedema"
+  },
+  {
+    "drug_id": "telmisartan",
+    "drug_name": "Telmisartan",
+    "side_effect": "hypotension"
+  },
+  {
+    "drug_id": "telmisartan",
+    "drug_name": "Telmisartan",
+    "side_effect": "elevated liver enzymes"
+  },
+  {
+    "drug_id": "hydrochlorothiazide",
+    "drug_name": "Hydrochlorothiazide",
+    "side_effect": "Hypokalemia"
+  },
+  {
+    "drug_id": "hydrochlorothiazide",
+    "drug_name": "Hydrochlorothiazide",
+    "side_effect": "hyponatremia"
+  },
+  {
+    "drug_id": "hydrochlorothiazide",
+    "drug_name": "Hydrochlorothiazide",
+    "side_effect": "hypomagnesemia"
+  },
+  {
+    "drug_id": "hydrochlorothiazide",
+    "drug_name": "Hydrochlorothiazide",
+    "side_effect": "hyperuricemia"
+  },
+  {
+    "drug_id": "hydrochlorothiazide",
+    "drug_name": "Hydrochlorothiazide",
+    "side_effect": "hyperglycemia"
+  },
+  {
+    "drug_id": "hydrochlorothiazide",
+    "drug_name": "Hydrochlorothiazide",
+    "side_effect": "hyperlipidemia"
+  },
+  {
+    "drug_id": "hydrochlorothiazide",
+    "drug_name": "Hydrochlorothiazide",
+    "side_effect": "photosensitivity"
+  },
+  {
+    "drug_id": "hydrochlorothiazide",
+    "drug_name": "Hydrochlorothiazide",
+    "side_effect": "dizziness"
+  },
+  {
+    "drug_id": "hydrochlorothiazide",
+    "drug_name": "Hydrochlorothiazide",
+    "side_effect": "headache"
+  },
+  {
+    "drug_id": "hydrochlorothiazide",
+    "drug_name": "Hydrochlorothiazide",
+    "side_effect": "orthostatic hypotension"
+  },
+  {
+    "drug_id": "hydrochlorothiazide",
+    "drug_name": "Hydrochlorothiazide",
+    "side_effect": "impotence"
+  },
+  {
+    "drug_id": "hydrochlorothiazide",
+    "drug_name": "Hydrochlorothiazide",
+    "side_effect": "pancreatitis"
+  },
+  {
+    "drug_id": "hydrochlorothiazide",
+    "drug_name": "Hydrochlorothiazide",
+    "side_effect": "agranulocytosis"
+  },
+  {
+    "drug_id": "hydrochlorothiazide",
+    "drug_name": "Hydrochlorothiazide",
+    "side_effect": "severe cutaneous reactions"
+  },
+  {
+    "drug_id": "atenolol",
+    "drug_name": "Atenolol",
+    "side_effect": "Bradycardia"
+  },
+  {
+    "drug_id": "atenolol",
+    "drug_name": "Atenolol",
+    "side_effect": "fatigue"
+  },
+  {
+    "drug_id": "atenolol",
+    "drug_name": "Atenolol",
+    "side_effect": "dizziness"
+  },
+  {
+    "drug_id": "atenolol",
+    "drug_name": "Atenolol",
+    "side_effect": "depression"
+  },
+  {
+    "drug_id": "atenolol",
+    "drug_name": "Atenolol",
+    "side_effect": "cold extremities"
+  },
+  {
+    "drug_id": "atenolol",
+    "drug_name": "Atenolol",
+    "side_effect": "sleep disturbances"
+  },
+  {
+    "drug_id": "atenolol",
+    "drug_name": "Atenolol",
+    "side_effect": "impotence"
+  },
+  {
+    "drug_id": "atenolol",
+    "drug_name": "Atenolol",
+    "side_effect": "dyspnea"
+  },
+  {
+    "drug_id": "atenolol",
+    "drug_name": "Atenolol",
+    "side_effect": "In susceptible patients: bronchospasm"
+  },
+  {
+    "drug_id": "atenolol",
+    "drug_name": "Atenolol",
+    "side_effect": "May mask tachycardia of hypoglycemia"
+  },
+  {
+    "drug_id": "ramipril",
+    "drug_name": "Ramipril",
+    "side_effect": "Dry cough (10–15%)"
+  },
+  {
+    "drug_id": "ramipril",
+    "drug_name": "Ramipril",
+    "side_effect": "dizziness"
+  },
+  {
+    "drug_id": "ramipril",
+    "drug_name": "Ramipril",
+    "side_effect": "headache"
+  },
+  {
+    "drug_id": "ramipril",
+    "drug_name": "Ramipril",
+    "side_effect": "fatigue"
+  },
+  {
+    "drug_id": "ramipril",
+    "drug_name": "Ramipril",
+    "side_effect": "hyperkalemia"
+  },
+  {
+    "drug_id": "ramipril",
+    "drug_name": "Ramipril",
+    "side_effect": "elevated serum creatinine"
+  },
+  {
+    "drug_id": "ramipril",
+    "drug_name": "Ramipril",
+    "side_effect": "angioedema"
+  },
+  {
+    "drug_id": "ramipril",
+    "drug_name": "Ramipril",
+    "side_effect": "hypotension"
+  },
+  {
+    "drug_id": "ramipril",
+    "drug_name": "Ramipril",
+    "side_effect": "neutropenia"
+  },
+  {
+    "drug_id": "ramipril",
+    "drug_name": "Ramipril",
+    "side_effect": "renal failure"
+  },
+  {
+    "drug_id": "chlorthalidone",
+    "drug_name": "Chlorthalidone",
+    "side_effect": "Hypokalemia"
+  },
+  {
+    "drug_id": "chlorthalidone",
+    "drug_name": "Chlorthalidone",
+    "side_effect": "hyponatremia"
+  },
+  {
+    "drug_id": "chlorthalidone",
+    "drug_name": "Chlorthalidone",
+    "side_effect": "hyperuricemia"
+  },
+  {
+    "drug_id": "chlorthalidone",
+    "drug_name": "Chlorthalidone",
+    "side_effect": "hyperglycemia"
+  },
+  {
+    "drug_id": "chlorthalidone",
+    "drug_name": "Chlorthalidone",
+    "side_effect": "elevated triglycerides"
+  },
+  {
+    "drug_id": "chlorthalidone",
+    "drug_name": "Chlorthalidone",
+    "side_effect": "photosensitivity"
+  },
+  {
+    "drug_id": "chlorthalidone",
+    "drug_name": "Chlorthalidone",
+    "side_effect": "orthostatic hypotension"
+  },
+  {
+    "drug_id": "chlorthalidone",
+    "drug_name": "Chlorthalidone",
+    "side_effect": "muscle cramps"
+  },
+  {
+    "drug_id": "chlorthalidone",
+    "drug_name": "Chlorthalidone",
+    "side_effect": "impotence"
+  },
+  {
+    "drug_id": "chlorthalidone",
+    "drug_name": "Chlorthalidone",
+    "side_effect": "pancreatitis"
+  },
+  {
+    "drug_id": "chlorthalidone",
+    "drug_name": "Chlorthalidone",
+    "side_effect": "aplastic anemia"
+  },
+  {
+    "drug_id": "chlorthalidone",
+    "drug_name": "Chlorthalidone",
+    "side_effect": "severe skin reactions"
+  },
+  {
+    "drug_id": "carvedilol",
+    "drug_name": "Carvedilol",
+    "side_effect": "Dizziness"
+  },
+  {
+    "drug_id": "carvedilol",
+    "drug_name": "Carvedilol",
+    "side_effect": "fatigue"
+  },
+  {
+    "drug_id": "carvedilol",
+    "drug_name": "Carvedilol",
+    "side_effect": "hypotension"
+  },
+  {
+    "drug_id": "carvedilol",
+    "drug_name": "Carvedilol",
+    "side_effect": "weight gain"
+  },
+  {
+    "drug_id": "carvedilol",
+    "drug_name": "Carvedilol",
+    "side_effect": "bradycardia"
+  },
+  {
+    "drug_id": "carvedilol",
+    "drug_name": "Carvedilol",
+    "side_effect": "diarrhea"
+  },
+  {
+    "drug_id": "carvedilol",
+    "drug_name": "Carvedilol",
+    "side_effect": "edema"
+  },
+  {
+    "drug_id": "carvedilol",
+    "drug_name": "Carvedilol",
+    "side_effect": "hyperglycemia (in diabetes)"
+  },
+  {
+    "drug_id": "carvedilol",
+    "drug_name": "Carvedilol",
+    "side_effect": "blurred vision"
+  },
+  {
+    "drug_id": "carvedilol",
+    "drug_name": "Carvedilol",
+    "side_effect": "severe hepatocellular injury"
+  },
+  {
+    "drug_id": "carvedilol",
+    "drug_name": "Carvedilol",
+    "side_effect": "thrombocytopenia"
+  },
+  {
+    "drug_id": "clonidine",
+    "drug_name": "Clonidine",
+    "side_effect": "Dry mouth (most common)"
+  },
+  {
+    "drug_id": "clonidine",
+    "drug_name": "Clonidine",
+    "side_effect": "drowsiness"
+  },
+  {
+    "drug_id": "clonidine",
+    "drug_name": "Clonidine",
+    "side_effect": "dizziness"
+  },
+  {
+    "drug_id": "clonidine",
+    "drug_name": "Clonidine",
+    "side_effect": "constipation"
+  },
+  {
+    "drug_id": "clonidine",
+    "drug_name": "Clonidine",
+    "side_effect": "sedation"
+  },
+  {
+    "drug_id": "clonidine",
+    "drug_name": "Clonidine",
+    "side_effect": "headache"
+  },
+  {
+    "drug_id": "clonidine",
+    "drug_name": "Clonidine",
+    "side_effect": "fatigue"
+  },
+  {
+    "drug_id": "clonidine",
+    "drug_name": "Clonidine",
+    "side_effect": "rebound hypertension on abrupt discontinuation"
+  },
+  {
+    "drug_id": "clonidine",
+    "drug_name": "Clonidine",
+    "side_effect": "AV block"
+  },
+  {
+    "drug_id": "clonidine",
+    "drug_name": "Clonidine",
+    "side_effect": "liver function abnormalities"
+  },
+  {
+    "drug_id": "clonidine",
+    "drug_name": "Clonidine",
+    "side_effect": "depression"
+  },
+  {
+    "drug_id": "ibuprofen",
+    "drug_name": "Ibuprofen",
+    "side_effect": "Gastrointestinal: nausea"
+  },
+  {
+    "drug_id": "ibuprofen",
+    "drug_name": "Ibuprofen",
+    "side_effect": "dyspepsia"
+  },
+  {
+    "drug_id": "ibuprofen",
+    "drug_name": "Ibuprofen",
+    "side_effect": "abdominal pain"
+  },
+  {
+    "drug_id": "ibuprofen",
+    "drug_name": "Ibuprofen",
+    "side_effect": "GI bleeding"
+  },
+  {
+    "drug_id": "ibuprofen",
+    "drug_name": "Ibuprofen",
+    "side_effect": "peptic ulceration"
+  },
+  {
+    "drug_id": "ibuprofen",
+    "drug_name": "Ibuprofen",
+    "side_effect": "Cardiovascular: increased risk of MI and stroke"
+  },
+  {
+    "drug_id": "ibuprofen",
+    "drug_name": "Ibuprofen",
+    "side_effect": "Renal: fluid retention"
+  },
+  {
+    "drug_id": "ibuprofen",
+    "drug_name": "Ibuprofen",
+    "side_effect": "edema"
+  },
+  {
+    "drug_id": "ibuprofen",
+    "drug_name": "Ibuprofen",
+    "side_effect": "acute renal failure"
+  },
+  {
+    "drug_id": "ibuprofen",
+    "drug_name": "Ibuprofen",
+    "side_effect": "Headache"
+  },
+  {
+    "drug_id": "ibuprofen",
+    "drug_name": "Ibuprofen",
+    "side_effect": "dizziness"
+  },
+  {
+    "drug_id": "ibuprofen",
+    "drug_name": "Ibuprofen",
+    "side_effect": "rash"
+  },
+  {
+    "drug_id": "ibuprofen",
+    "drug_name": "Ibuprofen",
+    "side_effect": "hepatotoxicity"
+  },
+  {
+    "drug_id": "ibuprofen",
+    "drug_name": "Ibuprofen",
+    "side_effect": "aseptic meningitis"
+  },
+  {
+    "drug_id": "ibuprofen",
+    "drug_name": "Ibuprofen",
+    "side_effect": "serious skin reactions (SJS, TEN)"
+  },
+  {
+    "drug_id": "diclofenac",
+    "drug_name": "Diclofenac",
+    "side_effect": "GI: nausea"
+  },
+  {
+    "drug_id": "diclofenac",
+    "drug_name": "Diclofenac",
+    "side_effect": "abdominal pain"
+  },
+  {
+    "drug_id": "diclofenac",
+    "drug_name": "Diclofenac",
+    "side_effect": "dyspepsia"
+  },
+  {
+    "drug_id": "diclofenac",
+    "drug_name": "Diclofenac",
+    "side_effect": "diarrhea"
+  },
+  {
+    "drug_id": "diclofenac",
+    "drug_name": "Diclofenac",
+    "side_effect": "GI bleeding"
+  },
+  {
+    "drug_id": "diclofenac",
+    "drug_name": "Diclofenac",
+    "side_effect": "Hepatotoxicity: elevations in liver enzymes (common)"
+  },
+  {
+    "drug_id": "diclofenac",
+    "drug_name": "Diclofenac",
+    "side_effect": "clinically important liver injury"
+  },
+  {
+    "drug_id": "diclofenac",
+    "drug_name": "Diclofenac",
+    "side_effect": "Cardiovascular: increased MI/stroke risk"
+  },
+  {
+    "drug_id": "diclofenac",
+    "drug_name": "Diclofenac",
+    "side_effect": "Renal: fluid retention"
+  },
+  {
+    "drug_id": "diclofenac",
+    "drug_name": "Diclofenac",
+    "side_effect": "renal impairment"
+  },
+  {
+    "drug_id": "diclofenac",
+    "drug_name": "Diclofenac",
+    "side_effect": "serious skin reactions (SJS, TEN, DRESS)"
+  },
+  {
+    "drug_id": "naproxen",
+    "drug_name": "Naproxen",
+    "side_effect": "GI: nausea"
+  },
+  {
+    "drug_id": "naproxen",
+    "drug_name": "Naproxen",
+    "side_effect": "dyspepsia"
+  },
+  {
+    "drug_id": "naproxen",
+    "drug_name": "Naproxen",
+    "side_effect": "abdominal pain"
+  },
+  {
+    "drug_id": "naproxen",
+    "drug_name": "Naproxen",
+    "side_effect": "heartburn"
+  },
+  {
+    "drug_id": "naproxen",
+    "drug_name": "Naproxen",
+    "side_effect": "GI bleeding"
+  },
+  {
+    "drug_id": "naproxen",
+    "drug_name": "Naproxen",
+    "side_effect": "Fluid retention"
+  },
+  {
+    "drug_id": "naproxen",
+    "drug_name": "Naproxen",
+    "side_effect": "edema"
+  },
+  {
+    "drug_id": "naproxen",
+    "drug_name": "Naproxen",
+    "side_effect": "hypertension"
+  },
+  {
+    "drug_id": "naproxen",
+    "drug_name": "Naproxen",
+    "side_effect": "Headache"
+  },
+  {
+    "drug_id": "naproxen",
+    "drug_name": "Naproxen",
+    "side_effect": "dizziness"
+  },
+  {
+    "drug_id": "naproxen",
+    "drug_name": "Naproxen",
+    "side_effect": "Tinnitus (high doses)"
+  },
+  {
+    "drug_id": "naproxen",
+    "drug_name": "Naproxen",
+    "side_effect": "hepatic abnormalities"
+  },
+  {
+    "drug_id": "naproxen",
+    "drug_name": "Naproxen",
+    "side_effect": "renal papillary necrosis"
+  },
+  {
+    "drug_id": "naproxen",
+    "drug_name": "Naproxen",
+    "side_effect": "serious skin reactions"
+  },
+  {
+    "drug_id": "methotrexate",
+    "drug_name": "Methotrexate",
+    "side_effect": "Nausea"
+  },
+  {
+    "drug_id": "methotrexate",
+    "drug_name": "Methotrexate",
+    "side_effect": "vomiting"
+  },
+  {
+    "drug_id": "methotrexate",
+    "drug_name": "Methotrexate",
+    "side_effect": "stomatitis"
+  },
+  {
+    "drug_id": "methotrexate",
+    "drug_name": "Methotrexate",
+    "side_effect": "fatigue (common, reduced by folic acid supplementation)"
+  },
+  {
+    "drug_id": "methotrexate",
+    "drug_name": "Methotrexate",
+    "side_effect": "Hepatotoxicity: liver fibrosis/cirrhosis with cumulative doses"
+  },
+  {
+    "drug_id": "methotrexate",
+    "drug_name": "Methotrexate",
+    "side_effect": "Pulmonary toxicity (methotrexate pneumonitis)"
+  },
+  {
+    "drug_id": "methotrexate",
+    "drug_name": "Methotrexate",
+    "side_effect": "Bone marrow suppression: pancytopenia"
+  },
+  {
+    "drug_id": "methotrexate",
+    "drug_name": "Methotrexate",
+    "side_effect": "leukopenia"
+  },
+  {
+    "drug_id": "methotrexate",
+    "drug_name": "Methotrexate",
+    "side_effect": "Teratogenicity"
+  },
+  {
+    "drug_id": "hydroxychloroquine",
+    "drug_name": "Hydroxychloroquine",
+    "side_effect": "Nausea"
+  },
+  {
+    "drug_id": "hydroxychloroquine",
+    "drug_name": "Hydroxychloroquine",
+    "side_effect": "vomiting"
+  },
+  {
+    "drug_id": "hydroxychloroquine",
+    "drug_name": "Hydroxychloroquine",
+    "side_effect": "diarrhea"
+  },
+  {
+    "drug_id": "hydroxychloroquine",
+    "drug_name": "Hydroxychloroquine",
+    "side_effect": "abdominal cramps"
+  },
+  {
+    "drug_id": "hydroxychloroquine",
+    "drug_name": "Hydroxychloroquine",
+    "side_effect": "headache"
+  },
+  {
+    "drug_id": "hydroxychloroquine",
+    "drug_name": "Hydroxychloroquine",
+    "side_effect": "dizziness"
+  },
+  {
+    "drug_id": "hydroxychloroquine",
+    "drug_name": "Hydroxychloroquine",
+    "side_effect": "skin rash"
+  },
+  {
+    "drug_id": "hydroxychloroquine",
+    "drug_name": "Hydroxychloroquine",
+    "side_effect": "Ophthalmologic: retinal toxicity/maculopathy (irreversible with long-term use, dose-dependent)"
+  },
+  {
+    "drug_id": "hydroxychloroquine",
+    "drug_name": "Hydroxychloroquine",
+    "side_effect": "cardiomyopathy"
+  },
+  {
+    "drug_id": "hydroxychloroquine",
+    "drug_name": "Hydroxychloroquine",
+    "side_effect": "QT prolongation"
+  },
+  {
+    "drug_id": "hydroxychloroquine",
+    "drug_name": "Hydroxychloroquine",
+    "side_effect": "peripheral neuropathy"
+  },
+  {
+    "drug_id": "hydroxychloroquine",
+    "drug_name": "Hydroxychloroquine",
+    "side_effect": "drug-induced lupus"
+  },
+  {
+    "drug_id": "celecoxib",
+    "drug_name": "Celecoxib",
+    "side_effect": "Abdominal pain"
+  },
+  {
+    "drug_id": "celecoxib",
+    "drug_name": "Celecoxib",
+    "side_effect": "dyspepsia"
+  },
+  {
+    "drug_id": "celecoxib",
+    "drug_name": "Celecoxib",
+    "side_effect": "diarrhea"
+  },
+  {
+    "drug_id": "celecoxib",
+    "drug_name": "Celecoxib",
+    "side_effect": "nausea"
+  },
+  {
+    "drug_id": "celecoxib",
+    "drug_name": "Celecoxib",
+    "side_effect": "headache"
+  },
+  {
+    "drug_id": "celecoxib",
+    "drug_name": "Celecoxib",
+    "side_effect": "dizziness"
+  },
+  {
+    "drug_id": "celecoxib",
+    "drug_name": "Celecoxib",
+    "side_effect": "fluid retention"
+  },
+  {
+    "drug_id": "celecoxib",
+    "drug_name": "Celecoxib",
+    "side_effect": "hypertension"
+  },
+  {
+    "drug_id": "celecoxib",
+    "drug_name": "Celecoxib",
+    "side_effect": "peripheral edema"
+  },
+  {
+    "drug_id": "celecoxib",
+    "drug_name": "Celecoxib",
+    "side_effect": "upper respiratory infection"
+  },
+  {
+    "drug_id": "celecoxib",
+    "drug_name": "Celecoxib",
+    "side_effect": "serious cardiovascular events (MI, stroke)"
+  },
+  {
+    "drug_id": "celecoxib",
+    "drug_name": "Celecoxib",
+    "side_effect": "serious GI events"
+  },
+  {
+    "drug_id": "celecoxib",
+    "drug_name": "Celecoxib",
+    "side_effect": "serious skin reactions"
+  },
+  {
+    "drug_id": "celecoxib",
+    "drug_name": "Celecoxib",
+    "side_effect": "hepatotoxicity"
+  },
+  {
+    "drug_id": "sulfasalazine",
+    "drug_name": "Sulfasalazine",
+    "side_effect": "Nausea"
+  },
+  {
+    "drug_id": "sulfasalazine",
+    "drug_name": "Sulfasalazine",
+    "side_effect": "vomiting"
+  },
+  {
+    "drug_id": "sulfasalazine",
+    "drug_name": "Sulfasalazine",
+    "side_effect": "anorexia"
+  },
+  {
+    "drug_id": "sulfasalazine",
+    "drug_name": "Sulfasalazine",
+    "side_effect": "headache"
+  },
+  {
+    "drug_id": "sulfasalazine",
+    "drug_name": "Sulfasalazine",
+    "side_effect": "dizziness"
+  },
+  {
+    "drug_id": "sulfasalazine",
+    "drug_name": "Sulfasalazine",
+    "side_effect": "skin rash"
+  },
+  {
+    "drug_id": "sulfasalazine",
+    "drug_name": "Sulfasalazine",
+    "side_effect": "oligospermia (reversible)"
+  },
+  {
+    "drug_id": "sulfasalazine",
+    "drug_name": "Sulfasalazine",
+    "side_effect": "Orange-yellow discoloration of urine/skin"
+  },
+  {
+    "drug_id": "sulfasalazine",
+    "drug_name": "Sulfasalazine",
+    "side_effect": "agranulocytosis"
+  },
+  {
+    "drug_id": "sulfasalazine",
+    "drug_name": "Sulfasalazine",
+    "side_effect": "aplastic anemia"
+  },
+  {
+    "drug_id": "sulfasalazine",
+    "drug_name": "Sulfasalazine",
+    "side_effect": "hepatotoxicity"
+  },
+  {
+    "drug_id": "sulfasalazine",
+    "drug_name": "Sulfasalazine",
+    "side_effect": "SJS/TEN"
+  },
+  {
+    "drug_id": "sulfasalazine",
+    "drug_name": "Sulfasalazine",
+    "side_effect": "severe hypersensitivity reactions"
+  },
+  {
+    "drug_id": "prednisolone",
+    "drug_name": "Prednisolone",
+    "side_effect": "Short-term: insomnia"
+  },
+  {
+    "drug_id": "prednisolone",
+    "drug_name": "Prednisolone",
+    "side_effect": "mood changes"
+  },
+  {
+    "drug_id": "prednisolone",
+    "drug_name": "Prednisolone",
+    "side_effect": "increased appetite"
+  },
+  {
+    "drug_id": "prednisolone",
+    "drug_name": "Prednisolone",
+    "side_effect": "hyperglycemia"
+  },
+  {
+    "drug_id": "prednisolone",
+    "drug_name": "Prednisolone",
+    "side_effect": "hypertension"
+  },
+  {
+    "drug_id": "prednisolone",
+    "drug_name": "Prednisolone",
+    "side_effect": "Long-term: Cushing's syndrome"
+  },
+  {
+    "drug_id": "prednisolone",
+    "drug_name": "Prednisolone",
+    "side_effect": "osteoporosis"
+  },
+  {
+    "drug_id": "prednisolone",
+    "drug_name": "Prednisolone",
+    "side_effect": "adrenal suppression"
+  },
+  {
+    "drug_id": "prednisolone",
+    "drug_name": "Prednisolone",
+    "side_effect": "infections"
+  },
+  {
+    "drug_id": "prednisolone",
+    "drug_name": "Prednisolone",
+    "side_effect": "cataracts"
+  },
+  {
+    "drug_id": "prednisolone",
+    "drug_name": "Prednisolone",
+    "side_effect": "glaucoma"
+  },
+  {
+    "drug_id": "prednisolone",
+    "drug_name": "Prednisolone",
+    "side_effect": "peptic ulceration"
+  },
+  {
+    "drug_id": "prednisolone",
+    "drug_name": "Prednisolone",
+    "side_effect": "muscle weakness"
+  },
+  {
+    "drug_id": "prednisolone",
+    "drug_name": "Prednisolone",
+    "side_effect": "growth suppression (pediatric)"
+  },
+  {
+    "drug_id": "leflunomide",
+    "drug_name": "Leflunomide",
+    "side_effect": "Diarrhea (most common)"
+  },
+  {
+    "drug_id": "leflunomide",
+    "drug_name": "Leflunomide",
+    "side_effect": "nausea"
+  },
+  {
+    "drug_id": "leflunomide",
+    "drug_name": "Leflunomide",
+    "side_effect": "alopecia (reversible)"
+  },
+  {
+    "drug_id": "leflunomide",
+    "drug_name": "Leflunomide",
+    "side_effect": "rash"
+  },
+  {
+    "drug_id": "leflunomide",
+    "drug_name": "Leflunomide",
+    "side_effect": "elevated ALT/AST"
+  },
+  {
+    "drug_id": "leflunomide",
+    "drug_name": "Leflunomide",
+    "side_effect": "headache"
+  },
+  {
+    "drug_id": "leflunomide",
+    "drug_name": "Leflunomide",
+    "side_effect": "hypertension"
+  },
+  {
+    "drug_id": "leflunomide",
+    "drug_name": "Leflunomide",
+    "side_effect": "hepatotoxicity (including fatal liver failure)"
+  },
+  {
+    "drug_id": "leflunomide",
+    "drug_name": "Leflunomide",
+    "side_effect": "teratogenicity"
+  },
+  {
+    "drug_id": "leflunomide",
+    "drug_name": "Leflunomide",
+    "side_effect": "bone marrow suppression"
+  },
+  {
+    "drug_id": "leflunomide",
+    "drug_name": "Leflunomide",
+    "side_effect": "peripheral neuropathy"
+  },
+  {
+    "drug_id": "leflunomide",
+    "drug_name": "Leflunomide",
+    "side_effect": "serious infections"
+  },
+  {
+    "drug_id": "colchicine",
+    "drug_name": "Colchicine",
+    "side_effect": "Diarrhea (most common, dose-limiting)"
+  },
+  {
+    "drug_id": "colchicine",
+    "drug_name": "Colchicine",
+    "side_effect": "nausea"
+  },
+  {
+    "drug_id": "colchicine",
+    "drug_name": "Colchicine",
+    "side_effect": "vomiting"
+  },
+  {
+    "drug_id": "colchicine",
+    "drug_name": "Colchicine",
+    "side_effect": "abdominal pain"
+  },
+  {
+    "drug_id": "colchicine",
+    "drug_name": "Colchicine",
+    "side_effect": "Neuromuscular toxicity: myopathy"
+  },
+  {
+    "drug_id": "colchicine",
+    "drug_name": "Colchicine",
+    "side_effect": "rhabdomyolysis (especially with statins/CsA)"
+  },
+  {
+    "drug_id": "colchicine",
+    "drug_name": "Colchicine",
+    "side_effect": "Bone marrow suppression: pancytopenia with overdose or in renal impairment"
+  },
+  {
+    "drug_id": "colchicine",
+    "drug_name": "Colchicine",
+    "side_effect": "Alopecia with long-term use"
+  }
+]

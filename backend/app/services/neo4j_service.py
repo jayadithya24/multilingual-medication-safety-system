@@ -1,4 +1,5 @@
 import os
+import re
 import itertools
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -467,7 +468,8 @@ def _fallback_local_knowledge_graph() -> Dict[str, List[Dict[str, Any]]]:
     if master_path.exists():
         master_df = pd.read_csv(master_path)
         for _, row in master_df.iterrows():
-            drug_id = row.get("drug_id") or str(row.get("drug_name", "")).strip().lower().replace(" ", "-")
+            drug_id = row.get("drug_id") or re.sub(
+                r"[^a-z0-9]+", "-", str(row.get("drug_name", "")).strip().lower()).strip("-")
             drug_name = row.get("drug_name") or row.get("generic_name")
             if drug_id is None:
                 continue

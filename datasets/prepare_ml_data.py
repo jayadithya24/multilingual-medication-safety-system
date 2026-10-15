@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import itertools
 import json
+import re
 from pathlib import Path
 
 import pandas as pd
@@ -14,7 +15,11 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parent
 RANK = {"None": 0, "Mild": 1, "Moderate": 2, "Severe": 3}
 CONDITIONS = {"Diabetes": "type_2_diabetes", "Type 2 Diabetes": "type_2_diabetes",
-              "Hypertension": "hypertension", "Arthritis": "arthritis"}
+              "Hypertension": "hypertension", "Arthritis": "arthritis",
+              "Common Cold": "common_cold", "Fever & Body Ache": "fever_body_ache",
+              "Bronchial Asthma & Allergies": "asthma_allergies",
+              "Acid Reflux / GERD / Gastritis": "gerd_gastritis", "Malaria": "malaria",
+              "Dengue Fever": "dengue_fever", "Gastroenteritis / Diarrhea": "gastroenteritis_diarrhea"}
 
 
 def require(condition, message):
@@ -55,17 +60,21 @@ def prepare(source=ROOT, output=None, seed=42):
 
     masters = {lang: load(f"{name}_master_dataset.csv") for lang, name in
                (("en", "english"), ("kn", "kannada"), ("tulu", "tulu"))}
-    canonical = masters["kn"][["drug_id", "drug_name"]].copy()
+    english = masters["en"]
+    canonical = english[["drug_name"]].copy()
+    canonical.insert(0, "drug_id", canonical.drug_name.map(
+        lambda name: re.sub(r"[^a-z0-9]+", "-", name.strip().lower()).strip("-")))
     require(canonical.drug_id.is_unique and canonical.drug_name.is_unique, "Duplicate master IDs/names")
     ids = set(canonical.drug_id)
-    english = masters["en"]
     disease_map = english.set_index("drug_name").disease.map(CONDITIONS)
     require(disease_map.notna().all(), "Unmapped English disease label")
     canonical["disease_id"] = canonical.drug_name.map(disease_map)
     disease_by_id = canonical.set_index("drug_id").disease_id
     localized = []
+    missing_translations = {}
     for lang, master in masters.items():
-        require(master.drug_name.is_unique and set(master.drug_name) == set(canonical.drug_name), f"Medicine coverage differs: {lang}")
+        require(master.drug_name.is_unique and set(master.drug_name) <= set(canonical.drug_name), f"Unknown/duplicate medicines: {lang}")
+        missing_translations[lang] = sorted(set(canonical.drug_name) - set(master.drug_name))
         aligned = canonical.merge(master, on="drug_name", suffixes=("", "_source"), validate="one_to_one")
         if "drug_id_source" in aligned:
             require(aligned.drug_id.eq(aligned.drug_id_source).all(), f"Drug IDs differ: {lang}")
@@ -104,9 +113,12 @@ def prepare(source=ROOT, output=None, seed=42):
 
     # Mirror the existing generator's max-severity conflict policy, documenting
     # every conflict. This is an audit convention, not clinical adjudication.
-    pair_rules, conflicts = {}, []
+    pair_rules, conflicts, ungraded_pairs = {}, [], set()
     for row in rules.itertuples():
         if row.drug1_id not in ids or row.drug2_id not in ids:
+            continue
+        if row.severity == "Unknown":
+            ungraded_pairs.add(tuple(sorted((row.drug1_id, row.drug2_id))))
             continue
         require(row.severity in RANK, "Unknown rule severity")
         pair = tuple(sorted((row.drug1_id, row.drug2_id)))
@@ -126,6 +138,7 @@ def prepare(source=ROOT, output=None, seed=42):
     for patient, medicines in grouped.items():
         worst = "None"
         for pair in itertools.combinations(sorted(medicines), 2):
+            require(pair not in ungraded_pairs, "Prescription contains an ungraded interaction; review before generating a target")
             severity = pair_rules.get(pair, "None")
             if severity != "None":
                 expected[(patient, *pair)] = severity
@@ -160,8 +173,17 @@ def prepare(source=ROOT, output=None, seed=42):
         "source_rule_conflicts": conflicts, "drug_count": len(ids),
         "patient_count": len(patients), "prescription_count": len(drugs),
         "interaction_count": len(interactions),
+        "localized_row_count": sum(len(frame) for frame in localized),
+        "missing_translations": missing_translations,
+        "prescribed_drug_count": drugs.drug_id.nunique(),
+        "unrepresented_drug_ids": sorted(ids - set(drugs.drug_id)),
+        "unrepresented_disease_ids": sorted(set(disease_by_id) - set(drugs.disease_id)),
+        "ungraded_interaction_pairs": sorted(ungraded_pairs),
         "limitations": [
             "Synthetic rule-derived labels, not measured clinical outcomes.",
+            "Missing translations are reported; localized exports contain only supplied translations.",
+            "Catalog expansion does not create patient examples for the newly added medicines.",
+            "New explicit-name interaction candidates are ungraded and cannot supply training labels.",
             "None means no recorded interaction in the supplied rules, not proven safety.",
             "Same medicine combinations may occur in different patient splits; this does not test unseen-pair generalization.",
             "Do not train on IDs, split, interaction severity, highest_severity, or master warning/interaction text.",

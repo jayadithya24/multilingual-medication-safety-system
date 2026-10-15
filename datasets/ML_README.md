@@ -9,9 +9,17 @@ deployment. The preparation script never changes the source CSVs or translations
 From the repository root, using Python with pandas installed:
 
 ```powershell
-rtk proxy .venv-1/Scripts/python.exe datasets/prepare_ml_data.py
-rtk proxy .venv-1/Scripts/python.exe -m pytest tests/test_ml_data.py -q
+rtk proxy .venv-dataset/Scripts/python.exe datasets/update_english_scope.py
+rtk proxy .venv-dataset/Scripts/python.exe -m pytest tests/test_dataset_scope.py tests/test_ml_data.py -q
 ```
+
+For an English frontend check, start Vite on port 5173, then run
+`rtk proxy .venv-dataset/Scripts/python.exe tests/english_dataset_browser_check.py`.
+This requires Playwright, uvicorn and Microsoft Edge. It runs real CSV-backed
+medicine/disease API routes on an isolated port, checks all 100 medicine cards,
+all 10 disease searches and a mobile viewport, and saves screenshots/results in
+`artifacts/english-dataset-browser/`. Account and speech endpoints are stubbed;
+the check does not write patient records or connect to a live database.
 
 The output is deterministic for the same inputs and seed (`--seed 42`). The
 manifest contains source and output SHA-256 hashes. Rebuild after any source
@@ -26,14 +34,22 @@ patient generator to prepare a split: it creates different dated source data.
 | `manifest.json` | Exact feature allowlist, target, class weights, hashes, validation summary and limitations |
 | `patient_splits.csv` | Patient-level split membership shared by every related table |
 | `drug_catalog.csv` | Shared medicine IDs/names and canonical disease IDs |
-| `master_localized.csv` | 90 rows: 30 medicines × 3 languages, joined using `drug_id` + `language` |
+| `master_localized.csv` | 160 supplied rows: 100 English, 30 Kannada, 30 Tulu; joined using `drug_id` + `language` |
 | `patient_drugs.csv` | Prescription details, canonical disease IDs and patient split |
 | `patient_interactions.csv` | Positive recorded interaction labels, for audit; not classifier input |
 
-English IDs are added to the exported catalog using the matching medicine names
-and the agreed Kannada/Tulu IDs. Diabetes/Type 2 Diabetes becomes
-`type_2_diabetes`; the other canonical categories are `hypertension` and
-`arthritis`. Original translated text is preserved in the localized master.
+English IDs are normalized to lowercase ASCII slugs and validated against supplied
+Kannada/Tulu IDs. All ten English disease categories have canonical IDs.
+Original translated text is preserved; missing translations are listed in the
+manifest and are not filled with English text labeled as another language.
+
+The canonical English content is `english_master_records.json`. The scope rebuild
+regenerates the master, derived tables, existing compatibility copies and ML bundle.
+`legacy_interaction_records.json` and `legacy_sideeffect_records.json` preserve the
+original structured entries. New interaction prose contributes explicit catalog
+medicine names only; class-based inference and comparison statements are excluded.
+New pairs use `Unknown` severity and retain source wording in
+`new_interaction_candidates.json`. They require review before becoming training labels.
 
 ## Load training inputs
 
@@ -81,6 +97,9 @@ multiple splits. Such an experiment needs a separately designed pair holdout.
 ## Known limitations carried into the manifest
 
 - 43,700 patients; 99,877 prescriptions; 2,041 recorded positive interactions.
+- The catalog contains 100 medicines, but patient examples still cover only the
+  original 30 medicines and three conditions. The manifest lists unrepresented
+  medicines/categories; adding zero-valued feature columns does not train those drugs.
 - Approximate 80/10/10 stratified split: 34,959 / 4,370 / 4,371 patients.
 - Patient labels contain None, Mild, and Severe; **no Moderate patient targets**.
   Moderate exists at the interaction-pair level but is masked by more severe
@@ -97,5 +116,5 @@ multiple splits. Such an experiment needs a separately designed pair holdout.
   reimport without reconciling those differences.
 
 The bundle contains all aligned master fields for separate NLP experiments,
-but it is not a ready-made multilingual NLP evaluation set: 30 medicines are
-too few to infer broad language coverage, and that task needs its own split.
+but it is not a ready-made multilingual NLP evaluation set: only 30 medicines
+have supplied translations, and that task needs its own split.
