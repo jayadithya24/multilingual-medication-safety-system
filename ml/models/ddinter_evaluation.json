@@ -1,0 +1,645 @@
+{
+  "source": {
+    "source": "DDInter",
+    "download_page": "https://ddinter.scbdd.com/download/",
+    "terms": "https://ddinter.scbdd.com/terms/",
+    "license": "CC BY-NC-SA 4.0",
+    "citation": "https://doi.org/10.1093/nar/gkab880",
+    "files": [
+      {
+        "file": "ddinter_downloads_code_A.csv",
+        "url": "https://ddinter.scbdd.com/static/media/download/ddinter_downloads_code_A.csv",
+        "sha256": "a22ca451d2b755ca2331886f7e00540c86f555f9f55704a59a19c691251f52e0"
+      },
+      {
+        "file": "ddinter_downloads_code_B.csv",
+        "url": "https://ddinter.scbdd.com/static/media/download/ddinter_downloads_code_B.csv",
+        "sha256": "76de5115a55587f0e822e1096b684fd3ddde058fbefcbb19896df58820ace130"
+      },
+      {
+        "file": "ddinter_downloads_code_D.csv",
+        "url": "https://ddinter.scbdd.com/static/media/download/ddinter_downloads_code_D.csv",
+        "sha256": "c0627ec39965dbe27829e4934cd20d71eb079f4e373287678737bba9423a306a"
+      },
+      {
+        "file": "ddinter_downloads_code_H.csv",
+        "url": "https://ddinter.scbdd.com/static/media/download/ddinter_downloads_code_H.csv",
+        "sha256": "f0f925f0ba1ee68c4668d3e7a6732719b34623b22a0f5d017f9090e59f63c88e"
+      },
+      {
+        "file": "ddinter_downloads_code_L.csv",
+        "url": "https://ddinter.scbdd.com/static/media/download/ddinter_downloads_code_L.csv",
+        "sha256": "f54f4486cc00344f8c86508c31c2ca3fad6d1d37ec3af5bcf609b4bbda5507ef"
+      },
+      {
+        "file": "ddinter_downloads_code_P.csv",
+        "url": "https://ddinter.scbdd.com/static/media/download/ddinter_downloads_code_P.csv",
+        "sha256": "83f8c0edb20d09ef29b8500b48f9623e208379525688ade9e70a7df2d8749d55"
+      },
+      {
+        "file": "ddinter_downloads_code_R.csv",
+        "url": "https://ddinter.scbdd.com/static/media/download/ddinter_downloads_code_R.csv",
+        "sha256": "1c39c3d4a6e41659b7a988538d7f363867592abc6f41a815de8746f6e2150574"
+      },
+      {
+        "file": "ddinter_downloads_code_V.csv",
+        "url": "https://ddinter.scbdd.com/static/media/download/ddinter_downloads_code_V.csv",
+        "sha256": "353973fb300453946aea95733e8fb52338e4b59426d2ce6ca318363d4f84f10a"
+      }
+    ]
+  },
+  "audit": {
+    "raw_rows": 222383,
+    "conflicting_pairs_excluded": 0,
+    "unique_graded_pairs": 130422
+  },
+  "algorithm": "Logistic regression",
+  "models": {
+    "Logistic regression": {
+      "validation": {
+        "accuracy": 0.7961457854112355,
+        "macro_f1": 0.7012454731549923,
+        "classification_report": {
+          "Minor": {
+            "precision": 0.3694398682042834,
+            "recall": 0.8751219512195122,
+            "f1-score": 0.5195482189400521,
+            "support": 1025.0
+          },
+          "Moderate": {
+            "precision": 0.9583475298126065,
+            "recall": 0.7758775256878836,
+            "f1-score": 0.8575130520940513,
+            "support": 14501.0
+          },
+          "Major": {
+            "precision": 0.6352177942539389,
+            "recall": 0.8488976963091405,
+            "f1-score": 0.7266751484308737,
+            "support": 4037.0
+          },
+          "accuracy": 0.7961457854112355,
+          "macro avg": {
+            "precision": 0.6543350640902763,
+            "recall": 0.8332990577388455,
+            "f1-score": 0.7012454731549923,
+            "support": 19563.0
+          },
+          "weighted avg": {
+            "precision": 0.8608111041315313,
+            "recall": 0.7961457854112355,
+            "f1-score": 0.8128058716477445,
+            "support": 19563.0
+          }
+        },
+        "confusion_matrix_labels": [
+          "Minor",
+          "Moderate",
+          "Major"
+        ],
+        "confusion_matrix": [
+          [
+            897,
+            81,
+            47
+          ],
+          [
+            1329,
+            11251,
+            1921
+          ],
+          [
+            202,
+            408,
+            3427
+          ]
+        ],
+        "score_threshold": 0.7,
+        "selective_coverage": 0.7165567653222921,
+        "selective_accuracy": 0.8797260664859466
+      },
+      "test": {
+        "accuracy": 0.790380290329176,
+        "macro_f1": 0.6939267225164204,
+        "classification_report": {
+          "Minor": {
+            "precision": 0.349941611521993,
+            "recall": 0.8770731707317073,
+            "f1-score": 0.5002782415136339,
+            "support": 1025.0
+          },
+          "Moderate": {
+            "precision": 0.9583297460180801,
+            "recall": 0.7675493035443387,
+            "f1-score": 0.8523949917678141,
+            "support": 14502.0
+          },
+          "Major": {
+            "precision": 0.6381040892193308,
+            "recall": 0.8503839484765915,
+            "f1-score": 0.7291069342678135,
+            "support": 4037.0
+          },
+          "accuracy": 0.790380290329176,
+          "macro avg": {
+            "precision": 0.6487918155864679,
+            "recall": 0.8316688075842125,
+            "f1-score": 0.6939267225164204,
+            "support": 19564.0
+          },
+          "weighted avg": {
+            "precision": 0.8603769339982968,
+            "recall": 0.790380290329176,
+            "f1-score": 0.8085065457885645,
+            "support": 19564.0
+          }
+        },
+        "confusion_matrix_labels": [
+          "Minor",
+          "Moderate",
+          "Major"
+        ],
+        "confusion_matrix": [
+          [
+            899,
+            85,
+            41
+          ],
+          [
+            1465,
+            11131,
+            1906
+          ],
+          [
+            205,
+            399,
+            3433
+          ]
+        ],
+        "score_threshold": 0.7,
+        "selective_coverage": 0.707063995093028,
+        "selective_accuracy": 0.8741415455794116
+      }
+    },
+    "Multinomial naive Bayes": {
+      "validation": {
+        "accuracy": 0.8502274702244033,
+        "macro_f1": 0.6933968064895043,
+        "classification_report": {
+          "Minor": {
+            "precision": 0.6920289855072463,
+            "recall": 0.3726829268292683,
+            "f1-score": 0.4844641724793913,
+            "support": 1025.0
+          },
+          "Moderate": {
+            "precision": 0.8631171587291679,
+            "recall": 0.9535894076270602,
+            "f1-score": 0.9061005176593933,
+            "support": 14501.0
+          },
+          "Major": {
+            "precision": 0.8103678929765886,
+            "recall": 0.6001981669556602,
+            "f1-score": 0.6896257293297282,
+            "support": 4037.0
+          },
+          "accuracy": 0.8502274702244033,
+          "macro avg": {
+            "precision": 0.788504679071001,
+            "recall": 0.6421568338039962,
+            "f1-score": 0.6933968064895043,
+            "support": 19563.0
+          },
+          "weighted avg": {
+            "precision": 0.8432677407771345,
+            "recall": 0.8502274702244033,
+            "f1-score": 0.8393374458249936,
+            "support": 19563.0
+          }
+        },
+        "confusion_matrix_labels": [
+          "Minor",
+          "Moderate",
+          "Major"
+        ],
+        "confusion_matrix": [
+          [
+            382,
+            605,
+            38
+          ],
+          [
+            144,
+            13828,
+            529
+          ],
+          [
+            26,
+            1588,
+            2423
+          ]
+        ],
+        "score_threshold": 0.7,
+        "selective_coverage": 0.76879824157849,
+        "selective_accuracy": 0.9234707446808511
+      },
+      "test": {
+        "accuracy": 0.845992639542016,
+        "macro_f1": 0.6777999265228649,
+        "classification_report": {
+          "Minor": {
+            "precision": 0.6746031746031746,
+            "recall": 0.33170731707317075,
+            "f1-score": 0.4447351209941138,
+            "support": 1025.0
+          },
+          "Moderate": {
+            "precision": 0.8595551124680666,
+            "recall": 0.9512481037098331,
+            "f1-score": 0.9030800955778862,
+            "support": 14502.0
+          },
+          "Major": {
+            "precision": 0.8023912321487878,
+            "recall": 0.5984642060936339,
+            "f1-score": 0.6855845629965948,
+            "support": 4037.0
+          },
+          "accuracy": 0.845992639542016,
+          "macro avg": {
+            "precision": 0.7788498397400097,
+            "recall": 0.627139875625546,
+            "f1-score": 0.6777999265228649,
+            "support": 19564.0
+          },
+          "weighted avg": {
+            "precision": 0.8380694080538137,
+            "recall": 0.845992639542016,
+            "f1-score": 0.8341865633769538,
+            "support": 19564.0
+          }
+        },
+        "confusion_matrix_labels": [
+          "Minor",
+          "Moderate",
+          "Major"
+        ],
+        "confusion_matrix": [
+          [
+            340,
+            648,
+            37
+          ],
+          [
+            149,
+            13795,
+            558
+          ],
+          [
+            15,
+            1606,
+            2416
+          ]
+        ],
+        "score_threshold": 0.7,
+        "selective_coverage": 0.76891228787569,
+        "selective_accuracy": 0.921691152030845
+      }
+    },
+    "Majority baseline": {
+      "validation": {
+        "accuracy": 0.7412462301283035,
+        "macro_f1": 0.28379912321903866,
+        "classification_report": {
+          "Minor": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 1025.0
+          },
+          "Moderate": {
+            "precision": 0.7412462301283035,
+            "recall": 1.0,
+            "f1-score": 0.851397369657116,
+            "support": 14501.0
+          },
+          "Major": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 4037.0
+          },
+          "accuracy": 0.7412462301283035,
+          "macro avg": {
+            "precision": 0.2470820767094345,
+            "recall": 0.3333333333333333,
+            "f1-score": 0.28379912321903866,
+            "support": 19563.0
+          },
+          "weighted avg": {
+            "precision": 0.5494459736794217,
+            "recall": 0.7412462301283035,
+            "f1-score": 0.6310950905994909,
+            "support": 19563.0
+          }
+        },
+        "confusion_matrix_labels": [
+          "Minor",
+          "Moderate",
+          "Major"
+        ],
+        "confusion_matrix": [
+          [
+            0,
+            1025,
+            0
+          ],
+          [
+            0,
+            14501,
+            0
+          ],
+          [
+            0,
+            4037,
+            0
+          ]
+        ],
+        "score_threshold": 0.7,
+        "selective_coverage": 1.0,
+        "selective_accuracy": 0.7412462301283035
+      },
+      "test": {
+        "accuracy": 0.7412594561439378,
+        "macro_f1": 0.28380203135090704,
+        "classification_report": {
+          "Minor": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 1025.0
+          },
+          "Moderate": {
+            "precision": 0.7412594561439378,
+            "recall": 1.0,
+            "f1-score": 0.8514060940527212,
+            "support": 14502.0
+          },
+          "Major": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 4037.0
+          },
+          "accuracy": 0.7412594561439378,
+          "macro avg": {
+            "precision": 0.24708648538131261,
+            "recall": 0.3333333333333333,
+            "f1-score": 0.28380203135090704,
+            "support": 19564.0
+          },
+          "weighted avg": {
+            "precision": 0.5494655813228065,
+            "recall": 0.7412594561439378,
+            "f1-score": 0.6311128182351545,
+            "support": 19564.0
+          }
+        },
+        "confusion_matrix_labels": [
+          "Minor",
+          "Moderate",
+          "Major"
+        ],
+        "confusion_matrix": [
+          [
+            0,
+            1025,
+            0
+          ],
+          [
+            0,
+            14502,
+            0
+          ],
+          [
+            0,
+            4037,
+            0
+          ]
+        ],
+        "score_threshold": 0.7,
+        "selective_coverage": 1.0,
+        "selective_accuracy": 0.7412594561439378
+      }
+    }
+  },
+  "split": {
+    "train": {
+      "pairs": 91295,
+      "labels": {
+        "Moderate": 67672,
+        "Major": 18840,
+        "Minor": 4783
+      }
+    },
+    "validation": {
+      "pairs": 19563,
+      "labels": {
+        "Moderate": 14501,
+        "Major": 4037,
+        "Minor": 1025
+      }
+    },
+    "test": {
+      "pairs": 19564,
+      "labels": {
+        "Moderate": 14502,
+        "Major": 4037,
+        "Minor": 1025
+      }
+    }
+  },
+  "features": "Unordered binary drug identity indicators; no interaction text or severity input",
+  "coverage": {
+    "catalog_size": 100,
+    "exact_name_matches": 76,
+    "supported_medicines": [
+      "Acarbose",
+      "Amlodipine",
+      "Artesunate",
+      "Atenolol",
+      "Azithromycin",
+      "Budesonide",
+      "Carvedilol",
+      "Celecoxib",
+      "Cetirizine",
+      "Chloroquine",
+      "Chlorpheniramine",
+      "Chlorthalidone",
+      "Chlorzoxazone",
+      "Ciprofloxacin",
+      "Clonidine",
+      "Colchicine",
+      "Dapagliflozin",
+      "Dextromethorphan",
+      "Diclofenac",
+      "Dicyclomine",
+      "Diphenhydramine",
+      "Doxycycline",
+      "Empagliflozin",
+      "Enalapril",
+      "Esomeprazole",
+      "Famotidine",
+      "Fexofenadine",
+      "Fluticasone",
+      "Formoterol",
+      "Glimepiride",
+      "Glipizide",
+      "Hydrochlorothiazide",
+      "Hydroxychloroquine",
+      "Ibuprofen",
+      "Insulin Glargine",
+      "Ipratropium",
+      "Ketorolac",
+      "Lansoprazole",
+      "Leflunomide",
+      "Levocetirizine",
+      "Levosalbutamol",
+      "Loperamide",
+      "Loratadine",
+      "Losartan",
+      "Mefenamic Acid",
+      "Mefloquine",
+      "Metformin",
+      "Methotrexate",
+      "Metoclopramide",
+      "Metronidazole",
+      "Montelukast",
+      "Naproxen",
+      "Nitazoxanide",
+      "Norfloxacin",
+      "Omeprazole",
+      "Ondansetron",
+      "Pantoprazole",
+      "Phenylephrine",
+      "Pioglitazone",
+      "Piroxicam",
+      "Prednisolone",
+      "Primaquine",
+      "Quinine",
+      "Rabeprazole",
+      "Ramipril",
+      "Salbutamol",
+      "Sitagliptin",
+      "Sucralfate",
+      "Sulfasalazine",
+      "Tafenoquine",
+      "Telmisartan",
+      "Theophylline",
+      "Tinidazole",
+      "Tiotropium",
+      "Tizanidine",
+      "Zinc Sulfate"
+    ],
+    "unsupported_medicines": [
+      "Aceclofenac",
+      "Aluminium-Magnesium Antacid",
+      "Ambroxol",
+      "Artemether-Lumefantrine",
+      "Aspirin",
+      "Atovaquone-Proguanil",
+      "Bromhexine",
+      "Dextrose Saline",
+      "Domperidone",
+      "Etoricoxib",
+      "Guaifenesin",
+      "Itopride",
+      "Normal Saline",
+      "Oral Rehydration Salts",
+      "Oxymetazoline",
+      "Paracetamol",
+      "Racecadotril",
+      "Ringer's Lactate",
+      "Saccharomyces boulardii",
+      "Sodium Alginate",
+      "Sulfadoxine-Pyrimethamine",
+      "Thiocolchicoside",
+      "Vildagliptin",
+      "Xylometazoline"
+    ]
+  },
+  "catalog_heldout_pairs": 83,
+  "catalog_heldout_metrics": {
+    "accuracy": 0.7710843373493976,
+    "macro_f1": 0.6155862068965517,
+    "classification_report": {
+      "Minor": {
+        "precision": 0.35,
+        "recall": 0.7777777777777778,
+        "f1-score": 0.4827586206896552,
+        "support": 9.0
+      },
+      "Moderate": {
+        "precision": 0.9473684210526315,
+        "recall": 0.7941176470588235,
+        "f1-score": 0.864,
+        "support": 68.0
+      },
+      "Major": {
+        "precision": 0.5,
+        "recall": 0.5,
+        "f1-score": 0.5,
+        "support": 6.0
+      },
+      "accuracy": 0.7710843373493976,
+      "macro avg": {
+        "precision": 0.5991228070175438,
+        "recall": 0.690631808278867,
+        "f1-score": 0.6155862068965517,
+        "support": 83.0
+      },
+      "weighted avg": {
+        "precision": 0.8502536461636018,
+        "recall": 0.7710843373493976,
+        "f1-score": 0.7963473203157457,
+        "support": 83.0
+      }
+    },
+    "confusion_matrix_labels": [
+      "Minor",
+      "Moderate",
+      "Major"
+    ],
+    "confusion_matrix": [
+      [
+        7,
+        1,
+        1
+      ],
+      [
+        12,
+        54,
+        2
+      ],
+      [
+        1,
+        2,
+        3
+      ]
+    ],
+    "score_threshold": 0.7,
+    "selective_coverage": 0.5421686746987951,
+    "selective_accuracy": 0.9333333333333333
+  },
+  "clinical_validation": false,
+  "limitations": [
+    "Predicts severity conditional on a documented interaction; cannot determine whether an interaction exists.",
+    "Pair-disjoint evaluation allows the same drugs in multiple splits; it is not unseen-drug or prospective clinical validation.",
+    "Identity features learn drug-associated severity patterns, not biological mechanisms or patient-specific risk.",
+    "Model scores are not calibrated probabilities of harm. Scores below 0.70 abstain.",
+    "Only exact unambiguous catalog names with at least five training pairs are supported; no guessed aliases.",
+    "Minor/Moderate/Major are source labels, not silently equated with the older project rating scale.",
+    "Eight published therapeutic-area downloads are overlapping and do not guarantee full DDInter coverage."
+  ]
+}

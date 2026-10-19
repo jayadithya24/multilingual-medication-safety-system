@@ -86,6 +86,7 @@ function AppRoutes() {
                 {/* =====================================
                     PATIENT ROUTES
                 ===================================== */}
+                <Route element={<RequireRole allowedRoles={["patient"]} />}>
                 <Route element={<PatientLayout />}>
                     <Route
                         path="patient-dashboard"
@@ -107,6 +108,8 @@ function AppRoutes() {
                         path="prescription"
                         element={<Navigate to="/scan-medicines" replace />}
                     />
+                </Route>
+
                 </Route>
 
 

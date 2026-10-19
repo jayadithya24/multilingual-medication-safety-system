@@ -9,10 +9,14 @@ function loadGoogle() {
   if (!googleScript) {
     googleScript = new Promise((resolve, reject) => {
       const script = document.createElement("script");
+      const timer = setTimeout(() => {
+        script.remove(); googleScript = null;
+        reject(new Error("Google sign-in timed out. Check your connection and retry."));
+      }, 15000);
       script.src = "https://accounts.google.com/gsi/client";
       script.async = true;
-      script.onload = resolve;
-      script.onerror = () => { script.remove(); googleScript = null; reject(new Error("Google could not load. Use email and password or reload to retry.")); };
+      script.onload = () => { clearTimeout(timer); resolve(); };
+      script.onerror = () => { clearTimeout(timer); script.remove(); googleScript = null; reject(new Error("Google could not load. Use email and password or reload to retry.")); };
       document.head.appendChild(script);
     });
   }

@@ -1,10 +1,23 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { fetchDiseases } from "../../services/neo4jService";
 
 import KnowledgeGraph from "../../components/KnowledgeGraph/KnowledgeGraph";
 
 import "./DoctorDashboard.css";
 
 function DoctorDashboard() {
+    const [scope, setScope] = useState(null);
+    const [scopeError, setScopeError] = useState(false);
+    useEffect(() => {
+        let active = true;
+        fetchDiseases("en").then((data) => {
+            if (active) setScope(data);
+        }).catch(() => {
+            if (active) setScopeError(true);
+        });
+        return () => { active = false; };
+    }, []);
     return (
         <div className="doctor-dashboard">
 
@@ -245,12 +258,17 @@ function DoctorDashboard() {
                     </span>
 
                     <h3>
-                        Medication Safety Dataset
+                        {scope
+                            ? `${scope.medicine_count} medicines across ${scope.diseases.length} diseases`
+                            : "Medication Safety Dataset"}
                     </h3>
 
                     <p>
-                        Type 2 Diabetes · Hypertension · Arthritis
+                        {scope ? scope.diseases.join(" · ")
+                            : scopeError ? "Dataset scope is currently unavailable."
+                            : "Loading English dataset scope..."}
                     </p>
+                    <p>Medicine references and disease lists are available in English, Kannada and Tulu.</p>
                 </div>
 
             </section>

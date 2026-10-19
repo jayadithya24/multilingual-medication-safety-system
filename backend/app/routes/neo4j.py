@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, Query
+from backend.app.services.medicine_service import _load_dataset
 
 from backend.app.services.neo4j_service import (
     search_drug_by_text, get_drug_by_id, get_diseases,
@@ -23,14 +24,18 @@ def drug_details(drug_id: str):
 
 
 @router.get("/diseases")
-def disease_list():
-    return {"status": "success", "diseases": get_diseases()}
+def disease_list(lang: str = "en"):
+    data = _load_dataset(lang)
+    diseases = sorted(set(data["disease"].astype(str))) if data is not None else []
+    return {"status": "success", "diseases": diseases, "lang": lang,
+            "disease_count": len(diseases),
+            "medicine_count": int(data["drug_name"].nunique()) if data is not None else 0}
 
 
-@router.get("/diseases/{disease_name}/drugs")
-def disease_drugs(disease_name: str):
+@router.get("/diseases/{disease_name:path}/drugs")
+def disease_drugs(disease_name: str, lang: str = "en"):
     return {"status": "success", "disease": disease_name,
-            "drugs": get_drugs_for_disease(disease_name)}
+            "lang": lang, "drugs": get_drugs_for_disease(disease_name, lang)}
 
 
 @router.get("/graph")

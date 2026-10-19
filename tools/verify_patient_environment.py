@@ -76,7 +76,8 @@ def main():
             'rows': len(frame), 'duplicate_drug_names': int(frame['drug_name'].duplicated().sum()),
             'empty_drug_names': int((frame['drug_name'].str.strip() == '').sum()),
         }
-    report['datasets_same_drug_names'] = names['en'] == names['kn'] == names['tulu']
+    report['localized_scopes_match'] = names['kn'] == names['tulu']
+    report['localized_scopes_within_english'] = names['kn'] <= names['en'] and names['tulu'] <= names['en']
     from backend.app.services.neo4j_service import search_drug_by_text
     report['search_all_records'] = {}
     for lang, drug_names in names.items():

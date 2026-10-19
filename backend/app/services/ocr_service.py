@@ -422,6 +422,6 @@ def extract_prescription_details(file_path, lang: str = "en"):
             "Multiple medicine names detected: " + ", ".join(found_medicines) + ". Verify whether these belong to a combination pack or separate medicines, and enter the complete strength manually."
             if multiple else "Prescription details detected."
             if medicine
-            else "Text was detected, but no supported medicine matched this project's 30-medicine dataset. Please verify the name manually."
+            else "Text was detected, but no supported medicine matched the selected language's dataset. Please verify the name manually."
         ),
     }

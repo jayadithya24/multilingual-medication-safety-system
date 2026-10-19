@@ -150,6 +150,8 @@ def get_interaction(drug1, drug2, lang: str = "en"):
         "source_severities": severities,
         "review_required": conflict or not severities or "Unknown" in severities or bool(rule and rule.get("review_note")),
         "source": "local_dataset",
+        "analysis_method": "Recorded-pair lookup with explicit class mapping; no ML inference",
+        "severity_clinically_validated": False,
         "source_rows": [int(index) + 2 for index in matches.index],
         "description": ("Source records disagree on severity: " + ", ".join(severities) + ". Clinical review is required before assigning a rating.") if conflict else str(first_match.get("description", "")),
         "recommendation": str(first_match.get("recommendation", "")),

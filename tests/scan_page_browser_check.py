@@ -96,8 +96,8 @@ def main():
             expect(page).to_have_url('http://localhost:5173/scan-medicines')
         page = browser.new_page()
         page.goto('http://localhost:5173/scan-medicines')
-        expect(page.get_by_role('button', name='Add to Schedule', exact=True)).to_be_disabled()
-        expect(page.get_by_role('link', name='Log in as a patient', exact=True)).to_be_visible()
+        expect(page).to_have_url('http://localhost:5173/public')
+        expect(page.get_by_role('button', name='Register', exact=True).first).to_be_visible()
         browser.close()
         print('PASS: unified navigation, scan review, explicit save, corrected dosage, manual entry, legacy redirects, guest profile guard')
 

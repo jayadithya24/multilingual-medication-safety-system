@@ -64,7 +64,7 @@ def main():
                     route.continue_()
 
             page.route("**/*", api)
-            page.goto("http://127.0.0.1:5173/patient-dashboard")
+            page.goto("http://localhost:5173/patient-dashboard")
             expect(page.locator("#patient-medicine-options option")).to_have_count(100)
             search = page.get_by_placeholder("Search disease or drug")
             for record in records:

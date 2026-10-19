@@ -1,13 +1,13 @@
 import api, { getStoredToken } from "./api";
 
-export const fetchDiseases = async () => {
-    const response = await api.get("/neo4j/diseases");
+export const fetchDiseases = async (lang = "en") => {
+    const response = await api.get("/neo4j/diseases", { params: { lang } });
     return response.data;
 };
 
-export const fetchDrugsForDisease = async (diseaseName) => {
+export const fetchDrugsForDisease = async (diseaseName, lang = "en") => {
     const response = await api.get(
-        `/neo4j/diseases/${encodeURIComponent(diseaseName)}/drugs`
+        `/neo4j/diseases/${encodeURIComponent(diseaseName)}/drugs`, { params: { lang } }
     );
 
     return response.data;

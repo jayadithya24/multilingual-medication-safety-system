@@ -17,7 +17,7 @@ class MultiDrugRequest(BaseModel):
 
 
 @router.get("/interaction")
-async def check_interaction(
+def check_interaction(
     drug1: str = Query(..., min_length=1),
     drug2: str = Query(..., min_length=1),
     lang: str = Query("en"),
@@ -53,7 +53,7 @@ async def check_interaction(
 
 
 @router.post("/interaction/multi")
-async def check_multi_interaction(
+def check_multi_interaction(
     body: MultiDrugRequest,
     lang: str = Query("en"),
 ):

@@ -84,7 +84,7 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    const patientPage = ["/patient-dashboard", "/patient-profile", "/scan-medicines", "/prescription"].includes(window.location.pathname);
+    const patientPage = ["/patient-dashboard", "/patient-profile", "/scan-medicines", "/prescription", "/voice-search"].includes(window.location.pathname);
     const role = getStoredRole();
     const loginRequest = ["/auth/token", "/auth/patient-token", "/auth/google"].includes(error.config?.url);
     if (error.response?.status === 401 && role === "doctor" && !loginRequest) {

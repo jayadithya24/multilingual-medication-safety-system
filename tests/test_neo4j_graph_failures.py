@@ -25,6 +25,6 @@ def test_pair_failure_does_not_invent_interaction(monkeypatch):
 def test_fallback_graph_uses_one_node_per_master_drug():
     graph = _fallback_local_knowledge_graph()
     drugs = [node for node in graph['nodes'] if node['type'] == 'drug']
-    assert len(drugs) == 30
+    assert len(drugs) == 100
     ids = {node['id'] for node in graph['nodes']}
     assert all(edge['source'] in ids and edge['target'] in ids for edge in graph['edges'])

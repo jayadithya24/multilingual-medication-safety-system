@@ -34,7 +34,7 @@ patient generator to prepare a split: it creates different dated source data.
 | `manifest.json` | Exact feature allowlist, target, class weights, hashes, validation summary and limitations |
 | `patient_splits.csv` | Patient-level split membership shared by every related table |
 | `drug_catalog.csv` | Shared medicine IDs/names and canonical disease IDs |
-| `master_localized.csv` | 160 supplied rows: 100 English, 30 Kannada, 30 Tulu; joined using `drug_id` + `language` |
+| `master_localized.csv` | 300 supplied rows: 100 each in English, Kannada and Tulu; joined using `drug_id` + `language` |
 | `patient_drugs.csv` | Prescription details, canonical disease IDs and patient split |
 | `patient_interactions.csv` | Positive recorded interaction labels, for audit; not classifier input |
 
@@ -116,5 +116,5 @@ multiple splits. Such an experiment needs a separately designed pair holdout.
   reimport without reconciling those differences.
 
 The bundle contains all aligned master fields for separate NLP experiments,
-but it is not a ready-made multilingual NLP evaluation set: only 30 medicines
+but it is not a ready-made multilingual NLP evaluation set: all 100 medicines
 have supplied translations, and that task needs its own split.

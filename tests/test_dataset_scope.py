@@ -59,6 +59,18 @@ def test_new_medicines_are_available_through_english_api():
     assert search_medicine("Ringer's Lactate")["drug_name"] == "Ringer's Lactate"
 
 
+def test_every_english_disease_and_medicine_is_available_in_protocols():
+    from backend.app.routes.neo4j import disease_list, disease_drugs
+    from backend.app.services.medicine_service import search_medicine
+    master = pd.read_csv(ROOT / "datasets/english_master_dataset.csv")
+    assert set(disease_list("en")["diseases"]) == set(master.disease)
+    for disease, rows in master.groupby("disease"):
+        actual = disease_drugs(disease)["drugs"]
+        assert {row["drug_name"] for row in actual} == set(rows.drug_name)
+        for name in rows.drug_name:
+            assert search_medicine(name, "en")["disease"] == disease
+
+
 def test_graph_uses_one_consistent_id_per_medicine():
     from neo4j.load_data import Neo4jLoader
     graph = Neo4jLoader.prepare_graph()

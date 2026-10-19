@@ -1,4 +1,3 @@
-import { renderToStaticMarkup } from "react-dom/server";
 
 const value = item => item === null || item === undefined || item === "" ? "Not recorded" : String(item);
 const date = item => item && !Number.isNaN(new Date(item).getTime()) ? new Date(item).toLocaleString() : "Not recorded";
@@ -7,7 +6,7 @@ export function PrescriptionReport({ report }) {
   const patient = report.patient;
   return <article className="prescription-report">
     <h2>Prescription report</h2>
-    <p>Generated: {date(report.generated_at)} · Doctor: {report.doctor}</p>
+    <p>Generated: {date(report.generated_at)} · Prepared for: {report.doctor || "Patient copy"}</p>
     <h3>{value(patient.full_name)} ({patient.username})</h3>
     <p>Patient ID: {value(patient.patient_id)} · Age: {value(patient.age)} · Gender: {value(patient.gender)}</p>
     <p><strong>Medical condition:</strong> {value(patient.medical_condition)}</p>
@@ -31,30 +30,4 @@ export function PrescriptionReport({ report }) {
       {report.history.map((record, index) => <tr key={record.history_id || index}><td>{value(record.medicine_name)}</td><td>{value(record.dosage)}</td><td>{value(record.scheduled_time)}</td><td>{date(record.taken_at)}</td></tr>)}
     </tbody></table></div> : <p>No doses recorded as taken.</p>}
   </article>;
-}
-
-function documentHtml(report) {
-  return '<!doctype html><html><head><meta charset="utf-8"><title>Prescription report</title><style>body{font:14px Arial,sans-serif;color:#193744;margin:32px}h2{font-size:26px}p{line-height:1.6}section{border:1px solid #ccc;padding:16px;margin:16px 0;break-inside:avoid}dl>div{display:flex;margin:8px 0}dt{font-weight:bold;width:150px;flex-shrink:0}dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}table{width:100%;border-collapse:collapse}th,td{padding:10px;border:1px solid #ccc;text-align:left}thead{display:table-header-group}@page{margin:15mm}</style></head><body>' + renderToStaticMarkup(<PrescriptionReport report={report} />) + '</body></html>';
-}
-
-export function downloadReport(report) {
-  const url = URL.createObjectURL(new Blob([documentHtml(report)], { type: "text/html;charset=utf-8" }));
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = `prescription-report-${report.patient.patient_id || "patient"}.html`;
-  link.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-
-export function printReport(report) {
-  const frame = document.createElement("iframe");
-  frame.style.cssText = "position:fixed;width:0;height:0;border:0";
-  frame.title = "Print prescription report";
-  frame.onload = () => {
-    frame.contentWindow.focus();
-    frame.contentWindow.print();
-  };
-  frame.srcdoc = documentHtml(report);
-  document.body.appendChild(frame);
-  setTimeout(() => frame.remove(), 60000);
 }

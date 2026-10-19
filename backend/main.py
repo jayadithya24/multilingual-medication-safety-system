@@ -31,7 +31,6 @@ from backend.app.services.ocr_service import warm_up_reader
 from backend.app.routes.fcm import router as fcm_router
 from backend.app.services.fcm_service import reminder_loop, _firebase
 from backend.app.routes.risk_prediction import router as risk_prediction_router
-from backend.app.services.fcm_service import reminder_loop, _firebase
 
 app = FastAPI(
     title="Medication Safety System",

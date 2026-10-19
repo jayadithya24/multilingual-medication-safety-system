@@ -20,6 +20,7 @@ const API_PROXY_PATHS = [
   '/health',
   '/mongo',
   '/fcm',
+  '/ml',
 ]
 
 // https://vite.dev/config/

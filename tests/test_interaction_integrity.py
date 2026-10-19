@@ -79,7 +79,7 @@ def test_live_graph_result_does_not_discard_evidence(monkeypatch):
     import asyncio
     from backend.app.routes import interaction
     monkeypatch.setattr(interaction, "get_drug_interaction", lambda *args, **kwargs: {"severity": "Moderate"})
-    result = asyncio.run(interaction.check_interaction("Naproxen", "Methotrexate", "en"))["interaction"]
+    result = interaction.check_interaction("Naproxen", "Methotrexate", "en")["interaction"]
     assert result["source"] == "neo4j"
     assert result["evidence_sources"]
     assert "toxicity" in result["description"]

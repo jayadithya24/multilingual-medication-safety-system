@@ -28,7 +28,7 @@ function DiseaseProtocolSummary({
                 <div className="clinical-protocol-summary">
                     <p>
                         Medicines currently linked to this disease in the
-                        knowledge graph. Full descriptions stay on Disease
+                        selected language's dataset. Full descriptions stay on Disease
                         Protocols so this page can focus on sources.
                     </p>
                     <ul className="clinical-protocol-summary__chips">

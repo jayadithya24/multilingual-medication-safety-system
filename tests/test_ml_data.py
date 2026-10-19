@@ -43,6 +43,9 @@ def test_full_export_integrity(tmp_path):
     localized = pd.read_csv(tmp_path / "master_localized.csv", keep_default_na=False)
     assert not localized.duplicated(["drug_id", "language"]).any()
     assert len(localized) == report["localized_row_count"]
+    assert len(localized) == 300
+    assert all(not missing for missing in report['missing_translations'].values())
+    assert len(report['missing_optional_fields']['tulu']['drug_class']) == 11
     assert len(localized[localized.language.eq("en")]) == report["drug_count"]
     catalog = pd.read_csv(tmp_path / "drug_catalog.csv", keep_default_na=False)
     for lang in ("kn", "tulu"):

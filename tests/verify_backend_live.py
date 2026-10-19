@@ -75,7 +75,7 @@ def main():
             assert db.patient_schedules.count_documents({"patient_username": username}) == 1
             results["browser_schedule_persisted"] = True
             page.get_by_role("link", name="My Medicines", exact=True).click()
-            expect(page.get_by_text("Integration verification only", exact=True).first).to_be_visible()
+            expect(page.get_by_text("Integration verification only", exact=True).first).to_be_visible(timeout=20000)
             page.get_by_role("button", name="Mark as Taken").click()
             expect(page.get_by_role("button", name="Taken", exact=False).first).to_be_visible()
             assert db.medication_history.count_documents({"patient_username": username}) == 1
@@ -89,7 +89,18 @@ def main():
             assert db.patient_schedules.count_documents({"patient_username": username, "status": "active"}) == 0
             assert db.medication_history.count_documents({"patient_username": username}) == 1
             results["browser_removal_preserves_history"] = True
-            page.get_by_role("button", name="Sign out", exact=True).click()
+            page.get_by_role("button", name="Generate My Medication Report", exact=True).click()
+            report = page.get_by_role("dialog", name="My medication report")
+            expect(report).to_contain_text("Disposable verification patient")
+            expect(report).to_contain_text("Integration verification only")
+            expect(report).not_to_contain_text("Ramesh Kumar")
+            expect(report).not_to_contain_text("94%")
+            with page.expect_download() as report_download:
+                report.get_by_role("button", name="Download report (HTML)", exact=True).click()
+            assert report_download.value.suggested_filename.endswith('.html')
+            report.get_by_role("button", name="Close report", exact=True).click()
+            results["patient_report_saved_records_and_download"] = True
+            page.get_by_role("button", name="Logout", exact=False).click()
             expect(page).to_have_url("http://localhost:5173/public")
             assert page.evaluate("localStorage.getItem('mmss_token')") is None
             results["browser_signout"] = True

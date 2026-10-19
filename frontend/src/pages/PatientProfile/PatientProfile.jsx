@@ -5,6 +5,7 @@ import {
     updatePatientProfile,
 } from "../../services/patientService";
 import "./PatientProfile.css";
+import { fetchDiseases } from "../../services/neo4jService";
 
 function PatientProfile() {
     const navigate = useNavigate();
@@ -20,6 +21,14 @@ function PatientProfile() {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState("");
+    const [conditions, setConditions] = useState([]);
+
+    useEffect(() => {
+        let active = true;
+        fetchDiseases().then(data => { if (active) setConditions(data.diseases || []); })
+            .catch(() => { if (active) setError("Unable to load medical conditions. Please reload the page."); });
+        return () => { active = false; };
+    }, []);
 
     // Load logged-in patient's profile from MongoDB
     useEffect(() => {
@@ -312,17 +321,9 @@ function PatientProfile() {
                                 Select medical condition
                             </option>
 
-                            <option value="Type 2 Diabetes">
-                                Type 2 Diabetes
-                            </option>
-
-                            <option value="Hypertension">
-                                Hypertension
-                            </option>
-
-                            <option value="Arthritis">
-                                Arthritis
-                            </option>
+                            {[...new Set([...conditions, profile.condition].filter(Boolean))].map(condition =>
+                                <option key={condition} value={condition}>{condition}</option>
+                            )}
 
                         </select>
 

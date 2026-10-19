@@ -265,7 +265,7 @@ def _fallback_search(
         matches = dataframe[partial_mask] if partial_mask is not None else dataframe.iloc[0:0]
 
     if matches.empty:
-        fallback = search_medicine(query, lang="en")
+        fallback = search_medicine(query, lang=lang)
         return [
     _serialize_drug(
         {
@@ -300,7 +300,7 @@ def search_drug_by_text(
 
     # Patient search uses the same complete, cached multilingual data as OCR.
     dataset_results = _fallback_search(query, limit, lang=lang)
-    if dataset_results:
+    if dataset_results or lang != "en":
         return dataset_results
     driver = None
     try:
@@ -525,31 +525,7 @@ def get_diseases() -> List[str]:
     """
     Return the diseases available in the Neo4j knowledge graph or dataset.
     """
-    driver = None
-    try:
-        driver = _get_driver()
-
-        with driver.session() as session:
-            cypher = """
-            MATCH (d:Disease)
-            RETURN DISTINCT d.name AS disease
-            ORDER BY disease
-            """
-
-            records = session.run(cypher)
-
-            return [
-                record["disease"]
-                for record in records
-                if record["disease"]
-            ]
-
-    except Exception as err:
-        print(f"Neo4j disease lookup unavailable, falling back to CSV: {err}")
-    finally:
-        if driver:
-            driver.close()
-
+    # The published CSV defines scope even when Neo4j has an older import.
     dataframe = _load_dataset("en")
     if dataframe is None or "disease" not in dataframe.columns:
         return []
@@ -564,7 +540,7 @@ def get_diseases() -> List[str]:
     )
 
 
-def get_drugs_for_disease(disease_name: str) -> List[Dict[str, Any]]:
+def get_drugs_for_disease(disease_name: str, lang: str = "en") -> List[Dict[str, Any]]:
     """
     Return drugs connected to a disease through the TREATS relationship.
     """
@@ -572,41 +548,8 @@ def get_drugs_for_disease(disease_name: str) -> List[Dict[str, Any]]:
     if not disease_name:
         return []
 
-    driver = None
-    try:
-        driver = _get_driver()
-
-        with driver.session() as session:
-            cypher = """
-            MATCH (drug:Drug)-[:TREATS]->(d:Disease)
-            WHERE toLower(d.name) = toLower($disease_name)
-
-            RETURN
-                drug.name AS drug_id,
-                drug.name AS drug_name,
-                drug.generic_name AS generic_name,
-                drug.drug_class AS drug_class,
-                drug.description AS description_en,
-                drug.warnings AS warnings_en,
-                drug.contraindications AS contraindications_en
-
-            ORDER BY drug.name
-            """
-
-            records = session.run(
-                cypher,
-                disease_name=disease_name.strip()
-            )
-
-            return [dict(record) for record in records]
-
-    except Exception as err:
-        print(f"Neo4j disease-drug lookup unavailable, falling back to CSV: {err}")
-    finally:
-        if driver:
-            driver.close()
-
-    dataframe = _load_dataset("en")
+    # The published CSV defines scope even when Neo4j has an older import.
+    dataframe = _load_dataset(lang)
     if dataframe is None or "disease" not in dataframe.columns:
         return []
 

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
-import { PrescriptionReport, downloadReport, printReport } from "./PrescriptionReport";
+import { PrescriptionReport } from "./PrescriptionReport";
+import { downloadReport, printReport } from "./reportExport";
 import "./Reports.css";
 
 function formatDate(value) {

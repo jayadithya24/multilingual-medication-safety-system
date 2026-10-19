@@ -21,8 +21,6 @@ def _load_dataset(lang: str = "en"):
     possible_paths = [
         ROOT_DATASETS / filename,
         APP_DATASETS / filename,
-        ROOT_DATASETS / "english_master_dataset.csv",
-        APP_DATASETS / "english_master_dataset.csv",
     ]
 
     for path in possible_paths:
@@ -45,9 +43,6 @@ def search_medicine(medicine_name: str, lang: str = "en"):
             return None
 
         dataframe = _load_dataset(lang)
-        if dataframe is None or "drug_name" not in dataframe.columns:
-            dataframe = _load_dataset("en")
-
         if dataframe is None or "drug_name" not in dataframe.columns:
             return None
 
@@ -88,24 +83,6 @@ def search_medicine(medicine_name: str, lang: str = "en"):
         matches = dataframe[partial_mask] if partial_mask is not None else dataframe.iloc[0:0]
 
         if matches.empty:
-            # Fallback to English if not found in requested language
-            if lang != "en":
-                en_df = _load_dataset("en")
-                if en_df is not None:
-                    available_columns = [
-                        column
-                        for column in ["drug_name", "generic_name", "active_ingredient"]
-                        if column in en_df.columns
-                    ]
-                    if available_columns:
-                        fallback_mask = None
-                        for column in available_columns:
-                            series = en_df[column].astype(str).str.lower().str.strip()
-                            column_mask = series.str.contains(normalized_name, na=False, regex=False)
-                            fallback_mask = column_mask if fallback_mask is None else (fallback_mask | column_mask)
-                        matches = en_df[fallback_mask] if fallback_mask is not None else en_df.iloc[0:0]
-
-        if matches.empty:
             return None
 
         match_dict = matches.iloc[0].to_dict()
@@ -121,8 +98,6 @@ def list_medicine_names(lang: str = "en"):
     """Return a sorted list of unique medicine names for dropdown usage."""
     try:
         dataframe = _load_dataset(lang)
-        if dataframe is None:
-            dataframe = _load_dataset("en")
         if dataframe is None or "drug_name" not in dataframe.columns:
             return []
 

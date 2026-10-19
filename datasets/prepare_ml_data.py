@@ -31,7 +31,8 @@ def read_csv(path):
     # 'None' is a real synthetic label, not a missing value.
     frame = pd.read_csv(path, keep_default_na=False)
     require(not frame.empty, f"Empty dataset: {path.name}")
-    require(not frame.astype(str).apply(lambda col: col.str.strip().eq("")).any().any(),
+    required = frame.drop(columns=["drug_class"], errors="ignore") if path.name.endswith("_master_dataset.csv") else frame
+    require(not required.astype(str).apply(lambda col: col.str.strip().eq("")).any().any(),
             f"Blank cells in {path.name}")
     return frame
 
@@ -175,6 +176,11 @@ def prepare(source=ROOT, output=None, seed=42):
         "interaction_count": len(interactions),
         "localized_row_count": sum(len(frame) for frame in localized),
         "missing_translations": missing_translations,
+        "missing_optional_fields": {
+            lang: {column: frame.loc[frame[column].astype(str).str.strip().eq(""), "drug_name"].tolist()
+                   for column in ("drug_class",) if column in frame and frame[column].astype(str).str.strip().eq("").any()}
+            for lang, frame in masters.items()
+        },
         "prescribed_drug_count": drugs.drug_id.nunique(),
         "unrepresented_drug_ids": sorted(ids - set(drugs.drug_id)),
         "unrepresented_disease_ids": sorted(set(disease_by_id) - set(drugs.disease_id)),

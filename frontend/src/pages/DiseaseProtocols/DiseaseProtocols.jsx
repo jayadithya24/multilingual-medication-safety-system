@@ -7,6 +7,7 @@ import {
 import clinicalSources from "../../data/clinicalSources.json";
 import ClinicalSources from "./ClinicalSources";
 import DiseaseProtocolSummary from "./DiseaseProtocolSummary";
+import LanguageSelector from "../../components/LanguageSelector/LanguageSelector";
 
 import "./DiseaseProtocols.css";
 
@@ -27,6 +28,7 @@ const SELECTED_DISEASE_KEY = "mmss-clinical-selected-disease";
 function DiseaseProtocols() {
     const location = useLocation();
     const navigate = useNavigate();
+    const [lang, setLang] = useState("en");
 
     const activeTab = location.pathname.includes("clinical-insights")
         ? "insights"
@@ -49,24 +51,26 @@ function DiseaseProtocols() {
     );
 
     useEffect(() => {
+        let active = true;
         const loadDiseases = async () => {
             try {
                 setLoadingDiseases(true);
                 setError("");
 
-                const data = await fetchDiseases();
+                const data = await fetchDiseases(lang);
 
-                setDiseases(data.diseases || []);
+                if (active) setDiseases(data.diseases || []);
             } catch (err) {
                 console.error(err);
-                setError("Unable to load disease list.");
+                if (active) setError("Unable to load disease list.");
             } finally {
-                setLoadingDiseases(false);
+                if (active) setLoadingDiseases(false);
             }
         };
 
         loadDiseases();
-    }, []);
+        return () => { active = false; };
+    }, [lang]);
 
     useEffect(() => {
         if (!selectedDisease) {
@@ -80,7 +84,7 @@ function DiseaseProtocols() {
         const loadDrugs = async () => {
             try {
                 setLoadingDrugs(true);
-                const data = await fetchDrugsForDisease(selectedDisease);
+                const data = await fetchDrugsForDisease(selectedDisease, lang);
                 if (active) {
                     setDrugs(data.drugs || []);
                 }
@@ -101,7 +105,7 @@ function DiseaseProtocols() {
         return () => {
             active = false;
         };
-    }, [selectedDisease]);
+    }, [selectedDisease, lang]);
 
     const handleDiseaseChange = (event) => {
         const disease = event.target.value;
@@ -133,7 +137,7 @@ function DiseaseProtocols() {
                 <p>
                     {activeTab === "insights"
                         ? "Review the disease protocol summary together with curated sources already used in the MMSS reference list."
-                        : "Review medicines associated with specific diseases from the medication safety knowledge graph."}
+                        : "Review 100 medicines across 10 diseases in English, Kannada or Tulu."}
                 </p>
             </section>
 
@@ -159,6 +163,14 @@ function DiseaseProtocols() {
             </div>
 
             <section className="disease-protocols__panel">
+                <LanguageSelector selectedLanguage={lang} onLanguageChange={(value) => {
+                    setLang(value);
+                    setSelectedDisease("");
+                    setDiseases([]);
+                    setDrugs([]);
+                    setLoadingDrugs(false);
+                    sessionStorage.removeItem(SELECTED_DISEASE_KEY);
+                }} />
                 <label htmlFor="disease-select">
                     Select Disease
                 </label>

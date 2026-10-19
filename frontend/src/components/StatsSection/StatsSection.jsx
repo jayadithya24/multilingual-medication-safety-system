@@ -4,16 +4,16 @@ function StatsSection() {
 
     const stats = [
         {
-            number: "30",
-            title: "Medicines"
+            number: "100",
+            title: "English medicines · 10 diseases"
         },
         {
             number: "3",
             title: "Languages"
         },
         {
-            number: "157",
-            title: "Drug Interactions"
+            number: "100 each",
+            title: "Kannada & Tulu medicines · 10 diseases each"
         },
         {
             number: "Rule-Based",

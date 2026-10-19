@@ -4,6 +4,8 @@ import { checkDrugInteraction } from "../../services/interactionService";
 import { fetchMedicines } from "../../services/medicineService";
 import "./DrugInteraction.css";
 import InteractionGraph from "../../components/KnowledgeGraph/InteractionGraph";
+import ExperimentalRisk from "../../components/ExperimentalRisk";
+import DDInterPrediction from "../../components/DDInterPrediction";
 
 
 function DrugInteraction() {
@@ -124,6 +126,11 @@ function DrugInteraction() {
           </div>
 
           {loadingMedicines && <Loading />}
+          <details className="interaction-method"><summary>How is this conclusion produced?</summary>
+            <p>The checker matches the two medicine names against recorded interaction pairs in either order, then checks explicit medicine-class mappings. Neo4j stores the relationships; it does not train a model or infer severity.</p>
+            <p>Mild, Moderate and Severe are existing dataset ratings. Prescribing-label references support the described interaction, but do not validate that rating scale. Conflicting ratings require review; missing records do not establish safety.</p>
+            <p>The DDInter model below learns from externally documented drug-pair labels. The older Random Forest demonstration uses synthetic patient records. Both are research models, separate from the recorded evidence.</p>
+          </details>
 
           {error && <div className="interaction-error">{error}</div>}
 
@@ -181,6 +188,8 @@ function DrugInteraction() {
         drug2={drug2.trim()}
     />
 )}
+          {result && drug1 && drug2 && <DDInterPrediction key={`ddinter:${drug1}:${drug2}`} drug1={drug1} drug2={drug2} />}
+          {result && drug1 && drug2 && <ExperimentalRisk key={`${drug1}:${drug2}`} drug1={drug1} drug2={drug2} />}
         </div>
       </section>
     </div>

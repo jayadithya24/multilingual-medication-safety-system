@@ -1,25 +1,13 @@
 # Tulu dataset
 
-The maintained source is `tulu_master_dataset.xlsx`, supplied by the user.
-The app reads `tulu_master_dataset.csv`, exported from that workbook.
+The maintained source is `tulu_master_dataset.csv`, updated by the user to
+100 medicines across 10 diseases on 19 October 2026. The backend reads this
+CSV directly. The older workbook, importer and 30-drug generator are archived
+under `artifacts/`; they must not overwrite the current CSV.
 
-After editing the workbook, run:
+After editing, run `python datasets/prepare_ml_data.py` and restart the backend.
+See the export manifest's `missing_optional_fields` for the 11 missing
+drug-class values; no translated clinical content is fabricated.
 
-```powershell
-rtk proxy .venv-1/Scripts/python.exe datasets/import_tulu_workbook.py
-```
-
-The importer needs pandas and openpyxl. It normalizes column headers to
-snake_case, validates required fields and unique medicine names/IDs, and
-verifies that all cell text survives the UTF-8 CSV export unchanged.
-Restart the backend afterward because medicine datasets are cached in memory.
-
-The older `build_tulu_dataset.py` contains earlier generated wording; do not
-use it to refresh the user-maintained dataset.
-
-Validated: 30 exported medicines; all 30 live Tulu medicine API results matched
-the workbook content; Metformin voice lookup returned the new description;
-the new description produced MP3 speech; eight regression tests passed.
-Speech still uses Kannada synthesis for Tulu text, so pronunciation remains
-dependent on that voice. This import verifies data integration, not clinical
-accuracy or translation quality. Existing database records are not reimported.
+Tulu speech uses Kannada synthesis, so pronunciation depends on that voice.
+Data integration checks do not certify medical accuracy or translation quality.

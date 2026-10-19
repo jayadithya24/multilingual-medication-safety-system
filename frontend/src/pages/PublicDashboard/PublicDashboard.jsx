@@ -174,7 +174,7 @@ function PublicDashboard() {
 
             const [medicineResponse, diseaseResponse] = await Promise.all([
                 searchMedicine(trimmedQuery, lang).catch(() => ({ results: [] })),
-                fetchDiseases().catch(() => ({ diseases: [] })),
+                fetchDiseases(lang).catch(() => ({ diseases: [] })),
             ]);
 
             if (version !== searchVersion.current) return;
@@ -283,14 +283,29 @@ function PublicDashboard() {
     useEffect(() => {
         if (activeTab !== "medicines") return;
         let active = true;
-        Promise.all([fetchPatientSchedule(), fetchMedicationHistory()])
-            .then(([scheduleResponse, historyResponse]) => {
-                if (!active) return;
-                setSchedules(scheduleResponse.schedules || []);
-                setHistory(historyResponse.history || []);
-                setScheduleError("");
-            })
-            .catch(() => { if (active) setScheduleError("Unable to load your medicines. Refresh or sign in again."); });
+        async function loadMedicationTab() {
+            setScheduleLoading(true);
+            setHistoryLoading(true);
+            setScheduleError("");
+            setHistoryError("");
+            const [scheduleResponse, historyResponse] = await Promise.allSettled([
+                fetchPatientSchedule(), fetchMedicationHistory(),
+            ]);
+            if (!active) return;
+            if (scheduleResponse.status === "fulfilled") {
+                setSchedules(scheduleResponse.value.schedules || []);
+            } else {
+                setScheduleError("Unable to load your medicines. Refresh or sign in again.");
+            }
+            if (historyResponse.status === "fulfilled") {
+                setHistory(historyResponse.value.history || []);
+            } else {
+                setHistoryError("Unable to load medication history. Please refresh.");
+            }
+            setScheduleLoading(false);
+            setHistoryLoading(false);
+        }
+        loadMedicationTab();
         api.get("/patient/access-requests")
             .then(({ data }) => { if (active) { setAccessRequests(data.requests || []); setAccessRequestError(""); } })
             .catch(() => { if (active) setAccessRequestError("Unable to load access requests. Please refresh."); });
@@ -587,7 +602,7 @@ function PublicDashboard() {
                                 
                                 <div className="patient-access-requests-list">
                                     <button type="button" className="patient-btn--accept" onClick={() => setShowReportModal(true)}>
-                                        Select Searches & Generate Report (PDF)
+                                        Generate My Medication Report
                                     </button>
                                     {!accessRequestError && pendingAccessRequests.length === 0 && (
                                         <p>No pending doctor access requests.</p>
@@ -966,7 +981,6 @@ function PublicDashboard() {
             )}
             {showReportModal && (
                 <PatientReportGeneratorModal
-                    doctorName="Dr. Smith"
                     onClose={() => setShowReportModal(false)}
                 />
             )}

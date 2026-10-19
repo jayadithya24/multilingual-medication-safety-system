@@ -332,3 +332,7 @@
 .interaction-graph__error {
     color: #b91c1c;
 }
+.interaction-method, .experimental-risk { margin-top: 24px; padding: 18px; border: 1px solid #c9d9df; border-radius: 12px; line-height: 1.6; }
+.interaction-method summary, .experimental-risk summary { cursor: pointer; font-weight: 700; }
+.experimental-risk .interaction-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+.experimental-risk input { min-width: 0; width: 100%; padding: 10px; border: 1px solid #b8cbd2; border-radius: 8px; box-sizing: border-box; }
