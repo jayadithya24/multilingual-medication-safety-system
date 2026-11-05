@@ -37,7 +37,18 @@ def test_pair_graph_works_offline_without_inventing_edges(monkeypatch):
     assert graph["source"] == "local_csv"
 
 
-def test_side_effect_identity_does_not_merge_conditions_or_case_variants():
+def test_side_effect_identity_does_not_merge_conditions_or_case_variants(monkeypatch):
+    # Exercise an intentional naming collision independently of current clinical wording.
+    read_csv = service.pd.read_csv
+    def collision_fixture(path, *args, **kwargs):
+        frame = read_csv(path, *args, **kwargs)
+        if str(path).endswith('drug_disease.csv'):
+            frame.loc[0, ['disease', 'disease_id']] = ['Hypertension', 'hypertension']
+        elif str(path).endswith('drug_sideeffects.csv'):
+            frame.loc[0, 'side_effect'] = 'Hypertension'
+            frame.loc[1, 'side_effect'] = 'hypertension'
+        return frame
+    monkeypatch.setattr(service.pd, 'read_csv', collision_fixture)
     graph = service._fallback_local_knowledge_graph()
     effects = [n for n in graph["nodes"] if n["type"] == "sideeffect"]
     assert len({n["name"].casefold() for n in effects}) == len(effects)

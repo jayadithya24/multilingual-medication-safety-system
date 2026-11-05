@@ -29,7 +29,7 @@ def main():
 
         page.route("**/*", route_api)
         page.goto("http://localhost:5173")
-        page.evaluate("localStorage.setItem('mmss_token','scope-test'); localStorage.setItem('mmss_role','patient')")
+        page.evaluate("sessionStorage.setItem('mmss_session','active'); sessionStorage.setItem('mmss_role','patient')")
         page.goto("http://localhost:5173/patient-dashboard")
         records = {}
         for lang, name in (("en", "english"), ("kn", "kannada"), ("tulu", "tulu")):
@@ -43,7 +43,7 @@ def main():
                 expect(card.get_by_role("heading", name=row["drug_name"], exact=True)).to_be_visible()
                 expect(card).to_contain_text(row["description"])
             print(f"Patient {lang} checked", flush=True)
-        page.evaluate("localStorage.setItem('mmss_role','doctor')")
+        page.evaluate("sessionStorage.setItem('mmss_role','doctor')")
         page.goto("http://localhost:5173/doctor-dashboard")
         expect(page.locator(".doctor-dashboard__scope")).to_contain_text("100 medicines across 10 diseases")
         page.goto("http://localhost:5173/disease-protocols")

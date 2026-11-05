@@ -1,22 +1,18 @@
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 import os
 from uuid import uuid4
 from typing import Literal, Optional
 from backend.app.services.google_auth_service import verify_google_credential
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from fastapi.security import OAuth2PasswordRequestForm
 from backend.app.database import doctor_requests_collection, users_collection
 from backend.app.auth import (
     authenticate_user,
-    create_access_token,
-    ACCESS_TOKEN_EXPIRE_MINUTES,
     get_current_active_user,
-    fake_users_db,
     get_password_hash,
     User,
-    Token,
 )
-from pydantic import AliasChoices, BaseModel, ConfigDict, Field
+from pydantic import AliasChoices, BaseModel, ConfigDict, Field, field_validator
 from pymongo.errors import DuplicateKeyError
 
 router = APIRouter(prefix="/auth", tags=["authentication"])
@@ -33,8 +29,7 @@ def auth_providers():
     return {"google_client_id": os.getenv("GOOGLE_CLIENT_ID", "").strip()}
 
 
-@router.post("/google", response_model=Token)
-def login_with_google(payload: GoogleLoginRequest):
+def login_with_google(payload: GoogleLoginRequest, client_ip='unknown'):
     claims = verify_google_credential(payload.credential)
     subject = claims["sub"]
     user = users_collection.find_one({"google_sub": subject})
@@ -45,9 +40,12 @@ def login_with_google(payload: GoogleLoginRequest):
                 raise HTTPException(403, "This account cannot be linked to this Google identity.")
             if not payload.password:
                 raise HTTPException(409, detail={"code": "google_link_required", "message": "Your account is already registered with a password. Confirm that password once to enable Google sign-in."})
-            authenticated = authenticate_user({}, existing["username"], payload.password)
+            from backend.app.login_limits import reserve, succeeded
+            attempt = reserve(existing['username'], client_ip)
+            authenticated = authenticate_user(existing["username"], payload.password)
             if not authenticated:
                 raise HTTPException(401, "Incorrect password. Enter your existing account password to link Google.")
+            succeeded(attempt)
             try:
                 result = users_collection.update_one(
                     {"_id": existing["_id"], "google_sub": {"$exists": False}},
@@ -62,7 +60,7 @@ def login_with_google(payload: GoogleLoginRequest):
         if payload.mode != "register":
             raise HTTPException(401, "Please register your Google account before signing in.")
         username = claims["email"].strip().lower()
-        if users_collection.find_one({"username": username}) or username in fake_users_db:
+        if users_collection.find_one({"username": username}):
             raise HTTPException(409, "This email already has an account. Sign in with your existing password.")
         user = {
             "username": username, "email": username,
@@ -79,11 +77,8 @@ def login_with_google(payload: GoogleLoginRequest):
                 raise HTTPException(409, "This account already exists. Use your existing sign-in method.") from error
     if user.get("role") != "patient" or user.get("disabled"):
         raise HTTPException(403, "This account cannot access the patient portal.")
-    token = create_access_token(
-        {"sub": user["username"], "role": "patient"},
-        timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES),
-    )
-    return {"access_token": token, "token_type": "bearer", "role": "patient"}
+    return user
+
 
 
 class RegisterRequest(BaseModel):
@@ -92,14 +87,12 @@ class RegisterRequest(BaseModel):
     password: str = Field(..., min_length=8, max_length=72)
     confirm_password: str = Field(..., min_length=8, max_length=72)
 
-
-@router.post("/patient-token", response_model=Token)
-def patient_login(form_data: OAuth2PasswordRequestForm = Depends()):
-    user = authenticate_user({}, form_data.username, form_data.password)
-    if not user or user.disabled or user.role != "patient":
-        raise HTTPException(401, "Sign in with your registered patient email and password. New here? Register first.")
-    token = create_access_token({"sub": user.username, "role": "patient"}, timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
-    return {"access_token": token, "token_type": "bearer", "role": "patient"}
+    @field_validator('password', 'confirm_password')
+    @classmethod
+    def password_byte_limit(cls, value):
+        if len(value.encode('utf-8')) > 72:
+            raise ValueError('Password must be at most 72 UTF-8 bytes.')
+        return value
 
 
 class DoctorRegisterRequest(RegisterRequest):
@@ -156,23 +149,6 @@ def create_doctor_request(payload: DoctorRegisterRequest) -> dict:
     return {"status": "pending", "request_id": request["request_id"]}
 
 
-@router.post("/token", response_model=Token)
-def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
-    user = authenticate_user(fake_users_db, form_data.username, form_data.password)
-    if not user or user.disabled:
-        raise HTTPException(
-            status_code=401,
-            detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(
-        data={"sub": user.username, "role": user.role}, expires_delta=access_token_expires
-    )
-    return {"access_token": access_token, "token_type": "bearer", "role": user.role}
-
-
-@router.post("/register", response_model=Token)
 def register_patient(payload: RegisterRequest):
 
     if payload.password != payload.confirm_password:
@@ -223,24 +199,7 @@ def register_patient(payload: RegisterRequest):
     except DuplicateKeyError as error:
         raise HTTPException(409, "An account with this email already exists.") from error
 
-    # Create login token
-    access_token_expires = timedelta(
-        minutes=ACCESS_TOKEN_EXPIRE_MINUTES
-    )
-
-    access_token = create_access_token(
-        data={
-            "sub": username,
-            "role": "patient"
-        },
-        expires_delta=access_token_expires
-    )
-
-    return {
-        "access_token": access_token,
-        "token_type": "bearer",
-        "role": "patient"
-    }
+    return patient_document
 
 
 @router.post("/doctor-request")
@@ -251,3 +210,42 @@ def register_doctor(payload: DoctorRegisterRequest):
 @router.get("/me", response_model=User)
 def read_users_me(current_user: User = Depends(get_current_active_user)):
     return current_user
+
+
+@router.post("/session")
+def browser_login(request: Request, response: Response, form: OAuth2PasswordRequestForm = Depends()):
+    from backend.app.browser_sessions import check_origin, issue
+    from backend.app.login_limits import reserve, succeeded
+    check_origin(request)
+    attempt = reserve(form.username, request.client.host if request.client else 'unknown')
+    user = authenticate_user(form.username, form.password)
+    if not user or user.disabled:
+        raise HTTPException(401, "Incorrect username or password")
+    succeeded(attempt)
+    return issue(request, response, user.username, user.role)
+
+
+@router.post("/register-session")
+def browser_register(payload: RegisterRequest, request: Request, response: Response):
+    from backend.app.browser_sessions import check_origin, issue
+    check_origin(request)
+    register_patient(payload)
+    return issue(request, response, payload.email.strip().lower(), "patient")
+
+
+@router.post("/google-session")
+def browser_google(payload: GoogleLoginRequest, request: Request, response: Response):
+    from backend.app.browser_sessions import check_origin, issue
+    check_origin(request)
+    result = login_with_google(payload, request.client.host if request.client else 'unknown')
+    return issue(request, response, result["username"], result["role"])
+
+
+@router.post("/logout")
+def browser_logout(request: Request, response: Response):
+    from backend.app.browser_sessions import COOKIE, check_origin, revoke
+    check_origin(request)
+    revoke(request)
+    response.delete_cookie(COOKIE, path="/", httponly=True, samesite="strict")
+    response.headers["Cache-Control"] = "no-store"
+    return {"status": "signed_out"}

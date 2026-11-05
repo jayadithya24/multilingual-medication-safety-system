@@ -61,7 +61,7 @@ function DiseaseProtocols() {
 
                 if (active) setDiseases(data.diseases || []);
             } catch (err) {
-                console.error(err);
+                console.error("Request failed", err?.response?.status || "unavailable");
                 if (active) setError("Unable to load disease list.");
             } finally {
                 if (active) setLoadingDiseases(false);
@@ -89,7 +89,7 @@ function DiseaseProtocols() {
                     setDrugs(data.drugs || []);
                 }
             } catch (err) {
-                console.error(err);
+                console.error("Request failed", err?.response?.status || "unavailable");
                 if (active) {
                     setError("Unable to load medicines for this disease.");
                 }

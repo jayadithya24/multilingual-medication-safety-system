@@ -7,7 +7,7 @@ def main():
         browser = playwright.chromium.launch(channel="msedge", headless=True)
         page = browser.new_page()
         history = []
-        page.add_init_script("localStorage.setItem('mmss_token','ui-test'); localStorage.setItem('mmss_role','doctor');")
+        page.add_init_script("sessionStorage.setItem('mmss_session','active'); sessionStorage.setItem('mmss_role','doctor');")
         page.route("**/auth/me", lambda route: route.fulfill(json={"username": "doctor.test@example.invalid", "full_name": "Alex Doctor", "role": "doctor"}))
         def respond(route):
             if route.request.resource_type not in {"fetch", "xhr"}:

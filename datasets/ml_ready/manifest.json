@@ -2,13 +2,13 @@
   "task": "synthetic_patient_worst_recorded_interaction_severity",
   "seed": 42,
   "source_sha256": {
-    "english_master_dataset.csv": "12ef860463a9e8292f1ecf6d15e45ba24137b06b2778cf5e9bb33f8323a7e332",
-    "kannada_master_dataset.csv": "bf994d97657b0d91d22b1af74a2501f09e9eb308f17914184bbe0ff60a83c875",
-    "tulu_master_dataset.csv": "e71f7a1f7c34b179407bdf8ccd91e2693a9e5255250a4516f5bebe4e9d026337",
+    "english_master_dataset.csv": "d062b63685ea69e7c1ce3b94cd9cf45427921e5257e5b30a1958abaf2608468c",
+    "kannada_master_dataset.csv": "5a593bf214ac7f5a1779287dbbb21d8f6af6ad2fad37f676033b0bdcd41a830e",
+    "tulu_master_dataset.csv": "571dd687b0cd2fa0e3741d0a778b17d33ed4a6627d5f65dcbbbcd5ddb83a33db",
     "synthetic_patients.csv": "ed97776ca2df72db258ee77a6c29a1861deaef1547b3ca68b7faef4ad5b0a2f6",
     "synthetic_patient_drugs.csv": "98b7583370bd6f5ced575bdbc4cf731f5947d42675718498392d388cf6224f7a",
     "synthetic_patient_interactions.csv": "b4f4b74a68318c4931d12d7e6e94fd0612546838d052262de9122c07139c92e6",
-    "drug_interactions.csv": "e34aafda56f2a9f76ac6036aeddf3b3c440a713d74a8cff6ef8ca62fb7a2de5d"
+    "drug_interactions.csv": "0921df505ad032c97beb9ca00ccee5f54df9f6fac4b94fea8f07e7ed10c314fe"
   },
   "splits": {
     "train": {
@@ -285,148 +285,7 @@
     "gerd_gastritis",
     "malaria"
   ],
-  "ungraded_interaction_pairs": [
-    [
-      "aceclofenac",
-      "methotrexate"
-    ],
-    [
-      "aluminium-magnesium-antacid",
-      "ciprofloxacin"
-    ],
-    [
-      "aspirin",
-      "ketorolac"
-    ],
-    [
-      "aspirin",
-      "methotrexate"
-    ],
-    [
-      "atenolol",
-      "salbutamol"
-    ],
-    [
-      "atovaquone-proguanil",
-      "metoclopramide"
-    ],
-    [
-      "azithromycin",
-      "domperidone"
-    ],
-    [
-      "azithromycin",
-      "ondansetron"
-    ],
-    [
-      "azithromycin",
-      "quinine"
-    ],
-    [
-      "carvedilol",
-      "salbutamol"
-    ],
-    [
-      "cetirizine",
-      "theophylline"
-    ],
-    [
-      "chlorzoxazone",
-      "paracetamol"
-    ],
-    [
-      "ciprofloxacin",
-      "sucralfate"
-    ],
-    [
-      "ciprofloxacin",
-      "theophylline"
-    ],
-    [
-      "ciprofloxacin",
-      "tizanidine"
-    ],
-    [
-      "ciprofloxacin",
-      "zinc-sulfate"
-    ],
-    [
-      "dicyclomine",
-      "itopride"
-    ],
-    [
-      "domperidone",
-      "ondansetron"
-    ],
-    [
-      "domperidone",
-      "quinine"
-    ],
-    [
-      "enalapril",
-      "racecadotril"
-    ],
-    [
-      "formoterol",
-      "theophylline"
-    ],
-    [
-      "ketorolac",
-      "methotrexate"
-    ],
-    [
-      "lansoprazole",
-      "theophylline"
-    ],
-    [
-      "levocetirizine",
-      "theophylline"
-    ],
-    [
-      "mefenamic-acid",
-      "methotrexate"
-    ],
-    [
-      "mefloquine",
-      "quinine"
-    ],
-    [
-      "metformin",
-      "tafenoquine"
-    ],
-    [
-      "methotrexate",
-      "omeprazole"
-    ],
-    [
-      "methotrexate",
-      "pantoprazole"
-    ],
-    [
-      "methotrexate",
-      "piroxicam"
-    ],
-    [
-      "methotrexate",
-      "rabeprazole"
-    ],
-    [
-      "norfloxacin",
-      "theophylline"
-    ],
-    [
-      "ondansetron",
-      "quinine"
-    ],
-    [
-      "racecadotril",
-      "ramipril"
-    ],
-    [
-      "salbutamol",
-      "theophylline"
-    ]
-  ],
+  "ungraded_interaction_pairs": [],
   "limitations": [
     "Synthetic rule-derived labels, not measured clinical outcomes.",
     "Missing translations are reported; localized exports contain only supplied translations.",
@@ -440,7 +299,7 @@
   ],
   "output_sha256": {
     "drug_catalog.csv": "f357edee70a2e776762fb0edd55ad225ce77e5e8aedebfcbd0e4b9218f80872f",
-    "master_localized.csv": "268c07dfb5c8e488d33c46e94dcc57891d30688708cdbbe10c1bb96a941dcb15",
+    "master_localized.csv": "19ff029e57f42b3730d55e299b38ff9827573cfe62c4710fa500e67061ee4f07",
     "patient_drugs.csv": "06bb5ddd2e0ff639d9469188128da6bbf8427fa4b05e70465af70b3c9738166c",
     "patient_interactions.csv": "2efc05a5841383c7559cdcd8aaf165d2f4875b4ebaf3f59a02873cd791d64b95",
     "patient_splits.csv": "3a7124e0fd0541d9afc5592b21f91e33608c1e93cd043709e7ffe7b06fa373ac",

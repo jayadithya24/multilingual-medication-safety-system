@@ -19,9 +19,11 @@ def main():
     username = f"verification-{secrets.token_hex(8)}@example.invalid"
     password = secrets.token_urlsafe(24)
     results = {}
+    api_session = requests.Session()
+    api_session.headers.update({"Origin": "http://localhost:5173"})
 
     def call(method, path, **kwargs):
-        response = requests.request(method, base + path, timeout=20, **kwargs)
+        response = api_session.request(method, base + path, timeout=20, **kwargs)
         results[f"{method} {path}"] = response.status_code
         return response
 
@@ -32,14 +34,14 @@ def main():
             path: list(operations) for path, operations in schema["paths"].items()
             if "fcm" in path
         }
-        response = call("POST", "/auth/register", json={
+        response = call("POST", "/auth/register-session", json={
             "name": "Disposable verification patient", "email": username,
             "password": password, "confirm_password": password,
         })
         assert response.status_code == 200
-        response = call("POST", "/auth/token", data={"username": username, "password": password})
+        response = call("POST", "/auth/session", data={"username": username, "password": password})
         assert response.status_code == 200
-        headers = {"Authorization": "Bearer " + response.json()["access_token"]}
+        headers = {}
         assert call("GET", "/auth/me", headers=headers).status_code == 200
         profile_response = call("GET", "/patient/profile", headers=headers)
         assert "hashed_password" not in profile_response.json()["profile"]
@@ -59,7 +61,7 @@ def main():
             expect(page.get_by_label("Full Name", exact=True)).to_have_value("Disposable verification patient")
             page.get_by_label("Age", exact=True).fill("45")
             page.locator('select[name="gender"]').select_option("Other")
-            page.locator('select[name="condition"]').select_option("Hypertension")
+            page.locator('select[name="condition"]').select_option("Essential Hypertension (High BP)")
             page.get_by_label("Age", exact=True).fill("45")
             expect(page.get_by_label("Age", exact=True)).to_have_value("45")
             page.get_by_role("button", name="Save Profile", exact=True).click()
@@ -130,6 +132,7 @@ def main():
         for collection in ("fcm_tokens", "patient_schedules", "medication_history"):
             db[collection].delete_many({"patient_username": username})
         db.users.delete_one({"username": username})
+        db.browser_sessions.delete_many({"username": username})
         results["disposable_records_cleaned"] = True
         print(json.dumps(results, indent=2))
 

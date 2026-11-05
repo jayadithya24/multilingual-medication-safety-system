@@ -41,7 +41,7 @@ function DoctorTopbar({ user }) {
                 })),
             });
         } catch (error) {
-            console.error("Doctor dashboard search failed:", error);
+            console.error("Request failed", error?.response?.status || "unavailable");
             setResults({ medicines: [], diseases: [] });
         } finally {
             setLoading(false);

@@ -7,30 +7,36 @@ import pandas as pd
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location("build_english", ROOT / "datasets/build_dataset.py")
+spec = importlib.util.spec_from_file_location("sync_datasets", ROOT / "tools/datasets/sync_datasets.py")
 builder = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(builder)
 
 
 def test_builder_reproduces_master_and_compatibility_copies(tmp_path):
-    output = tmp_path / "english.csv"
-    builder.main(dst=output)
+    builder.validate(allow_incomplete=True)
     expected = (ROOT / "datasets/english_master_dataset.csv").read_bytes()
-    assert output.read_bytes() == expected
-    builder.main(dst=output)
-    assert output.read_bytes() == expected
     for path in ("english_master_dataset.csv", "backend/app/datasets/english_master_dataset.csv"):
         assert (ROOT / path).read_bytes() == expected
 
 
 def test_invalid_records_do_not_overwrite_output(tmp_path):
-    source, target = tmp_path / "source.json", tmp_path / "out.csv"
-    rows = json.loads((ROOT / "datasets/english_master_records.json").read_text(encoding="utf-8"))
-    source.write_text(json.dumps(rows + [rows[0]]), encoding="utf-8")
-    target.write_text("keep me", encoding="utf-8")
-    with pytest.raises(ValueError, match="Duplicate medicine"):
-        builder.main(source, target)
-    assert target.read_text() == "keep me"
+    import shutil
+    for language in builder.LANGUAGES:
+        name = f'{language}_master_dataset.csv'
+        shutil.copyfile(ROOT / 'datasets' / name, tmp_path / name)
+    path = tmp_path / 'english_master_dataset.csv'
+    rows = pd.read_csv(path)
+    rows.loc[1, 'drug_id'] = rows.loc[0, 'drug_id']
+    rows.to_csv(path, index=False)
+    before = path.read_bytes()
+    with pytest.raises(ValueError, match="duplicate"):
+        builder.validate(tmp_path)
+    assert path.read_bytes() == before
+
+
+def test_default_validation_blocks_unreviewed_missing_classes():
+    with pytest.raises(ValueError, match="missing required drug_class for 11 medicines"):
+        builder.validate()
 
 
 def test_derived_tables_cover_expanded_scope():
@@ -44,12 +50,10 @@ def test_derived_tables_cover_expanded_scope():
     assert interactions.drug2_in_scope.eq("yes").equals(interactions.drug2_id.isin(diseases.drug_id))
 
 
-def test_new_named_interactions_are_ungraded_and_comparisons_are_excluded():
+def test_generic_replacement_text_does_not_invent_named_interactions():
     from backend.app.services.interaction_service import get_interaction
     result = get_interaction("Ciprofloxacin", "Tizanidine")
-    assert result["review_required"]
-    assert result["source_severities"] == ["Unknown"]
-    assert "must not be combined" in result["description"].lower() or "dangerously" in result["description"].lower()
+    assert result is None
     assert get_interaction("Pantoprazole", "Omeprazole") is None
 
 

@@ -8,14 +8,14 @@ from pathlib import Path
 # ------------------------------------------------------------------
 # CONFIG — reads and writes alongside this script from any working directory
 # ------------------------------------------------------------------
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2] / "datasets"
 INPUT_CSV = ROOT / "english_master_dataset.csv"
 OUTPUT_DIR = ROOT
  
 if not os.path.exists(INPUT_CSV):
     sys.exit(
         f"ERROR: Could not find '{INPUT_CSV}' in the current folder.\n"
-        "Run build_dataset.py first to create it."
+        "Place your maintained English CSV in datasets first."
     )
  
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -367,9 +367,7 @@ def main():
     drug_disease_df = build_drug_disease(df)
     known_drug_ids = set(drug_disease_df["drug_id"])
  
-    legacy_side = pd.DataFrame(json.loads((ROOT / "legacy_sideeffect_records.json").read_text(encoding="utf-8")))
-    drug_sideeffects_df = pd.concat([legacy_side, build_drug_sideeffects(
-        df[~df.drug_name.map(slugify).isin(set(legacy_side.drug_id))])], ignore_index=True).drop_duplicates()
+    drug_sideeffects_df = build_drug_sideeffects(df).drop_duplicates()
     # Keep original ratings/conflicts, which underpin the saved patient labels.
     legacy = pd.DataFrame(json.loads((ROOT / "legacy_interaction_records.json").read_text(encoding="utf-8")))
     original_ids = set(legacy.drug1_id)

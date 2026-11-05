@@ -7,7 +7,7 @@ def main():
     with sync_playwright() as p:
         browser = p.chromium.launch(channel="msedge", headless=True)
         page = browser.new_page(viewport={"width": 1440, "height": 1000})
-        page.add_init_script("localStorage.setItem('mmss_token','admin-ui-test');localStorage.setItem('mmss_role','admin');")
+        page.add_init_script("sessionStorage.setItem('mmss_session','active');sessionStorage.setItem('mmss_role','admin');")
         requests = [{"request_id": f"TEST-{i}", "full_name": f"Review Doctor {i}", "email": f"review{i}@example.invalid", "medical_registration_no": f"TEST-REG-{i}", "specialization": "Test", "hospital": "Test Clinic", "status": "pending"} for i in (1, 2)]
         decisions = []
         fail_next = [True]
@@ -44,7 +44,7 @@ def main():
         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1")
         for role in ("patient", "doctor"):
             guest = browser.new_page()
-            guest.add_init_script(f"localStorage.setItem('mmss_token','wrong-role');localStorage.setItem('mmss_role','{role}');")
+            guest.add_init_script(f"sessionStorage.setItem('mmss_session','active');sessionStorage.setItem('mmss_role','{role}');")
             guest.goto("http://localhost:5173/admin-dashboard")
             expect(guest).to_have_url("http://localhost:5173/")
             guest.close()

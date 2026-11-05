@@ -45,7 +45,7 @@ def main():
         with sync_playwright() as playwright:
             browser = playwright.chromium.launch(channel="msedge", headless=True)
             page = browser.new_page()
-            page.add_init_script("localStorage.setItem('mmss_token','dataset-test'); localStorage.setItem('mmss_role','patient');")
+            page.add_init_script("sessionStorage.setItem('mmss_session','active'); sessionStorage.setItem('mmss_role','patient');")
             errors = []
             page.on("pageerror", lambda error: errors.append(str(error)))
 

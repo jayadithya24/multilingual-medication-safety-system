@@ -155,7 +155,7 @@ function AppRoutes() {
                             element={<PatientDrugLists />}
                         />
 
-                        {/* Analysis History */}
+                        {/* Medication History */}
                         <Route path="reports" element={<Reports />} />
                         <Route
                             path="analysis-history"

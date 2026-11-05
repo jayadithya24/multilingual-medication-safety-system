@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import api from "../../services/api";
-import { getStoredToken } from "../../services/api";
+import { hasStoredSession } from "../../services/api";
 import { registerMedicationNotifications } from "../../services/fcmService";
 import { Link } from "react-router-dom";
 import MedicineCard from "../../components/MedicineCard/MedicineCard";
@@ -14,6 +14,14 @@ function Prescription() {
     const [spokenScan, setSpokenScan] = useState("");
     const [speechRun, setSpeechRun] = useState(0);
     const [medicineName, setMedicineName] = useState("");
+    const [catalog, setCatalog] = useState(null);
+    useEffect(() => {
+        const controller = new AbortController();
+        api.get('/medicines', { params: { lang: 'en' }, signal: controller.signal })
+            .then(({ data }) => setCatalog(data.medicines || []))
+            .catch(() => {});
+        return () => controller.abort();
+    }, []);
     const [dosage, setDosage] = useState("");
     const [instructions, setInstructions] = useState("");
 
@@ -88,7 +96,7 @@ const openCamera = async () => {
         setCameraOpen(true);
 
     } catch (err) {
-        console.error("Camera error:", err);
+        console.error("Request failed", err?.response?.status || "unavailable");
 
         if (err.name === "NotAllowedError") {
             setCameraError(
@@ -235,10 +243,6 @@ useEffect(() => () => {
                 }
             );
 
-            console.log(
-                "Prescription OCR response:",
-                response.data
-            );
 
             const ocrResult =
                 response.data?.ocr_result;
@@ -253,7 +257,7 @@ useEffect(() => () => {
             const detectedSummary = [ocrResult.medicine, ocrResult.dosage, ocrResult.instructions].filter(Boolean).join(". ");
             const reviewNotice = {
                 en: "These are detected details. Check them against your prescription before saving.",
-                kn: "ಉಳಿಸುವ ಮೊದಲು ಈ ವಿವರಗಳನ್ನು ನಿಮ್ಮ ಔಷಧ ಚೀಟಿಯೊಂದಿಗೆ ಪರಿಶೀಲಿಸಿ.",
+                kn: "ಬಳಸುವ ಮೊದಲು ಈ ವಿವರಗಳನ್ನು ನಿಮ್ಮ ಔಷಧ ಚೀಟಿಯೊಂದಿಗೆ ಪರಿಶೀಲಿಸಿ.",
                 tulu: "ಬಳಕೆ ಮಲ್ಪುನ ದುಂಬು ಈ ವಿವರಣ್ ಈರ್ನ ಔಷಧ ಚೀಟಿ ದ ಒಟ್ಟು ಪರಿಶೀಲನೆ ಮಲ್ಪುಲೆ.",
             };
             setSpokenScan(detectedSummary ? `${detectedSummary}. ${reviewNotice[lang]}` : "");
@@ -295,10 +299,7 @@ useEffect(() => () => {
             }
 
         } catch (err) {
-            console.error(
-                "Prescription OCR error:",
-                err
-            );
+            console.error("Request failed", err?.response?.status || "unavailable");
 
             const detail =
                 err?.response?.data?.detail;
@@ -444,12 +445,11 @@ useEffect(() => () => {
         try {
             setSaving(true);
 
-            if (!getStoredToken()) {
+            if (!hasStoredSession()) {
                 throw new Error("Please log in again before adding a medication to your schedule.");
             }
 
-            const response =
-                await api.post(
+            await api.post(
                     "/patient-schedule",
                     {
                         medicine_name:
@@ -481,10 +481,6 @@ useEffect(() => () => {
                 }
             }
 
-            console.log(
-                "Medication schedule created:",
-                response.data
-            );
 
             setSaved(true);
 
@@ -505,10 +501,7 @@ useEffect(() => () => {
             setOcrMessage("");
 
         } catch (err) {
-            console.error(
-                "Medication schedule error:",
-                err
-            );
+            console.error("Request failed", err?.response?.status || "unavailable");
 
             const detail =
                 err?.response?.data?.detail;
@@ -793,7 +786,15 @@ useEffect(() => () => {
                                 )
                             }
                             placeholder="e.g. Metformin"
+                            list="schedule-medicine-catalog"
+                            aria-describedby="schedule-catalog-help"
                         />
+                        <datalist id="schedule-medicine-catalog">
+                            {(catalog || []).map(name => <option key={name} value={name} />)}
+                        </datalist>
+                        <small id="schedule-catalog-help">Choose a catalog name only if it matches your prescription. Brand names are not automatically converted.</small>
+                        {catalog && medicineName.trim() && !catalog.some(name => name.toLowerCase() === medicineName.trim().toLowerCase()) &&
+                            <p role="status">This name is outside the reference catalog. You can save it, but interaction checking will mark it as not covered.</p>}
 
                     </label>
 
@@ -1063,13 +1064,13 @@ useEffect(() => () => {
                     <button
                         type="submit"
                         className="prescription-submit"
-                        disabled={saving || saved || !getStoredToken()}
+                        disabled={saving || saved || !hasStoredSession()}
                     >
                         {saving
                             ? "Adding to Schedule..."
                             : "Add to Schedule"}
                     </button>
-                    {!getStoredToken() && <p><Link to="/public">Log in as a patient</Link> to save a medication schedule.</p>}
+                    {!hasStoredSession() && <p><Link to="/public">Log in as a patient</Link> to save a medication schedule.</p>}
                     </fieldset>
 
                 </form>

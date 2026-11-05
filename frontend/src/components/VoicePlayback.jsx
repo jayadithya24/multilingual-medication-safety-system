@@ -7,6 +7,7 @@ export default function VoicePlayback({ text, language, controls = true }) {
   const audioRef = useRef(null);
   const [resource, setResource] = useState(null);
   const [playbackMessage, setPlaybackMessage] = useState("");
+  const [speed, setSpeed] = useState(language === "en" ? 1 : 0.9);
   const key = JSON.stringify([language, text]);
   const current = resource?.key === key ? resource : null;
 
@@ -50,18 +51,23 @@ export default function VoicePlayback({ text, language, controls = true }) {
     if (!current?.url || !audioRef.current) return;
     let active = true;
     const audio = audioRef.current;
-    audio.playbackRate = 1;
+    audio.playbackRate = speed;
     audio.preservesPitch = true;
     audio.play().catch(() => {
       if (active) setPlaybackMessage(controls ? "Press Play below to hear the response." : "Your browser blocked automatic audio. Allow sound for this site and search again.");
     });
     return () => { active = false; audio.pause(); };
-  }, [current?.url, controls]);
+  }, [current?.url, controls, speed]);
 
   if (!text) return null;
   const message = current ? current.message || playbackMessage : "Preparing spoken response...";
   return (
     <div className="voice-response-audio">
+      <p>{language === "en" ? "Indian English · Female voice" : "Indian Kannada · Female voice"}
+        {["tulu", "tlu", "te"].includes(language) && " · Tulu is read using Kannada synthesis; pronunciation may differ."}</p>
+      {controls && <label>Speaking speed <select aria-label="Speaking speed" value={speed} onChange={event => setSpeed(Number(event.target.value))}>
+        <option value={0.8}>Slow</option><option value={0.9}>Gentle</option><option value={1}>Normal</option>
+      </select></label>}
       {message && <p role="status">{message}</p>}
       {current?.url && <audio ref={audioRef} controls={controls} hidden={!controls} src={current.url} aria-label="Spoken medicine response"
         onPlaying={() => setPlaybackMessage("")}

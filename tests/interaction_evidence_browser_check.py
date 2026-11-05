@@ -9,7 +9,7 @@ def main():
         page = browser.new_page(viewport={"width": 1440, "height": 1100})
         errors = []
         page.on("pageerror", lambda error: errors.append(str(error)))
-        page.add_init_script("localStorage.setItem('mmss_token','ui-test'); localStorage.setItem('mmss_role','doctor');")
+        page.add_init_script("sessionStorage.setItem('mmss_session','active'); sessionStorage.setItem('mmss_role','doctor');")
         page.route("**/auth/me", lambda route: route.fulfill(json={"username": "interaction.test@example.invalid", "full_name": "Test Doctor", "role": "doctor"}))
         page.goto("http://localhost:5173/drug-interaction")
         Path("artifacts").mkdir(exist_ok=True)

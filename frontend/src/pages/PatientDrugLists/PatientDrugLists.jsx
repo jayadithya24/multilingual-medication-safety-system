@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import RegimenReview from "../../components/RegimenReview";
 import "./PatientDrugLists.css";
 
 function PatientDrugLists() {
+    const [shareCode, setShareCode] = useState("");
     const [patients, setPatients] = useState([]);
     const [selectedPatient, setSelectedPatient] = useState("");
     const [medications, setMedications] = useState([]);
@@ -26,7 +28,7 @@ function PatientDrugLists() {
                 }
             })
             .catch(err => {
-                if (!controller.signal.aborted) setError(err?.response?.data?.detail || "Unable to load registered patients.");
+                if (!controller.signal.aborted) setError(err?.response?.data?.detail || "Unable to load approved patients.");
             })
             .finally(() => {
                 if (!controller.signal.aborted) setLoading(false);
@@ -39,10 +41,8 @@ function PatientDrugLists() {
             setRequestingPatient(patientId);
             setError("");
             setNotice("");
-            const response = await api.post("/doctor/access-request", { patient_id: patientId });
-            setPatients((prev) =>
-                prev.map((p) => (p.patient_id === patientId ? { ...p, status: response.data.request.status } : p))
-            );
+            await api.post("/doctor/access-request", { share_code: patientId });
+            setShareCode("");
             setNotice("Request sent. The patient can respond in My Medicines. Refresh patients after they respond.");
         } catch (err) {
             setError(err?.response?.data?.detail || "Unable to request access.");
@@ -91,11 +91,16 @@ function PatientDrugLists() {
                 </p>
             </section>
 
+            <form className="patient-sharing-form" onSubmit={event => { event.preventDefault(); requestAccess(shareCode); }}>
+                <label>Patient sharing code <input value={shareCode} onChange={event => setShareCode(event.target.value)} required minLength={16} maxLength={64} autoComplete="off" /></label>
+                <button disabled={Boolean(requestingPatient) || !shareCode.trim()}>Request patient access</button>
+                <p>Ask the patient to create a code in My Medicines and then approve the request. Access lasts seven days unless revoked sooner.</p>
+            </form>
             <section className="patient-drug-lists__results">
                 <div className="patient-drug-lists__results-header">
                     <div>
                         <p>PATIENT ACCESS & CONSENT</p>
-                        <h2>Registered Patients</h2>
+                        <h2>Approved Patients</h2>
                     </div>
                     <button className="patient-drug-lists__action" type="button" disabled={loading} onClick={() => { setLoading(true); setRefreshVersion((value) => value + 1); }}>
                         Refresh patients
@@ -144,7 +149,7 @@ function PatientDrugLists() {
                                 </div>
                             </article>
                         ))}
-                        {patients.length === 0 && <p>No registered patients found.</p>}
+                        {patients.length === 0 && <p>No patients have active approved access.</p>}
                     </div>
                 )}
             </section>
@@ -172,6 +177,7 @@ function PatientDrugLists() {
             {/* Medication & History Results */}
             {selectedPatient && (
                 <>
+                    {!loadingMedications && !error && <RegimenReview key={selectedPatient} patientId={selectedPatient} />}
                     {/* Active Medications */}
                     <section className="patient-drug-lists__results">
                         <div className="patient-drug-lists__results-header">

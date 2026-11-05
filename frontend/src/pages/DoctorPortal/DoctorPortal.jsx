@@ -54,7 +54,7 @@ function DoctorPortal() {
       await loginWithPassword(identity.trim(), password, false, "doctor");
       navigate("/doctor-dashboard", { replace: true });
     } catch (loginError) {
-      console.error(loginError);
+      console.error("Request failed", loginError?.response?.status || "unavailable");
       setError(formatApiError(loginError) || "Doctor login failed.");
     } finally {
       setLoading(false);
@@ -78,7 +78,7 @@ function DoctorPortal() {
         specialization: "", hospital: "", password: "", confirmPassword: "",
       });
     } catch (requestError) {
-      console.error(requestError);
+      console.error("Request failed", requestError?.response?.status || "unavailable");
       setError(formatApiError(requestError) || "Doctor account request failed.");
     } finally {
       setLoading(false);

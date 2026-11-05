@@ -22,7 +22,7 @@ route_auth.doctor_requests_collection = database_module.doctor_requests_collecti
 doctor_requests_route.users_collection = database_module.users_collection
 doctor_requests_route.doctor_requests_collection = database_module.doctor_requests_collection
 
-client = TestClient(app)
+client = TestClient(app, headers={"Origin": "http://localhost:5173"})
 
 
 def test_doctor_request_accepts_legacy_camelcase_payload_fields():
@@ -54,7 +54,7 @@ def test_approved_doctor_can_login_with_normalized_email():
 
     admin_email = "admin@example.com"
     admin_password = "AdminPass123!"
-    users_collection.insert_one({
+    database_module.users_collection.insert_one({
         "username": admin_email,
         "email": admin_email,
         "role": "admin",
@@ -77,12 +77,11 @@ def test_approved_doctor_can_login_with_normalized_email():
     request_response = client.post("/auth/doctor-request", json=payload)
     request_id = request_response.json()["request_id"]
 
-    admin_login = client.post("/auth/token", data={"username": admin_email, "password": admin_password})
-    admin_token = admin_login.json()["access_token"]
+    admin_login = client.post("/auth/session", data={"username": admin_email, "password": admin_password})
+    assert admin_login.status_code == 200
 
     approval_response = client.put(
         f"/admin/doctor-requests/{request_id}/approve",
-        headers={"Authorization": f"Bearer {admin_token}"},
     )
 
     assert approval_response.status_code == 200, approval_response.text
@@ -90,8 +89,8 @@ def test_approved_doctor_can_login_with_normalized_email():
     assert approved_user is not None
     assert approved_user["role"] == "doctor"
     assert approved_user["email"] == "doc.login@example.com"
-    assert authenticate_user({}, "Doc.Login@Example.com", "DoctorPass123!") is not False
+    assert authenticate_user("Doc.Login@Example.com", "DoctorPass123!") is not False
 
-    login_response = client.post("/auth/token", data={"username": "Doc.Login@Example.com", "password": "DoctorPass123!"})
+    login_response = client.post("/auth/session", data={"username": "Doc.Login@Example.com", "password": "DoctorPass123!"})
     assert login_response.status_code == 200, login_response.text
     assert login_response.json()["role"] == "doctor"

@@ -32,8 +32,8 @@ def main():
         ])
         context = browser.new_context(permissions=["microphone"])
         context.add_init_script("""
-            localStorage.setItem('mmss_token', 'voice-test');
-            localStorage.setItem('mmss_role', 'patient');
+            sessionStorage.setItem('mmss_session','active');
+            sessionStorage.setItem('mmss_role', 'patient');
             window.spokenResponses = [];
             const originalSpeak = speechSynthesis.speak.bind(speechSynthesis);
             speechSynthesis.speak = utterance => {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api, { getStoredToken } from "../../services/api";
+import api, { hasStoredSession } from "../../services/api";
 import "./AnalysisHistory.css";
 
 function AnalysisHistory() {
@@ -13,7 +13,7 @@ function AnalysisHistory() {
                 setLoading(true);
                 setError("");
 
-                const token = getStoredToken();
+                const token = hasStoredSession();
                 if (!token) {
                     throw new Error("Doctor authentication required.");
                 }
@@ -21,7 +21,7 @@ function AnalysisHistory() {
                 const response = await api.get("/doctor/medication-history");
                 setHistory(response.data.history || []);
             } catch (err) {
-                console.error(err);
+                console.error("Request failed", err?.response?.status || "unavailable");
                 setError("Unable to load medication history.");
             } finally {
                 setLoading(false);
@@ -42,7 +42,7 @@ function AnalysisHistory() {
                 </p>
 
                 <h1>
-                    Analysis History
+                    Medication History
                 </h1>
 
                 <p>

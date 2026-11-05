@@ -10,7 +10,7 @@ def main():
         page = browser.new_page(viewport={"width": 1440, "height": 1100}, device_scale_factor=1)
         errors = []
         page.on("pageerror", lambda error: errors.append(str(error)))
-        page.add_init_script("localStorage.setItem('mmss_token','ui-test'); localStorage.setItem('mmss_role','doctor');")
+        page.add_init_script("sessionStorage.setItem('mmss_session','active'); sessionStorage.setItem('mmss_role','doctor');")
         page.route("**/auth/me", lambda route: route.fulfill(json={"username": "graph.test@example.invalid", "full_name": "Graph Doctor", "role": "doctor"}))
         page.goto("http://localhost:5173/drug-reference")
         picker = page.get_by_label("Choose a medicine", exact=True)
@@ -22,7 +22,7 @@ def main():
         page.get_by_role("button", name="Medicine: Celecoxib", exact=True).click()
         expect(page.get_by_role("complementary", name="Node details")).to_be_visible()
         page.get_by_role("button", name="Close node details").click()
-        condition = page.get_by_role("button", name="Condition: Arthritis", exact=True)
+        condition = page.get_by_role("button", name="Condition: Rheumatoid Arthritis (Joint Pain)", exact=True)
         condition.click()
         expect(condition).to_have_attribute("aria-pressed", "true")
         expect(page.locator(".med-graph__edge.is-highlighted")).to_have_count(1)

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import VoicePlayback from "../../components/VoicePlayback";
 import { sendVoiceSearchAudio } from "../../services/voiceService";
 import { scanMedicine } from "../../services/ocrService";
@@ -238,7 +239,7 @@ function VoiceSearch({ embedded = false }) {
     } catch (recordingError) {
       mediaStreamRef.current?.getTracks().forEach((track) => track.stop());
       mediaStreamRef.current = null;
-      console.error(recordingError);
+      console.error("Request failed", recordingError?.response?.status || "unavailable");
       setError(
         recordingError?.name === "NotAllowedError"
           ? "Microphone permission is required."
@@ -286,7 +287,7 @@ function VoiceSearch({ embedded = false }) {
       setResult(response);
 
     } catch (searchError) {
-      console.error(searchError);
+      console.error("Request failed", searchError?.response?.status || "unavailable");
       setError(
         searchError?.response?.data?.detail ||
         searchError?.message ||
@@ -410,7 +411,10 @@ function VoiceSearch({ embedded = false }) {
             </div>
           )}
 
-          {error && <div className="voice-error">{error}</div>}
+          {error && <div className="voice-error" role="alert">
+            <p>{error}</p>
+            <p>Retry when the connection is available, or <Link to="/patient-dashboard">use typed medicine search</Link>.</p>
+          </div>}
 
           {result && (
             <div className="voice-result">

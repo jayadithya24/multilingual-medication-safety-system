@@ -4,6 +4,7 @@ import csv
 import json
 import os
 import re
+from datetime import datetime, timezone
 from pathlib import Path
 from neo4j import GraphDatabase
 
@@ -72,23 +73,47 @@ class Neo4jLoader:
 
     def verify(self, graph):
         with self.driver.session(database=self.database) as session:
-            nodes = list(session.run("MATCH (n) WHERE n:Drug OR n:Disease OR n:SideEffect RETURN n.type AS kind, n.id AS id"))
+            nodes = list(session.run("MATCH (n) WHERE n:Drug OR n:Disease OR n:SideEffect RETURN n.type AS kind, n.id AS id, properties(n) AS properties"))
             rows = list(session.run("MATCH (a)-[r:TREATS|CAUSES|INTERACTS_WITH]->(b) "
-                                    "RETURN a.id AS source, b.id AS target, type(r) AS relationship, r.severity AS severity"))
+                                    "RETURN a.id AS source, b.id AS target, type(r) AS relationship, r.severity AS severity, properties(r) AS properties"))
         expected_nodes = {(n["type"], n["node_id"]) for n in graph["nodes"]}
         expected_edges = {(e["source"], e["target"], e["relationship"], e.get("severity")) for e in graph["edges"]}
         actual_nodes = {(n["kind"], n["id"]) for n in nodes}
         actual_edges = {(r["source"], r["target"], r["relationship"], r["severity"]) for r in rows}
         if actual_nodes != expected_nodes or actual_edges != expected_edges or len(rows) != len(expected_edges) or len(nodes) != len(expected_nodes):
             raise RuntimeError("Live graph differs from the dataset. Inspect existing records; no data was deleted.")
+        stored_nodes = {n["id"]: n["properties"] for n in nodes}
+        stored_edges = {(r["source"], r["target"], r["relationship"]): r["properties"] for r in rows}
+        for node in graph["nodes"]:
+            if any(stored_nodes[node["node_id"]].get(key) != value for key, value in node.items()):
+                raise RuntimeError("Live graph reference content differs from the current CSVs.")
+        for edge in graph["edges"]:
+            properties = stored_edges[(edge["source"], edge["target"], edge["relationship"])]
+            if any(properties.get(key) != value for key, value in edge.items() if key not in {"source", "target", "relationship", "type"}):
+                raise RuntimeError("Live graph relationship evidence differs from the current CSVs.")
         return {"nodes": len(nodes), "relationships": len(rows), "verified": True}
 
-    def run_full_pipeline(self):
+    @staticmethod
+    def _synchronize(tx, graph):
+        # Only replace this application's reference relationships, never other labels/types.
+        tx.run("MATCH (a)-[r:TREATS|CAUSES|INTERACTS_WITH]->(b) "
+               "WHERE (a:Drug OR a:Disease OR a:SideEffect) AND (b:Drug OR b:Disease OR b:SideEffect) DELETE r").consume()
+        tx.run("MATCH (n) WHERE (n:Drug OR n:Disease OR n:SideEffect) AND NOT n.id IN $ids "
+               "AND NOT (n)--() DELETE n", ids=[n["node_id"] for n in graph["nodes"]]).consume()
+        Neo4jLoader._import(tx, graph)
+
+    def run_full_pipeline(self, synchronize=False):
         graph = self.prepare_graph()
         self.driver.verify_connectivity()
         self.create_constraints_and_indexes()
         with self.driver.session(database=self.database) as session:
-            session.execute_write(self._import, graph)
+            if synchronize:
+                backup = {"nodes": [dict(r) for r in session.run("MATCH (n) WHERE n:Drug OR n:Disease OR n:SideEffect RETURN labels(n) AS labels, properties(n) AS properties")],
+                          "relationships": [dict(r) for r in session.run("MATCH (a)-[r:TREATS|CAUSES|INTERACTS_WITH]->(b) RETURN a.id AS source, b.id AS target, type(r) AS type, properties(r) AS properties")]}
+                destination = ROOT / "artifacts" / ("neo4j-before-sync-" + datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S-%f") + ".json")
+                destination.parent.mkdir(exist_ok=True)
+                destination.write_text(json.dumps(backup, default=str, ensure_ascii=False, indent=2), encoding="utf-8")
+            session.execute_write(self._synchronize if synchronize else self._import, graph)
         return self.verify(graph)
 
 
@@ -97,6 +122,7 @@ def main():
     load_project_env()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--apply", action="store_true")
+    parser.add_argument("--sync", action="store_true", help="Back up and reconcile application graph relationships with current CSVs; requires --apply")
     args = parser.parse_args()
     graph = Neo4jLoader.prepare_graph()
     if not args.apply:
@@ -104,7 +130,7 @@ def main():
         return
     loader = Neo4jLoader(os.environ["NEO4J_URI"], os.environ["NEO4J_USER"], os.environ["NEO4J_PASSWORD"], os.getenv("NEO4J_DATABASE", "neo4j"))
     try:
-        print(json.dumps(loader.run_full_pipeline()))
+        print(json.dumps(loader.run_full_pipeline(synchronize=args.sync)))
     finally:
         loader.close()
 

@@ -19,7 +19,7 @@ export async function listenForMedicationNotifications() {
     if (!hasFirebaseConfig() || !(await isSupported())) return () => {};
     const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
     return onMessage(getMessaging(app), async (payload) => {
-        if (Notification.permission !== "granted" || !localStorage.getItem("mmss_token")) return;
+        if (Notification.permission !== "granted" || sessionStorage.getItem("mmss_session") !== "active") return;
         const registration = await navigator.serviceWorker.getRegistration("/");
         await registration?.showNotification(payload.notification?.title || "Medication reminder", {
             body: payload.notification?.body || "Your medication reminder is ready.",

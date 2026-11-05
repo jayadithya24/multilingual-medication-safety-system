@@ -97,5 +97,5 @@ def test_import_preserves_multilingual_fields_and_endpoints():
     for lang in ("en", "kn", "tulu"):
         assert nodes["metformin"][f"description_{lang}"]
     assert all(e["source"] in nodes and e["target"] in nodes for e in graph["edges"])
-    assert nodes["sideeffect:hypertension"]["type"] == "sideeffect"
-    assert nodes["hypertension"]["type"] == "disease"
+    assert nodes["sideeffect:diarrhea"]["type"] == "sideeffect"
+    assert nodes["essential-hypertension-high-bp"]["type"] == "disease"

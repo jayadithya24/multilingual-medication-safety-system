@@ -1,6 +1,6 @@
 [
   {
-    "disease": "Type 2 Diabetes",
+    "disease": "Type 2 Diabetes Mellitus",
     "sources": [
       {
         "title": "Knowledge-driven drug repurposing using a comprehensive drug knowledge graph",
@@ -21,7 +21,7 @@
     ]
   },
   {
-    "disease": "Hypertension",
+    "disease": "Essential Hypertension (High BP)",
     "sources": [
       {
         "title": "Cardiovascular diseases in India: current epidemiology and future directions",
@@ -42,7 +42,7 @@
     ]
   },
   {
-    "disease": "Arthritis",
+    "disease": "Rheumatoid Arthritis (Joint Pain)",
     "sources": [
       {
         "title": "Clinical profile of rheumatoid arthritis patients reporting to a tertiary care center – data from southwestern part of India",

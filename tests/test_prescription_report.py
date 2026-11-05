@@ -1,10 +1,12 @@
 from types import SimpleNamespace
+from datetime import datetime, timezone, timedelta
 
 import mongomock
 import pytest
 from fastapi import HTTPException
 
 from backend.app.routes import patient_drugs as routes
+from backend.app.routes import access_requests
 
 
 @pytest.fixture
@@ -12,7 +14,11 @@ def report_data(monkeypatch):
     db = mongomock.MongoClient().db
     for name in ("users", "patient_schedules", "medication_history"):
         monkeypatch.setattr(routes, name + "_collection", db[name])
-    monkeypatch.setattr(routes, "has_accepted_access", lambda doctor, patient: doctor == "doctor" and patient == "P1")
+    for module in (routes, access_requests):
+        monkeypatch.setattr(module, "access_requests_collection", db.access_requests)
+    monkeypatch.setattr(access_requests, "access_log_collection", db.access_log)
+    db.access_requests.insert_one({"requestId": "R1", "doctorId": "doctor", "patientId": "P1", "status": "ACCEPTED",
+        "respondedAt": datetime.now(timezone.utc), "expiresAt": datetime.now(timezone.utc) + timedelta(days=7), "scope": "medicines_and_history"})
     db.users.insert_one({"username": "patient", "patient_id": "P1", "role": "patient", "hashed_password": "secret", "full_name": "Test Patient"})
     return db
 

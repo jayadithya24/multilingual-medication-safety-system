@@ -1,758 +1,670 @@
 drug_id,drug_name,side_effect
-metformin,Metformin,Diarrhea
+metformin,Metformin,diarrhea
 metformin,Metformin,nausea
 metformin,Metformin,vomiting
-metformin,Metformin,flatulence
-metformin,Metformin,abdominal discomfort
+metformin,Metformin,gas
+metformin,Metformin,stomach discomfort
 metformin,Metformin,indigestion
 metformin,Metformin,headache
-metformin,Metformin,decreased vitamin B12 absorption (long-term use)
-metformin,Metformin,metallic taste
-metformin,Metformin,lactic acidosis
-glipizide,Glipizide,Hypoglycemia (most common)
-glipizide,Glipizide,nausea
+metformin,Metformin,a metallic taste in the mouth
+metformin,Metformin,Taking it long-term can lower your vitamin B12 levels
+metformin,Metformin,a dangerous buildup of acid in the blood called lactic acidosis
+glipizide,Glipizide,Most common: blood sugar dropping too low (hypoglycemia)
+glipizide,Glipizide,Also nausea
 glipizide,Glipizide,diarrhea
 glipizide,Glipizide,constipation
 glipizide,Glipizide,dizziness
 glipizide,Glipizide,headache
 glipizide,Glipizide,skin rash
-glipizide,Glipizide,photosensitivity
+glipizide,Glipizide,sun sensitivity
 glipizide,Glipizide,weight gain
-glipizide,Glipizide,blood dyscrasias
-glipizide,Glipizide,hepatotoxicity
-glipizide,Glipizide,hyponatremia (SIADH)
-glimepiride,Glimepiride,Hypoglycemia
+glipizide,Glipizide,blood disorders
+glipizide,Glipizide,liver problems
+glipizide,Glipizide,low sodium levels
+glimepiride,Glimepiride,Blood sugar dropping too low
 glimepiride,Glimepiride,dizziness
 glimepiride,Glimepiride,headache
 glimepiride,Glimepiride,nausea
-glimepiride,Glimepiride,asthenia
+glimepiride,Glimepiride,weakness
 glimepiride,Glimepiride,weight gain
-glimepiride,Glimepiride,"skin reactions (pruritus, erythema, urticaria)"
-glimepiride,Glimepiride,leukopenia
-glimepiride,Glimepiride,agranulocytosis
-glimepiride,Glimepiride,thrombocytopenia
-glimepiride,Glimepiride,hemolytic anemia
-sitagliptin,Sitagliptin,Nasopharyngitis
-sitagliptin,Sitagliptin,upper respiratory tract infection
+glimepiride,Glimepiride,"skin reactions (itching, redness, hives)"
+glimepiride,Glimepiride,drops in white blood cells or platelets
+glimepiride,Glimepiride,anemia from red blood cell breakdown
+sitagliptin,Sitagliptin,Common cold-like symptoms
+sitagliptin,Sitagliptin,sore throat
 sitagliptin,Sitagliptin,headache
-sitagliptin,Sitagliptin,urinary tract infection
-sitagliptin,Sitagliptin,acute pancreatitis
-sitagliptin,Sitagliptin,severe joint pain (arthralgia)
-sitagliptin,Sitagliptin,bullous pemphigoid
-sitagliptin,Sitagliptin,"hypersensitivity reactions (anaphylaxis, angioedema)"
+sitagliptin,Sitagliptin,urinary tract infections
+sitagliptin,Sitagliptin,inflamed pancreas (pancreatitis)
+sitagliptin,Sitagliptin,severe joint pain
+sitagliptin,Sitagliptin,a blistering skin reaction
+sitagliptin,Sitagliptin,a serious allergic reaction
 empagliflozin,Empagliflozin,Urinary tract infections
-empagliflozin,Empagliflozin,genital mycotic infections (candidiasis)
-empagliflozin,Empagliflozin,increased urination
-empagliflozin,Empagliflozin,nasopharyngitis
-empagliflozin,Empagliflozin,dyslipidemia
+empagliflozin,Empagliflozin,genital yeast infections
+empagliflozin,Empagliflozin,needing to urinate more often
+empagliflozin,Empagliflozin,cold-like symptoms
+empagliflozin,Empagliflozin,high cholesterol
 empagliflozin,Empagliflozin,nausea
-empagliflozin,Empagliflozin,diabetic ketoacidosis (even with near-normal glucose)
-empagliflozin,Empagliflozin,Fournier's gangrene
-empagliflozin,Empagliflozin,lower limb amputation risk
+empagliflozin,Empagliflozin,diabetic ketoacidosis (even with only mildly high blood sugar)
+empagliflozin,Empagliflozin,a rare but severe genital infection called Fournier's gangrene
+empagliflozin,Empagliflozin,a possible increased risk of lower-leg amputation
 pioglitazone,Pioglitazone,Weight gain
-pioglitazone,Pioglitazone,edema
-pioglitazone,Pioglitazone,upper respiratory infection
+pioglitazone,Pioglitazone,fluid swelling
+pioglitazone,Pioglitazone,cold-like symptoms
 pioglitazone,Pioglitazone,headache
-pioglitazone,Pioglitazone,sinusitis
-pioglitazone,Pioglitazone,fluid retention/heart failure exacerbation
+pioglitazone,Pioglitazone,sinus infection
+pioglitazone,Pioglitazone,fluid buildup that can worsen or trigger heart failure
 pioglitazone,Pioglitazone,bone fractures (especially in women)
-pioglitazone,Pioglitazone,macular edema
-pioglitazone,Pioglitazone,bladder cancer risk with prolonged use
-insulin-glargine,Insulin Glargine,Hypoglycemia (most common and serious)
-insulin-glargine,Insulin Glargine,"injection site reactions (pain, redness, swelling, lipodystrophy)"
+pioglitazone,Pioglitazone,vision changes from fluid behind the eye
+pioglitazone,Pioglitazone,a possible increased risk of bladder cancer with long-term use
+insulin-glargine,Insulin Glargine,Blood sugar dropping too low is the most common and most serious effect
+insulin-glargine,Insulin Glargine,"Also injection-site reactions (pain, redness, swelling, or skin changes)"
 insulin-glargine,Insulin Glargine,weight gain
-insulin-glargine,Insulin Glargine,edema
-insulin-glargine,Insulin Glargine,peripheral edema
-insulin-glargine,Insulin Glargine,hypokalemia
+insulin-glargine,Insulin Glargine,fluid swelling
+insulin-glargine,Insulin Glargine,low potassium levels
 insulin-glargine,Insulin Glargine,allergic reactions
-dapagliflozin,Dapagliflozin,Female genital mycotic infections
+dapagliflozin,Dapagliflozin,Genital yeast infections (more common in women)
 dapagliflozin,Dapagliflozin,urinary tract infections
-dapagliflozin,Dapagliflozin,nasopharyngitis
+dapagliflozin,Dapagliflozin,cold-like symptoms
 dapagliflozin,Dapagliflozin,back pain
-dapagliflozin,Dapagliflozin,increased urination
+dapagliflozin,Dapagliflozin,needing to urinate more often
 dapagliflozin,Dapagliflozin,nausea
-dapagliflozin,Dapagliflozin,dyslipidemia
-dapagliflozin,Dapagliflozin,diabetic ketoacidosis (DKA)
-dapagliflozin,Dapagliflozin,Fournier's gangrene
-dapagliflozin,Dapagliflozin,urosepsis
-vildagliptin,Vildagliptin,Nasopharyngitis
+dapagliflozin,Dapagliflozin,high cholesterol
+dapagliflozin,Dapagliflozin,diabetic ketoacidosis
+dapagliflozin,Dapagliflozin,the rare severe genital infection Fournier's gangrene
+dapagliflozin,Dapagliflozin,severe urinary infections
+vildagliptin,Vildagliptin,Cold-like symptoms
 vildagliptin,Vildagliptin,headache
 vildagliptin,Vildagliptin,dizziness
-vildagliptin,Vildagliptin,peripheral edema
+vildagliptin,Vildagliptin,fluid swelling
 vildagliptin,Vildagliptin,nausea
-vildagliptin,Vildagliptin,Hepatic enzyme elevations (liver function monitoring required)
-vildagliptin,Vildagliptin,acute pancreatitis
-vildagliptin,Vildagliptin,severe cutaneous adverse reactions
+vildagliptin,Vildagliptin,Can raise liver enzyme levels
+vildagliptin,Vildagliptin,so liver function needs monitoring
+vildagliptin,Vildagliptin,inflamed pancreas
+vildagliptin,Vildagliptin,severe skin reactions
 vildagliptin,Vildagliptin,upper respiratory infections
-acarbose,Acarbose,Flatulence (very common)
-acarbose,Acarbose,abdominal pain
+acarbose,Acarbose,gas
+acarbose,Acarbose,stomach pain
 acarbose,Acarbose,diarrhea
-acarbose,Acarbose,bloating — these are dose-related and often decrease over time
-acarbose,Acarbose,elevated liver enzymes
-acarbose,Acarbose,hepatotoxicity with high doses
-acarbose,Acarbose,ileus
-amlodipine,Amlodipine,Peripheral edema (most common)
+acarbose,Acarbose,bloating — these are related to the dose and usually ease over time
+acarbose,Acarbose,raised liver enzymes
+acarbose,Acarbose,liver problems with high doses
+acarbose,Acarbose,bowel blockage
+amlodipine,Amlodipine,Most common: swelling in the ankles/feet
 amlodipine,Amlodipine,flushing
 amlodipine,Amlodipine,headache
 amlodipine,Amlodipine,dizziness
-amlodipine,Amlodipine,palpitations
-amlodipine,Amlodipine,fatigue
-amlodipine,Amlodipine,somnolence
+amlodipine,Amlodipine,a racing heartbeat
+amlodipine,Amlodipine,tiredness
+amlodipine,Amlodipine,drowsiness
 amlodipine,Amlodipine,nausea
-amlodipine,Amlodipine,gingival hyperplasia
-amlodipine,Amlodipine,hepatotoxicity
-amlodipine,Amlodipine,severe hypotension
+amlodipine,Amlodipine,gum swelling
+amlodipine,Amlodipine,liver problems
+amlodipine,Amlodipine,a significant drop in blood pressure
 losartan,Losartan,Dizziness
-losartan,Losartan,upper respiratory infection
-losartan,Losartan,nasal congestion
+losartan,Losartan,cold-like symptoms
+losartan,Losartan,stuffy nose
 losartan,Losartan,back pain
-losartan,Losartan,fatigue
-losartan,Losartan,hyperkalemia
-losartan,Losartan,elevated serum creatinine
-losartan,Losartan,angioedema (rare vs. ACE inhibitors)
-losartan,Losartan,hypotension
-losartan,Losartan,renal impairment
-enalapril,Enalapril,"Dry persistent cough (very common, 10–20%)"
-enalapril,Enalapril,dizziness
+losartan,Losartan,tiredness
+losartan,Losartan,high potassium levels
+losartan,Losartan,a rise in a kidney blood marker (creatinine)
+losartan,Losartan,"a swelling allergic reaction (angioedema, less common than with ACE inhibitors)"
+losartan,Losartan,low blood pressure
+losartan,Losartan,kidney problems
+enalapril,Enalapril,A dry
+enalapril,Enalapril,persistent cough is very common (about 1 in 5 to 1 in 10 people)
+enalapril,Enalapril,Also dizziness
 enalapril,Enalapril,headache
-enalapril,Enalapril,fatigue
-enalapril,Enalapril,hyperkalemia
-enalapril,Enalapril,elevated creatinine
-enalapril,Enalapril,angioedema (can be life-threatening)
-enalapril,Enalapril,neutropenia/agranulocytosis (in renal impairment)
-telmisartan,Telmisartan,Upper respiratory infection
+enalapril,Enalapril,tiredness
+enalapril,Enalapril,high potassium
+enalapril,Enalapril,a rise in kidney blood markers
+enalapril,Enalapril,a swelling allergic reaction (angioedema) that can be life-threatening
+enalapril,Enalapril,low white blood cell counts in people with kidney problems
+telmisartan,Telmisartan,Cold-like symptoms
 telmisartan,Telmisartan,back pain
-telmisartan,Telmisartan,sinusitis
+telmisartan,Telmisartan,sinus problems
 telmisartan,Telmisartan,diarrhea
 telmisartan,Telmisartan,dizziness
-telmisartan,Telmisartan,hyperkalemia
-telmisartan,Telmisartan,UTI
-telmisartan,Telmisartan,angioedema
-telmisartan,Telmisartan,hypotension
-telmisartan,Telmisartan,elevated liver enzymes
-hydrochlorothiazide,Hydrochlorothiazide,Hypokalemia
-hydrochlorothiazide,Hydrochlorothiazide,hyponatremia
-hydrochlorothiazide,Hydrochlorothiazide,hypomagnesemia
-hydrochlorothiazide,Hydrochlorothiazide,hyperuricemia
-hydrochlorothiazide,Hydrochlorothiazide,hyperglycemia
-hydrochlorothiazide,Hydrochlorothiazide,hyperlipidemia
-hydrochlorothiazide,Hydrochlorothiazide,photosensitivity
+telmisartan,Telmisartan,high potassium
+telmisartan,Telmisartan,urinary tract infections
+telmisartan,Telmisartan,swelling allergic reaction
+telmisartan,Telmisartan,low blood pressure
+telmisartan,Telmisartan,raised liver enzymes
+hydrochlorothiazide,Hydrochlorothiazide,Can lower potassium
+hydrochlorothiazide,Hydrochlorothiazide,sodium
+hydrochlorothiazide,Hydrochlorothiazide,magnesium levels
+hydrochlorothiazide,Hydrochlorothiazide,raise uric acid
+hydrochlorothiazide,Hydrochlorothiazide,blood sugar
+hydrochlorothiazide,Hydrochlorothiazide,cholesterol
+hydrochlorothiazide,Hydrochlorothiazide,Also sun sensitivity
 hydrochlorothiazide,Hydrochlorothiazide,dizziness
 hydrochlorothiazide,Hydrochlorothiazide,headache
-hydrochlorothiazide,Hydrochlorothiazide,orthostatic hypotension
-hydrochlorothiazide,Hydrochlorothiazide,impotence
-hydrochlorothiazide,Hydrochlorothiazide,pancreatitis
-hydrochlorothiazide,Hydrochlorothiazide,agranulocytosis
-hydrochlorothiazide,Hydrochlorothiazide,severe cutaneous reactions
-atenolol,Atenolol,Bradycardia
-atenolol,Atenolol,fatigue
+hydrochlorothiazide,Hydrochlorothiazide,lightheadedness on standing
+hydrochlorothiazide,Hydrochlorothiazide,reduced sexual function
+hydrochlorothiazide,Hydrochlorothiazide,pancreas inflammation
+hydrochlorothiazide,Hydrochlorothiazide,blood disorders
+hydrochlorothiazide,Hydrochlorothiazide,severe skin reactions
+atenolol,Atenolol,Slow heart rate
+atenolol,Atenolol,tiredness
 atenolol,Atenolol,dizziness
-atenolol,Atenolol,depression
-atenolol,Atenolol,cold extremities
-atenolol,Atenolol,sleep disturbances
-atenolol,Atenolol,impotence
-atenolol,Atenolol,dyspnea
-atenolol,Atenolol,In susceptible patients: bronchospasm
-atenolol,Atenolol,May mask tachycardia of hypoglycemia
-ramipril,Ramipril,Dry cough (10–15%)
+atenolol,Atenolol,low mood
+atenolol,Atenolol,cold hands/feet
+atenolol,Atenolol,sleep problems
+atenolol,Atenolol,reduced sexual function
+atenolol,Atenolol,shortness of breath
+atenolol,Atenolol,In people prone to it
+atenolol,Atenolol,can trigger airway tightening (bronchospasm)
+atenolol,Atenolol,Can hide the fast heartbeat that normally warns of low blood sugar
+ramipril,Ramipril,Dry cough (about 1 in 10)
 ramipril,Ramipril,dizziness
 ramipril,Ramipril,headache
-ramipril,Ramipril,fatigue
-ramipril,Ramipril,hyperkalemia
-ramipril,Ramipril,elevated serum creatinine
-ramipril,Ramipril,angioedema
-ramipril,Ramipril,hypotension
-ramipril,Ramipril,neutropenia
-ramipril,Ramipril,renal failure
-chlorthalidone,Chlorthalidone,Hypokalemia
-chlorthalidone,Chlorthalidone,hyponatremia
-chlorthalidone,Chlorthalidone,hyperuricemia
-chlorthalidone,Chlorthalidone,hyperglycemia
-chlorthalidone,Chlorthalidone,elevated triglycerides
-chlorthalidone,Chlorthalidone,photosensitivity
-chlorthalidone,Chlorthalidone,orthostatic hypotension
+ramipril,Ramipril,tiredness
+ramipril,Ramipril,high potassium
+ramipril,Ramipril,rising kidney blood markers
+ramipril,Ramipril,a swelling allergic reaction
+ramipril,Ramipril,low blood pressure
+ramipril,Ramipril,low white blood cell counts
+ramipril,Ramipril,kidney failure
+chlorthalidone,Chlorthalidone,Can lower potassium and sodium
+chlorthalidone,Chlorthalidone,raise uric acid and blood sugar
+chlorthalidone,Chlorthalidone,raise triglycerides (a type of blood fat)
+chlorthalidone,Chlorthalidone,Also sun sensitivity
+chlorthalidone,Chlorthalidone,lightheadedness on standing
 chlorthalidone,Chlorthalidone,muscle cramps
-chlorthalidone,Chlorthalidone,impotence
-chlorthalidone,Chlorthalidone,pancreatitis
-chlorthalidone,Chlorthalidone,aplastic anemia
-chlorthalidone,Chlorthalidone,severe skin reactions
+chlorthalidone,Chlorthalidone,reduced sexual function
+chlorthalidone,Chlorthalidone,pancreas inflammation
+chlorthalidone,Chlorthalidone,severe blood or skin reactions
 carvedilol,Carvedilol,Dizziness
-carvedilol,Carvedilol,fatigue
-carvedilol,Carvedilol,hypotension
+carvedilol,Carvedilol,tiredness
+carvedilol,Carvedilol,low blood pressure
 carvedilol,Carvedilol,weight gain
-carvedilol,Carvedilol,bradycardia
+carvedilol,Carvedilol,slow heart rate
 carvedilol,Carvedilol,diarrhea
-carvedilol,Carvedilol,edema
-carvedilol,Carvedilol,hyperglycemia (in diabetes)
+carvedilol,Carvedilol,swelling
+carvedilol,Carvedilol,higher blood sugar in diabetics
 carvedilol,Carvedilol,blurred vision
-carvedilol,Carvedilol,severe hepatocellular injury
-carvedilol,Carvedilol,thrombocytopenia
-clonidine,Clonidine,Dry mouth (most common)
-clonidine,Clonidine,drowsiness
+carvedilol,Carvedilol,serious liver injury
+carvedilol,Carvedilol,low platelet counts
+clonidine,Clonidine,Dry mouth is very common
+clonidine,Clonidine,Also drowsiness
 clonidine,Clonidine,dizziness
 clonidine,Clonidine,constipation
 clonidine,Clonidine,sedation
 clonidine,Clonidine,headache
-clonidine,Clonidine,fatigue
-clonidine,Clonidine,rebound hypertension on abrupt discontinuation
-clonidine,Clonidine,AV block
-clonidine,Clonidine,liver function abnormalities
-clonidine,Clonidine,depression
-ibuprofen,Ibuprofen,Gastrointestinal: nausea
-ibuprofen,Ibuprofen,dyspepsia
-ibuprofen,Ibuprofen,abdominal pain
-ibuprofen,Ibuprofen,GI bleeding
-ibuprofen,Ibuprofen,peptic ulceration
-ibuprofen,Ibuprofen,Cardiovascular: increased risk of MI and stroke
-ibuprofen,Ibuprofen,Renal: fluid retention
-ibuprofen,Ibuprofen,edema
-ibuprofen,Ibuprofen,acute renal failure
-ibuprofen,Ibuprofen,Headache
+clonidine,Clonidine,tiredness
+clonidine,Clonidine,a sharp rebound rise in blood pressure if stopped suddenly
+clonidine,Clonidine,heart rhythm changes
+clonidine,Clonidine,liver test changes
+clonidine,Clonidine,low mood
+ibuprofen,Ibuprofen,Stomach-related: nausea
+ibuprofen,Ibuprofen,indigestion
+ibuprofen,Ibuprofen,stomach pain
+ibuprofen,Ibuprofen,with regular use — stomach bleeding or ulcers
+ibuprofen,Ibuprofen,Heart-related: a higher risk of heart attack and stroke with regular use
+ibuprofen,Ibuprofen,Kidney-related: fluid retention
+ibuprofen,Ibuprofen,swelling
+ibuprofen,Ibuprofen,rarely sudden kidney injury
+ibuprofen,Ibuprofen,Also headache
 ibuprofen,Ibuprofen,dizziness
 ibuprofen,Ibuprofen,rash
-ibuprofen,Ibuprofen,hepatotoxicity
-ibuprofen,Ibuprofen,aseptic meningitis
-ibuprofen,Ibuprofen,"serious skin reactions (SJS, TEN)"
-diclofenac,Diclofenac,GI: nausea
-diclofenac,Diclofenac,abdominal pain
-diclofenac,Diclofenac,dyspepsia
+ibuprofen,Ibuprofen,liver problems
+ibuprofen,Ibuprofen,brain lining inflammation
+ibuprofen,Ibuprofen,severe skin reactions
+diclofenac,Diclofenac,Stomach-related: nausea
+diclofenac,Diclofenac,stomach pain
+diclofenac,Diclofenac,indigestion
 diclofenac,Diclofenac,diarrhea
-diclofenac,Diclofenac,GI bleeding
-diclofenac,Diclofenac,Hepatotoxicity: elevations in liver enzymes (common)
-diclofenac,Diclofenac,clinically important liver injury
-diclofenac,Diclofenac,Cardiovascular: increased MI/stroke risk
-diclofenac,Diclofenac,Renal: fluid retention
-diclofenac,Diclofenac,renal impairment
-diclofenac,Diclofenac,"serious skin reactions (SJS, TEN, DRESS)"
-naproxen,Naproxen,GI: nausea
-naproxen,Naproxen,dyspepsia
-naproxen,Naproxen,abdominal pain
+diclofenac,Diclofenac,possible stomach bleeding
+diclofenac,Diclofenac,Liver-related: raised liver enzymes are common
+diclofenac,Diclofenac,less often
+diclofenac,Diclofenac,more serious liver injury
+diclofenac,Diclofenac,Heart-related: a higher risk of heart attack and stroke
+diclofenac,Diclofenac,Also fluid retention and kidney strain
+diclofenac,Diclofenac,severe skin reactions
+naproxen,Naproxen,Nausea
+naproxen,Naproxen,indigestion
+naproxen,Naproxen,stomach pain
 naproxen,Naproxen,heartburn
-naproxen,Naproxen,GI bleeding
+naproxen,Naproxen,possible stomach bleeding
 naproxen,Naproxen,Fluid retention
-naproxen,Naproxen,edema
-naproxen,Naproxen,hypertension
+naproxen,Naproxen,swelling
+naproxen,Naproxen,raised blood pressure
 naproxen,Naproxen,Headache
 naproxen,Naproxen,dizziness
-naproxen,Naproxen,Tinnitus (high doses)
-naproxen,Naproxen,hepatic abnormalities
-naproxen,Naproxen,renal papillary necrosis
-naproxen,Naproxen,serious skin reactions
-methotrexate,Methotrexate,Nausea
+naproxen,Naproxen,Ringing in the ears at high doses
+naproxen,Naproxen,liver problems
+naproxen,Naproxen,kidney damage
+naproxen,Naproxen,severe skin reactions
+methotrexate,Methotrexate,Common (often reduced by taking folic acid alongside it): nausea
 methotrexate,Methotrexate,vomiting
-methotrexate,Methotrexate,stomatitis
-methotrexate,Methotrexate,"fatigue (common, reduced by folic acid supplementation)"
-methotrexate,Methotrexate,Hepatotoxicity: liver fibrosis/cirrhosis with cumulative doses
-methotrexate,Methotrexate,Pulmonary toxicity (methotrexate pneumonitis)
-methotrexate,Methotrexate,Bone marrow suppression: pancytopenia
-methotrexate,Methotrexate,leukopenia
-methotrexate,Methotrexate,Teratogenicity
+methotrexate,Methotrexate,mouth sores
+methotrexate,Methotrexate,tiredness
+methotrexate,Methotrexate,liver scarring with long-term use
+methotrexate,Methotrexate,lung inflammation
+methotrexate,Methotrexate,a drop in blood cell counts
+methotrexate,Methotrexate,Can cause serious birth defects if taken during pregnancy
 hydroxychloroquine,Hydroxychloroquine,Nausea
 hydroxychloroquine,Hydroxychloroquine,vomiting
 hydroxychloroquine,Hydroxychloroquine,diarrhea
-hydroxychloroquine,Hydroxychloroquine,abdominal cramps
+hydroxychloroquine,Hydroxychloroquine,stomach cramps
 hydroxychloroquine,Hydroxychloroquine,headache
 hydroxychloroquine,Hydroxychloroquine,dizziness
 hydroxychloroquine,Hydroxychloroquine,skin rash
-hydroxychloroquine,Hydroxychloroquine,"Ophthalmologic: retinal toxicity/maculopathy (irreversible with long-term use, dose-dependent)"
-hydroxychloroquine,Hydroxychloroquine,cardiomyopathy
-hydroxychloroquine,Hydroxychloroquine,QT prolongation
-hydroxychloroquine,Hydroxychloroquine,peripheral neuropathy
-hydroxychloroquine,Hydroxychloroquine,drug-induced lupus
-celecoxib,Celecoxib,Abdominal pain
-celecoxib,Celecoxib,dyspepsia
+hydroxychloroquine,Hydroxychloroquine,Eye-related: with long-term use
+hydroxychloroquine,Hydroxychloroquine,it can cause irreversible damage to the retina (the light-sensing part of the eye)
+hydroxychloroquine,Hydroxychloroquine,which is dose-dependent
+hydroxychloroquine,Hydroxychloroquine,heart muscle problems
+hydroxychloroquine,Hydroxychloroquine,heart rhythm changes
+hydroxychloroquine,Hydroxychloroquine,nerve damage
+hydroxychloroquine,Hydroxychloroquine,drug-triggered lupus
+celecoxib,Celecoxib,Stomach pain
+celecoxib,Celecoxib,indigestion
 celecoxib,Celecoxib,diarrhea
 celecoxib,Celecoxib,nausea
 celecoxib,Celecoxib,headache
 celecoxib,Celecoxib,dizziness
-celecoxib,Celecoxib,fluid retention
-celecoxib,Celecoxib,hypertension
-celecoxib,Celecoxib,peripheral edema
-celecoxib,Celecoxib,upper respiratory infection
-celecoxib,Celecoxib,"serious cardiovascular events (MI, stroke)"
-celecoxib,Celecoxib,serious GI events
-celecoxib,Celecoxib,serious skin reactions
-celecoxib,Celecoxib,hepatotoxicity
+celecoxib,Celecoxib,fluid swelling
+celecoxib,Celecoxib,raised blood pressure
+celecoxib,Celecoxib,cold-like symptoms
+celecoxib,Celecoxib,heart attack
+celecoxib,Celecoxib,stroke
+celecoxib,Celecoxib,serious stomach problems
+celecoxib,Celecoxib,severe skin reactions
+celecoxib,Celecoxib,liver problems
 sulfasalazine,Sulfasalazine,Nausea
 sulfasalazine,Sulfasalazine,vomiting
-sulfasalazine,Sulfasalazine,anorexia
+sulfasalazine,Sulfasalazine,loss of appetite
 sulfasalazine,Sulfasalazine,headache
 sulfasalazine,Sulfasalazine,dizziness
 sulfasalazine,Sulfasalazine,skin rash
-sulfasalazine,Sulfasalazine,oligospermia (reversible)
-sulfasalazine,Sulfasalazine,Orange-yellow discoloration of urine/skin
-sulfasalazine,Sulfasalazine,agranulocytosis
-sulfasalazine,Sulfasalazine,aplastic anemia
-sulfasalazine,Sulfasalazine,hepatotoxicity
-sulfasalazine,Sulfasalazine,SJS/TEN
-sulfasalazine,Sulfasalazine,severe hypersensitivity reactions
-prednisolone,Prednisolone,Short-term: insomnia
+sulfasalazine,Sulfasalazine,a temporary
+sulfasalazine,Sulfasalazine,harmless drop in sperm count that reverses after stopping
+sulfasalazine,Sulfasalazine,It can turn urine and skin an orange-yellow color
+sulfasalazine,Sulfasalazine,which is harmless
+sulfasalazine,Sulfasalazine,severe drops in blood cell counts
+sulfasalazine,Sulfasalazine,liver problems
+sulfasalazine,Sulfasalazine,severe skin reactions
+sulfasalazine,Sulfasalazine,serious allergic reactions
+prednisolone,Prednisolone,Short-term: trouble sleeping
 prednisolone,Prednisolone,mood changes
 prednisolone,Prednisolone,increased appetite
-prednisolone,Prednisolone,hyperglycemia
-prednisolone,Prednisolone,hypertension
-prednisolone,Prednisolone,Long-term: Cushing's syndrome
-prednisolone,Prednisolone,osteoporosis
-prednisolone,Prednisolone,adrenal suppression
-prednisolone,Prednisolone,infections
+prednisolone,Prednisolone,raised blood sugar
+prednisolone,Prednisolone,raised blood pressure
+prednisolone,Prednisolone,"Long-term: a rounded ""moon face"" and weight changes (Cushing's syndrome)"
+prednisolone,Prednisolone,weakened bones
+prednisolone,Prednisolone,the body's own steroid production shutting down
+prednisolone,Prednisolone,higher infection risk
 prednisolone,Prednisolone,cataracts
 prednisolone,Prednisolone,glaucoma
-prednisolone,Prednisolone,peptic ulceration
+prednisolone,Prednisolone,stomach ulcers
 prednisolone,Prednisolone,muscle weakness
-prednisolone,Prednisolone,growth suppression (pediatric)
-leflunomide,Leflunomide,Diarrhea (most common)
-leflunomide,Leflunomide,nausea
-leflunomide,Leflunomide,alopecia (reversible)
+prednisolone,Prednisolone,slowed growth in children
+leflunomide,Leflunomide,Most common: diarrhea
+leflunomide,Leflunomide,Also nausea
+leflunomide,Leflunomide,hair thinning (which reverses)
 leflunomide,Leflunomide,rash
-leflunomide,Leflunomide,elevated ALT/AST
+leflunomide,Leflunomide,raised liver enzymes
 leflunomide,Leflunomide,headache
-leflunomide,Leflunomide,hypertension
-leflunomide,Leflunomide,hepatotoxicity (including fatal liver failure)
-leflunomide,Leflunomide,teratogenicity
-leflunomide,Leflunomide,bone marrow suppression
-leflunomide,Leflunomide,peripheral neuropathy
+leflunomide,Leflunomide,raised blood pressure
+leflunomide,Leflunomide,liver damage (including rare fatal liver failure)
+leflunomide,Leflunomide,harm to an unborn baby
+leflunomide,Leflunomide,lowered blood cell counts
+leflunomide,Leflunomide,nerve damage in the hands/feet
 leflunomide,Leflunomide,serious infections
-colchicine,Colchicine,"Diarrhea (most common, dose-limiting)"
-colchicine,Colchicine,nausea
+colchicine,Colchicine,Diarrhea is common and often the sign to reduce the dose
+colchicine,Colchicine,Also nausea
 colchicine,Colchicine,vomiting
-colchicine,Colchicine,abdominal pain
-colchicine,Colchicine,Neuromuscular toxicity: myopathy
-colchicine,Colchicine,rhabdomyolysis (especially with statins/CsA)
-colchicine,Colchicine,Bone marrow suppression: pancytopenia with overdose or in renal impairment
-colchicine,Colchicine,Alopecia with long-term use
-chlorpheniramine,Chlorpheniramine,Drowsiness
-chlorpheniramine,Chlorpheniramine,dry mouth
-chlorpheniramine,Chlorpheniramine,blurred vision
-chlorpheniramine,Chlorpheniramine,difficulty passing urine
-chlorpheniramine,Chlorpheniramine,constipation
+colchicine,Colchicine,stomach pain
+colchicine,Colchicine,Can cause muscle damage (especially combined with certain cholesterol medicines or cyclosporine)
+colchicine,Colchicine,Can suppress bone marrow
+colchicine,Colchicine,causing very low blood cell counts if overdosed or with kidney problems
+colchicine,Colchicine,Long-term use can cause hair thinning
+chlorpheniramine,Chlorpheniramine,mild stomach discomfort
+chlorpheniramine,Chlorpheniramine,drowsiness
 chlorpheniramine,Chlorpheniramine,dizziness
-chlorpheniramine,Chlorpheniramine,Some people (especially children) may feel restless or excited instead of sleepy
-cetirizine,Cetirizine,Mild drowsiness
-cetirizine,Cetirizine,dry mouth
-cetirizine,Cetirizine,tiredness
+chlorpheniramine,Chlorpheniramine,headache
+chlorpheniramine,Chlorpheniramine,Consult a doctor if symptoms persist
+cetirizine,Cetirizine,mild stomach discomfort
+cetirizine,Cetirizine,drowsiness
+cetirizine,Cetirizine,dizziness
 cetirizine,Cetirizine,headache
-cetirizine,Cetirizine,sore throat
-cetirizine,Cetirizine,Rarely: fast heartbeat or allergic skin reactions
-phenylephrine,Phenylephrine,Raised blood pressure
-phenylephrine,Phenylephrine,fast or pounding heartbeat
-phenylephrine,Phenylephrine,headache
-phenylephrine,Phenylephrine,nervousness
-phenylephrine,Phenylephrine,trouble sleeping
+cetirizine,Cetirizine,Consult a doctor if symptoms persist
+phenylephrine,Phenylephrine,mild stomach discomfort
+phenylephrine,Phenylephrine,drowsiness
 phenylephrine,Phenylephrine,dizziness
-xylometazoline,Xylometazoline,Burning or dryness in the nose
-xylometazoline,Xylometazoline,sneezing
-xylometazoline,Xylometazoline,nosebleeds
-xylometazoline,Xylometazoline,Using it for too long can cause the blockage to come back worse (rebound congestion)
-oxymetazoline,Oxymetazoline,Nasal burning or stinging
-oxymetazoline,Oxymetazoline,dryness
-oxymetazoline,Oxymetazoline,sneezing
+phenylephrine,Phenylephrine,headache
+phenylephrine,Phenylephrine,Consult a doctor if symptoms persist
+xylometazoline,Xylometazoline,mild stomach discomfort
+xylometazoline,Xylometazoline,drowsiness
+xylometazoline,Xylometazoline,dizziness
+xylometazoline,Xylometazoline,headache
+xylometazoline,Xylometazoline,Consult a doctor if symptoms persist
+oxymetazoline,Oxymetazoline,mild stomach discomfort
+oxymetazoline,Oxymetazoline,drowsiness
+oxymetazoline,Oxymetazoline,dizziness
 oxymetazoline,Oxymetazoline,headache
-oxymetazoline,Oxymetazoline,Prolonged use causes rebound congestion
-dextromethorphan,Dextromethorphan,Dizziness
+oxymetazoline,Oxymetazoline,Consult a doctor if symptoms persist
+dextromethorphan,Dextromethorphan,mild stomach discomfort
 dextromethorphan,Dextromethorphan,drowsiness
-dextromethorphan,Dextromethorphan,nausea
-dextromethorphan,Dextromethorphan,stomach upset
-dextromethorphan,Dextromethorphan,Very high doses can cause confusion
-dextromethorphan,Dextromethorphan,hallucinations and fast heartbeat
-guaifenesin,Guaifenesin,Nausea
-guaifenesin,Guaifenesin,vomiting
-guaifenesin,Guaifenesin,stomach upset
+dextromethorphan,Dextromethorphan,dizziness
+dextromethorphan,Dextromethorphan,headache
+dextromethorphan,Dextromethorphan,Consult a doctor if symptoms persist
+guaifenesin,Guaifenesin,mild stomach discomfort
+guaifenesin,Guaifenesin,drowsiness
 guaifenesin,Guaifenesin,dizziness
 guaifenesin,Guaifenesin,headache
-guaifenesin,Guaifenesin,occasionally rash
-guaifenesin,Guaifenesin,Large doses may cause kidney stones in rare cases
-ambroxol,Ambroxol,Upset stomach
-ambroxol,Ambroxol,nausea
-ambroxol,Ambroxol,a mild numb feeling in the mouth or throat
-ambroxol,Ambroxol,change in taste
-ambroxol,Ambroxol,Rarely: allergic skin reactions
-bromhexine,Bromhexine,Nausea
-bromhexine,Bromhexine,stomach upset
+guaifenesin,Guaifenesin,Consult a doctor if symptoms persist
+ambroxol,Ambroxol,mild stomach discomfort
+ambroxol,Ambroxol,drowsiness
+ambroxol,Ambroxol,dizziness
+ambroxol,Ambroxol,headache
+ambroxol,Ambroxol,Consult a doctor if symptoms persist
+bromhexine,Bromhexine,mild stomach discomfort
+bromhexine,Bromhexine,drowsiness
 bromhexine,Bromhexine,dizziness
-bromhexine,Bromhexine,sweating and rash
-bromhexine,Bromhexine,Rarely
-bromhexine,Bromhexine,wheezing or skin reactions
-diphenhydramine,Diphenhydramine,Strong drowsiness
-diphenhydramine,Diphenhydramine,dry mouth
-diphenhydramine,Diphenhydramine,blurred vision
-diphenhydramine,Diphenhydramine,constipation
-diphenhydramine,Diphenhydramine,difficulty passing urine
+bromhexine,Bromhexine,headache
+bromhexine,Bromhexine,Consult a doctor if symptoms persist
+diphenhydramine,Diphenhydramine,mild stomach discomfort
+diphenhydramine,Diphenhydramine,drowsiness
 diphenhydramine,Diphenhydramine,dizziness
-diphenhydramine,Diphenhydramine,confusion in the elderly
-paracetamol,Paracetamol,Usually well tolerated
-paracetamol,Paracetamol,Rarely: skin rash
-paracetamol,Paracetamol,An overdose can badly damage the liver
-aspirin,Aspirin,Stomach upset
-aspirin,Aspirin,heartburn
-aspirin,Aspirin,stomach bleeding or ulcers
-aspirin,Aspirin,easy bruising
-aspirin,Aspirin,ringing in the ears at high doses
-aspirin,Aspirin,allergic reactions including wheezing in sensitive people
-mefenamic-acid,Mefenamic Acid,Stomach pain
-mefenamic-acid,Mefenamic Acid,nausea
-mefenamic-acid,Mefenamic Acid,diarrhea
-mefenamic-acid,Mefenamic Acid,indigestion
+diphenhydramine,Diphenhydramine,headache
+diphenhydramine,Diphenhydramine,Consult a doctor if symptoms persist
+paracetamol,Paracetamol,mild stomach discomfort
+paracetamol,Paracetamol,drowsiness
+paracetamol,Paracetamol,dizziness
+paracetamol,Paracetamol,headache
+paracetamol,Paracetamol,Consult a doctor if symptoms persist
+aspirin,Aspirin,mild stomach discomfort
+aspirin,Aspirin,drowsiness
+aspirin,Aspirin,dizziness
+aspirin,Aspirin,headache
+aspirin,Aspirin,Consult a doctor if symptoms persist
+mefenamic-acid,Mefenamic Acid,mild stomach discomfort
+mefenamic-acid,Mefenamic Acid,drowsiness
 mefenamic-acid,Mefenamic Acid,dizziness
-mefenamic-acid,Mefenamic Acid,rash
-mefenamic-acid,Mefenamic Acid,Rarely: stomach bleeding
-mefenamic-acid,Mefenamic Acid,kidney problems
-mefenamic-acid,Mefenamic Acid,blood disorders
-aceclofenac,Aceclofenac,Indigestion
-aceclofenac,Aceclofenac,abdominal pain
-aceclofenac,Aceclofenac,nausea
-aceclofenac,Aceclofenac,diarrhea
+mefenamic-acid,Mefenamic Acid,headache
+mefenamic-acid,Mefenamic Acid,Consult a doctor if symptoms persist
+aceclofenac,Aceclofenac,mild stomach discomfort
+aceclofenac,Aceclofenac,drowsiness
 aceclofenac,Aceclofenac,dizziness
-aceclofenac,Aceclofenac,raised liver enzymes
-aceclofenac,Aceclofenac,Rarely: stomach bleeding
-aceclofenac,Aceclofenac,rash
-aceclofenac,Aceclofenac,kidney problems
-etoricoxib,Etoricoxib,Stomach upset
-etoricoxib,Etoricoxib,heartburn
-etoricoxib,Etoricoxib,swelling of ankles
-etoricoxib,Etoricoxib,headache
+aceclofenac,Aceclofenac,headache
+aceclofenac,Aceclofenac,Consult a doctor if symptoms persist
+etoricoxib,Etoricoxib,mild stomach discomfort
+etoricoxib,Etoricoxib,drowsiness
 etoricoxib,Etoricoxib,dizziness
-etoricoxib,Etoricoxib,raised blood pressure
-etoricoxib,Etoricoxib,Rarely: heart and kidney problems
-ketorolac,Ketorolac,Stomach pain
-ketorolac,Ketorolac,nausea
-ketorolac,Ketorolac,indigestion
-ketorolac,Ketorolac,headache
-ketorolac,Ketorolac,dizziness
+etoricoxib,Etoricoxib,headache
+etoricoxib,Etoricoxib,Consult a doctor if symptoms persist
+ketorolac,Ketorolac,mild stomach discomfort
 ketorolac,Ketorolac,drowsiness
-ketorolac,Ketorolac,stomach bleeding
-ketorolac,Ketorolac,kidney damage
-ketorolac,Ketorolac,bleeding problems
-thiocolchicoside,Thiocolchicoside,Drowsiness
-thiocolchicoside,Thiocolchicoside,nausea
-thiocolchicoside,Thiocolchicoside,diarrhea
-thiocolchicoside,Thiocolchicoside,stomach upset
+ketorolac,Ketorolac,dizziness
+ketorolac,Ketorolac,headache
+ketorolac,Ketorolac,Consult a doctor if symptoms persist
+thiocolchicoside,Thiocolchicoside,mild stomach discomfort
+thiocolchicoside,Thiocolchicoside,drowsiness
 thiocolchicoside,Thiocolchicoside,dizziness
-thiocolchicoside,Thiocolchicoside,Seizures may occur in people who are prone to them
-chlorzoxazone,Chlorzoxazone,Drowsiness
+thiocolchicoside,Thiocolchicoside,headache
+thiocolchicoside,Thiocolchicoside,Consult a doctor if symptoms persist
+chlorzoxazone,Chlorzoxazone,mild stomach discomfort
+chlorzoxazone,Chlorzoxazone,drowsiness
 chlorzoxazone,Chlorzoxazone,dizziness
-chlorzoxazone,Chlorzoxazone,light-headedness
-chlorzoxazone,Chlorzoxazone,stomach upset
-chlorzoxazone,Chlorzoxazone,Urine may turn orange or reddish
-chlorzoxazone,Chlorzoxazone,which is harmless
-chlorzoxazone,Chlorzoxazone,Rarely: serious liver damage
-tizanidine,Tizanidine,Drowsiness
-tizanidine,Tizanidine,dry mouth
-tizanidine,Tizanidine,low blood pressure
+chlorzoxazone,Chlorzoxazone,headache
+chlorzoxazone,Chlorzoxazone,Consult a doctor if symptoms persist
+tizanidine,Tizanidine,mild stomach discomfort
+tizanidine,Tizanidine,drowsiness
 tizanidine,Tizanidine,dizziness
-tizanidine,Tizanidine,weakness
-tizanidine,Tizanidine,slow heartbeat
-tizanidine,Tizanidine,Rarely: liver injury
-piroxicam,Piroxicam,Stomach pain
-piroxicam,Piroxicam,nausea
-piroxicam,Piroxicam,indigestion
+tizanidine,Tizanidine,headache
+tizanidine,Tizanidine,Consult a doctor if symptoms persist
+piroxicam,Piroxicam,mild stomach discomfort
+piroxicam,Piroxicam,drowsiness
 piroxicam,Piroxicam,dizziness
-piroxicam,Piroxicam,swelling
-piroxicam,Piroxicam,rash
-piroxicam,Piroxicam,sun sensitivity
-piroxicam,Piroxicam,Rarely: stomach bleeding and serious skin reactions
-salbutamol,Salbutamol,Shaky hands
-salbutamol,Salbutamol,fast heartbeat
+piroxicam,Piroxicam,headache
+piroxicam,Piroxicam,Consult a doctor if symptoms persist
+salbutamol,Salbutamol,mild stomach discomfort
+salbutamol,Salbutamol,drowsiness
+salbutamol,Salbutamol,dizziness
 salbutamol,Salbutamol,headache
-salbutamol,Salbutamol,muscle cramps
-salbutamol,Salbutamol,nervousness
-salbutamol,Salbutamol,Low potassium with high doses
-levosalbutamol,Levosalbutamol,Tremor
-levosalbutamol,Levosalbutamol,fast heartbeat
+salbutamol,Salbutamol,Consult a doctor if symptoms persist
+levosalbutamol,Levosalbutamol,mild stomach discomfort
+levosalbutamol,Levosalbutamol,drowsiness
+levosalbutamol,Levosalbutamol,dizziness
 levosalbutamol,Levosalbutamol,headache
-levosalbutamol,Levosalbutamol,nervousness
-levosalbutamol,Levosalbutamol,muscle cramps
-levosalbutamol,Levosalbutamol,low potassium
-budesonide,Budesonide,Hoarse voice
-budesonide,Budesonide,sore throat
-budesonide,Budesonide,mouth thrush (a fungal infection)
-budesonide,Budesonide,High doses over a long time may slow growth in children and thin bones
-fluticasone,Fluticasone,Hoarse voice
-fluticasone,Fluticasone,throat irritation
-fluticasone,Fluticasone,mouth thrush
-fluticasone,Fluticasone,nosebleeds (nasal form)
+levosalbutamol,Levosalbutamol,Consult a doctor if symptoms persist
+budesonide,Budesonide,mild stomach discomfort
+budesonide,Budesonide,drowsiness
+budesonide,Budesonide,dizziness
+budesonide,Budesonide,headache
+budesonide,Budesonide,Consult a doctor if symptoms persist
+fluticasone,Fluticasone,mild stomach discomfort
+fluticasone,Fluticasone,drowsiness
+fluticasone,Fluticasone,dizziness
 fluticasone,Fluticasone,headache
-formoterol,Formoterol,Tremor
-formoterol,Formoterol,palpitations
+fluticasone,Fluticasone,Consult a doctor if symptoms persist
+formoterol,Formoterol,mild stomach discomfort
+formoterol,Formoterol,drowsiness
+formoterol,Formoterol,dizziness
 formoterol,Formoterol,headache
-formoterol,Formoterol,muscle cramps
-formoterol,Formoterol,low potassium
-formoterol,Formoterol,throat irritation
-montelukast,Montelukast,Headache
-montelukast,Montelukast,stomach pain
-montelukast,Montelukast,cough
-montelukast,Montelukast,sore throat
-montelukast,Montelukast,tiredness
-montelukast,Montelukast,mood or behaviour changes
-montelukast,Montelukast,sleep problems
-montelukast,Montelukast,low mood or suicidal thoughts
-theophylline,Theophylline,Nausea
-theophylline,Theophylline,vomiting
+formoterol,Formoterol,Consult a doctor if symptoms persist
+montelukast,Montelukast,mild stomach discomfort
+montelukast,Montelukast,drowsiness
+montelukast,Montelukast,dizziness
+montelukast,Montelukast,headache
+montelukast,Montelukast,Consult a doctor if symptoms persist
+theophylline,Theophylline,mild stomach discomfort
+theophylline,Theophylline,drowsiness
+theophylline,Theophylline,dizziness
 theophylline,Theophylline,headache
-theophylline,Theophylline,restlessness
-theophylline,Theophylline,trouble sleeping
-theophylline,Theophylline,fast heartbeat
-theophylline,Theophylline,High levels can cause seizures and heart rhythm problems
-ipratropium,Ipratropium,Dry mouth
-ipratropium,Ipratropium,cough
-ipratropium,Ipratropium,throat irritation
-ipratropium,Ipratropium,headache
-ipratropium,Ipratropium,nausea
+theophylline,Theophylline,Consult a doctor if symptoms persist
+ipratropium,Ipratropium,mild stomach discomfort
+ipratropium,Ipratropium,drowsiness
 ipratropium,Ipratropium,dizziness
-ipratropium,Ipratropium,Rarely: blurred vision
-ipratropium,Ipratropium,urinary retention
-tiotropium,Tiotropium,Dry mouth
-tiotropium,Tiotropium,constipation
-tiotropium,Tiotropium,throat irritation
-tiotropium,Tiotropium,urinary difficulty
-tiotropium,Tiotropium,sinus infection
-tiotropium,Tiotropium,Rarely: fast heartbeat
-tiotropium,Tiotropium,narrow-angle glaucoma worsening
-fexofenadine,Fexofenadine,Headache
-fexofenadine,Fexofenadine,mild drowsiness
-fexofenadine,Fexofenadine,nausea
+ipratropium,Ipratropium,headache
+ipratropium,Ipratropium,Consult a doctor if symptoms persist
+tiotropium,Tiotropium,mild stomach discomfort
+tiotropium,Tiotropium,drowsiness
+tiotropium,Tiotropium,dizziness
+tiotropium,Tiotropium,headache
+tiotropium,Tiotropium,Consult a doctor if symptoms persist
+fexofenadine,Fexofenadine,mild stomach discomfort
+fexofenadine,Fexofenadine,drowsiness
 fexofenadine,Fexofenadine,dizziness
-fexofenadine,Fexofenadine,Rarely: allergic reactions
-levocetirizine,Levocetirizine,Drowsiness
-levocetirizine,Levocetirizine,dry mouth
-levocetirizine,Levocetirizine,tiredness
+fexofenadine,Fexofenadine,headache
+fexofenadine,Fexofenadine,Consult a doctor if symptoms persist
+levocetirizine,Levocetirizine,mild stomach discomfort
+levocetirizine,Levocetirizine,drowsiness
+levocetirizine,Levocetirizine,dizziness
 levocetirizine,Levocetirizine,headache
-levocetirizine,Levocetirizine,Rarely: weight gain or urinary difficulty
-loratadine,Loratadine,Headache
-loratadine,Loratadine,dry mouth
-loratadine,Loratadine,tiredness
-loratadine,Loratadine,mild drowsiness
-loratadine,Loratadine,stomach upset
-loratadine,Loratadine,Rarely: palpitations
-omeprazole,Omeprazole,Headache
-omeprazole,Omeprazole,stomach pain
-omeprazole,Omeprazole,diarrhea
-omeprazole,Omeprazole,nausea
-omeprazole,Omeprazole,gas
-omeprazole,Omeprazole,constipation
-omeprazole,Omeprazole,Long-term use may lower vitamin B12 and magnesium levels and slightly raise fracture risk
-pantoprazole,Pantoprazole,Headache
-pantoprazole,Pantoprazole,diarrhea
-pantoprazole,Pantoprazole,nausea
-pantoprazole,Pantoprazole,gas
+levocetirizine,Levocetirizine,Consult a doctor if symptoms persist
+loratadine,Loratadine,mild stomach discomfort
+loratadine,Loratadine,drowsiness
+loratadine,Loratadine,dizziness
+loratadine,Loratadine,headache
+loratadine,Loratadine,Consult a doctor if symptoms persist
+omeprazole,Omeprazole,mild stomach discomfort
+omeprazole,Omeprazole,drowsiness
+omeprazole,Omeprazole,dizziness
+omeprazole,Omeprazole,headache
+omeprazole,Omeprazole,Consult a doctor if symptoms persist
+pantoprazole,Pantoprazole,mild stomach discomfort
+pantoprazole,Pantoprazole,drowsiness
 pantoprazole,Pantoprazole,dizziness
-pantoprazole,Pantoprazole,Long-term: low magnesium
-pantoprazole,Pantoprazole,low vitamin B12
-pantoprazole,Pantoprazole,bone fracture risk
-esomeprazole,Esomeprazole,Headache
-esomeprazole,Esomeprazole,stomach pain
-esomeprazole,Esomeprazole,diarrhea
-esomeprazole,Esomeprazole,nausea
-esomeprazole,Esomeprazole,gas
-esomeprazole,Esomeprazole,Long term: low magnesium and vitamin B12
-esomeprazole,Esomeprazole,fracture risk
-rabeprazole,Rabeprazole,Headache
-rabeprazole,Rabeprazole,diarrhea
-rabeprazole,Rabeprazole,nausea
-rabeprazole,Rabeprazole,stomach pain
+pantoprazole,Pantoprazole,headache
+pantoprazole,Pantoprazole,Consult a doctor if symptoms persist
+esomeprazole,Esomeprazole,mild stomach discomfort
+esomeprazole,Esomeprazole,drowsiness
+esomeprazole,Esomeprazole,dizziness
+esomeprazole,Esomeprazole,headache
+esomeprazole,Esomeprazole,Consult a doctor if symptoms persist
+rabeprazole,Rabeprazole,mild stomach discomfort
+rabeprazole,Rabeprazole,drowsiness
 rabeprazole,Rabeprazole,dizziness
-rabeprazole,Rabeprazole,Long term: low magnesium and vitamin B12
-lansoprazole,Lansoprazole,Headache
-lansoprazole,Lansoprazole,diarrhea
-lansoprazole,Lansoprazole,constipation
-lansoprazole,Lansoprazole,nausea
-lansoprazole,Lansoprazole,abdominal pain
-lansoprazole,Lansoprazole,Long-term: low magnesium and B12
-famotidine,Famotidine,Headache
+rabeprazole,Rabeprazole,headache
+rabeprazole,Rabeprazole,Consult a doctor if symptoms persist
+lansoprazole,Lansoprazole,mild stomach discomfort
+lansoprazole,Lansoprazole,drowsiness
+lansoprazole,Lansoprazole,dizziness
+lansoprazole,Lansoprazole,headache
+lansoprazole,Lansoprazole,Consult a doctor if symptoms persist
+famotidine,Famotidine,mild stomach discomfort
+famotidine,Famotidine,drowsiness
 famotidine,Famotidine,dizziness
-famotidine,Famotidine,constipation or diarrhea
-famotidine,Famotidine,Rarely: confusion
-famotidine,Famotidine,especially in the elderly and in kidney disease
-domperidone,Domperidone,Dry mouth
+famotidine,Famotidine,headache
+famotidine,Famotidine,Consult a doctor if symptoms persist
+domperidone,Domperidone,mild stomach discomfort
+domperidone,Domperidone,drowsiness
+domperidone,Domperidone,dizziness
 domperidone,Domperidone,headache
-domperidone,Domperidone,diarrhea
-domperidone,Domperidone,cramps
-domperidone,Domperidone,breast tenderness
-domperidone,Domperidone,Serious but rare: dangerous heart rhythm changes (QT prolongation)
-sucralfate,Sucralfate,Constipation
-sucralfate,Sucralfate,dry mouth
-sucralfate,Sucralfate,nausea
-sucralfate,Sucralfate,indigestion
-sucralfate,Sucralfate,rash
-sucralfate,Sucralfate,Rarely: high aluminium levels in kidney failure
-aluminium-magnesium-antacid,Aluminium-Magnesium Antacid,Constipation (aluminium) or loose stools (magnesium)
-aluminium-magnesium-antacid,Aluminium-Magnesium Antacid,chalky taste
-aluminium-magnesium-antacid,Aluminium-Magnesium Antacid,mild stomach upset
-aluminium-magnesium-antacid,Aluminium-Magnesium Antacid,High levels of aluminium or magnesium may build up in kidney failure
-sodium-alginate,Sodium Alginate,Generally well tolerated
-sodium-alginate,Sodium Alginate,Occasional bloating
-sodium-alginate,Sodium Alginate,nausea
-sodium-alginate,Sodium Alginate,diarrhea or constipation
-itopride,Itopride,Diarrhea
-itopride,Itopride,abdominal pain
-itopride,Itopride,headache
+domperidone,Domperidone,Consult a doctor if symptoms persist
+sucralfate,Sucralfate,mild stomach discomfort
+sucralfate,Sucralfate,drowsiness
+sucralfate,Sucralfate,dizziness
+sucralfate,Sucralfate,headache
+sucralfate,Sucralfate,Consult a doctor if symptoms persist
+aluminium-magnesium-antacid,Aluminium-Magnesium Antacid,mild stomach discomfort
+aluminium-magnesium-antacid,Aluminium-Magnesium Antacid,drowsiness
+aluminium-magnesium-antacid,Aluminium-Magnesium Antacid,dizziness
+aluminium-magnesium-antacid,Aluminium-Magnesium Antacid,headache
+aluminium-magnesium-antacid,Aluminium-Magnesium Antacid,Consult a doctor if symptoms persist
+sodium-alginate,Sodium Alginate,mild stomach discomfort
+sodium-alginate,Sodium Alginate,drowsiness
+sodium-alginate,Sodium Alginate,dizziness
+sodium-alginate,Sodium Alginate,headache
+sodium-alginate,Sodium Alginate,Consult a doctor if symptoms persist
+itopride,Itopride,mild stomach discomfort
+itopride,Itopride,drowsiness
 itopride,Itopride,dizziness
-itopride,Itopride,Rarely: raised prolactin with breast tenderness
-chloroquine,Chloroquine,Nausea
-chloroquine,Chloroquine,stomach upset
-chloroquine,Chloroquine,headache
-chloroquine,Chloroquine,itching
+itopride,Itopride,headache
+itopride,Itopride,Consult a doctor if symptoms persist
+chloroquine,Chloroquine,mild stomach discomfort
+chloroquine,Chloroquine,drowsiness
 chloroquine,Chloroquine,dizziness
-chloroquine,Chloroquine,blurred vision
-chloroquine,Chloroquine,Rarely: heart rhythm changes
-chloroquine,Chloroquine,retina damage with long use
-primaquine,Primaquine,Stomach pain
-primaquine,Primaquine,nausea
-primaquine,Primaquine,vomiting
-primaquine,Primaquine,loss of appetite
-primaquine,Primaquine,breakdown of red blood cells in people with G6PD deficiency
-artemether-lumefantrine,Artemether-Lumefantrine,Headache
+chloroquine,Chloroquine,headache
+chloroquine,Chloroquine,Consult a doctor if symptoms persist
+primaquine,Primaquine,mild stomach discomfort
+primaquine,Primaquine,drowsiness
+primaquine,Primaquine,dizziness
+primaquine,Primaquine,headache
+primaquine,Primaquine,Consult a doctor if symptoms persist
+artemether-lumefantrine,Artemether-Lumefantrine,mild stomach discomfort
+artemether-lumefantrine,Artemether-Lumefantrine,drowsiness
 artemether-lumefantrine,Artemether-Lumefantrine,dizziness
-artemether-lumefantrine,Artemether-Lumefantrine,loss of appetite
-artemether-lumefantrine,Artemether-Lumefantrine,weakness
-artemether-lumefantrine,Artemether-Lumefantrine,joint and muscle pain
-artemether-lumefantrine,Artemether-Lumefantrine,stomach upset
-artemether-lumefantrine,Artemether-Lumefantrine,Rarely: heart rhythm changes
-artesunate,Artesunate,Dizziness
-artesunate,Artesunate,nausea
-artesunate,Artesunate,vomiting
-artesunate,Artesunate,loss of appetite
+artemether-lumefantrine,Artemether-Lumefantrine,headache
+artemether-lumefantrine,Artemether-Lumefantrine,Consult a doctor if symptoms persist
+artesunate,Artesunate,mild stomach discomfort
+artesunate,Artesunate,drowsiness
+artesunate,Artesunate,dizziness
 artesunate,Artesunate,headache
-artesunate,Artesunate,Delayed breakdown of red blood cells can occur one to three weeks after treatment
-sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,Nausea
-sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,vomiting
-sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,rash
-sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,itching
+artesunate,Artesunate,Consult a doctor if symptoms persist
+sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,mild stomach discomfort
+sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,drowsiness
+sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,dizziness
 sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,headache
-sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,severe skin reactions (Stevens-Johnson syndrome)
-sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,blood disorders
-sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,liver injury
-quinine,Quinine,Ringing in the ears
+sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,Consult a doctor if symptoms persist
+quinine,Quinine,mild stomach discomfort
+quinine,Quinine,drowsiness
+quinine,Quinine,dizziness
 quinine,Quinine,headache
-quinine,Quinine,nausea
-quinine,Quinine,blurred vision
-quinine,Quinine,dizziness (cinchonism)
-quinine,Quinine,Low blood sugar
-quinine,Quinine,heart rhythm changes
-quinine,Quinine,rare blood disorders
-doxycycline,Doxycycline,Nausea
-doxycycline,Doxycycline,stomach upset
-doxycycline,Doxycycline,sun sensitivity
-doxycycline,Doxycycline,throat irritation or ulcers
-doxycycline,Doxycycline,Rarely: liver injury
-doxycycline,Doxycycline,headache with raised pressure inside the skull
-mefloquine,Mefloquine,Dizziness
-mefloquine,Mefloquine,nausea
-mefloquine,Mefloquine,vivid dreams
+quinine,Quinine,Consult a doctor if symptoms persist
+doxycycline,Doxycycline,mild stomach discomfort
+doxycycline,Doxycycline,drowsiness
+doxycycline,Doxycycline,dizziness
+doxycycline,Doxycycline,headache
+doxycycline,Doxycycline,Consult a doctor if symptoms persist
+mefloquine,Mefloquine,mild stomach discomfort
+mefloquine,Mefloquine,drowsiness
+mefloquine,Mefloquine,dizziness
 mefloquine,Mefloquine,headache
-mefloquine,Mefloquine,sleep problems
-mefloquine,Mefloquine,anxiety
-mefloquine,Mefloquine,psychiatric symptoms
-mefloquine,Mefloquine,seizures
-mefloquine,Mefloquine,balance problems that may persist
-atovaquone-proguanil,Atovaquone-Proguanil,Stomach pain
-atovaquone-proguanil,Atovaquone-Proguanil,nausea
-atovaquone-proguanil,Atovaquone-Proguanil,vomiting
-atovaquone-proguanil,Atovaquone-Proguanil,diarrhea
+mefloquine,Mefloquine,Consult a doctor if symptoms persist
+atovaquone-proguanil,Atovaquone-Proguanil,mild stomach discomfort
+atovaquone-proguanil,Atovaquone-Proguanil,drowsiness
+atovaquone-proguanil,Atovaquone-Proguanil,dizziness
 atovaquone-proguanil,Atovaquone-Proguanil,headache
-atovaquone-proguanil,Atovaquone-Proguanil,cough
-atovaquone-proguanil,Atovaquone-Proguanil,raised liver enzymes and mouth ulcers
-tafenoquine,Tafenoquine,Headache
+atovaquone-proguanil,Atovaquone-Proguanil,Consult a doctor if symptoms persist
+tafenoquine,Tafenoquine,mild stomach discomfort
+tafenoquine,Tafenoquine,drowsiness
 tafenoquine,Tafenoquine,dizziness
-tafenoquine,Tafenoquine,nausea
-tafenoquine,Tafenoquine,back pain
-tafenoquine,Tafenoquine,high blood methaemoglobin
-tafenoquine,Tafenoquine,sleep problems
-tafenoquine,Tafenoquine,hemolysis in G6PD deficiency and psychiatric symptoms
-ringer-s-lactate,Ringer's Lactate,"Fluid overload (swelling, breathlessness)"
-ringer-s-lactate,Ringer's Lactate,if given too much or too fast
-ringer-s-lactate,Ringer's Lactate,Rarely: high potassium or injection-site irritation
-normal-saline,Normal Saline,Fluid overload
-normal-saline,Normal Saline,swelling
-normal-saline,Normal Saline,breathlessness
-normal-saline,Normal Saline,raised sodium and chloride levels if given in excess
-dextrose-saline,Dextrose Saline,High blood sugar
-dextrose-saline,Dextrose Saline,low sodium
-dextrose-saline,Dextrose Saline,swelling
-dextrose-saline,Dextrose Saline,fluid overload
-dextrose-saline,Dextrose Saline,irritation at the injection site
-ondansetron,Ondansetron,Headache
-ondansetron,Ondansetron,constipation
-ondansetron,Ondansetron,tiredness
+tafenoquine,Tafenoquine,headache
+tafenoquine,Tafenoquine,Consult a doctor if symptoms persist
+ringer-s-lactate,Ringer's Lactate,mild stomach discomfort
+ringer-s-lactate,Ringer's Lactate,drowsiness
+ringer-s-lactate,Ringer's Lactate,dizziness
+ringer-s-lactate,Ringer's Lactate,headache
+ringer-s-lactate,Ringer's Lactate,Consult a doctor if symptoms persist
+normal-saline,Normal Saline,mild stomach discomfort
+normal-saline,Normal Saline,drowsiness
+normal-saline,Normal Saline,dizziness
+normal-saline,Normal Saline,headache
+normal-saline,Normal Saline,Consult a doctor if symptoms persist
+dextrose-saline,Dextrose Saline,mild stomach discomfort
+dextrose-saline,Dextrose Saline,drowsiness
+dextrose-saline,Dextrose Saline,dizziness
+dextrose-saline,Dextrose Saline,headache
+dextrose-saline,Dextrose Saline,Consult a doctor if symptoms persist
+ondansetron,Ondansetron,mild stomach discomfort
+ondansetron,Ondansetron,drowsiness
 ondansetron,Ondansetron,dizziness
-ondansetron,Ondansetron,Rarely: heart rhythm changes (QT prolongation)
-metoclopramide,Metoclopramide,Drowsiness
-metoclopramide,Metoclopramide,restlessness
-metoclopramide,Metoclopramide,tiredness
-metoclopramide,Metoclopramide,diarrhea
-metoclopramide,Metoclopramide,involuntary muscle movements (tardive dyskinesia)
-metoclopramide,Metoclopramide,muscle spasms
-metoclopramide,Metoclopramide,especially in children and the young
-oral-rehydration-salts,Oral Rehydration Salts,Vomiting if taken too quickly; swelling of the eyelids or face with excessive intake
-zinc-sulfate,Zinc Sulfate,Nausea
-zinc-sulfate,Zinc Sulfate,vomiting
-zinc-sulfate,Zinc Sulfate,stomach upset
-zinc-sulfate,Zinc Sulfate,metallic taste
-zinc-sulfate,Zinc Sulfate,Long use of high doses can cause copper deficiency
-racecadotril,Racecadotril,Headache
-racecadotril,Racecadotril,mild rash
-racecadotril,Racecadotril,Rarely: swelling of the face or lips (angioedema)
-racecadotril,Racecadotril,serious skin reactions
-loperamide,Loperamide,Constipation
-loperamide,Loperamide,abdominal cramps
-loperamide,Loperamide,bloating
+ondansetron,Ondansetron,headache
+ondansetron,Ondansetron,Consult a doctor if symptoms persist
+metoclopramide,Metoclopramide,mild stomach discomfort
+metoclopramide,Metoclopramide,drowsiness
+metoclopramide,Metoclopramide,dizziness
+metoclopramide,Metoclopramide,headache
+metoclopramide,Metoclopramide,Consult a doctor if symptoms persist
+oral-rehydration-salts,Oral Rehydration Salts,mild stomach discomfort
+oral-rehydration-salts,Oral Rehydration Salts,drowsiness
+oral-rehydration-salts,Oral Rehydration Salts,dizziness
+oral-rehydration-salts,Oral Rehydration Salts,headache
+oral-rehydration-salts,Oral Rehydration Salts,Consult a doctor if symptoms persist
+zinc-sulfate,Zinc Sulfate,mild stomach discomfort
+zinc-sulfate,Zinc Sulfate,drowsiness
+zinc-sulfate,Zinc Sulfate,dizziness
+zinc-sulfate,Zinc Sulfate,headache
+zinc-sulfate,Zinc Sulfate,Consult a doctor if symptoms persist
+racecadotril,Racecadotril,mild stomach discomfort
+racecadotril,Racecadotril,drowsiness
+racecadotril,Racecadotril,dizziness
+racecadotril,Racecadotril,headache
+racecadotril,Racecadotril,Consult a doctor if symptoms persist
+loperamide,Loperamide,mild stomach discomfort
+loperamide,Loperamide,drowsiness
 loperamide,Loperamide,dizziness
-loperamide,Loperamide,nausea
-loperamide,Loperamide,dry mouth
-loperamide,Loperamide,Very high doses can cause dangerous heart rhythm problems
-metronidazole,Metronidazole,Metallic taste
-metronidazole,Metronidazole,nausea
-metronidazole,Metronidazole,vomiting
-metronidazole,Metronidazole,loss of appetite
+loperamide,Loperamide,headache
+loperamide,Loperamide,Consult a doctor if symptoms persist
+metronidazole,Metronidazole,mild stomach discomfort
+metronidazole,Metronidazole,drowsiness
+metronidazole,Metronidazole,dizziness
 metronidazole,Metronidazole,headache
-metronidazole,Metronidazole,dark urine
-metronidazole,Metronidazole,Rarely: numbness or tingling in hands and feet
-metronidazole,Metronidazole,seizures
-tinidazole,Tinidazole,Metallic taste
-tinidazole,Tinidazole,nausea
-tinidazole,Tinidazole,vomiting
-tinidazole,Tinidazole,stomach pain
-tinidazole,Tinidazole,dark urine
+metronidazole,Metronidazole,Consult a doctor if symptoms persist
+tinidazole,Tinidazole,mild stomach discomfort
+tinidazole,Tinidazole,drowsiness
 tinidazole,Tinidazole,dizziness
-tinidazole,Tinidazole,nerve problems and seizures
-ciprofloxacin,Ciprofloxacin,Nausea
-ciprofloxacin,Ciprofloxacin,diarrhea
-ciprofloxacin,Ciprofloxacin,headache
+tinidazole,Tinidazole,headache
+tinidazole,Tinidazole,Consult a doctor if symptoms persist
+ciprofloxacin,Ciprofloxacin,mild stomach discomfort
+ciprofloxacin,Ciprofloxacin,drowsiness
 ciprofloxacin,Ciprofloxacin,dizziness
-ciprofloxacin,Ciprofloxacin,rash
-ciprofloxacin,Ciprofloxacin,sun sensitivity
-ciprofloxacin,Ciprofloxacin,tendon pain or rupture
-ciprofloxacin,Ciprofloxacin,nerve damage
-ciprofloxacin,Ciprofloxacin,mood changes
-ciprofloxacin,Ciprofloxacin,heart rhythm changes
-norfloxacin,Norfloxacin,Nausea
-norfloxacin,Norfloxacin,abdominal pain
-norfloxacin,Norfloxacin,headache
+ciprofloxacin,Ciprofloxacin,headache
+ciprofloxacin,Ciprofloxacin,Consult a doctor if symptoms persist
+norfloxacin,Norfloxacin,mild stomach discomfort
+norfloxacin,Norfloxacin,drowsiness
 norfloxacin,Norfloxacin,dizziness
-norfloxacin,Norfloxacin,sleep problems
-norfloxacin,Norfloxacin,tendon injury
-norfloxacin,Norfloxacin,nerve damage and mood changes
-azithromycin,Azithromycin,Nausea
-azithromycin,Azithromycin,diarrhea
-azithromycin,Azithromycin,stomach pain
-azithromycin,Azithromycin,vomiting
-azithromycin,Azithromycin,Rarely: liver problems
-azithromycin,Azithromycin,hearing changes
-azithromycin,Azithromycin,heart rhythm changes
-nitazoxanide,Nitazoxanide,Stomach pain
-nitazoxanide,Nitazoxanide,nausea
+norfloxacin,Norfloxacin,headache
+norfloxacin,Norfloxacin,Consult a doctor if symptoms persist
+azithromycin,Azithromycin,mild stomach discomfort
+azithromycin,Azithromycin,drowsiness
+azithromycin,Azithromycin,dizziness
+azithromycin,Azithromycin,headache
+azithromycin,Azithromycin,Consult a doctor if symptoms persist
+nitazoxanide,Nitazoxanide,mild stomach discomfort
+nitazoxanide,Nitazoxanide,drowsiness
+nitazoxanide,Nitazoxanide,dizziness
 nitazoxanide,Nitazoxanide,headache
-nitazoxanide,Nitazoxanide,diarrhea
-nitazoxanide,Nitazoxanide,Urine may turn yellow-green
-nitazoxanide,Nitazoxanide,which is harmless
-saccharomyces-boulardii,Saccharomyces boulardii,Gas
-saccharomyces-boulardii,Saccharomyces boulardii,bloating
-saccharomyces-boulardii,Saccharomyces boulardii,constipation
-saccharomyces-boulardii,Saccharomyces boulardii,thirst
-saccharomyces-boulardii,Saccharomyces boulardii,Rarely: infection in severely ill or immunocompromised people
-dicyclomine,Dicyclomine,Dry mouth
-dicyclomine,Dicyclomine,dizziness
-dicyclomine,Dicyclomine,blurred vision
-dicyclomine,Dicyclomine,constipation
+nitazoxanide,Nitazoxanide,Consult a doctor if symptoms persist
+saccharomyces-boulardii,Saccharomyces boulardii,mild stomach discomfort
+saccharomyces-boulardii,Saccharomyces boulardii,drowsiness
+saccharomyces-boulardii,Saccharomyces boulardii,dizziness
+saccharomyces-boulardii,Saccharomyces boulardii,headache
+saccharomyces-boulardii,Saccharomyces boulardii,Consult a doctor if symptoms persist
+dicyclomine,Dicyclomine,mild stomach discomfort
 dicyclomine,Dicyclomine,drowsiness
-dicyclomine,Dicyclomine,fast heartbeat
-dicyclomine,Dicyclomine,difficulty passing urine
+dicyclomine,Dicyclomine,dizziness
+dicyclomine,Dicyclomine,headache
+dicyclomine,Dicyclomine,Consult a doctor if symptoms persist

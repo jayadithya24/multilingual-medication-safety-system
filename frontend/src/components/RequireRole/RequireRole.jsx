@@ -1,9 +1,9 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { getStoredRole, getStoredToken } from "../../services/api";
+import { getStoredRole, hasStoredSession } from "../../services/api";
 
 function RequireRole({ allowedRoles }) {
   const location = useLocation();
-  const token = getStoredToken();
+  const token = hasStoredSession();
   const role = getStoredRole();
 
   const localDoctorPreview = import.meta.env.DEV

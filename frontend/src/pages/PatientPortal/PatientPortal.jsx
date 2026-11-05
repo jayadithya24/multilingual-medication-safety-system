@@ -35,7 +35,7 @@ function PatientPortal() {
     navigate("/patient-profile", { replace: true });
 
   } catch (loginError) {
-    console.error("Login error:", loginError);
+    console.error("Request failed", loginError?.response?.status || "unavailable");
 
     const detail = loginError?.response?.data?.detail;
 
@@ -86,7 +86,7 @@ function PatientPortal() {
     setError("");
 
   } catch (registerError) {
-    console.error("Registration error:", registerError);
+    console.error("Request failed", registerError?.response?.status || "unavailable");
 
     const detail = registerError?.response?.data?.detail;
 

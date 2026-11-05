@@ -6,7 +6,7 @@ def main():
     with sync_playwright() as p:
         browser = p.chromium.launch(channel="msedge", headless=True)
         page = browser.new_page()
-        page.add_init_script("localStorage.setItem('mmss_token','test-token'); localStorage.setItem('mmss_role','doctor');")
+        page.add_init_script("sessionStorage.setItem('mmss_session','active'); sessionStorage.setItem('mmss_role','doctor');")
         page.route("**/auth/me", lambda route: route.fulfill(json={"username": "alex@example.invalid", "full_name": "Alex Rao", "role": "doctor"}))
         page.route("**/doctor/patients", lambda route: route.fulfill(json={"patients": []}))
         page.goto("http://localhost:5173/doctor-patients")

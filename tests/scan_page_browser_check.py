@@ -11,7 +11,7 @@ def main():
     with sync_playwright() as p:
         browser = p.chromium.launch(channel="msedge", headless=True)
         page = browser.new_page()
-        page.add_init_script("localStorage.setItem('mmss_token', 'browser-test'); localStorage.setItem('mmss_role', 'patient');")
+        page.add_init_script("sessionStorage.setItem('mmss_session','active'); sessionStorage.setItem('mmss_role', 'patient');")
         page.add_init_script("window.scanSpeech = []; speechSynthesis.speak = utterance => { window.scanSpeech.push(utterance.text); utterance.onstart?.(); };")
         saves = []
         speech = []

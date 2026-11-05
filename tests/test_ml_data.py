@@ -6,7 +6,7 @@ import pandas as pd
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location("prepare_ml_data", ROOT / "datasets/prepare_ml_data.py")
+spec = importlib.util.spec_from_file_location("prepare_ml_data", ROOT / "tools/datasets/prepare_ml_data.py")
 module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
 

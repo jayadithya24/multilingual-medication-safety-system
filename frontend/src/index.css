@@ -1,17 +1,17 @@
 html {
-  color-scheme: dark;
-  background: #020617;
+  color-scheme: light;
+  background: #f8fafc;
 }
 
 :root {
   font-family: "Avenir Next", "Segoe UI Variable", "Segoe UI", sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #e2e8f0;
+  color: #1e293b;
   background:
     radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 30%),
     radial-gradient(circle at bottom right, rgba(15, 118, 110, 0.14), transparent 28%),
-    #020617;
+    #f8fafc;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

@@ -1,3 +1,4 @@
+import ConsentManager from "../../components/patient/ConsentManager";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import Loading from "../../components/Loading/Loading";
@@ -6,7 +7,6 @@ import VoicePlayback from "../../components/VoicePlayback";
 
 import { searchMedicine, fetchMedicines } from "../../services/medicineService";
 import VoiceSearch from "../VoiceSearch/VoiceSearch";
-import api from "../../services/api";
 import { fetchDiseases } from "../../services/neo4jService";
 import { registerMedicationNotifications, sendTestNotification } from "../../services/fcmService";
 import PatientReportGeneratorModal from "../../components/patient/PatientReportGeneratorModal";
@@ -78,9 +78,6 @@ function PublicDashboard() {
     const [takingMedicineId, setTakingMedicineId] = useState(null);
     const [deletingMedicineId, setDeletingMedicineId] = useState(null);
     const [schedulePendingDeletion, setSchedulePendingDeletion] = useState(null);
-    const [accessRequests, setAccessRequests] = useState([]);
-    const pendingAccessRequests = accessRequests.filter((request) => request.status === "PENDING");
-    const [accessRequestError, setAccessRequestError] = useState("");
     const [notificationStatus, setNotificationStatus] = useState("");
     const [testNotificationLoading, setTestNotificationLoading] = useState(false);
     const [showReportModal, setShowReportModal] = useState(false);
@@ -97,7 +94,7 @@ function PublicDashboard() {
                     setMedicineNames(response.medicines || []);
                 }
             } catch (error) {
-                console.error(error);
+                console.error("Request failed", error?.response?.status || "unavailable");
 
                 if (isMounted) {
                     setMedicineNames([]);
@@ -133,7 +130,7 @@ function PublicDashboard() {
                 }
             })
             .catch((error) => {
-                console.error("[FCM] Registration failed:", error);
+                console.error("Request failed", error?.response?.status || "unavailable");
                 setNotificationStatus(`Medication reminders failed: ${error.message}`);
             });
     };
@@ -144,7 +141,7 @@ function PublicDashboard() {
             const result = await sendTestNotification();
             setNotificationStatus(result.message || "Test notification sent.");
         } catch (error) {
-            console.error("[FCM] Test notification failed:", error);
+            console.error("Request failed", error?.response?.status || "unavailable");
             setNotificationStatus(error?.response?.data?.detail || "Test notification failed.");
         } finally {
             setTestNotificationLoading(false);
@@ -196,7 +193,7 @@ function PublicDashboard() {
             });
         } catch (error) {
             if (version !== searchVersion.current) return;
-            console.error(error);
+            console.error("Request failed", error?.response?.status || "unavailable");
             setTextError(
                 "Unable to search for that medicine or disease right now."
             );
@@ -232,7 +229,7 @@ function PublicDashboard() {
             );
 
         } catch (error) {
-            console.error(error);
+            console.error("Request failed", error?.response?.status || "unavailable");
 
             const status = error?.response?.status;
 
@@ -255,27 +252,6 @@ function PublicDashboard() {
         } finally {
             setScheduleLoading(false);
             setHistoryLoading(false);
-        }
-    };
-
-    const loadAccessRequests = async () => {
-        try {
-            const response = await api.get("/patient/access-requests");
-            setAccessRequests(response.data.requests || []);
-            setAccessRequestError("");
-        } catch (error) {
-            setAccessRequestError(error?.response?.data?.detail || "Unable to load access requests.");
-        }
-    };
-
-    const respondToAccessRequest = async (requestId, decision) => {
-        try {
-            await api.put(`/patient/access-request/${encodeURIComponent(requestId)}/${decision}`);
-            setAccessRequests((requests) => requests.filter((request) => request.requestId !== requestId));
-            setAccessRequestError("");
-            await loadAccessRequests();
-        } catch (error) {
-            setAccessRequestError(error?.response?.data?.detail || "Unable to update access request.");
         }
     };
 
@@ -306,9 +282,7 @@ function PublicDashboard() {
             setHistoryLoading(false);
         }
         loadMedicationTab();
-        api.get("/patient/access-requests")
-            .then(({ data }) => { if (active) { setAccessRequests(data.requests || []); setAccessRequestError(""); } })
-            .catch(() => { if (active) setAccessRequestError("Unable to load access requests. Please refresh."); });
+
         return () => { active = false; };
     }, [activeTab]);
 
@@ -321,7 +295,7 @@ function PublicDashboard() {
             // Reload schedule + history after marking medicine taken
             await loadPatientMedication();
         } catch (error) {
-            console.error(error);
+            console.error("Request failed", error?.response?.status || "unavailable");
 
             alert(
                 error?.response?.data?.detail ||
@@ -350,7 +324,7 @@ function PublicDashboard() {
             );
             setSchedulePendingDeletion(null);
         } catch (error) {
-            console.error(error);
+            console.error("Request failed", error?.response?.status || "unavailable");
             setScheduleError(
                 error?.response?.data?.detail ||
                 "Unable to remove this medicine from your schedule."
@@ -579,7 +553,7 @@ function PublicDashboard() {
                                     type="button"
                                     className="patient-refresh-button"
                                     onClick={
-                                        () => { loadPatientMedication(); loadAccessRequests(); }
+                                        () => { loadPatientMedication(); }
                                     }
                                     disabled={
                                         scheduleLoading ||
@@ -591,50 +565,8 @@ function PublicDashboard() {
 
                             </div>
 
-                            <div className="patient-medication-block">
-                                <div className="patient-medication-title">
-                                    <h3>👨‍⚕️ Doctor Research Requests & Automated Reports</h3>
-                                    <span>
-                                        {pendingAccessRequests.length} pending request{pendingAccessRequests.length === 1 ? "" : "s"}
-                                    </span>
-                                </div>
-                                {accessRequestError && <div className="patient-error">{accessRequestError}</div>}
-                                
-                                <div className="patient-access-requests-list">
-                                    <button type="button" className="patient-btn--accept" onClick={() => setShowReportModal(true)}>
-                                        Generate My Medication Report
-                                    </button>
-                                    {!accessRequestError && pendingAccessRequests.length === 0 && (
-                                        <p>No pending doctor access requests.</p>
-                                    )}
-
-                                    {pendingAccessRequests.map((request) => (
-                                        <div className="patient-access-card" key={request.requestId}>
-                                            <div className="patient-access-card__main">
-                                                <div className="patient-access-card__avatar">👨‍⚕️</div>
-                                                <div>
-                                                    <h3>Dr. {request.doctorName || "Medical Professional"}</h3>
-                                                    <p>Requesting permission to view medication schedule & history</p>
-                                                    <span className={`patient-badge patient-status--${request.status?.toLowerCase() || 'pending'}`}>
-                                                        {request.status}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            {request.status === "PENDING" && (
-                                                <div className="patient-access-card__actions">
-                                                    <button type="button" className="patient-btn--accept" onClick={() => setShowReportModal(true)}>
-                                                        📄 Generate Report
-                                                    </button>
-                                                    <button type="button" className="patient-btn--accept" onClick={() => respondToAccessRequest(request.requestId, "accept")}>
-                                                        ✓ Grant Access
-                                                    </button>
-                                                </div>
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
+                            <ConsentManager />
+                            <button type="button" onClick={() => setShowReportModal(true)}>Generate My Medication Report</button>
                             {/* SCHEDULE */}
                             <div className="patient-medication-block">
 

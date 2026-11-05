@@ -17,7 +17,7 @@ function AdminPortal() {
       await loginWithPassword(identity.trim(), password, false, "admin");
       navigate("/admin-dashboard", { replace: true });
     } catch (loginError) {
-      console.error(loginError);
+      console.error("Request failed", loginError?.response?.status || "unavailable");
       setError(loginError?.response?.data?.detail || loginError.message || "Admin login failed.");
     } finally {
       setLoading(false);
@@ -30,7 +30,7 @@ function AdminPortal() {
         <div className="portal-auth-hero">
           <p className="portal-auth-kicker">Admin Portal</p>
           <h1>Admin sign in</h1>
-          <p>Enter the administration area to manage users, datasets, and system settings later.</p>
+          <p>Review doctor account applications and approve or reject submitted details.</p>
         </div>
 
         <div className="portal-auth-card">

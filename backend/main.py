@@ -8,11 +8,14 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from backend.app.request_limits import RequestLimits
 from backend.env_loader import load_project_env
 
 load_project_env()
+from backend.app.log_privacy import configure as configure_log_privacy
+configure_log_privacy()
 
 from backend.app.routes.upload import router as upload_router
 from backend.app.routes.mongo_loader_route import router as mongo_loader_router
@@ -37,22 +40,14 @@ app = FastAPI(
     version="1.0.0"
 )
 
+app.add_middleware(RequestLimits)
+from backend.app.browser_sessions import ALLOWED_ORIGINS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:5174",
-        "http://127.0.0.1:5174",
-        "http://localhost:5175",
-        "http://127.0.0.1:5175",
-        "http://localhost:8000",
-        "http://127.0.0.1:8000",
-    ],
-    allow_origin_regex=r"https?://(localhost|127\.0\.0\.1)(:\d+)?",
+    allow_origins=list(ALLOWED_ORIGINS),
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
 )
 app.include_router(upload_router)
 app.include_router(auth_router)
@@ -68,14 +63,54 @@ app.include_router(patient_router)
 app.include_router(access_requests_router)
 app.include_router(doctor_requests_router)
 app.include_router(fcm_router)
-app.include_router(risk_prediction_router)
+if os.getenv("ENABLE_RESEARCH_ML_API", "false").lower() == "true" and os.getenv('ENVIRONMENT', '').lower() != 'production':
+    app.include_router(risk_prediction_router)
+
+# Validation errors must not echo passwords, credentials or share codes.
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+
+@app.exception_handler(RequestValidationError)
+async def safe_validation_error(request, exc):
+    return JSONResponse(status_code=422, content={"detail": [
+        {"loc": list(error["loc"]), "msg": error["msg"], "type": error["type"]}
+        for error in exc.errors()
+    ]})
 
 reminder_stop_event = asyncio.Event()
 reminder_task = None
+graph_check_task = None
+
+
+@app.on_event("startup")
+async def start_graph_verification():
+    from backend.app.services.graph_health import check_graph
+    global graph_check_task
+    app.state.graph_check = {"status": "checking"}
+    async def monitor():
+        while True:
+            result = await asyncio.to_thread(check_graph)
+            app.state.graph_check = result
+            # Recover promptly when Neo4j is started after the API. Healthy graphs
+            # still use the lower-frequency check to avoid unnecessary work.
+            await asyncio.sleep(30 if result.get("status") == "unavailable" else 300)
+    graph_check_task = asyncio.create_task(monitor())
+
+
+@app.on_event("shutdown")
+async def stop_graph_verification():
+    if graph_check_task:
+        graph_check_task.cancel()
+        try:
+            await graph_check_task
+        except asyncio.CancelledError:
+            pass
 
 
 @app.on_event("startup")
 def warm_up_ocr():
+    if os.getenv('ENVIRONMENT', '').strip().lower() != 'production':
+        logging.getLogger(__name__).warning('DEVELOPMENT MODE: not a production deployment. Run tools/deploy_preflight.py before public deployment.')
     # PaddleOCR loads native model libraries; defer that work for Uvicorn reload.
     if os.getenv("WARM_UP_OCR", "true").lower() == "true":
         warm_up_reader()
@@ -110,8 +145,24 @@ def root():
 
 @app.get("/health")
 def health():
+    return {"status": "running"}
+
+
+from backend.app.auth import get_current_admin, get_current_active_user
+
+
+@app.get('/doctor/reference-status')
+def reference_status(user=Depends(get_current_active_user)):
+    if user.role != 'doctor':
+        raise HTTPException(403, 'Doctor access required.')
+    return {'graph_check': getattr(app.state, 'graph_check', {'status': 'not_checked'})}
+
+
+@app.get('/admin/health')
+def detailed_health(user=Depends(get_current_admin)):
     return {
         "status": "running",
+        "graph_check": getattr(app.state, "graph_check", {"status": "not_checked"}),
         "project": "Multilingual Medication Safety System",
         "firebase_admin_ready": getattr(app.state, "firebase_admin_ready", False),
         "reminder_worker_running": reminder_task is not None and not reminder_task.done(),

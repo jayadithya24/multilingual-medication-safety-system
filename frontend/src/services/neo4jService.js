@@ -1,4 +1,4 @@
-import api, { getStoredToken } from "./api";
+import api, { hasStoredSession } from "./api";
 
 export const fetchDiseases = async (lang = "en") => {
     const response = await api.get("/neo4j/diseases", { params: { lang } });
@@ -32,7 +32,7 @@ export const fetchInteractionGraph = async (
 };
 
 export async function fetchDoctorPatients() {
-    const token = getStoredToken();
+    const token = hasStoredSession();
 
     if (!token) {
         throw new Error("Doctor authentication required.");

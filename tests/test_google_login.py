@@ -19,16 +19,16 @@ def client(monkeypatch):
     })
     app = FastAPI()
     app.include_router(auth.router)
-    return TestClient(app), collection
+    return TestClient(app, headers={"Origin": "http://localhost:5173"}), collection
 
 
 def login(client):
-    return client.post('/auth/google', json={'credential': 'test-credential-for-unit-test', 'mode': 'register'})
+    return client.post('/auth/google-session', json={'credential': 'test-credential-for-unit-test', 'mode': 'register'})
 
 
 def test_google_login_requires_registration(client):
     browser, users = client
-    response = browser.post('/auth/google', json={'credential': 'test-credential-for-unit-test', 'mode': 'login'})
+    response = browser.post('/auth/google-session', json={'credential': 'test-credential-for-unit-test', 'mode': 'login'})
     assert response.status_code == 401
     assert users.count_documents({}) == 0
 
@@ -36,11 +36,11 @@ def test_google_login_requires_registration(client):
 def test_patient_password_login_requires_mongo_registration(client):
     browser, users = client
     for username in ('unknown@example.invalid', 'patient', 'doctor'):
-        response = browser.post('/auth/patient-token', data={'username': username, 'password': 'test-password'})
+        response = browser.post('/auth/session', data={'username': username, 'password': 'test-password'})
         assert response.status_code == 401
     users.insert_one({'username': 'registered@example.invalid', 'role': 'patient', 'hashed_password': auth.get_password_hash('test-password')})
-    assert browser.post('/auth/patient-token', data={'username': 'registered@example.invalid', 'password': 'wrong'}).status_code == 401
-    assert browser.post('/auth/patient-token', data={'username': 'registered@example.invalid', 'password': 'test-password'}).status_code == 200
+    assert browser.post('/auth/session', data={'username': 'registered@example.invalid', 'password': 'wrong'}).status_code == 401
+    assert browser.post('/auth/session', data={'username': 'registered@example.invalid', 'password': 'test-password'}).status_code == 200
 
 
 def test_google_creates_and_reuses_patient(client):
@@ -66,14 +66,14 @@ def test_google_links_only_after_correct_password(client):
     browser, users = client
     users.insert_one({'username': 'test@example.invalid', 'role': 'patient', 'patient_id': 'P001', 'age': 50, 'hashed_password': auth.get_password_hash('existing-password')})
     payload = {'credential': 'test-credential-for-unit-test', 'mode': 'login'}
-    assert browser.post('/auth/google', json=payload).json()['detail']['code'] == 'google_link_required'
-    assert browser.post('/auth/google', json={**payload, 'password': 'wrong-password'}).status_code == 401
+    assert browser.post('/auth/google-session', json=payload).json()['detail']['code'] == 'google_link_required'
+    assert browser.post('/auth/google-session', json={**payload, 'password': 'wrong-password'}).status_code == 401
     assert 'google_sub' not in users.find_one()
-    assert browser.post('/auth/google', json={**payload, 'password': 'existing-password'}).status_code == 200
+    assert browser.post('/auth/google-session', json={**payload, 'password': 'existing-password'}).status_code == 200
     assert users.count_documents({}) == 1
     assert users.find_one()['patient_id'] == 'P001'
     assert users.find_one()['age'] == 50
-    assert browser.post('/auth/google', json=payload).status_code == 200
+    assert browser.post('/auth/google-session', json=payload).status_code == 200
 
 
 @pytest.mark.parametrize('fields', [{'disabled': True, 'role': 'patient'}, {'role': 'doctor'}])

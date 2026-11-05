@@ -12,9 +12,13 @@ USE_MONGOMOCK = (
     or "PYTEST_CURRENT_TEST" in os.environ
     or os.environ.get("ENVIRONMENT", "").lower() == "test"
 )
+if os.environ.get('ENVIRONMENT', '').lower() == 'production' and USE_MONGOMOCK:
+    raise RuntimeError('Production cannot use an in-memory test database.')
 
 
 def _get_database_client():
+    if os.environ.get('ENVIRONMENT', '').lower() == 'production' and USE_MONGOMOCK:
+        raise RuntimeError('Production cannot use an in-memory test database.')
     if USE_MONGOMOCK:
         import mongomock
 
@@ -49,6 +53,14 @@ doctor_requests_collection = db["doctor_requests"]
 patient_schedules_collection = db["patient_schedules"]
 medication_history_collection = db["medication_history"]
 access_requests_collection = db["access_requests"]
+share_codes_collection = db["share_codes"]
+access_log_collection = db["access_log"]
+consent_attempts_collection = db["consent_attempts"]
+consent_attempts_collection.create_index([("doctorId", 1), ("window", 1)], unique=True)
+consent_attempts_collection.create_index("expiresAt", expireAfterSeconds=0)
+share_codes_collection.create_index("code_hash", unique=True)
+share_codes_collection.create_index("expiresAt", expireAfterSeconds=0)
+access_log_collection.create_index([("patientId", 1), ("createdAt", -1)])
 fcm_tokens_collection = db["fcm_tokens"]
 reminder_deliveries_collection = db["reminder_deliveries"]
 reminder_deliveries_collection.create_index([("schedule_id", 1), ("due_at", 1)], unique=True)

@@ -1,34 +1,47 @@
 # multilingual-medication-safety-system
 Multilingual Voice-Assisted Medication Information and Safety Monitoring System
 
-The [DDInter ML model](ml/DDINTER_MODEL.md) adds independently evaluated
-drug-pair severity classification from external documented labels, alongside
-the existing evidence checker and older synthetic-patient demonstration.
+See the [current implementation and verification record](IMPLEMENTATION_REVIEW.md)
+for the patient/doctor/admin workflow, share-code consent and measured test results.
+For presentation setup, see the [three-role demo walkthrough](docs/DEMO_WALKTHROUGH.md)
+and [human content-review handoff](docs/CONTENT_REVIEW.md). Demo credentials are
+generated locally by `tools/seed_demo.py` and must never be committed or shared.
+See [deployment prerequisites](docs/DEPLOYMENT.md) for trusted-proxy settings,
+account-security gaps and release/licensing boundaries.
+The [DDInter ML model](ml/DDINTER_MODEL.md) and older synthetic-patient model
+remain research artifacts; their panels are hidden from the doctor dashboard.
+The normal interaction checker shows recorded evidence and explicit coverage.
 
 The active English catalog covers **100 medicines across 10 diseases**. Kannada
 and Tulu each cover **100 medicines across 10 diseases**. Search, voice/OCR
 matching, patient disease selection, doctor references and disease protocols
 use the language-specific catalog in `datasets/`.
 
-After editing `datasets/english_master_records.json`, run
-`python datasets/update_english_scope.py` to refresh the English master,
+After editing the three maintained CSVs in `datasets/`, run
+`python tools/datasets/sync_datasets.py` to validate them and refresh
 compatibility copies, relationship tables and ML preparation exports. Restart
-the backend to clear cached datasets; use `python neo4j/load_data.py --apply` to refresh
+the backend to clear cached datasets; use `python -m neo4j.load_data --apply --sync` to reconcile
 an available Neo4j database. Translations and synthetic patient training data
 are maintained separately. Expanding the catalog does not train or validate the
 experimental risk model for the added medicines. Older dated reports describe
 their original scope.
 
+Default dataset validation rejects the 11 currently missing Tulu drug classes.
+For an explicitly incomplete demo synchronization, add `--allow-incomplete`;
+this preserves and reports missing content instead of inventing translations.
+The clean-install tested Windows interpreter is `.venv-review/Scripts/python.exe`;
+the older `.venv` points to a removed Python installation.
+
 ## Run locally
 
-Use Python 3.11 and Node.js with npm. Copy `.env.example` to `.env` and
+Use Python 3.13 and Node.js with npm. Copy `.env.example` to `.env` and
 `frontend/.env.example` to `frontend/.env`, then configure your own credentials.
 Do not commit environment files or Firebase service-account keys.
 
 ```powershell
 python -m venv .venv
 .venv/Scripts/python.exe -m pip install -r requirements.txt -r requirements-test.txt
-.venv/Scripts/python.exe -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
+.venv/Scripts/python.exe -m uvicorn backend.main:app --host 127.0.0.1 --port 8000 --no-proxy-headers
 ```
 
 In a second terminal:
@@ -52,7 +65,7 @@ is unavailable; that fallback is not proof that the live database is healthy.
 ## Data and model scope
 
 The Kannada and Tulu CSVs are user-maintained sources. Run
-`python datasets/prepare_ml_data.py` after editing them and restart the backend.
+`python tools/datasets/sync_datasets.py` after editing them and restart the backend.
 Tulu currently has 11 blank optional drug-class fields, recorded in the export
 manifest. Do not invent translations to fill those cells. The old 30-drug
 generators and workbook were removed from the active tree.

@@ -55,7 +55,7 @@ def send_patient_test_notification(current_user: User = Depends(get_current_acti
         if success_count == 0:
             raise RuntimeError("No device accepted the notification. Enable notifications again and retry.")
     except (RuntimeError, ValueError) as error:
-        raise HTTPException(status_code=503, detail=str(error)) from error
+        raise HTTPException(status_code=503, detail="No device accepted the test. Enable notifications and check the Firebase configuration.") from error
     except Exception as error:
         logger.warning("FCM test failed (%s)", type(error).__name__)
         raise HTTPException(503, "Firebase could not accept the notification. Check the backend credentials, project and device registration.") from error

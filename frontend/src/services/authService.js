@@ -1,12 +1,8 @@
-import api, { clearStoredToken, setStoredRole, setStoredToken } from "./api";
+import api, { clearStoredToken, setStoredRole, setStoredSession } from "./api";
 import { unregisterMedicationNotifications } from "./fcmService";
 
 function persistAuth(responseData) {
-  const accessToken = responseData?.access_token || responseData?.token;
-
-  if (accessToken) {
-    setStoredToken(accessToken);
-  }
+  setStoredSession();
 
   if (responseData?.role) {
     setStoredRole(responseData.role);
@@ -18,13 +14,16 @@ export async function loginWithPassword(username, password, patientOnly = false,
   body.append("username", username);
   body.append("password", password);
 
-  const response = await api.post(patientOnly ? "/auth/patient-token" : "/auth/token", body, {
+  const response = await api.post("/auth/session", body, {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
   });
 
+  expectedRole = patientOnly ? "patient" : expectedRole;
   if (expectedRole && response.data?.role !== expectedRole) {
+    await api.post("/auth/logout");
+    clearStoredToken();
     throw new Error(`Please sign in with a registered ${expectedRole} account.`);
   }
   persistAuth(response.data);
@@ -32,7 +31,7 @@ export async function loginWithPassword(username, password, patientOnly = false,
 }
 
 export async function registerPatient(name, email, password, confirmPassword) {
-  const response = await api.post("/auth/register", {
+  const response = await api.post("/auth/register-session", {
     name,
     email,
     password,
@@ -60,12 +59,13 @@ export async function requestDoctorAccount(request) {
 export async function logout() {
   try { await unregisterMedicationNotifications(); }
   catch { console.warn("Could not fully unregister notifications on this device."); }
+  await api.post("/auth/logout");
   window.google?.accounts?.id?.disableAutoSelect();
   clearStoredToken();
 }
 
 export async function loginWithGoogle(credential, mode = "login", password) {
-  const response = await api.post("/auth/google", { credential, mode, password });
+  const response = await api.post("/auth/google-session", { credential, mode, password });
   persistAuth(response.data);
   return response.data;
 }

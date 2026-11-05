@@ -9,7 +9,7 @@ deployment. The preparation script never changes the source CSVs or translations
 From the repository root, using Python with pandas installed:
 
 ```powershell
-rtk proxy .venv-dataset/Scripts/python.exe datasets/update_english_scope.py
+rtk proxy .venv/Scripts/python.exe tools/datasets/sync_datasets.py
 rtk proxy .venv-dataset/Scripts/python.exe -m pytest tests/test_dataset_scope.py tests/test_ml_data.py -q
 ```
 
@@ -43,10 +43,10 @@ Kannada/Tulu IDs. All ten English disease categories have canonical IDs.
 Original translated text is preserved; missing translations are listed in the
 manifest and are not filled with English text labeled as another language.
 
-The canonical English content is `english_master_records.json`. The scope rebuild
-regenerates the master, derived tables, existing compatibility copies and ML bundle.
-`legacy_interaction_records.json` and `legacy_sideeffect_records.json` preserve the
-original structured entries. New interaction prose contributes explicit catalog
+The three master CSVs are authoritative and are never regenerated from JSON.
+The sync command refreshes derived tables, compatibility copies and the ML bundle.
+`legacy_interaction_records.json` preserves separately maintained severity entries;
+side-effect tables are rebuilt from the current English CSV. Interaction prose contributes explicit catalog
 medicine names only; class-based inference and comparison statements are excluded.
 New pairs use `Unknown` severity and retain source wording in
 `new_interaction_candidates.json`. They require review before becoming training labels.

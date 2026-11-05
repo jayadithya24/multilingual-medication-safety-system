@@ -4,6 +4,7 @@ import asyncio
 
 
 from fastapi import APIRouter, UploadFile, File, HTTPException, Query
+from backend.app.image_validation import validate_image
 
 from backend.app.services.ocr_service import (
     extract_text,
@@ -18,16 +19,16 @@ async def upload_image(file: UploadFile = File(...), lang: str = Query("en")):
     if not file.filename:
         raise HTTPException(status_code=400, detail="File name is required")
 
-    suffix = os.path.splitext(file.filename)[1] or ".jpg"
+    content = await file.read()
+    suffix = await asyncio.to_thread(validate_image, file.filename, content)
     with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
-        content = await file.read()
         tmp.write(content)
         tmp_path = tmp.name
 
     try:
         result = await asyncio.to_thread(extract_text, tmp_path, lang)
     except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"OCR failed: {str(exc)}") from exc
+        raise HTTPException(status_code=500, detail="OCR processing failed. Please try a clearer image.") from exc
     finally:
         if os.path.exists(tmp_path):
             os.remove(tmp_path)
@@ -49,14 +50,14 @@ async def prescription_ocr(
             detail="File name is required"
         )
 
-    suffix = os.path.splitext(file.filename)[1] or ".jpg"
+    content = await file.read()
+    suffix = await asyncio.to_thread(validate_image, file.filename, content)
 
     with tempfile.NamedTemporaryFile(
         delete=False,
         suffix=suffix
     ) as tmp:
 
-        content = await file.read()
         tmp.write(content)
         tmp_path = tmp.name
 
@@ -70,7 +71,7 @@ async def prescription_ocr(
     except Exception as exc:
         raise HTTPException(
             status_code=500,
-            detail=f"Prescription OCR failed: {str(exc)}"
+            detail="Prescription OCR processing failed. Please try a clearer image."
         ) from exc
 
     finally:

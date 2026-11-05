@@ -41,6 +41,23 @@ def _normalize_drug_name(drug_name):
 
 
 @lru_cache(maxsize=1)
+def _catalog_names():
+    return set(pd.read_csv(PROJECT_ROOT / "datasets" / "english_master_dataset.csv")["drug_name"].str.strip().str.lower())
+
+
+def interaction_coverage(drugs):
+    names = list(dict.fromkeys(_normalize_drug_name(d) for d in drugs if str(d).strip()))
+    covered = [name for name in names if name in _catalog_names()]
+    unsupported = [name for name in names if name not in _catalog_names()]
+    pairs = list(itertools.combinations(names, 2))
+    matched = sum(get_interaction(a, b) is not None for a, b in pairs if a in covered and b in covered)
+    return {"total_medicines": len(names), "covered_medicines": len(covered),
+        "unsupported_medicines": unsupported, "total_pairs": len(pairs), "pairs_with_records": matched,
+        "message": f"{len(covered)} of {len(names)} medicines in the reference catalog; {len(unsupported)} not checked. "
+                   f"{matched} of {len(pairs)} pairs have interaction records. Missing records do not establish safety."}
+
+
+@lru_cache(maxsize=1)
 def _load_interaction_table():
     """Load interaction data from root or app dataset once and normalize columns."""
     paths = [ROOT_CSV, APP_CSV]

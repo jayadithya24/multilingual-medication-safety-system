@@ -1,6 +1,6 @@
 """Validate and export a reproducible synthetic patient-severity training bundle.
 
-Run from any directory: python datasets/prepare_ml_data.py
+Run from any directory: python tools/datasets/prepare_ml_data.py
 Source CSVs are never modified. No clinical validity is inferred from passing checks.
 """
 import argparse
@@ -12,7 +12,7 @@ from pathlib import Path
 
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2] / "datasets"
 RANK = {"None": 0, "Mild": 1, "Moderate": 2, "Severe": 3}
 CONDITIONS = {"Diabetes": "type_2_diabetes", "Type 2 Diabetes": "type_2_diabetes",
               "Hypertension": "hypertension", "Arthritis": "arthritis",
@@ -20,6 +20,14 @@ CONDITIONS = {"Diabetes": "type_2_diabetes", "Type 2 Diabetes": "type_2_diabetes
               "Bronchial Asthma & Allergies": "asthma_allergies",
               "Acid Reflux / GERD / Gastritis": "gerd_gastritis", "Malaria": "malaria",
               "Dengue Fever": "dengue_fever", "Gastroenteritis / Diarrhea": "gastroenteritis_diarrhea"}
+CONDITIONS.update({
+    "Type 2 Diabetes Mellitus": "type_2_diabetes",
+    "Essential Hypertension (High BP)": "hypertension",
+    "Rheumatoid Arthritis (Joint Pain)": "arthritis",
+    "Common Cold & Respiratory Allergies": "common_cold",
+    "Fever & Acute Body Ache": "fever_body_ache",
+    "Gastroenteritis & Acute Diarrhea": "gastroenteritis_diarrhea",
+})
 
 
 def require(condition, message):

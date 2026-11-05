@@ -32,12 +32,13 @@ access_requests_module.access_requests_collection = database_module.access_reque
 client = TestClient(app)
 
 
-def _doctor_token():
-    return auth_module.create_access_token({"sub": "doctor@example.com", "role": "doctor"}, timedelta(minutes=30))
+from session_helpers import session_headers
 
 
-def _patient_token():
-    return auth_module.create_access_token({"sub": "patient@example.com", "role": "patient"}, timedelta(minutes=30))
+def _share_code(patient_headers):
+    response = client.post("/patient/share-code", headers=patient_headers)
+    assert response.status_code == 200, response.text
+    return response.json()["share_code"]
 
 
 def setup_function():
@@ -66,12 +67,12 @@ def setup_function():
 
 
 def test_doctor_request_and_patient_approval_workflow():
-    doctor_headers = {"Authorization": f"Bearer {_doctor_token()}"}
-    patient_headers = {"Authorization": f"Bearer {_patient_token()}"}
+    doctor_headers = session_headers("doctor@example.com")
+    patient_headers = session_headers("patient@example.com")
 
     response = client.post(
         "/doctor/access-request",
-        json={"patient_id": "P-100"},
+        json={"share_code": _share_code(patient_headers)},
         headers=doctor_headers,
     )
     assert response.status_code == 200, response.text
@@ -94,12 +95,12 @@ def test_doctor_request_and_patient_approval_workflow():
 
 
 def test_rejection_block_access_and_pending_status_is_respected():
-    doctor_headers = {"Authorization": f"Bearer {_doctor_token()}"}
-    patient_headers = {"Authorization": f"Bearer {_patient_token()}"}
+    doctor_headers = session_headers("doctor@example.com")
+    patient_headers = session_headers("patient@example.com")
 
     response = client.post(
         "/doctor/access-request",
-        json={"patient_id": "P-100"},
+        json={"share_code": _share_code(patient_headers)},
         headers=doctor_headers,
     )
     request_id = response.json()["request"]["requestId"]
@@ -110,7 +111,10 @@ def test_rejection_block_access_and_pending_status_is_respected():
 
     blocked = client.get("/doctor/patients/P-100/medications", headers=doctor_headers)
     assert blocked.status_code == 403, blocked.text
-    assert "accepted" in blocked.json()["detail"].lower()
+    assert blocked.json()["detail"] == "Patient access is not authorized."
+    unknown = client.get("/doctor/patients/P-DOES-NOT-EXIST/medications", headers=doctor_headers)
+    assert unknown.status_code == 403
+    assert unknown.json() == blocked.json()
 
     pending_response = client.get("/patient/access-requests", headers=patient_headers)
     assert pending_response.status_code == 200

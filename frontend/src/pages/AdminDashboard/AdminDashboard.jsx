@@ -73,7 +73,7 @@ function AdminDashboard() {
             <p className="admin-dashboard__eyebrow">MMSS Administration</p>
             <h1>Admin Dashboard</h1>
             <p className="admin-dashboard__intro">
-              Review doctor account requests, monitor platform health, and keep the MMSS clinical network ready for verified professionals.
+              Review doctor account applications and approve or reject submitted details.
             </p>
           </div>
           <div className="admin-dashboard__toolbar">
@@ -97,16 +97,6 @@ function AdminDashboard() {
             <span className="admin-stat__label">Pending Doctor Requests</span>
             <strong>{pendingCount}</strong>
             <span className="admin-stat__hint">Awaiting administrator review</span>
-          </div>
-          <div className="admin-stat">
-            <span className="admin-stat__label">Approved Doctors</span>
-            <strong className="admin-stat__muted" title="User directory metrics are not exposed by the current API">—</strong>
-            <span className="admin-stat__hint">Verified doctor portal accounts</span>
-          </div>
-          <div className="admin-stat">
-            <span className="admin-stat__label">Total Patients</span>
-            <strong className="admin-stat__muted" title="User directory metrics are not exposed by the current API">—</strong>
-            <span className="admin-stat__hint">Registered patient portal users</span>
           </div>
           <div className="admin-stat admin-stat--status">
             <span className="admin-stat__label">Review Queue</span>

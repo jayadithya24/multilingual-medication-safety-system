@@ -11,7 +11,7 @@ def main():
     with sync_playwright() as p:
         browser = p.chromium.launch(channel='msedge', headless=True)
         page = browser.new_page()
-        page.add_init_script("localStorage.setItem('mmss_token','layout-test'); localStorage.setItem('mmss_role','patient');")
+        page.add_init_script("sessionStorage.setItem('mmss_session','active'); sessionStorage.setItem('mmss_role','patient');")
         def respond(route):
             body = {'profile': {'full_name': 'Layout Test', 'patient_id': 'TEST', 'age': 45, 'gender': 'Other', 'medical_condition': 'Hypertension'}, 'medicines': [], 'schedules': [], 'history': [], 'requests': [], 'google_client_id': ''}
             route.fulfill(status=200, content_type='application/json', body=json.dumps(body))
@@ -49,7 +49,7 @@ def main():
         guest.get_by_label('Password', exact=True).fill('test-password')
         guest.get_by_label('Show password', exact=True).check()
         expect(guest.get_by_label('Password', exact=True)).to_have_attribute('type', 'text')
-        guest.evaluate("localStorage.setItem('mmss_token', 'expired'); localStorage.setItem('mmss_role', 'patient');")
+        guest.evaluate("sessionStorage.setItem('mmss_session','active'); sessionStorage.setItem('mmss_role', 'patient');")
         guest.route(f'{backend}/patient/profile', lambda route: route.fulfill(status=401, content_type='application/json', body='{}'))
         guest.goto('http://localhost:5173/patient-profile')
         expect(guest).to_have_url('http://localhost:5173/public?session=expired')

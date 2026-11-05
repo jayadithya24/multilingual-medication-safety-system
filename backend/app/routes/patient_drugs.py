@@ -10,7 +10,7 @@ from backend.app.database import (
     patient_schedules_collection,
     medication_history_collection,
 )
-from backend.app.routes.access_requests import has_accepted_access
+from backend.app.routes.access_requests import authorize_access, log_access
 
 
 router = APIRouter(
@@ -26,14 +26,26 @@ def require_doctor(current_user):
         raise HTTPException(status_code=403, detail="Only doctor accounts can access this endpoint.")
 
 
+@router.get("/patients/{patient_id}/regimen")
+def get_regimen_review(patient_id: str, current_user=Depends(get_current_active_user)):
+    require_doctor(current_user)
+    authorize_access(current_user.username, patient_id, "VIEW_REGIMEN")
+    patient = users_collection.find_one({"patient_id": patient_id, "role": "patient"})
+    if not patient:
+        raise HTTPException(404, "Patient not found.")
+    from backend.app.services.regimen_review import build_review
+    schedules = list(patient_schedules_collection.find({"patient_username": patient["username"]}, {"_id": 0}))
+    history = list(medication_history_collection.find({"patient_username": patient["username"]}, {"_id": 0}))
+    return build_review(schedules, history)
+
+
 @router.get("/patients/{patient_username}/report")
 def get_patient_report(patient_username: str, current_user=Depends(get_current_active_user)):
     require_doctor(current_user)
     patient = users_collection.find_one({"username": patient_username, "role": "patient"})
     if not patient:
-        raise HTTPException(status_code=404, detail="Patient not found.")
-    if not has_accepted_access(current_user.username, patient.get("patient_id")):
-        raise HTTPException(status_code=403, detail="Patient medication access has not been accepted.")
+        raise HTTPException(status_code=403, detail="Patient access is not authorized.")
+    consent = authorize_access(current_user.username, patient["patient_id"], "GENERATE_REPORT")
 
     def records(collection, sort_field):
         result = list(collection.find({"patient_username": patient_username}, {"_id": 0}).sort(sort_field, -1))
@@ -46,6 +58,8 @@ def get_patient_report(patient_username: str, current_user=Depends(get_current_a
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "doctor": current_user.username,
+        "consent": {key: value.replace(tzinfo=timezone.utc) if isinstance(value, datetime) and value.tzinfo is None else value
+                    for key, value in consent.items() if key in ("respondedAt", "expiresAt", "scope")},
         "patient": {key: patient.get(key) for key in (
             "username", "patient_id", "full_name", "age", "gender", "medical_condition"
         )},
@@ -60,10 +74,11 @@ async def get_patients(
 ):
     require_doctor(current_user)
 
-    # Patient identity and consent state are the only data shown before approval.
+    approved_ids = [r["patientId"] for r in access_requests_collection.find({
+        "doctorId": current_user.username, "status": "ACCEPTED", "expiresAt": {"$gt": datetime.now(timezone.utc)}})]
     patients = list(
         users_collection.find(
-            {"role": "patient"},
+            {"role": "patient", "patient_id": {"$in": approved_ids}},
             {
                 "_id": 0,
                 "full_name": 1,
@@ -78,6 +93,7 @@ async def get_patients(
             {
                 "doctorId": current_user.username,
                 "patientId": patient.get("patient_id"),
+                "status": "ACCEPTED", "expiresAt": {"$gt": datetime.now(timezone.utc)},
             },
             sort=[("createdAt", -1)],
         )
@@ -98,9 +114,8 @@ async def get_patient_drugs(
 
     patient = users_collection.find_one({"username": patient_username, "role": "patient"})
     if not patient:
-        raise HTTPException(status_code=404, detail="Patient not found.")
-    if not has_accepted_access(current_user.username, patient.get("patient_id")):
-        raise HTTPException(status_code=403, detail="Patient medication access has not been accepted.")
+        raise HTTPException(status_code=403, detail="Patient access is not authorized.")
+    authorize_access(current_user.username, patient["patient_id"], "VIEW_MEDICATIONS")
 
     schedules = list(
         patient_schedules_collection.find(
@@ -131,13 +146,15 @@ async def get_doctor_medication_history(
     require_doctor(current_user)
 
     accepted_patient_ids = [request["patientId"] for request in access_requests_collection.find(
-        {"doctorId": current_user.username, "status": "ACCEPTED"},
+        {"doctorId": current_user.username, "status": "ACCEPTED", "expiresAt": {"$gt": datetime.now(timezone.utc)}},
         {"patientId": 1, "_id": 0},
     )]
     accepted_patients = [patient["username"] for patient in users_collection.find(
         {"patient_id": {"$in": accepted_patient_ids}, "role": "patient"},
         {"username": 1, "_id": 0},
     )]
+    for patient_id in set(accepted_patient_ids):
+        authorize_access(current_user.username, patient_id, "VIEW_HISTORY")
 
     history = list(
         medication_history_collection.find(

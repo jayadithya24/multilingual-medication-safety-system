@@ -9,6 +9,14 @@ import "./DoctorLayout.css";
 
 function DoctorLayout() {
     const [user, setUser] = useState(null);
+    const [graphStatus, setGraphStatus] = useState(null);
+    useEffect(() => {
+        let active = true;
+        const check = () => api.get("/doctor/reference-status").then(({ data }) => { if (active) setGraphStatus(data.graph_check); }).catch(() => {});
+        check();
+        const timer = setInterval(check, 60000);
+        return () => { active = false; clearInterval(timer); };
+    }, []);
     useEffect(() => {
         const controller = new AbortController();
         api.get("/auth/me", { signal: controller.signal })
@@ -26,6 +34,7 @@ function DoctorLayout() {
                 <DoctorTopbar user={user} />
 
                 <main className="doctor-layout__content">
+                    {["drift", "unavailable"].includes(graphStatus?.status) && <p role="status" className="graph-health-notice">{graphStatus.message} Local reference checks remain available.</p>}
                     <Outlet />
                 </main>
 

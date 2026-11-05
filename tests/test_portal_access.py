@@ -16,7 +16,7 @@ def client(monkeypatch):
     monkeypatch.setattr(access_requests, "patient_schedules_collection", db.schedules)
     app.dependency_overrides[auth.get_current_active_user] = lambda: auth.User(username="review-doctor", role="doctor")
     try:
-        yield TestClient(app), db
+        yield TestClient(app, headers={"Origin": "http://localhost:5173"}), db
     finally:
         app.dependency_overrides.clear()
 
@@ -42,7 +42,7 @@ def test_demo_style_patient_id_cannot_bypass_consent(client):
 def test_legacy_demo_credentials_are_not_valid_accounts(client):
     browser, _ = client
     for username in ("doctor", "patient"):
-        assert browser.post("/auth/token", data={"username": username, "password": "secret"}).status_code == 401
+        assert browser.post("/auth/session", data={"username": username, "password": "secret"}).status_code == 401
 
 
 def test_explicit_mock_mode_never_attempts_real_mongo(monkeypatch):

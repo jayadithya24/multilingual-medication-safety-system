@@ -1,6 +1,7 @@
 import os
 import re
 import itertools
+import logging
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -8,6 +9,8 @@ import pandas as pd
 from neo4j import GraphDatabase
 
 from backend.app.services.medicine_service import _load_dataset, search_medicine
+
+logger = logging.getLogger(__name__)
 
 
 def _get_driver():
@@ -352,7 +355,7 @@ LIMIT $limit
                 return [_serialize_drug(record, lang=lang) for record in records]
 
     except Exception as err:
-        print(f"Neo4j unavailable, falling back to CSV: {err}")
+        logger.warning("Neo4j unavailable; using CSV fallback (%s)", type(err).__name__)
     finally:
         if driver:
             driver.close()
@@ -387,7 +390,7 @@ RETURN
             if record:
                 return _serialize_drug(record)
     except Exception as err:
-        print(f"Neo4j unavailable, falling back to CSV: {err}")
+        logger.warning("Neo4j unavailable; using CSV fallback (%s)", type(err).__name__)
     finally:
         if driver:
             driver.close()
@@ -696,7 +699,7 @@ def get_knowledge_graph() -> Dict[str, List[Dict[str, Any]]]:
             }
 
     except Exception as err:
-        print(f"Neo4j graph unavailable, falling back to local CSV data: {err}")
+        logger.warning("Neo4j graph unavailable; using CSV fallback (%s)", type(err).__name__)
         return _fallback_local_knowledge_graph()
     finally:
         if "driver" in locals():

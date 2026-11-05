@@ -7,6 +7,7 @@ export function PrescriptionReport({ report }) {
   return <article className="prescription-report">
     <h2>Prescription report</h2>
     <p>Generated: {date(report.generated_at)} · Prepared for: {report.doctor || "Patient copy"}</p>
+    {report.consent && <p>Patient consent granted: {date(report.consent.respondedAt)} · Access expires: {date(report.consent.expiresAt)} · Scope: medicines and history.</p>}
     <h3>{value(patient.full_name)} ({patient.username})</h3>
     <p>Patient ID: {value(patient.patient_id)} · Age: {value(patient.age)} · Gender: {value(patient.gender)}</p>
     <p><strong>Medical condition:</strong> {value(patient.medical_condition)}</p>

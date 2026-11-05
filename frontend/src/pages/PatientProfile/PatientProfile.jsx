@@ -53,7 +53,7 @@ function PatientProfile() {
 
             } catch (profileError) {
                 if (!active) return;
-                console.error("Unable to load patient profile:", profileError);
+                console.error("Request failed", profileError?.response?.status || "unavailable");
 
                 const detail = profileError?.response?.data?.detail;
 
@@ -92,7 +92,7 @@ function PatientProfile() {
 
             const response = await updatePatientProfile(profile);
 
-            console.log("Profile saved:", response);
+
 
             // Update screen with the saved data
             const patient = response.profile;
@@ -108,7 +108,7 @@ function PatientProfile() {
             navigate("/patient-dashboard", { replace: true });
 
         } catch (saveError) {
-            console.error("Profile update failed:", saveError);
+            console.error("Request failed", saveError?.response?.status || "unavailable");
 
             const detail = saveError?.response?.data?.detail;
 
