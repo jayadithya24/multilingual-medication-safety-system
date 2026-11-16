@@ -1,34 +1,251 @@
-from datetime import timedelta
-from fastapi import APIRouter, Depends, HTTPException
+from datetime import datetime, timezone
+import os
+from uuid import uuid4
+from typing import Literal, Optional
+from backend.app.services.google_auth_service import verify_google_credential
+from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from fastapi.security import OAuth2PasswordRequestForm
+from backend.app.database import doctor_requests_collection, users_collection
 from backend.app.auth import (
     authenticate_user,
-    create_access_token,
-    ACCESS_TOKEN_EXPIRE_MINUTES,
     get_current_active_user,
+    get_password_hash,
     User,
-    Token,
 )
+from pydantic import AliasChoices, BaseModel, ConfigDict, Field, field_validator
+from pymongo.errors import DuplicateKeyError
 
 router = APIRouter(prefix="/auth", tags=["authentication"])
 
 
-@router.post("/token", response_model=Token)
-async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
-    user = authenticate_user({}, form_data.username, form_data.password)
+class GoogleLoginRequest(BaseModel):
+    credential: str = Field(..., min_length=20, max_length=10000)
+    mode: Literal["login", "register"] = "login"
+    password: Optional[str] = Field(default=None, max_length=200)
+
+
+@router.get("/providers")
+def auth_providers():
+    return {"google_client_id": os.getenv("GOOGLE_CLIENT_ID", "").strip()}
+
+
+def login_with_google(payload: GoogleLoginRequest, client_ip='unknown'):
+    claims = verify_google_credential(payload.credential)
+    subject = claims["sub"]
+    user = users_collection.find_one({"google_sub": subject})
     if not user:
-        raise HTTPException(
-            status_code=401,
-            detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
+        existing = users_collection.find_one({"username": claims["email"].strip().lower()})
+        if existing:
+            if existing.get("role") != "patient" or existing.get("disabled") or existing.get("google_sub"):
+                raise HTTPException(403, "This account cannot be linked to this Google identity.")
+            if not payload.password:
+                raise HTTPException(409, detail={"code": "google_link_required", "message": "Your account is already registered with a password. Confirm that password once to enable Google sign-in."})
+            from backend.app.login_limits import reserve, succeeded
+            attempt = reserve(existing['username'], client_ip)
+            authenticated = authenticate_user(existing["username"], payload.password)
+            if not authenticated:
+                raise HTTPException(401, "Incorrect password. Enter your existing account password to link Google.")
+            succeeded(attempt)
+            try:
+                result = users_collection.update_one(
+                    {"_id": existing["_id"], "google_sub": {"$exists": False}},
+                    {"$set": {"google_sub": subject}},
+                )
+            except DuplicateKeyError as error:
+                raise HTTPException(409, "This Google identity is already linked. Please sign in again.") from error
+            if result.modified_count != 1:
+                raise HTTPException(409, "Account changed while linking. Please sign in again.")
+            user = existing
+    if not user:
+        if payload.mode != "register":
+            raise HTTPException(401, "Please register your Google account before signing in.")
+        username = claims["email"].strip().lower()
+        if users_collection.find_one({"username": username}):
+            raise HTTPException(409, "This email already has an account. Sign in with your existing password.")
+        user = {
+            "username": username, "email": username,
+            "full_name": claims.get("name") or username.split("@")[0],
+            "role": "patient", "google_sub": subject, "auth_provider": "google",
+            "patient_id": "P-" + uuid4().hex[:12].upper(),
+            "age": None, "gender": None, "medical_condition": None,
+        }
+        try:
+            users_collection.insert_one(user)
+        except DuplicateKeyError as error:
+            user = users_collection.find_one({"google_sub": subject})
+            if not user:
+                raise HTTPException(409, "This account already exists. Use your existing sign-in method.") from error
+    if user.get("role") != "patient" or user.get("disabled"):
+        raise HTTPException(403, "This account cannot access the patient portal.")
+    return user
+
+
+
+class RegisterRequest(BaseModel):
+    name: str = Field(..., min_length=1)
+    email: str = Field(..., min_length=3)
+    password: str = Field(..., min_length=8, max_length=72)
+    confirm_password: str = Field(..., min_length=8, max_length=72)
+
+    @field_validator('password', 'confirm_password')
+    @classmethod
+    def password_byte_limit(cls, value):
+        if len(value.encode('utf-8')) > 72:
+            raise ValueError('Password must be at most 72 UTF-8 bytes.')
+        return value
+
+
+class DoctorRegisterRequest(RegisterRequest):
+    model_config = ConfigDict(populate_by_name=True)
+
+    doctor_id: str = Field(
+        ...,
+        min_length=2,
+        validation_alias=AliasChoices("doctor_id", "medicalRegistrationNo"),
     )
-    return {"access_token": access_token, "token_type": "bearer"}
+    specialization: str = Field(..., min_length=2)
+    phone: Optional[str] = None
+    hospital: Optional[str] = None
+    confirm_password: str = Field(
+        ...,
+        min_length=8,
+        max_length=72,
+        validation_alias=AliasChoices("confirm_password", "confirmPassword"),
+    )
 
 
+def create_doctor_request(payload: DoctorRegisterRequest) -> dict:
+    if payload.password != payload.confirm_password:
+        raise HTTPException(status_code=400, detail="Passwords do not match")
+
+    username = payload.email.strip().lower()
+    registration_number = payload.doctor_id.strip()
+
+    if users_collection.find_one({"username": username}):
+        raise HTTPException(status_code=409, detail="An account already exists for this email.")
+    if users_collection.find_one({"license_number": registration_number}):
+        raise HTTPException(status_code=409, detail="A doctor account already uses this registration number.")
+    if doctor_requests_collection.find_one({"email": username, "status": {"$in": ["pending", "approving"]}}):
+        raise HTTPException(status_code=409, detail="A doctor request is already pending for this email.")
+    if doctor_requests_collection.find_one({"medical_registration_no": registration_number, "status": {"$in": ["pending", "approving"]}}):
+        raise HTTPException(status_code=409, detail="A doctor request is already pending for this registration number.")
+
+    request = {
+        "request_id": f"DRQ-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S%f')}",
+        "full_name": payload.name.strip(),
+        "email": username,
+        "phone": payload.phone.strip() if payload.phone else None,
+        "medical_registration_no": registration_number,
+        "specialization": payload.specialization.strip(),
+        "hospital": payload.hospital.strip() if payload.hospital else None,
+        "hashed_password": get_password_hash(payload.password),
+        "status": "pending",
+        "created_at": datetime.now(timezone.utc),
+    }
+    try:
+        doctor_requests_collection.insert_one(request)
+    except DuplicateKeyError:
+        raise HTTPException(status_code=409, detail="A doctor request is already pending.")
+    return {"status": "pending", "request_id": request["request_id"]}
+
+
+def register_patient(payload: RegisterRequest):
+
+    if payload.password != payload.confirm_password:
+        raise HTTPException(
+            status_code=400,
+            detail="Passwords do not match"
+        )
+
+    username = payload.email.strip().lower()
+    if not payload.name.strip() or "@" not in username or len(payload.password.encode("utf-8")) > 72:
+        raise HTTPException(400, "Enter a name, valid email, and password no longer than 72 bytes.")
+
+    # Check MongoDB for existing patient
+    existing_user = users_collection.find_one({
+        "username": username
+    })
+
+    if existing_user:
+        raise HTTPException(
+            status_code=400,
+            detail="User already exists"
+        )
+
+    # Generate patient ID
+    patient_id = "P-" + uuid4().hex[:12].upper()
+
+    # Create patient document
+    patient_document = {
+        "username": username,
+        "full_name": payload.name.strip(),
+        "email": username,
+        "role": "patient",
+
+        "hashed_password": get_password_hash(
+            payload.password
+        ),
+
+        # Patient profile information
+        "patient_id": patient_id,
+        "age": None,
+        "gender": None,
+        "medical_condition": None,
+    }
+
+    # Save patient to MongoDB
+    try:
+        users_collection.insert_one(patient_document)
+    except DuplicateKeyError as error:
+        raise HTTPException(409, "An account with this email already exists.") from error
+
+    return patient_document
+
+
+@router.post("/doctor-request")
+@router.post("/register-doctor")
+def register_doctor(payload: DoctorRegisterRequest):
+    """Submit a doctor account for administrator approval."""
+    return create_doctor_request(payload)
 @router.get("/me", response_model=User)
-async def read_users_me(current_user: User = Depends(get_current_active_user)):
+def read_users_me(current_user: User = Depends(get_current_active_user)):
     return current_user
+
+
+@router.post("/session")
+def browser_login(request: Request, response: Response, form: OAuth2PasswordRequestForm = Depends()):
+    from backend.app.browser_sessions import check_origin, issue
+    from backend.app.login_limits import reserve, succeeded
+    check_origin(request)
+    attempt = reserve(form.username, request.client.host if request.client else 'unknown')
+    user = authenticate_user(form.username, form.password)
+    if not user or user.disabled:
+        raise HTTPException(401, "Incorrect username or password")
+    succeeded(attempt)
+    return issue(request, response, user.username, user.role)
+
+
+@router.post("/register-session")
+def browser_register(payload: RegisterRequest, request: Request, response: Response):
+    from backend.app.browser_sessions import check_origin, issue
+    check_origin(request)
+    register_patient(payload)
+    return issue(request, response, payload.email.strip().lower(), "patient")
+
+
+@router.post("/google-session")
+def browser_google(payload: GoogleLoginRequest, request: Request, response: Response):
+    from backend.app.browser_sessions import check_origin, issue
+    check_origin(request)
+    result = login_with_google(payload, request.client.host if request.client else 'unknown')
+    return issue(request, response, result["username"], result["role"])
+
+
+@router.post("/logout")
+def browser_logout(request: Request, response: Response):
+    from backend.app.browser_sessions import COOKIE, check_origin, revoke
+    check_origin(request)
+    revoke(request)
+    response.delete_cookie(COOKIE, path="/", httponly=True, samesite="strict")
+    response.headers["Cache-Control"] = "no-store"
+    return {"status": "signed_out"}

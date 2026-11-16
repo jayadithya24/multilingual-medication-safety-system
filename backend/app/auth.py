@@ -1,99 +1,75 @@
-from datetime import datetime, timedelta, timezone
+"""Database identities authenticated only by revocable browser sessions."""
 from typing import Optional
-from jose import JWTError, jwt
+from fastapi import Depends, HTTPException, Request
 from passlib.context import CryptContext
-from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
 from pydantic import BaseModel
+from backend.app.database import users_collection
 
-# Secret key for JWT encoding/decoding - should come from environment in production
-SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
-
-# Password hashing
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-# OAuth2 scheme
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-
-# Pydantic models
-class Token(BaseModel):
-    access_token: str
-    token_type: str
-
-class TokenData(BaseModel):
-    username: Optional[str] = None
 
 class User(BaseModel):
     username: str
     email: Optional[str] = None
     full_name: Optional[str] = None
+    role: Optional[str] = "patient"
     disabled: Optional[bool] = None
+    doctor_id: Optional[str] = None
+    specialization: Optional[str] = None
+    license_number: Optional[str] = None
+    phone: Optional[str] = None
+    hospital: Optional[str] = None
+
 
 class UserInDB(User):
     hashed_password: str
 
-# Fake user database for demonstration
-# In production, this would be replaced with a real database lookup
-fake_users_db = {
-    "admin": {
-        "username": "admin",
-        "full_name": "Admin User",
-        "email": "admin@example.com",
-        "hashed_password": "$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW",  # secret
-    }
-}
 
-def verify_password(plain_password: str, hashed_password: str) -> bool:
-    return pwd_context.verify(plain_password, hashed_password)
+def get_mongo_user(username):
+    normalized = (username or '').strip().lower()
+    if not normalized:
+        return None
+    return users_collection.find_one({'$or': [{'username': normalized}, {'email': normalized}]}, {'_id': 0})
 
-def get_password_hash(password: str) -> str:
+
+def verify_password(plain_password, hashed_password):
+    if len(plain_password.encode('utf-8')) > 72:
+        return False
+    try:
+        return pwd_context.verify(plain_password, hashed_password)
+    except (ValueError, TypeError):
+        return False
+
+
+def get_password_hash(password):
+    if len(password.encode('utf-8')) > 72:
+        raise ValueError('Password must be at most 72 UTF-8 bytes.')
     return pwd_context.hash(password)
 
-def get_user(db: dict, username: str) -> Optional[dict]:
-    if username in db:
-        user_dict = db[username]
-        return UserInDB(**user_dict)
 
-def authenticate_user(db: dict, username: str, password: str) -> Optional[dict]:
-    user = get_user(db, username)
-    if not user:
+def authenticate_user(username, password):
+    user = get_mongo_user(username)
+    if not user or not user.get('hashed_password') or not verify_password(password, user['hashed_password']):
         return False
-    if not verify_password(password, user.hashed_password):
-        return False
-    return user
+    return UserInDB(**user)
 
-def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
-    to_encode = data.copy()
-    if expires_delta:
-        expire = datetime.now(timezone.utc) + expires_delta
-    else:
-        expire = datetime.now(timezone.utc) + timedelta(minutes=15)
-    to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
-    return encoded_jwt
 
-async def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username: str = payload.get("sub")
-        if username is None:
-            raise credentials_exception
-        token_data = TokenData(username=username)
-    except JWTError:
-        raise credentials_exception
-    user = get_user(fake_users_db, token_data.username)
-    if user is None:
-        raise credentials_exception
-    return User(**user.dict())
+def get_current_user(request: Request) -> User:
+    from backend.app.browser_sessions import resolve
+    username = resolve(request)
+    record = get_mongo_user(username) if username else None
+    if not record:
+        raise HTTPException(401, 'Sign in to continue.')
+    return User(**record)
 
-async def get_current_active_user(current_user: User = Depends(get_current_user)) -> User:
+
+def get_current_active_user(current_user: User = Depends(get_current_user)) -> User:
     if current_user.disabled:
-        raise HTTPException(status_code=400, detail="Inactive user")
+        raise HTTPException(403, 'Inactive user')
+    return current_user
+
+
+def get_current_admin(current_user: User = Depends(get_current_active_user)) -> User:
+    if current_user.role != 'admin':
+        raise HTTPException(403, 'Only administrators can perform this action.')
     return current_user

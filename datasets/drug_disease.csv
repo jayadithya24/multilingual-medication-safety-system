@@ -1,31 +1,101 @@
 drug_id,drug_name,disease_id,disease
-metformin,Metformin,type-2-diabetes,Type 2 Diabetes
-glipizide,Glipizide,type-2-diabetes,Type 2 Diabetes
-glimepiride,Glimepiride,type-2-diabetes,Type 2 Diabetes
-sitagliptin,Sitagliptin,type-2-diabetes,Type 2 Diabetes
-empagliflozin,Empagliflozin,type-2-diabetes,Type 2 Diabetes
-pioglitazone,Pioglitazone,type-2-diabetes,Type 2 Diabetes
-insulin-glargine,Insulin Glargine,type-2-diabetes,Type 2 Diabetes
-dapagliflozin,Dapagliflozin,type-2-diabetes,Type 2 Diabetes
-vildagliptin,Vildagliptin,type-2-diabetes,Type 2 Diabetes
-acarbose,Acarbose,type-2-diabetes,Type 2 Diabetes
-amlodipine,Amlodipine,hypertension,Hypertension
-losartan,Losartan,hypertension,Hypertension
-enalapril,Enalapril,hypertension,Hypertension
-telmisartan,Telmisartan,hypertension,Hypertension
-hydrochlorothiazide,Hydrochlorothiazide,hypertension,Hypertension
-atenolol,Atenolol,hypertension,Hypertension
-ramipril,Ramipril,hypertension,Hypertension
-chlorthalidone,Chlorthalidone,hypertension,Hypertension
-carvedilol,Carvedilol,hypertension,Hypertension
-clonidine,Clonidine,hypertension,Hypertension
-ibuprofen,Ibuprofen,arthritis,Arthritis
-diclofenac,Diclofenac,arthritis,Arthritis
-naproxen,Naproxen,arthritis,Arthritis
-methotrexate,Methotrexate,arthritis,Arthritis
-hydroxychloroquine,Hydroxychloroquine,arthritis,Arthritis
-celecoxib,Celecoxib,arthritis,Arthritis
-sulfasalazine,Sulfasalazine,arthritis,Arthritis
-prednisolone,Prednisolone,arthritis,Arthritis
-leflunomide,Leflunomide,arthritis,Arthritis
-colchicine,Colchicine,arthritis,Arthritis
+metformin,Metformin,type-2-diabetes-mellitus,Type 2 Diabetes Mellitus
+glipizide,Glipizide,type-2-diabetes-mellitus,Type 2 Diabetes Mellitus
+glimepiride,Glimepiride,type-2-diabetes-mellitus,Type 2 Diabetes Mellitus
+sitagliptin,Sitagliptin,type-2-diabetes-mellitus,Type 2 Diabetes Mellitus
+empagliflozin,Empagliflozin,type-2-diabetes-mellitus,Type 2 Diabetes Mellitus
+pioglitazone,Pioglitazone,type-2-diabetes-mellitus,Type 2 Diabetes Mellitus
+insulin-glargine,Insulin Glargine,type-2-diabetes-mellitus,Type 2 Diabetes Mellitus
+dapagliflozin,Dapagliflozin,type-2-diabetes-mellitus,Type 2 Diabetes Mellitus
+vildagliptin,Vildagliptin,type-2-diabetes-mellitus,Type 2 Diabetes Mellitus
+acarbose,Acarbose,type-2-diabetes-mellitus,Type 2 Diabetes Mellitus
+amlodipine,Amlodipine,essential-hypertension-high-bp,Essential Hypertension (High BP)
+losartan,Losartan,essential-hypertension-high-bp,Essential Hypertension (High BP)
+enalapril,Enalapril,essential-hypertension-high-bp,Essential Hypertension (High BP)
+telmisartan,Telmisartan,essential-hypertension-high-bp,Essential Hypertension (High BP)
+hydrochlorothiazide,Hydrochlorothiazide,essential-hypertension-high-bp,Essential Hypertension (High BP)
+atenolol,Atenolol,essential-hypertension-high-bp,Essential Hypertension (High BP)
+ramipril,Ramipril,essential-hypertension-high-bp,Essential Hypertension (High BP)
+chlorthalidone,Chlorthalidone,essential-hypertension-high-bp,Essential Hypertension (High BP)
+carvedilol,Carvedilol,essential-hypertension-high-bp,Essential Hypertension (High BP)
+clonidine,Clonidine,essential-hypertension-high-bp,Essential Hypertension (High BP)
+ibuprofen,Ibuprofen,rheumatoid-arthritis-joint-pain,Rheumatoid Arthritis (Joint Pain)
+diclofenac,Diclofenac,rheumatoid-arthritis-joint-pain,Rheumatoid Arthritis (Joint Pain)
+naproxen,Naproxen,rheumatoid-arthritis-joint-pain,Rheumatoid Arthritis (Joint Pain)
+methotrexate,Methotrexate,rheumatoid-arthritis-joint-pain,Rheumatoid Arthritis (Joint Pain)
+hydroxychloroquine,Hydroxychloroquine,rheumatoid-arthritis-joint-pain,Rheumatoid Arthritis (Joint Pain)
+celecoxib,Celecoxib,rheumatoid-arthritis-joint-pain,Rheumatoid Arthritis (Joint Pain)
+sulfasalazine,Sulfasalazine,rheumatoid-arthritis-joint-pain,Rheumatoid Arthritis (Joint Pain)
+prednisolone,Prednisolone,rheumatoid-arthritis-joint-pain,Rheumatoid Arthritis (Joint Pain)
+leflunomide,Leflunomide,rheumatoid-arthritis-joint-pain,Rheumatoid Arthritis (Joint Pain)
+colchicine,Colchicine,rheumatoid-arthritis-joint-pain,Rheumatoid Arthritis (Joint Pain)
+chlorpheniramine,Chlorpheniramine,common-cold-respiratory-allergies,Common Cold & Respiratory Allergies
+cetirizine,Cetirizine,common-cold-respiratory-allergies,Common Cold & Respiratory Allergies
+phenylephrine,Phenylephrine,common-cold-respiratory-allergies,Common Cold & Respiratory Allergies
+xylometazoline,Xylometazoline,common-cold-respiratory-allergies,Common Cold & Respiratory Allergies
+oxymetazoline,Oxymetazoline,common-cold-respiratory-allergies,Common Cold & Respiratory Allergies
+dextromethorphan,Dextromethorphan,common-cold-respiratory-allergies,Common Cold & Respiratory Allergies
+guaifenesin,Guaifenesin,common-cold-respiratory-allergies,Common Cold & Respiratory Allergies
+ambroxol,Ambroxol,common-cold-respiratory-allergies,Common Cold & Respiratory Allergies
+bromhexine,Bromhexine,common-cold-respiratory-allergies,Common Cold & Respiratory Allergies
+diphenhydramine,Diphenhydramine,common-cold-respiratory-allergies,Common Cold & Respiratory Allergies
+paracetamol,Paracetamol,fever-acute-body-ache,Fever & Acute Body Ache
+aspirin,Aspirin,fever-acute-body-ache,Fever & Acute Body Ache
+mefenamic-acid,Mefenamic Acid,fever-acute-body-ache,Fever & Acute Body Ache
+aceclofenac,Aceclofenac,fever-acute-body-ache,Fever & Acute Body Ache
+etoricoxib,Etoricoxib,fever-acute-body-ache,Fever & Acute Body Ache
+ketorolac,Ketorolac,fever-acute-body-ache,Fever & Acute Body Ache
+thiocolchicoside,Thiocolchicoside,fever-acute-body-ache,Fever & Acute Body Ache
+chlorzoxazone,Chlorzoxazone,fever-acute-body-ache,Fever & Acute Body Ache
+tizanidine,Tizanidine,fever-acute-body-ache,Fever & Acute Body Ache
+piroxicam,Piroxicam,fever-acute-body-ache,Fever & Acute Body Ache
+salbutamol,Salbutamol,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+levosalbutamol,Levosalbutamol,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+budesonide,Budesonide,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+fluticasone,Fluticasone,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+formoterol,Formoterol,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+montelukast,Montelukast,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+theophylline,Theophylline,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+ipratropium,Ipratropium,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+tiotropium,Tiotropium,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+fexofenadine,Fexofenadine,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+levocetirizine,Levocetirizine,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+loratadine,Loratadine,bronchial-asthma-allergies,Bronchial Asthma & Allergies
+omeprazole,Omeprazole,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+pantoprazole,Pantoprazole,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+esomeprazole,Esomeprazole,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+rabeprazole,Rabeprazole,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+lansoprazole,Lansoprazole,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+famotidine,Famotidine,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+domperidone,Domperidone,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+sucralfate,Sucralfate,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+aluminium-magnesium-antacid,Aluminium-Magnesium Antacid,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+sodium-alginate,Sodium Alginate,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+itopride,Itopride,acid-reflux-gerd-gastritis,Acid Reflux / GERD / Gastritis
+chloroquine,Chloroquine,malaria,Malaria
+primaquine,Primaquine,malaria,Malaria
+artemether-lumefantrine,Artemether-Lumefantrine,malaria,Malaria
+artesunate,Artesunate,malaria,Malaria
+sulfadoxine-pyrimethamine,Sulfadoxine-Pyrimethamine,malaria,Malaria
+quinine,Quinine,malaria,Malaria
+doxycycline,Doxycycline,malaria,Malaria
+mefloquine,Mefloquine,malaria,Malaria
+atovaquone-proguanil,Atovaquone-Proguanil,malaria,Malaria
+tafenoquine,Tafenoquine,malaria,Malaria
+ringer-s-lactate,Ringer's Lactate,dengue-fever,Dengue Fever
+normal-saline,Normal Saline,dengue-fever,Dengue Fever
+dextrose-saline,Dextrose Saline,dengue-fever,Dengue Fever
+ondansetron,Ondansetron,dengue-fever,Dengue Fever
+metoclopramide,Metoclopramide,dengue-fever,Dengue Fever
+oral-rehydration-salts,Oral Rehydration Salts,gastroenteritis-acute-diarrhea,Gastroenteritis & Acute Diarrhea
+zinc-sulfate,Zinc Sulfate,gastroenteritis-acute-diarrhea,Gastroenteritis & Acute Diarrhea
+racecadotril,Racecadotril,gastroenteritis-acute-diarrhea,Gastroenteritis & Acute Diarrhea
+loperamide,Loperamide,gastroenteritis-acute-diarrhea,Gastroenteritis & Acute Diarrhea
+metronidazole,Metronidazole,gastroenteritis-acute-diarrhea,Gastroenteritis & Acute Diarrhea
+tinidazole,Tinidazole,gastroenteritis-acute-diarrhea,Gastroenteritis & Acute Diarrhea
+ciprofloxacin,Ciprofloxacin,gastroenteritis-acute-diarrhea,Gastroenteritis & Acute Diarrhea
+norfloxacin,Norfloxacin,gastroenteritis-acute-diarrhea,Gastroenteritis & Acute Diarrhea
+azithromycin,Azithromycin,gastroenteritis-acute-diarrhea,Gastroenteritis & Acute Diarrhea
+nitazoxanide,Nitazoxanide,gastroenteritis-acute-diarrhea,Gastroenteritis & Acute Diarrhea
+saccharomyces-boulardii,Saccharomyces boulardii,gastroenteritis-acute-diarrhea,Gastroenteritis & Acute Diarrhea
+dicyclomine,Dicyclomine,gastroenteritis-acute-diarrhea,Gastroenteritis & Acute Diarrhea

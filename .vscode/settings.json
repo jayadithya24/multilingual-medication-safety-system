@@ -1,0 +1,12 @@
+{
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/node_modules": true,
+    "**/.pytest_cache": true,
+    "**/.venv*": true,
+    "backend/venv": true,
+    ".cache": true,
+    "artifacts": true,
+    "frontend/dist": true
+  }
+}

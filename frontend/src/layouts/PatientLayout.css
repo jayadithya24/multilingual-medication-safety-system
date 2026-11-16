@@ -1,0 +1,19 @@
+.patient-layout {
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+.patient-layout__main {
+    min-height: 100vh;
+    margin-left: 240px;
+}
+
+.patient-layout__content {
+    min-height: 100vh;
+}
+
+@media (max-width: 900px) {
+    .patient-layout__main {
+        margin-left: 0;
+    }
+}

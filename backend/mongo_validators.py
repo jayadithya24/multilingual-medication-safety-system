@@ -2,8 +2,18 @@
 
 This script is idempotent and intended for initial DB setup.
 """
+import sys
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 from pymongo import MongoClient
 from typing import Dict, Any
+from backend.env_loader import load_project_env
+
+load_project_env()
 
 
 INTERACTIONS_VALIDATOR = {

@@ -1,12 +1,2 @@
-
-fastapi
-uvicorn
-pandas
-pymongo
-python-multipart
-python-jose[cryptography]
-passlib[bcrypt]
-bcrypt
-neo4j
-pytest
-mongomock
+# Compatibility entry point. Runtime pins are maintained at the repository root.
+-r ../requirements.txt

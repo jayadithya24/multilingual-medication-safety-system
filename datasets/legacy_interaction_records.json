@@ -1,0 +1,1258 @@
+[
+  {
+    "drug1_id": "metformin",
+    "drug1": "Metformin",
+    "drug2_id": "topiramate",
+    "drug2": "Topiramate",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "metformin",
+    "drug1": "Metformin",
+    "drug2_id": "acetazolamide",
+    "drug2": "Acetazolamide",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "metformin",
+    "drug1": "Metformin",
+    "drug2_id": "alcohol",
+    "drug2": "Alcohol",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "metformin",
+    "drug1": "Metformin",
+    "drug2_id": "iodinated-contrast-agents",
+    "drug2": "Iodinated contrast agents",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "metformin",
+    "drug1": "Metformin",
+    "drug2_id": "cimetidine",
+    "drug2": "Cimetidine",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "glipizide",
+    "drug1": "Glipizide",
+    "drug2_id": "fluconazole",
+    "drug2": "Fluconazole",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "glipizide",
+    "drug1": "Glipizide",
+    "drug2_id": "miconazole",
+    "drug2": "Miconazole",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "glipizide",
+    "drug1": "Glipizide",
+    "drug2_id": "nsaids",
+    "drug2": "NSAIDs",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "glipizide",
+    "drug1": "Glipizide",
+    "drug2_id": "warfarin",
+    "drug2": "Warfarin",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "glipizide",
+    "drug1": "Glipizide",
+    "drug2_id": "salicylates",
+    "drug2": "Salicylates",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "glipizide",
+    "drug1": "Glipizide",
+    "drug2_id": "beta-blockers",
+    "drug2": "Beta-blockers",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "glipizide",
+    "drug1": "Glipizide",
+    "drug2_id": "rifampin",
+    "drug2": "Rifampin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "glimepiride",
+    "drug1": "Glimepiride",
+    "drug2_id": "fluconazole",
+    "drug2": "Fluconazole",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "glimepiride",
+    "drug1": "Glimepiride",
+    "drug2_id": "gemfibrozil",
+    "drug2": "Gemfibrozil",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "glimepiride",
+    "drug1": "Glimepiride",
+    "drug2_id": "ace-inhibitors",
+    "drug2": "ACE inhibitors",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "glimepiride",
+    "drug1": "Glimepiride",
+    "drug2_id": "salicylates",
+    "drug2": "Salicylates",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "glimepiride",
+    "drug1": "Glimepiride",
+    "drug2_id": "corticosteroids",
+    "drug2": "Corticosteroids",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "glimepiride",
+    "drug1": "Glimepiride",
+    "drug2_id": "thiazides",
+    "drug2": "Thiazides",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "sitagliptin",
+    "drug1": "Sitagliptin",
+    "drug2_id": "digoxin",
+    "drug2": "Digoxin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "sitagliptin",
+    "drug1": "Sitagliptin",
+    "drug2_id": "insulin",
+    "drug2": "Insulin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "sitagliptin",
+    "drug1": "Sitagliptin",
+    "drug2_id": "sulfonylureas",
+    "drug2": "Sulfonylureas",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "empagliflozin",
+    "drug1": "Empagliflozin",
+    "drug2_id": "insulin",
+    "drug2": "Insulin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "empagliflozin",
+    "drug1": "Empagliflozin",
+    "drug2_id": "insulin-secretagogues",
+    "drug2": "Insulin Secretagogues",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "empagliflozin",
+    "drug1": "Empagliflozin",
+    "drug2_id": "diuretics",
+    "drug2": "Diuretics",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "empagliflozin",
+    "drug1": "Empagliflozin",
+    "drug2_id": "rifampin",
+    "drug2": "Rifampin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "pioglitazone",
+    "drug1": "Pioglitazone",
+    "drug2_id": "gemfibrozil",
+    "drug2": "Gemfibrozil",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "pioglitazone",
+    "drug1": "Pioglitazone",
+    "drug2_id": "rifampin",
+    "drug2": "Rifampin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "pioglitazone",
+    "drug1": "Pioglitazone",
+    "drug2_id": "insulin",
+    "drug2": "Insulin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "insulin-glargine",
+    "drug1": "Insulin Glargine",
+    "drug2_id": "beta-blockers",
+    "drug2": "Beta-blockers",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "insulin-glargine",
+    "drug1": "Insulin Glargine",
+    "drug2_id": "ace-inhibitors",
+    "drug2": "ACE inhibitors",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "insulin-glargine",
+    "drug1": "Insulin Glargine",
+    "drug2_id": "salicylates",
+    "drug2": "Salicylates",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "insulin-glargine",
+    "drug1": "Insulin Glargine",
+    "drug2_id": "mao-inhibitors",
+    "drug2": "MAO inhibitors",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "insulin-glargine",
+    "drug1": "Insulin Glargine",
+    "drug2_id": "corticosteroids",
+    "drug2": "Corticosteroids",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "insulin-glargine",
+    "drug1": "Insulin Glargine",
+    "drug2_id": "thiazides",
+    "drug2": "Thiazides",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "insulin-glargine",
+    "drug1": "Insulin Glargine",
+    "drug2_id": "atypical-antipsychotics",
+    "drug2": "Atypical Antipsychotics",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "dapagliflozin",
+    "drug1": "Dapagliflozin",
+    "drug2_id": "insulin",
+    "drug2": "Insulin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "dapagliflozin",
+    "drug1": "Dapagliflozin",
+    "drug2_id": "sulfonylureas",
+    "drug2": "Sulfonylureas",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "dapagliflozin",
+    "drug1": "Dapagliflozin",
+    "drug2_id": "diuretics",
+    "drug2": "Diuretics",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "dapagliflozin",
+    "drug1": "Dapagliflozin",
+    "drug2_id": "mefenamic-acid",
+    "drug2": "Mefenamic Acid",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "vildagliptin",
+    "drug1": "Vildagliptin",
+    "drug2_id": "insulin",
+    "drug2": "Insulin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "vildagliptin",
+    "drug1": "Vildagliptin",
+    "drug2_id": "sulfonylureas",
+    "drug2": "Sulfonylureas",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "vildagliptin",
+    "drug1": "Vildagliptin",
+    "drug2_id": "ace-inhibitors",
+    "drug2": "ACE inhibitors",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "acarbose",
+    "drug1": "Acarbose",
+    "drug2_id": "amylase",
+    "drug2": "Amylase",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "acarbose",
+    "drug1": "Acarbose",
+    "drug2_id": "pancreatin",
+    "drug2": "Pancreatin",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "acarbose",
+    "drug1": "Acarbose",
+    "drug2_id": "activated-charcoal",
+    "drug2": "Activated charcoal",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "acarbose",
+    "drug1": "Acarbose",
+    "drug2_id": "digoxin",
+    "drug2": "Digoxin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "amlodipine",
+    "drug1": "Amlodipine",
+    "drug2_id": "ketoconazole",
+    "drug2": "Ketoconazole",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "amlodipine",
+    "drug1": "Amlodipine",
+    "drug2_id": "ritonavir",
+    "drug2": "Ritonavir",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "amlodipine",
+    "drug1": "Amlodipine",
+    "drug2_id": "clarithromycin",
+    "drug2": "Clarithromycin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "amlodipine",
+    "drug1": "Amlodipine",
+    "drug2_id": "rifampin",
+    "drug2": "Rifampin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "amlodipine",
+    "drug1": "Amlodipine",
+    "drug2_id": "simvastatin",
+    "drug2": "Simvastatin",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "amlodipine",
+    "drug1": "Amlodipine",
+    "drug2_id": "cyclosporine",
+    "drug2": "Cyclosporine",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "amlodipine",
+    "drug1": "Amlodipine",
+    "drug2_id": "tacrolimus",
+    "drug2": "Tacrolimus",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "losartan",
+    "drug1": "Losartan",
+    "drug2_id": "aliskiren",
+    "drug2": "Aliskiren",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "losartan",
+    "drug1": "Losartan",
+    "drug2_id": "potassium-supplements",
+    "drug2": "Potassium supplements",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "losartan",
+    "drug1": "Losartan",
+    "drug2_id": "potassium-sparing-diuretics",
+    "drug2": "Potassium-Sparing Diuretics",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "losartan",
+    "drug1": "Losartan",
+    "drug2_id": "nsaids",
+    "drug2": "NSAIDs",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "losartan",
+    "drug1": "Losartan",
+    "drug2_id": "lithium",
+    "drug2": "Lithium",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "enalapril",
+    "drug1": "Enalapril",
+    "drug2_id": "aliskiren",
+    "drug2": "Aliskiren",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "enalapril",
+    "drug1": "Enalapril",
+    "drug2_id": "potassium-sparing-diuretics",
+    "drug2": "Potassium-sparing diuretics",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "enalapril",
+    "drug1": "Enalapril",
+    "drug2_id": "supplements",
+    "drug2": "Supplements",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "enalapril",
+    "drug1": "Enalapril",
+    "drug2_id": "nsaids",
+    "drug2": "NSAIDs",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "enalapril",
+    "drug1": "Enalapril",
+    "drug2_id": "lithium",
+    "drug2": "Lithium",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "telmisartan",
+    "drug1": "Telmisartan",
+    "drug2_id": "digoxin",
+    "drug2": "Digoxin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "telmisartan",
+    "drug1": "Telmisartan",
+    "drug2_id": "lithium",
+    "drug2": "Lithium",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "telmisartan",
+    "drug1": "Telmisartan",
+    "drug2_id": "ramipril",
+    "drug2": "Ramipril",
+    "drug2_in_scope": "yes",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "telmisartan",
+    "drug1": "Telmisartan",
+    "drug2_id": "nsaids",
+    "drug2": "NSAIDs",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "hydrochlorothiazide",
+    "drug1": "Hydrochlorothiazide",
+    "drug2_id": "lithium",
+    "drug2": "Lithium",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "hydrochlorothiazide",
+    "drug1": "Hydrochlorothiazide",
+    "drug2_id": "nsaids",
+    "drug2": "NSAIDs",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "hydrochlorothiazide",
+    "drug1": "Hydrochlorothiazide",
+    "drug2_id": "antidiabetic-agents",
+    "drug2": "Antidiabetic agents",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "hydrochlorothiazide",
+    "drug1": "Hydrochlorothiazide",
+    "drug2_id": "corticosteroids",
+    "drug2": "Corticosteroids",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "hydrochlorothiazide",
+    "drug1": "Hydrochlorothiazide",
+    "drug2_id": "digoxin",
+    "drug2": "Digoxin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "atenolol",
+    "drug1": "Atenolol",
+    "drug2_id": "verapamil",
+    "drug2": "Verapamil",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "atenolol",
+    "drug1": "Atenolol",
+    "drug2_id": "diltiazem",
+    "drug2": "Diltiazem",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "atenolol",
+    "drug1": "Atenolol",
+    "drug2_id": "clonidine",
+    "drug2": "Clonidine",
+    "drug2_in_scope": "yes",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "atenolol",
+    "drug1": "Atenolol",
+    "drug2_id": "insulin",
+    "drug2": "Insulin",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "atenolol",
+    "drug1": "Atenolol",
+    "drug2_id": "oral-antidiabetics",
+    "drug2": "Oral Antidiabetics",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "atenolol",
+    "drug1": "Atenolol",
+    "drug2_id": "nsaids",
+    "drug2": "NSAIDs",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "ramipril",
+    "drug1": "Ramipril",
+    "drug2_id": "aliskiren",
+    "drug2": "Aliskiren",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "ramipril",
+    "drug1": "Ramipril",
+    "drug2_id": "potassium-sparing-diuretics",
+    "drug2": "Potassium-sparing diuretics",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "ramipril",
+    "drug1": "Ramipril",
+    "drug2_id": "nsaids",
+    "drug2": "NSAIDs",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "ramipril",
+    "drug1": "Ramipril",
+    "drug2_id": "lithium",
+    "drug2": "Lithium",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "chlorthalidone",
+    "drug1": "Chlorthalidone",
+    "drug2_id": "lithium",
+    "drug2": "Lithium",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "chlorthalidone",
+    "drug1": "Chlorthalidone",
+    "drug2_id": "digoxin",
+    "drug2": "Digoxin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "chlorthalidone",
+    "drug1": "Chlorthalidone",
+    "drug2_id": "nsaids",
+    "drug2": "NSAIDs",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "chlorthalidone",
+    "drug1": "Chlorthalidone",
+    "drug2_id": "corticosteroids",
+    "drug2": "Corticosteroids",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "chlorthalidone",
+    "drug1": "Chlorthalidone",
+    "drug2_id": "amphotericin-b",
+    "drug2": "amphotericin B",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "carvedilol",
+    "drug1": "Carvedilol",
+    "drug2_id": "verapamil",
+    "drug2": "Verapamil",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "carvedilol",
+    "drug1": "Carvedilol",
+    "drug2_id": "diltiazem",
+    "drug2": "Diltiazem",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "carvedilol",
+    "drug1": "Carvedilol",
+    "drug2_id": "digoxin",
+    "drug2": "Digoxin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "carvedilol",
+    "drug1": "Carvedilol",
+    "drug2_id": "insulin",
+    "drug2": "Insulin",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "carvedilol",
+    "drug1": "Carvedilol",
+    "drug2_id": "oral-antidiabetics",
+    "drug2": "Oral Antidiabetics",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "carvedilol",
+    "drug1": "Carvedilol",
+    "drug2_id": "fluoxetine",
+    "drug2": "Fluoxetine",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "carvedilol",
+    "drug1": "Carvedilol",
+    "drug2_id": "paroxetine",
+    "drug2": "Paroxetine",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "clonidine",
+    "drug1": "Clonidine",
+    "drug2_id": "beta-blockers",
+    "drug2": "Beta-blockers",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "clonidine",
+    "drug1": "Clonidine",
+    "drug2_id": "tricyclic-antidepressants",
+    "drug2": "Tricyclic Antidepressants",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "clonidine",
+    "drug1": "Clonidine",
+    "drug2_id": "cns-depressants",
+    "drug2": "CNS depressants",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "clonidine",
+    "drug1": "Clonidine",
+    "drug2_id": "alcohol",
+    "drug2": "Alcohol",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "ibuprofen",
+    "drug1": "Ibuprofen",
+    "drug2_id": "aspirin",
+    "drug2": "Aspirin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "ibuprofen",
+    "drug1": "Ibuprofen",
+    "drug2_id": "warfarin",
+    "drug2": "Warfarin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "ibuprofen",
+    "drug1": "Ibuprofen",
+    "drug2_id": "ace-inhibitors",
+    "drug2": "ACE inhibitors",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "ibuprofen",
+    "drug1": "Ibuprofen",
+    "drug2_id": "arbs",
+    "drug2": "ARBs",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "ibuprofen",
+    "drug1": "Ibuprofen",
+    "drug2_id": "lithium",
+    "drug2": "Lithium",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "ibuprofen",
+    "drug1": "Ibuprofen",
+    "drug2_id": "methotrexate",
+    "drug2": "Methotrexate",
+    "drug2_in_scope": "yes",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "diclofenac",
+    "drug1": "Diclofenac",
+    "drug2_id": "warfarin",
+    "drug2": "Warfarin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "diclofenac",
+    "drug1": "Diclofenac",
+    "drug2_id": "anticoagulants",
+    "drug2": "Anticoagulants",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "diclofenac",
+    "drug1": "Diclofenac",
+    "drug2_id": "methotrexate",
+    "drug2": "Methotrexate",
+    "drug2_in_scope": "yes",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "diclofenac",
+    "drug1": "Diclofenac",
+    "drug2_id": "cyclosporine",
+    "drug2": "Cyclosporine",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "diclofenac",
+    "drug1": "Diclofenac",
+    "drug2_id": "digoxin",
+    "drug2": "Digoxin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "diclofenac",
+    "drug1": "Diclofenac",
+    "drug2_id": "ace-inhibitors",
+    "drug2": "ACE inhibitors",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "diclofenac",
+    "drug1": "Diclofenac",
+    "drug2_id": "arbs",
+    "drug2": "ARBs",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "naproxen",
+    "drug1": "Naproxen",
+    "drug2_id": "warfarin",
+    "drug2": "Warfarin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "naproxen",
+    "drug1": "Naproxen",
+    "drug2_id": "ace-inhibitors",
+    "drug2": "ACE inhibitors",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "naproxen",
+    "drug1": "Naproxen",
+    "drug2_id": "arbs",
+    "drug2": "ARBs",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "naproxen",
+    "drug1": "Naproxen",
+    "drug2_id": "methotrexate",
+    "drug2": "Methotrexate",
+    "drug2_in_scope": "yes",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "naproxen",
+    "drug1": "Naproxen",
+    "drug2_id": "probenecid",
+    "drug2": "Probenecid",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "naproxen",
+    "drug1": "Naproxen",
+    "drug2_id": "lithium",
+    "drug2": "Lithium",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "methotrexate",
+    "drug1": "Methotrexate",
+    "drug2_id": "ibuprofen",
+    "drug2": "Ibuprofen",
+    "drug2_in_scope": "yes",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "methotrexate",
+    "drug1": "Methotrexate",
+    "drug2_id": "diclofenac",
+    "drug2": "Diclofenac",
+    "drug2_in_scope": "yes",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "methotrexate",
+    "drug1": "Methotrexate",
+    "drug2_id": "trimethoprim",
+    "drug2": "Trimethoprim",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "methotrexate",
+    "drug1": "Methotrexate",
+    "drug2_id": "sulfamethoxazole",
+    "drug2": "Sulfamethoxazole",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "methotrexate",
+    "drug1": "Methotrexate",
+    "drug2_id": "penicillins",
+    "drug2": "Penicillins",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "methotrexate",
+    "drug1": "Methotrexate",
+    "drug2_id": "proton-pump-inhibitors",
+    "drug2": "Proton pump inhibitors",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "methotrexate",
+    "drug1": "Methotrexate",
+    "drug2_id": "alcohol",
+    "drug2": "Alcohol",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "hydroxychloroquine",
+    "drug1": "Hydroxychloroquine",
+    "drug2_id": "azithromycin",
+    "drug2": "Azithromycin",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "hydroxychloroquine",
+    "drug1": "Hydroxychloroquine",
+    "drug2_id": "fluoroquinolones",
+    "drug2": "Fluoroquinolones",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "hydroxychloroquine",
+    "drug1": "Hydroxychloroquine",
+    "drug2_id": "antiarrhythmics",
+    "drug2": "Antiarrhythmics",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "hydroxychloroquine",
+    "drug1": "Hydroxychloroquine",
+    "drug2_id": "digoxin",
+    "drug2": "Digoxin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "hydroxychloroquine",
+    "drug1": "Hydroxychloroquine",
+    "drug2_id": "antidiabetics",
+    "drug2": "Antidiabetics",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "hydroxychloroquine",
+    "drug1": "Hydroxychloroquine",
+    "drug2_id": "cyclosporine",
+    "drug2": "Cyclosporine",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "celecoxib",
+    "drug1": "Celecoxib",
+    "drug2_id": "warfarin",
+    "drug2": "Warfarin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "celecoxib",
+    "drug1": "Celecoxib",
+    "drug2_id": "ace-inhibitors",
+    "drug2": "ACE inhibitors",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "celecoxib",
+    "drug1": "Celecoxib",
+    "drug2_id": "arbs",
+    "drug2": "ARBs",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "celecoxib",
+    "drug1": "Celecoxib",
+    "drug2_id": "lithium",
+    "drug2": "Lithium",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "celecoxib",
+    "drug1": "Celecoxib",
+    "drug2_id": "cyp2c9-inhibitor",
+    "drug2": "CYP2C9 inhibitor",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "celecoxib",
+    "drug1": "Celecoxib",
+    "drug2_id": "methotrexate",
+    "drug2": "Methotrexate",
+    "drug2_in_scope": "yes",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "sulfasalazine",
+    "drug1": "Sulfasalazine",
+    "drug2_id": "methotrexate",
+    "drug2": "Methotrexate",
+    "drug2_in_scope": "yes",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "sulfasalazine",
+    "drug1": "Sulfasalazine",
+    "drug2_id": "digoxin",
+    "drug2": "Digoxin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "sulfasalazine",
+    "drug1": "Sulfasalazine",
+    "drug2_id": "folic-acid",
+    "drug2": "Folic acid",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "sulfasalazine",
+    "drug1": "Sulfasalazine",
+    "drug2_id": "warfarin",
+    "drug2": "Warfarin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "prednisolone",
+    "drug1": "Prednisolone",
+    "drug2_id": "nsaids",
+    "drug2": "NSAIDs",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "prednisolone",
+    "drug1": "Prednisolone",
+    "drug2_id": "antidiabetic-agents",
+    "drug2": "Antidiabetic agents",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "prednisolone",
+    "drug1": "Prednisolone",
+    "drug2_id": "live-vaccines",
+    "drug2": "Live vaccines",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "prednisolone",
+    "drug1": "Prednisolone",
+    "drug2_id": "rifampin",
+    "drug2": "Rifampin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "prednisolone",
+    "drug1": "Prednisolone",
+    "drug2_id": "warfarin",
+    "drug2": "Warfarin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "leflunomide",
+    "drug1": "Leflunomide",
+    "drug2_id": "methotrexate",
+    "drug2": "Methotrexate",
+    "drug2_in_scope": "yes",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "leflunomide",
+    "drug1": "Leflunomide",
+    "drug2_id": "warfarin",
+    "drug2": "Warfarin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "leflunomide",
+    "drug1": "Leflunomide",
+    "drug2_id": "active-metabolite-overlap",
+    "drug2": "Active Metabolite Overlap",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "leflunomide",
+    "drug1": "Leflunomide",
+    "drug2_id": "cholestyramine",
+    "drug2": "Cholestyramine",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "leflunomide",
+    "drug1": "Leflunomide",
+    "drug2_id": "activated-charcoal",
+    "drug2": "Activated Charcoal",
+    "drug2_in_scope": "no",
+    "severity": "Mild"
+  },
+  {
+    "drug1_id": "colchicine",
+    "drug1": "Colchicine",
+    "drug2_id": "clarithromycin",
+    "drug2": "Clarithromycin",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "colchicine",
+    "drug1": "Colchicine",
+    "drug2_id": "ritonavir",
+    "drug2": "Ritonavir",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "colchicine",
+    "drug1": "Colchicine",
+    "drug2_id": "ketoconazole",
+    "drug2": "Ketoconazole",
+    "drug2_in_scope": "no",
+    "severity": "Severe"
+  },
+  {
+    "drug1_id": "colchicine",
+    "drug1": "Colchicine",
+    "drug2_id": "cyclosporine",
+    "drug2": "Cyclosporine",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "colchicine",
+    "drug1": "Colchicine",
+    "drug2_id": "ranolazine",
+    "drug2": "Ranolazine",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "colchicine",
+    "drug1": "Colchicine",
+    "drug2_id": "statins",
+    "drug2": "Statins",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  },
+  {
+    "drug1_id": "colchicine",
+    "drug1": "Colchicine",
+    "drug2_id": "digoxin",
+    "drug2": "Digoxin",
+    "drug2_in_scope": "no",
+    "severity": "Moderate"
+  }
+]

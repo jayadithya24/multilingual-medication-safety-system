@@ -37,7 +37,7 @@ insulin-glargine,Insulin Glargine,atypical-antipsychotics,Atypical Antipsychotic
 dapagliflozin,Dapagliflozin,insulin,Insulin,no,Moderate
 dapagliflozin,Dapagliflozin,sulfonylureas,Sulfonylureas,no,Moderate
 dapagliflozin,Dapagliflozin,diuretics,Diuretics,no,Moderate
-dapagliflozin,Dapagliflozin,mefenamic-acid,Mefenamic Acid,no,Moderate
+dapagliflozin,Dapagliflozin,mefenamic-acid,Mefenamic Acid,yes,Moderate
 vildagliptin,Vildagliptin,insulin,Insulin,no,Moderate
 vildagliptin,Vildagliptin,sulfonylureas,Sulfonylureas,no,Moderate
 vildagliptin,Vildagliptin,ace-inhibitors,ACE inhibitors,no,Moderate
@@ -97,7 +97,7 @@ clonidine,Clonidine,beta-blockers,Beta-blockers,no,Mild
 clonidine,Clonidine,tricyclic-antidepressants,Tricyclic Antidepressants,no,Moderate
 clonidine,Clonidine,cns-depressants,CNS depressants,no,Moderate
 clonidine,Clonidine,alcohol,Alcohol,no,Moderate
-ibuprofen,Ibuprofen,aspirin,Aspirin,no,Moderate
+ibuprofen,Ibuprofen,aspirin,Aspirin,yes,Moderate
 ibuprofen,Ibuprofen,warfarin,Warfarin,no,Moderate
 ibuprofen,Ibuprofen,ace-inhibitors,ACE inhibitors,no,Moderate
 ibuprofen,Ibuprofen,arbs,ARBs,no,Moderate
@@ -123,7 +123,7 @@ methotrexate,Methotrexate,sulfamethoxazole,Sulfamethoxazole,no,Moderate
 methotrexate,Methotrexate,penicillins,Penicillins,no,Moderate
 methotrexate,Methotrexate,proton-pump-inhibitors,Proton pump inhibitors,no,Moderate
 methotrexate,Methotrexate,alcohol,Alcohol,no,Moderate
-hydroxychloroquine,Hydroxychloroquine,azithromycin,Azithromycin,no,Severe
+hydroxychloroquine,Hydroxychloroquine,azithromycin,Azithromycin,yes,Severe
 hydroxychloroquine,Hydroxychloroquine,fluoroquinolones,Fluoroquinolones,no,Severe
 hydroxychloroquine,Hydroxychloroquine,antiarrhythmics,Antiarrhythmics,no,Severe
 hydroxychloroquine,Hydroxychloroquine,digoxin,Digoxin,no,Moderate
