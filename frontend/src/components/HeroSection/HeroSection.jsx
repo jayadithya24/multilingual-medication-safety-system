@@ -8,7 +8,7 @@ function HeroSection() {
       <div className="hero-content">
 
         <span className="hero-tag">
-          🩺 AI Powered Healthcare Platform
+          🩺 Static Medication Safety Demo
         </span>
 
         <h1>
@@ -20,9 +20,9 @@ function HeroSection() {
         </h1>
 
         <p>
-          Search medicines, identify tablets using OCR,
-          analyze drug interactions, explore knowledge graphs,
-          and assist patients with multilingual voice support.
+          Search the bundled medicine catalog, review sample interaction records,
+          and explore multilingual reference data and a predefined knowledge graph.
+          OCR and voice results are examples only.
         </p>
 
         <div className="hero-buttons">
@@ -45,10 +45,11 @@ function HeroSection() {
 
       <div className="hero-image">
 
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/2966/2966488.png"
-          alt="Medical"
-        />
+        <div className="hero-illustration" role="img" aria-label="Medicine and health symbols">
+          <span>💊</span>
+          <span>🩺</span>
+          <span>📋</span>
+        </div>
 
       </div>
 

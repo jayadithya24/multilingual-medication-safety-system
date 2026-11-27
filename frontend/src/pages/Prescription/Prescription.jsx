@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import api from "../../services/api";
 import { hasStoredSession } from "../../services/api";
 import { registerMedicationNotifications } from "../../services/fcmService";
+import { IS_STATIC_DEMO } from "../../services/api";
 import { Link } from "react-router-dom";
 import MedicineCard from "../../components/MedicineCard/MedicineCard";
 import VoicePlayback from "../../components/VoicePlayback";
@@ -445,6 +446,9 @@ useEffect(() => () => {
         try {
             setSaving(true);
 
+            if (IS_STATIC_DEMO) {
+                throw new Error("This is a read-only demo. Medication schedules are not saved.");
+            }
             if (!hasStoredSession()) {
                 throw new Error("Please log in again before adding a medication to your schedule.");
             }
@@ -472,7 +476,7 @@ useEffect(() => () => {
                 );
 
             setNotificationMessage("");
-            if (reminderEnabled) {
+            if (reminderEnabled && !IS_STATIC_DEMO) {
                 try {
                     const result = await registerMedicationNotifications();
                     if (!result.registered) setNotificationMessage("Schedule saved. Browser reminders are unavailable on this device.");
@@ -532,8 +536,9 @@ useEffect(() => () => {
                 </h1>
 
                 <p>
-                    Scan a medicine label or prescription, view medicine information,
-                    or enter details manually. Review everything before adding a schedule.
+                    {IS_STATIC_DEMO
+                        ? "Try the predefined OCR sample. Images stay in your browser and are not processed or uploaded; schedules cannot be saved."
+                        : "Scan a medicine label or prescription, view medicine information, or enter details manually. Review everything before adding a schedule."}
                 </p>
 
             </section>
@@ -555,10 +560,9 @@ useEffect(() => () => {
                     </h2>
 
                     <p>
-                        OCR will automatically fill
-                        the information it can detect.
-                        You can edit everything before
-                        saving.
+                        {IS_STATIC_DEMO
+                            ? "Running OCR displays a predefined example only. Your selected image stays in this browser and is not processed or uploaded."
+                            : "OCR will fill detected information. You can review and edit everything before saving."}
                     </p>
 
                 </div>
@@ -1064,13 +1068,13 @@ useEffect(() => () => {
                     <button
                         type="submit"
                         className="prescription-submit"
-                        disabled={saving || saved || !hasStoredSession()}
+                        disabled={saving || saved || !hasStoredSession() || IS_STATIC_DEMO}
                     >
                         {saving
                             ? "Adding to Schedule..."
                             : "Add to Schedule"}
                     </button>
-                    {!hasStoredSession() && <p><Link to="/public">Log in as a patient</Link> to save a medication schedule.</p>}
+                    {!IS_STATIC_DEMO && !hasStoredSession() && <p><Link to="/public">Log in as a patient</Link> to save a medication schedule.</p>}
                     </fieldset>
 
                 </form>

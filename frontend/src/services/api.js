@@ -1,42 +1,13 @@
 import axios from "axios";
+import { staticDemoAdapter } from "./demoApi";
 
-function resolveApiBaseUrl() {
-  const configured = import.meta.env.VITE_API_URL;
+export const IS_STATIC_DEMO = true;
 
-  if (configured && typeof window !== "undefined") {
-    try {
-      const apiUrl = new URL(configured, window.location.origin);
-      const pageHost = window.location.hostname;
-      const loopbackSwap =
-        (apiUrl.hostname === "127.0.0.1" && pageHost === "localhost") ||
-        (apiUrl.hostname === "localhost" && pageHost === "127.0.0.1");
-
-      if (loopbackSwap) {
-        apiUrl.hostname = pageHost;
-      }
-
-      return apiUrl.origin;
-    } catch {
-      return configured;
-    }
-  }
-
-  if (configured) {
-    return configured;
-  }
-
-  if (import.meta.env.DEV) {
-    return "";
-  }
-
-  return "";
-}
-
-const BASE_URL = resolveApiBaseUrl();
-
-// UI hints only. The credential is an HttpOnly cookie owned by the server.
+// The demo does not authenticate or contact a backend.
 localStorage.removeItem("mmss_token");
 localStorage.removeItem("mmss_role");
+sessionStorage.removeItem("mmss_session");
+sessionStorage.removeItem("mmss_role");
 export function hasStoredSession() { return sessionStorage.getItem("mmss_session") === "active"; }
 export function getStoredRole() { return sessionStorage.getItem("mmss_role") || ""; }
 export function setStoredSession() { sessionStorage.setItem("mmss_session", "active"); }
@@ -45,7 +16,12 @@ export function clearStoredToken() {
   sessionStorage.removeItem("mmss_session");
   sessionStorage.removeItem("mmss_role");
 }
-export const api = axios.create({ baseURL: BASE_URL, timeout: 300000, withCredentials: true });
+export const api = axios.create({
+  baseURL: "",
+  timeout: 300000,
+  withCredentials: false,
+  adapter: staticDemoAdapter,
+});
 
 api.interceptors.response.use(
   (response) => response,
@@ -78,32 +54,21 @@ api.interceptors.response.use(
 );
 
 export async function getHealth() {
-  const response = await fetch(`${BASE_URL}/health`);
-  return response.json();
+  const response = await api.get("/health");
+  return response.data;
 }
 
 export async function uploadPrescription(file) {
   const formData = new FormData();
   formData.append("file", file);
 
-  const response = await fetch(`${BASE_URL}/upload-image`, {
-    method: "POST",
-    body: formData,
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to upload prescription");
-  }
-
-  return response.json();
+  const response = await api.post("/upload-image", formData);
+  return response.data;
 }
 
 export async function searchDrug(term) {
-  const response = await fetch(`${BASE_URL}/neo4j/search?term=${encodeURIComponent(term)}`);
-  if (!response.ok) {
-    throw new Error("Drug search failed");
-  }
-  return response.json();
+  const response = await api.get("/neo4j/search", { params: { term } });
+  return response.data;
 }
 
 export default api;

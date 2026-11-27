@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import VoicePlayback from "../../components/VoicePlayback";
 import { sendVoiceSearchAudio } from "../../services/voiceService";
 import { scanMedicine } from "../../services/ocrService";
+import { IS_STATIC_DEMO } from "../../services/api";
 import "./VoiceSearch.css";
 
 const LANGUAGE_COPY = {
@@ -298,6 +299,20 @@ function VoiceSearch({ embedded = false }) {
     }
   };
 
+  const showDemoVoiceSample = async () => {
+    setProcessing(true);
+    setError("");
+    setResult(null);
+    try {
+      const sampleAudio = new File(["sample"], "sample-audio.webm", { type: "audio/webm" });
+      setResult(await sendVoiceSearchAudio(sampleAudio, lang === "auto" ? "en" : lang, "Metformin"));
+    } catch (sampleError) {
+      setError(sampleError?.message || "Unable to load the predefined voice sample.");
+    } finally {
+      setProcessing(false);
+    }
+  };
+
   const medicineDetails = result?.medicine_details ?? null;
   const matchingMedicines = result?.matching_medicines ?? [];
   const detectedText = result?.detected_text ?? "";
@@ -317,10 +332,12 @@ function VoiceSearch({ embedded = false }) {
         <div className="voice-hero">
           {!embedded && <p className="voice-kicker">Voice Search</p>}
           {embedded
-            ? <h2>Speak or upload an audio clip to find a medicine</h2>
-            : <h1>Speak or upload an audio clip to find a medicine</h1>}
+            ? <h2>{IS_STATIC_DEMO ? "View a voice-search sample" : "Speak or upload an audio clip to find a medicine"}</h2>
+            : <h1>{IS_STATIC_DEMO ? "View a voice-search sample" : "Speak or upload an audio clip to find a medicine"}</h1>}
           <p>
-            Record your medicine name or question. After you speak, pause for about 3 seconds to search automatically. Maximum recording: 30 seconds. You can also press Stop.
+            {IS_STATIC_DEMO
+              ? "View a predefined multilingual voice-search example. This demo does not request microphone access or process audio."
+              : "Record your medicine name or question. After you speak, pause for about 3 seconds to search automatically. Maximum recording: 30 seconds. You can also press Stop."}
           </p>
         </div>
 
@@ -334,12 +351,16 @@ function VoiceSearch({ embedded = false }) {
           </select>
         </label>
 
-        {lang === "auto" && (
+        {lang === "auto" && !IS_STATIC_DEMO && (
           <p>Speak a short sentence with the medicine name so we can identify your language. A medicine name alone may not be enough.</p>
         )}
 
         <div className="voice-panel">
-          <div className="voice-controls">
+          {IS_STATIC_DEMO ? (
+            <button className="voice-submit" onClick={showDemoVoiceSample} disabled={processing}>
+              {processing ? "Loading sample..." : "Show predefined sample result"}
+            </button>
+          ) : <><div className="voice-controls">
             <button
               className={`voice-button voice-button--primary ${isRecording ? "is-recording" : ""}`}
               onClick={startRecording}
@@ -403,6 +424,7 @@ function VoiceSearch({ embedded = false }) {
           >
             {processing ? "Processing..." : "Search Medicine"}
           </button>
+          </>}
 
           {(processing || isRecording) && (
             <div className="voice-processing" aria-live="polite">
@@ -413,7 +435,9 @@ function VoiceSearch({ embedded = false }) {
 
           {error && <div className="voice-error" role="alert">
             <p>{error}</p>
-            <p>Retry when the connection is available, or <Link to="/patient-dashboard">use typed medicine search</Link>.</p>
+            <p>{IS_STATIC_DEMO
+              ? "The predefined sample could not be loaded."
+              : <>Retry when the connection is available, or <Link to="/patient-dashboard">use typed medicine search</Link>.</>}</p>
           </div>}
 
           {result && (
@@ -421,7 +445,7 @@ function VoiceSearch({ embedded = false }) {
               {result.status === "language_uncertain" && <p role="status">{result.message}</p>}
               <VoicePlayback text={spokenResponse} language={result.response_language || (lang === "auto" ? "en" : lang)} />
               <div className="voice-summary">
-                <p className="voice-summary__label">Recognized Text</p>
+                <p className="voice-summary__label">{IS_STATIC_DEMO ? "Sample Transcript" : "Recognized Text"}</p>
                 <h2>{detectedText || "N/A"}</h2>
                 {result.response_text && !medicineDetails && (
                   <p className="voice-summary__response">

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../services/authService";
+import { IS_STATIC_DEMO } from "../../services/api";
 import "./PatientSidebar.css";
 
 function PatientSidebar() {
@@ -121,7 +122,7 @@ function PatientSidebar() {
                     onClick={handleLogout}
                 >
                     <span>↪</span>
-                    Logout
+                    {IS_STATIC_DEMO ? "Return to Portal" : "Logout"}
                 </button>
 
             </div>

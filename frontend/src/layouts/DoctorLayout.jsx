@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
-import api from "../services/api";
+import api, { IS_STATIC_DEMO } from "../services/api";
 
 import DoctorSidebar from "../components/doctor/DoctorSidebar";
 import DoctorTopbar from "../components/doctor/DoctorTopbar";
@@ -8,9 +8,14 @@ import DoctorTopbar from "../components/doctor/DoctorTopbar";
 import "./DoctorLayout.css";
 
 function DoctorLayout() {
-    const [user, setUser] = useState(null);
-    const [graphStatus, setGraphStatus] = useState(null);
+    const [user, setUser] = useState(IS_STATIC_DEMO
+        ? { username: "demo.doctor", full_name: "Demo Doctor", role: "doctor" }
+        : null);
+    const [graphStatus, setGraphStatus] = useState(IS_STATIC_DEMO
+        ? { status: "available", message: "Static CSV reference data is loaded." }
+        : null);
     useEffect(() => {
+        if (IS_STATIC_DEMO) return undefined;
         let active = true;
         const check = () => api.get("/doctor/reference-status").then(({ data }) => { if (active) setGraphStatus(data.graph_check); }).catch(() => {});
         check();
@@ -18,6 +23,7 @@ function DoctorLayout() {
         return () => { active = false; clearInterval(timer); };
     }, []);
     useEffect(() => {
+        if (IS_STATIC_DEMO) return undefined;
         const controller = new AbortController();
         api.get("/auth/me", { signal: controller.signal })
             .then(({ data }) => setUser(data))

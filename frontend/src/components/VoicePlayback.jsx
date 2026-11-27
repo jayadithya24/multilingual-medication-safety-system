@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import api from "../services/api";
+import api, { IS_STATIC_DEMO } from "../services/api";
 
 const audioCache = new Map();
 
@@ -12,7 +12,7 @@ export default function VoicePlayback({ text, language, controls = true }) {
   const current = resource?.key === key ? resource : null;
 
   useEffect(() => {
-    if (!text) return;
+    if (!text || IS_STATIC_DEMO) return;
     let disposed = false;
     let objectUrl;
     const controller = new AbortController();
@@ -60,6 +60,9 @@ export default function VoicePlayback({ text, language, controls = true }) {
   }, [current?.url, controls, speed]);
 
   if (!text) return null;
+  if (IS_STATIC_DEMO) {
+    return <p className="voice-response-audio" role="status">Audio playback is not available in this static demo. The sample text is shown above.</p>;
+  }
   const message = current ? current.message || playbackMessage : "Preparing spoken response...";
   return (
     <div className="voice-response-audio">

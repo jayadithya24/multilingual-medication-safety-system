@@ -68,7 +68,7 @@ export default function KnowledgeGraph({ drug1 = "", drug2 = "" }) {
       <h2>{drug2 ? "Interaction knowledge graph" : "Medication knowledge graph"}</h2>
       <p>{drug2 ? `${drug1} and ${drug2}.` : "One medicine. Its direct connections."} Select a node to explore its relationships.</p></div>
       <span className="med-graph__count">{relatedLinks.length} relationships</span></header>
-    {!loading && !error && <p className="med-graph__source">Source: {data.source === "neo4j" ? "Neo4j database" : data.source === "local_csv" ? "Local dataset (Neo4j unavailable)" : "Not reported"}</p>}
+    {!loading && !error && <p className="med-graph__source">Source: {data.source === "neo4j" ? "Neo4j database" : data.source === "local_csv" ? "Local dataset (Neo4j unavailable)" : data.source === "static_csv" ? "Bundled static demo CSVs" : "Not reported"}</p>}
     {drug2 && <p className="med-graph__source">Conditions and side effects belong to each medicine individually. Only an “interacts with” connection represents a recorded risk from taking the pair together.</p>}
     {!loading && !error && data.source === "local_csv" && <button onClick={() => { setLoading(true); setRetry(retry + 1); }}>Retry Neo4j connection</button>}
     <div className="med-graph__toolbar">

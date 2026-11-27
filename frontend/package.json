@@ -4,16 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predev": "node scripts/generate-firebase-config.mjs",
     "dev": "vite",
-    "prebuild": "node scripts/generate-firebase-config.mjs",
     "build": "vite build",
     "lint": "eslint .",
+    "test:demo": "node --test src/services/demoData.test.js",
     "preview": "vite preview"
   },
   "dependencies": {
     "axios": "^1.20.0",
-    "firebase": "^12.19.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-force-graph-2d": "^1.29.1",

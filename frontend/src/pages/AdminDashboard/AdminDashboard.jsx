@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../services/authService";
 import api from "../../services/api";
+import { IS_STATIC_DEMO } from "../../services/api";
 import "./AdminDashboard.css";
 
 function AdminDashboard() {
@@ -73,7 +74,7 @@ function AdminDashboard() {
             <p className="admin-dashboard__eyebrow">MMSS Administration</p>
             <h1>Admin Dashboard</h1>
             <p className="admin-dashboard__intro">
-              Review doctor account applications and approve or reject submitted details.
+              Review the predefined sample verification queue. This read-only demo does not contain real applications.
             </p>
           </div>
           <div className="admin-dashboard__toolbar">
@@ -87,22 +88,22 @@ function AdminDashboard() {
               {loading ? "Refreshing…" : "Refresh"}
             </button>
             <button type="button" className="admin-dashboard__sign-out" onClick={handleLogout}>
-              Sign out
+              Return to Admin Portal
             </button>
           </div>
         </section>
 
         <section className="admin-dashboard__summary" aria-label="Dashboard summary">
           <div className="admin-stat admin-stat--accent">
-            <span className="admin-stat__label">Pending Doctor Requests</span>
+            <span className="admin-stat__label">Sample Doctor Requests</span>
             <strong>{pendingCount}</strong>
-            <span className="admin-stat__hint">Awaiting administrator review</span>
+            <span className="admin-stat__hint">Preloaded example entries</span>
           </div>
           <div className="admin-stat admin-stat--status">
             <span className="admin-stat__label">Review Queue</span>
             <strong className="admin-stat__online">
               <i aria-hidden="true" />
-              {loading ? "Loading" : error ? "Needs attention" : "Ready"}
+              {loading ? "Loading" : error ? "Needs attention" : "Sample"}
             </strong>
             <span className="admin-stat__hint">Doctor request review status</span>
           </div>
@@ -112,8 +113,8 @@ function AdminDashboard() {
           <div className="admin-panel__header">
             <div>
               <p className="admin-panel__eyebrow">Verification queue</p>
-              <h2 id="admin-doctor-requests-heading">Doctor Account Requests</h2>
-              <p>Review professional credentials before granting access to the Doctor Portal.</p>
+              <h2 id="admin-doctor-requests-heading">Sample Doctor Account Request</h2>
+              <p>This synthetic example is for display only. Approval and rejection are disabled.</p>
             </div>
             <span className="admin-panel__count">{pendingCount} pending</span>
           </div>
@@ -172,7 +173,7 @@ function AdminDashboard() {
                                 type="button"
                                 className="admin-btn admin-btn--approve"
                                 onClick={() => decideRequest(request.request_id, "approve")}
-                                disabled={Boolean(reviewing)}
+                                disabled={Boolean(reviewing) || IS_STATIC_DEMO}
                               >
                                 {request.status === "approving" ? "Complete approval" : "Approve"}
                               </button>
@@ -180,7 +181,7 @@ function AdminDashboard() {
                                 type="button"
                                 className="admin-btn admin-btn--reject"
                                 onClick={() => decideRequest(request.request_id, "reject")}
-                                disabled={Boolean(reviewing) || request.status === "approving"}
+                                disabled={Boolean(reviewing) || request.status === "approving" || IS_STATIC_DEMO}
                               >
                                 Reject
                               </button>
@@ -227,7 +228,7 @@ function AdminDashboard() {
                           type="button"
                           className="admin-btn admin-btn--approve"
                           onClick={() => decideRequest(request.request_id, "approve")}
-                          disabled={Boolean(reviewing)}
+                          disabled={Boolean(reviewing) || IS_STATIC_DEMO}
                         >
                           {request.status === "approving" ? "Complete approval" : "Approve"}
                         </button>
@@ -235,7 +236,7 @@ function AdminDashboard() {
                           type="button"
                           className="admin-btn admin-btn--reject"
                           onClick={() => decideRequest(request.request_id, "reject")}
-                          disabled={Boolean(reviewing) || request.status === "approving"}
+                          disabled={Boolean(reviewing) || request.status === "approving" || IS_STATIC_DEMO}
                         >
                           Reject
                         </button>
@@ -250,8 +251,29 @@ function AdminDashboard() {
           </div>
         </section>
 
+        <section className="admin-panel" aria-labelledby="admin-demo-data-heading">
+          <div className="admin-panel__header">
+            <div>
+              <p className="admin-panel__eyebrow">Bundled reference files</p>
+              <h2 id="admin-demo-data-heading">Download Demo CSVs</h2>
+              <p>These are static copies of the project reference datasets used by the demo.</p>
+            </div>
+          </div>
+          <div className="admin-panel__body">
+            <ul className="demo-data-downloads">
+              <li><a href="/demo-data/english_master_dataset.csv" download>English medicine catalog</a></li>
+              <li><a href="/demo-data/kannada_master_dataset.csv" download>Kannada medicine catalog</a></li>
+              <li><a href="/demo-data/tulu_master_dataset.csv" download>Tulu medicine catalog</a></li>
+              <li><a href="/demo-data/drug_disease.csv" download>Drug–disease relationships</a></li>
+              <li><a href="/demo-data/drug_sideeffects.csv" download>Drug side effects</a></li>
+              <li><a href="/demo-data/drug_interactions.csv" download>Recorded drug interactions</a></li>
+              <li><a href="/demo-data/interaction_evidence.json" download>Interaction evidence references</a></li>
+            </ul>
+          </div>
+        </section>
+
         <footer className="admin-dashboard__footer">
-          <span>MMSS Administration · Secure access management</span>
+          <span>MMSS Administration · public sample dashboard</span>
         </footer>
       </div>
     </main>

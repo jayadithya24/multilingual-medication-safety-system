@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api, { hasStoredSession } from "../../services/api";
+import { IS_STATIC_DEMO } from "../../services/api";
 import "./AnalysisHistory.css";
 
 function AnalysisHistory() {
@@ -14,7 +15,7 @@ function AnalysisHistory() {
                 setError("");
 
                 const token = hasStoredSession();
-                if (!token) {
+                if (!token && !IS_STATIC_DEMO) {
                     throw new Error("Doctor authentication required.");
                 }
 

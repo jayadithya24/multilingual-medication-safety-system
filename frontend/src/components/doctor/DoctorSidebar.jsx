@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout } from "../../services/authService";
+import { IS_STATIC_DEMO } from "../../services/api";
 import "./DoctorSidebar.css";
 
 function DoctorSidebar({ user }) {
@@ -109,7 +110,7 @@ function DoctorSidebar({ user }) {
                     onClick={handleLogout}
                 >
                     <span>↪</span>
-                    Logout
+                    {IS_STATIC_DEMO ? "Return to Portal" : "Logout"}
                 </button>
 
             </div>

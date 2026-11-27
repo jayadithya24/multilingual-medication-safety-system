@@ -1,4 +1,4 @@
-import api, { clearStoredToken, setStoredRole, setStoredSession } from "./api";
+import api, { clearStoredToken, IS_STATIC_DEMO, setStoredRole, setStoredSession } from "./api";
 import { unregisterMedicationNotifications } from "./fcmService";
 
 function persistAuth(responseData) {
@@ -57,6 +57,10 @@ export async function requestDoctorAccount(request) {
 }
 
 export async function logout() {
+  if (IS_STATIC_DEMO) {
+    clearStoredToken();
+    return;
+  }
   try { await unregisterMedicationNotifications(); }
   catch { console.warn("Could not fully unregister notifications on this device."); }
   await api.post("/auth/logout");

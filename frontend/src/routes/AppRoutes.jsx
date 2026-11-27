@@ -8,14 +8,11 @@ import PatientLayout from "../layouts/PatientLayout";
 import Home from "../pages/Home/Home";
 import PublicDashboard from "../pages/PublicDashboard/PublicDashboard";
 
-import PatientPortal from "../pages/PatientPortal/PatientPortal";
-
-import DoctorPortal from "../pages/DoctorPortal/DoctorPortal";
+import DemoPortal from "../pages/DemoPortal/DemoPortal";
 const DoctorDashboard = lazy(() => import("../pages/DoctorDashboard/DoctorDashboard"));
 const DrugInteraction = lazy(() => import("../pages/DrugInteraction/DrugInteraction"));
 import DrugReference from "../pages/DrugReference/DrugReference";
 
-import AdminPortal from "../pages/AdminPortal/AdminPortal";
 const AdminDashboard = lazy(() => import("../pages/AdminDashboard/AdminDashboard"));
 
 import RequireRole from "../components/RequireRole/RequireRole";
@@ -47,29 +44,29 @@ function AppRoutes() {
 
 
                 {/* =====================================
-                    PATIENT PORTAL LOGIN
+                    PATIENT PORTAL ENTRY
                 ===================================== */}
                 <Route
                     path="public"
-                    element={<PatientPortal />}
+                    element={<DemoPortal role="patient" />}
                 />
 
 
                 {/* =====================================
-                    DOCTOR PORTAL LOGIN
+                    DOCTOR PORTAL ENTRY
                 ===================================== */}
                 <Route
                     path="research"
-                    element={<DoctorPortal />}
+                    element={<DemoPortal role="doctor" />}
                 />
 
 
                 {/* =====================================
-                    ADMIN PORTAL LOGIN
+                    ADMIN PORTAL ENTRY
                 ===================================== */}
                 <Route
                     path="admin"
-                    element={<AdminPortal />}
+                    element={<DemoPortal role="admin" />}
                 />
 
                 <Route

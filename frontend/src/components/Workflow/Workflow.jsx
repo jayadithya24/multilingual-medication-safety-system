@@ -5,15 +5,15 @@ function Workflow() {
 
     const steps = [
 
-        "📷 Scan Medicine",
+        "📚 Browse Reference Data",
 
-        "📝 OCR Extraction",
+        "📝 Sample OCR Output",
 
-        "🎤 Voice Translation",
+        "🎤 Multilingual Examples",
 
-        "⚠ Drug Interaction",
+        "⚠ Recorded Pair Check",
 
-        "🧠 Knowledge Graph"
+        "🧠 Local Knowledge Graph"
 
     ];
 

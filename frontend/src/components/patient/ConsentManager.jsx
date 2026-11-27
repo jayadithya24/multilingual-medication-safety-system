@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import { IS_STATIC_DEMO } from "../../services/api";
 
 export default function ConsentManager() {
   const [requests, setRequests] = useState([]);
@@ -42,17 +43,17 @@ export default function ConsentManager() {
   }
   return <section aria-label="Doctor access and privacy">
     <h3>Doctor access and privacy</h3>
-    <p>Your profile, saved medicines and dose history are stored to provide medication management. Sharing is optional. A code lets a signed-in doctor request access; it does not grant access automatically.</p>
-    <p>Approval shares your identity, medication report, schedules and dose history for seven days. You can reject or revoke access here. Revocation blocks future access but cannot retrieve copies already downloaded or printed. Requests expire after 24 hours.</p>
-    <button disabled={busy} onClick={() => act("code")}>Create sharing code</button>{" "}
+    <p>{IS_STATIC_DEMO ? "The access request and log below are fictional examples. No profile or health information is stored or shared." : "Your profile, saved medicines and dose history are stored to provide medication management. Sharing is optional. A code lets a signed-in doctor request access; it does not grant access automatically."}</p>
+    <p>{IS_STATIC_DEMO ? "Access controls are disabled because this page contains example data only." : "Approval shares your identity, medication report, schedules and dose history for seven days. You can reject or revoke access here. Revocation blocks future access but cannot retrieve copies already downloaded or printed. Requests expire after 24 hours."}</p>
+    {!IS_STATIC_DEMO && <><button disabled={busy} onClick={() => act("code")}>Create sharing code</button>{" "}</>}
     <button disabled={busy} onClick={() => act("refresh")}>Refresh access and log</button>
     {code && <p role="status">Single-use code: <strong>{code.share_code}</strong>. Expires {new Date(code.expires_at).toLocaleString()}. Share privately with your doctor; a new code replaces the old one.</p>}
     {error && <p role="alert">{error}</p>}
     {!requests.length && <p>No access requests.</p>}
     {requests.map(request => <article key={request.requestId}>
       <p><strong>{request.doctorName || request.doctorId}</strong> — {request.status}. {request.expiresAt && <>Expires {new Date(request.expiresAt).toLocaleString()}.</>}</p>
-      {request.status === "PENDING" && <><button disabled={busy} onClick={() => act("accept", request.requestId)}>Grant access for 7 days</button>{" "}<button disabled={busy} onClick={() => act("reject", request.requestId)}>Reject</button></>}
-      {request.status === "ACCEPTED" && <><button disabled={busy} onClick={() => act("renew", request.requestId)}>Renew for 7 days</button>{" "}<button disabled={busy} onClick={() => act("revoke", request.requestId)}>Revoke access</button></>}
+      {!IS_STATIC_DEMO && request.status === "PENDING" && <><button disabled={busy} onClick={() => act("accept", request.requestId)}>Grant access for 7 days</button>{" "}<button disabled={busy} onClick={() => act("reject", request.requestId)}>Reject</button></>}
+      {!IS_STATIC_DEMO && request.status === "ACCEPTED" && <><button disabled={busy} onClick={() => act("renew", request.requestId)}>Renew for 7 days</button>{" "}<button disabled={busy} onClick={() => act("revoke", request.requestId)}>Revoke access</button></>}
     </article>)}
     <details><summary>Access log</summary>
       <label>Event type <select value={logCategory} disabled={busy} onChange={event => readLog(event.target.value)}>

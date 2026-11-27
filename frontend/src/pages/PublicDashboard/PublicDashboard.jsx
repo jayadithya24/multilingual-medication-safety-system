@@ -18,6 +18,7 @@ import {
     deletePatientSchedule,
     fetchMedicationHistory,
 } from "../../services/patientScheduleService";
+import { IS_STATIC_DEMO } from "../../services/api";
 
 import "./PublicDashboard.css";
 
@@ -110,6 +111,7 @@ function PublicDashboard() {
     }, [lang]);
 
     useEffect(() => {
+        if (IS_STATIC_DEMO) return undefined;
         if ("Notification" in window && Notification.permission === "granted") {
             registerMedicationNotifications().then((res) => {
                 if (res.registered) {
@@ -352,9 +354,9 @@ function PublicDashboard() {
 
     const nextDose = getNextDose(schedules);
     const pageHeading = {
-        text: ["My Medication Dashboard", "Search medicines, scan medicine strips, use voice search, and manage your medication schedule."],
-        voice: ["Voice Search", "Speak a medicine name or question, upload audio, and listen to medicine information in your language."],
-        medicines: ["My Medicines", "Manage your medication schedule, mark doses as taken, and review your medication history."],
+        text: ["My Medication Dashboard", "Search the bundled medicine reference and view predefined sample information."],
+        voice: ["Voice Search Sample", "View a predefined multilingual example; audio is not recorded, uploaded, or transcribed."],
+        medicines: ["My Medicines", "Review a synthetic sample schedule and medication history. Changes are disabled in this demo."],
     }[activeTab];
 
     return (
@@ -566,6 +568,7 @@ function PublicDashboard() {
                             </div>
 
                             <ConsentManager />
+                            {IS_STATIC_DEMO && <p className="patient-empty">Fictional sample schedule · read-only · changes are not saved.</p>}
                             <button type="button" onClick={() => setShowReportModal(true)}>Generate My Medication Report</button>
                             {/* SCHEDULE */}
                             <div className="patient-medication-block">
@@ -583,12 +586,12 @@ function PublicDashboard() {
                                     </span>
                                 </div>
                                 {notificationStatus && <div className="patient-empty">{notificationStatus}</div>}
-                                {("Notification" in window && Notification.permission !== "granted") && (
+                                {!IS_STATIC_DEMO && ("Notification" in window && Notification.permission !== "granted") && (
                                     <button type="button" className="patient-refresh-button" onClick={enableNotifications}>
                                         Enable Reminders & Notifications
                                     </button>
                                 )}
-                                <details className="patient-notification-tools">
+                                {!IS_STATIC_DEMO && <details className="patient-notification-tools">
                                 <summary>Check notification delivery</summary>
                                 <p>Keep the backend running and enable browser notifications on this device.</p>
                                 <button
@@ -599,7 +602,7 @@ function PublicDashboard() {
                                 >
                                     {testNotificationLoading ? "Sending..." : "Send Test Notification"}
                                 </button>
-                                </details>
+                                </details>}
                                 {nextDose && (
                                     <div className="patient-empty">
                                         Next scheduled dose: {nextDose.label} at {nextDose.time}
@@ -723,6 +726,7 @@ function PublicDashboard() {
                                                                 )
                                                             }
                                                             disabled={
+                                                                IS_STATIC_DEMO ||
                                                                 takingMedicineId ===
                                                                     schedule.schedule_id ||
                                                                 deletingMedicineId ===
@@ -743,6 +747,7 @@ function PublicDashboard() {
                                                             setSchedulePendingDeletion(schedule)
                                                         }
                                                         disabled={
+                                                            IS_STATIC_DEMO ||
                                                             takingMedicineId ===
                                                                 schedule.schedule_id ||
                                                             deletingMedicineId ===

@@ -23,3 +23,13 @@
     .patient-profile .patient-profile__card { padding: 20px; }
     .patient-profile .patient-profile__card-header { gap: 16px; }
 }
+.static-demo-banner {
+  padding: 9px 16px;
+  background: #ecfdf5;
+  border-bottom: 1px solid #a7f3d0;
+  color: #065f46;
+  font-size: .82rem;
+  font-weight: 650;
+  line-height: 1.45;
+  text-align: center;
+}

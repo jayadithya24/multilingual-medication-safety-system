@@ -130,12 +130,14 @@
 
 }
 
-.hero-image img{
-
-    width:90%;
-
+.hero-illustration {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:clamp(12px, 3vw, 36px);
+    min-height:280px;
+    font-size:clamp(3rem, 8vw, 7rem);
     animation:float 3s ease-in-out infinite;
-
 }
 
 @keyframes float{

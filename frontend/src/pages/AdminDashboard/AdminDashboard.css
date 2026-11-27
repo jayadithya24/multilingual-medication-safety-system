@@ -15,6 +15,19 @@
   margin: 0 auto;
 }
 
+.demo-data-downloads {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px 24px;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.demo-data-downloads a {
+  color: #1d4ed8;
+  font-weight: 650;
+}
+
 /* =========================
    HEADER
 ========================= */

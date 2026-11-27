@@ -1,8 +1,9 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { getStoredRole, hasStoredSession } from "../../services/api";
+import { getStoredRole, hasStoredSession, IS_STATIC_DEMO } from "../../services/api";
 
 function RequireRole({ allowedRoles }) {
   const location = useLocation();
+  if (IS_STATIC_DEMO) return <Outlet />;
   const token = hasStoredSession();
   const role = getStoredRole();
 

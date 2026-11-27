@@ -1,6 +1,7 @@
 import { Outlet, useMatch, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { listenForMedicationNotifications } from "../services/fcmService";
+import { IS_STATIC_DEMO } from "../services/api";
 
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
@@ -16,6 +17,7 @@ function MainLayout() {
     const patientPrescription = useMatch("/prescription");
     const hasPatientSidebar = patientDashboard || patientScan || patientVoice || patientProfile || patientPrescription;
     useEffect(() => {
+        if (IS_STATIC_DEMO) return undefined;
         let disposed = false;
         let unsubscribe;
         listenForMedicationNotifications().then((cleanup) => {
@@ -30,6 +32,10 @@ function MainLayout() {
         <>
 
             {!hasPatientSidebar && !hasDoctorSidebar && <Navbar />}
+
+            <div className="static-demo-banner" role="status">
+                Public static demo · sample data only · uploads and audio are not processed · changes are not saved · no backend connected
+            </div>
 
             <Outlet />
 

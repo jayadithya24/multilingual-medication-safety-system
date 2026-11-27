@@ -29,20 +29,20 @@ function Home() {
 
                     <FeatureCard
                         icon="📷"
-                        title="OCR Scanner"
-                        description="Upload medicine images to identify tablets."
+                        title="OCR Sample"
+                        description="View predefined scan output; images are not uploaded or processed."
                     />
 
                     <FeatureCard
                         icon="🎤"
-                        title="Voice Assistant"
-                        description="Search medicines using multilingual voice input."
+                        title="Voice Sample"
+                        description="Explore predefined multilingual examples; audio is not uploaded or transcribed."
                     />
 
                     <FeatureCard
                         icon="⚠"
                         title="Drug Interaction"
-                        description="Analyze interactions between medicines."
+                        description="Check recorded sample pairs from the bundled reference dataset."
                     />
 
                 </div>

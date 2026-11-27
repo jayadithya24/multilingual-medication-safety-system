@@ -6,6 +6,7 @@ import {
 } from "../../services/patientService";
 import "./PatientProfile.css";
 import { fetchDiseases } from "../../services/neo4jService";
+import { IS_STATIC_DEMO } from "../../services/api";
 
 function PatientProfile() {
     const navigate = useNavigate();
@@ -154,9 +155,9 @@ function PatientProfile() {
                     My Profile
                 </h1>
 
-                <p>
-                    Manage your personal and medical information.
-                </p>
+                <p>{IS_STATIC_DEMO
+                    ? "Synthetic profile for the public demo. Changes cannot be saved."
+                    : "Manage your personal and medical information."}</p>
 
             </section>
 
@@ -346,12 +347,12 @@ function PatientProfile() {
                         <button
                             type="submit"
                             className="patient-profile__save"
-                            disabled={saving}
+                            disabled={saving || IS_STATIC_DEMO}
                         >
 
                             {saving
                                 ? "Saving..."
-                                : "Save Profile"}
+                                : IS_STATIC_DEMO ? "Read-only demo" : "Save Profile"}
 
                         </button>
 

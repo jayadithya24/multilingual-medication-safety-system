@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import { IS_STATIC_DEMO } from "../../services/api";
 import RegimenReview from "../../components/RegimenReview";
 import "./PatientDrugLists.css";
 
@@ -86,16 +87,17 @@ function PatientDrugLists() {
                 <h1>
                     Patient History & Drug Lists
                 </h1>
-                <p>
-                    Send an access request to a patient. Once they approve it in My Medicines, you can view their medication history.
-                </p>
+                <p>{IS_STATIC_DEMO
+                    ? "This page shows one synthetic patient record for demonstration; no real patient access is available."
+                    : "Send an access request to a patient. Once they approve it in My Medicines, you can view their medication history."}</p>
             </section>
 
-            <form className="patient-sharing-form" onSubmit={event => { event.preventDefault(); requestAccess(shareCode); }}>
+            {!IS_STATIC_DEMO && <form className="patient-sharing-form" onSubmit={event => { event.preventDefault(); requestAccess(shareCode); }}>
                 <label>Patient sharing code <input value={shareCode} onChange={event => setShareCode(event.target.value)} required minLength={16} maxLength={64} autoComplete="off" /></label>
                 <button disabled={Boolean(requestingPatient) || !shareCode.trim()}>Request patient access</button>
                 <p>Ask the patient to create a code in My Medicines and then approve the request. Access lasts seven days unless revoked sooner.</p>
             </form>
+            }
             <section className="patient-drug-lists__results">
                 <div className="patient-drug-lists__results-header">
                     <div>
