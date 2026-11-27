@@ -22,6 +22,38 @@ Caddy, two backend processes and real MongoDB counters. Repeat its deployment
 checklist through the actual public proxy, network restrictions and certificate
 chain before launch; loopback success does not verify those external controls.
 
+## Vercel frontend with Render API
+
+The repository includes a Render Blueprint in `render.yaml` and API rewrites in
+`frontend/vercel.json`. This split keeps the Python dependencies off Vercel and
+routes browser API requests through the frontend origin, preserving the
+HttpOnly, `SameSite=Strict` session cookie.
+
+1. Import the `dev` branch into Render using the repository's `render.yaml`.
+   The backend service must use a compute plan with enough memory for the
+   configured OCR/speech dependencies.
+2. Set `MONGO_URI` to the real MongoDB connection string in Render's secret
+   settings. Never put it in `render.yaml` or Git.
+3. Set `FORWARDED_ALLOW_IPS` to the exact trusted proxy address(es) for the
+   Render service. Do not use `*`; the production preflight refuses it.
+   Verify Render's actual proxy behavior and source addresses before enabling
+   public sign-in. The service binds to `0.0.0.0:$PORT` as Render requires.
+4. In Vercel, set the project's Root Directory to `frontend`, leave
+   `VITE_API_URL` unset, and let Vercel detect/build the Vite app. The root
+   `pyproject.toml` is for the former FastAPI deployment and is outside this
+   frontend project root.
+5. `frontend/vercel.json` rewrites API routes to
+   `https://mmss-api-jayadithya24.onrender.com`. If Render assigns a different
+   service hostname, update those destinations to match it. Keep Vercel's
+   production hostname in Render's exact HTTPS `BROWSER_ORIGINS` value.
+6. Configure any optional Neo4j, Google OAuth, and Firebase settings in Render
+   and Vercel as appropriate. Never copy secrets into tracked env examples.
+
+The checked-in Render service name is a suggested name; Render may require a
+different globally available name. If it changes, update the Vercel rewrite
+destinations as well. A successful local config check does not verify Render
+proxy trust, MongoDB access, Vercel rewrites, or delivery of notifications.
+
 - Use Python 3.13 and the single pinned root `requirements.txt`.
   `backend/requirements.txt` delegates to it; test dependencies are separate.
   Regenerate with `uv pip compile requirements.in --python-version 3.13 -o requirements.txt`.
